@@ -1,0 +1,532 @@
+{
+  "usage" : {
+    "file" : "syscall_linux.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "601",
+    "module" : "std",
+    "pkg" : "syscall",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "err := getsockopt(fd, level, opt, unsafe.Pointer(&value), &vallen)",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 3, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 2, 3 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 599,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Ucred"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "value"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 599,
+      "code" : "var value Ucred",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 6, 1, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 7, 1, 2, 3, 6 ],
+      "decl-vars" : [ 7 ],
+      "line-start" : 600,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "vallen"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 15,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "12"
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 600,
+      "code" : "vallen := _Socklen(SizeofUcred)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 2, 3, 6, 7, 1 ],
+      "exit" : false,
+      "out-vars" : [ 6, 8 ],
+      "decl-vars" : [ 8 ],
+      "line-start" : 601,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "level",
+              "variable" : 2
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "opt",
+              "variable" : 3
+            }
+          }, {
+            "coerced-to" : {
+              "go-type" : 18,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 18,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 18,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "value",
+                  "variable" : 6
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 19,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 15,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "vallen",
+                "variable" : 7
+              }
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 16,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "getsockopt"
+            }
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 601,
+      "code" : "err := getsockopt(fd, level, opt, unsafe.Pointer(&value), &vallen)",
+      "entry" : false,
+      "use-vars" : [ 1, 2, 3, 6, 7 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 6, 8 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 602,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "value",
+              "variable" : 6
+            }
+          },
+          "type" : "unary"
+        }, {
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 8
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 602,
+      "code" : "return &value, err",
+      "entry" : false,
+      "use-vars" : [ 6, 8 ]
+    } ],
+    "code" : "func GetsockoptUcred(fd, level, opt int) (*Ucred, error) {\n\tvar value Ucred\n\tvallen := _Socklen(SizeofUcred)\n\terr := getsockopt(fd, level, opt, unsafe.Pointer(&value), &vallen)\n\treturn &value, err\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "GetsockoptUcred",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "getsockopt",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false
+    } ],
+    "line-end" : 603,
+    "line-start" : 598,
+    "names" : [ "GetsockoptUcred" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1, 2, 3 ],
+    "receivers" : [ ],
+    "results" : [ 4, 5 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(fd int, level int, opt int) (*syscall.Ucred, error)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "level",
+        "type" : 2
+      }, {
+        "name" : "opt",
+        "type" : 2
+      } ],
+      "name" : "(fd int, level int, opt int)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      }, {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(*syscall.Ucred, error)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "elem" : 5,
+      "name" : "*syscall.Ucred",
+      "type" : "Pointer",
+      "underlying" : 4
+    }, {
+      "local-name" : "Ucred",
+      "name" : "syscall.Ucred",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "Pid",
+        "type" : 7
+      }, {
+        "name" : "Uid",
+        "type" : 8
+      }, {
+        "name" : "Gid",
+        "type" : 8
+      } ],
+      "name" : "struct{Pid int32; Uid uint32; Gid uint32}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 10
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 11
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 10
+    }, {
+      "name" : "func() string",
+      "params" : 12,
+      "recv" : 0,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 14
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 13
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "local-name" : "_Socklen",
+      "name" : "syscall._Socklen",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "name" : "func(s int, level int, name int, val unsafe.Pointer, vallen *syscall._Socklen) (err error)",
+      "params" : 17,
+      "recv" : -1,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 2
+      }, {
+        "name" : "level",
+        "type" : 2
+      }, {
+        "name" : "name",
+        "type" : 2
+      }, {
+        "name" : "val",
+        "type" : 18
+      }, {
+        "name" : "vallen",
+        "type" : 19
+      } ],
+      "name" : "(s int, level int, name int, val unsafe.Pointer, vallen *syscall._Socklen)",
+      "type" : "Tuple",
+      "underlying" : 17
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "elem" : 15,
+      "name" : "*syscall._Socklen",
+      "type" : "Pointer",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 9
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 20
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "level",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "opt",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "[res1]",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "value",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "vallen",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

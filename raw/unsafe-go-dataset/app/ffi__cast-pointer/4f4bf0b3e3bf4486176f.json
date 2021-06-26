@@ -1,0 +1,1913 @@
+{
+  "usage" : {
+    "file" : "generated_API.go",
+    "label1" : "cast-pointer",
+    "label2" : "ffi",
+    "line" : "614",
+    "module" : "gorgonia.org/cu",
+    "pkg" : "gorgonia.org/cu/dnn",
+    "project" : "gorgonia/gorgonia",
+    "snippet" : "betaC = unsafe.Pointer(&betaF)",
+    "version" : "v0.9.2"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 7, 8, 10, 18, 14, 20, 15, 9, 17, 4, 11, 6, 5, 13, 16, 19, 12 ],
+      "exit" : false,
+      "out-vars" : [ 8, 20, 11, 19, 6, 18, 14, 9, 15, 16, 12, 10, 17, 7, 5, 4, 13 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 7, 18, 4, 11, 10, 5, 14, 15, 12, 17, 13, 8, 6, 20, 9, 16, 19 ],
+      "exit" : false,
+      "out-vars" : [ 5, 15, 9, 8, 13, 19, 10, 7, 18, 4, 20, 11, 16, 17, 6, 14, 12 ],
+      "decl-vars" : [ 22, 23 ],
+      "line-start" : 601,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 20,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 20,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "alphaC"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "betaC"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 601,
+      "code" : "// DOUBLECHECK: \"cudnnBatchNormalizationForwardTraining\" returns Memory type in Parameter 16\nvar alphaC, betaC unsafe.Pointer",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 10, 16 ],
+      "in-vars" : [ 12, 14, 13, 9, 19, 7, 6, 5, 20, 16, 17, 8, 18, 4, 11, 15, 10 ],
+      "exit" : false,
+      "out-vars" : [ 8, 5, 18, 20, 19, 17, 11, 15, 9, 12, 7, 6, 14, 4, 13, 16, 10 ],
+      "decl-vars" : [ ],
+      "line-start" : 602,
+      "ast" : {
+        "condition" : {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "dataType",
+            "variable" : 24
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "xDesc",
+              "variable" : 8
+            }
+          },
+          "type" : "selector"
+        },
+        "kind" : "statement",
+        "type" : "switch"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 617,
+      "code" : "switch xDesc.dataType {\ncase Float, Half:\n\tvar alphaF, betaF C.float\n\talphaF = C.float(float32(alpha))\n\tbetaF = C.float(float32(beta))\n\talphaC = unsafe.Pointer(&alphaF)\n\tbetaC = unsafe.Pointer(&betaF)\ncase Double:\n\tvar alphaF, betaF C.double\n\talphaF = C.double(alpha)\n\tbetaF = C.double(beta)\n\talphaC = unsafe.Pointer(&alphaF)\n\tbetaC = unsafe.Pointer(&betaF)\ndefault:\n\treturn errors.Errorf(\"Unsupported data type: %v\", xDesc.dataType)\n}",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 11, 13, 12, 10, 9, 19, 17, 7, 8, 6, 5, 18, 14, 4, 20, 15, 16 ],
+      "exit" : false,
+      "out-vars" : [ 7, 5, 20, 8, 14, 19, 10, 16, 12, 6, 18, 4, 15, 13, 11, 9, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 603,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 10,
+          "kind" : "constant",
+          "value" : null
+        }, {
+          "go-type" : 10,
+          "kind" : "constant",
+          "value" : null
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 608,
+      "code" : "case Float, Half:\n\tvar alphaF, betaF C.float\n\talphaF = C.float(float32(alpha))\n\tbetaF = C.float(float32(beta))\n\talphaC = unsafe.Pointer(&alphaF)\n\tbetaC = unsafe.Pointer(&betaF)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 7, 14, 9, 16, 17, 18, 20, 15, 19, 12, 4, 13, 10, 8, 6, 5, 11 ],
+      "exit" : false,
+      "out-vars" : [ 6, 4, 16, 5, 19, 12, 10, 8, 15, 13, 9, 17, 7, 18, 14, 20, 11 ],
+      "decl-vars" : [ 25, 26 ],
+      "line-start" : 604,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 8,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 2,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "float"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "alphaF"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "betaF"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 604,
+      "code" : "var alphaF, betaF C.float",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 25 ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 7, 6, 5, 4, 19, 12, 14, 20, 11, 15, 9, 8, 13, 16, 10, 17, 18 ],
+      "exit" : false,
+      "out-vars" : [ 18, 10, 8, 25, 5, 20, 13, 16, 19, 15, 7, 14, 4, 11, 9, 12, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 605,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "alphaF",
+            "variable" : 25
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 30,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 30,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "float32"
+              }
+            },
+            "go-type" : 30,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "alpha",
+                "variable" : 6
+              }
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "float"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 25 ],
+      "line-end" : 605,
+      "code" : "alphaF = C.float(float32(alpha))",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 26 ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 25, 20, 15, 12, 7, 5, 14, 11, 17, 8, 4, 13, 9, 16, 19, 18, 10 ],
+      "exit" : false,
+      "out-vars" : [ 11, 10, 8, 14, 4, 13, 19, 12, 17, 5, 9, 16, 15, 25, 18, 20, 26 ],
+      "decl-vars" : [ ],
+      "line-start" : 606,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "betaF",
+            "variable" : 26
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 30,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 30,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "float32"
+              }
+            },
+            "go-type" : 30,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "beta",
+                "variable" : 7
+              }
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "float"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 26 ],
+      "line-end" : 606,
+      "code" : "betaF = C.float(float32(beta))",
+      "entry" : false,
+      "use-vars" : [ 7 ]
+    }, {
+      "update-vars" : [ 22 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 18, 14, 11, 16, 10, 25, 8, 5, 4, 13, 9, 17, 26, 20, 15, 19, 12 ],
+      "exit" : false,
+      "out-vars" : [ 16, 17, 8, 5, 18, 11, 19, 26, 14, 4, 20, 13, 10, 22, 15, 9, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 607,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "alphaC",
+            "variable" : 22
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 20,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 20,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "alphaF",
+                "variable" : 25
+              }
+            },
+            "type" : "unary"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 22 ],
+      "line-end" : 607,
+      "code" : "alphaC = unsafe.Pointer(&alphaF)",
+      "entry" : false,
+      "use-vars" : [ 25 ]
+    }, {
+      "update-vars" : [ 23 ],
+      "successors" : [ 18 ],
+      "in-vars" : [ 15, 16, 5, 18, 11, 13, 9, 10, 22, 8, 14, 4, 20, 12, 26, 17, 19 ],
+      "exit" : false,
+      "out-vars" : [ 23, 20, 11, 14, 17, 5, 18, 13, 19, 12, 10, 22, 8, 4, 15, 9, 16 ],
+      "decl-vars" : [ ],
+      "line-start" : 608,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "betaC",
+            "variable" : 23
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 20,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 20,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "betaF",
+                "variable" : 26
+              }
+            },
+            "type" : "unary"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 23 ],
+      "line-end" : 608,
+      "code" : "betaC = unsafe.Pointer(&betaF)",
+      "entry" : false,
+      "use-vars" : [ 26 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 7, 5, 20, 19, 10, 6, 11, 15, 4, 13, 9, 16, 12, 8, 18, 14, 17 ],
+      "exit" : false,
+      "out-vars" : [ 7, 9, 19, 6, 14, 17, 5, 18, 11, 12, 10, 8, 4, 20, 15, 13, 16 ],
+      "decl-vars" : [ ],
+      "line-start" : 609,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 10,
+          "kind" : "constant",
+          "value" : null
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 614,
+      "code" : "case Double:\n\tvar alphaF, betaF C.double\n\talphaF = C.double(alpha)\n\tbetaF = C.double(beta)\n\talphaC = unsafe.Pointer(&alphaF)\n\tbetaC = unsafe.Pointer(&betaF)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 12, 10, 6, 5, 14, 15, 7, 9, 19, 11, 13, 16, 17, 8, 18, 4, 20 ],
+      "exit" : false,
+      "out-vars" : [ 12, 17, 15, 6, 4, 9, 10, 8, 5, 18, 20, 11, 16, 7, 13, 19, 14 ],
+      "decl-vars" : [ 27, 28 ],
+      "line-start" : 610,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 8,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 2,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "double"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "alphaF"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "betaF"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 610,
+      "code" : "var alphaF, betaF C.double",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 27 ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 19, 10, 6, 13, 9, 16, 5, 18, 4, 17, 15, 12, 7, 8, 14, 11, 20 ],
+      "exit" : false,
+      "out-vars" : [ 12, 10, 17, 7, 14, 15, 9, 19, 8, 27, 5, 11, 13, 18, 4, 20, 16 ],
+      "decl-vars" : [ ],
+      "line-start" : 611,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "alphaF",
+            "variable" : 27
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "alpha",
+              "variable" : 6
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "double"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 27 ],
+      "line-end" : 611,
+      "code" : "alphaF = C.double(alpha)",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 28 ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 16, 11, 13, 4, 20, 15, 9, 10, 7, 8, 14, 12, 5, 18, 17, 27, 19 ],
+      "exit" : false,
+      "out-vars" : [ 8, 15, 9, 16, 19, 17, 27, 28, 5, 18, 14, 4, 20, 11, 13, 12, 10 ],
+      "decl-vars" : [ ],
+      "line-start" : 612,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "betaF",
+            "variable" : 28
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "beta",
+              "variable" : 7
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "double"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 28 ],
+      "line-end" : 612,
+      "code" : "betaF = C.double(beta)",
+      "entry" : false,
+      "use-vars" : [ 7 ]
+    }, {
+      "update-vars" : [ 22 ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 28, 11, 15, 16, 19, 10, 27, 18, 4, 20, 13, 9, 8, 5, 14, 12, 17 ],
+      "exit" : false,
+      "out-vars" : [ 18, 11, 19, 28, 13, 17, 15, 16, 8, 5, 14, 9, 12, 10, 22, 4, 20 ],
+      "decl-vars" : [ ],
+      "line-start" : 613,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "alphaC",
+            "variable" : 22
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 20,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 20,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "alphaF",
+                "variable" : 27
+              }
+            },
+            "type" : "unary"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 22 ],
+      "line-end" : 613,
+      "code" : "alphaC = unsafe.Pointer(&alphaF)",
+      "entry" : false,
+      "use-vars" : [ 27 ]
+    }, {
+      "update-vars" : [ 23 ],
+      "successors" : [ 18 ],
+      "in-vars" : [ 20, 11, 16, 10, 22, 18, 14, 4, 15, 13, 28, 9, 19, 17, 8, 5, 12 ],
+      "exit" : false,
+      "out-vars" : [ 14, 10, 17, 4, 16, 12, 15, 13, 19, 23, 8, 18, 11, 9, 22, 5, 20 ],
+      "decl-vars" : [ ],
+      "line-start" : 614,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "betaC",
+            "variable" : 23
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 20,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 20,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "betaF",
+                "variable" : 28
+              }
+            },
+            "type" : "unary"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 23 ],
+      "line-end" : 614,
+      "code" : "betaC = unsafe.Pointer(&betaF)",
+      "entry" : false,
+      "use-vars" : [ 28 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17 ],
+      "in-vars" : [ 8 ],
+      "exit" : false,
+      "out-vars" : [ 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 615,
+      "ast" : {
+        "expressions" : [ ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 616,
+      "code" : "default:\n\treturn errors.Errorf(\"Unsupported data type: %v\", xDesc.dataType)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 8 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 616,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 29,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "Unsupported data type: %v"
+            }
+          }, {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dataType",
+              "variable" : 24
+            },
+            "go-type" : 10,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "xDesc",
+                "variable" : 8
+              }
+            },
+            "type" : "selector"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 31,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 616,
+      "code" : "return errors.Errorf(\"Unsupported data type: %v\", xDesc.dataType)",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 4, 13, 9, 19, 8, 18, 20, 12, 5, 14, 15, 10, 17, 22, 23, 11, 16 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 619,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "arguments" : [ {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "internal",
+                "variable" : 29
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "co",
+                  "variable" : 4
+                }
+              },
+              "type" : "selector"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "C"
+                },
+                "go-type" : 37,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "mode",
+                    "variable" : 5
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "alphaC",
+                "variable" : 22
+              }
+            }, {
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "betaC",
+                "variable" : 23
+              }
+            }, {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "internal",
+                "variable" : 30
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "xDesc",
+                  "variable" : 8
+                }
+              },
+              "type" : "selector"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "x",
+                    "variable" : 9
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "internal",
+                "variable" : 30
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "yDesc",
+                  "variable" : 10
+                }
+              },
+              "type" : "selector"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "y",
+                    "variable" : 11
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "internal",
+                "variable" : 30
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "bnScaleBiasMeanVarDesc",
+                  "variable" : 12
+                }
+              },
+              "type" : "selector"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "bnScale",
+                    "variable" : 13
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "bnBias",
+                    "variable" : 14
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ {
+                "go-type" : 4,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "exponentialAverageFactor",
+                  "variable" : 15
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : -1,
+                "kind" : "expression",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 2,
+                  "value" : "C"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "double"
+                }
+              },
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "resultRunningMean",
+                    "variable" : 16
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "resultRunningVariance",
+                    "variable" : 17
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ {
+                "go-type" : 4,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "epsilon",
+                  "variable" : 18
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : -1,
+                "kind" : "expression",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 2,
+                  "value" : "C"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "double"
+                }
+              },
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "resultSaveMean",
+                    "variable" : 19
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            }, {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "resultSaveInvVariance",
+                    "variable" : 20
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "type" : "call"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 2,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "cudnnBatchNormalizationForwardTraining"
+              }
+            },
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 35,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "result"
+            }
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 619,
+      "code" : "return result(C.cudnnBatchNormalizationForwardTraining(co.internal, mode.C(), alphaC, betaC, xDesc.internal, x.Pointer(), yDesc.internal, y.Pointer(), bnScaleBiasMeanVarDesc.internal, bnScale.Pointer(), bnBias.Pointer(), C.double(exponentialAverageFactor), resultRunningMean.Pointer(), resultRunningVariance.Pointer(), C.double(epsilon), resultSaveMean.Pointer(), resultSaveInvVariance.Pointer()))",
+      "entry" : false,
+      "use-vars" : [ 20, 9, 5, 15, 23, 16, 8, 14, 22, 10, 11, 19, 13, 4, 18, 17, 12 ]
+    } ],
+    "code" : "// BatchNormalizationForwardTraining performs the forward BatchNormalization layer computation for training phase.\nfunc (co *Context) BatchNormalizationForwardTraining(mode BatchNormMode, alpha float64, beta float64, xDesc *TensorDescriptor, x Memory, yDesc *TensorDescriptor, y Memory, bnScaleBiasMeanVarDesc *TensorDescriptor, bnScale Memory, bnBias Memory, exponentialAverageFactor float64, resultRunningMean Memory, resultRunningVariance Memory, epsilon float64, resultSaveMean Memory, resultSaveInvVariance Memory) error {\n\t// DOUBLECHECK: \"cudnnBatchNormalizationForwardTraining\" returns Memory type in Parameter 16\n\tvar alphaC, betaC unsafe.Pointer\n\tswitch xDesc.dataType {\n\tcase Float, Half:\n\t\tvar alphaF, betaF C.float\n\t\talphaF = C.float(float32(alpha))\n\t\tbetaF = C.float(float32(beta))\n\t\talphaC = unsafe.Pointer(&alphaF)\n\t\tbetaC = unsafe.Pointer(&betaF)\n\tcase Double:\n\t\tvar alphaF, betaF C.double\n\t\talphaF = C.double(alpha)\n\t\tbetaF = C.double(beta)\n\t\talphaC = unsafe.Pointer(&alphaF)\n\t\tbetaC = unsafe.Pointer(&betaF)\n\tdefault:\n\t\treturn errors.Errorf(\"Unsupported data type: %v\", xDesc.dataType)\n\t}\n\n\treturn result(C.cudnnBatchNormalizationForwardTraining(co.internal, mode.C(), alphaC, betaC, xDesc.internal, x.Pointer(), yDesc.internal, y.Pointer(), bnScaleBiasMeanVarDesc.internal, bnScale.Pointer(), bnBias.Pointer(), C.double(exponentialAverageFactor), resultRunningMean.Pointer(), resultRunningVariance.Pointer(), C.double(epsilon), resultSaveMean.Pointer(), resultSaveInvVariance.Pointer()))\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "BatchNormalizationForwardTraining",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "Errorf",
+      "package" : 3,
+      "type" : 31,
+      "exported" : true
+    }, {
+      "name" : "result",
+      "package" : 0,
+      "type" : 35,
+      "exported" : false
+    }, {
+      "name" : "C",
+      "package" : 0,
+      "type" : 37,
+      "exported" : true
+    }, {
+      "name" : "Pointer",
+      "package" : 0,
+      "type" : 18,
+      "exported" : true
+    } ],
+    "line-end" : 620,
+    "line-start" : 599,
+    "names" : [ "BatchNormalizationForwardTraining" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "cudnn",
+      "path" : "gorgonia.org/cu/dnn"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "C",
+      "path" : "C"
+    }, {
+      "name" : "errors",
+      "path" : "github.com/pkg/errors"
+    } ],
+    "params" : [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ],
+    "receivers" : [ 4 ],
+    "results" : [ 21 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(mode gorgonia.org/cu/dnn.BatchNormMode, alpha float64, beta float64, xDesc *gorgonia.org/cu/dnn.TensorDescriptor, x gorgonia.org/cu/dnn.Memory, yDesc *gorgonia.org/cu/dnn.TensorDescriptor, y gorgonia.org/cu/dnn.Memory, bnScaleBiasMeanVarDesc *gorgonia.org/cu/dnn.TensorDescriptor, bnScale gorgonia.org/cu/dnn.Memory, bnBias gorgonia.org/cu/dnn.Memory, exponentialAverageFactor float64, resultRunningMean gorgonia.org/cu/dnn.Memory, resultRunningVariance gorgonia.org/cu/dnn.Memory, epsilon float64, resultSaveMean gorgonia.org/cu/dnn.Memory, resultSaveInvVariance gorgonia.org/cu/dnn.Memory) error",
+      "params" : 1,
+      "recv" : 4,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "mode",
+        "type" : 2
+      }, {
+        "name" : "alpha",
+        "type" : 4
+      }, {
+        "name" : "beta",
+        "type" : 4
+      }, {
+        "name" : "xDesc",
+        "type" : 5
+      }, {
+        "name" : "x",
+        "type" : 12
+      }, {
+        "name" : "yDesc",
+        "type" : 5
+      }, {
+        "name" : "y",
+        "type" : 12
+      }, {
+        "name" : "bnScaleBiasMeanVarDesc",
+        "type" : 5
+      }, {
+        "name" : "bnScale",
+        "type" : 12
+      }, {
+        "name" : "bnBias",
+        "type" : 12
+      }, {
+        "name" : "exponentialAverageFactor",
+        "type" : 4
+      }, {
+        "name" : "resultRunningMean",
+        "type" : 12
+      }, {
+        "name" : "resultRunningVariance",
+        "type" : 12
+      }, {
+        "name" : "epsilon",
+        "type" : 4
+      }, {
+        "name" : "resultSaveMean",
+        "type" : 12
+      }, {
+        "name" : "resultSaveInvVariance",
+        "type" : 12
+      } ],
+      "name" : "(mode gorgonia.org/cu/dnn.BatchNormMode, alpha float64, beta float64, xDesc *gorgonia.org/cu/dnn.TensorDescriptor, x gorgonia.org/cu/dnn.Memory, yDesc *gorgonia.org/cu/dnn.TensorDescriptor, y gorgonia.org/cu/dnn.Memory, bnScaleBiasMeanVarDesc *gorgonia.org/cu/dnn.TensorDescriptor, bnScale gorgonia.org/cu/dnn.Memory, bnBias gorgonia.org/cu/dnn.Memory, exponentialAverageFactor float64, resultRunningMean gorgonia.org/cu/dnn.Memory, resultRunningVariance gorgonia.org/cu/dnn.Memory, epsilon float64, resultSaveMean gorgonia.org/cu/dnn.Memory, resultSaveInvVariance gorgonia.org/cu/dnn.Memory)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "BatchNormMode",
+      "name" : "gorgonia.org/cu/dnn.BatchNormMode",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 3
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "name" : "float64",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "elem" : 6,
+      "name" : "*gorgonia.org/cu/dnn.TensorDescriptor",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "local-name" : "TensorDescriptor",
+      "name" : "gorgonia.org/cu/dnn.TensorDescriptor",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "internal",
+        "type" : 8
+      }, {
+        "name" : "format",
+        "type" : 9
+      }, {
+        "name" : "dataType",
+        "type" : 10
+      }, {
+        "name" : "shape",
+        "type" : 11
+      }, {
+        "name" : "strides",
+        "type" : 11
+      } ],
+      "name" : "struct{internal invalid type; format gorgonia.org/cu/dnn.TensorFormat; dataType gorgonia.org/cu/dnn.DataType; shape []int; strides []int}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
+      "name" : "invalid type",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "local-name" : "TensorFormat",
+      "name" : "gorgonia.org/cu/dnn.TensorFormat",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 3
+    }, {
+      "local-name" : "DataType",
+      "name" : "gorgonia.org/cu/dnn.DataType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 3
+    }, {
+      "elem" : 3,
+      "name" : "[]int",
+      "type" : "Slice",
+      "underlying" : 11
+    }, {
+      "local-name" : "Memory",
+      "name" : "gorgonia.org/cu/dnn.Memory",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "methods" : [ {
+        "name" : "IsNativelyAccessible",
+        "type" : 14
+      }, {
+        "name" : "Pointer",
+        "type" : 18
+      }, {
+        "name" : "Uintptr",
+        "type" : 21
+      } ],
+      "name" : "interface{IsNativelyAccessible() bool; Pointer() unsafe.Pointer; Uintptr() uintptr}",
+      "type" : "Interface",
+      "underlying" : 13
+    }, {
+      "name" : "func() bool",
+      "params" : 15,
+      "recv" : 0,
+      "results" : 16,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "name" : "func() unsafe.Pointer",
+      "params" : 15,
+      "recv" : 1,
+      "results" : 19,
+      "type" : "Signature",
+      "underlying" : 18,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 20
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 19
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "name" : "func() uintptr",
+      "params" : 15,
+      "recv" : 2,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 21,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 23
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 22
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 23
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 25
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 27
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 26
+    }, {
+      "name" : "func() string",
+      "params" : 15,
+      "recv" : 3,
+      "results" : 28,
+      "type" : "Signature",
+      "underlying" : 27,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 29
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 28
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 29
+    }, {
+      "name" : "float32",
+      "type" : "Basic",
+      "underlying" : 30
+    }, {
+      "name" : "func(format string, args ...interface{}) error",
+      "params" : 32,
+      "recv" : -1,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 31,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 29
+      }, {
+        "name" : "args",
+        "type" : 33
+      } ],
+      "name" : "(format string, args []interface{})",
+      "type" : "Tuple",
+      "underlying" : 32
+    }, {
+      "elem" : 34,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 33
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 34
+    }, {
+      "name" : "func(x invalid type) error",
+      "params" : 36,
+      "recv" : -1,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "x",
+        "type" : 8
+      } ],
+      "name" : "(x invalid type)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "func() invalid type",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 37,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(invalid type)",
+      "type" : "Tuple",
+      "underlying" : 38
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : -1,
+      "type" : 25,
+      "exported" : false
+    }, {
+      "name" : "co",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "mode",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "alpha",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "beta",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "xDesc",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "yDesc",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "y",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "bnScaleBiasMeanVarDesc",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "bnScale",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "bnBias",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "exponentialAverageFactor",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "resultRunningMean",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "resultRunningVariance",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "epsilon",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "resultSaveMean",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "resultSaveInvVariance",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false
+    }, {
+      "name" : "alphaC",
+      "package" : 0,
+      "type" : 20,
+      "exported" : false
+    }, {
+      "name" : "betaC",
+      "package" : 0,
+      "type" : 20,
+      "exported" : false
+    }, {
+      "name" : "dataType",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "alphaF",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "betaF",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "alphaF",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "betaF",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "internal",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "internal",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

@@ -1,0 +1,371 @@
+{
+  "usage" : {
+    "file" : "reflect_optional.go",
+    "label1" : "delegate",
+    "label2" : "serialization",
+    "line" : "94",
+    "module" : "github.com/json-iterator/go",
+    "pkg" : "github.com/json-iterator/go",
+    "project" : "rook/rook",
+    "snippet" : "func (encoder *dereferenceEncoder) IsEmpty(ptr unsafe.Pointer) bool {",
+    "version" : "v1.1.8"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 95,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "dePtr"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 2,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 2,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 5,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "ptr",
+                  "variable" : 1
+                }
+              },
+              "type" : "cast"
+            },
+            "type" : "paren"
+          },
+          "type" : "star"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 95,
+      "code" : "dePtr := *((*unsafe.Pointer)(ptr))",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 5 ],
+      "in-vars" : [ 3, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 96,
+      "ast" : {
+        "condition" : {
+          "go-type" : 6,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dePtr",
+              "variable" : 3
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 98,
+      "code" : "if dePtr == nil {\n\treturn true\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 97,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "true"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 97,
+      "code" : "return true",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 3, 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 99,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dePtr",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "IsEmpty"
+            },
+            "go-type" : 0,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "ValueEncoder",
+                "variable" : 4
+              },
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "encoder",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 99,
+      "code" : "return encoder.ValueEncoder.IsEmpty(dePtr)",
+      "entry" : false,
+      "use-vars" : [ 0, 3 ]
+    } ],
+    "code" : "func (encoder *dereferenceEncoder) IsEmpty(ptr unsafe.Pointer) bool {\n\tdePtr := *((*unsafe.Pointer)(ptr))\n\tif dePtr == nil {\n\t\treturn true\n\t}\n\treturn encoder.ValueEncoder.IsEmpty(dePtr)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "IsEmpty",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "IsEmpty",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    } ],
+    "line-end" : 100,
+    "line-start" : 94,
+    "names" : [ "IsEmpty" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "jsoniter",
+      "path" : "github.com/json-iterator/go"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "concurrent",
+      "path" : "github.com/modern-go/concurrent"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "atomic",
+      "path" : "sync/atomic"
+    }, {
+      "name" : "reflect2",
+      "path" : "github.com/modern-go/reflect2"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "io",
+      "path" : "io"
+    } ],
+    "params" : [ 1 ],
+    "receivers" : [ 0 ],
+    "results" : [ 2 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(ptr unsafe.Pointer) bool",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "ptr",
+        "type" : 2
+      } ],
+      "name" : "(ptr unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "elem" : 2,
+      "name" : "*unsafe.Pointer",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 6
+    } ],
+    "variables" : [ {
+      "name" : "encoder",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "ptr",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "dePtr",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "ValueEncoder",
+      "package" : 0,
+      "type" : 3,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

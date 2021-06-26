@@ -1,0 +1,2205 @@
+{
+  "usage" : {
+    "file" : "murmur32.go",
+    "label1" : "cast-basic",
+    "label2" : "efficiency",
+    "line" : "116",
+    "module" : "github.com/spaolacci/murmur3",
+    "pkg" : "github.com/spaolacci/murmur3",
+    "project" : "weaveworks/scope",
+    "snippet" : "k1 := *(*uint32)(unsafe.Pointer(p))",
+    "version" : "v0.0.0-20150829172844-0d12bf811670"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 107,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uint32"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "h1"
+            } ],
+            "type" : "var",
+            "values" : [ {
+              "go-type" : 5,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            } ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 107,
+      "code" : "var h1 uint32 = 0",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0, 2 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0, 3 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 109,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "nblocks"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 6,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "data",
+                "variable" : 0
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "/",
+          "right" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "4"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 109,
+      "code" : "nblocks := len(data) / 4",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 3, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 2, 4, 0 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 110,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 10,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 10,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "p"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 110,
+      "code" : "var p uintptr",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 7 ],
+      "in-vars" : [ 4, 0, 3, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 0, 3, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 111,
+      "ast" : {
+        "condition" : {
+          "go-type" : 11,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "data",
+                "variable" : 0
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : ">",
+          "right" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 113,
+      "code" : "if len(data) > 0 {\n\tp = uintptr(unsafe.Pointer(&data[0]))\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ 4 ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 2, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 4, 0, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 112,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "p",
+            "variable" : 4
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 10,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 10,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uintptr"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 12,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 12,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 12,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 13,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 3,
+                "index" : {
+                  "go-type" : 6,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "data",
+                    "variable" : 0
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 4 ],
+      "line-end" : 112,
+      "code" : "p = uintptr(unsafe.Pointer(&data[0]))",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 4, 0, 3, 2 ],
+      "exit" : false,
+      "out-vars" : [ 3, 5, 2, 4, 0 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 114,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p1"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 4
+            }
+          },
+          "operator" : "+",
+          "right" : {
+            "coerced-to" : {
+              "go-type" : 10,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 10,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 10,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 6,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "4"
+                }
+              },
+              "operator" : "*",
+              "right" : {
+                "go-type" : 6,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "nblocks",
+                  "variable" : 3
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "cast"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 114,
+      "code" : "p1 := p + uintptr(4*nblocks)",
+      "entry" : false,
+      "use-vars" : [ 4, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10, 17 ],
+      "in-vars" : [ 3, 5, 2, 4, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 5, 2, 4, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 115,
+      "ast" : {
+        "condition" : {
+          "go-type" : 11,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 4
+            }
+          },
+          "operator" : "<",
+          "right" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p1",
+              "variable" : 5
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "for"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 125,
+      "code" : "for ; p < p1; p += 4 {\n\tk1 := *(*uint32)(unsafe.Pointer(p))\n\n\tk1 *= c1_32\n\tk1 = (k1 << 15) | (k1 >> 17)\n\tk1 *= c2_32\n\n\th1 ^= k1\n\th1 = (h1 << 13) | (h1 >> 19)\n\th1 = h1*5 + 0xe6546b64\n}",
+      "entry" : false,
+      "use-vars" : [ 4, 5 ]
+    }, {
+      "update-vars" : [ 4 ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 2, 4, 0, 3, 5 ],
+      "exit" : false,
+      "out-vars" : [ 2, 4, 0, 3, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 115,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "p",
+            "variable" : 4
+          }
+        } ],
+        "operator" : "+",
+        "right" : [ {
+          "go-type" : 10,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "4"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 4 ],
+      "line-end" : 115,
+      "code" : "p += 4",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 2, 4, 0, 3, 5 ],
+      "exit" : false,
+      "out-vars" : [ 6, 2, 4, 0, 3, 5 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 116,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "k1"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 5,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uint32"
+                }
+              },
+              "go-type" : 14,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 12,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 12,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 10,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "p",
+                  "variable" : 4
+                }
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 116,
+      "code" : "k1 := *(*uint32)(unsafe.Pointer(p))",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 5, 6, 2, 4, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 6, 2, 4, 0, 3, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 118,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 6
+          }
+        } ],
+        "operator" : "*",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "3432918353"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 6 ],
+      "line-end" : 118,
+      "code" : "k1 *= c1_32",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 6, 2, 4, 0, 3, 5 ],
+      "exit" : false,
+      "out-vars" : [ 3, 5, 6, 2, 4, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 119,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 6
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "k1",
+                  "variable" : 6
+                }
+              },
+              "operator" : "<<",
+              "right" : {
+                "go-type" : 15,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "15"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "|",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "k1",
+                  "variable" : 6
+                }
+              },
+              "operator" : ">>",
+              "right" : {
+                "go-type" : 15,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "17"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 6 ],
+      "line-end" : 119,
+      "code" : "k1 = (k1 << 15) | (k1 >> 17)",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 0, 3, 5, 6, 2, 4 ],
+      "exit" : false,
+      "out-vars" : [ 0, 3, 5, 6, 2, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 120,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 6
+          }
+        } ],
+        "operator" : "*",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "461845907"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 6 ],
+      "line-end" : 120,
+      "code" : "k1 *= c2_32",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 6, 2, 4, 0, 3, 5 ],
+      "exit" : false,
+      "out-vars" : [ 2, 4, 0, 3, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 122,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 6
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 122,
+      "code" : "h1 ^= k1",
+      "entry" : false,
+      "use-vars" : [ 6, 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 0, 3, 5, 2, 4 ],
+      "exit" : false,
+      "out-vars" : [ 2, 4, 0, 3, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 123,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "h1",
+                  "variable" : 2
+                }
+              },
+              "operator" : "<<",
+              "right" : {
+                "go-type" : 15,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "13"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "|",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "h1",
+                  "variable" : 2
+                }
+              },
+              "operator" : ">>",
+              "right" : {
+                "go-type" : 15,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "19"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 123,
+      "code" : "h1 = (h1 << 13) | (h1 >> 19)",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 5, 2, 4, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 4, 0, 3, 5, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 124,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "h1",
+                "variable" : 2
+              }
+            },
+            "operator" : "*",
+            "right" : {
+              "go-type" : 5,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "5"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "+",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "3864292196"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 124,
+      "code" : "h1 = h1*5 + 0xe6546b64",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 18 ],
+      "in-vars" : [ 2, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 7, 0 ],
+      "decl-vars" : [ 7 ],
+      "line-start" : 127,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "tail"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "type" : "slice",
+          "three" : false,
+          "high" : null,
+          "max" : null,
+          "kind" : "expression",
+          "low" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "nblocks",
+                "variable" : 3
+              }
+            },
+            "operator" : "*",
+            "right" : {
+              "go-type" : 6,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "4"
+              }
+            },
+            "type" : "binary"
+          },
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "data",
+              "variable" : 0
+            }
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 127,
+      "code" : "tail := data[nblocks*4:]",
+      "entry" : false,
+      "use-vars" : [ 0, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ 0, 2, 7 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ 8 ],
+      "line-start" : 129,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uint32"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "k1"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 129,
+      "code" : "var k1 uint32",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 20, 23, 26, 32 ],
+      "in-vars" : [ 0, 8, 2, 7 ],
+      "exit" : false,
+      "out-vars" : [ 7, 0, 8, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 130,
+      "ast" : {
+        "condition" : {
+          "go-type" : 6,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "tail",
+                "variable" : 7
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "&",
+          "right" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "3"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "switch"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 143,
+      "code" : "switch len(tail) & 3 {\ncase 3:\n\tk1 ^= uint32(tail[2]) << 16\n\tfallthrough\ncase 2:\n\tk1 ^= uint32(tail[1]) << 8\n\tfallthrough\ncase 1:\n\tk1 ^= uint32(tail[0])\n\tk1 *= c1_32\n\tk1 = (k1 << 15) | (k1 >> 17)\n\tk1 *= c2_32\n\th1 ^= k1\n}",
+      "entry" : false,
+      "use-vars" : [ 7 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 21 ],
+      "in-vars" : [ 8, 2, 7, 0 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 131,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 6,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "3"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 133,
+      "code" : "case 3:\n\tk1 ^= uint32(tail[2]) << 16\n\tfallthrough",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 22 ],
+      "in-vars" : [ 2, 7, 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 132,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "coerced-to" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uint32"
+              }
+            },
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "index" : {
+                "go-type" : 6,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "2"
+                }
+              },
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tail",
+                  "variable" : 7
+                }
+              },
+              "type" : "index"
+            },
+            "type" : "cast"
+          },
+          "operator" : "<<",
+          "right" : {
+            "go-type" : 15,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "16"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 132,
+      "code" : "k1 ^= uint32(tail[2]) << 16",
+      "entry" : false,
+      "use-vars" : [ 7, 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 0, 8, 2, 7 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 133,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "fallthrough"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 133,
+      "code" : "fallthrough",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 0, 8, 2, 7 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 134,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 6,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "2"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 136,
+      "code" : "case 2:\n\tk1 ^= uint32(tail[1]) << 8\n\tfallthrough",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 25 ],
+      "in-vars" : [ 2, 7, 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 135,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "coerced-to" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uint32"
+              }
+            },
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "index" : {
+                "go-type" : 6,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "1"
+                }
+              },
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tail",
+                  "variable" : 7
+                }
+              },
+              "type" : "index"
+            },
+            "type" : "cast"
+          },
+          "operator" : "<<",
+          "right" : {
+            "go-type" : 15,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "8"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 135,
+      "code" : "k1 ^= uint32(tail[1]) << 8",
+      "entry" : false,
+      "use-vars" : [ 7, 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 27 ],
+      "in-vars" : [ 8, 2, 7, 0 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 7, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 136,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "fallthrough"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 136,
+      "code" : "fallthrough",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 27 ],
+      "in-vars" : [ 8, 2, 7, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 7, 0, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 137,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 6,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "1"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 142,
+      "code" : "case 1:\n\tk1 ^= uint32(tail[0])\n\tk1 *= c1_32\n\tk1 = (k1 << 15) | (k1 >> 17)\n\tk1 *= c2_32\n\th1 ^= k1",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 28 ],
+      "in-vars" : [ 8, 2, 7, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 138,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 5,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 5,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uint32"
+            }
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 3,
+            "index" : {
+              "go-type" : 6,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "tail",
+                "variable" : 7
+              }
+            },
+            "type" : "index"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 138,
+      "code" : "k1 ^= uint32(tail[0])",
+      "entry" : false,
+      "use-vars" : [ 7, 8 ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 29 ],
+      "in-vars" : [ 8, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 139,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "operator" : "*",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "3432918353"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 139,
+      "code" : "k1 *= c1_32",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 30 ],
+      "in-vars" : [ 8, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 140,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "k1",
+                  "variable" : 8
+                }
+              },
+              "operator" : "<<",
+              "right" : {
+                "go-type" : 15,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "15"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "|",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "k1",
+                  "variable" : 8
+                }
+              },
+              "operator" : ">>",
+              "right" : {
+                "go-type" : 15,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "17"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 140,
+      "code" : "k1 = (k1 << 15) | (k1 >> 17)",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 31 ],
+      "in-vars" : [ 8, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 8, 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 141,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "operator" : "*",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "461845907"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 141,
+      "code" : "k1 *= c2_32",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 32 ],
+      "in-vars" : [ 8, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 142,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k1",
+            "variable" : 8
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 142,
+      "code" : "h1 ^= k1",
+      "entry" : false,
+      "use-vars" : [ 8, 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 33 ],
+      "in-vars" : [ 0, 2 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 145,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 5,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 5,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uint32"
+            }
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "data",
+                "variable" : 0
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 145,
+      "code" : "h1 ^= uint32(len(data))",
+      "entry" : false,
+      "use-vars" : [ 0, 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 34 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 147,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "h1",
+              "variable" : 2
+            }
+          },
+          "operator" : ">>",
+          "right" : {
+            "go-type" : 15,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "16"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 147,
+      "code" : "h1 ^= h1 >> 16",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 35 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 148,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "*",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "2246822507"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 148,
+      "code" : "h1 *= 0x85ebca6b",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 36 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 149,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "h1",
+              "variable" : 2
+            }
+          },
+          "operator" : ">>",
+          "right" : {
+            "go-type" : 15,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "13"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 149,
+      "code" : "h1 ^= h1 >> 13",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 37 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 150,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "*",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "3266489909"
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 150,
+      "code" : "h1 *= 0xc2b2ae35",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 38 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 151,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ],
+        "operator" : "^",
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "h1",
+              "variable" : 2
+            }
+          },
+          "operator" : ">>",
+          "right" : {
+            "go-type" : 15,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "16"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 2 ],
+      "line-end" : 151,
+      "code" : "h1 ^= h1 >> 16",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 153,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "h1",
+            "variable" : 2
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 153,
+      "code" : "return h1",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    } ],
+    "code" : "// Sum32 returns the MurmurHash3 sum of data. It is equivalent to the\n// following sequence (without the extra burden and the extra allocation):\n//     hasher := New32()\n//     hasher.Write(data)\n//     return hasher.Sum32()\nfunc Sum32(data []byte) uint32 {\n\n\tvar h1 uint32 = 0\n\n\tnblocks := len(data) / 4\n\tvar p uintptr\n\tif len(data) > 0 {\n\t\tp = uintptr(unsafe.Pointer(&data[0]))\n\t}\n\tp1 := p + uintptr(4*nblocks)\n\tfor ; p < p1; p += 4 {\n\t\tk1 := *(*uint32)(unsafe.Pointer(p))\n\n\t\tk1 *= c1_32\n\t\tk1 = (k1 << 15) | (k1 >> 17)\n\t\tk1 *= c2_32\n\n\t\th1 ^= k1\n\t\th1 = (h1 << 13) | (h1 >> 19)\n\t\th1 = h1*5 + 0xe6546b64\n\t}\n\n\ttail := data[nblocks*4:]\n\n\tvar k1 uint32\n\tswitch len(tail) & 3 {\n\tcase 3:\n\t\tk1 ^= uint32(tail[2]) << 16\n\t\tfallthrough\n\tcase 2:\n\t\tk1 ^= uint32(tail[1]) << 8\n\t\tfallthrough\n\tcase 1:\n\t\tk1 ^= uint32(tail[0])\n\t\tk1 *= c1_32\n\t\tk1 = (k1 << 15) | (k1 >> 17)\n\t\tk1 *= c2_32\n\t\th1 ^= k1\n\t}\n\n\th1 ^= uint32(len(data))\n\n\th1 ^= h1 >> 16\n\th1 *= 0x85ebca6b\n\th1 ^= h1 >> 13\n\th1 *= 0xc2b2ae35\n\th1 ^= h1 >> 16\n\n\treturn h1\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Sum32",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    } ],
+    "line-end" : 154,
+    "line-start" : 105,
+    "names" : [ "Sum32" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "murmur3",
+      "path" : "github.com/spaolacci/murmur3"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0 ],
+    "receivers" : [ ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(data []byte) uint32",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "data",
+        "type" : 2
+      } ],
+      "name" : "(data []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(uint32)",
+      "type" : "Tuple",
+      "underlying" : 4
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "name" : "func([]byte) int",
+      "params" : 8,
+      "recv" : -1,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 7,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "elem" : 3,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "elem" : 5,
+      "name" : "*uint32",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 15
+    } ],
+    "variables" : [ {
+      "name" : "data",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "h1",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "nblocks",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "p1",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "k1",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "tail",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "k1",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

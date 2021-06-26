@@ -1,0 +1,921 @@
+{
+  "usage" : {
+    "file" : "array.go",
+    "label1" : "cast-header",
+    "label2" : "generics",
+    "line" : "257",
+    "module" : "gorgonia.org/tensor",
+    "pkg" : "gorgonia.org/tensor",
+    "project" : "gorgonia/gorgonia",
+    "snippet" : "ptr := unsafe.Pointer(&shdr)",
+    "version" : "v0.9.6"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 8 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 249,
+      "ast" : {
+        "condition" : {
+          "go-type" : 4,
+          "kind" : "expression",
+          "left" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "v",
+              "variable" : 2
+            },
+            "go-type" : 3,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "a",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 261,
+      "code" : "if a.v == nil {\n\n\tshdr := reflect.SliceHeader{\n\t\tData: uintptr(a.Header.Ptr),\n\t\tLen:  a.Header.L,\n\t\tCap:  a.Header.C,\n\t}\n\tsliceT := reflect.SliceOf(a.t.Type)\n\tptr := unsafe.Pointer(&shdr)\n\tval := reflect.Indirect(reflect.NewAt(sliceT, ptr))\n\ta.v = val.Interface()\n\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 12 ],
+      "decl-vars" : [ 12 ],
+      "line-start" : 251,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "shdr"
+          }
+        } ],
+        "right" : [ {
+          "declared" : {
+            "go-type" : 6,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "reflect"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 6,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "SliceHeader"
+            }
+          },
+          "go-type" : 6,
+          "kind" : "literal",
+          "type" : "composite",
+          "values" : [ {
+            "go-type" : -1,
+            "key" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Data",
+                "variable" : 3
+              }
+            },
+            "kind" : "expression",
+            "type" : "key-value",
+            "value" : {
+              "coerced-to" : {
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 29,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uintptr"
+                }
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "Ptr",
+                  "variable" : 5
+                },
+                "go-type" : 4,
+                "kind" : "expression",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "Header",
+                    "variable" : 4
+                  },
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 0,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "a",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "selector"
+              },
+              "type" : "cast"
+            }
+          }, {
+            "go-type" : -1,
+            "key" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Len",
+                "variable" : 6
+              }
+            },
+            "kind" : "expression",
+            "type" : "key-value",
+            "value" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "L",
+                "variable" : 7
+              },
+              "go-type" : 5,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "Header",
+                  "variable" : 4
+                },
+                "go-type" : 2,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "a",
+                    "variable" : 0
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            }
+          }, {
+            "go-type" : -1,
+            "key" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Cap",
+                "variable" : 8
+              }
+            },
+            "kind" : "expression",
+            "type" : "key-value",
+            "value" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "C",
+                "variable" : 9
+              },
+              "go-type" : 5,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "Header",
+                  "variable" : 4
+                },
+                "go-type" : 2,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "a",
+                    "variable" : 0
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            }
+          } ]
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 255,
+      "code" : "shdr := reflect.SliceHeader{\n\tData: uintptr(a.Header.Ptr),\n\tLen:  a.Header.L,\n\tCap:  a.Header.C,\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 12, 0 ],
+      "exit" : false,
+      "out-vars" : [ 12, 13, 0 ],
+      "decl-vars" : [ 13 ],
+      "line-start" : 256,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "sliceT"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Type",
+              "variable" : 11
+            },
+            "go-type" : 8,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "t",
+                "variable" : 10
+              },
+              "go-type" : 6,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "reflect"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "SliceOf"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 256,
+      "code" : "sliceT := reflect.SliceOf(a.t.Type)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 0, 12, 13 ],
+      "exit" : false,
+      "out-vars" : [ 14, 13, 0 ],
+      "decl-vars" : [ 14 ],
+      "line-start" : 257,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ptr"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 4,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 4,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "shdr",
+                "variable" : 12
+              }
+            },
+            "type" : "unary"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 257,
+      "code" : "ptr := unsafe.Pointer(&shdr)",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 14, 13, 0 ],
+      "exit" : false,
+      "out-vars" : [ 15, 0 ],
+      "decl-vars" : [ 15 ],
+      "line-start" : 258,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "val"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "arguments" : [ {
+              "go-type" : 8,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sliceT",
+                "variable" : 13
+              }
+            }, {
+              "go-type" : 4,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "ptr",
+                "variable" : 14
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 14,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 3,
+                "value" : "reflect"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "NewAt"
+              }
+            },
+            "go-type" : 49,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "reflect"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Indirect"
+            }
+          },
+          "go-type" : 49,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 258,
+      "code" : "val := reflect.Indirect(reflect.NewAt(sliceT, ptr))",
+      "entry" : false,
+      "use-vars" : [ 13, 14 ]
+    }, {
+      "update-vars" : [ 0 ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 15, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 259,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "v",
+            "variable" : 2
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "a",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Interface"
+            },
+            "go-type" : 16,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 49,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "val",
+                "variable" : 15
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 259,
+      "code" : "a.v = val.Interface()",
+      "entry" : false,
+      "use-vars" : [ 15, 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 262,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "v",
+            "variable" : 2
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "a",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 262,
+      "code" : "return a.v",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    } ],
+    "code" : "// Data returns the representation of a slice.\nfunc (a array) Data() interface{} {\n\tif a.v == nil {\n\n\t\tshdr := reflect.SliceHeader{\n\t\t\tData: uintptr(a.Header.Ptr),\n\t\t\tLen:  a.Header.L,\n\t\t\tCap:  a.Header.C,\n\t\t}\n\t\tsliceT := reflect.SliceOf(a.t.Type)\n\t\tptr := unsafe.Pointer(&shdr)\n\t\tval := reflect.Indirect(reflect.NewAt(sliceT, ptr))\n\t\ta.v = val.Interface()\n\n\t}\n\treturn a.v\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Data",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "SliceOf",
+      "package" : 3,
+      "type" : 8,
+      "exported" : true
+    }, {
+      "name" : "Indirect",
+      "package" : 3,
+      "type" : 11,
+      "exported" : true
+    }, {
+      "name" : "NewAt",
+      "package" : 3,
+      "type" : 14,
+      "exported" : true
+    }, {
+      "name" : "Interface",
+      "package" : 3,
+      "type" : 16,
+      "exported" : true
+    } ],
+    "line-end" : 263,
+    "line-start" : 248,
+    "names" : [ "Data" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "tensor",
+      "path" : "gorgonia.org/tensor"
+    }, {
+      "name" : "storage",
+      "path" : "gorgonia.org/tensor/internal/storage"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 0 ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() interface{}",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 3
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "local-name" : "SliceHeader",
+      "name" : "reflect.SliceHeader",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "Data",
+        "type" : 29
+      }, {
+        "name" : "Len",
+        "type" : 5
+      }, {
+        "name" : "Cap",
+        "type" : 5
+      } ],
+      "name" : "struct{Data uintptr; Len int; Cap int}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
+      "name" : "func(t reflect.Type) reflect.Type",
+      "params" : 9,
+      "recv" : -1,
+      "results" : 21,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "t",
+        "type" : 8
+      } ],
+      "name" : "(t reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "elem" : 6,
+      "name" : "*reflect.SliceHeader",
+      "type" : "Pointer",
+      "underlying" : 10
+    }, {
+      "name" : "func(v reflect.Value) reflect.Value",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "v",
+        "type" : 49
+      } ],
+      "name" : "(v reflect.Value)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 49
+      } ],
+      "name" : "(reflect.Value)",
+      "type" : "Tuple",
+      "underlying" : 13
+    }, {
+      "name" : "func(typ reflect.Type, p unsafe.Pointer) reflect.Value",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "typ",
+        "type" : 8
+      }, {
+        "name" : "p",
+        "type" : 4
+      } ],
+      "name" : "(typ reflect.Type, p unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "name" : "func() (i interface{})",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 3
+      } ],
+      "name" : "(i interface{})",
+      "type" : "Tuple",
+      "underlying" : 17
+    } ],
+    "variables" : [ {
+      "name" : "a",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "v",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "Data",
+      "package" : 3,
+      "type" : 29,
+      "exported" : true
+    }, {
+      "name" : "Header",
+      "package" : 0,
+      "type" : 2,
+      "exported" : true
+    }, {
+      "name" : "Ptr",
+      "package" : 1,
+      "type" : 4,
+      "exported" : true
+    }, {
+      "name" : "Len",
+      "package" : 3,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "L",
+      "package" : 1,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "Cap",
+      "package" : 3,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "C",
+      "package" : 1,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "Type",
+      "package" : 0,
+      "type" : 8,
+      "exported" : true
+    }, {
+      "name" : "shdr",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "sliceT",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "ptr",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "val",
+      "package" : 0,
+      "type" : 49,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

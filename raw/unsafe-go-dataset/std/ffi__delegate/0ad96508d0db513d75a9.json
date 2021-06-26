@@ -1,0 +1,1886 @@
+{
+  "usage" : {
+    "file" : "malloc.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "820",
+    "module" : "std",
+    "pkg" : "runtime",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "sysFree(unsafe.Pointer(end), endLen, nil)",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 5, 0 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 785,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "retries"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 785,
+      "code" : "retries := 0",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 1, 2, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 5, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 786,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 3,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 3,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uintptr"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "v",
+                "variable" : 0
+              }
+            }, {
+              "go-type" : 3,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "size",
+                  "variable" : 1
+                }
+              },
+              "operator" : "+",
+              "right" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "align",
+                  "variable" : 2
+                }
+              },
+              "type" : "binary"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "sysReserve"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 787,
+      "code" : "retry:\n\tp := uintptr(sysReserve(v, size+align))",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 1, 2, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 6, 1, 2, 5 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 787,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 3,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 3,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uintptr"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "v",
+                "variable" : 0
+              }
+            }, {
+              "go-type" : 3,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "size",
+                  "variable" : 1
+                }
+              },
+              "operator" : "+",
+              "right" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "align",
+                  "variable" : 2
+                }
+              },
+              "type" : "binary"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "sysReserve"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 787,
+      "code" : "p := uintptr(sysReserve(v, size+align))",
+      "entry" : false,
+      "use-vars" : [ 0, 1, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 8, 10, 21 ],
+      "in-vars" : [ 6, 1, 2, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 5, 0, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : 788,
+      "ast" : {
+        "condition" : null,
+        "kind" : "statement",
+        "type" : "switch"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 823,
+      "code" : "switch {\ncase p == 0:\n\treturn nil, 0\ncase p&(align-1) == 0:\n\n\treturn unsafe.Pointer(p), size + align\ncase GOOS == \"windows\":\n\n\tsysFree(unsafe.Pointer(p), size+align, nil)\n\tp = alignUp(p, align)\n\tp2 := sysReserve(unsafe.Pointer(p), size)\n\tif p != uintptr(p2) {\n\n\t\tsysFree(p2, size, nil)\n\t\tif retries++; retries == 100 {\n\t\t\tthrow(\"failed to allocate aligned heap memory; too many retries\")\n\t\t}\n\t\tgoto retry\n\t}\n\n\treturn p2, size\ndefault:\n\n\tpAligned := alignUp(p, align)\n\tsysFree(unsafe.Pointer(p), pAligned-p, nil)\n\tend := pAligned + size\n\tendLen := (p + size + align) - end\n\tif endLen > 0 {\n\t\tsysFree(unsafe.Pointer(end), endLen, nil)\n\t}\n\treturn unsafe.Pointer(pAligned), size\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 789,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 6
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 790,
+      "code" : "case p == 0:\n\treturn nil, 0",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 790,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 3,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 790,
+      "code" : "return nil, 0",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 2, 6, 1 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 791,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 6
+              }
+            },
+            "operator" : "&",
+            "right" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "left" : {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "align",
+                    "variable" : 2
+                  }
+                },
+                "operator" : "-",
+                "right" : {
+                  "go-type" : 3,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "1"
+                  }
+                },
+                "type" : "binary"
+              },
+              "type" : "paren"
+            },
+            "type" : "binary"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 794,
+      "code" : "case p&(align-1) == 0:\n\n\treturn unsafe.Pointer(p), size + align",
+      "entry" : false,
+      "use-vars" : [ 6, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1, 2, 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 794,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 2,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 2,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 6
+            }
+          },
+          "type" : "cast"
+        }, {
+          "go-type" : 3,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 1
+            }
+          },
+          "operator" : "+",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "align",
+              "variable" : 2
+            }
+          },
+          "type" : "binary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 794,
+      "code" : "return unsafe.Pointer(p), size + align",
+      "entry" : false,
+      "use-vars" : [ 6, 1, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 5, 0, 6, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 2, 5, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 795,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 9,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "false"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 812,
+      "code" : "case GOOS == \"windows\":\n\n\tsysFree(unsafe.Pointer(p), size+align, nil)\n\tp = alignUp(p, align)\n\tp2 := sysReserve(unsafe.Pointer(p), size)\n\tif p != uintptr(p2) {\n\n\t\tsysFree(p2, size, nil)\n\t\tif retries++; retries == 100 {\n\t\t\tthrow(\"failed to allocate aligned heap memory; too many retries\")\n\t\t}\n\t\tgoto retry\n\t}\n\n\treturn p2, size",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 5, 0, 6, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 0, 6, 1, 2, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 800,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 2,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 2,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 6
+              }
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "size",
+                "variable" : 1
+              }
+            },
+            "operator" : "+",
+            "right" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "align",
+                "variable" : 2
+              }
+            },
+            "type" : "binary"
+          }, {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "sysFree"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 800,
+      "code" : "sysFree(unsafe.Pointer(p), size+align, nil)",
+      "entry" : false,
+      "use-vars" : [ 1, 2, 6 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 1, 2, 5, 0, 6 ],
+      "exit" : false,
+      "out-vars" : [ 5, 0, 6, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 801,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "p",
+            "variable" : 6
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 6
+            }
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "align",
+              "variable" : 2
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 16,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "alignUp"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 6 ],
+      "line-end" : 801,
+      "code" : "p = alignUp(p, align)",
+      "entry" : false,
+      "use-vars" : [ 6, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 6, 1, 2, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 2, 7, 5, 0 ],
+      "decl-vars" : [ 7 ],
+      "line-start" : 802,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p2"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 2,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 2,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 6
+              }
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "sysReserve"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 802,
+      "code" : "p2 := sysReserve(unsafe.Pointer(p), size)",
+      "entry" : false,
+      "use-vars" : [ 6, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15, 20 ],
+      "in-vars" : [ 0, 6, 1, 2, 7, 5 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 7, 5, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 803,
+      "ast" : {
+        "condition" : {
+          "go-type" : 19,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 6
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "coerced-to" : {
+              "go-type" : 3,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 3,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 3,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p2",
+                "variable" : 7
+              }
+            },
+            "type" : "cast"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 810,
+      "code" : "if p != uintptr(p2) {\n\n\tsysFree(p2, size, nil)\n\tif retries++; retries == 100 {\n\t\tthrow(\"failed to allocate aligned heap memory; too many retries\")\n\t}\n\tgoto retry\n}",
+      "entry" : false,
+      "use-vars" : [ 7, 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17 ],
+      "in-vars" : [ 1, 2, 7, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 5, 0, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 805,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p2",
+              "variable" : 7
+            }
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "sysFree"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 805,
+      "code" : "sysFree(p2, size, nil)",
+      "entry" : false,
+      "use-vars" : [ 7, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 18, 19 ],
+      "in-vars" : [ 1, 2, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 5, 0, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 806,
+      "ast" : {
+        "condition" : {
+          "go-type" : 19,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "retries",
+              "variable" : 5
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "100"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 808,
+      "code" : "if retries++; retries == 100 {\n\tthrow(\"failed to allocate aligned heap memory; too many retries\")\n}",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ 5 ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 1, 2, 5, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 5, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 806,
+      "ast" : {
+        "kind" : "statement",
+        "operation" : "++",
+        "target" : {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "retries",
+            "variable" : 5
+          }
+        },
+        "type" : "crement"
+      },
+      "assign-vars" : [ 5 ],
+      "line-end" : 806,
+      "code" : "retries++",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ 0, 1, 2, 5 ],
+      "exit" : false,
+      "out-vars" : [ 5, 0, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 807,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 22,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "failed to allocate aligned heap memory; too many retries"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 20,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "throw"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 807,
+      "code" : "throw(\"failed to allocate aligned heap memory; too many retries\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0, 1, 2, 5 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 5, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 809,
+      "ast" : {
+        "kind" : "statement",
+        "label" : {
+          "ident-kind" : "Label",
+          "kind" : "ident",
+          "value" : "retry"
+        },
+        "type" : "goto"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 809,
+      "code" : "goto retry",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1, 7 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 812,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "p2",
+            "variable" : 7
+          }
+        }, {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "size",
+            "variable" : 1
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 812,
+      "code" : "return p2, size",
+      "entry" : false,
+      "use-vars" : [ 7, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 22 ],
+      "in-vars" : [ 6, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 813,
+      "ast" : {
+        "expressions" : [ ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 822,
+      "code" : "default:\n\n\tpAligned := alignUp(p, align)\n\tsysFree(unsafe.Pointer(p), pAligned-p, nil)\n\tend := pAligned + size\n\tendLen := (p + size + align) - end\n\tif endLen > 0 {\n\t\tsysFree(unsafe.Pointer(end), endLen, nil)\n\t}\n\treturn unsafe.Pointer(pAligned), size",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 23 ],
+      "in-vars" : [ 6, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 2, 8 ],
+      "decl-vars" : [ 8 ],
+      "line-start" : 815,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "pAligned"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 6
+            }
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "align",
+              "variable" : 2
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 16,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "alignUp"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 815,
+      "code" : "pAligned := alignUp(p, align)",
+      "entry" : false,
+      "use-vars" : [ 6, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 6, 1, 2, 8 ],
+      "exit" : false,
+      "out-vars" : [ 8, 6, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 816,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 2,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 2,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 6
+              }
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "pAligned",
+                "variable" : 8
+              }
+            },
+            "operator" : "-",
+            "right" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 6
+              }
+            },
+            "type" : "binary"
+          }, {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "sysFree"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 816,
+      "code" : "sysFree(unsafe.Pointer(p), pAligned-p, nil)",
+      "entry" : false,
+      "use-vars" : [ 8, 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 25 ],
+      "in-vars" : [ 1, 2, 8, 6 ],
+      "exit" : false,
+      "out-vars" : [ 2, 8, 9, 6, 1 ],
+      "decl-vars" : [ 9 ],
+      "line-start" : 817,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "end"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pAligned",
+              "variable" : 8
+            }
+          },
+          "operator" : "+",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 1
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 817,
+      "code" : "end := pAligned + size",
+      "entry" : false,
+      "use-vars" : [ 8, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 26 ],
+      "in-vars" : [ 6, 1, 2, 8, 9 ],
+      "exit" : false,
+      "out-vars" : [ 10, 9, 1, 8 ],
+      "decl-vars" : [ 10 ],
+      "line-start" : 818,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "endLen"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "left" : {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "p",
+                    "variable" : 6
+                  }
+                },
+                "operator" : "+",
+                "right" : {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "size",
+                    "variable" : 1
+                  }
+                },
+                "type" : "binary"
+              },
+              "operator" : "+",
+              "right" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "align",
+                  "variable" : 2
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "-",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "end",
+              "variable" : 9
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 818,
+      "code" : "endLen := (p + size + align) - end",
+      "entry" : false,
+      "use-vars" : [ 2, 9, 6, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 27, 28 ],
+      "in-vars" : [ 8, 10, 9, 1 ],
+      "exit" : false,
+      "out-vars" : [ 10, 9, 1, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 819,
+      "ast" : {
+        "condition" : {
+          "go-type" : 19,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "endLen",
+              "variable" : 10
+            }
+          },
+          "operator" : ">",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 821,
+      "code" : "if endLen > 0 {\n\tsysFree(unsafe.Pointer(end), endLen, nil)\n}",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 28 ],
+      "in-vars" : [ 1, 8, 10, 9 ],
+      "exit" : false,
+      "out-vars" : [ 1, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 820,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 2,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 2,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "end",
+                "variable" : 9
+              }
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "endLen",
+              "variable" : 10
+            }
+          }, {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "sysFree"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 820,
+      "code" : "sysFree(unsafe.Pointer(end), endLen, nil)",
+      "entry" : false,
+      "use-vars" : [ 9, 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1, 8 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 822,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 2,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 2,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pAligned",
+              "variable" : 8
+            }
+          },
+          "type" : "cast"
+        }, {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "size",
+            "variable" : 1
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 822,
+      "code" : "return unsafe.Pointer(pAligned), size",
+      "entry" : false,
+      "use-vars" : [ 1, 8 ]
+    } ],
+    "code" : "// sysReserveAligned is like sysReserve, but the returned pointer is\n// aligned to align bytes. It may reserve either n or n+align bytes,\n// so it returns the size that was reserved.\nfunc sysReserveAligned(v unsafe.Pointer, size, align uintptr) (unsafe.Pointer, uintptr) {\n\n\tretries := 0\nretry:\n\tp := uintptr(sysReserve(v, size+align))\n\tswitch {\n\tcase p == 0:\n\t\treturn nil, 0\n\tcase p&(align-1) == 0:\n\n\t\treturn unsafe.Pointer(p), size + align\n\tcase GOOS == \"windows\":\n\n\t\tsysFree(unsafe.Pointer(p), size+align, nil)\n\t\tp = alignUp(p, align)\n\t\tp2 := sysReserve(unsafe.Pointer(p), size)\n\t\tif p != uintptr(p2) {\n\n\t\t\tsysFree(p2, size, nil)\n\t\t\tif retries++; retries == 100 {\n\t\t\t\tthrow(\"failed to allocate aligned heap memory; too many retries\")\n\t\t\t}\n\t\t\tgoto retry\n\t\t}\n\n\t\treturn p2, size\n\tdefault:\n\n\t\tpAligned := alignUp(p, align)\n\t\tsysFree(unsafe.Pointer(p), pAligned-p, nil)\n\t\tend := pAligned + size\n\t\tendLen := (p + size + align) - end\n\t\tif endLen > 0 {\n\t\t\tsysFree(unsafe.Pointer(end), endLen, nil)\n\t\t}\n\t\treturn unsafe.Pointer(pAligned), size\n\t}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "sysReserveAligned",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "sysReserve",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "sysFree",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    }, {
+      "name" : "alignUp",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false
+    }, {
+      "name" : "throw",
+      "package" : 0,
+      "type" : 20,
+      "exported" : false
+    } ],
+    "line-end" : 824,
+    "line-start" : 781,
+    "names" : [ "sysReserveAligned" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "runtime",
+      "path" : "runtime"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0, 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3, 4 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(v unsafe.Pointer, size uintptr, align uintptr) (unsafe.Pointer, uintptr)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "v",
+        "type" : 2
+      }, {
+        "name" : "size",
+        "type" : 3
+      }, {
+        "name" : "align",
+        "type" : 3
+      } ],
+      "name" : "(v unsafe.Pointer, size uintptr, align uintptr)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      }, {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(unsafe.Pointer, uintptr)",
+      "type" : "Tuple",
+      "underlying" : 4
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "func(v unsafe.Pointer, n uintptr) unsafe.Pointer",
+      "params" : 7,
+      "recv" : -1,
+      "results" : 8,
+      "type" : "Signature",
+      "underlying" : 6,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "v",
+        "type" : 2
+      }, {
+        "name" : "n",
+        "type" : 3
+      } ],
+      "name" : "(v unsafe.Pointer, n uintptr)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 8
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "name" : "func(v unsafe.Pointer, n uintptr, sysStat *uint64)",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "v",
+        "type" : 2
+      }, {
+        "name" : "n",
+        "type" : 3
+      }, {
+        "name" : "sysStat",
+        "type" : 13
+      } ],
+      "name" : "(v unsafe.Pointer, n uintptr, sysStat *uint64)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "elem" : 14,
+      "name" : "*uint64",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
+      "name" : "func(n uintptr, a uintptr) uintptr",
+      "params" : 17,
+      "recv" : -1,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "n",
+        "type" : 3
+      }, {
+        "name" : "a",
+        "type" : 3
+      } ],
+      "name" : "(n uintptr, a uintptr)",
+      "type" : "Tuple",
+      "underlying" : 17
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 18
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "name" : "func(s string)",
+      "params" : 21,
+      "recv" : -1,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 20,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 22
+      } ],
+      "name" : "(s string)",
+      "type" : "Tuple",
+      "underlying" : 21
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 22
+    } ],
+    "variables" : [ {
+      "name" : "v",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "size",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "align",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res1]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "retries",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "p2",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "pAligned",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "end",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "endLen",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

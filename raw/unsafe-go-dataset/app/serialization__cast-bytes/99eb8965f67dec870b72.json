@@ -1,0 +1,1416 @@
+{
+  "usage" : {
+    "file" : "sockopt_posix.go",
+    "label1" : "cast-bytes",
+    "label2" : "serialization",
+    "line" : "60",
+    "module" : "golang.org/x/net",
+    "pkg" : "golang.org/x/net/ipv6",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "mi := (*ipv6Mtuinfo)(unsafe.Pointer(&b[0]))",
+    "version" : "v0.0.0-20200324143707-d3edc9973b7e"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 3, 4, 8 ],
+      "exit" : false,
+      "out-vars" : [ 3, 4, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 3, 4, 8 ],
+      "exit" : false,
+      "out-vars" : [ 4, 8, 10, 3 ],
+      "decl-vars" : [ 10 ],
+      "line-start" : 52,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "b"
+          }
+        } ],
+        "right" : [ {
+          "argument" : {
+            "element" : {
+              "go-type" : 31,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 31,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "byte"
+              }
+            },
+            "go-type" : 30,
+            "kind" : "type",
+            "type" : "slice"
+          },
+          "go-type" : 30,
+          "kind" : "expression",
+          "rest" : [ {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Len",
+              "variable" : 9
+            },
+            "go-type" : 28,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "so",
+                "variable" : 3
+              }
+            },
+            "type" : "selector"
+          } ],
+          "type" : "make"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 52,
+      "code" : "b := make([]byte, so.Len)",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 10, 3, 4, 8 ],
+      "exit" : false,
+      "out-vars" : [ 11, 12, 10, 8 ],
+      "decl-vars" : [ 12, 11 ],
+      "line-start" : 53,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "n"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "c",
+              "variable" : 4
+            }
+          }, {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "b",
+              "variable" : 10
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Get"
+            },
+            "go-type" : 35,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "so",
+                "variable" : 3
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 34,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 53,
+      "code" : "n, err := so.Get(c, b)",
+      "entry" : false,
+      "use-vars" : [ 4, 10, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 6 ],
+      "in-vars" : [ 11, 12, 10, 8 ],
+      "exit" : false,
+      "out-vars" : [ 12, 10, 8, 11 ],
+      "decl-vars" : [ ],
+      "line-start" : 54,
+      "ast" : {
+        "condition" : {
+          "go-type" : 37,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 11
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 38,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 56,
+      "code" : "if err != nil {\n\treturn nil, 0, err\n}",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 11 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 55,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 28,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        }, {
+          "go-type" : 15,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 11
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 55,
+      "code" : "return nil, 0, err",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7, 8 ],
+      "in-vars" : [ 12, 10, 8 ],
+      "exit" : false,
+      "out-vars" : [ 10, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 57,
+      "ast" : {
+        "condition" : {
+          "go-type" : 37,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 28,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 12
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 28,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "32"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 59,
+      "code" : "if n != sizeofIPv6Mtuinfo {\n\treturn nil, 0, errNotImplemented\n}",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 8 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 58,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 28,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        }, {
+          "go-type" : 15,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "errNotImplemented",
+            "variable" : 8
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 58,
+      "code" : "return nil, 0, errNotImplemented",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 10 ],
+      "exit" : false,
+      "out-vars" : [ 13 ],
+      "decl-vars" : [ 13 ],
+      "line-start" : 60,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "mi"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 40,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 40,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "ipv6Mtuinfo"
+              }
+            },
+            "go-type" : 39,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 39,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 47,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 4,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 47,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 47,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 48,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 31,
+                "index" : {
+                  "go-type" : 28,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 30,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "b",
+                    "variable" : 10
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 60,
+      "code" : "mi := (*ipv6Mtuinfo)(unsafe.Pointer(&b[0]))",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10, 11 ],
+      "in-vars" : [ 13 ],
+      "exit" : false,
+      "out-vars" : [ 13 ],
+      "decl-vars" : [ ],
+      "line-start" : 61,
+      "ast" : {
+        "condition" : {
+          "go-type" : 37,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 37,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Scope_id",
+                "variable" : 15
+              },
+              "go-type" : 45,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "Addr",
+                  "variable" : 14
+                },
+                "go-type" : 42,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 39,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "mi",
+                    "variable" : 13
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "operator" : "==",
+            "right" : {
+              "go-type" : 45,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "||",
+          "right" : {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 64,
+      "code" : "if mi.Addr.Scope_id == 0 || runtime.GOOS == \"aix\" {\n\n\treturn nil, int(mi.Mtu), nil\n}",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 13 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 63,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "coerced-to" : {
+            "go-type" : 28,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 28,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int"
+            }
+          },
+          "go-type" : 28,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Mtu",
+              "variable" : 16
+            },
+            "go-type" : 45,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 39,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "mi",
+                "variable" : 13
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "cast"
+        }, {
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 63,
+      "code" : "return nil, int(mi.Mtu), nil",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 13 ],
+      "exit" : false,
+      "out-vars" : [ 11, 13, 17 ],
+      "decl-vars" : [ 11, 17 ],
+      "line-start" : 65,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ifi"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 11
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 28,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 28,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int"
+              }
+            },
+            "go-type" : 28,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Scope_id",
+                "variable" : 15
+              },
+              "go-type" : 45,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "Addr",
+                  "variable" : 14
+                },
+                "go-type" : 42,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 39,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "mi",
+                    "variable" : 13
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 50,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "net"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "InterfaceByIndex"
+            }
+          },
+          "go-type" : 49,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 65,
+      "code" : "ifi, err := net.InterfaceByIndex(int(mi.Addr.Scope_id))",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 13, 14 ],
+      "in-vars" : [ 11, 13, 17 ],
+      "exit" : false,
+      "out-vars" : [ 11, 13, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 66,
+      "ast" : {
+        "condition" : {
+          "go-type" : 37,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 11
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 38,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 68,
+      "code" : "if err != nil {\n\treturn nil, 0, err\n}",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 11 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 67,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 28,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        }, {
+          "go-type" : 15,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 11
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 67,
+      "code" : "return nil, 0, err",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 13, 17 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 69,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ifi",
+            "variable" : 17
+          }
+        }, {
+          "coerced-to" : {
+            "go-type" : 28,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 28,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int"
+            }
+          },
+          "go-type" : 28,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Mtu",
+              "variable" : 16
+            },
+            "go-type" : 45,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 39,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "mi",
+                "variable" : 13
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "cast"
+        }, {
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 69,
+      "code" : "return ifi, int(mi.Mtu), nil",
+      "entry" : false,
+      "use-vars" : [ 17, 13 ]
+    } ],
+    "code" : "func (so *sockOpt) getMTUInfo(c *socket.Conn) (*net.Interface, int, error) {\n\tb := make([]byte, so.Len)\n\tn, err := so.Get(c, b)\n\tif err != nil {\n\t\treturn nil, 0, err\n\t}\n\tif n != sizeofIPv6Mtuinfo {\n\t\treturn nil, 0, errNotImplemented\n\t}\n\tmi := (*ipv6Mtuinfo)(unsafe.Pointer(&b[0]))\n\tif mi.Addr.Scope_id == 0 || runtime.GOOS == \"aix\" {\n\n\t\treturn nil, int(mi.Mtu), nil\n\t}\n\tifi, err := net.InterfaceByIndex(int(mi.Addr.Scope_id))\n\tif err != nil {\n\t\treturn nil, 0, err\n\t}\n\treturn ifi, int(mi.Mtu), nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "getMTUInfo",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Get",
+      "package" : 1,
+      "type" : 35,
+      "exported" : true
+    }, {
+      "name" : "InterfaceByIndex",
+      "package" : 3,
+      "type" : 50,
+      "exported" : true
+    } ],
+    "line-end" : 70,
+    "line-start" : 51,
+    "names" : [ "getMTUInfo" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "ipv6",
+      "path" : "golang.org/x/net/ipv6"
+    }, {
+      "name" : "socket",
+      "path" : "golang.org/x/net/internal/socket"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "net",
+      "path" : "net"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 4 ],
+    "receivers" : [ 3 ],
+    "results" : [ 5, 6, 7 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(c *golang.org/x/net/internal/socket.Conn) (*net.Interface, int, error)",
+      "params" : 1,
+      "recv" : 3,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "c",
+        "type" : 2
+      } ],
+      "name" : "(c *golang.org/x/net/internal/socket.Conn)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*golang.org/x/net/internal/socket.Conn",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "Conn",
+      "name" : "golang.org/x/net/internal/socket.Conn",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "network",
+        "type" : 5
+      }, {
+        "name" : "c",
+        "type" : 6
+      } ],
+      "name" : "struct{network string; c syscall.RawConn}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "local-name" : "RawConn",
+      "name" : "syscall.RawConn",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "methods" : [ {
+        "name" : "Control",
+        "type" : 8
+      }, {
+        "name" : "Read",
+        "type" : 19
+      }, {
+        "name" : "Write",
+        "type" : 19
+      } ],
+      "name" : "interface{Control(f func(fd uintptr)) error; Read(f func(fd uintptr) (done bool)) error; Write(f func(fd uintptr) (done bool)) error}",
+      "type" : "Interface",
+      "underlying" : 7
+    }, {
+      "name" : "func(f func(fd uintptr)) error",
+      "params" : 9,
+      "recv" : 1,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "f",
+        "type" : 10
+      } ],
+      "name" : "(f func(fd uintptr))",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "name" : "func(fd uintptr)",
+      "params" : 11,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 10,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 12
+      } ],
+      "name" : "(fd uintptr)",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 13
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 14
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 16
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 17
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 16
+    }, {
+      "name" : "func() string",
+      "params" : 13,
+      "recv" : 0,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 17,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 18
+    }, {
+      "name" : "func(f func(fd uintptr) (done bool)) error",
+      "params" : 20,
+      "recv" : 2,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 19,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "f",
+        "type" : 21
+      } ],
+      "name" : "(f func(fd uintptr) (done bool))",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "name" : "func(fd uintptr) (done bool)",
+      "params" : 11,
+      "recv" : -1,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 21,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "done",
+        "type" : 23
+      } ],
+      "name" : "(done bool)",
+      "type" : "Tuple",
+      "underlying" : 22
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 23
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 25
+      }, {
+        "name" : "",
+        "type" : 28
+      }, {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(*net.Interface, int, error)",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "elem" : 26,
+      "name" : "*net.Interface",
+      "type" : "Pointer",
+      "underlying" : 25
+    }, {
+      "local-name" : "Interface",
+      "name" : "net.Interface",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 27
+    }, {
+      "fields" : [ {
+        "name" : "Index",
+        "type" : 28
+      }, {
+        "name" : "MTU",
+        "type" : 28
+      }, {
+        "name" : "Name",
+        "type" : 5
+      }, {
+        "name" : "HardwareAddr",
+        "type" : 29
+      }, {
+        "name" : "Flags",
+        "type" : 32
+      } ],
+      "name" : "struct{Index int; MTU int; Name string; HardwareAddr net.HardwareAddr; Flags net.Flags}",
+      "type" : "Struct",
+      "underlying" : 27
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 28
+    }, {
+      "local-name" : "HardwareAddr",
+      "name" : "net.HardwareAddr",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 30
+    }, {
+      "elem" : 31,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 30
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 31
+    }, {
+      "local-name" : "Flags",
+      "name" : "net.Flags",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 28
+      }, {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(int, error)",
+      "type" : "Tuple",
+      "underlying" : 34
+    }, {
+      "name" : "func(c *golang.org/x/net/internal/socket.Conn, b []byte) (int, error)",
+      "params" : 36,
+      "recv" : -1,
+      "results" : 34,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "c",
+        "type" : 2
+      }, {
+        "name" : "b",
+        "type" : 30
+      } ],
+      "name" : "(c *golang.org/x/net/internal/socket.Conn, b []byte)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 37
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 38
+    }, {
+      "elem" : 40,
+      "name" : "*golang.org/x/net/ipv6.ipv6Mtuinfo",
+      "type" : "Pointer",
+      "underlying" : 39
+    }, {
+      "local-name" : "ipv6Mtuinfo",
+      "name" : "golang.org/x/net/ipv6.ipv6Mtuinfo",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 41
+    }, {
+      "fields" : [ {
+        "name" : "Addr",
+        "type" : 42
+      }, {
+        "name" : "Mtu",
+        "type" : 45
+      } ],
+      "name" : "struct{Addr golang.org/x/net/ipv6.sockaddrInet6; Mtu uint32}",
+      "type" : "Struct",
+      "underlying" : 41
+    }, {
+      "local-name" : "sockaddrInet6",
+      "name" : "golang.org/x/net/ipv6.sockaddrInet6",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 43
+    }, {
+      "fields" : [ {
+        "name" : "Family",
+        "type" : 44
+      }, {
+        "name" : "Port",
+        "type" : 44
+      }, {
+        "name" : "Flowinfo",
+        "type" : 45
+      }, {
+        "name" : "Addr",
+        "type" : 46
+      }, {
+        "name" : "Scope_id",
+        "type" : 45
+      } ],
+      "name" : "struct{Family uint16; Port uint16; Flowinfo uint32; Addr [16]byte; Scope_id uint32}",
+      "type" : "Struct",
+      "underlying" : 43
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 44
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 45
+    }, {
+      "elem" : 31,
+      "name" : "[16]byte",
+      "type" : "Array",
+      "underlying" : 46
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 4,
+      "type" : "Basic",
+      "underlying" : 47
+    }, {
+      "elem" : 31,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 48
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 25
+      }, {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(*net.Interface, error)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "name" : "func(index int) (*net.Interface, error)",
+      "params" : 51,
+      "recv" : -1,
+      "results" : 49,
+      "type" : "Signature",
+      "underlying" : 50,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "index",
+        "type" : 28
+      } ],
+      "name" : "(index int)",
+      "type" : "Tuple",
+      "underlying" : 51
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "so",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false
+    }, {
+      "name" : "[res1]",
+      "package" : 0,
+      "type" : 28,
+      "exported" : false
+    }, {
+      "name" : "[res2]",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "errNotImplemented",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "Len",
+      "package" : 1,
+      "type" : 28,
+      "exported" : true
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 30,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 28,
+      "exported" : false
+    }, {
+      "name" : "mi",
+      "package" : 0,
+      "type" : 39,
+      "exported" : false
+    }, {
+      "name" : "Addr",
+      "package" : 0,
+      "type" : 42,
+      "exported" : true
+    }, {
+      "name" : "Scope_id",
+      "package" : 0,
+      "type" : 45,
+      "exported" : true
+    }, {
+      "name" : "Mtu",
+      "package" : 0,
+      "type" : 45,
+      "exported" : true
+    }, {
+      "name" : "ifi",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

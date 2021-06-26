@@ -1,0 +1,318 @@
+{
+  "usage" : {
+    "file" : "value.go",
+    "label1" : "definition",
+    "label2" : "reflect",
+    "line" : "42",
+    "module" : "std",
+    "pkg" : "reflect",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "ptr unsafe.Pointer",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 36,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "Value"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "contained" : {
+                    "go-type" : 3,
+                    "kind" : "type",
+                    "type" : "identifier",
+                    "value" : {
+                      "go-type" : 3,
+                      "ident-kind" : "TypeName",
+                      "kind" : "ident",
+                      "value" : "rtype"
+                    }
+                  },
+                  "go-type" : 2,
+                  "kind" : "type",
+                  "type" : "pointer"
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "typ"
+                } ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 11,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 11,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "ptr"
+                } ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 19,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 19,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "flag"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              } ],
+              "go-type" : 1,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 63,
+      "code" : "// Value is the reflection interface to a Go value.\n//\n// Not all methods apply to all kinds of values. Restrictions,\n// if any, are noted in the documentation for each method.\n// Use the Kind method to find out the kind of value before\n// calling kind-specific methods. Calling a method\n// inappropriate to the kind of type causes a run time panic.\n//\n// The zero Value represents no value.\n// Its IsValid method returns false, its Kind method returns Invalid,\n// its String method returns \"<invalid Value>\", and all other methods panic.\n// Most functions and methods never return an invalid value.\n// If one does, its documentation states the conditions explicitly.\n//\n// A Value can be used concurrently by multiple goroutines provided that\n// the underlying Go value can be used concurrently for the equivalent\n// direct operations.\n//\n// To compare two Values, compare the results of the Interface method.\n// Using == on two Values does not compare the underlying values\n// they represent.\ntype Value struct {\n\t// typ holds the type of the value represented by a Value.\n\ttyp *rtype\n\n\t// Pointer-valued data or, if flagIndir is set, pointer to data.\n\t// Valid when either flagIndir is set or typ.pointers() is true.\n\tptr unsafe.Pointer\n\n\t// flag holds metadata about the value.\n\t// The lowest bits are flag bits:\n\t//\t- flagStickyRO: obtained via unexported not embedded field, so read-only\n\t//\t- flagEmbedRO: obtained via unexported embedded field, so read-only\n\t//\t- flagIndir: val holds a pointer to the data\n\t//\t- flagAddr: v.CanAddr is true (implies flagIndir)\n\t//\t- flagMethod: v is a method value.\n\t// The next five bits give the Kind of the value.\n\t// This repeats typ.Kind() except for method values.\n\t// The remaining 23+ bits give a method number for method values.\n\t// If flag.kind() != Func, code can assume that flagMethod is unset.\n\t// If ifaceIndir(typ), code can assume that flagIndir is set.\n\tflag\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// Value is the reflection interface to a Go value.\n//\n// Not all methods apply to all kinds of values. Restrictions,\n// if any, are noted in the documentation for each method.\n// Use the Kind method to find out the kind of value before\n// calling kind-specific methods. Calling a method\n// inappropriate to the kind of type causes a run time panic.\n//\n// The zero Value represents no value.\n// Its IsValid method returns false, its Kind method returns Invalid,\n// its String method returns \"<invalid Value>\", and all other methods panic.\n// Most functions and methods never return an invalid value.\n// If one does, its documentation states the conditions explicitly.\n//\n// A Value can be used concurrently by multiple goroutines provided that\n// the underlying Go value can be used concurrently for the equivalent\n// direct operations.\n//\n// To compare two Values, compare the results of the Interface method.\n// Using == on two Values does not compare the underlying values\n// they represent.\ntype Value struct {\n\t// typ holds the type of the value represented by a Value.\n\ttyp *rtype\n\n\t// Pointer-valued data or, if flagIndir is set, pointer to data.\n\t// Valid when either flagIndir is set or typ.pointers() is true.\n\tptr unsafe.Pointer\n\n\t// flag holds metadata about the value.\n\t// The lowest bits are flag bits:\n\t//\t- flagStickyRO: obtained via unexported not embedded field, so read-only\n\t//\t- flagEmbedRO: obtained via unexported embedded field, so read-only\n\t//\t- flagIndir: val holds a pointer to the data\n\t//\t- flagAddr: v.CanAddr is true (implies flagIndir)\n\t//\t- flagMethod: v is a method value.\n\t// The next five bits give the Kind of the value.\n\t// This repeats typ.Kind() except for method values.\n\t// The remaining 23+ bits give a method number for method values.\n\t// If flag.kind() != Func, code can assume that flagMethod is unset.\n\t// If ifaceIndir(typ), code can assume that flagIndir is set.\n\tflag\n}",
+    "defines" : [ 0 ],
+    "functions" : [ ],
+    "line-end" : 63,
+    "line-start" : 36,
+    "names" : [ "Value" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ ],
+    "receivers" : [ ],
+    "results" : [ ],
+    "type" : "type",
+    "types" : [ {
+      "local-name" : "Value",
+      "name" : "reflect.Value",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "typ",
+        "type" : 2
+      }, {
+        "name" : "ptr",
+        "type" : 11
+      }, {
+        "name" : "flag",
+        "type" : 19
+      } ],
+      "name" : "struct{typ *reflect.rtype; ptr unsafe.Pointer; reflect.flag}",
+      "type" : "Struct",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*reflect.rtype",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "rtype",
+      "name" : "reflect.rtype",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 5
+      }, {
+        "name" : "ptrdata",
+        "type" : 5
+      }, {
+        "name" : "hash",
+        "type" : 6
+      }, {
+        "name" : "tflag",
+        "type" : 7
+      }, {
+        "name" : "align",
+        "type" : 8
+      }, {
+        "name" : "fieldAlign",
+        "type" : 8
+      }, {
+        "name" : "kind",
+        "type" : 8
+      }, {
+        "name" : "equal",
+        "type" : 9
+      }, {
+        "name" : "gcdata",
+        "type" : 14
+      }, {
+        "name" : "str",
+        "type" : 16
+      }, {
+        "name" : "ptrToThis",
+        "type" : 18
+      } ],
+      "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag reflect.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str reflect.nameOff; ptrToThis reflect.typeOff}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "local-name" : "tflag",
+      "name" : "reflect.tflag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
+      "params" : 10,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 9,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 11
+      }, {
+        "name" : "",
+        "type" : 11
+      } ],
+      "name" : "(unsafe.Pointer, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "elem" : 15,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
+      "local-name" : "nameOff",
+      "name" : "reflect.nameOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 17
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "local-name" : "typeOff",
+      "name" : "reflect.typeOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 17
+    }, {
+      "local-name" : "flag",
+      "name" : "reflect.flag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    } ],
+    "variables" : [ ]
+  },
+  "go-version" : "1.14.3"
+}

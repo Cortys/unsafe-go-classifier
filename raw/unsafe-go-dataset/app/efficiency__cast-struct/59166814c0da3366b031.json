@@ -1,0 +1,1341 @@
+{
+  "usage" : {
+    "file" : "zz_generated.conversion.go",
+    "label1" : "cast-struct",
+    "label2" : "efficiency",
+    "line" : "166",
+    "module" : "k8s.io/apiserver",
+    "pkg" : "k8s.io/apiserver/pkg/apis/audit/v1",
+    "project" : "rook/rook",
+    "snippet" : "out.Items = *(*[]audit.Event)(unsafe.Pointer(&in.Items))",
+    "version" : "v0.17.2"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 6, 5 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 6, 5 ],
+      "exit" : false,
+      "out-vars" : [ 6, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 165,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ListMeta",
+            "variable" : 9
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 65,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ListMeta",
+            "variable" : 10
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "in",
+              "variable" : 5
+            }
+          },
+          "type" : "selector"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 165,
+      "code" : "out.ListMeta = in.ListMeta",
+      "entry" : false,
+      "use-vars" : [ 5, 6 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 6, 5 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 166,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Items",
+            "variable" : 11
+          },
+          "go-type" : 68,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 65,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 68,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "element" : {
+                  "go-type" : 69,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 6,
+                    "value" : "audit"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 69,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Event"
+                  }
+                },
+                "go-type" : 68,
+                "kind" : "type",
+                "type" : "slice"
+              },
+              "go-type" : 102,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 102,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 103,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 9,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 103,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 103,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 104,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "Items",
+                    "variable" : 12
+                  },
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "in",
+                      "variable" : 5
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 166,
+      "code" : "out.Items = *(*[]audit.Event)(unsafe.Pointer(&in.Items))",
+      "entry" : false,
+      "use-vars" : [ 5, 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 167,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 105,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 167,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func autoConvert_v1_EventList_To_audit_EventList(in *EventList, out *audit.EventList, s conversion.Scope) error {\n\tout.ListMeta = in.ListMeta\n\tout.Items = *(*[]audit.Event)(unsafe.Pointer(&in.Items))\n\treturn nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "autoConvert_v1_EventList_To_audit_EventList",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    } ],
+    "line-end" : 168,
+    "line-start" : 164,
+    "names" : [ "autoConvert_v1_EventList_To_audit_EventList" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "v1",
+      "path" : "k8s.io/apiserver/pkg/apis/audit/v1"
+    }, {
+      "name" : "v1",
+      "path" : "k8s.io/apimachinery/pkg/apis/meta/v1"
+    }, {
+      "name" : "types",
+      "path" : "k8s.io/apimachinery/pkg/types"
+    }, {
+      "name" : "v1",
+      "path" : "k8s.io/api/authentication/v1"
+    }, {
+      "name" : "runtime",
+      "path" : "k8s.io/apimachinery/pkg/runtime"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "audit",
+      "path" : "k8s.io/apiserver/pkg/apis/audit"
+    }, {
+      "name" : "conversion",
+      "path" : "k8s.io/apimachinery/pkg/conversion"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 5, 6, 7 ],
+    "receivers" : [ ],
+    "results" : [ 8 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(in *k8s.io/apiserver/pkg/apis/audit/v1.EventList, out *k8s.io/apiserver/pkg/apis/audit.EventList, s k8s.io/apimachinery/pkg/conversion.Scope) error",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 82,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "in",
+        "type" : 2
+      }, {
+        "name" : "out",
+        "type" : 65
+      }, {
+        "name" : "s",
+        "type" : 76
+      } ],
+      "name" : "(in *k8s.io/apiserver/pkg/apis/audit/v1.EventList, out *k8s.io/apiserver/pkg/apis/audit.EventList, s k8s.io/apimachinery/pkg/conversion.Scope)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*k8s.io/apiserver/pkg/apis/audit/v1.EventList",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "EventList",
+      "name" : "k8s.io/apiserver/pkg/apis/audit/v1.EventList",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 5
+      }, {
+        "name" : "ListMeta",
+        "type" : 8
+      }, {
+        "name" : "Items",
+        "type" : 12
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta \"json:\\\",inline\\\"\"; k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta \"json:\\\"metadata,omitempty\\\" protobuf:\\\"bytes,1,opt,name=metadata\\\"\"; Items []k8s.io/apiserver/pkg/apis/audit/v1.Event \"json:\\\"items\\\" protobuf:\\\"bytes,2,rep,name=items\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "local-name" : "TypeMeta",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "Kind",
+        "type" : 7
+      }, {
+        "name" : "APIVersion",
+        "type" : 7
+      } ],
+      "name" : "struct{Kind string \"json:\\\"kind,omitempty\\\" protobuf:\\\"bytes,1,opt,name=kind\\\"\"; APIVersion string \"json:\\\"apiVersion,omitempty\\\" protobuf:\\\"bytes,2,opt,name=apiVersion\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "local-name" : "ListMeta",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "fields" : [ {
+        "name" : "SelfLink",
+        "type" : 7
+      }, {
+        "name" : "ResourceVersion",
+        "type" : 7
+      }, {
+        "name" : "Continue",
+        "type" : 7
+      }, {
+        "name" : "RemainingItemCount",
+        "type" : 10
+      } ],
+      "name" : "struct{SelfLink string \"json:\\\"selfLink,omitempty\\\" protobuf:\\\"bytes,1,opt,name=selfLink\\\"\"; ResourceVersion string \"json:\\\"resourceVersion,omitempty\\\" protobuf:\\\"bytes,2,opt,name=resourceVersion\\\"\"; Continue string \"json:\\\"continue,omitempty\\\" protobuf:\\\"bytes,3,opt,name=continue\\\"\"; RemainingItemCount *int64 \"json:\\\"remainingItemCount,omitempty\\\" protobuf:\\\"bytes,4,opt,name=remainingItemCount\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 9
+    }, {
+      "elem" : 11,
+      "name" : "*int64",
+      "type" : "Pointer",
+      "underlying" : 10
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "elem" : 13,
+      "name" : "[]k8s.io/apiserver/pkg/apis/audit/v1.Event",
+      "type" : "Slice",
+      "underlying" : 12
+    }, {
+      "local-name" : "Event",
+      "name" : "k8s.io/apiserver/pkg/apis/audit/v1.Event",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 14
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 5
+      }, {
+        "name" : "Level",
+        "type" : 15
+      }, {
+        "name" : "AuditID",
+        "type" : 16
+      }, {
+        "name" : "Stage",
+        "type" : 17
+      }, {
+        "name" : "RequestURI",
+        "type" : 7
+      }, {
+        "name" : "Verb",
+        "type" : 7
+      }, {
+        "name" : "User",
+        "type" : 18
+      }, {
+        "name" : "ImpersonatedUser",
+        "type" : 23
+      }, {
+        "name" : "SourceIPs",
+        "type" : 20
+      }, {
+        "name" : "UserAgent",
+        "type" : 7
+      }, {
+        "name" : "ObjectRef",
+        "type" : 24
+      }, {
+        "name" : "ResponseStatus",
+        "type" : 27
+      }, {
+        "name" : "RequestObject",
+        "type" : 39
+      }, {
+        "name" : "ResponseObject",
+        "type" : 39
+      }, {
+        "name" : "RequestReceivedTimestamp",
+        "type" : 46
+      }, {
+        "name" : "StageTimestamp",
+        "type" : 46
+      }, {
+        "name" : "Annotations",
+        "type" : 64
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta \"json:\\\",inline\\\"\"; Level k8s.io/apiserver/pkg/apis/audit/v1.Level \"json:\\\"level\\\" protobuf:\\\"bytes,1,opt,name=level,casttype=Level\\\"\"; AuditID k8s.io/apimachinery/pkg/types.UID \"json:\\\"auditID\\\" protobuf:\\\"bytes,2,opt,name=auditID,casttype=k8s.io/apimachinery/pkg/types.UID\\\"\"; Stage k8s.io/apiserver/pkg/apis/audit/v1.Stage \"json:\\\"stage\\\" protobuf:\\\"bytes,3,opt,name=stage,casttype=Stage\\\"\"; RequestURI string \"json:\\\"requestURI\\\" protobuf:\\\"bytes,4,opt,name=requestURI\\\"\"; Verb string \"json:\\\"verb\\\" protobuf:\\\"bytes,5,opt,name=verb\\\"\"; User k8s.io/api/authentication/v1.UserInfo \"json:\\\"user\\\" protobuf:\\\"bytes,6,opt,name=user\\\"\"; ImpersonatedUser *k8s.io/api/authentication/v1.UserInfo \"json:\\\"impersonatedUser,omitempty\\\" protobuf:\\\"bytes,7,opt,name=impersonatedUser\\\"\"; SourceIPs []string \"json:\\\"sourceIPs,omitempty\\\" protobuf:\\\"bytes,8,rep,name=sourceIPs\\\"\"; UserAgent string \"json:\\\"userAgent,omitempty\\\" protobuf:\\\"bytes,16,opt,name=userAgent\\\"\"; ObjectRef *k8s.io/apiserver/pkg/apis/audit/v1.ObjectReference \"json:\\\"objectRef,omitempty\\\" protobuf:\\\"bytes,9,opt,name=objectRef\\\"\"; ResponseStatus *k8s.io/apimachinery/pkg/apis/meta/v1.Status \"json:\\\"responseStatus,omitempty\\\" protobuf:\\\"bytes,10,opt,name=responseStatus\\\"\"; RequestObject *k8s.io/apimachinery/pkg/runtime.Unknown \"json:\\\"requestObject,omitempty\\\" protobuf:\\\"bytes,11,opt,name=requestObject\\\"\"; ResponseObject *k8s.io/apimachinery/pkg/runtime.Unknown \"json:\\\"responseObject,omitempty\\\" protobuf:\\\"bytes,12,opt,name=responseObject\\\"\"; RequestReceivedTimestamp k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime \"json:\\\"requestReceivedTimestamp\\\" protobuf:\\\"bytes,13,opt,name=requestReceivedTimestamp\\\"\"; StageTimestamp k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime \"json:\\\"stageTimestamp\\\" protobuf:\\\"bytes,14,opt,name=stageTimestamp\\\"\"; Annotations map[string]string \"json:\\\"annotations,omitempty\\\" protobuf:\\\"bytes,15,rep,name=annotations\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 14
+    }, {
+      "local-name" : "Level",
+      "name" : "k8s.io/apiserver/pkg/apis/audit/v1.Level",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "local-name" : "UID",
+      "name" : "k8s.io/apimachinery/pkg/types.UID",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "local-name" : "Stage",
+      "name" : "k8s.io/apiserver/pkg/apis/audit/v1.Stage",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "local-name" : "UserInfo",
+      "name" : "k8s.io/api/authentication/v1.UserInfo",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "Username",
+        "type" : 7
+      }, {
+        "name" : "UID",
+        "type" : 7
+      }, {
+        "name" : "Groups",
+        "type" : 20
+      }, {
+        "name" : "Extra",
+        "type" : 21
+      } ],
+      "name" : "struct{Username string \"json:\\\"username,omitempty\\\" protobuf:\\\"bytes,1,opt,name=username\\\"\"; UID string \"json:\\\"uid,omitempty\\\" protobuf:\\\"bytes,2,opt,name=uid\\\"\"; Groups []string \"json:\\\"groups,omitempty\\\" protobuf:\\\"bytes,3,rep,name=groups\\\"\"; Extra map[string]k8s.io/api/authentication/v1.ExtraValue \"json:\\\"extra,omitempty\\\" protobuf:\\\"bytes,4,rep,name=extra\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 19
+    }, {
+      "elem" : 7,
+      "name" : "[]string",
+      "type" : "Slice",
+      "underlying" : 20
+    }, {
+      "elem" : 22,
+      "key" : 7,
+      "name" : "map[string]k8s.io/api/authentication/v1.ExtraValue",
+      "type" : "Map",
+      "underlying" : 21
+    }, {
+      "local-name" : "ExtraValue",
+      "name" : "k8s.io/api/authentication/v1.ExtraValue",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 20
+    }, {
+      "elem" : 18,
+      "name" : "*k8s.io/api/authentication/v1.UserInfo",
+      "type" : "Pointer",
+      "underlying" : 23
+    }, {
+      "elem" : 25,
+      "name" : "*k8s.io/apiserver/pkg/apis/audit/v1.ObjectReference",
+      "type" : "Pointer",
+      "underlying" : 24
+    }, {
+      "local-name" : "ObjectReference",
+      "name" : "k8s.io/apiserver/pkg/apis/audit/v1.ObjectReference",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "Resource",
+        "type" : 7
+      }, {
+        "name" : "Namespace",
+        "type" : 7
+      }, {
+        "name" : "Name",
+        "type" : 7
+      }, {
+        "name" : "UID",
+        "type" : 16
+      }, {
+        "name" : "APIGroup",
+        "type" : 7
+      }, {
+        "name" : "APIVersion",
+        "type" : 7
+      }, {
+        "name" : "ResourceVersion",
+        "type" : 7
+      }, {
+        "name" : "Subresource",
+        "type" : 7
+      } ],
+      "name" : "struct{Resource string \"json:\\\"resource,omitempty\\\" protobuf:\\\"bytes,1,opt,name=resource\\\"\"; Namespace string \"json:\\\"namespace,omitempty\\\" protobuf:\\\"bytes,2,opt,name=namespace\\\"\"; Name string \"json:\\\"name,omitempty\\\" protobuf:\\\"bytes,3,opt,name=name\\\"\"; UID k8s.io/apimachinery/pkg/types.UID \"json:\\\"uid,omitempty\\\" protobuf:\\\"bytes,4,opt,name=uid,casttype=k8s.io/apimachinery/pkg/types.UID\\\"\"; APIGroup string \"json:\\\"apiGroup,omitempty\\\" protobuf:\\\"bytes,5,opt,name=apiGroup\\\"\"; APIVersion string \"json:\\\"apiVersion,omitempty\\\" protobuf:\\\"bytes,6,opt,name=apiVersion\\\"\"; ResourceVersion string \"json:\\\"resourceVersion,omitempty\\\" protobuf:\\\"bytes,7,opt,name=resourceVersion\\\"\"; Subresource string \"json:\\\"subresource,omitempty\\\" protobuf:\\\"bytes,8,opt,name=subresource\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "elem" : 28,
+      "name" : "*k8s.io/apimachinery/pkg/apis/meta/v1.Status",
+      "type" : "Pointer",
+      "underlying" : 27
+    }, {
+      "local-name" : "Status",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.Status",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 29
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 5
+      }, {
+        "name" : "ListMeta",
+        "type" : 8
+      }, {
+        "name" : "Status",
+        "type" : 7
+      }, {
+        "name" : "Message",
+        "type" : 7
+      }, {
+        "name" : "Reason",
+        "type" : 30
+      }, {
+        "name" : "Details",
+        "type" : 31
+      }, {
+        "name" : "Code",
+        "type" : 38
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta \"json:\\\",inline\\\"\"; k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta \"json:\\\"metadata,omitempty\\\" protobuf:\\\"bytes,1,opt,name=metadata\\\"\"; Status string \"json:\\\"status,omitempty\\\" protobuf:\\\"bytes,2,opt,name=status\\\"\"; Message string \"json:\\\"message,omitempty\\\" protobuf:\\\"bytes,3,opt,name=message\\\"\"; Reason k8s.io/apimachinery/pkg/apis/meta/v1.StatusReason \"json:\\\"reason,omitempty\\\" protobuf:\\\"bytes,4,opt,name=reason,casttype=StatusReason\\\"\"; Details *k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails \"json:\\\"details,omitempty\\\" protobuf:\\\"bytes,5,opt,name=details\\\"\"; Code int32 \"json:\\\"code,omitempty\\\" protobuf:\\\"varint,6,opt,name=code\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 29
+    }, {
+      "local-name" : "StatusReason",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.StatusReason",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "elem" : 32,
+      "name" : "*k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails",
+      "type" : "Pointer",
+      "underlying" : 31
+    }, {
+      "local-name" : "StatusDetails",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 7
+      }, {
+        "name" : "Group",
+        "type" : 7
+      }, {
+        "name" : "Kind",
+        "type" : 7
+      }, {
+        "name" : "UID",
+        "type" : 16
+      }, {
+        "name" : "Causes",
+        "type" : 34
+      }, {
+        "name" : "RetryAfterSeconds",
+        "type" : 38
+      } ],
+      "name" : "struct{Name string \"json:\\\"name,omitempty\\\" protobuf:\\\"bytes,1,opt,name=name\\\"\"; Group string \"json:\\\"group,omitempty\\\" protobuf:\\\"bytes,2,opt,name=group\\\"\"; Kind string \"json:\\\"kind,omitempty\\\" protobuf:\\\"bytes,3,opt,name=kind\\\"\"; UID k8s.io/apimachinery/pkg/types.UID \"json:\\\"uid,omitempty\\\" protobuf:\\\"bytes,6,opt,name=uid,casttype=k8s.io/apimachinery/pkg/types.UID\\\"\"; Causes []k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause \"json:\\\"causes,omitempty\\\" protobuf:\\\"bytes,4,rep,name=causes\\\"\"; RetryAfterSeconds int32 \"json:\\\"retryAfterSeconds,omitempty\\\" protobuf:\\\"varint,5,opt,name=retryAfterSeconds\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 33
+    }, {
+      "elem" : 35,
+      "name" : "[]k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause",
+      "type" : "Slice",
+      "underlying" : 34
+    }, {
+      "local-name" : "StatusCause",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 36
+    }, {
+      "fields" : [ {
+        "name" : "Type",
+        "type" : 37
+      }, {
+        "name" : "Message",
+        "type" : 7
+      }, {
+        "name" : "Field",
+        "type" : 7
+      } ],
+      "name" : "struct{Type k8s.io/apimachinery/pkg/apis/meta/v1.CauseType \"json:\\\"reason,omitempty\\\" protobuf:\\\"bytes,1,opt,name=reason,casttype=CauseType\\\"\"; Message string \"json:\\\"message,omitempty\\\" protobuf:\\\"bytes,2,opt,name=message\\\"\"; Field string \"json:\\\"field,omitempty\\\" protobuf:\\\"bytes,3,opt,name=field\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 36
+    }, {
+      "local-name" : "CauseType",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.CauseType",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 38
+    }, {
+      "elem" : 40,
+      "name" : "*k8s.io/apimachinery/pkg/runtime.Unknown",
+      "type" : "Pointer",
+      "underlying" : 39
+    }, {
+      "local-name" : "Unknown",
+      "name" : "k8s.io/apimachinery/pkg/runtime.Unknown",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 41
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 42
+      }, {
+        "name" : "Raw",
+        "type" : 44
+      }, {
+        "name" : "ContentEncoding",
+        "type" : 7
+      }, {
+        "name" : "ContentType",
+        "type" : 7
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/runtime.TypeMeta \"json:\\\",inline\\\" protobuf:\\\"bytes,1,opt,name=typeMeta\\\"\"; Raw []byte \"protobuf:\\\"bytes,2,opt,name=raw\\\"\"; ContentEncoding string \"protobuf:\\\"bytes,3,opt,name=contentEncoding\\\"\"; ContentType string \"protobuf:\\\"bytes,4,opt,name=contentType\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 41
+    }, {
+      "local-name" : "TypeMeta",
+      "name" : "k8s.io/apimachinery/pkg/runtime.TypeMeta",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 43
+    }, {
+      "fields" : [ {
+        "name" : "APIVersion",
+        "type" : 7
+      }, {
+        "name" : "Kind",
+        "type" : 7
+      } ],
+      "name" : "struct{APIVersion string \"json:\\\"apiVersion,omitempty\\\" yaml:\\\"apiVersion,omitempty\\\" protobuf:\\\"bytes,1,opt,name=apiVersion\\\"\"; Kind string \"json:\\\"kind,omitempty\\\" yaml:\\\"kind,omitempty\\\" protobuf:\\\"bytes,2,opt,name=kind\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 43
+    }, {
+      "elem" : 45,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 44
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 45
+    }, {
+      "local-name" : "MicroTime",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 47
+    }, {
+      "fields" : [ {
+        "name" : "Time",
+        "type" : 48
+      } ],
+      "name" : "struct{time.Time \"protobuf:\\\"-\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 47
+    }, {
+      "local-name" : "Time",
+      "name" : "time.Time",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 49
+    }, {
+      "fields" : [ {
+        "name" : "wall",
+        "type" : 50
+      }, {
+        "name" : "ext",
+        "type" : 11
+      }, {
+        "name" : "loc",
+        "type" : 51
+      } ],
+      "name" : "struct{wall uint64; ext int64; loc *time.Location}",
+      "type" : "Struct",
+      "underlying" : 49
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 50
+    }, {
+      "elem" : 52,
+      "name" : "*time.Location",
+      "type" : "Pointer",
+      "underlying" : 51
+    }, {
+      "local-name" : "Location",
+      "name" : "time.Location",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 53
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 7
+      }, {
+        "name" : "zone",
+        "type" : 54
+      }, {
+        "name" : "tx",
+        "type" : 59
+      }, {
+        "name" : "cacheStart",
+        "type" : 11
+      }, {
+        "name" : "cacheEnd",
+        "type" : 11
+      }, {
+        "name" : "cacheZone",
+        "type" : 63
+      } ],
+      "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
+      "type" : "Struct",
+      "underlying" : 53
+    }, {
+      "elem" : 55,
+      "name" : "[]time.zone",
+      "type" : "Slice",
+      "underlying" : 54
+    }, {
+      "local-name" : "zone",
+      "name" : "time.zone",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 56
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 7
+      }, {
+        "name" : "offset",
+        "type" : 57
+      }, {
+        "name" : "isDST",
+        "type" : 58
+      } ],
+      "name" : "struct{name string; offset int; isDST bool}",
+      "type" : "Struct",
+      "underlying" : 56
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 57
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 58
+    }, {
+      "elem" : 60,
+      "name" : "[]time.zoneTrans",
+      "type" : "Slice",
+      "underlying" : 59
+    }, {
+      "local-name" : "zoneTrans",
+      "name" : "time.zoneTrans",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 61
+    }, {
+      "fields" : [ {
+        "name" : "when",
+        "type" : 11
+      }, {
+        "name" : "index",
+        "type" : 62
+      }, {
+        "name" : "isstd",
+        "type" : 58
+      }, {
+        "name" : "isutc",
+        "type" : 58
+      } ],
+      "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
+      "type" : "Struct",
+      "underlying" : 61
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 62
+    }, {
+      "elem" : 55,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 63
+    }, {
+      "elem" : 7,
+      "key" : 7,
+      "name" : "map[string]string",
+      "type" : "Map",
+      "underlying" : 64
+    }, {
+      "elem" : 66,
+      "name" : "*k8s.io/apiserver/pkg/apis/audit.EventList",
+      "type" : "Pointer",
+      "underlying" : 65
+    }, {
+      "local-name" : "EventList",
+      "name" : "k8s.io/apiserver/pkg/apis/audit.EventList",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 67
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 5
+      }, {
+        "name" : "ListMeta",
+        "type" : 8
+      }, {
+        "name" : "Items",
+        "type" : 68
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta; k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta; Items []k8s.io/apiserver/pkg/apis/audit.Event}",
+      "type" : "Struct",
+      "underlying" : 67
+    }, {
+      "elem" : 69,
+      "name" : "[]k8s.io/apiserver/pkg/apis/audit.Event",
+      "type" : "Slice",
+      "underlying" : 68
+    }, {
+      "local-name" : "Event",
+      "name" : "k8s.io/apiserver/pkg/apis/audit.Event",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 70
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 5
+      }, {
+        "name" : "Level",
+        "type" : 71
+      }, {
+        "name" : "AuditID",
+        "type" : 16
+      }, {
+        "name" : "Stage",
+        "type" : 72
+      }, {
+        "name" : "RequestURI",
+        "type" : 7
+      }, {
+        "name" : "Verb",
+        "type" : 7
+      }, {
+        "name" : "User",
+        "type" : 18
+      }, {
+        "name" : "ImpersonatedUser",
+        "type" : 23
+      }, {
+        "name" : "SourceIPs",
+        "type" : 20
+      }, {
+        "name" : "UserAgent",
+        "type" : 7
+      }, {
+        "name" : "ObjectRef",
+        "type" : 73
+      }, {
+        "name" : "ResponseStatus",
+        "type" : 27
+      }, {
+        "name" : "RequestObject",
+        "type" : 39
+      }, {
+        "name" : "ResponseObject",
+        "type" : 39
+      }, {
+        "name" : "RequestReceivedTimestamp",
+        "type" : 46
+      }, {
+        "name" : "StageTimestamp",
+        "type" : 46
+      }, {
+        "name" : "Annotations",
+        "type" : 64
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta; Level k8s.io/apiserver/pkg/apis/audit.Level; AuditID k8s.io/apimachinery/pkg/types.UID; Stage k8s.io/apiserver/pkg/apis/audit.Stage; RequestURI string; Verb string; User k8s.io/api/authentication/v1.UserInfo; ImpersonatedUser *k8s.io/api/authentication/v1.UserInfo; SourceIPs []string; UserAgent string; ObjectRef *k8s.io/apiserver/pkg/apis/audit.ObjectReference; ResponseStatus *k8s.io/apimachinery/pkg/apis/meta/v1.Status; RequestObject *k8s.io/apimachinery/pkg/runtime.Unknown; ResponseObject *k8s.io/apimachinery/pkg/runtime.Unknown; RequestReceivedTimestamp k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime; StageTimestamp k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime; Annotations map[string]string}",
+      "type" : "Struct",
+      "underlying" : 70
+    }, {
+      "local-name" : "Level",
+      "name" : "k8s.io/apiserver/pkg/apis/audit.Level",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "local-name" : "Stage",
+      "name" : "k8s.io/apiserver/pkg/apis/audit.Stage",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "elem" : 74,
+      "name" : "*k8s.io/apiserver/pkg/apis/audit.ObjectReference",
+      "type" : "Pointer",
+      "underlying" : 73
+    }, {
+      "local-name" : "ObjectReference",
+      "name" : "k8s.io/apiserver/pkg/apis/audit.ObjectReference",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 75
+    }, {
+      "fields" : [ {
+        "name" : "Resource",
+        "type" : 7
+      }, {
+        "name" : "Namespace",
+        "type" : 7
+      }, {
+        "name" : "Name",
+        "type" : 7
+      }, {
+        "name" : "UID",
+        "type" : 16
+      }, {
+        "name" : "APIGroup",
+        "type" : 7
+      }, {
+        "name" : "APIVersion",
+        "type" : 7
+      }, {
+        "name" : "ResourceVersion",
+        "type" : 7
+      }, {
+        "name" : "Subresource",
+        "type" : 7
+      } ],
+      "name" : "struct{Resource string; Namespace string; Name string; UID k8s.io/apimachinery/pkg/types.UID; APIGroup string; APIVersion string; ResourceVersion string; Subresource string}",
+      "type" : "Struct",
+      "underlying" : 75
+    }, {
+      "local-name" : "Scope",
+      "name" : "k8s.io/apimachinery/pkg/conversion.Scope",
+      "package" : 7,
+      "type" : "Named",
+      "underlying" : 77
+    }, {
+      "methods" : [ {
+        "name" : "Convert",
+        "type" : 78
+      }, {
+        "name" : "DefaultConvert",
+        "type" : 78
+      }, {
+        "name" : "DestTag",
+        "type" : 88
+      }, {
+        "name" : "Flags",
+        "type" : 91
+      }, {
+        "name" : "Meta",
+        "type" : 93
+      }, {
+        "name" : "SrcTag",
+        "type" : 88
+      } ],
+      "name" : "interface{Convert(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags) error; DefaultConvert(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags) error; DestTag() reflect.StructTag; Flags() k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags; Meta() *k8s.io/apimachinery/pkg/conversion.Meta; SrcTag() reflect.StructTag}",
+      "type" : "Interface",
+      "underlying" : 77
+    }, {
+      "name" : "func(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags) error",
+      "params" : 79,
+      "recv" : 1,
+      "results" : 82,
+      "type" : "Signature",
+      "underlying" : 78,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "src",
+        "type" : 80
+      }, {
+        "name" : "dest",
+        "type" : 80
+      }, {
+        "name" : "flags",
+        "type" : 81
+      } ],
+      "name" : "(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags)",
+      "type" : "Tuple",
+      "underlying" : 79
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 80
+    }, {
+      "local-name" : "FieldMatchingFlags",
+      "name" : "k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags",
+      "package" : 7,
+      "type" : "Named",
+      "underlying" : 57
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 83
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 82
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 84
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 85
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 84
+    }, {
+      "name" : "func() string",
+      "params" : 86,
+      "recv" : 0,
+      "results" : 87,
+      "type" : "Signature",
+      "underlying" : 85,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 86
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 87
+    }, {
+      "name" : "func() reflect.StructTag",
+      "params" : 86,
+      "recv" : 2,
+      "results" : 89,
+      "type" : "Signature",
+      "underlying" : 88,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(reflect.StructTag)",
+      "type" : "Tuple",
+      "underlying" : 89
+    }, {
+      "local-name" : "StructTag",
+      "name" : "reflect.StructTag",
+      "package" : 8,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "name" : "func() k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags",
+      "params" : 86,
+      "recv" : 3,
+      "results" : 92,
+      "type" : "Signature",
+      "underlying" : 91,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 81
+      } ],
+      "name" : "(k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags)",
+      "type" : "Tuple",
+      "underlying" : 92
+    }, {
+      "name" : "func() *k8s.io/apimachinery/pkg/conversion.Meta",
+      "params" : 86,
+      "recv" : 4,
+      "results" : 94,
+      "type" : "Signature",
+      "underlying" : 93,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 95
+      } ],
+      "name" : "(*k8s.io/apimachinery/pkg/conversion.Meta)",
+      "type" : "Tuple",
+      "underlying" : 94
+    }, {
+      "elem" : 96,
+      "name" : "*k8s.io/apimachinery/pkg/conversion.Meta",
+      "type" : "Pointer",
+      "underlying" : 95
+    }, {
+      "local-name" : "Meta",
+      "name" : "k8s.io/apimachinery/pkg/conversion.Meta",
+      "package" : 7,
+      "type" : "Named",
+      "underlying" : 97
+    }, {
+      "fields" : [ {
+        "name" : "KeyNameMapping",
+        "type" : 98
+      }, {
+        "name" : "Context",
+        "type" : 80
+      } ],
+      "name" : "struct{KeyNameMapping k8s.io/apimachinery/pkg/conversion.FieldMappingFunc; Context interface{}}",
+      "type" : "Struct",
+      "underlying" : 97
+    }, {
+      "local-name" : "FieldMappingFunc",
+      "name" : "k8s.io/apimachinery/pkg/conversion.FieldMappingFunc",
+      "package" : 7,
+      "type" : "Named",
+      "underlying" : 99
+    }, {
+      "name" : "func(key string, sourceTag reflect.StructTag, destTag reflect.StructTag) (source string, dest string)",
+      "params" : 100,
+      "recv" : -1,
+      "results" : 101,
+      "type" : "Signature",
+      "underlying" : 99,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "key",
+        "type" : 7
+      }, {
+        "name" : "sourceTag",
+        "type" : 90
+      }, {
+        "name" : "destTag",
+        "type" : 90
+      } ],
+      "name" : "(key string, sourceTag reflect.StructTag, destTag reflect.StructTag)",
+      "type" : "Tuple",
+      "underlying" : 100
+    }, {
+      "fields" : [ {
+        "name" : "source",
+        "type" : 7
+      }, {
+        "name" : "dest",
+        "type" : 7
+      } ],
+      "name" : "(source string, dest string)",
+      "type" : "Tuple",
+      "underlying" : 101
+    }, {
+      "elem" : 68,
+      "name" : "*[]k8s.io/apiserver/pkg/apis/audit.Event",
+      "type" : "Pointer",
+      "underlying" : 102
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 9,
+      "type" : "Basic",
+      "underlying" : 103
+    }, {
+      "elem" : 12,
+      "name" : "*[]k8s.io/apiserver/pkg/apis/audit/v1.Event",
+      "type" : "Pointer",
+      "underlying" : 104
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 105
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 83,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 76,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 76,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 76,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 76,
+      "exported" : false
+    }, {
+      "name" : "in",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "out",
+      "package" : 0,
+      "type" : 65,
+      "exported" : false
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 76,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 83,
+      "exported" : false
+    }, {
+      "name" : "ListMeta",
+      "package" : 6,
+      "type" : 8,
+      "exported" : true
+    }, {
+      "name" : "ListMeta",
+      "package" : 0,
+      "type" : 8,
+      "exported" : true
+    }, {
+      "name" : "Items",
+      "package" : 6,
+      "type" : 68,
+      "exported" : true
+    }, {
+      "name" : "Items",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

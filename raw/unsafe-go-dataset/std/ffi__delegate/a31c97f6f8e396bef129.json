@@ -1,0 +1,642 @@
+{
+  "usage" : {
+    "file" : "netpoll_epoll.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "79",
+    "module" : "std",
+    "pkg" : "runtime",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "n := write(netpollBreakWr, unsafe.Pointer(&b), 1)",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1, 3 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 77,
+      "ast" : {
+        "condition" : null,
+        "kind" : "statement",
+        "type" : "for"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 91,
+      "code" : "for {\n\tvar b byte\n\tn := write(netpollBreakWr, unsafe.Pointer(&b), 1)\n\tif n == 1 {\n\t\tbreak\n\t}\n\tif n == -_EINTR {\n\t\tcontinue\n\t}\n\tif n == -_EAGAIN {\n\t\treturn\n\t}\n\tprintln(\"runtime: netpollBreak write failed with\", -n)\n\tthrow(\"runtime: netpollBreak write failed\")\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 0 ],
+      "decl-vars" : [ 1 ],
+      "line-start" : 78,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 3,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 3,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "byte"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "b"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 78,
+      "code" : "var b byte",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 79,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "n"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "netpollBreakWr",
+              "variable" : 0
+            }
+          }, {
+            "coerced-to" : {
+              "go-type" : 7,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 7,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 9,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "b",
+                  "variable" : 1
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 4,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "1"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "write"
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 79,
+      "code" : "n := write(netpollBreakWr, unsafe.Pointer(&b), 1)",
+      "entry" : false,
+      "use-vars" : [ 1, 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 7 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 80,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 2
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 4,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "1"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 82,
+      "code" : "if n == 1 {\n\tbreak\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 81,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "break"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 81,
+      "code" : "break",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 9 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 83,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 2
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 4,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "-4"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 85,
+      "code" : "if n == -_EINTR {\n\tcontinue\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 84,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "continue"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 84,
+      "code" : "continue",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10, 11 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 86,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 2
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 4,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "-11"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 88,
+      "code" : "if n == -_EAGAIN {\n\treturn\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 87,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 87,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 89,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 13,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "runtime: netpollBreak write failed with"
+            }
+          }, {
+            "go-type" : 4,
+            "kind" : "expression",
+            "operator" : "-",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "n",
+                "variable" : 2
+              }
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "println"
+            }
+          },
+          "go-type" : 1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 89,
+      "code" : "println(\"runtime: netpollBreak write failed with\", -n)",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 90,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 13,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "runtime: netpollBreak write failed"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "throw"
+            }
+          },
+          "go-type" : 1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 90,
+      "code" : "throw(\"runtime: netpollBreak write failed\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// netpollBreak interrupts an epollwait.\nfunc netpollBreak() {\n\tfor {\n\t\tvar b byte\n\t\tn := write(netpollBreakWr, unsafe.Pointer(&b), 1)\n\t\tif n == 1 {\n\t\t\tbreak\n\t\t}\n\t\tif n == -_EINTR {\n\t\t\tcontinue\n\t\t}\n\t\tif n == -_EAGAIN {\n\t\t\treturn\n\t\t}\n\t\tprintln(\"runtime: netpollBreak write failed with\", -n)\n\t\tthrow(\"runtime: netpollBreak write failed\")\n\t}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "netpollBreak",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "write",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "throw",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    } ],
+    "line-end" : 92,
+    "line-start" : 76,
+    "names" : [ "netpollBreak" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "runtime",
+      "path" : "runtime"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ ],
+    "receivers" : [ ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func()",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "name" : "func(fd uintptr, p unsafe.Pointer, n int32) int32",
+      "params" : 6,
+      "recv" : -1,
+      "results" : 8,
+      "type" : "Signature",
+      "underlying" : 5,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "p",
+        "type" : 7
+      }, {
+        "name" : "n",
+        "type" : 4
+      } ],
+      "name" : "(fd uintptr, p unsafe.Pointer, n int32)",
+      "type" : "Tuple",
+      "underlying" : 6
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(int32)",
+      "type" : "Tuple",
+      "underlying" : 8
+    }, {
+      "elem" : 3,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 9
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "func(string, int32)",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      }, {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(string, int32)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func(s string)",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 13
+      } ],
+      "name" : "(s string)",
+      "type" : "Tuple",
+      "underlying" : 15
+    } ],
+    "variables" : [ {
+      "name" : "netpollBreakWr",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

@@ -1,0 +1,386 @@
+{
+  "usage" : {
+    "file" : "unsafe_array.go",
+    "label1" : "delegate",
+    "label2" : "efficiency",
+    "line" : "51",
+    "module" : "github.com/modern-go/reflect2",
+    "pkg" : "github.com/modern-go/reflect2",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "func (type2 *UnsafeArrayType) UnsafeSetIndex(obj unsafe.Pointer, index int, elem unsafe.Pointer) {",
+    "version" : "v1.0.1"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 0, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 2, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 3, 5 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 52,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "elemPtr"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "obj",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "index",
+              "variable" : 2
+            }
+          }, {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "elemSize",
+              "variable" : 4
+            },
+            "go-type" : 28,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "type2",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          }, {
+            "go-type" : 26,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "i < s.Len"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "arrayAt"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 52,
+      "code" : "elemPtr := arrayAt(obj, index, type2.elemSize, \"i < s.Len\")",
+      "entry" : false,
+      "use-vars" : [ 1, 2, 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 5, 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 53,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "elemRType",
+              "variable" : 6
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "type2",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "elemPtr",
+              "variable" : 5
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "elem",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "typedmemmove"
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 53,
+      "code" : "typedmemmove(type2.elemRType, elemPtr, elem)",
+      "entry" : false,
+      "use-vars" : [ 5, 3, 0 ]
+    } ],
+    "code" : "func (type2 *UnsafeArrayType) UnsafeSetIndex(obj unsafe.Pointer, index int, elem unsafe.Pointer) {\n\telemPtr := arrayAt(obj, index, type2.elemSize, \"i < s.Len\")\n\ttypedmemmove(type2.elemRType, elemPtr, elem)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "UnsafeSetIndex",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "arrayAt",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "typedmemmove",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    } ],
+    "line-end" : 54,
+    "line-start" : 51,
+    "names" : [ "UnsafeSetIndex" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "reflect2",
+      "path" : "github.com/modern-go/reflect2"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "concurrent",
+      "path" : "github.com/modern-go/concurrent"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "atomic",
+      "path" : "sync/atomic"
+    } ],
+    "params" : [ 1, 2, 3 ],
+    "receivers" : [ 0 ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(obj unsafe.Pointer, index int, elem unsafe.Pointer)",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "obj",
+        "type" : 2
+      }, {
+        "name" : "index",
+        "type" : 3
+      }, {
+        "name" : "elem",
+        "type" : 2
+      } ],
+      "name" : "(obj unsafe.Pointer, index int, elem unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 4
+    }, {
+      "name" : "func(p unsafe.Pointer, i int, eltSize uintptr, whySafe string) unsafe.Pointer",
+      "params" : 6,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 5,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 2
+      }, {
+        "name" : "i",
+        "type" : 3
+      }, {
+        "name" : "eltSize",
+        "type" : 28
+      }, {
+        "name" : "whySafe",
+        "type" : 26
+      } ],
+      "name" : "(p unsafe.Pointer, i int, eltSize uintptr, whySafe string)",
+      "type" : "Tuple",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "name" : "func(rtype unsafe.Pointer, dst unsafe.Pointer, src unsafe.Pointer)",
+      "params" : 9,
+      "recv" : -1,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 2
+      }, {
+        "name" : "dst",
+        "type" : 2
+      }, {
+        "name" : "src",
+        "type" : 2
+      } ],
+      "name" : "(rtype unsafe.Pointer, dst unsafe.Pointer, src unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 9
+    } ],
+    "variables" : [ {
+      "name" : "type2",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "obj",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "index",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "elem",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "elemSize",
+      "package" : 0,
+      "type" : 28,
+      "exported" : false
+    }, {
+      "name" : "elemPtr",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "elemRType",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

@@ -1,0 +1,2522 @@
+{
+  "usage" : {
+    "file" : "obj.go",
+    "label1" : "cast-bytes",
+    "label2" : "ffi",
+    "line" : "56",
+    "module" : "github.com/godror/godror",
+    "pkg" : "github.com/godror/godror",
+    "project" : "xo/usql",
+    "snippet" : "C.dpiData_setBytes(&data.dpiData, (*C.char)(unsafe.Pointer(&a[0])), C.uint32_t(len(a)))",
+    "version" : "v0.16.0"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 11, 10, 12, 14 ],
+      "exit" : false,
+      "out-vars" : [ 11, 10, 12, 14 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 14, 11, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 10, 12, 14, 11 ],
+      "decl-vars" : [ ],
+      "line-start" : 40,
+      "ast" : {
+        "condition" : {
+          "go-type" : 108,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 108,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "O",
+                "variable" : 10
+              }
+            },
+            "operator" : "==",
+            "right" : {
+              "go-type" : 109,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Nil",
+                "kind" : "ident",
+                "value" : "nil"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "||",
+          "right" : {
+            "go-type" : 108,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dpiObject",
+                "variable" : 15
+              },
+              "go-type" : 11,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "O",
+                  "variable" : 10
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "==",
+            "right" : {
+              "go-type" : 109,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Nil",
+                "kind" : "ident",
+                "value" : "nil"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 42,
+      "code" : "if O == nil || O.dpiObject == nil {\n\tpanic(\"nil dpiObject\")\n}",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 10, 12, 14, 11 ],
+      "exit" : false,
+      "out-vars" : [ 12, 14, 11, 10 ],
+      "decl-vars" : [ ],
+      "line-start" : 41,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "nil dpiObject"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 110,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "panic"
+            }
+          },
+          "go-type" : 37,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 41,
+      "code" : "panic(\"nil dpiObject\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 12, 14, 11, 10 ],
+      "exit" : false,
+      "out-vars" : [ 11, 17, 10, 12, 18, 14 ],
+      "decl-vars" : [ 18, 17 ],
+      "line-start" : 43,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "attr"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ok"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 112,
+          "index" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "name",
+              "variable" : 12
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Attributes",
+              "variable" : 16
+            },
+            "go-type" : 8,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "O",
+                "variable" : 10
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "index"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 43,
+      "code" : "attr, ok := O.Attributes[name]",
+      "entry" : false,
+      "use-vars" : [ 10, 12 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 7 ],
+      "in-vars" : [ 10, 12, 18, 14, 11, 17 ],
+      "exit" : false,
+      "out-vars" : [ 17, 10, 12, 14, 11 ],
+      "decl-vars" : [ ],
+      "line-start" : 44,
+      "ast" : {
+        "condition" : {
+          "go-type" : 31,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "go-type" : 31,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ok",
+              "variable" : 18
+            }
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 46,
+      "code" : "if !ok {\n\treturn errors.Errorf(\"%s: %w\", name, ErrNoSuchKey)\n}",
+      "entry" : false,
+      "use-vars" : [ 18 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 12, 14 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 45,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "%s: %w"
+            }
+          }, {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "name",
+              "variable" : 12
+            }
+          }, {
+            "go-type" : 43,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ErrNoSuchKey",
+              "variable" : 14
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 113,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 43,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 45,
+      "code" : "return errors.Errorf(\"%s: %w\", name, ErrNoSuchKey)",
+      "entry" : false,
+      "use-vars" : [ 12, 14 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 11, 17, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 11, 17, 10, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 48,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "reset"
+            },
+            "go-type" : 115,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "data",
+                "variable" : 11
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 37,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 48,
+      "code" : "data.reset()",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 11, 17, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 11, 17, 10, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 49,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "NativeTypeNum"
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "data"
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "NativeTypeNum",
+            "variable" : 19
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 9,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "attr",
+              "variable" : 17
+            }
+          },
+          "type" : "selector"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 49,
+      "code" : "data.NativeTypeNum = attr.NativeTypeNum",
+      "entry" : false,
+      "use-vars" : [ 17 ]
+    }, {
+      "update-vars" : [ 11 ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 11, 17, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 11, 17, 10, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 50,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ObjectType",
+            "variable" : 20
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "data",
+              "variable" : 11
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ObjectType",
+            "variable" : 21
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 9,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "attr",
+              "variable" : 17
+            }
+          },
+          "type" : "selector"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 50,
+      "code" : "data.ObjectType = attr.ObjectType",
+      "entry" : false,
+      "use-vars" : [ 17, 11 ]
+    }, {
+      "update-vars" : [ 11 ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 11, 17, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 10, 12, 11, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 51,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "implicitObj",
+            "variable" : 22
+          },
+          "go-type" : 31,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "data",
+              "variable" : 11
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 31,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "true"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 51,
+      "code" : "data.implicitObj = true",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12, 14 ],
+      "in-vars" : [ 11, 17, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 12, 11, 17, 10 ],
+      "decl-vars" : [ ],
+      "line-start" : 54,
+      "ast" : {
+        "condition" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "NativeTypeNum",
+                "variable" : 19
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 9,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "attr",
+                  "variable" : 17
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "==",
+            "right" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 5,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "DPI_NATIVE_TYPE_BYTES"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "OracleTypeNum",
+                "variable" : 23
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 9,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "attr",
+                  "variable" : 17
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "==",
+            "right" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 5,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "DPI_ORACLE_TYPE_NUMBER"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 57,
+      "code" : "if attr.NativeTypeNum == C.DPI_NATIVE_TYPE_BYTES && attr.OracleTypeNum == C.DPI_ORACLE_TYPE_NUMBER {\n\tvar a [39]byte\n\tC.dpiData_setBytes(&data.dpiData, (*C.char)(unsafe.Pointer(&a[0])), C.uint32_t(len(a)))\n}",
+      "entry" : false,
+      "use-vars" : [ 17 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 10, 12, 11, 17 ],
+      "exit" : false,
+      "out-vars" : [ 11, 17, 25, 10, 12 ],
+      "decl-vars" : [ 25 ],
+      "line-start" : 55,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "element" : {
+                "go-type" : 117,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 117,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "byte"
+                }
+              },
+              "go-type" : 116,
+              "kind" : "type",
+              "length" : {
+                "go-type" : 118,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "39"
+                }
+              },
+              "type" : "array"
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "a"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 55,
+      "code" : "var a [39]byte",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 11, 17, 25, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ 11, 17, 10, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 56,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 11,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dpiData",
+                "variable" : 24
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "data",
+                  "variable" : 11
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          }, {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : -1,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 5,
+                  "value" : "C"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "char"
+                }
+              },
+              "go-type" : -1,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : -1,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 119,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 6,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 119,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 119,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 120,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 117,
+                  "index" : {
+                    "go-type" : 65,
+                    "kind" : "constant",
+                    "value" : {
+                      "type" : "INT",
+                      "value" : "0"
+                    }
+                  },
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 116,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "a",
+                      "variable" : 25
+                    }
+                  },
+                  "type" : "index"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }, {
+            "arguments" : [ {
+              "go-type" : 65,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "39"
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 5,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "uint32_t"
+              }
+            },
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 5,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "dpiData_setBytes"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 56,
+      "code" : "C.dpiData_setBytes(&data.dpiData, (*C.char)(unsafe.Pointer(&a[0])), C.uint32_t(len(a)))",
+      "entry" : false,
+      "use-vars" : [ 25, 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15, 16 ],
+      "in-vars" : [ 10, 12, 11, 17 ],
+      "exit" : false,
+      "out-vars" : [ 12, 11, 17, 10 ],
+      "decl-vars" : [ ],
+      "line-start" : 60,
+      "ast" : {
+        "condition" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dpiObject",
+                "variable" : 15
+              },
+              "go-type" : 11,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "O",
+                  "variable" : 10
+                }
+              },
+              "type" : "selector"
+            }, {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dpiObjectAttr",
+                "variable" : 26
+              },
+              "go-type" : 11,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 9,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "attr",
+                  "variable" : 17
+                }
+              },
+              "type" : "selector"
+            }, {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "NativeTypeNum",
+                "variable" : 27
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "data",
+                  "variable" : 11
+                }
+              },
+              "type" : "selector"
+            }, {
+              "go-type" : 11,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "dpiData",
+                  "variable" : 24
+                },
+                "go-type" : 12,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "data",
+                    "variable" : 11
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "unary"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 5,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "dpiObject_getAttributeValue"
+              }
+            },
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 5,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "DPI_FAILURE"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 62,
+      "code" : "if C.dpiObject_getAttributeValue(O.dpiObject, attr.dpiObjectAttr, data.NativeTypeNum, &data.dpiData) == C.DPI_FAILURE {\n\treturn errors.Errorf(\"getAttributeValue(%q, obj=%+v, attr=%+v, typ=%d): %w\", name, O, attr.dpiObjectAttr, data.NativeTypeNum, O.getError())\n}",
+      "entry" : false,
+      "use-vars" : [ 10, 11, 17 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 11, 17, 10, 12 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 61,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "getAttributeValue(%q, obj=%+v, attr=%+v, typ=%d): %w"
+            }
+          }, {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "name",
+              "variable" : 12
+            }
+          }, {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "O",
+              "variable" : 10
+            }
+          }, {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dpiObjectAttr",
+              "variable" : 26
+            },
+            "go-type" : 11,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 9,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "attr",
+                "variable" : 17
+              }
+            },
+            "type" : "selector"
+          }, {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "NativeTypeNum",
+              "variable" : 27
+            },
+            "go-type" : 12,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "data",
+                "variable" : 11
+              }
+            },
+            "type" : "selector"
+          }, {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "getError"
+              },
+              "go-type" : 41,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "O",
+                  "variable" : 10
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 43,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 113,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 43,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 61,
+      "code" : "return errors.Errorf(\"getAttributeValue(%q, obj=%+v, attr=%+v, typ=%d): %w\", name, O, attr.dpiObjectAttr, data.NativeTypeNum, O.getError())",
+      "entry" : false,
+      "use-vars" : [ 10, 12, 17, 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 64,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 109,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 64,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// GetAttribute gets the i-th attribute into data.\nfunc (O *Object) GetAttribute(data *Data, name string) error {\n\tif O == nil || O.dpiObject == nil {\n\t\tpanic(\"nil dpiObject\")\n\t}\n\tattr, ok := O.Attributes[name]\n\tif !ok {\n\t\treturn errors.Errorf(\"%s: %w\", name, ErrNoSuchKey)\n\t}\n\n\tdata.reset()\n\tdata.NativeTypeNum = attr.NativeTypeNum\n\tdata.ObjectType = attr.ObjectType\n\tdata.implicitObj = true\n\n\tif attr.NativeTypeNum == C.DPI_NATIVE_TYPE_BYTES && attr.OracleTypeNum == C.DPI_ORACLE_TYPE_NUMBER {\n\t\tvar a [39]byte\n\t\tC.dpiData_setBytes(&data.dpiData, (*C.char)(unsafe.Pointer(&a[0])), C.uint32_t(len(a)))\n\t}\n\n\tif C.dpiObject_getAttributeValue(O.dpiObject, attr.dpiObjectAttr, data.NativeTypeNum, &data.dpiData) == C.DPI_FAILURE {\n\t\treturn errors.Errorf(\"getAttributeValue(%q, obj=%+v, attr=%+v, typ=%d): %w\", name, O, attr.dpiObjectAttr, data.NativeTypeNum, O.getError())\n\t}\n\n\treturn nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "GetAttribute",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "Errorf",
+      "package" : 4,
+      "type" : 113,
+      "exported" : true
+    }, {
+      "name" : "reset",
+      "package" : 0,
+      "type" : 115,
+      "exported" : false
+    }, {
+      "name" : "getError",
+      "package" : 0,
+      "type" : 41,
+      "exported" : false
+    } ],
+    "line-end" : 65,
+    "line-start" : 39,
+    "names" : [ "GetAttribute" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "godror",
+      "path" : "github.com/godror/godror"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "driver",
+      "path" : "database/sql/driver"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "xerrors",
+      "path" : "golang.org/x/xerrors"
+    }, {
+      "name" : "C",
+      "path" : "C"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 11, 12 ],
+    "receivers" : [ 10 ],
+    "results" : [ 13 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(data *github.com/godror/godror.Data, name string) error",
+      "params" : 1,
+      "recv" : 10,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "data",
+        "type" : 2
+      }, {
+        "name" : "name",
+        "type" : 7
+      } ],
+      "name" : "(data *github.com/godror/godror.Data, name string)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*github.com/godror/godror.Data",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "Data",
+      "name" : "github.com/godror/godror.Data",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "ObjectType",
+        "type" : 5
+      }, {
+        "name" : "dpiData",
+        "type" : 12
+      }, {
+        "name" : "implicitObj",
+        "type" : 31
+      }, {
+        "name" : "NativeTypeNum",
+        "type" : 12
+      } ],
+      "name" : "struct{ObjectType github.com/godror/godror.ObjectType; dpiData invalid type; implicitObj bool; NativeTypeNum invalid type}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "local-name" : "ObjectType",
+      "name" : "github.com/godror/godror.ObjectType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "Schema",
+        "type" : 7
+      }, {
+        "name" : "Name",
+        "type" : 7
+      }, {
+        "name" : "Attributes",
+        "type" : 8
+      }, {
+        "name" : "objectTypeConn",
+        "type" : 13
+      }, {
+        "name" : "DBSize",
+        "type" : 65
+      }, {
+        "name" : "ClientSizeInBytes",
+        "type" : 65
+      }, {
+        "name" : "CharSize",
+        "type" : 65
+      }, {
+        "name" : "CollectionOf",
+        "type" : 105
+      }, {
+        "name" : "OracleTypeNum",
+        "type" : 12
+      }, {
+        "name" : "NativeTypeNum",
+        "type" : 12
+      }, {
+        "name" : "Precision",
+        "type" : 106
+      }, {
+        "name" : "Scale",
+        "type" : 107
+      }, {
+        "name" : "FsPrecision",
+        "type" : 84
+      } ],
+      "name" : "struct{Schema string; Name string; Attributes map[string]github.com/godror/godror.ObjectAttribute; *github.com/godror/godror.objectTypeConn; DBSize int; ClientSizeInBytes int; CharSize int; CollectionOf *github.com/godror/godror.ObjectType; OracleTypeNum invalid type; NativeTypeNum invalid type; Precision int16; Scale int8; FsPrecision uint8}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "elem" : 9,
+      "key" : 7,
+      "name" : "map[string]github.com/godror/godror.ObjectAttribute",
+      "type" : "Map",
+      "underlying" : 8
+    }, {
+      "local-name" : "ObjectAttribute",
+      "name" : "github.com/godror/godror.ObjectAttribute",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 10
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 7
+      }, {
+        "name" : "dpiObjectAttr",
+        "type" : 11
+      }, {
+        "name" : "ObjectType",
+        "type" : 5
+      } ],
+      "name" : "struct{Name string; dpiObjectAttr *invalid type; github.com/godror/godror.ObjectType}",
+      "type" : "Struct",
+      "underlying" : 10
+    }, {
+      "elem" : 12,
+      "name" : "*invalid type",
+      "type" : "Pointer",
+      "underlying" : 11
+    }, {
+      "name" : "invalid type",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "elem" : 14,
+      "name" : "*github.com/godror/godror.objectTypeConn",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "local-name" : "objectTypeConn",
+      "name" : "github.com/godror/godror.objectTypeConn",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "fields" : [ {
+        "name" : "mu",
+        "type" : 16
+      }, {
+        "name" : "conn",
+        "type" : 22
+      }, {
+        "name" : "dpiObjectType",
+        "type" : 11
+      } ],
+      "name" : "struct{mu sync.RWMutex; conn *github.com/godror/godror.conn; dpiObjectType *invalid type}",
+      "type" : "Struct",
+      "underlying" : 15
+    }, {
+      "local-name" : "RWMutex",
+      "name" : "sync.RWMutex",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 17
+    }, {
+      "fields" : [ {
+        "name" : "w",
+        "type" : 18
+      }, {
+        "name" : "writerSem",
+        "type" : 21
+      }, {
+        "name" : "readerSem",
+        "type" : 21
+      }, {
+        "name" : "readerCount",
+        "type" : 20
+      }, {
+        "name" : "readerWait",
+        "type" : 20
+      } ],
+      "name" : "struct{w sync.Mutex; writerSem uint32; readerSem uint32; readerCount int32; readerWait int32}",
+      "type" : "Struct",
+      "underlying" : 17
+    }, {
+      "local-name" : "Mutex",
+      "name" : "sync.Mutex",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "state",
+        "type" : 20
+      }, {
+        "name" : "sema",
+        "type" : 21
+      } ],
+      "name" : "struct{state int32; sema uint32}",
+      "type" : "Struct",
+      "underlying" : 19
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "elem" : 23,
+      "name" : "*github.com/godror/godror.conn",
+      "type" : "Pointer",
+      "underlying" : 22
+    }, {
+      "local-name" : "conn",
+      "name" : "github.com/godror/godror.conn",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "currentTT",
+        "type" : 25
+      }, {
+        "name" : "params",
+        "type" : 27
+      }, {
+        "name" : "Client",
+        "type" : 92
+      }, {
+        "name" : "Server",
+        "type" : 92
+      }, {
+        "name" : "tranParams",
+        "type" : 94
+      }, {
+        "name" : "mu",
+        "type" : 16
+      }, {
+        "name" : "poolKey",
+        "type" : 7
+      }, {
+        "name" : "drv",
+        "type" : 96
+      }, {
+        "name" : "dpiConn",
+        "type" : 11
+      }, {
+        "name" : "tzOffSecs",
+        "type" : 65
+      }, {
+        "name" : "inTransaction",
+        "type" : 31
+      }, {
+        "name" : "newSession",
+        "type" : 31
+      }, {
+        "name" : "released",
+        "type" : 31
+      } ],
+      "name" : "struct{currentTT github.com/godror/godror.TraceTag; params github.com/godror/godror.ConnectionParams; Client github.com/godror/godror.VersionInfo; Server github.com/godror/godror.VersionInfo; tranParams github.com/godror/godror.tranParams; mu sync.RWMutex; poolKey string; drv *github.com/godror/godror.drv; dpiConn *invalid type; tzOffSecs int; inTransaction bool; newSession bool; released bool}",
+      "type" : "Struct",
+      "underlying" : 24
+    }, {
+      "local-name" : "TraceTag",
+      "name" : "github.com/godror/godror.TraceTag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "ClientIdentifier",
+        "type" : 7
+      }, {
+        "name" : "ClientInfo",
+        "type" : 7
+      }, {
+        "name" : "DbOp",
+        "type" : 7
+      }, {
+        "name" : "Module",
+        "type" : 7
+      }, {
+        "name" : "Action",
+        "type" : 7
+      } ],
+      "name" : "struct{ClientIdentifier string; ClientInfo string; DbOp string; Module string; Action string}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "local-name" : "ConnectionParams",
+      "name" : "github.com/godror/godror.ConnectionParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 28
+    }, {
+      "fields" : [ {
+        "name" : "CommonParams",
+        "type" : 29
+      }, {
+        "name" : "ConnParams",
+        "type" : 86
+      }, {
+        "name" : "PoolParams",
+        "type" : 89
+      }, {
+        "name" : "NewPassword",
+        "type" : 7
+      }, {
+        "name" : "onInitStmts",
+        "type" : 72
+      }, {
+        "name" : "StandaloneConnection",
+        "type" : 31
+      } ],
+      "name" : "struct{github.com/godror/godror.CommonParams; github.com/godror/godror.ConnParams; github.com/godror/godror.PoolParams; NewPassword string; onInitStmts []string; StandaloneConnection bool}",
+      "type" : "Struct",
+      "underlying" : 28
+    }, {
+      "local-name" : "CommonParams",
+      "name" : "github.com/godror/godror.CommonParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "Username",
+        "type" : 7
+      }, {
+        "name" : "Password",
+        "type" : 7
+      }, {
+        "name" : "DSN",
+        "type" : 7
+      }, {
+        "name" : "EnableEvents",
+        "type" : 31
+      }, {
+        "name" : "OnInit",
+        "type" : 32
+      }, {
+        "name" : "Timezone",
+        "type" : 75
+      } ],
+      "name" : "struct{Username string; Password string; DSN string; EnableEvents bool; OnInit func(database/sql/driver.Conn) error; Timezone *time.Location}",
+      "type" : "Struct",
+      "underlying" : 30
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 31
+    }, {
+      "name" : "func(database/sql/driver.Conn) error",
+      "params" : 33,
+      "recv" : -1,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 32,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 34
+      } ],
+      "name" : "(database/sql/driver.Conn)",
+      "type" : "Tuple",
+      "underlying" : 33
+    }, {
+      "local-name" : "Conn",
+      "name" : "database/sql/driver.Conn",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 35
+    }, {
+      "methods" : [ {
+        "name" : "Begin",
+        "type" : 36
+      }, {
+        "name" : "Close",
+        "type" : 41
+      }, {
+        "name" : "Prepare",
+        "type" : 47
+      } ],
+      "name" : "interface{Begin() (database/sql/driver.Tx, error); Close() error; Prepare(query string) (database/sql/driver.Stmt, error)}",
+      "type" : "Interface",
+      "underlying" : 35
+    }, {
+      "name" : "func() (database/sql/driver.Tx, error)",
+      "params" : 37,
+      "recv" : 2,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 36,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 37
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 39
+      }, {
+        "name" : "",
+        "type" : 43
+      } ],
+      "name" : "(database/sql/driver.Tx, error)",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "local-name" : "Tx",
+      "name" : "database/sql/driver.Tx",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 40
+    }, {
+      "methods" : [ {
+        "name" : "Commit",
+        "type" : 41
+      }, {
+        "name" : "Rollback",
+        "type" : 41
+      } ],
+      "name" : "interface{Commit() error; Rollback() error}",
+      "type" : "Interface",
+      "underlying" : 40
+    }, {
+      "name" : "func() error",
+      "params" : 37,
+      "recv" : 1,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 41,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 43
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 42
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 44
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 45
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 44
+    }, {
+      "name" : "func() string",
+      "params" : 37,
+      "recv" : 0,
+      "results" : 46,
+      "type" : "Signature",
+      "underlying" : 45,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 46
+    }, {
+      "name" : "func(query string) (database/sql/driver.Stmt, error)",
+      "params" : 48,
+      "recv" : 9,
+      "results" : 49,
+      "type" : "Signature",
+      "underlying" : 47,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "query",
+        "type" : 7
+      } ],
+      "name" : "(query string)",
+      "type" : "Tuple",
+      "underlying" : 48
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 50
+      }, {
+        "name" : "",
+        "type" : 43
+      } ],
+      "name" : "(database/sql/driver.Stmt, error)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "local-name" : "Stmt",
+      "name" : "database/sql/driver.Stmt",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 51
+    }, {
+      "methods" : [ {
+        "name" : "Close",
+        "type" : 41
+      }, {
+        "name" : "Exec",
+        "type" : 52
+      }, {
+        "name" : "NumInput",
+        "type" : 63
+      }, {
+        "name" : "Query",
+        "type" : 66
+      } ],
+      "name" : "interface{Close() error; Exec(args []database/sql/driver.Value) (database/sql/driver.Result, error); NumInput() int; Query(args []database/sql/driver.Value) (database/sql/driver.Rows, error)}",
+      "type" : "Interface",
+      "underlying" : 51
+    }, {
+      "name" : "func(args []database/sql/driver.Value) (database/sql/driver.Result, error)",
+      "params" : 53,
+      "recv" : 4,
+      "results" : 57,
+      "type" : "Signature",
+      "underlying" : 52,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "args",
+        "type" : 54
+      } ],
+      "name" : "(args []database/sql/driver.Value)",
+      "type" : "Tuple",
+      "underlying" : 53
+    }, {
+      "elem" : 55,
+      "name" : "[]database/sql/driver.Value",
+      "type" : "Slice",
+      "underlying" : 54
+    }, {
+      "local-name" : "Value",
+      "name" : "database/sql/driver.Value",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 56
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 56
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 58
+      }, {
+        "name" : "",
+        "type" : 43
+      } ],
+      "name" : "(database/sql/driver.Result, error)",
+      "type" : "Tuple",
+      "underlying" : 57
+    }, {
+      "local-name" : "Result",
+      "name" : "database/sql/driver.Result",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 59
+    }, {
+      "methods" : [ {
+        "name" : "LastInsertId",
+        "type" : 60
+      }, {
+        "name" : "RowsAffected",
+        "type" : 60
+      } ],
+      "name" : "interface{LastInsertId() (int64, error); RowsAffected() (int64, error)}",
+      "type" : "Interface",
+      "underlying" : 59
+    }, {
+      "name" : "func() (int64, error)",
+      "params" : 37,
+      "recv" : 3,
+      "results" : 61,
+      "type" : "Signature",
+      "underlying" : 60,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 62
+      }, {
+        "name" : "",
+        "type" : 43
+      } ],
+      "name" : "(int64, error)",
+      "type" : "Tuple",
+      "underlying" : 61
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 62
+    }, {
+      "name" : "func() int",
+      "params" : 37,
+      "recv" : 5,
+      "results" : 64,
+      "type" : "Signature",
+      "underlying" : 63,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 65
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 64
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 65
+    }, {
+      "name" : "func(args []database/sql/driver.Value) (database/sql/driver.Rows, error)",
+      "params" : 53,
+      "recv" : 8,
+      "results" : 67,
+      "type" : "Signature",
+      "underlying" : 66,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 68
+      }, {
+        "name" : "",
+        "type" : 43
+      } ],
+      "name" : "(database/sql/driver.Rows, error)",
+      "type" : "Tuple",
+      "underlying" : 67
+    }, {
+      "local-name" : "Rows",
+      "name" : "database/sql/driver.Rows",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 69
+    }, {
+      "methods" : [ {
+        "name" : "Close",
+        "type" : 41
+      }, {
+        "name" : "Columns",
+        "type" : 70
+      }, {
+        "name" : "Next",
+        "type" : 73
+      } ],
+      "name" : "interface{Close() error; Columns() []string; Next(dest []database/sql/driver.Value) error}",
+      "type" : "Interface",
+      "underlying" : 69
+    }, {
+      "name" : "func() []string",
+      "params" : 37,
+      "recv" : 6,
+      "results" : 71,
+      "type" : "Signature",
+      "underlying" : 70,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 72
+      } ],
+      "name" : "([]string)",
+      "type" : "Tuple",
+      "underlying" : 71
+    }, {
+      "elem" : 7,
+      "name" : "[]string",
+      "type" : "Slice",
+      "underlying" : 72
+    }, {
+      "name" : "func(dest []database/sql/driver.Value) error",
+      "params" : 74,
+      "recv" : 7,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 73,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "dest",
+        "type" : 54
+      } ],
+      "name" : "(dest []database/sql/driver.Value)",
+      "type" : "Tuple",
+      "underlying" : 74
+    }, {
+      "elem" : 76,
+      "name" : "*time.Location",
+      "type" : "Pointer",
+      "underlying" : 75
+    }, {
+      "local-name" : "Location",
+      "name" : "time.Location",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 77
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 7
+      }, {
+        "name" : "zone",
+        "type" : 78
+      }, {
+        "name" : "tx",
+        "type" : 81
+      }, {
+        "name" : "cacheStart",
+        "type" : 62
+      }, {
+        "name" : "cacheEnd",
+        "type" : 62
+      }, {
+        "name" : "cacheZone",
+        "type" : 85
+      } ],
+      "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
+      "type" : "Struct",
+      "underlying" : 77
+    }, {
+      "elem" : 79,
+      "name" : "[]time.zone",
+      "type" : "Slice",
+      "underlying" : 78
+    }, {
+      "local-name" : "zone",
+      "name" : "time.zone",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 7
+      }, {
+        "name" : "offset",
+        "type" : 65
+      }, {
+        "name" : "isDST",
+        "type" : 31
+      } ],
+      "name" : "struct{name string; offset int; isDST bool}",
+      "type" : "Struct",
+      "underlying" : 80
+    }, {
+      "elem" : 82,
+      "name" : "[]time.zoneTrans",
+      "type" : "Slice",
+      "underlying" : 81
+    }, {
+      "local-name" : "zoneTrans",
+      "name" : "time.zoneTrans",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 83
+    }, {
+      "fields" : [ {
+        "name" : "when",
+        "type" : 62
+      }, {
+        "name" : "index",
+        "type" : 84
+      }, {
+        "name" : "isstd",
+        "type" : 31
+      }, {
+        "name" : "isutc",
+        "type" : 31
+      } ],
+      "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
+      "type" : "Struct",
+      "underlying" : 83
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 84
+    }, {
+      "elem" : 79,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 85
+    }, {
+      "local-name" : "ConnParams",
+      "name" : "github.com/godror/godror.ConnParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 87
+    }, {
+      "fields" : [ {
+        "name" : "NewPassword",
+        "type" : 7
+      }, {
+        "name" : "ConnClass",
+        "type" : 7
+      }, {
+        "name" : "IsSysDBA",
+        "type" : 31
+      }, {
+        "name" : "IsSysOper",
+        "type" : 31
+      }, {
+        "name" : "IsSysASM",
+        "type" : 31
+      }, {
+        "name" : "IsPrelim",
+        "type" : 31
+      }, {
+        "name" : "ShardingKey",
+        "type" : 88
+      }, {
+        "name" : "SuperShardingKey",
+        "type" : 88
+      } ],
+      "name" : "struct{NewPassword string; ConnClass string; IsSysDBA bool; IsSysOper bool; IsSysASM bool; IsPrelim bool; ShardingKey []interface{}; SuperShardingKey []interface{}}",
+      "type" : "Struct",
+      "underlying" : 87
+    }, {
+      "elem" : 56,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 88
+    }, {
+      "local-name" : "PoolParams",
+      "name" : "github.com/godror/godror.PoolParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 90
+    }, {
+      "fields" : [ {
+        "name" : "MinSessions",
+        "type" : 65
+      }, {
+        "name" : "MaxSessions",
+        "type" : 65
+      }, {
+        "name" : "SessionIncrement",
+        "type" : 65
+      }, {
+        "name" : "WaitTimeout",
+        "type" : 91
+      }, {
+        "name" : "MaxLifeTime",
+        "type" : 91
+      }, {
+        "name" : "SessionTimeout",
+        "type" : 91
+      }, {
+        "name" : "Heterogeneous",
+        "type" : 31
+      }, {
+        "name" : "ExternalAuth",
+        "type" : 31
+      } ],
+      "name" : "struct{MinSessions int; MaxSessions int; SessionIncrement int; WaitTimeout time.Duration; MaxLifeTime time.Duration; SessionTimeout time.Duration; Heterogeneous bool; ExternalAuth bool}",
+      "type" : "Struct",
+      "underlying" : 90
+    }, {
+      "local-name" : "Duration",
+      "name" : "time.Duration",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 62
+    }, {
+      "local-name" : "VersionInfo",
+      "name" : "github.com/godror/godror.VersionInfo",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 93
+    }, {
+      "fields" : [ {
+        "name" : "ServerRelease",
+        "type" : 7
+      }, {
+        "name" : "Version",
+        "type" : 84
+      }, {
+        "name" : "Release",
+        "type" : 84
+      }, {
+        "name" : "Update",
+        "type" : 84
+      }, {
+        "name" : "PortRelease",
+        "type" : 84
+      }, {
+        "name" : "PortUpdate",
+        "type" : 84
+      }, {
+        "name" : "Full",
+        "type" : 84
+      } ],
+      "name" : "struct{ServerRelease string; Version uint8; Release uint8; Update uint8; PortRelease uint8; PortUpdate uint8; Full uint8}",
+      "type" : "Struct",
+      "underlying" : 93
+    }, {
+      "local-name" : "tranParams",
+      "name" : "github.com/godror/godror.tranParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 95
+    }, {
+      "fields" : [ {
+        "name" : "RW",
+        "type" : 7
+      }, {
+        "name" : "Level",
+        "type" : 7
+      } ],
+      "name" : "struct{RW string; Level string}",
+      "type" : "Struct",
+      "underlying" : 95
+    }, {
+      "elem" : 97,
+      "name" : "*github.com/godror/godror.drv",
+      "type" : "Pointer",
+      "underlying" : 96
+    }, {
+      "local-name" : "drv",
+      "name" : "github.com/godror/godror.drv",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 98
+    }, {
+      "fields" : [ {
+        "name" : "mu",
+        "type" : 18
+      }, {
+        "name" : "dpiContext",
+        "type" : 11
+      }, {
+        "name" : "pools",
+        "type" : 99
+      }, {
+        "name" : "clientVersion",
+        "type" : 92
+      } ],
+      "name" : "struct{mu sync.Mutex; dpiContext *invalid type; pools map[string]*github.com/godror/godror.connPool; clientVersion github.com/godror/godror.VersionInfo}",
+      "type" : "Struct",
+      "underlying" : 98
+    }, {
+      "elem" : 100,
+      "key" : 7,
+      "name" : "map[string]*github.com/godror/godror.connPool",
+      "type" : "Map",
+      "underlying" : 99
+    }, {
+      "elem" : 101,
+      "name" : "*github.com/godror/godror.connPool",
+      "type" : "Pointer",
+      "underlying" : 100
+    }, {
+      "local-name" : "connPool",
+      "name" : "github.com/godror/godror.connPool",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 102
+    }, {
+      "fields" : [ {
+        "name" : "dpiPool",
+        "type" : 11
+      }, {
+        "name" : "params",
+        "type" : 103
+      }, {
+        "name" : "timeZone",
+        "type" : 75
+      }, {
+        "name" : "key",
+        "type" : 7
+      } ],
+      "name" : "struct{dpiPool *invalid type; params github.com/godror/godror.commonAndPoolParams; timeZone *time.Location; key string}",
+      "type" : "Struct",
+      "underlying" : 102
+    }, {
+      "local-name" : "commonAndPoolParams",
+      "name" : "github.com/godror/godror.commonAndPoolParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 104
+    }, {
+      "fields" : [ {
+        "name" : "CommonParams",
+        "type" : 29
+      }, {
+        "name" : "PoolParams",
+        "type" : 89
+      } ],
+      "name" : "struct{github.com/godror/godror.CommonParams; github.com/godror/godror.PoolParams}",
+      "type" : "Struct",
+      "underlying" : 104
+    }, {
+      "elem" : 5,
+      "name" : "*github.com/godror/godror.ObjectType",
+      "type" : "Pointer",
+      "underlying" : 105
+    }, {
+      "name" : "int16",
+      "type" : "Basic",
+      "underlying" : 106
+    }, {
+      "name" : "int8",
+      "type" : "Basic",
+      "underlying" : 107
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 108
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 109
+    }, {
+      "name" : "func(interface{})",
+      "params" : 111,
+      "recv" : -1,
+      "results" : 37,
+      "type" : "Signature",
+      "underlying" : 110,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 56
+      } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
+      "underlying" : 111
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      }, {
+        "name" : "",
+        "type" : 31
+      } ],
+      "name" : "(github.com/godror/godror.ObjectAttribute, bool)",
+      "type" : "Tuple",
+      "underlying" : 112
+    }, {
+      "name" : "func(format string, a ...interface{}) error",
+      "params" : 114,
+      "recv" : -1,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 113,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 7
+      }, {
+        "name" : "a",
+        "type" : 88
+      } ],
+      "name" : "(format string, a []interface{})",
+      "type" : "Tuple",
+      "underlying" : 114
+    }, {
+      "name" : "func()",
+      "params" : 37,
+      "recv" : -1,
+      "results" : 37,
+      "type" : "Signature",
+      "underlying" : 115,
+      "variadic" : false
+    }, {
+      "elem" : 117,
+      "name" : "[39]byte",
+      "type" : "Array",
+      "underlying" : 116
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 117
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 118
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 6,
+      "type" : "Basic",
+      "underlying" : 119
+    }, {
+      "elem" : 117,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 120
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 43,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 39,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 58,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 50,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 50,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 68,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 68,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 50,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "O",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "data",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "name",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 43,
+      "exported" : false
+    }, {
+      "name" : "ErrNoSuchKey",
+      "package" : 0,
+      "type" : 43,
+      "exported" : true
+    }, {
+      "name" : "dpiObject",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    }, {
+      "name" : "Attributes",
+      "package" : 0,
+      "type" : 8,
+      "exported" : true
+    }, {
+      "name" : "attr",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "ok",
+      "package" : 0,
+      "type" : 31,
+      "exported" : false
+    }, {
+      "name" : "NativeTypeNum",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    }, {
+      "name" : "ObjectType",
+      "package" : 0,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "ObjectType",
+      "package" : 0,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "implicitObj",
+      "package" : 0,
+      "type" : 31,
+      "exported" : false
+    }, {
+      "name" : "OracleTypeNum",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    }, {
+      "name" : "dpiData",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "a",
+      "package" : 0,
+      "type" : 116,
+      "exported" : false
+    }, {
+      "name" : "dpiObjectAttr",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    }, {
+      "name" : "NativeTypeNum",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

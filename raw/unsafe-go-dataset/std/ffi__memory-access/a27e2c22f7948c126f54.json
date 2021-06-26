@@ -1,0 +1,975 @@
+{
+  "usage" : {
+    "file" : "signal_unix.go",
+    "label1" : "memory-access",
+    "label2" : "ffi",
+    "line" : "906",
+    "module" : "std",
+    "pkg" : "runtime",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "*(*uintptr)(unsafe.Pointer(uintptr(123))) = 2",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2, 3, 4, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 4, 0, 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 7 ],
+      "in-vars" : [ 3, 4, 0, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 899,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "operator" : "!",
+            "target" : {
+              "go-type" : 13,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "iscgo",
+                "variable" : 2
+              }
+            },
+            "type" : "unary"
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "operator" : "!",
+            "target" : {
+              "go-type" : 13,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "cgoHasExtraM",
+                "variable" : 3
+              }
+            },
+            "type" : "unary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 907,
+      "code" : "if !iscgo && !cgoHasExtraM {\n\n\ts := stringStructOf(&badginsignalMsg)\n\twrite(2, s.str, int32(s.len))\n\texit(2)\n\t*(*uintptr)(unsafe.Pointer(uintptr(123))) = 2\n}",
+      "entry" : false,
+      "use-vars" : [ 2, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0, 1, 4 ],
+      "exit" : false,
+      "out-vars" : [ 5, 0, 1 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 903,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "s"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 21,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 14,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "badginsignalMsg",
+                "variable" : 4
+              }
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 19,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "stringStructOf"
+            }
+          },
+          "go-type" : 15,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 903,
+      "code" : "s := stringStructOf(&badginsignalMsg)",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 5, 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 904,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "2"
+            }
+          }, {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "str",
+              "variable" : 6
+            },
+            "go-type" : 11,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 15,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "s",
+                "variable" : 5
+              }
+            },
+            "type" : "selector"
+          }, {
+            "coerced-to" : {
+              "go-type" : 9,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 9,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int32"
+              }
+            },
+            "go-type" : 9,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "len",
+                "variable" : 7
+              },
+              "go-type" : 18,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 15,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "s",
+                  "variable" : 5
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 23,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "write"
+            }
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 904,
+      "code" : "write(2, s.str, int32(s.len))",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 905,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 9,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "2"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 26,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "exit"
+            }
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 905,
+      "code" : "exit(2)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 906,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 2,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 2,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uintptr"
+                }
+              },
+              "go-type" : 28,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 28,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 11,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 11,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 11,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "123"
+                }
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "2"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 906,
+      "code" : "*(*uintptr)(unsafe.Pointer(uintptr(123))) = 2",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 908,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 31,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "needm"
+            }
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 908,
+      "code" : "needm(0)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9, 10 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 909,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "arguments" : [ {
+              "coerced-to" : {
+                "go-type" : 34,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 34,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uint32"
+                }
+              },
+              "go-type" : 34,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "sig",
+                  "variable" : 0
+                }
+              },
+              "type" : "cast"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 32,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "sigsend"
+              }
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 913,
+      "code" : "if !sigsend(uint32(sig)) {\n\n\traisebadsignal(uint32(sig), c)\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 912,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 34,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 34,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uint32"
+              }
+            },
+            "go-type" : 34,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sig",
+                "variable" : 0
+              }
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "c",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 36,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "raisebadsignal"
+            }
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 912,
+      "code" : "raisebadsignal(uint32(sig), c)",
+      "entry" : false,
+      "use-vars" : [ 0, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 914,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 38,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "dropm"
+            }
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 914,
+      "code" : "dropm()",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// This runs on a foreign stack, without an m or a g. No stack split.\n//go:nosplit\n//go:norace\n//go:nowritebarrierrec\nfunc badsignal(sig uintptr, c *sigctxt) {\n\tif !iscgo && !cgoHasExtraM {\n\n\t\ts := stringStructOf(&badginsignalMsg)\n\t\twrite(2, s.str, int32(s.len))\n\t\texit(2)\n\t\t*(*uintptr)(unsafe.Pointer(uintptr(123))) = 2\n\t}\n\tneedm(0)\n\tif !sigsend(uint32(sig)) {\n\n\t\traisebadsignal(uint32(sig), c)\n\t}\n\tdropm()\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "badsignal",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "stringStructOf",
+      "package" : 0,
+      "type" : 19,
+      "exported" : false
+    }, {
+      "name" : "write",
+      "package" : 0,
+      "type" : 23,
+      "exported" : false
+    }, {
+      "name" : "exit",
+      "package" : 0,
+      "type" : 26,
+      "exported" : false
+    }, {
+      "name" : "needm",
+      "package" : 0,
+      "type" : 29,
+      "exported" : false
+    }, {
+      "name" : "sigsend",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "raisebadsignal",
+      "package" : 0,
+      "type" : 36,
+      "exported" : false
+    }, {
+      "name" : "dropm",
+      "package" : 0,
+      "type" : 38,
+      "exported" : false
+    } ],
+    "line-end" : 915,
+    "line-start" : 898,
+    "names" : [ "badsignal" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "runtime",
+      "path" : "runtime"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0, 1 ],
+    "receivers" : [ ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(sig uintptr, c *runtime.sigctxt)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "sig",
+        "type" : 2
+      }, {
+        "name" : "c",
+        "type" : 3
+      } ],
+      "name" : "(sig uintptr, c *runtime.sigctxt)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "*runtime.sigctxt",
+      "type" : "Pointer",
+      "underlying" : 3
+    }, {
+      "local-name" : "sigctxt",
+      "name" : "runtime.sigctxt",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "fields" : [ {
+        "name" : "info",
+        "type" : 6
+      }, {
+        "name" : "ctxt",
+        "type" : 11
+      } ],
+      "name" : "struct{info *runtime.siginfo; ctxt unsafe.Pointer}",
+      "type" : "Struct",
+      "underlying" : 5
+    }, {
+      "elem" : 7,
+      "name" : "*runtime.siginfo",
+      "type" : "Pointer",
+      "underlying" : 6
+    }, {
+      "local-name" : "siginfo",
+      "name" : "runtime.siginfo",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "si_signo",
+        "type" : 9
+      }, {
+        "name" : "si_errno",
+        "type" : 9
+      }, {
+        "name" : "si_code",
+        "type" : 9
+      }, {
+        "name" : "si_addr",
+        "type" : 10
+      } ],
+      "name" : "struct{si_signo int32; si_errno int32; si_code int32; si_addr uint64}",
+      "type" : "Struct",
+      "underlying" : 8
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "elem" : 16,
+      "name" : "*runtime.stringStruct",
+      "type" : "Pointer",
+      "underlying" : 15
+    }, {
+      "local-name" : "stringStruct",
+      "name" : "runtime.stringStruct",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 17
+    }, {
+      "fields" : [ {
+        "name" : "str",
+        "type" : 11
+      }, {
+        "name" : "len",
+        "type" : 18
+      } ],
+      "name" : "struct{str unsafe.Pointer; len int}",
+      "type" : "Struct",
+      "underlying" : 17
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "name" : "func(sp *string) *runtime.stringStruct",
+      "params" : 20,
+      "recv" : -1,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 19,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "sp",
+        "type" : 21
+      } ],
+      "name" : "(sp *string)",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "elem" : 14,
+      "name" : "*string",
+      "type" : "Pointer",
+      "underlying" : 21
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(*runtime.stringStruct)",
+      "type" : "Tuple",
+      "underlying" : 22
+    }, {
+      "name" : "func(fd uintptr, p unsafe.Pointer, n int32) int32",
+      "params" : 24,
+      "recv" : -1,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 23,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "p",
+        "type" : 11
+      }, {
+        "name" : "n",
+        "type" : 9
+      } ],
+      "name" : "(fd uintptr, p unsafe.Pointer, n int32)",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(int32)",
+      "type" : "Tuple",
+      "underlying" : 25
+    }, {
+      "name" : "func(code int32)",
+      "params" : 27,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "code",
+        "type" : 9
+      } ],
+      "name" : "(code int32)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "elem" : 2,
+      "name" : "*uintptr",
+      "type" : "Pointer",
+      "underlying" : 28
+    }, {
+      "name" : "func(x byte)",
+      "params" : 30,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "x",
+        "type" : 31
+      } ],
+      "name" : "(x byte)",
+      "type" : "Tuple",
+      "underlying" : 30
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 31
+    }, {
+      "name" : "func(s uint32) bool",
+      "params" : 33,
+      "recv" : -1,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 32,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 34
+      } ],
+      "name" : "(s uint32)",
+      "type" : "Tuple",
+      "underlying" : 33
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 34
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 35
+    }, {
+      "name" : "func(sig uint32, c *runtime.sigctxt)",
+      "params" : 37,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 36,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "sig",
+        "type" : 34
+      }, {
+        "name" : "c",
+        "type" : 3
+      } ],
+      "name" : "(sig uint32, c *runtime.sigctxt)",
+      "type" : "Tuple",
+      "underlying" : 37
+    }, {
+      "name" : "func()",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 38,
+      "variadic" : false
+    } ],
+    "variables" : [ {
+      "name" : "sig",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "iscgo",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "cgoHasExtraM",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "badginsignalMsg",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "str",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    }, {
+      "name" : "len",
+      "package" : 0,
+      "type" : 18,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

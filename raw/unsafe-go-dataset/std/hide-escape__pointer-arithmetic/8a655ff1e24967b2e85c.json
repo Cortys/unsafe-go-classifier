@@ -1,0 +1,237 @@
+{
+  "usage" : {
+    "file" : "builder.go",
+    "label1" : "pointer-arithmetic",
+    "label2" : "hide-escape",
+    "line" : "30",
+    "module" : "std",
+    "pkg" : "strings",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "return unsafe.Pointer(x ^ 0)",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 29,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "x"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 4,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 4,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uintptr"
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 0
+            }
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 29,
+      "code" : "x := uintptr(p)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 30,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 2,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 2,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "x",
+                "variable" : 2
+              }
+            },
+            "operator" : "^",
+            "right" : {
+              "go-type" : 4,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "cast"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 30,
+      "code" : "return unsafe.Pointer(x ^ 0)",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    } ],
+    "code" : "// noescape hides a pointer from escape analysis.  noescape is\n// the identity function but escape analysis doesn't think the\n// output depends on the input. noescape is inlined and currently\n// compiles down to zero instructions.\n// USE CAREFULLY!\n// This was copied from the runtime; see issues 23382 and 7921.\n//go:nosplit\n//go:nocheckptr\nfunc noescape(p unsafe.Pointer) unsafe.Pointer {\n\tx := uintptr(p)\n\treturn unsafe.Pointer(x ^ 0)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "noescape",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    } ],
+    "line-end" : 31,
+    "line-start" : 28,
+    "names" : [ "noescape" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "strings",
+      "path" : "strings"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0 ],
+    "receivers" : [ ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(p unsafe.Pointer) unsafe.Pointer",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 2
+      } ],
+      "name" : "(p unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 4
+    } ],
+    "variables" : [ {
+      "name" : "p",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

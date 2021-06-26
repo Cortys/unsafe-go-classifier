@@ -1,0 +1,303 @@
+{
+  "usage" : {
+    "file" : "sockcmsg_unix.go",
+    "label1" : "pointer-arithmetic",
+    "label2" : "serialization",
+    "line" : "28",
+    "module" : "golang.org/x/sys",
+    "pkg" : "golang.org/x/sys/unix",
+    "project" : "rook/rook",
+    "snippet" : "return unsafe.Pointer(uintptr(unsafe.Pointer(h)) + uintptr(cmsgAlignOf(SizeofCmsghdr)) + offset)",
+    "version" : "v0.0.0-20191120155948-bd437916bb0e"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 28,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 4,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 4,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "left" : {
+                "coerced-to" : {
+                  "go-type" : 2,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 2,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uintptr"
+                  }
+                },
+                "go-type" : 2,
+                "kind" : "expression",
+                "target" : {
+                  "coerced-to" : {
+                    "go-type" : 4,
+                    "kind" : "type",
+                    "qualifier" : {
+                      "ident-kind" : "PkgName",
+                      "kind" : "ident",
+                      "package" : 1,
+                      "value" : "unsafe"
+                    },
+                    "type" : "identifier",
+                    "value" : {
+                      "go-type" : 4,
+                      "ident-kind" : "TypeName",
+                      "kind" : "ident",
+                      "value" : "Pointer"
+                    }
+                  },
+                  "go-type" : 4,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 0,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "h",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "cast"
+                },
+                "type" : "cast"
+              },
+              "operator" : "+",
+              "right" : {
+                "coerced-to" : {
+                  "go-type" : 2,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 2,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uintptr"
+                  }
+                },
+                "go-type" : 2,
+                "kind" : "expression",
+                "target" : {
+                  "arguments" : [ {
+                    "go-type" : 5,
+                    "kind" : "constant",
+                    "value" : {
+                      "type" : "INT",
+                      "value" : "16"
+                    }
+                  } ],
+                  "ellipsis" : false,
+                  "function" : {
+                    "go-type" : 6,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Func",
+                      "kind" : "ident",
+                      "value" : "cmsgAlignOf"
+                    }
+                  },
+                  "go-type" : 5,
+                  "kind" : "expression",
+                  "type" : "call"
+                },
+                "type" : "cast"
+              },
+              "type" : "binary"
+            },
+            "operator" : "+",
+            "right" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "offset",
+                "variable" : 1
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "cast"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 28,
+      "code" : "return unsafe.Pointer(uintptr(unsafe.Pointer(h)) + uintptr(cmsgAlignOf(SizeofCmsghdr)) + offset)",
+      "entry" : false,
+      "use-vars" : [ 1, 0 ]
+    } ],
+    "code" : "func (h *Cmsghdr) data(offset uintptr) unsafe.Pointer {\n\treturn unsafe.Pointer(uintptr(unsafe.Pointer(h)) + uintptr(cmsgAlignOf(SizeofCmsghdr)) + offset)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "data",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "cmsgAlignOf",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    } ],
+    "line-end" : 29,
+    "line-start" : 27,
+    "names" : [ "data" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1 ],
+    "receivers" : [ 0 ],
+    "results" : [ 2 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(offset uintptr) unsafe.Pointer",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "offset",
+        "type" : 2
+      } ],
+      "name" : "(offset uintptr)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "func(salen int) int",
+      "params" : 7,
+      "recv" : -1,
+      "results" : 8,
+      "type" : "Signature",
+      "underlying" : 6,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "salen",
+        "type" : 5
+      } ],
+      "name" : "(salen int)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 8
+    } ],
+    "variables" : [ {
+      "name" : "h",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "offset",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

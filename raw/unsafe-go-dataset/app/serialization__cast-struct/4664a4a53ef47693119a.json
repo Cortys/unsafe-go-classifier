@@ -1,0 +1,671 @@
+{
+  "usage" : {
+    "file" : "socket.go",
+    "label1" : "cast-struct",
+    "label2" : "serialization",
+    "line" : "142",
+    "module" : "golang.org/x/net",
+    "pkg" : "golang.org/x/net/internal/socket",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "h := (*cmsghdr)(unsafe.Pointer(&m[0]))",
+    "version" : "v0.0.0-20200324143707-d3edc9973b7e"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 4, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 3, 1, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 4, 2, 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 4, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 139,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "m",
+                "variable" : 1
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 11,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "<",
+          "right" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 14,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "controlHeaderLen"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 141,
+      "code" : "if len(m) < controlHeaderLen() {\n\treturn errors.New(\"short message\")\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 140,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 9,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "short message"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "New"
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 140,
+      "code" : "return errors.New(\"short message\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 3, 1, 4, 2 ],
+      "exit" : false,
+      "out-vars" : [ 3, 6, 4, 2 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 142,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "h"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 18,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 18,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "cmsghdr"
+              }
+            },
+            "go-type" : 17,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 22,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 2,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 22,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 22,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 23,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 2,
+                "index" : {
+                  "go-type" : 2,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "m",
+                    "variable" : 1
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 142,
+      "code" : "h := (*cmsghdr)(unsafe.Pointer(&m[0]))",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 6, 4, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 143,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dataLen",
+                "variable" : 4
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 26,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "controlMessageLen"
+              }
+            },
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "call"
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "lvl",
+              "variable" : 2
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "typ",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "set"
+            },
+            "go-type" : 24,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 17,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "h",
+                "variable" : 6
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 143,
+      "code" : "h.set(controlMessageLen(dataLen), lvl, typ)",
+      "entry" : false,
+      "use-vars" : [ 6, 4, 2, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 144,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 28,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 144,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// MarshalHeader marshals the header fields of the control message at\n// the head on m.\nfunc (m ControlMessage) MarshalHeader(lvl, typ, dataLen int) error {\n\tif len(m) < controlHeaderLen() {\n\t\treturn errors.New(\"short message\")\n\t}\n\th := (*cmsghdr)(unsafe.Pointer(&m[0]))\n\th.set(controlMessageLen(dataLen), lvl, typ)\n\treturn nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "MarshalHeader",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "controlHeaderLen",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "New",
+      "package" : 1,
+      "type" : 15,
+      "exported" : true
+    }, {
+      "name" : "set",
+      "package" : 0,
+      "type" : 24,
+      "exported" : false
+    }, {
+      "name" : "controlMessageLen",
+      "package" : 0,
+      "type" : 26,
+      "exported" : false
+    } ],
+    "line-end" : 145,
+    "line-start" : 138,
+    "names" : [ "MarshalHeader" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "socket",
+      "path" : "golang.org/x/net/internal/socket"
+    }, {
+      "name" : "errors",
+      "path" : "errors"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 2, 3, 4 ],
+    "receivers" : [ 1 ],
+    "results" : [ 5 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(lvl int, typ int, dataLen int) error",
+      "params" : 1,
+      "recv" : 1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "lvl",
+        "type" : 2
+      }, {
+        "name" : "typ",
+        "type" : 2
+      }, {
+        "name" : "dataLen",
+        "type" : 2
+      } ],
+      "name" : "(lvl int, typ int, dataLen int)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 6
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 5
+    }, {
+      "name" : "func() string",
+      "params" : 7,
+      "recv" : 0,
+      "results" : 8,
+      "type" : "Signature",
+      "underlying" : 6,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 8
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "func([]byte) int",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 1
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 13
+    }, {
+      "name" : "func() int",
+      "params" : 7,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "name" : "func(text string) error",
+      "params" : 16,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 15,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "text",
+        "type" : 9
+      } ],
+      "name" : "(text string)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "elem" : 18,
+      "name" : "*golang.org/x/net/internal/socket.cmsghdr",
+      "type" : "Pointer",
+      "underlying" : 17
+    }, {
+      "local-name" : "cmsghdr",
+      "name" : "golang.org/x/net/internal/socket.cmsghdr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "Len",
+        "type" : 20
+      }, {
+        "name" : "Level",
+        "type" : 21
+      }, {
+        "name" : "Type",
+        "type" : 21
+      } ],
+      "name" : "struct{Len uint64; Level int32; Type int32}",
+      "type" : "Struct",
+      "underlying" : 19
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 2,
+      "type" : "Basic",
+      "underlying" : 22
+    }, {
+      "elem" : 2,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 23
+    }, {
+      "name" : "func(l int, lvl int, typ int)",
+      "params" : 25,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 24,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "l",
+        "type" : 2
+      }, {
+        "name" : "lvl",
+        "type" : 2
+      }, {
+        "name" : "typ",
+        "type" : 2
+      } ],
+      "name" : "(l int, lvl int, typ int)",
+      "type" : "Tuple",
+      "underlying" : 25
+    }, {
+      "name" : "func(dataLen int) int",
+      "params" : 27,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "dataLen",
+        "type" : 2
+      } ],
+      "name" : "(dataLen int)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 28
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "m",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "lvl",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "typ",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "dataLen",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 17,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

@@ -1,0 +1,3208 @@
+{
+  "usage" : {
+    "file" : "netpoll.go",
+    "label1" : "delegate",
+    "label2" : "atomic",
+    "line" : "486",
+    "module" : "std",
+    "pkg" : "runtime",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "atomic.StorepNoWB(unsafe.Pointer(&pd.wt.f), nil) // full memory barrier between store to wd and load of wg in netpollunblock",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 2, 1, 3, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2, 1, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0, 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1, 3, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 459,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 20,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "lock",
+                "variable" : 4
+              },
+              "go-type" : 5,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "pd",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 18,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "lock"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 459,
+      "code" : "lock(&pd.lock)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0, 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1, 3, 0, 6 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 462,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "currentSeq"
+          }
+        } ],
+        "right" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "rseq",
+            "variable" : 5
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pd",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 462,
+      "code" : "currentSeq := pd.rseq",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 6 ],
+      "in-vars" : [ 0, 6, 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 6, 2, 1, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 463,
+      "ast" : {
+        "condition" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "read",
+              "variable" : 2
+            }
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 465,
+      "code" : "if !read {\n\tcurrentSeq = pd.wseq\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 0, 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 6, 2, 1, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 464,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "currentSeq",
+            "variable" : 6
+          }
+        } ],
+        "right" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "wseq",
+            "variable" : 7
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pd",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 6 ],
+      "line-end" : 464,
+      "code" : "currentSeq = pd.wseq",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7, 9 ],
+      "in-vars" : [ 0, 6, 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 3, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 466,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "seq",
+              "variable" : 1
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "currentSeq",
+              "variable" : 6
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 470,
+      "code" : "if seq != currentSeq {\n\n\tunlock(&pd.lock)\n\treturn\n}",
+      "entry" : false,
+      "use-vars" : [ 6, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 468,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 20,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "lock",
+                "variable" : 4
+              },
+              "go-type" : 5,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "pd",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 18,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "unlock"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 468,
+      "code" : "unlock(&pd.lock)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 469,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 469,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 0, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2, 8, 3 ],
+      "decl-vars" : [ 8 ],
+      "line-start" : 471,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "contained" : {
+                "go-type" : 23,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 23,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "g"
+                }
+              },
+              "go-type" : 22,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "rg"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 471,
+      "code" : "var rg *g",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11, 16 ],
+      "in-vars" : [ 0, 2, 8, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2, 8, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 472,
+      "ast" : {
+        "condition" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "read",
+            "variable" : 2
+          }
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 479,
+      "code" : "if read {\n\tif pd.rd <= 0 || pd.rt.f == nil {\n\t\tthrow(\"runtime: inconsistent read deadline\")\n\t}\n\tpd.rd = -1\n\tatomic.StorepNoWB(unsafe.Pointer(&pd.rt.f), nil)\n\trg = netpollunblock(pd, 'r', false)\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12, 13 ],
+      "in-vars" : [ 0, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 473,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "rd",
+                "variable" : 9
+              },
+              "go-type" : 13,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "pd",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "<=",
+            "right" : {
+              "go-type" : 13,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "||",
+          "right" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "f",
+                "variable" : 11
+              },
+              "go-type" : 14,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "rt",
+                  "variable" : 10
+                },
+                "go-type" : 10,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "pd",
+                    "variable" : 0
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "operator" : "==",
+            "right" : {
+              "go-type" : 121,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Nil",
+                "kind" : "ident",
+                "value" : "nil"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 475,
+      "code" : "if pd.rd <= 0 || pd.rt.f == nil {\n\tthrow(\"runtime: inconsistent read deadline\")\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 0, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 474,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 52,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "runtime: inconsistent read deadline"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 122,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "throw"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 474,
+      "code" : "throw(\"runtime: inconsistent read deadline\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 0 ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 0, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 3, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 476,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "rd",
+            "variable" : 9
+          },
+          "go-type" : 13,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pd",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 13,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "-1"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 476,
+      "code" : "pd.rd = -1",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 3, 0, 2 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 477,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 30,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 30,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 30,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 126,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "f",
+                  "variable" : 11
+                },
+                "go-type" : 14,
+                "kind" : "expression",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "rt",
+                    "variable" : 10
+                  },
+                  "go-type" : 10,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "pd",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "selector"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 124,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "atomic"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "StorepNoWB"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 477,
+      "code" : "atomic.StorepNoWB(unsafe.Pointer(&pd.rt.f), nil)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 0, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2, 8, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 478,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 22,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "rg",
+            "variable" : 8
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pd",
+              "variable" : 0
+            }
+          }, {
+            "go-type" : 34,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "114"
+            }
+          }, {
+            "go-type" : 8,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 127,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "netpollunblock"
+            }
+          },
+          "go-type" : 22,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 478,
+      "code" : "rg = netpollunblock(pd, 'r', false)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17 ],
+      "in-vars" : [ 2, 8, 3, 0 ],
+      "exit" : false,
+      "out-vars" : [ 8, 12, 3, 0, 2 ],
+      "decl-vars" : [ 12 ],
+      "line-start" : 480,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "contained" : {
+                "go-type" : 23,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 23,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "g"
+                }
+              },
+              "go-type" : 22,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "wg"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 480,
+      "code" : "var wg *g",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 18, 23 ],
+      "in-vars" : [ 12, 3, 0, 2, 8 ],
+      "exit" : false,
+      "out-vars" : [ 12, 0, 2, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 481,
+      "ast" : {
+        "condition" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "write",
+            "variable" : 3
+          }
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 488,
+      "code" : "if write {\n\tif pd.wd <= 0 || pd.wt.f == nil && !read {\n\t\tthrow(\"runtime: inconsistent write deadline\")\n\t}\n\tpd.wd = -1\n\tatomic.StorepNoWB(unsafe.Pointer(&pd.wt.f), nil)\n\twg = netpollunblock(pd, 'w', false)\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19, 20 ],
+      "in-vars" : [ 2, 8, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 482,
+      "ast" : {
+        "condition" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "wd",
+                "variable" : 13
+              },
+              "go-type" : 13,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "pd",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "<=",
+            "right" : {
+              "go-type" : 13,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "||",
+          "right" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 8,
+              "kind" : "expression",
+              "left" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "f",
+                  "variable" : 11
+                },
+                "go-type" : 14,
+                "kind" : "expression",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "wt",
+                    "variable" : 14
+                  },
+                  "go-type" : 10,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "pd",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "selector"
+              },
+              "operator" : "==",
+              "right" : {
+                "go-type" : 121,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Nil",
+                  "kind" : "ident",
+                  "value" : "nil"
+                }
+              },
+              "type" : "binary"
+            },
+            "operator" : "&&",
+            "right" : {
+              "go-type" : 8,
+              "kind" : "expression",
+              "operator" : "!",
+              "target" : {
+                "go-type" : 8,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "read",
+                  "variable" : 2
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 484,
+      "code" : "if pd.wd <= 0 || pd.wt.f == nil && !read {\n\tthrow(\"runtime: inconsistent write deadline\")\n}",
+      "entry" : false,
+      "use-vars" : [ 2, 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 20 ],
+      "in-vars" : [ 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 8, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 483,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 52,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "runtime: inconsistent write deadline"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 122,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "throw"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 483,
+      "code" : "throw(\"runtime: inconsistent write deadline\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 0 ],
+      "successors" : [ 21 ],
+      "in-vars" : [ 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 0, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 485,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "wd",
+            "variable" : 13
+          },
+          "go-type" : 13,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pd",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 13,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "-1"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 485,
+      "code" : "pd.wd = -1",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 22 ],
+      "in-vars" : [ 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 8, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 486,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 30,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 30,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 30,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 126,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "f",
+                  "variable" : 11
+                },
+                "go-type" : 14,
+                "kind" : "expression",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "wt",
+                    "variable" : 14
+                  },
+                  "go-type" : 10,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "pd",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "selector"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 124,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "atomic"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "StorepNoWB"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 486,
+      "code" : "atomic.StorepNoWB(unsafe.Pointer(&pd.wt.f), nil)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ 12 ],
+      "successors" : [ 23 ],
+      "in-vars" : [ 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 0, 8, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 487,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 22,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "wg",
+            "variable" : 12
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pd",
+              "variable" : 0
+            }
+          }, {
+            "go-type" : 34,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "119"
+            }
+          }, {
+            "go-type" : 8,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 127,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "netpollunblock"
+            }
+          },
+          "go-type" : 22,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 12 ],
+      "line-end" : 487,
+      "code" : "wg = netpollunblock(pd, 'w', false)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 12, 0, 8 ],
+      "exit" : false,
+      "out-vars" : [ 8, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 489,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 20,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "lock",
+                "variable" : 4
+              },
+              "go-type" : 5,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "pd",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 18,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "unlock"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 489,
+      "code" : "unlock(&pd.lock)",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 25, 26 ],
+      "in-vars" : [ 8, 12 ],
+      "exit" : false,
+      "out-vars" : [ 8, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 490,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "rg",
+              "variable" : 8
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 121,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 492,
+      "code" : "if rg != nil {\n\tnetpollgoready(rg, 0)\n}",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 26 ],
+      "in-vars" : [ 8, 12 ],
+      "exit" : false,
+      "out-vars" : [ 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 491,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "rg",
+              "variable" : 8
+            }
+          }, {
+            "go-type" : 89,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 130,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "netpollgoready"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 491,
+      "code" : "netpollgoready(rg, 0)",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1, 27 ],
+      "in-vars" : [ 12 ],
+      "exit" : false,
+      "out-vars" : [ 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 493,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "wg",
+              "variable" : 12
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 121,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 495,
+      "code" : "if wg != nil {\n\tnetpollgoready(wg, 0)\n}",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 12 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 494,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "wg",
+              "variable" : 12
+            }
+          }, {
+            "go-type" : 89,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 130,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "netpollgoready"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 494,
+      "code" : "netpollgoready(wg, 0)",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    } ],
+    "code" : "func netpolldeadlineimpl(pd *pollDesc, seq uintptr, read, write bool) {\n\tlock(&pd.lock)\n\n\tcurrentSeq := pd.rseq\n\tif !read {\n\t\tcurrentSeq = pd.wseq\n\t}\n\tif seq != currentSeq {\n\n\t\tunlock(&pd.lock)\n\t\treturn\n\t}\n\tvar rg *g\n\tif read {\n\t\tif pd.rd <= 0 || pd.rt.f == nil {\n\t\t\tthrow(\"runtime: inconsistent read deadline\")\n\t\t}\n\t\tpd.rd = -1\n\t\tatomic.StorepNoWB(unsafe.Pointer(&pd.rt.f), nil)\n\t\trg = netpollunblock(pd, 'r', false)\n\t}\n\tvar wg *g\n\tif write {\n\t\tif pd.wd <= 0 || pd.wt.f == nil && !read {\n\t\t\tthrow(\"runtime: inconsistent write deadline\")\n\t\t}\n\t\tpd.wd = -1\n\t\tatomic.StorepNoWB(unsafe.Pointer(&pd.wt.f), nil)\n\t\twg = netpollunblock(pd, 'w', false)\n\t}\n\tunlock(&pd.lock)\n\tif rg != nil {\n\t\tnetpollgoready(rg, 0)\n\t}\n\tif wg != nil {\n\t\tnetpollgoready(wg, 0)\n\t}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "netpolldeadlineimpl",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "lock",
+      "package" : 0,
+      "type" : 18,
+      "exported" : false
+    }, {
+      "name" : "unlock",
+      "package" : 0,
+      "type" : 18,
+      "exported" : false
+    }, {
+      "name" : "throw",
+      "package" : 0,
+      "type" : 122,
+      "exported" : false
+    }, {
+      "name" : "StorepNoWB",
+      "package" : 3,
+      "type" : 124,
+      "exported" : true
+    }, {
+      "name" : "netpollunblock",
+      "package" : 0,
+      "type" : 127,
+      "exported" : false
+    }, {
+      "name" : "netpollgoready",
+      "package" : 0,
+      "type" : 130,
+      "exported" : false
+    } ],
+    "line-end" : 496,
+    "line-start" : 458,
+    "names" : [ "netpolldeadlineimpl" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "runtime",
+      "path" : "runtime"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "sys",
+      "path" : "runtime/internal/sys"
+    }, {
+      "name" : "atomic",
+      "path" : "runtime/internal/atomic"
+    } ],
+    "params" : [ 0, 1, 2, 3 ],
+    "receivers" : [ ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(pd *runtime.pollDesc, seq uintptr, read bool, write bool)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "pd",
+        "type" : 2
+      }, {
+        "name" : "seq",
+        "type" : 7
+      }, {
+        "name" : "read",
+        "type" : 8
+      }, {
+        "name" : "write",
+        "type" : 8
+      } ],
+      "name" : "(pd *runtime.pollDesc, seq uintptr, read bool, write bool)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*runtime.pollDesc",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "pollDesc",
+      "name" : "runtime.pollDesc",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "link",
+        "type" : 2
+      }, {
+        "name" : "lock",
+        "type" : 5
+      }, {
+        "name" : "fd",
+        "type" : 7
+      }, {
+        "name" : "closing",
+        "type" : 8
+      }, {
+        "name" : "everr",
+        "type" : 8
+      }, {
+        "name" : "user",
+        "type" : 9
+      }, {
+        "name" : "rseq",
+        "type" : 7
+      }, {
+        "name" : "rg",
+        "type" : 7
+      }, {
+        "name" : "rt",
+        "type" : 10
+      }, {
+        "name" : "rd",
+        "type" : 13
+      }, {
+        "name" : "wseq",
+        "type" : 7
+      }, {
+        "name" : "wg",
+        "type" : 7
+      }, {
+        "name" : "wt",
+        "type" : 10
+      }, {
+        "name" : "wd",
+        "type" : 13
+      } ],
+      "name" : "struct{link *runtime.pollDesc; lock runtime.mutex; fd uintptr; closing bool; everr bool; user uint32; rseq uintptr; rg uintptr; rt runtime.timer; rd int64; wseq uintptr; wg uintptr; wt runtime.timer; wd int64}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "local-name" : "mutex",
+      "name" : "runtime.mutex",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "key",
+        "type" : 7
+      } ],
+      "name" : "struct{key uintptr}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "local-name" : "timer",
+      "name" : "runtime.timer",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "pp",
+        "type" : 12
+      }, {
+        "name" : "when",
+        "type" : 13
+      }, {
+        "name" : "period",
+        "type" : 13
+      }, {
+        "name" : "f",
+        "type" : 14
+      }, {
+        "name" : "arg",
+        "type" : 16
+      }, {
+        "name" : "seq",
+        "type" : 7
+      }, {
+        "name" : "nextwhen",
+        "type" : 13
+      }, {
+        "name" : "status",
+        "type" : 9
+      } ],
+      "name" : "struct{pp runtime.puintptr; when int64; period int64; f func(interface{}, uintptr); arg interface{}; seq uintptr; nextwhen int64; status uint32}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "local-name" : "puintptr",
+      "name" : "runtime.puintptr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func(interface{}, uintptr)",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 16
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(interface{}, uintptr)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 16
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 17
+    }, {
+      "name" : "func(l *runtime.mutex)",
+      "params" : 19,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 18,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "l",
+        "type" : 20
+      } ],
+      "name" : "(l *runtime.mutex)",
+      "type" : "Tuple",
+      "underlying" : 19
+    }, {
+      "elem" : 5,
+      "name" : "*runtime.mutex",
+      "type" : "Pointer",
+      "underlying" : 20
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "elem" : 23,
+      "name" : "*runtime.g",
+      "type" : "Pointer",
+      "underlying" : 22
+    }, {
+      "local-name" : "g",
+      "name" : "runtime.g",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "stack",
+        "type" : 25
+      }, {
+        "name" : "stackguard0",
+        "type" : 7
+      }, {
+        "name" : "stackguard1",
+        "type" : 7
+      }, {
+        "name" : "_panic",
+        "type" : 27
+      }, {
+        "name" : "_defer",
+        "type" : 31
+      }, {
+        "name" : "m",
+        "type" : 38
+      }, {
+        "name" : "sched",
+        "type" : 41
+      }, {
+        "name" : "syscallsp",
+        "type" : 7
+      }, {
+        "name" : "syscallpc",
+        "type" : 7
+      }, {
+        "name" : "stktopsp",
+        "type" : 7
+      }, {
+        "name" : "param",
+        "type" : 30
+      }, {
+        "name" : "atomicstatus",
+        "type" : 9
+      }, {
+        "name" : "stackLock",
+        "type" : 9
+      }, {
+        "name" : "goid",
+        "type" : 13
+      }, {
+        "name" : "schedlink",
+        "type" : 43
+      }, {
+        "name" : "waitsince",
+        "type" : 13
+      }, {
+        "name" : "waitreason",
+        "type" : 95
+      }, {
+        "name" : "preempt",
+        "type" : 8
+      }, {
+        "name" : "preemptStop",
+        "type" : 8
+      }, {
+        "name" : "preemptShrink",
+        "type" : 8
+      }, {
+        "name" : "asyncSafePoint",
+        "type" : 8
+      }, {
+        "name" : "paniconfault",
+        "type" : 8
+      }, {
+        "name" : "gcscandone",
+        "type" : 8
+      }, {
+        "name" : "throwsplit",
+        "type" : 8
+      }, {
+        "name" : "activeStackChans",
+        "type" : 8
+      }, {
+        "name" : "raceignore",
+        "type" : 53
+      }, {
+        "name" : "sysblocktraced",
+        "type" : 8
+      }, {
+        "name" : "sysexitticks",
+        "type" : 13
+      }, {
+        "name" : "traceseq",
+        "type" : 45
+      }, {
+        "name" : "tracelastp",
+        "type" : 12
+      }, {
+        "name" : "lockedm",
+        "type" : 59
+      }, {
+        "name" : "sig",
+        "type" : 9
+      }, {
+        "name" : "writebuf",
+        "type" : 96
+      }, {
+        "name" : "sigcode0",
+        "type" : 7
+      }, {
+        "name" : "sigcode1",
+        "type" : 7
+      }, {
+        "name" : "sigpc",
+        "type" : 7
+      }, {
+        "name" : "gopc",
+        "type" : 7
+      }, {
+        "name" : "ancestors",
+        "type" : 97
+      }, {
+        "name" : "startpc",
+        "type" : 7
+      }, {
+        "name" : "racectx",
+        "type" : 7
+      }, {
+        "name" : "waiting",
+        "type" : 102
+      }, {
+        "name" : "cgoCtxt",
+        "type" : 101
+      }, {
+        "name" : "labels",
+        "type" : 30
+      }, {
+        "name" : "timer",
+        "type" : 120
+      }, {
+        "name" : "selectDone",
+        "type" : 9
+      }, {
+        "name" : "gcAssistBytes",
+        "type" : 13
+      } ],
+      "name" : "struct{stack runtime.stack; stackguard0 uintptr; stackguard1 uintptr; _panic *runtime._panic; _defer *runtime._defer; m *runtime.m; sched runtime.gobuf; syscallsp uintptr; syscallpc uintptr; stktopsp uintptr; param unsafe.Pointer; atomicstatus uint32; stackLock uint32; goid int64; schedlink runtime.guintptr; waitsince int64; waitreason runtime.waitReason; preempt bool; preemptStop bool; preemptShrink bool; asyncSafePoint bool; paniconfault bool; gcscandone bool; throwsplit bool; activeStackChans bool; raceignore int8; sysblocktraced bool; sysexitticks int64; traceseq uint64; tracelastp runtime.puintptr; lockedm runtime.muintptr; sig uint32; writebuf []byte; sigcode0 uintptr; sigcode1 uintptr; sigpc uintptr; gopc uintptr; ancestors *[]runtime.ancestorInfo; startpc uintptr; racectx uintptr; waiting *runtime.sudog; cgoCtxt []uintptr; labels unsafe.Pointer; timer *runtime.timer; selectDone uint32; gcAssistBytes int64}",
+      "type" : "Struct",
+      "underlying" : 24
+    }, {
+      "local-name" : "stack",
+      "name" : "runtime.stack",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "lo",
+        "type" : 7
+      }, {
+        "name" : "hi",
+        "type" : 7
+      } ],
+      "name" : "struct{lo uintptr; hi uintptr}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "elem" : 28,
+      "name" : "*runtime._panic",
+      "type" : "Pointer",
+      "underlying" : 27
+    }, {
+      "local-name" : "_panic",
+      "name" : "runtime._panic",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 29
+    }, {
+      "fields" : [ {
+        "name" : "argp",
+        "type" : 30
+      }, {
+        "name" : "arg",
+        "type" : 16
+      }, {
+        "name" : "link",
+        "type" : 27
+      }, {
+        "name" : "pc",
+        "type" : 7
+      }, {
+        "name" : "sp",
+        "type" : 30
+      }, {
+        "name" : "recovered",
+        "type" : 8
+      }, {
+        "name" : "aborted",
+        "type" : 8
+      }, {
+        "name" : "goexit",
+        "type" : 8
+      } ],
+      "name" : "struct{argp unsafe.Pointer; arg interface{}; link *runtime._panic; pc uintptr; sp unsafe.Pointer; recovered bool; aborted bool; goexit bool}",
+      "type" : "Struct",
+      "underlying" : 29
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 30
+    }, {
+      "elem" : 32,
+      "name" : "*runtime._defer",
+      "type" : "Pointer",
+      "underlying" : 31
+    }, {
+      "local-name" : "_defer",
+      "name" : "runtime._defer",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "siz",
+        "type" : 34
+      }, {
+        "name" : "started",
+        "type" : 8
+      }, {
+        "name" : "heap",
+        "type" : 8
+      }, {
+        "name" : "openDefer",
+        "type" : 8
+      }, {
+        "name" : "sp",
+        "type" : 7
+      }, {
+        "name" : "pc",
+        "type" : 7
+      }, {
+        "name" : "fn",
+        "type" : 35
+      }, {
+        "name" : "_panic",
+        "type" : 27
+      }, {
+        "name" : "link",
+        "type" : 31
+      }, {
+        "name" : "fd",
+        "type" : 30
+      }, {
+        "name" : "varp",
+        "type" : 7
+      }, {
+        "name" : "framepc",
+        "type" : 7
+      } ],
+      "name" : "struct{siz int32; started bool; heap bool; openDefer bool; sp uintptr; pc uintptr; fn *runtime.funcval; _panic *runtime._panic; link *runtime._defer; fd unsafe.Pointer; varp uintptr; framepc uintptr}",
+      "type" : "Struct",
+      "underlying" : 33
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 34
+    }, {
+      "elem" : 36,
+      "name" : "*runtime.funcval",
+      "type" : "Pointer",
+      "underlying" : 35
+    }, {
+      "local-name" : "funcval",
+      "name" : "runtime.funcval",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 37
+    }, {
+      "fields" : [ {
+        "name" : "fn",
+        "type" : 7
+      } ],
+      "name" : "struct{fn uintptr}",
+      "type" : "Struct",
+      "underlying" : 37
+    }, {
+      "elem" : 39,
+      "name" : "*runtime.m",
+      "type" : "Pointer",
+      "underlying" : 38
+    }, {
+      "local-name" : "m",
+      "name" : "runtime.m",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 40
+    }, {
+      "fields" : [ {
+        "name" : "g0",
+        "type" : 22
+      }, {
+        "name" : "morebuf",
+        "type" : 41
+      }, {
+        "name" : "divmod",
+        "type" : 9
+      }, {
+        "name" : "procid",
+        "type" : 45
+      }, {
+        "name" : "gsignal",
+        "type" : 22
+      }, {
+        "name" : "goSigStack",
+        "type" : 46
+      }, {
+        "name" : "sigmask",
+        "type" : 48
+      }, {
+        "name" : "tls",
+        "type" : 50
+      }, {
+        "name" : "mstartfn",
+        "type" : 51
+      }, {
+        "name" : "curg",
+        "type" : 22
+      }, {
+        "name" : "caughtsig",
+        "type" : 43
+      }, {
+        "name" : "p",
+        "type" : 12
+      }, {
+        "name" : "nextp",
+        "type" : 12
+      }, {
+        "name" : "oldp",
+        "type" : 12
+      }, {
+        "name" : "id",
+        "type" : 13
+      }, {
+        "name" : "mallocing",
+        "type" : 34
+      }, {
+        "name" : "throwing",
+        "type" : 34
+      }, {
+        "name" : "preemptoff",
+        "type" : 52
+      }, {
+        "name" : "locks",
+        "type" : 34
+      }, {
+        "name" : "dying",
+        "type" : 34
+      }, {
+        "name" : "profilehz",
+        "type" : 34
+      }, {
+        "name" : "spinning",
+        "type" : 8
+      }, {
+        "name" : "blocked",
+        "type" : 8
+      }, {
+        "name" : "newSigstack",
+        "type" : 8
+      }, {
+        "name" : "printlock",
+        "type" : 53
+      }, {
+        "name" : "incgo",
+        "type" : 8
+      }, {
+        "name" : "freeWait",
+        "type" : 9
+      }, {
+        "name" : "fastrand",
+        "type" : 49
+      }, {
+        "name" : "needextram",
+        "type" : 8
+      }, {
+        "name" : "traceback",
+        "type" : 54
+      }, {
+        "name" : "ncgocall",
+        "type" : 45
+      }, {
+        "name" : "ncgo",
+        "type" : 34
+      }, {
+        "name" : "cgoCallersUse",
+        "type" : 9
+      }, {
+        "name" : "cgoCallers",
+        "type" : 55
+      }, {
+        "name" : "park",
+        "type" : 58
+      }, {
+        "name" : "alllink",
+        "type" : 38
+      }, {
+        "name" : "schedlink",
+        "type" : 59
+      }, {
+        "name" : "mcache",
+        "type" : 60
+      }, {
+        "name" : "lockedg",
+        "type" : 43
+      }, {
+        "name" : "createstack",
+        "type" : 57
+      }, {
+        "name" : "lockedExt",
+        "type" : 9
+      }, {
+        "name" : "lockedInt",
+        "type" : 9
+      }, {
+        "name" : "nextwaitm",
+        "type" : 59
+      }, {
+        "name" : "waitunlockf",
+        "type" : 86
+      }, {
+        "name" : "waitlock",
+        "type" : 30
+      }, {
+        "name" : "waittraceev",
+        "type" : 81
+      }, {
+        "name" : "waittraceskip",
+        "type" : 89
+      }, {
+        "name" : "startingtrace",
+        "type" : 8
+      }, {
+        "name" : "syscalltick",
+        "type" : 9
+      }, {
+        "name" : "freelink",
+        "type" : 38
+      }, {
+        "name" : "libcall",
+        "type" : 90
+      }, {
+        "name" : "libcallpc",
+        "type" : 7
+      }, {
+        "name" : "libcallsp",
+        "type" : 7
+      }, {
+        "name" : "libcallg",
+        "type" : 43
+      }, {
+        "name" : "syscall",
+        "type" : 90
+      }, {
+        "name" : "vdsoSP",
+        "type" : 7
+      }, {
+        "name" : "vdsoPC",
+        "type" : 7
+      }, {
+        "name" : "preemptGen",
+        "type" : 9
+      }, {
+        "name" : "signalPending",
+        "type" : 9
+      }, {
+        "name" : "dlogPerM",
+        "type" : 92
+      }, {
+        "name" : "mOS",
+        "type" : 94
+      } ],
+      "name" : "struct{g0 *runtime.g; morebuf runtime.gobuf; divmod uint32; procid uint64; gsignal *runtime.g; goSigStack runtime.gsignalStack; sigmask runtime.sigset; tls [6]uintptr; mstartfn func(); curg *runtime.g; caughtsig runtime.guintptr; p runtime.puintptr; nextp runtime.puintptr; oldp runtime.puintptr; id int64; mallocing int32; throwing int32; preemptoff string; locks int32; dying int32; profilehz int32; spinning bool; blocked bool; newSigstack bool; printlock int8; incgo bool; freeWait uint32; fastrand [2]uint32; needextram bool; traceback uint8; ncgocall uint64; ncgo int32; cgoCallersUse uint32; cgoCallers *runtime.cgoCallers; park runtime.note; alllink *runtime.m; schedlink runtime.muintptr; mcache *runtime.mcache; lockedg runtime.guintptr; createstack [32]uintptr; lockedExt uint32; lockedInt uint32; nextwaitm runtime.muintptr; waitunlockf func(*runtime.g, unsafe.Pointer) bool; waitlock unsafe.Pointer; waittraceev byte; waittraceskip int; startingtrace bool; syscalltick uint32; freelink *runtime.m; libcall runtime.libcall; libcallpc uintptr; libcallsp uintptr; libcallg runtime.guintptr; syscall runtime.libcall; vdsoSP uintptr; vdsoPC uintptr; preemptGen uint32; signalPending uint32; runtime.dlogPerM; runtime.mOS}",
+      "type" : "Struct",
+      "underlying" : 40
+    }, {
+      "local-name" : "gobuf",
+      "name" : "runtime.gobuf",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 42
+    }, {
+      "fields" : [ {
+        "name" : "sp",
+        "type" : 7
+      }, {
+        "name" : "pc",
+        "type" : 7
+      }, {
+        "name" : "g",
+        "type" : 43
+      }, {
+        "name" : "ctxt",
+        "type" : 30
+      }, {
+        "name" : "ret",
+        "type" : 44
+      }, {
+        "name" : "lr",
+        "type" : 7
+      }, {
+        "name" : "bp",
+        "type" : 7
+      } ],
+      "name" : "struct{sp uintptr; pc uintptr; g runtime.guintptr; ctxt unsafe.Pointer; ret runtime/internal/sys.Uintreg; lr uintptr; bp uintptr}",
+      "type" : "Struct",
+      "underlying" : 42
+    }, {
+      "local-name" : "guintptr",
+      "name" : "runtime.guintptr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "local-name" : "Uintreg",
+      "name" : "runtime/internal/sys.Uintreg",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 45
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 45
+    }, {
+      "local-name" : "gsignalStack",
+      "name" : "runtime.gsignalStack",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 47
+    }, {
+      "fields" : [ {
+        "name" : "stack",
+        "type" : 25
+      }, {
+        "name" : "stackguard0",
+        "type" : 7
+      }, {
+        "name" : "stackguard1",
+        "type" : 7
+      }, {
+        "name" : "stktopsp",
+        "type" : 7
+      } ],
+      "name" : "struct{stack runtime.stack; stackguard0 uintptr; stackguard1 uintptr; stktopsp uintptr}",
+      "type" : "Struct",
+      "underlying" : 47
+    }, {
+      "local-name" : "sigset",
+      "name" : "runtime.sigset",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 49
+    }, {
+      "elem" : 9,
+      "name" : "[2]uint32",
+      "type" : "Array",
+      "underlying" : 49
+    }, {
+      "elem" : 7,
+      "name" : "[6]uintptr",
+      "type" : "Array",
+      "underlying" : 50
+    }, {
+      "name" : "func()",
+      "params" : 17,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 51,
+      "variadic" : false
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 52
+    }, {
+      "name" : "int8",
+      "type" : "Basic",
+      "underlying" : 53
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 54
+    }, {
+      "elem" : 56,
+      "name" : "*runtime.cgoCallers",
+      "type" : "Pointer",
+      "underlying" : 55
+    }, {
+      "local-name" : "cgoCallers",
+      "name" : "runtime.cgoCallers",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 57
+    }, {
+      "elem" : 7,
+      "name" : "[32]uintptr",
+      "type" : "Array",
+      "underlying" : 57
+    }, {
+      "local-name" : "note",
+      "name" : "runtime.note",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "local-name" : "muintptr",
+      "name" : "runtime.muintptr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "elem" : 61,
+      "name" : "*runtime.mcache",
+      "type" : "Pointer",
+      "underlying" : 60
+    }, {
+      "local-name" : "mcache",
+      "name" : "runtime.mcache",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 62
+    }, {
+      "fields" : [ {
+        "name" : "next_sample",
+        "type" : 7
+      }, {
+        "name" : "local_scan",
+        "type" : 7
+      }, {
+        "name" : "tiny",
+        "type" : 7
+      }, {
+        "name" : "tinyoffset",
+        "type" : 7
+      }, {
+        "name" : "local_tinyallocs",
+        "type" : 7
+      }, {
+        "name" : "alloc",
+        "type" : 63
+      }, {
+        "name" : "stackcache",
+        "type" : 82
+      }, {
+        "name" : "local_largefree",
+        "type" : 7
+      }, {
+        "name" : "local_nlargefree",
+        "type" : 7
+      }, {
+        "name" : "local_nsmallfree",
+        "type" : 85
+      }, {
+        "name" : "flushGen",
+        "type" : 9
+      } ],
+      "name" : "struct{next_sample uintptr; local_scan uintptr; tiny uintptr; tinyoffset uintptr; local_tinyallocs uintptr; alloc [134]*runtime.mspan; stackcache [4]runtime.stackfreelist; local_largefree uintptr; local_nlargefree uintptr; local_nsmallfree [67]uintptr; flushGen uint32}",
+      "type" : "Struct",
+      "underlying" : 62
+    }, {
+      "elem" : 64,
+      "name" : "[134]*runtime.mspan",
+      "type" : "Array",
+      "underlying" : 63
+    }, {
+      "elem" : 65,
+      "name" : "*runtime.mspan",
+      "type" : "Pointer",
+      "underlying" : 64
+    }, {
+      "local-name" : "mspan",
+      "name" : "runtime.mspan",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 66
+    }, {
+      "fields" : [ {
+        "name" : "next",
+        "type" : 64
+      }, {
+        "name" : "prev",
+        "type" : 64
+      }, {
+        "name" : "list",
+        "type" : 67
+      }, {
+        "name" : "startAddr",
+        "type" : 7
+      }, {
+        "name" : "npages",
+        "type" : 7
+      }, {
+        "name" : "manualFreeList",
+        "type" : 70
+      }, {
+        "name" : "freeindex",
+        "type" : 7
+      }, {
+        "name" : "nelems",
+        "type" : 7
+      }, {
+        "name" : "allocCache",
+        "type" : 45
+      }, {
+        "name" : "allocBits",
+        "type" : 71
+      }, {
+        "name" : "gcmarkBits",
+        "type" : 71
+      }, {
+        "name" : "sweepgen",
+        "type" : 9
+      }, {
+        "name" : "divMul",
+        "type" : 73
+      }, {
+        "name" : "baseMask",
+        "type" : 73
+      }, {
+        "name" : "allocCount",
+        "type" : 73
+      }, {
+        "name" : "spanclass",
+        "type" : 74
+      }, {
+        "name" : "state",
+        "type" : 75
+      }, {
+        "name" : "needzero",
+        "type" : 54
+      }, {
+        "name" : "divShift",
+        "type" : 54
+      }, {
+        "name" : "divShift2",
+        "type" : 54
+      }, {
+        "name" : "elemsize",
+        "type" : 7
+      }, {
+        "name" : "limit",
+        "type" : 7
+      }, {
+        "name" : "speciallock",
+        "type" : 5
+      }, {
+        "name" : "specials",
+        "type" : 78
+      } ],
+      "name" : "struct{next *runtime.mspan; prev *runtime.mspan; list *runtime.mSpanList; startAddr uintptr; npages uintptr; manualFreeList runtime.gclinkptr; freeindex uintptr; nelems uintptr; allocCache uint64; allocBits *runtime.gcBits; gcmarkBits *runtime.gcBits; sweepgen uint32; divMul uint16; baseMask uint16; allocCount uint16; spanclass runtime.spanClass; state runtime.mSpanStateBox; needzero uint8; divShift uint8; divShift2 uint8; elemsize uintptr; limit uintptr; speciallock runtime.mutex; specials *runtime.special}",
+      "type" : "Struct",
+      "underlying" : 66
+    }, {
+      "elem" : 68,
+      "name" : "*runtime.mSpanList",
+      "type" : "Pointer",
+      "underlying" : 67
+    }, {
+      "local-name" : "mSpanList",
+      "name" : "runtime.mSpanList",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 69
+    }, {
+      "fields" : [ {
+        "name" : "first",
+        "type" : 64
+      }, {
+        "name" : "last",
+        "type" : 64
+      } ],
+      "name" : "struct{first *runtime.mspan; last *runtime.mspan}",
+      "type" : "Struct",
+      "underlying" : 69
+    }, {
+      "local-name" : "gclinkptr",
+      "name" : "runtime.gclinkptr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "elem" : 72,
+      "name" : "*runtime.gcBits",
+      "type" : "Pointer",
+      "underlying" : 71
+    }, {
+      "local-name" : "gcBits",
+      "name" : "runtime.gcBits",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 73
+    }, {
+      "local-name" : "spanClass",
+      "name" : "runtime.spanClass",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "local-name" : "mSpanStateBox",
+      "name" : "runtime.mSpanStateBox",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 76
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 77
+      } ],
+      "name" : "struct{s runtime.mSpanState}",
+      "type" : "Struct",
+      "underlying" : 76
+    }, {
+      "local-name" : "mSpanState",
+      "name" : "runtime.mSpanState",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "elem" : 79,
+      "name" : "*runtime.special",
+      "type" : "Pointer",
+      "underlying" : 78
+    }, {
+      "local-name" : "special",
+      "name" : "runtime.special",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "fields" : [ {
+        "name" : "next",
+        "type" : 78
+      }, {
+        "name" : "offset",
+        "type" : 73
+      }, {
+        "name" : "kind",
+        "type" : 81
+      } ],
+      "name" : "struct{next *runtime.special; offset uint16; kind byte}",
+      "type" : "Struct",
+      "underlying" : 80
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 81
+    }, {
+      "elem" : 83,
+      "name" : "[4]runtime.stackfreelist",
+      "type" : "Array",
+      "underlying" : 82
+    }, {
+      "local-name" : "stackfreelist",
+      "name" : "runtime.stackfreelist",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 84
+    }, {
+      "fields" : [ {
+        "name" : "list",
+        "type" : 70
+      }, {
+        "name" : "size",
+        "type" : 7
+      } ],
+      "name" : "struct{list runtime.gclinkptr; size uintptr}",
+      "type" : "Struct",
+      "underlying" : 84
+    }, {
+      "elem" : 7,
+      "name" : "[67]uintptr",
+      "type" : "Array",
+      "underlying" : 85
+    }, {
+      "name" : "func(*runtime.g, unsafe.Pointer) bool",
+      "params" : 87,
+      "recv" : -1,
+      "results" : 88,
+      "type" : "Signature",
+      "underlying" : 86,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      }, {
+        "name" : "",
+        "type" : 30
+      } ],
+      "name" : "(*runtime.g, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 87
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 88
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 89
+    }, {
+      "local-name" : "libcall",
+      "name" : "runtime.libcall",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 91
+    }, {
+      "fields" : [ {
+        "name" : "fn",
+        "type" : 7
+      }, {
+        "name" : "n",
+        "type" : 7
+      }, {
+        "name" : "args",
+        "type" : 7
+      }, {
+        "name" : "r1",
+        "type" : 7
+      }, {
+        "name" : "r2",
+        "type" : 7
+      }, {
+        "name" : "err",
+        "type" : 7
+      } ],
+      "name" : "struct{fn uintptr; n uintptr; args uintptr; r1 uintptr; r2 uintptr; err uintptr}",
+      "type" : "Struct",
+      "underlying" : 91
+    }, {
+      "local-name" : "dlogPerM",
+      "name" : "runtime.dlogPerM",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 93
+    }, {
+      "fields" : [ ],
+      "name" : "struct{}",
+      "type" : "Struct",
+      "underlying" : 93
+    }, {
+      "local-name" : "mOS",
+      "name" : "runtime.mOS",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 93
+    }, {
+      "local-name" : "waitReason",
+      "name" : "runtime.waitReason",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "elem" : 81,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 96
+    }, {
+      "elem" : 98,
+      "name" : "*[]runtime.ancestorInfo",
+      "type" : "Pointer",
+      "underlying" : 97
+    }, {
+      "elem" : 99,
+      "name" : "[]runtime.ancestorInfo",
+      "type" : "Slice",
+      "underlying" : 98
+    }, {
+      "local-name" : "ancestorInfo",
+      "name" : "runtime.ancestorInfo",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 100
+    }, {
+      "fields" : [ {
+        "name" : "pcs",
+        "type" : 101
+      }, {
+        "name" : "goid",
+        "type" : 13
+      }, {
+        "name" : "gopc",
+        "type" : 7
+      } ],
+      "name" : "struct{pcs []uintptr; goid int64; gopc uintptr}",
+      "type" : "Struct",
+      "underlying" : 100
+    }, {
+      "elem" : 7,
+      "name" : "[]uintptr",
+      "type" : "Slice",
+      "underlying" : 101
+    }, {
+      "elem" : 103,
+      "name" : "*runtime.sudog",
+      "type" : "Pointer",
+      "underlying" : 102
+    }, {
+      "local-name" : "sudog",
+      "name" : "runtime.sudog",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 104
+    }, {
+      "fields" : [ {
+        "name" : "g",
+        "type" : 22
+      }, {
+        "name" : "isSelect",
+        "type" : 8
+      }, {
+        "name" : "next",
+        "type" : 102
+      }, {
+        "name" : "prev",
+        "type" : 102
+      }, {
+        "name" : "elem",
+        "type" : 30
+      }, {
+        "name" : "acquiretime",
+        "type" : 13
+      }, {
+        "name" : "releasetime",
+        "type" : 13
+      }, {
+        "name" : "ticket",
+        "type" : 9
+      }, {
+        "name" : "parent",
+        "type" : 102
+      }, {
+        "name" : "waitlink",
+        "type" : 102
+      }, {
+        "name" : "waittail",
+        "type" : 102
+      }, {
+        "name" : "c",
+        "type" : 105
+      } ],
+      "name" : "struct{g *runtime.g; isSelect bool; next *runtime.sudog; prev *runtime.sudog; elem unsafe.Pointer; acquiretime int64; releasetime int64; ticket uint32; parent *runtime.sudog; waitlink *runtime.sudog; waittail *runtime.sudog; c *runtime.hchan}",
+      "type" : "Struct",
+      "underlying" : 104
+    }, {
+      "elem" : 106,
+      "name" : "*runtime.hchan",
+      "type" : "Pointer",
+      "underlying" : 105
+    }, {
+      "local-name" : "hchan",
+      "name" : "runtime.hchan",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 107
+    }, {
+      "fields" : [ {
+        "name" : "qcount",
+        "type" : 108
+      }, {
+        "name" : "dataqsiz",
+        "type" : 108
+      }, {
+        "name" : "buf",
+        "type" : 30
+      }, {
+        "name" : "elemsize",
+        "type" : 73
+      }, {
+        "name" : "closed",
+        "type" : 9
+      }, {
+        "name" : "elemtype",
+        "type" : 109
+      }, {
+        "name" : "sendx",
+        "type" : 108
+      }, {
+        "name" : "recvx",
+        "type" : 108
+      }, {
+        "name" : "recvq",
+        "type" : 118
+      }, {
+        "name" : "sendq",
+        "type" : 118
+      }, {
+        "name" : "lock",
+        "type" : 5
+      } ],
+      "name" : "struct{qcount uint; dataqsiz uint; buf unsafe.Pointer; elemsize uint16; closed uint32; elemtype *runtime._type; sendx uint; recvx uint; recvq runtime.waitq; sendq runtime.waitq; lock runtime.mutex}",
+      "type" : "Struct",
+      "underlying" : 107
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 108
+    }, {
+      "elem" : 110,
+      "name" : "*runtime._type",
+      "type" : "Pointer",
+      "underlying" : 109
+    }, {
+      "local-name" : "_type",
+      "name" : "runtime._type",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 111
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 7
+      }, {
+        "name" : "ptrdata",
+        "type" : 7
+      }, {
+        "name" : "hash",
+        "type" : 9
+      }, {
+        "name" : "tflag",
+        "type" : 112
+      }, {
+        "name" : "align",
+        "type" : 54
+      }, {
+        "name" : "fieldAlign",
+        "type" : 54
+      }, {
+        "name" : "kind",
+        "type" : 54
+      }, {
+        "name" : "equal",
+        "type" : 113
+      }, {
+        "name" : "gcdata",
+        "type" : 115
+      }, {
+        "name" : "str",
+        "type" : 116
+      }, {
+        "name" : "ptrToThis",
+        "type" : 117
+      } ],
+      "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag runtime.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str runtime.nameOff; ptrToThis runtime.typeOff}",
+      "type" : "Struct",
+      "underlying" : 111
+    }, {
+      "local-name" : "tflag",
+      "name" : "runtime.tflag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
+      "params" : 114,
+      "recv" : -1,
+      "results" : 88,
+      "type" : "Signature",
+      "underlying" : 113,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 30
+      }, {
+        "name" : "",
+        "type" : 30
+      } ],
+      "name" : "(unsafe.Pointer, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 114
+    }, {
+      "elem" : 81,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 115
+    }, {
+      "local-name" : "nameOff",
+      "name" : "runtime.nameOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 34
+    }, {
+      "local-name" : "typeOff",
+      "name" : "runtime.typeOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 34
+    }, {
+      "local-name" : "waitq",
+      "name" : "runtime.waitq",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 119
+    }, {
+      "fields" : [ {
+        "name" : "first",
+        "type" : 102
+      }, {
+        "name" : "last",
+        "type" : 102
+      } ],
+      "name" : "struct{first *runtime.sudog; last *runtime.sudog}",
+      "type" : "Struct",
+      "underlying" : 119
+    }, {
+      "elem" : 10,
+      "name" : "*runtime.timer",
+      "type" : "Pointer",
+      "underlying" : 120
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 121
+    }, {
+      "name" : "func(s string)",
+      "params" : 123,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 122,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 52
+      } ],
+      "name" : "(s string)",
+      "type" : "Tuple",
+      "underlying" : 123
+    }, {
+      "name" : "func(ptr unsafe.Pointer, val unsafe.Pointer)",
+      "params" : 125,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 124,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "ptr",
+        "type" : 30
+      }, {
+        "name" : "val",
+        "type" : 30
+      } ],
+      "name" : "(ptr unsafe.Pointer, val unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 125
+    }, {
+      "elem" : 14,
+      "name" : "*func(interface{}, uintptr)",
+      "type" : "Pointer",
+      "underlying" : 126
+    }, {
+      "name" : "func(pd *runtime.pollDesc, mode int32, ioready bool) *runtime.g",
+      "params" : 128,
+      "recv" : -1,
+      "results" : 129,
+      "type" : "Signature",
+      "underlying" : 127,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "pd",
+        "type" : 2
+      }, {
+        "name" : "mode",
+        "type" : 34
+      }, {
+        "name" : "ioready",
+        "type" : 8
+      } ],
+      "name" : "(pd *runtime.pollDesc, mode int32, ioready bool)",
+      "type" : "Tuple",
+      "underlying" : 128
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      } ],
+      "name" : "(*runtime.g)",
+      "type" : "Tuple",
+      "underlying" : 129
+    }, {
+      "name" : "func(gp *runtime.g, traceskip int)",
+      "params" : 131,
+      "recv" : -1,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 130,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "gp",
+        "type" : 22
+      }, {
+        "name" : "traceskip",
+        "type" : 89
+      } ],
+      "name" : "(gp *runtime.g, traceskip int)",
+      "type" : "Tuple",
+      "underlying" : 131
+    } ],
+    "variables" : [ {
+      "name" : "pd",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "seq",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "read",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "write",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "lock",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "rseq",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "currentSeq",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "wseq",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "rg",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "rd",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "rt",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "f",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "wg",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "wd",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "wt",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

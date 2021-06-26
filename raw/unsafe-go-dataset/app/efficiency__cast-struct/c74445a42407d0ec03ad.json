@@ -1,0 +1,2301 @@
+{
+  "usage" : {
+    "file" : "zz_generated.conversion.go",
+    "label1" : "cast-struct",
+    "label2" : "efficiency",
+    "line" : "330",
+    "module" : "k8s.io/apimachinery",
+    "pkg" : "k8s.io/apimachinery/pkg/apis/meta/v1",
+    "project" : "rancher/rancher",
+    "snippet" : "out.DryRun = *(*[]string)(unsafe.Pointer(&values))",
+    "version" : "v0.18.0"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 5, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 7, 5, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 7 ],
+      "in-vars" : [ 6, 9, 10, 7, 5 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6, 10, 7 ],
+      "decl-vars" : [ ],
+      "line-start" : 307,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ok",
+              "variable" : 9
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "left" : {
+              "arguments" : [ {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "values",
+                  "variable" : 10
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 52,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 30,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 30,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 313,
+      "code" : "if values, ok := map[string][]string(*in)[\"gracePeriodSeconds\"]; ok && len(values) > 0 {\n\tif err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.GracePeriodSeconds, s); err != nil {\n\t\treturn err\n\t}\n} else {\n\tout.GracePeriodSeconds = nil\n}",
+      "entry" : false,
+      "use-vars" : [ 10, 9 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 5, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6, 9, 10, 7 ],
+      "decl-vars" : [ 9, 10 ],
+      "line-start" : 307,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "values"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ok"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 51,
+          "index" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "gracePeriodSeconds"
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 4,
+              "key" : {
+                "go-type" : 6,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 6,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "string"
+                }
+              },
+              "kind" : "type",
+              "type" : "map",
+              "value" : {
+                "element" : {
+                  "go-type" : 6,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 6,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "string"
+                  }
+                },
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "slice"
+              }
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "in",
+                  "variable" : 5
+                }
+              },
+              "type" : "star"
+            },
+            "type" : "cast"
+          },
+          "type" : "index"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 307,
+      "code" : "values, ok := map[string][]string(*in)[\"gracePeriodSeconds\"]",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 9 ],
+      "in-vars" : [ 6, 7, 12, 5 ],
+      "exit" : false,
+      "out-vars" : [ 6, 7, 12, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 308,
+      "ast" : {
+        "condition" : {
+          "go-type" : 59,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 32,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 12
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 60,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 310,
+      "code" : "if err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.GracePeriodSeconds, s); err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 5, 6, 10, 7 ],
+      "exit" : false,
+      "out-vars" : [ 12, 5, 6, 7 ],
+      "decl-vars" : [ 12 ],
+      "line-start" : 308,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 57,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "values",
+                "variable" : 10
+              }
+            },
+            "type" : "unary"
+          }, {
+            "go-type" : 58,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "GracePeriodSeconds",
+                "variable" : 11
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 7,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "out",
+                  "variable" : 6
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          }, {
+            "go-type" : 24,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "s",
+              "variable" : 7
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 55,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 5,
+              "value" : "runtime"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Convert_Slice_string_To_Pointer_int64"
+            }
+          },
+          "go-type" : 32,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 308,
+      "code" : "err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.GracePeriodSeconds, s)",
+      "entry" : false,
+      "use-vars" : [ 10, 6, 7 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 12 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 309,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 32,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 12
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 309,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 7, 5, 6 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6, 7 ],
+      "decl-vars" : [ ],
+      "line-start" : 312,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "GracePeriodSeconds",
+            "variable" : 11
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 60,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 312,
+      "code" : "out.GracePeriodSeconds = nil",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11, 13 ],
+      "in-vars" : [ 14, 6, 7, 5, 13 ],
+      "exit" : false,
+      "out-vars" : [ 7, 5, 14, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : 315,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ok",
+              "variable" : 13
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "left" : {
+              "arguments" : [ {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "values",
+                  "variable" : 14
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 52,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 30,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 30,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 321,
+      "code" : "if values, ok := map[string][]string(*in)[\"orphanDependents\"]; ok && len(values) > 0 {\n\tif err := runtime.Convert_Slice_string_To_Pointer_bool(&values, &out.OrphanDependents, s); err != nil {\n\t\treturn err\n\t}\n} else {\n\tout.OrphanDependents = nil\n}",
+      "entry" : false,
+      "use-vars" : [ 13, 14 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 5, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 5, 13, 14, 6, 7 ],
+      "decl-vars" : [ 13, 14 ],
+      "line-start" : 315,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "values"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ok"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 51,
+          "index" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "orphanDependents"
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 4,
+              "key" : {
+                "go-type" : 6,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 6,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "string"
+                }
+              },
+              "kind" : "type",
+              "type" : "map",
+              "value" : {
+                "element" : {
+                  "go-type" : 6,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 6,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "string"
+                  }
+                },
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "slice"
+              }
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "in",
+                  "variable" : 5
+                }
+              },
+              "type" : "star"
+            },
+            "type" : "cast"
+          },
+          "type" : "index"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 315,
+      "code" : "values, ok := map[string][]string(*in)[\"orphanDependents\"]",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12, 15 ],
+      "in-vars" : [ 5, 16, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 6, 7, 5, 16 ],
+      "decl-vars" : [ ],
+      "line-start" : 316,
+      "ast" : {
+        "condition" : {
+          "go-type" : 59,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 32,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 16
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 60,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 318,
+      "code" : "if err := runtime.Convert_Slice_string_To_Pointer_bool(&values, &out.OrphanDependents, s); err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 16 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 5, 14, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 5, 16, 6, 7 ],
+      "decl-vars" : [ 16 ],
+      "line-start" : 316,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 57,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "values",
+                "variable" : 14
+              }
+            },
+            "type" : "unary"
+          }, {
+            "go-type" : 63,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "OrphanDependents",
+                "variable" : 15
+              },
+              "go-type" : 20,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 7,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "out",
+                  "variable" : 6
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          }, {
+            "go-type" : 24,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "s",
+              "variable" : 7
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 61,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 5,
+              "value" : "runtime"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Convert_Slice_string_To_Pointer_bool"
+            }
+          },
+          "go-type" : 32,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 316,
+      "code" : "err := runtime.Convert_Slice_string_To_Pointer_bool(&values, &out.OrphanDependents, s)",
+      "entry" : false,
+      "use-vars" : [ 14, 6, 7 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 16 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 317,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 32,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 16
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 317,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 16 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 5, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6, 7 ],
+      "decl-vars" : [ ],
+      "line-start" : 320,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "OrphanDependents",
+            "variable" : 15
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 60,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 320,
+      "code" : "out.OrphanDependents = nil",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17, 19 ],
+      "in-vars" : [ 18, 17, 5, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 6, 7, 18, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 322,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ok",
+              "variable" : 17
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "left" : {
+              "arguments" : [ {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "values",
+                  "variable" : 18
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 52,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 30,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 30,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 328,
+      "code" : "if values, ok := map[string][]string(*in)[\"propagationPolicy\"]; ok && len(values) > 0 {\n\tif err := Convert_Slice_string_To_Pointer_v1_DeletionPropagation(&values, &out.PropagationPolicy, s); err != nil {\n\t\treturn err\n\t}\n} else {\n\tout.PropagationPolicy = nil\n}",
+      "entry" : false,
+      "use-vars" : [ 17, 18 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 7, 5, 6 ],
+      "exit" : false,
+      "out-vars" : [ 18, 17, 5, 6, 7 ],
+      "decl-vars" : [ 17, 18 ],
+      "line-start" : 322,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "values"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ok"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 51,
+          "index" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "propagationPolicy"
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 4,
+              "key" : {
+                "go-type" : 6,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 6,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "string"
+                }
+              },
+              "kind" : "type",
+              "type" : "map",
+              "value" : {
+                "element" : {
+                  "go-type" : 6,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 6,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "string"
+                  }
+                },
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "slice"
+              }
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "in",
+                  "variable" : 5
+                }
+              },
+              "type" : "star"
+            },
+            "type" : "cast"
+          },
+          "type" : "index"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 322,
+      "code" : "values, ok := map[string][]string(*in)[\"propagationPolicy\"]",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 18, 21 ],
+      "in-vars" : [ 5, 6, 20 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6, 20 ],
+      "decl-vars" : [ ],
+      "line-start" : 323,
+      "ast" : {
+        "condition" : {
+          "go-type" : 59,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 32,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 20
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 60,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 325,
+      "code" : "if err := Convert_Slice_string_To_Pointer_v1_DeletionPropagation(&values, &out.PropagationPolicy, s); err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 20 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 18, 5, 6, 7 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6, 20 ],
+      "decl-vars" : [ 20 ],
+      "line-start" : 323,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 57,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "values",
+                "variable" : 18
+              }
+            },
+            "type" : "unary"
+          }, {
+            "go-type" : 66,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "PropagationPolicy",
+                "variable" : 19
+              },
+              "go-type" : 22,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 7,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "out",
+                  "variable" : 6
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          }, {
+            "go-type" : 24,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "s",
+              "variable" : 7
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 64,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Convert_Slice_string_To_Pointer_v1_DeletionPropagation"
+            }
+          },
+          "go-type" : 32,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 323,
+      "code" : "err := Convert_Slice_string_To_Pointer_v1_DeletionPropagation(&values, &out.PropagationPolicy, s)",
+      "entry" : false,
+      "use-vars" : [ 7, 18, 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 20 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 324,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 32,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 20
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 324,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 20 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 21 ],
+      "in-vars" : [ 5, 6 ],
+      "exit" : false,
+      "out-vars" : [ 5, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : 327,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "PropagationPolicy",
+            "variable" : 19
+          },
+          "go-type" : 22,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 60,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 327,
+      "code" : "out.PropagationPolicy = nil",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 22, 23 ],
+      "in-vars" : [ 21, 22, 6 ],
+      "exit" : false,
+      "out-vars" : [ 22, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : 329,
+      "ast" : {
+        "condition" : {
+          "go-type" : 21,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ok",
+              "variable" : 21
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "left" : {
+              "arguments" : [ {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "values",
+                  "variable" : 22
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 52,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 30,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 30,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 333,
+      "code" : "if values, ok := map[string][]string(*in)[\"dryRun\"]; ok && len(values) > 0 {\n\tout.DryRun = *(*[]string)(unsafe.Pointer(&values))\n} else {\n\tout.DryRun = nil\n}",
+      "entry" : false,
+      "use-vars" : [ 21, 22 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 20 ],
+      "in-vars" : [ 5, 6 ],
+      "exit" : false,
+      "out-vars" : [ 21, 22, 6 ],
+      "decl-vars" : [ 21, 22 ],
+      "line-start" : 329,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "values"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ok"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 51,
+          "index" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "dryRun"
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 4,
+              "key" : {
+                "go-type" : 6,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 6,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "string"
+                }
+              },
+              "kind" : "type",
+              "type" : "map",
+              "value" : {
+                "element" : {
+                  "go-type" : 6,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 6,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "string"
+                  }
+                },
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "slice"
+              }
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "in",
+                  "variable" : 5
+                }
+              },
+              "type" : "star"
+            },
+            "type" : "cast"
+          },
+          "type" : "index"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 329,
+      "code" : "values, ok := map[string][]string(*in)[\"dryRun\"]",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 22, 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 330,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "DryRun",
+            "variable" : 23
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "element" : {
+                  "go-type" : 6,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 6,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "string"
+                  }
+                },
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "slice"
+              },
+              "go-type" : 57,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 57,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 67,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 6,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 67,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 67,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 57,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 5,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "values",
+                    "variable" : 22
+                  }
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 330,
+      "code" : "out.DryRun = *(*[]string)(unsafe.Pointer(&values))",
+      "entry" : false,
+      "use-vars" : [ 22, 6 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 332,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "DryRun",
+            "variable" : 23
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "out",
+              "variable" : 6
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 60,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 332,
+      "code" : "out.DryRun = nil",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 334,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 60,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 334,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func autoConvert_url_Values_To_v1_DeleteOptions(in *url.Values, out *DeleteOptions, s conversion.Scope) error {\n\n\tif values, ok := map[string][]string(*in)[\"gracePeriodSeconds\"]; ok && len(values) > 0 {\n\t\tif err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.GracePeriodSeconds, s); err != nil {\n\t\t\treturn err\n\t\t}\n\t} else {\n\t\tout.GracePeriodSeconds = nil\n\t}\n\n\tif values, ok := map[string][]string(*in)[\"orphanDependents\"]; ok && len(values) > 0 {\n\t\tif err := runtime.Convert_Slice_string_To_Pointer_bool(&values, &out.OrphanDependents, s); err != nil {\n\t\t\treturn err\n\t\t}\n\t} else {\n\t\tout.OrphanDependents = nil\n\t}\n\tif values, ok := map[string][]string(*in)[\"propagationPolicy\"]; ok && len(values) > 0 {\n\t\tif err := Convert_Slice_string_To_Pointer_v1_DeletionPropagation(&values, &out.PropagationPolicy, s); err != nil {\n\t\t\treturn err\n\t\t}\n\t} else {\n\t\tout.PropagationPolicy = nil\n\t}\n\tif values, ok := map[string][]string(*in)[\"dryRun\"]; ok && len(values) > 0 {\n\t\tout.DryRun = *(*[]string)(unsafe.Pointer(&values))\n\t} else {\n\t\tout.DryRun = nil\n\t}\n\treturn nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "autoConvert_url_Values_To_v1_DeleteOptions",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Convert_Slice_string_To_Pointer_int64",
+      "package" : 5,
+      "type" : 55,
+      "exported" : true
+    }, {
+      "name" : "Convert_Slice_string_To_Pointer_bool",
+      "package" : 5,
+      "type" : 61,
+      "exported" : true
+    }, {
+      "name" : "Convert_Slice_string_To_Pointer_v1_DeletionPropagation",
+      "package" : 0,
+      "type" : 64,
+      "exported" : true
+    } ],
+    "line-end" : 335,
+    "line-start" : 304,
+    "names" : [ "autoConvert_url_Values_To_v1_DeleteOptions" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "v1",
+      "path" : "k8s.io/apimachinery/pkg/apis/meta/v1"
+    }, {
+      "name" : "url",
+      "path" : "net/url"
+    }, {
+      "name" : "types",
+      "path" : "k8s.io/apimachinery/pkg/types"
+    }, {
+      "name" : "conversion",
+      "path" : "k8s.io/apimachinery/pkg/conversion"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "runtime",
+      "path" : "k8s.io/apimachinery/pkg/runtime"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 5, 6, 7 ],
+    "receivers" : [ ],
+    "results" : [ 8 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(in *net/url.Values, out *k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions, s k8s.io/apimachinery/pkg/conversion.Scope) error",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "in",
+        "type" : 2
+      }, {
+        "name" : "out",
+        "type" : 7
+      }, {
+        "name" : "s",
+        "type" : 24
+      } ],
+      "name" : "(in *net/url.Values, out *k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions, s k8s.io/apimachinery/pkg/conversion.Scope)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*net/url.Values",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "Values",
+      "name" : "net/url.Values",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "elem" : 5,
+      "key" : 6,
+      "name" : "map[string][]string",
+      "type" : "Map",
+      "underlying" : 4
+    }, {
+      "elem" : 6,
+      "name" : "[]string",
+      "type" : "Slice",
+      "underlying" : 5
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "elem" : 8,
+      "name" : "*k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions",
+      "type" : "Pointer",
+      "underlying" : 7
+    }, {
+      "local-name" : "DeleteOptions",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "fields" : [ {
+        "name" : "TypeMeta",
+        "type" : 10
+      }, {
+        "name" : "GracePeriodSeconds",
+        "type" : 12
+      }, {
+        "name" : "Preconditions",
+        "type" : 14
+      }, {
+        "name" : "OrphanDependents",
+        "type" : 20
+      }, {
+        "name" : "PropagationPolicy",
+        "type" : 22
+      }, {
+        "name" : "DryRun",
+        "type" : 5
+      } ],
+      "name" : "struct{k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta \"json:\\\",inline\\\"\"; GracePeriodSeconds *int64 \"json:\\\"gracePeriodSeconds,omitempty\\\" protobuf:\\\"varint,1,opt,name=gracePeriodSeconds\\\"\"; Preconditions *k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions \"json:\\\"preconditions,omitempty\\\" protobuf:\\\"bytes,2,opt,name=preconditions\\\"\"; OrphanDependents *bool \"json:\\\"orphanDependents,omitempty\\\" protobuf:\\\"varint,3,opt,name=orphanDependents\\\"\"; PropagationPolicy *k8s.io/apimachinery/pkg/apis/meta/v1.DeletionPropagation \"json:\\\"propagationPolicy,omitempty\\\" protobuf:\\\"varint,4,opt,name=propagationPolicy\\\"\"; DryRun []string \"json:\\\"dryRun,omitempty\\\" protobuf:\\\"bytes,5,rep,name=dryRun\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 9
+    }, {
+      "local-name" : "TypeMeta",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "Kind",
+        "type" : 6
+      }, {
+        "name" : "APIVersion",
+        "type" : 6
+      } ],
+      "name" : "struct{Kind string \"json:\\\"kind,omitempty\\\" protobuf:\\\"bytes,1,opt,name=kind\\\"\"; APIVersion string \"json:\\\"apiVersion,omitempty\\\" protobuf:\\\"bytes,2,opt,name=apiVersion\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "elem" : 13,
+      "name" : "*int64",
+      "type" : "Pointer",
+      "underlying" : 12
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "elem" : 15,
+      "name" : "*k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "local-name" : "Preconditions",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 16
+    }, {
+      "fields" : [ {
+        "name" : "UID",
+        "type" : 17
+      }, {
+        "name" : "ResourceVersion",
+        "type" : 19
+      } ],
+      "name" : "struct{UID *k8s.io/apimachinery/pkg/types.UID \"json:\\\"uid,omitempty\\\" protobuf:\\\"bytes,1,opt,name=uid,casttype=k8s.io/apimachinery/pkg/types.UID\\\"\"; ResourceVersion *string \"json:\\\"resourceVersion,omitempty\\\" protobuf:\\\"bytes,2,opt,name=resourceVersion\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 16
+    }, {
+      "elem" : 18,
+      "name" : "*k8s.io/apimachinery/pkg/types.UID",
+      "type" : "Pointer",
+      "underlying" : 17
+    }, {
+      "local-name" : "UID",
+      "name" : "k8s.io/apimachinery/pkg/types.UID",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "elem" : 6,
+      "name" : "*string",
+      "type" : "Pointer",
+      "underlying" : 19
+    }, {
+      "elem" : 21,
+      "name" : "*bool",
+      "type" : "Pointer",
+      "underlying" : 20
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "elem" : 23,
+      "name" : "*k8s.io/apimachinery/pkg/apis/meta/v1.DeletionPropagation",
+      "type" : "Pointer",
+      "underlying" : 22
+    }, {
+      "local-name" : "DeletionPropagation",
+      "name" : "k8s.io/apimachinery/pkg/apis/meta/v1.DeletionPropagation",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "local-name" : "Scope",
+      "name" : "k8s.io/apimachinery/pkg/conversion.Scope",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 25
+    }, {
+      "methods" : [ {
+        "name" : "Convert",
+        "type" : 26
+      }, {
+        "name" : "DestTag",
+        "type" : 37
+      }, {
+        "name" : "Flags",
+        "type" : 40
+      }, {
+        "name" : "Meta",
+        "type" : 42
+      }, {
+        "name" : "SrcTag",
+        "type" : 37
+      } ],
+      "name" : "interface{Convert(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags) error; DestTag() reflect.StructTag; Flags() k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags; Meta() *k8s.io/apimachinery/pkg/conversion.Meta; SrcTag() reflect.StructTag}",
+      "type" : "Interface",
+      "underlying" : 25
+    }, {
+      "name" : "func(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags) error",
+      "params" : 27,
+      "recv" : 1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "src",
+        "type" : 28
+      }, {
+        "name" : "dest",
+        "type" : 28
+      }, {
+        "name" : "flags",
+        "type" : 29
+      } ],
+      "name" : "(src interface{}, dest interface{}, flags k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 28
+    }, {
+      "local-name" : "FieldMatchingFlags",
+      "name" : "k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 30
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 32
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 31
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 34
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 33
+    }, {
+      "name" : "func() string",
+      "params" : 35,
+      "recv" : 0,
+      "results" : 36,
+      "type" : "Signature",
+      "underlying" : 34,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 35
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "func() reflect.StructTag",
+      "params" : 35,
+      "recv" : 2,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 37,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 39
+      } ],
+      "name" : "(reflect.StructTag)",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "local-name" : "StructTag",
+      "name" : "reflect.StructTag",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "name" : "func() k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags",
+      "params" : 35,
+      "recv" : 3,
+      "results" : 41,
+      "type" : "Signature",
+      "underlying" : 40,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 29
+      } ],
+      "name" : "(k8s.io/apimachinery/pkg/conversion.FieldMatchingFlags)",
+      "type" : "Tuple",
+      "underlying" : 41
+    }, {
+      "name" : "func() *k8s.io/apimachinery/pkg/conversion.Meta",
+      "params" : 35,
+      "recv" : 4,
+      "results" : 43,
+      "type" : "Signature",
+      "underlying" : 42,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 44
+      } ],
+      "name" : "(*k8s.io/apimachinery/pkg/conversion.Meta)",
+      "type" : "Tuple",
+      "underlying" : 43
+    }, {
+      "elem" : 45,
+      "name" : "*k8s.io/apimachinery/pkg/conversion.Meta",
+      "type" : "Pointer",
+      "underlying" : 44
+    }, {
+      "local-name" : "Meta",
+      "name" : "k8s.io/apimachinery/pkg/conversion.Meta",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 46
+    }, {
+      "fields" : [ {
+        "name" : "KeyNameMapping",
+        "type" : 47
+      }, {
+        "name" : "Context",
+        "type" : 28
+      } ],
+      "name" : "struct{KeyNameMapping k8s.io/apimachinery/pkg/conversion.FieldMappingFunc; Context interface{}}",
+      "type" : "Struct",
+      "underlying" : 46
+    }, {
+      "local-name" : "FieldMappingFunc",
+      "name" : "k8s.io/apimachinery/pkg/conversion.FieldMappingFunc",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 48
+    }, {
+      "name" : "func(key string, sourceTag reflect.StructTag, destTag reflect.StructTag) (source string, dest string)",
+      "params" : 49,
+      "recv" : -1,
+      "results" : 50,
+      "type" : "Signature",
+      "underlying" : 48,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "key",
+        "type" : 6
+      }, {
+        "name" : "sourceTag",
+        "type" : 39
+      }, {
+        "name" : "destTag",
+        "type" : 39
+      } ],
+      "name" : "(key string, sourceTag reflect.StructTag, destTag reflect.StructTag)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "fields" : [ {
+        "name" : "source",
+        "type" : 6
+      }, {
+        "name" : "dest",
+        "type" : 6
+      } ],
+      "name" : "(source string, dest string)",
+      "type" : "Tuple",
+      "underlying" : 50
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      }, {
+        "name" : "",
+        "type" : 21
+      } ],
+      "name" : "([]string, bool)",
+      "type" : "Tuple",
+      "underlying" : 51
+    }, {
+      "name" : "func([]string) int",
+      "params" : 53,
+      "recv" : -1,
+      "results" : 54,
+      "type" : "Signature",
+      "underlying" : 52,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "([]string)",
+      "type" : "Tuple",
+      "underlying" : 53
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 30
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 54
+    }, {
+      "name" : "func(in *[]string, out **int64, s k8s.io/apimachinery/pkg/conversion.Scope) error",
+      "params" : 56,
+      "recv" : -1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 55,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "in",
+        "type" : 57
+      }, {
+        "name" : "out",
+        "type" : 58
+      }, {
+        "name" : "s",
+        "type" : 24
+      } ],
+      "name" : "(in *[]string, out **int64, s k8s.io/apimachinery/pkg/conversion.Scope)",
+      "type" : "Tuple",
+      "underlying" : 56
+    }, {
+      "elem" : 5,
+      "name" : "*[]string",
+      "type" : "Pointer",
+      "underlying" : 57
+    }, {
+      "elem" : 12,
+      "name" : "**int64",
+      "type" : "Pointer",
+      "underlying" : 58
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 59
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 60
+    }, {
+      "name" : "func(in *[]string, out **bool, s k8s.io/apimachinery/pkg/conversion.Scope) error",
+      "params" : 62,
+      "recv" : -1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 61,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "in",
+        "type" : 57
+      }, {
+        "name" : "out",
+        "type" : 63
+      }, {
+        "name" : "s",
+        "type" : 24
+      } ],
+      "name" : "(in *[]string, out **bool, s k8s.io/apimachinery/pkg/conversion.Scope)",
+      "type" : "Tuple",
+      "underlying" : 62
+    }, {
+      "elem" : 20,
+      "name" : "**bool",
+      "type" : "Pointer",
+      "underlying" : 63
+    }, {
+      "name" : "func(in *[]string, out **k8s.io/apimachinery/pkg/apis/meta/v1.DeletionPropagation, s k8s.io/apimachinery/pkg/conversion.Scope) error",
+      "params" : 65,
+      "recv" : -1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 64,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "in",
+        "type" : 57
+      }, {
+        "name" : "out",
+        "type" : 66
+      }, {
+        "name" : "s",
+        "type" : 24
+      } ],
+      "name" : "(in *[]string, out **k8s.io/apimachinery/pkg/apis/meta/v1.DeletionPropagation, s k8s.io/apimachinery/pkg/conversion.Scope)",
+      "type" : "Tuple",
+      "underlying" : 65
+    }, {
+      "elem" : 22,
+      "name" : "**k8s.io/apimachinery/pkg/apis/meta/v1.DeletionPropagation",
+      "type" : "Pointer",
+      "underlying" : 66
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 6,
+      "type" : "Basic",
+      "underlying" : 67
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 24,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 24,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 24,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 24,
+      "exported" : false
+    }, {
+      "name" : "in",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "out",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 24,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "ok",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "values",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "GracePeriodSeconds",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "ok",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "values",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "OrphanDependents",
+      "package" : 0,
+      "type" : 20,
+      "exported" : true
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "ok",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "values",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "PropagationPolicy",
+      "package" : 0,
+      "type" : 22,
+      "exported" : true
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "ok",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "values",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "DryRun",
+      "package" : 0,
+      "type" : 5,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

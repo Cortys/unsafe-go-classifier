@@ -1,0 +1,1352 @@
+{
+  "usage" : {
+    "file" : "syscall_linux.go",
+    "label1" : "cast-struct",
+    "label2" : "efficiency",
+    "line" : "189",
+    "module" : "golang.org/x/sys",
+    "pkg" : "golang.org/x/sys/unix",
+    "project" : "mattermost/mattermost-server",
+    "snippet" : "return utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))",
+    "version" : "v0.0.0-20200515095857-1151b9dac4a9"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 7 ],
+      "in-vars" : [ 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 172,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "tv",
+              "variable" : 2
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 178,
+      "code" : "if tv == nil {\n\terr := utimensat(AT_FDCWD, path, nil, 0)\n\tif err != ENOSYS {\n\t\treturn err\n\t}\n\treturn utimes(path, nil)\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 4, 1 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 173,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "-100"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "path",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          }, {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "utimensat"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 173,
+      "code" : "err := utimensat(AT_FDCWD, path, nil, 0)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 6 ],
+      "in-vars" : [ 4, 1 ],
+      "exit" : false,
+      "out-vars" : [ 4, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 174,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 4
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 23,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "38"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 176,
+      "code" : "if err != ENOSYS {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 4 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 175,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 4
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 175,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 177,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "path",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 25,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "utimes"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 177,
+      "code" : "return utimes(path, nil)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 9 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 179,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "tv",
+                "variable" : 2
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 29,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "2"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 181,
+      "code" : "if len(tv) != 2 {\n\treturn EINVAL\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 180,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 23,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "22"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 180,
+      "code" : "return EINVAL",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 5, 1, 2 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 182,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "element" : {
+                "go-type" : 20,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 20,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Timespec"
+                }
+              },
+              "go-type" : 19,
+              "kind" : "type",
+              "length" : {
+                "go-type" : 32,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "2"
+                }
+              },
+              "type" : "array"
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "ts"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 182,
+      "code" : "var ts [2]Timespec",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 5 ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 5, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 183,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 20,
+          "index" : {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 19,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ts",
+              "variable" : 5
+            }
+          },
+          "type" : "index"
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "arguments" : [ {
+              "go-type" : 4,
+              "index" : {
+                "go-type" : 17,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "0"
+                }
+              },
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tv",
+                  "variable" : 2
+                }
+              },
+              "type" : "index"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 36,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "TimevalToNsec"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 33,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "NsecToTimespec"
+            }
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 183,
+      "code" : "ts[0] = NsecToTimespec(TimevalToNsec(tv[0]))",
+      "entry" : false,
+      "use-vars" : [ 2, 5 ]
+    }, {
+      "update-vars" : [ 5 ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 5, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 2, 5, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 184,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 20,
+          "index" : {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "1"
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 19,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ts",
+              "variable" : 5
+            }
+          },
+          "type" : "index"
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "arguments" : [ {
+              "go-type" : 4,
+              "index" : {
+                "go-type" : 17,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "1"
+                }
+              },
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tv",
+                  "variable" : 2
+                }
+              },
+              "type" : "index"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 36,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "TimevalToNsec"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 33,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "NsecToTimespec"
+            }
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 184,
+      "code" : "ts[1] = NsecToTimespec(TimevalToNsec(tv[1]))",
+      "entry" : false,
+      "use-vars" : [ 2, 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 5, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 6 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 185,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "-100"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "path",
+              "variable" : 1
+            }
+          }, {
+            "coerced-to" : {
+              "contained" : {
+                "element" : {
+                  "go-type" : 20,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 20,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Timespec"
+                  }
+                },
+                "go-type" : 19,
+                "kind" : "type",
+                "length" : {
+                  "go-type" : 32,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "2"
+                  }
+                },
+                "type" : "array"
+              },
+              "go-type" : 18,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 18,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 39,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 2,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 39,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 39,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 40,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 20,
+                  "index" : {
+                    "go-type" : 17,
+                    "kind" : "constant",
+                    "value" : {
+                      "type" : "INT",
+                      "value" : "0"
+                    }
+                  },
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 19,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "ts",
+                      "variable" : 5
+                    }
+                  },
+                  "type" : "index"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "utimensat"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 185,
+      "code" : "err := utimensat(AT_FDCWD, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), 0)",
+      "entry" : false,
+      "use-vars" : [ 1, 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14, 15 ],
+      "in-vars" : [ 2, 6, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 6 ],
+      "decl-vars" : [ ],
+      "line-start" : 186,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 6
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 23,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "38"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 188,
+      "code" : "if err != ENOSYS {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 187,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 6
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 187,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 189,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "path",
+              "variable" : 1
+            }
+          }, {
+            "coerced-to" : {
+              "contained" : {
+                "element" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Timeval"
+                  }
+                },
+                "go-type" : 28,
+                "kind" : "type",
+                "length" : {
+                  "go-type" : 32,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "2"
+                  }
+                },
+                "type" : "array"
+              },
+              "go-type" : 27,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 27,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 39,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 2,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 39,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 39,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 41,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 4,
+                  "index" : {
+                    "go-type" : 17,
+                    "kind" : "constant",
+                    "value" : {
+                      "type" : "INT",
+                      "value" : "0"
+                    }
+                  },
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 3,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "tv",
+                      "variable" : 2
+                    }
+                  },
+                  "type" : "index"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 25,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "utimes"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 189,
+      "code" : "return utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))",
+      "entry" : false,
+      "use-vars" : [ 1, 2 ]
+    } ],
+    "code" : "func Utimes(path string, tv []Timeval) error {\n\tif tv == nil {\n\t\terr := utimensat(AT_FDCWD, path, nil, 0)\n\t\tif err != ENOSYS {\n\t\t\treturn err\n\t\t}\n\t\treturn utimes(path, nil)\n\t}\n\tif len(tv) != 2 {\n\t\treturn EINVAL\n\t}\n\tvar ts [2]Timespec\n\tts[0] = NsecToTimespec(TimevalToNsec(tv[0]))\n\tts[1] = NsecToTimespec(TimevalToNsec(tv[1]))\n\terr := utimensat(AT_FDCWD, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), 0)\n\tif err != ENOSYS {\n\t\treturn err\n\t}\n\treturn utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Utimes",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "utimensat",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "utimes",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false
+    }, {
+      "name" : "NsecToTimespec",
+      "package" : 0,
+      "type" : 33,
+      "exported" : true
+    }, {
+      "name" : "TimevalToNsec",
+      "package" : 0,
+      "type" : 36,
+      "exported" : true
+    } ],
+    "line-end" : 190,
+    "line-start" : 171,
+    "names" : [ "Utimes" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(path string, tv []golang.org/x/sys/unix.Timeval) error",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "path",
+        "type" : 2
+      }, {
+        "name" : "tv",
+        "type" : 3
+      } ],
+      "name" : "(path string, tv []golang.org/x/sys/unix.Timeval)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "[]golang.org/x/sys/unix.Timeval",
+      "type" : "Slice",
+      "underlying" : 3
+    }, {
+      "local-name" : "Timeval",
+      "name" : "golang.org/x/sys/unix.Timeval",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "fields" : [ {
+        "name" : "Sec",
+        "type" : 6
+      }, {
+        "name" : "Usec",
+        "type" : 6
+      } ],
+      "name" : "struct{Sec int64; Usec int64}",
+      "type" : "Struct",
+      "underlying" : 5
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 10
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 9
+    }, {
+      "name" : "func() string",
+      "params" : 11,
+      "recv" : 0,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 10,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "name" : "func(dirfd int, path string, times *[2]golang.org/x/sys/unix.Timespec, flags int) (err error)",
+      "params" : 16,
+      "recv" : -1,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 15,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "dirfd",
+        "type" : 17
+      }, {
+        "name" : "path",
+        "type" : 2
+      }, {
+        "name" : "times",
+        "type" : 18
+      }, {
+        "name" : "flags",
+        "type" : 17
+      } ],
+      "name" : "(dirfd int, path string, times *[2]golang.org/x/sys/unix.Timespec, flags int)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "elem" : 19,
+      "name" : "*[2]golang.org/x/sys/unix.Timespec",
+      "type" : "Pointer",
+      "underlying" : 18
+    }, {
+      "elem" : 20,
+      "name" : "[2]golang.org/x/sys/unix.Timespec",
+      "type" : "Array",
+      "underlying" : 19
+    }, {
+      "local-name" : "Timespec",
+      "name" : "golang.org/x/sys/unix.Timespec",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 21
+    }, {
+      "fields" : [ {
+        "name" : "Sec",
+        "type" : 6
+      }, {
+        "name" : "Nsec",
+        "type" : 6
+      } ],
+      "name" : "struct{Sec int64; Nsec int64}",
+      "type" : "Struct",
+      "underlying" : 21
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 8
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 22
+    }, {
+      "local-name" : "Errno",
+      "name" : "syscall.Errno",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 24
+    }, {
+      "name" : "func(path string, times *[2]golang.org/x/sys/unix.Timeval) (err error)",
+      "params" : 26,
+      "recv" : -1,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 25,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "path",
+        "type" : 2
+      }, {
+        "name" : "times",
+        "type" : 27
+      } ],
+      "name" : "(path string, times *[2]golang.org/x/sys/unix.Timeval)",
+      "type" : "Tuple",
+      "underlying" : 26
+    }, {
+      "elem" : 28,
+      "name" : "*[2]golang.org/x/sys/unix.Timeval",
+      "type" : "Pointer",
+      "underlying" : 27
+    }, {
+      "elem" : 4,
+      "name" : "[2]golang.org/x/sys/unix.Timeval",
+      "type" : "Array",
+      "underlying" : 28
+    }, {
+      "name" : "func([]golang.org/x/sys/unix.Timeval) int",
+      "params" : 30,
+      "recv" : -1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "([]golang.org/x/sys/unix.Timeval)",
+      "type" : "Tuple",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 31
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 32
+    }, {
+      "name" : "func(nsec int64) golang.org/x/sys/unix.Timespec",
+      "params" : 34,
+      "recv" : -1,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 33,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "nsec",
+        "type" : 6
+      } ],
+      "name" : "(nsec int64)",
+      "type" : "Tuple",
+      "underlying" : 34
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 20
+      } ],
+      "name" : "(golang.org/x/sys/unix.Timespec)",
+      "type" : "Tuple",
+      "underlying" : 35
+    }, {
+      "name" : "func(tv golang.org/x/sys/unix.Timeval) int64",
+      "params" : 37,
+      "recv" : -1,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 36,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "tv",
+        "type" : 4
+      } ],
+      "name" : "(tv golang.org/x/sys/unix.Timeval)",
+      "type" : "Tuple",
+      "underlying" : 37
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(int64)",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 2,
+      "type" : "Basic",
+      "underlying" : 39
+    }, {
+      "elem" : 20,
+      "name" : "*golang.org/x/sys/unix.Timespec",
+      "type" : "Pointer",
+      "underlying" : 40
+    }, {
+      "elem" : 4,
+      "name" : "*golang.org/x/sys/unix.Timeval",
+      "type" : "Pointer",
+      "underlying" : 41
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "path",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "tv",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "ts",
+      "package" : 0,
+      "type" : 19,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

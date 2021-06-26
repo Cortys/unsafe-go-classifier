@@ -1,0 +1,437 @@
+{
+  "usage" : {
+    "file" : "sys_linux.go",
+    "label1" : "cast-struct",
+    "label2" : "efficiency",
+    "line" : "48",
+    "module" : "golang.org/x/net",
+    "pkg" : "golang.org/x/net/ipv4",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "sa := (*sockaddrInet)(unsafe.Pointer(&gr.Group))",
+    "version" : "v0.0.0-20200324143707-d3edc9973b7e"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 3, 1 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 48,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "sa"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 7,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 7,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "sockaddrInet"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 6,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 11,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 2,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 11,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 11,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 12,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "Group",
+                  "variable" : 2
+                },
+                "go-type" : 5,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "gr",
+                    "variable" : 0
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 48,
+      "code" : "sa := (*sockaddrInet)(unsafe.Pointer(&gr.Group))",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ 3 ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 49,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Family",
+            "variable" : 4
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "sa",
+              "variable" : 3
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 7,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "2"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 49,
+      "code" : "sa.Family = syscall.AF_INET",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 50,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 3,
+            "type" : "slice",
+            "three" : false,
+            "high" : null,
+            "max" : null,
+            "kind" : "expression",
+            "low" : null,
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Addr",
+                "variable" : 5
+              },
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 6,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "sa",
+                  "variable" : 3
+                }
+              },
+              "type" : "selector"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "grp",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "copy"
+            }
+          },
+          "go-type" : 13,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 50,
+      "code" : "copy(sa.Addr[:], grp)",
+      "entry" : false,
+      "use-vars" : [ 1, 3 ]
+    } ],
+    "code" : "func (gr *groupReq) setGroup(grp net.IP) {\n\tsa := (*sockaddrInet)(unsafe.Pointer(&gr.Group))\n\tsa.Family = syscall.AF_INET\n\tcopy(sa.Addr[:], grp)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "setGroup",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    } ],
+    "line-end" : 51,
+    "line-start" : 47,
+    "names" : [ "setGroup" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "ipv4",
+      "path" : "golang.org/x/net/ipv4"
+    }, {
+      "name" : "net",
+      "path" : "net"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1 ],
+    "receivers" : [ 0 ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(grp net.IP)",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 5,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "grp",
+        "type" : 2
+      } ],
+      "name" : "(grp net.IP)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "IP",
+      "name" : "net.IP",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 3
+    }, {
+      "elem" : 4,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 3
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 5
+    }, {
+      "elem" : 7,
+      "name" : "*golang.org/x/net/ipv4.sockaddrInet",
+      "type" : "Pointer",
+      "underlying" : 6
+    }, {
+      "local-name" : "sockaddrInet",
+      "name" : "golang.org/x/net/ipv4.sockaddrInet",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "Family",
+        "type" : 7
+      }, {
+        "name" : "Port",
+        "type" : 7
+      }, {
+        "name" : "Addr",
+        "type" : 4
+      }, {
+        "name" : "X__pad",
+        "type" : 9
+      } ],
+      "name" : "struct{Family uint16; Port uint16; Addr [4]byte; X__pad [8]uint8}",
+      "type" : "Struct",
+      "underlying" : 8
+    }, {
+      "elem" : 10,
+      "name" : "[8]uint8",
+      "type" : "Array",
+      "underlying" : 9
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 2,
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "elem" : 5,
+      "name" : "*golang.org/x/net/ipv4.kernelSockaddrStorage",
+      "type" : "Pointer",
+      "underlying" : 12
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func([]byte, net.IP) int",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 16,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      }, {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "([]byte, net.IP)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 16
+    } ],
+    "variables" : [ {
+      "name" : "gr",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "grp",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "Group",
+      "package" : 0,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "sa",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "Family",
+      "package" : 0,
+      "type" : 7,
+      "exported" : true
+    }, {
+      "name" : "Addr",
+      "package" : 0,
+      "type" : 4,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

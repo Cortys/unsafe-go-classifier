@@ -1,0 +1,1427 @@
+{
+  "usage" : {
+    "file" : "syscalls.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "306",
+    "module" : "github.com/cilium/ebpf",
+    "pkg" : "github.com/cilium/ebpf",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "_, err = bpfCall(_ObjPin, unsafe.Pointer(&bpfPinObjAttr{",
+    "version" : "v0.0.0-20191113100448-d9fb101ca1fb"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 4, 2, 1 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 292,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "dirName"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fileName",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "filepath"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Dir"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 292,
+      "code" : "dirName := filepath.Dir(fileName)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 1, 4, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 4, 5, 2 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 293,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 15,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 3,
+                "value" : "unix"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 15,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Statfs_t"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "statfs"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 293,
+      "code" : "var statfs unix.Statfs_t",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 7 ],
+      "in-vars" : [ 6, 5, 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 6, 5, 2, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 294,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 6
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 28,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 296,
+      "code" : "if err := unix.Statfs(dirName, &statfs); err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 4, 5, 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 5, 2, 1, 6 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 294,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dirName",
+              "variable" : 4
+            }
+          }, {
+            "go-type" : 25,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 15,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "statfs",
+                "variable" : 5
+              }
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 23,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "unix"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Statfs"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 294,
+      "code" : "err := unix.Statfs(dirName, &statfs)",
+      "entry" : false,
+      "use-vars" : [ 4, 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 295,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 6
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 295,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 9 ],
+      "in-vars" : [ 2, 1, 5 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 297,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "coerced-to" : {
+              "go-type" : 17,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 17,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uint64"
+              }
+            },
+            "go-type" : 17,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Type",
+                "variable" : 7
+              },
+              "go-type" : 6,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 15,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "statfs",
+                  "variable" : 5
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 17,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "3405662737"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 299,
+      "code" : "if uint64(statfs.Type) != bpfFSType {\n\treturn errors.Errorf(\"%s is not on a bpf filesystem\", fileName)\n}",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 298,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "%s is not on a bpf filesystem"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fileName",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 298,
+      "code" : "return errors.Errorf(\"%s is not on a bpf filesystem\", fileName)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 8, 1, 9 ],
+      "decl-vars" : [ 8, 9 ],
+      "line-start" : 301,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "value"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "value"
+            },
+            "go-type" : 35,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "fd",
+                "variable" : 2
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 33,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 301,
+      "code" : "value, err := fd.value()",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11, 12 ],
+      "in-vars" : [ 9, 8, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 9, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 302,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 8
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 28,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 304,
+      "code" : "if err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 8 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 303,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 8
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 303,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 8 ]
+    }, {
+      "update-vars" : [ 8 ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 9, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 306,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 8
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 40,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "6"
+            }
+          }, {
+            "coerced-to" : {
+              "go-type" : 41,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 5,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 41,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 41,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 42,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "declared" : {
+                  "go-type" : 43,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 43,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "bpfPinObjAttr"
+                  }
+                },
+                "go-type" : 43,
+                "kind" : "literal",
+                "type" : "composite",
+                "values" : [ {
+                  "go-type" : -1,
+                  "key" : {
+                    "go-type" : -1,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "fileName",
+                      "variable" : 10
+                    }
+                  },
+                  "kind" : "expression",
+                  "type" : "key-value",
+                  "value" : {
+                    "arguments" : [ {
+                      "coerced-to" : {
+                        "go-type" : 41,
+                        "kind" : "type",
+                        "qualifier" : {
+                          "ident-kind" : "PkgName",
+                          "kind" : "ident",
+                          "package" : 5,
+                          "value" : "unsafe"
+                        },
+                        "type" : "identifier",
+                        "value" : {
+                          "go-type" : 41,
+                          "ident-kind" : "TypeName",
+                          "kind" : "ident",
+                          "value" : "Pointer"
+                        }
+                      },
+                      "go-type" : 41,
+                      "kind" : "expression",
+                      "target" : {
+                        "go-type" : 50,
+                        "kind" : "expression",
+                        "operator" : "&",
+                        "target" : {
+                          "go-type" : 51,
+                          "index" : {
+                            "go-type" : 40,
+                            "kind" : "constant",
+                            "value" : {
+                              "type" : "INT",
+                              "value" : "0"
+                            }
+                          },
+                          "kind" : "expression",
+                          "target" : {
+                            "coerced-to" : {
+                              "element" : {
+                                "go-type" : 51,
+                                "kind" : "type",
+                                "type" : "identifier",
+                                "value" : {
+                                  "go-type" : 51,
+                                  "ident-kind" : "TypeName",
+                                  "kind" : "ident",
+                                  "value" : "byte"
+                                }
+                              },
+                              "go-type" : 52,
+                              "kind" : "type",
+                              "type" : "slice"
+                            },
+                            "go-type" : 52,
+                            "kind" : "expression",
+                            "target" : {
+                              "go-type" : 2,
+                              "kind" : "expression",
+                              "type" : "identifier",
+                              "value" : {
+                                "ident-kind" : "Var",
+                                "kind" : "ident",
+                                "value" : "fileName",
+                                "variable" : 1
+                              }
+                            },
+                            "type" : "cast"
+                          },
+                          "type" : "index"
+                        },
+                        "type" : "unary"
+                      },
+                      "type" : "cast"
+                    } ],
+                    "ellipsis" : false,
+                    "function" : {
+                      "go-type" : 47,
+                      "kind" : "expression",
+                      "type" : "identifier",
+                      "value" : {
+                        "ident-kind" : "Func",
+                        "kind" : "ident",
+                        "value" : "newPtr"
+                      }
+                    },
+                    "go-type" : 45,
+                    "kind" : "expression",
+                    "type" : "call"
+                  }
+                }, {
+                  "go-type" : -1,
+                  "key" : {
+                    "go-type" : -1,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "fd",
+                      "variable" : 11
+                    }
+                  },
+                  "kind" : "expression",
+                  "type" : "key-value",
+                  "value" : {
+                    "go-type" : 34,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "value",
+                      "variable" : 9
+                    }
+                  }
+                } ]
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "16"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 38,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "bpfCall"
+            }
+          },
+          "go-type" : 36,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 8 ],
+      "line-end" : 309,
+      "code" : "_, err = bpfCall(_ObjPin, unsafe.Pointer(&bpfPinObjAttr{\n\tfileName: newPtr(unsafe.Pointer(&[]byte(fileName)[0])),\n\tfd:       value,\n}), 16)",
+      "entry" : false,
+      "use-vars" : [ 1, 9 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 8, 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 310,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 8
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "pin object %s"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fileName",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 53,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Wrapf"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 310,
+      "code" : "return errors.Wrapf(err, \"pin object %s\", fileName)",
+      "entry" : false,
+      "use-vars" : [ 1, 8 ]
+    } ],
+    "code" : "func bpfPinObject(fileName string, fd *bpfFD) error {\n\tdirName := filepath.Dir(fileName)\n\tvar statfs unix.Statfs_t\n\tif err := unix.Statfs(dirName, &statfs); err != nil {\n\t\treturn err\n\t}\n\tif uint64(statfs.Type) != bpfFSType {\n\t\treturn errors.Errorf(\"%s is not on a bpf filesystem\", fileName)\n\t}\n\n\tvalue, err := fd.value()\n\tif err != nil {\n\t\treturn err\n\t}\n\n\t_, err = bpfCall(_ObjPin, unsafe.Pointer(&bpfPinObjAttr{\n\t\tfileName: newPtr(unsafe.Pointer(&[]byte(fileName)[0])),\n\t\tfd:       value,\n\t}), 16)\n\treturn errors.Wrapf(err, \"pin object %s\", fileName)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "bpfPinObject",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Dir",
+      "package" : 1,
+      "type" : 13,
+      "exported" : true
+    }, {
+      "name" : "Statfs",
+      "package" : 3,
+      "type" : 23,
+      "exported" : true
+    }, {
+      "name" : "Errorf",
+      "package" : 4,
+      "type" : 29,
+      "exported" : true
+    }, {
+      "name" : "value",
+      "package" : 0,
+      "type" : 35,
+      "exported" : false
+    }, {
+      "name" : "bpfCall",
+      "package" : 0,
+      "type" : 38,
+      "exported" : false
+    }, {
+      "name" : "newPtr",
+      "package" : 0,
+      "type" : 47,
+      "exported" : false
+    }, {
+      "name" : "Wrapf",
+      "package" : 4,
+      "type" : 53,
+      "exported" : true
+    } ],
+    "line-end" : 311,
+    "line-start" : 291,
+    "names" : [ "bpfPinObject" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "ebpf",
+      "path" : "github.com/cilium/ebpf"
+    }, {
+      "name" : "filepath",
+      "path" : "path/filepath"
+    }, {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "unix",
+      "path" : "github.com/cilium/ebpf/internal/unix"
+    }, {
+      "name" : "errors",
+      "path" : "github.com/pkg/errors"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(fileName string, fd *github.com/cilium/ebpf.bpfFD) error",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fileName",
+        "type" : 2
+      }, {
+        "name" : "fd",
+        "type" : 3
+      } ],
+      "name" : "(fileName string, fd *github.com/cilium/ebpf.bpfFD)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "*github.com/cilium/ebpf.bpfFD",
+      "type" : "Pointer",
+      "underlying" : 3
+    }, {
+      "local-name" : "bpfFD",
+      "name" : "github.com/cilium/ebpf.bpfFD",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "fields" : [ {
+        "name" : "raw",
+        "type" : 6
+      } ],
+      "name" : "struct{raw int64}",
+      "type" : "Struct",
+      "underlying" : 5
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 10
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 9
+    }, {
+      "name" : "func() string",
+      "params" : 11,
+      "recv" : 0,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 10,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "func(path string) string",
+      "params" : 14,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 13,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "path",
+        "type" : 2
+      } ],
+      "name" : "(path string)",
+      "type" : "Tuple",
+      "underlying" : 14
+    }, {
+      "local-name" : "Statfs_t",
+      "name" : "golang.org/x/sys/unix.Statfs_t",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 16
+    }, {
+      "fields" : [ {
+        "name" : "Type",
+        "type" : 6
+      }, {
+        "name" : "Bsize",
+        "type" : 6
+      }, {
+        "name" : "Blocks",
+        "type" : 17
+      }, {
+        "name" : "Bfree",
+        "type" : 17
+      }, {
+        "name" : "Bavail",
+        "type" : 17
+      }, {
+        "name" : "Files",
+        "type" : 17
+      }, {
+        "name" : "Ffree",
+        "type" : 17
+      }, {
+        "name" : "Fsid",
+        "type" : 18
+      }, {
+        "name" : "Namelen",
+        "type" : 6
+      }, {
+        "name" : "Frsize",
+        "type" : 6
+      }, {
+        "name" : "Flags",
+        "type" : 6
+      }, {
+        "name" : "Spare",
+        "type" : 22
+      } ],
+      "name" : "struct{Type int64; Bsize int64; Blocks uint64; Bfree uint64; Bavail uint64; Files uint64; Ffree uint64; Fsid golang.org/x/sys/unix.Fsid; Namelen int64; Frsize int64; Flags int64; Spare [4]int64}",
+      "type" : "Struct",
+      "underlying" : 16
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "local-name" : "Fsid",
+      "name" : "golang.org/x/sys/unix.Fsid",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "Val",
+        "type" : 20
+      } ],
+      "name" : "struct{Val [2]int32}",
+      "type" : "Struct",
+      "underlying" : 19
+    }, {
+      "elem" : 21,
+      "name" : "[2]int32",
+      "type" : "Array",
+      "underlying" : 20
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "elem" : 6,
+      "name" : "[4]int64",
+      "type" : "Array",
+      "underlying" : 22
+    }, {
+      "name" : "func(path string, buf *golang.org/x/sys/unix.Statfs_t) (err error)",
+      "params" : 24,
+      "recv" : -1,
+      "results" : 26,
+      "type" : "Signature",
+      "underlying" : 23,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "path",
+        "type" : 2
+      }, {
+        "name" : "buf",
+        "type" : 25
+      } ],
+      "name" : "(path string, buf *golang.org/x/sys/unix.Statfs_t)",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "elem" : 15,
+      "name" : "*golang.org/x/sys/unix.Statfs_t",
+      "type" : "Pointer",
+      "underlying" : 25
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 8
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 26
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 27
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 28
+    }, {
+      "name" : "func(format string, args ...interface{}) error",
+      "params" : 30,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 2
+      }, {
+        "name" : "args",
+        "type" : 31
+      } ],
+      "name" : "(format string, args []interface{})",
+      "type" : "Tuple",
+      "underlying" : 30
+    }, {
+      "elem" : 32,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 31
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 32
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 34
+      }, {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(uint32, error)",
+      "type" : "Tuple",
+      "underlying" : 33
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 34
+    }, {
+      "name" : "func() (uint32, error)",
+      "params" : 11,
+      "recv" : -1,
+      "results" : 33,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 37
+      }, {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(uintptr, error)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 37
+    }, {
+      "name" : "func(cmd int, attr unsafe.Pointer, size uintptr) (uintptr, error)",
+      "params" : 39,
+      "recv" : -1,
+      "results" : 36,
+      "type" : "Signature",
+      "underlying" : 38,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "cmd",
+        "type" : 40
+      }, {
+        "name" : "attr",
+        "type" : 41
+      }, {
+        "name" : "size",
+        "type" : 37
+      } ],
+      "name" : "(cmd int, attr unsafe.Pointer, size uintptr)",
+      "type" : "Tuple",
+      "underlying" : 39
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 40
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 5,
+      "type" : "Basic",
+      "underlying" : 41
+    }, {
+      "elem" : 43,
+      "name" : "*github.com/cilium/ebpf.bpfPinObjAttr",
+      "type" : "Pointer",
+      "underlying" : 42
+    }, {
+      "local-name" : "bpfPinObjAttr",
+      "name" : "github.com/cilium/ebpf.bpfPinObjAttr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 44
+    }, {
+      "fields" : [ {
+        "name" : "fileName",
+        "type" : 45
+      }, {
+        "name" : "fd",
+        "type" : 34
+      }, {
+        "name" : "padding",
+        "type" : 34
+      } ],
+      "name" : "struct{fileName github.com/cilium/ebpf.syscallPtr; fd uint32; padding uint32}",
+      "type" : "Struct",
+      "underlying" : 44
+    }, {
+      "local-name" : "syscallPtr",
+      "name" : "github.com/cilium/ebpf.syscallPtr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 46
+    }, {
+      "fields" : [ {
+        "name" : "ptr",
+        "type" : 41
+      } ],
+      "name" : "struct{ptr unsafe.Pointer}",
+      "type" : "Struct",
+      "underlying" : 46
+    }, {
+      "name" : "func(ptr unsafe.Pointer) github.com/cilium/ebpf.syscallPtr",
+      "params" : 48,
+      "recv" : -1,
+      "results" : 49,
+      "type" : "Signature",
+      "underlying" : 47,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "ptr",
+        "type" : 41
+      } ],
+      "name" : "(ptr unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 48
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 45
+      } ],
+      "name" : "(github.com/cilium/ebpf.syscallPtr)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "elem" : 51,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 50
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 51
+    }, {
+      "elem" : 51,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 52
+    }, {
+      "name" : "func(err error, format string, args ...interface{}) error",
+      "params" : 54,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 53,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 8
+      }, {
+        "name" : "format",
+        "type" : 2
+      }, {
+        "name" : "args",
+        "type" : 31
+      } ],
+      "name" : "(err error, format string, args []interface{})",
+      "type" : "Tuple",
+      "underlying" : 54
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "fileName",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "dirName",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "statfs",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "Type",
+      "package" : 2,
+      "type" : 6,
+      "exported" : true
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "value",
+      "package" : 0,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "fileName",
+      "package" : 0,
+      "type" : 45,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 34,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

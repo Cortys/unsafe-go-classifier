@@ -1,0 +1,215 @@
+{
+  "usage" : {
+    "file" : "cached_token_authenticator.go",
+    "label1" : "cast-bytes",
+    "label2" : "efficiency",
+    "line" : "173",
+    "module" : "k8s.io/apiserver",
+    "pkg" : "k8s.io/apiserver/pkg/authentication/token/cache",
+    "project" : "rook/rook",
+    "snippet" : "return *(*string)(unsafe.Pointer(&b))",
+    "version" : "v0.17.2"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 173,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 5,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "string"
+                }
+              },
+              "go-type" : 6,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 7,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 7,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 7,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 8,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "b",
+                    "variable" : 0
+                  }
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 173,
+      "code" : "return *(*string)(unsafe.Pointer(&b))",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    } ],
+    "code" : "// toString performs unholy acts to avoid allocations\nfunc toString(b []byte) string {\n\treturn *(*string)(unsafe.Pointer(&b))\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "toString",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    } ],
+    "line-end" : 174,
+    "line-start" : 172,
+    "names" : [ "toString" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "cache",
+      "path" : "k8s.io/apiserver/pkg/authentication/token/cache"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0 ],
+    "receivers" : [ ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(b []byte) string",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 2
+      } ],
+      "name" : "(b []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 4
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "elem" : 5,
+      "name" : "*string",
+      "type" : "Pointer",
+      "underlying" : 6
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "elem" : 2,
+      "name" : "*[]byte",
+      "type" : "Pointer",
+      "underlying" : 8
+    } ],
+    "variables" : [ {
+      "name" : "b",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

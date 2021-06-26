@@ -1,0 +1,1029 @@
+{
+  "usage" : {
+    "file" : "lob.go",
+    "label1" : "cast-basic",
+    "label2" : "ffi",
+    "line" : "257",
+    "module" : "github.com/godror/godror",
+    "pkg" : "github.com/godror/godror",
+    "project" : "xo/usql",
+    "snippet" : "if C.dpiLob_writeBytes(dl.dpiLob, C.uint64_t(offset)+1, (*C.char)(unsafe.Pointer(&p[0])), n) == C.DPI_FAILURE {",
+    "version" : "v0.16.0"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 6 ],
+      "in-vars" : [ 2, 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 248,
+      "ast" : {
+        "condition" : {
+          "go-type" : 12,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "opened",
+              "variable" : 6
+            },
+            "go-type" : 12,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dl",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 254,
+      "code" : "if !dl.opened {\n\n\tif C.dpiLob_openResource(dl.dpiLob) == C.DPI_FAILURE {\n\t\treturn 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())\n\t}\n\tdl.opened = true\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 5 ],
+      "in-vars" : [ 1, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 250,
+      "ast" : {
+        "condition" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dpiLob",
+                "variable" : 7
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "dl",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 4,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "dpiLob_openResource"
+              }
+            },
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "DPI_FAILURE"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 252,
+      "code" : "if C.dpiLob_openResource(dl.dpiLob) == C.DPI_FAILURE {\n\treturn 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 251,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 6,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 12,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "openResources(%p): %w"
+            }
+          }, {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dpiLob",
+              "variable" : 7
+            },
+            "go-type" : 79,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dl",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          }, {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "getError"
+              },
+              "go-type" : 21,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "conn",
+                  "variable" : 8
+                },
+                "go-type" : 3,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "dl",
+                    "variable" : 1
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 5,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 251,
+      "code" : "return 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 1, 2, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 253,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "opened",
+            "variable" : 6
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "dl",
+              "variable" : 1
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "true"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 253,
+      "code" : "dl.opened = true",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 2, 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 9, 3 ],
+      "decl-vars" : [ 9 ],
+      "line-start" : 256,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "n"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "arguments" : [ {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 2
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 15,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "uint64_t"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 256,
+      "code" : "n := C.uint64_t(len(p))",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 9 ],
+      "in-vars" : [ 3, 1, 2, 9 ],
+      "exit" : false,
+      "out-vars" : [ 1, 9 ],
+      "decl-vars" : [ ],
+      "line-start" : 257,
+      "ast" : {
+        "condition" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "dpiLob",
+                "variable" : 7
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "dl",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            }, {
+              "go-type" : -1,
+              "kind" : "expression",
+              "left" : {
+                "arguments" : [ {
+                  "go-type" : 4,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "offset",
+                    "variable" : 3
+                  }
+                } ],
+                "ellipsis" : false,
+                "function" : {
+                  "go-type" : -1,
+                  "kind" : "expression",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 4,
+                    "value" : "C"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "NoKind",
+                    "kind" : "ident",
+                    "value" : "uint64_t"
+                  }
+                },
+                "go-type" : -1,
+                "kind" : "expression",
+                "type" : "call"
+              },
+              "operator" : "+",
+              "right" : {
+                "go-type" : 17,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "1"
+                }
+              },
+              "type" : "binary"
+            }, {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : -1,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 4,
+                    "value" : "C"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "NoKind",
+                    "kind" : "ident",
+                    "value" : "char"
+                  }
+                },
+                "go-type" : -1,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : -1,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 18,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 6,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 18,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 18,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 19,
+                  "kind" : "expression",
+                  "operator" : "&",
+                  "target" : {
+                    "go-type" : 3,
+                    "index" : {
+                      "go-type" : 6,
+                      "kind" : "constant",
+                      "value" : {
+                        "type" : "INT",
+                        "value" : "0"
+                      }
+                    },
+                    "kind" : "expression",
+                    "target" : {
+                      "go-type" : 2,
+                      "kind" : "expression",
+                      "type" : "identifier",
+                      "value" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "p",
+                        "variable" : 2
+                      }
+                    },
+                    "type" : "index"
+                  },
+                  "type" : "unary"
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            }, {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "n",
+                "variable" : 9
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 4,
+                "value" : "C"
+              },
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "NoKind",
+                "kind" : "ident",
+                "value" : "dpiLob_writeBytes"
+              }
+            },
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "C"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "DPI_FAILURE"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 259,
+      "code" : "if C.dpiLob_writeBytes(dl.dpiLob, C.uint64_t(offset)+1, (*C.char)(unsafe.Pointer(&p[0])), n) == C.DPI_FAILURE {\n\treturn int(n), errors.Errorf(\"writeBytes: %w\", dl.conn.getError())\n}",
+      "entry" : false,
+      "use-vars" : [ 2, 3, 9, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1, 9 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 258,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 6,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 6,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 9
+            }
+          },
+          "type" : "cast"
+        }, {
+          "arguments" : [ {
+            "go-type" : 12,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "writeBytes: %w"
+            }
+          }, {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "getError"
+              },
+              "go-type" : 21,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "conn",
+                  "variable" : 8
+                },
+                "go-type" : 3,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "dl",
+                    "variable" : 1
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 5,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 258,
+      "code" : "return int(n), errors.Errorf(\"writeBytes: %w\", dl.conn.getError())",
+      "entry" : false,
+      "use-vars" : [ 9, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 9 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 260,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 6,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 6,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int"
+            }
+          },
+          "go-type" : -1,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : -1,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 9
+            }
+          },
+          "type" : "cast"
+        }, {
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 260,
+      "code" : "return int(n), nil",
+      "entry" : false,
+      "use-vars" : [ 9 ]
+    } ],
+    "code" : "// WriteAt writes p starting at offset.\nfunc (dl *DirectLob) WriteAt(p []byte, offset int64) (int, error) {\n\tif !dl.opened {\n\n\t\tif C.dpiLob_openResource(dl.dpiLob) == C.DPI_FAILURE {\n\t\t\treturn 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())\n\t\t}\n\t\tdl.opened = true\n\t}\n\n\tn := C.uint64_t(len(p))\n\tif C.dpiLob_writeBytes(dl.dpiLob, C.uint64_t(offset)+1, (*C.char)(unsafe.Pointer(&p[0])), n) == C.DPI_FAILURE {\n\t\treturn int(n), errors.Errorf(\"writeBytes: %w\", dl.conn.getError())\n\t}\n\treturn int(n), nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "WriteAt",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "Errorf",
+      "package" : 5,
+      "type" : 13,
+      "exported" : true
+    }, {
+      "name" : "getError",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    } ],
+    "line-end" : 261,
+    "line-start" : 247,
+    "names" : [ "WriteAt" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "godror",
+      "path" : "github.com/godror/godror"
+    }, {
+      "name" : "driver",
+      "path" : "database/sql/driver"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "C",
+      "path" : "C"
+    }, {
+      "name" : "xerrors",
+      "path" : "golang.org/x/xerrors"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 2, 3 ],
+    "receivers" : [ 1 ],
+    "results" : [ 4, 5 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(p []byte, offset int64) (int, error)",
+      "params" : 1,
+      "recv" : 1,
+      "results" : 5,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 2
+      }, {
+        "name" : "offset",
+        "type" : 4
+      } ],
+      "name" : "(p []byte, offset int64)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(int, error)",
+      "type" : "Tuple",
+      "underlying" : 5
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 9
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 8
+    }, {
+      "name" : "func() string",
+      "params" : 10,
+      "recv" : 0,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 9,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 12
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "name" : "func(format string, a ...interface{}) error",
+      "params" : 14,
+      "recv" : -1,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 13,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 12
+      }, {
+        "name" : "a",
+        "type" : 62
+      } ],
+      "name" : "(format string, a []interface{})",
+      "type" : "Tuple",
+      "underlying" : 14
+    }, {
+      "name" : "func([]byte) int",
+      "params" : 16,
+      "recv" : -1,
+      "results" : 39,
+      "type" : "Signature",
+      "underlying" : 15,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 6,
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "elem" : 3,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 19
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 20
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "dl",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "offset",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "[res1]",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "opened",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "dpiLob",
+      "package" : 0,
+      "type" : 79,
+      "exported" : false
+    }, {
+      "name" : "conn",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 80,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

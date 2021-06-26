@@ -1,0 +1,746 @@
+{
+  "usage" : {
+    "file" : "syscall_linux.go",
+    "label1" : "cast-pointer",
+    "label2" : "serialization",
+    "line" : "839",
+    "module" : "golang.org/x/sys",
+    "pkg" : "golang.org/x/sys/unix",
+    "project" : "mattermost/mattermost-server",
+    "snippet" : "return unsafe.Pointer(&sa.raw), SizeofSockaddrTIPC, nil",
+    "version" : "v0.0.0-20200515095857-1151b9dac4a9"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 830,
+      "ast" : {
+        "condition" : {
+          "go-type" : 11,
+          "kind" : "expression",
+          "left" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Addr",
+              "variable" : 5
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 12,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 832,
+      "code" : "if sa.Addr == nil {\n\treturn nil, 0, EINVAL\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 831,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        }, {
+          "go-type" : 13,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "22"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 831,
+      "code" : "return nil, 0, EINVAL",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 834,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Family",
+            "variable" : 7
+          },
+          "go-type" : 15,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "raw",
+              "variable" : 6
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 15,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "30"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 834,
+      "code" : "sa.raw.Family = AF_TIPC",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 835,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Scope",
+            "variable" : 8
+          },
+          "go-type" : 16,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "raw",
+              "variable" : 6
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 16,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 16,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int8"
+            }
+          },
+          "go-type" : 16,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "Scope",
+              "variable" : 9
+            },
+            "go-type" : 3,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 835,
+      "code" : "sa.raw.Scope = int8(sa.Scope)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 836,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Addrtype",
+            "variable" : 10
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "raw",
+              "variable" : 6
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "tipcAddrtype"
+            },
+            "go-type" : 10,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Addr",
+                "variable" : 5
+              },
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "sa",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 836,
+      "code" : "sa.raw.Addrtype = sa.Addr.tipcAddrtype()",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 837,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Addr",
+            "variable" : 11
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "raw",
+              "variable" : 6
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "tipcAddr"
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "Addr",
+                "variable" : 5
+              },
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "sa",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 837,
+      "code" : "sa.raw.Addr = sa.Addr.tipcAddr()",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 839,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 3,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 3,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "raw",
+                "variable" : 6
+              },
+              "go-type" : 13,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "sa",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          },
+          "type" : "cast"
+        }, {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "16"
+          }
+        }, {
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 839,
+      "code" : "return unsafe.Pointer(&sa.raw), SizeofSockaddrTIPC, nil",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    } ],
+    "code" : "func (sa *SockaddrTIPC) sockaddr() (unsafe.Pointer, _Socklen, error) {\n\tif sa.Addr == nil {\n\t\treturn nil, 0, EINVAL\n\t}\n\n\tsa.raw.Family = AF_TIPC\n\tsa.raw.Scope = int8(sa.Scope)\n\tsa.raw.Addrtype = sa.Addr.tipcAddrtype()\n\tsa.raw.Addr = sa.Addr.tipcAddr()\n\n\treturn unsafe.Pointer(&sa.raw), SizeofSockaddrTIPC, nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "sockaddr",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "tipcAddrtype",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "tipcAddr",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    } ],
+    "line-end" : 840,
+    "line-start" : 829,
+    "names" : [ "sockaddr" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 1 ],
+    "results" : [ 2, 3, 4 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() (unsafe.Pointer, golang.org/x/sys/unix._Socklen, error)",
+      "params" : 1,
+      "recv" : 1,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      }, {
+        "name" : "",
+        "type" : 4
+      }, {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(unsafe.Pointer, golang.org/x/sys/unix._Socklen, error)",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "local-name" : "_Socklen",
+      "name" : "golang.org/x/sys/unix._Socklen",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 8
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 7
+    }, {
+      "name" : "func() string",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 10
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "local-name" : "Errno",
+      "name" : "syscall.Errno",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 14
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "elem" : 13,
+      "name" : "*golang.org/x/sys/unix.RawSockaddrTIPC",
+      "type" : "Pointer",
+      "underlying" : 15
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "sa",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "[res1]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "[res2]",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "Addr",
+      "package" : 0,
+      "type" : 4,
+      "exported" : true
+    }, {
+      "name" : "raw",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "Family",
+      "package" : 0,
+      "type" : 15,
+      "exported" : true
+    }, {
+      "name" : "Scope",
+      "package" : 0,
+      "type" : 16,
+      "exported" : true
+    }, {
+      "name" : "Scope",
+      "package" : 0,
+      "type" : 3,
+      "exported" : true
+    }, {
+      "name" : "Addrtype",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    }, {
+      "name" : "Addr",
+      "package" : 0,
+      "type" : 8,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

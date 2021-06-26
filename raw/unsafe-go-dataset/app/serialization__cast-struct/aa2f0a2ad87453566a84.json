@@ -1,0 +1,426 @@
+{
+  "usage" : {
+    "file" : "unsafe_iface.go",
+    "label1" : "cast-struct",
+    "label2" : "serialization",
+    "line" : "55",
+    "module" : "github.com/modern-go/reflect2",
+    "pkg" : "github.com/modern-go/reflect2",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "func (type2 *UnsafeIFaceType) UnsafeIsNil(ptr unsafe.Pointer) bool {",
+    "version" : "v1.0.1"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 56,
+      "ast" : {
+        "condition" : {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ptr",
+              "variable" : 1
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 58,
+      "code" : "if ptr == nil {\n\treturn true\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 57,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "true"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 57,
+      "code" : "return true",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 1 ],
+      "exit" : false,
+      "out-vars" : [ 3 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 59,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "iface"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 7,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 7,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "iface"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 6,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ptr",
+              "variable" : 1
+            }
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 59,
+      "code" : "iface := (*iface)(ptr)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 7 ],
+      "in-vars" : [ 3 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 60,
+      "ast" : {
+        "condition" : {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "itab",
+              "variable" : 4
+            },
+            "go-type" : 9,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "iface",
+                "variable" : 3
+              }
+            },
+            "type" : "selector"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 12,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 62,
+      "code" : "if iface.itab == nil {\n\treturn true\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 61,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "true"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 61,
+      "code" : "return true",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 63,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "false"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 63,
+      "code" : "return false",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func (type2 *UnsafeIFaceType) UnsafeIsNil(ptr unsafe.Pointer) bool {\n\tif ptr == nil {\n\t\treturn true\n\t}\n\tiface := (*iface)(ptr)\n\tif iface.itab == nil {\n\t\treturn true\n\t}\n\treturn false\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "UnsafeIsNil",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    } ],
+    "line-end" : 64,
+    "line-start" : 55,
+    "names" : [ "UnsafeIsNil" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "reflect2",
+      "path" : "github.com/modern-go/reflect2"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "concurrent",
+      "path" : "github.com/modern-go/concurrent"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "atomic",
+      "path" : "sync/atomic"
+    } ],
+    "params" : [ 1 ],
+    "receivers" : [ 0 ],
+    "results" : [ 2 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(ptr unsafe.Pointer) bool",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "ptr",
+        "type" : 2
+      } ],
+      "name" : "(ptr unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "elem" : 7,
+      "name" : "*github.com/modern-go/reflect2.iface",
+      "type" : "Pointer",
+      "underlying" : 6
+    }, {
+      "local-name" : "iface",
+      "name" : "github.com/modern-go/reflect2.iface",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "itab",
+        "type" : 9
+      }, {
+        "name" : "data",
+        "type" : 2
+      } ],
+      "name" : "struct{itab *github.com/modern-go/reflect2.itab; data unsafe.Pointer}",
+      "type" : "Struct",
+      "underlying" : 8
+    }, {
+      "elem" : 10,
+      "name" : "*github.com/modern-go/reflect2.itab",
+      "type" : "Pointer",
+      "underlying" : 9
+    }, {
+      "local-name" : "itab",
+      "name" : "github.com/modern-go/reflect2.itab",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "ignore",
+        "type" : 2
+      }, {
+        "name" : "rtype",
+        "type" : 2
+      } ],
+      "name" : "struct{ignore unsafe.Pointer; rtype unsafe.Pointer}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 12
+    } ],
+    "variables" : [ {
+      "name" : "type2",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "ptr",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "iface",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "itab",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

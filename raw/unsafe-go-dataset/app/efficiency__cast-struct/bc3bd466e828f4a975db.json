@@ -1,0 +1,2187 @@
+{
+  "usage" : {
+    "file" : "ring.go",
+    "label1" : "cast-struct",
+    "label2" : "efficiency",
+    "line" : "55",
+    "module" : "github.com/cilium/ebpf",
+    "pkg" : "github.com/cilium/ebpf/perf",
+    "project" : "cilium/cilium",
+    "snippet" : "meta := (*unix.PerfEventMmapPage)(unsafe.Pointer(&mmap[0]))",
+    "version" : "v0.0.0-20191113100448-d9fb101ca1fb"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 3, 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 3, 2, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 3, 2, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 25,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "watermark",
+              "variable" : 3
+            }
+          },
+          "operator" : ">=",
+          "right" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "perCPUBuffer",
+              "variable" : 2
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 27,
+      "code" : "if watermark >= perCPUBuffer {\n\treturn nil, errors.Errorf(\"watermark must be smaller than perCPUBuffer\")\n}",
+      "entry" : false,
+      "use-vars" : [ 3, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 26,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 28,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 26,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "watermark must be smaller than perCPUBuffer"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 26,
+      "code" : "return nil, errors.Errorf(\"watermark must be smaller than perCPUBuffer\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 2, 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1, 6, 3 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 31,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "pageSize"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 34,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 3,
+              "value" : "os"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Getpagesize"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 31,
+      "code" : "pageSize := os.Getpagesize()",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 6, 3, 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 6, 3, 7, 1 ],
+      "decl-vars" : [ 7 ],
+      "line-start" : 32,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "nPages"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "left" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "perCPUBuffer",
+                    "variable" : 2
+                  }
+                },
+                "operator" : "+",
+                "right" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "pageSize",
+                    "variable" : 6
+                  }
+                },
+                "type" : "binary"
+              },
+              "operator" : "-",
+              "right" : {
+                "go-type" : 2,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "1"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "/",
+          "right" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pageSize",
+              "variable" : 6
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 32,
+      "code" : "nPages := (perCPUBuffer + pageSize - 1) / pageSize",
+      "entry" : false,
+      "use-vars" : [ 2, 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 6, 3, 7, 1 ],
+      "exit" : false,
+      "out-vars" : [ 8, 3, 1 ],
+      "decl-vars" : [ 8 ],
+      "line-start" : 33,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "size"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "left" : {
+                "go-type" : 2,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "1"
+                }
+              },
+              "operator" : "+",
+              "right" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "nPages",
+                  "variable" : 7
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "*",
+          "right" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pageSize",
+              "variable" : 6
+            }
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 33,
+      "code" : "size := (1 + nPages) * pageSize",
+      "entry" : false,
+      "use-vars" : [ 7, 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 8, 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ 9, 10, 8, 1 ],
+      "decl-vars" : [ 10, 9 ],
+      "line-start" : 35,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "fd"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "cpu",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "watermark",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 37,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "createPerfEvent"
+            }
+          },
+          "go-type" : 36,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 35,
+      "code" : "fd, err := createPerfEvent(cpu, watermark)",
+      "entry" : false,
+      "use-vars" : [ 3, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9, 11 ],
+      "in-vars" : [ 8, 1, 9, 10 ],
+      "exit" : false,
+      "out-vars" : [ 9, 10, 8, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 36,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 9
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 28,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 38,
+      "code" : "if err != nil {\n\treturn nil, errors.Wrap(err, \"can't create perf event\")\n}",
+      "entry" : false,
+      "use-vars" : [ 9 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 9 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 37,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 28,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 9
+            }
+          }, {
+            "go-type" : 26,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "can't create perf event"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 39,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Wrap"
+            }
+          },
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 37,
+      "code" : "return nil, errors.Wrap(err, \"can't create perf event\")",
+      "entry" : false,
+      "use-vars" : [ 9 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12, 14 ],
+      "in-vars" : [ 8, 1, 11, 10 ],
+      "exit" : false,
+      "out-vars" : [ 1, 11, 10, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 40,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 11
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 28,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 43,
+      "code" : "if err := unix.SetNonblock(fd, true); err != nil {\n\tunix.Close(fd)\n\treturn nil, err\n}",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 10, 8, 1 ],
+      "exit" : false,
+      "out-vars" : [ 11, 10, 8, 1 ],
+      "decl-vars" : [ 11 ],
+      "line-start" : 40,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 10
+            }
+          }, {
+            "go-type" : 43,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "true"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 41,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unix"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "SetNonblock"
+            }
+          },
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 40,
+      "code" : "err := unix.SetNonblock(fd, true)",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 11, 10 ],
+      "exit" : false,
+      "out-vars" : [ 11 ],
+      "decl-vars" : [ ],
+      "line-start" : 41,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 10
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 45,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unix"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Close"
+            }
+          },
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 41,
+      "code" : "unix.Close(fd)",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 11 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 42,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 28,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 11
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 42,
+      "code" : "return nil, err",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 10, 8, 1 ],
+      "exit" : false,
+      "out-vars" : [ 9, 10, 12, 1 ],
+      "decl-vars" : [ 12, 9 ],
+      "line-start" : 45,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "mmap"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 9
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 10
+            }
+          }, {
+            "go-type" : 16,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 8
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "3"
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "1"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 48,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unix"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Mmap"
+            }
+          },
+          "go-type" : 47,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 45,
+      "code" : "mmap, err := unix.Mmap(fd, 0, size, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED)",
+      "entry" : false,
+      "use-vars" : [ 10, 8 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 16, 18 ],
+      "in-vars" : [ 9, 10, 12, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 9, 10, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : 46,
+      "ast" : {
+        "condition" : {
+          "go-type" : 27,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 21,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 9
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 28,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 49,
+      "code" : "if err != nil {\n\tunix.Close(fd)\n\treturn nil, err\n}",
+      "entry" : false,
+      "use-vars" : [ 9 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17 ],
+      "in-vars" : [ 9, 10 ],
+      "exit" : false,
+      "out-vars" : [ 9 ],
+      "decl-vars" : [ ],
+      "line-start" : 47,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 10
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 45,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unix"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Close"
+            }
+          },
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 47,
+      "code" : "unix.Close(fd)",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 9 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 48,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 28,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "go-type" : 21,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 9
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 48,
+      "code" : "return nil, err",
+      "entry" : false,
+      "use-vars" : [ 9 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ 10, 12, 1 ],
+      "exit" : false,
+      "out-vars" : [ 12, 13, 1, 10 ],
+      "decl-vars" : [ 13 ],
+      "line-start" : 55,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "meta"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 13,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unix"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 13,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "PerfEventMmapPage"
+              }
+            },
+            "go-type" : 12,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 50,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 4,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 50,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 50,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 51,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 8,
+                "index" : {
+                  "go-type" : 2,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 7,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "mmap",
+                    "variable" : 12
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 55,
+      "code" : "meta := (*unix.PerfEventMmapPage)(unsafe.Pointer(&mmap[0]))",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 20 ],
+      "in-vars" : [ 10, 12, 13, 1 ],
+      "exit" : false,
+      "out-vars" : [ 20 ],
+      "decl-vars" : [ 20 ],
+      "line-start" : 57,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ring"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 4,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "declared" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "perfEventRing"
+              }
+            },
+            "go-type" : 5,
+            "kind" : "literal",
+            "type" : "composite",
+            "values" : [ {
+              "go-type" : -1,
+              "key" : {
+                "go-type" : -1,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "fd",
+                  "variable" : 14
+                }
+              },
+              "kind" : "expression",
+              "type" : "key-value",
+              "value" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "fd",
+                  "variable" : 10
+                }
+              }
+            }, {
+              "go-type" : -1,
+              "key" : {
+                "go-type" : -1,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "cpu",
+                  "variable" : 15
+                }
+              },
+              "kind" : "expression",
+              "type" : "key-value",
+              "value" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "cpu",
+                  "variable" : 1
+                }
+              }
+            }, {
+              "go-type" : -1,
+              "key" : {
+                "go-type" : -1,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "mmap",
+                  "variable" : 16
+                }
+              },
+              "kind" : "expression",
+              "type" : "key-value",
+              "value" : {
+                "go-type" : 7,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "mmap",
+                  "variable" : 12
+                }
+              }
+            }, {
+              "go-type" : -1,
+              "key" : {
+                "go-type" : -1,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "ringReader",
+                  "variable" : 17
+                }
+              },
+              "kind" : "expression",
+              "type" : "key-value",
+              "value" : {
+                "arguments" : [ {
+                  "go-type" : 12,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "meta",
+                    "variable" : 13
+                  }
+                }, {
+                  "go-type" : 7,
+                  "type" : "slice",
+                  "three" : false,
+                  "high" : {
+                    "go-type" : 17,
+                    "kind" : "expression",
+                    "left" : {
+                      "field" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "Data_offset",
+                        "variable" : 18
+                      },
+                      "go-type" : 17,
+                      "kind" : "expression",
+                      "target" : {
+                        "go-type" : 12,
+                        "kind" : "expression",
+                        "type" : "identifier",
+                        "value" : {
+                          "ident-kind" : "Var",
+                          "kind" : "ident",
+                          "value" : "meta",
+                          "variable" : 13
+                        }
+                      },
+                      "type" : "selector"
+                    },
+                    "operator" : "+",
+                    "right" : {
+                      "field" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "Data_size",
+                        "variable" : 19
+                      },
+                      "go-type" : 17,
+                      "kind" : "expression",
+                      "target" : {
+                        "go-type" : 12,
+                        "kind" : "expression",
+                        "type" : "identifier",
+                        "value" : {
+                          "ident-kind" : "Var",
+                          "kind" : "ident",
+                          "value" : "meta",
+                          "variable" : 13
+                        }
+                      },
+                      "type" : "selector"
+                    },
+                    "type" : "binary"
+                  },
+                  "max" : null,
+                  "kind" : "expression",
+                  "low" : {
+                    "field" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "Data_offset",
+                      "variable" : 18
+                    },
+                    "go-type" : 17,
+                    "kind" : "expression",
+                    "target" : {
+                      "go-type" : 12,
+                      "kind" : "expression",
+                      "type" : "identifier",
+                      "value" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "meta",
+                        "variable" : 13
+                      }
+                    },
+                    "type" : "selector"
+                  },
+                  "target" : {
+                    "go-type" : 7,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "mmap",
+                      "variable" : 12
+                    }
+                  }
+                } ],
+                "ellipsis" : false,
+                "function" : {
+                  "go-type" : 52,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Func",
+                    "kind" : "ident",
+                    "value" : "newRingReader"
+                  }
+                },
+                "go-type" : 9,
+                "kind" : "expression",
+                "type" : "call"
+              }
+            } ]
+          },
+          "type" : "unary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 62,
+      "code" : "ring := &perfEventRing{\n\tfd:         fd,\n\tcpu:        cpu,\n\tmmap:       mmap,\n\tringReader: newRingReader(meta, mmap[meta.Data_offset:meta.Data_offset+meta.Data_size]),\n}",
+      "entry" : false,
+      "use-vars" : [ 10, 13, 12, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 21 ],
+      "in-vars" : [ 20 ],
+      "exit" : false,
+      "out-vars" : [ 20 ],
+      "decl-vars" : [ ],
+      "line-start" : 63,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ring",
+              "variable" : 20
+            }
+          }, {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Close"
+            },
+            "go-type" : 57,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 4,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 5,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 5,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "perfEventRing"
+                  }
+                },
+                "type" : "star"
+              },
+              "type" : "paren"
+            },
+            "type" : "selector"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 55,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 6,
+              "value" : "runtime"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "SetFinalizer"
+            }
+          },
+          "go-type" : 24,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 63,
+      "code" : "runtime.SetFinalizer(ring, (*perfEventRing).Close)",
+      "entry" : false,
+      "use-vars" : [ 20 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 20 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 65,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ring",
+            "variable" : 20
+          }
+        }, {
+          "go-type" : 28,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 65,
+      "code" : "return ring, nil",
+      "entry" : false,
+      "use-vars" : [ 20 ]
+    } ],
+    "code" : "func newPerfEventRing(cpu, perCPUBuffer, watermark int) (*perfEventRing, error) {\n\tif watermark >= perCPUBuffer {\n\t\treturn nil, errors.Errorf(\"watermark must be smaller than perCPUBuffer\")\n\t}\n\n\tpageSize := os.Getpagesize()\n\tnPages := (perCPUBuffer + pageSize - 1) / pageSize\n\tsize := (1 + nPages) * pageSize\n\n\tfd, err := createPerfEvent(cpu, watermark)\n\tif err != nil {\n\t\treturn nil, errors.Wrap(err, \"can't create perf event\")\n\t}\n\n\tif err := unix.SetNonblock(fd, true); err != nil {\n\t\tunix.Close(fd)\n\t\treturn nil, err\n\t}\n\n\tmmap, err := unix.Mmap(fd, 0, size, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED)\n\tif err != nil {\n\t\tunix.Close(fd)\n\t\treturn nil, err\n\t}\n\n\tmeta := (*unix.PerfEventMmapPage)(unsafe.Pointer(&mmap[0]))\n\n\tring := &perfEventRing{\n\t\tfd:         fd,\n\t\tcpu:        cpu,\n\t\tmmap:       mmap,\n\t\tringReader: newRingReader(meta, mmap[meta.Data_offset:meta.Data_offset+meta.Data_size]),\n\t}\n\truntime.SetFinalizer(ring, (*perfEventRing).Close)\n\n\treturn ring, nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "newPerfEventRing",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Errorf",
+      "package" : 2,
+      "type" : 29,
+      "exported" : true
+    }, {
+      "name" : "Getpagesize",
+      "package" : 3,
+      "type" : 34,
+      "exported" : true
+    }, {
+      "name" : "createPerfEvent",
+      "package" : 0,
+      "type" : 37,
+      "exported" : false
+    }, {
+      "name" : "Wrap",
+      "package" : 2,
+      "type" : 39,
+      "exported" : true
+    }, {
+      "name" : "SetNonblock",
+      "package" : 1,
+      "type" : 41,
+      "exported" : true
+    }, {
+      "name" : "Close",
+      "package" : 1,
+      "type" : 45,
+      "exported" : true
+    }, {
+      "name" : "Mmap",
+      "package" : 1,
+      "type" : 48,
+      "exported" : true
+    }, {
+      "name" : "newRingReader",
+      "package" : 0,
+      "type" : 52,
+      "exported" : false
+    }, {
+      "name" : "SetFinalizer",
+      "package" : 6,
+      "type" : 55,
+      "exported" : true
+    }, {
+      "name" : "Close",
+      "package" : 0,
+      "type" : 59,
+      "exported" : true
+    } ],
+    "line-end" : 66,
+    "line-start" : 24,
+    "names" : [ "newPerfEventRing" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "perf",
+      "path" : "github.com/cilium/ebpf/perf"
+    }, {
+      "name" : "unix",
+      "path" : "github.com/cilium/ebpf/internal/unix"
+    }, {
+      "name" : "errors",
+      "path" : "github.com/pkg/errors"
+    }, {
+      "name" : "os",
+      "path" : "os"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "runtime",
+      "path" : "runtime"
+    } ],
+    "params" : [ 1, 2, 3 ],
+    "receivers" : [ ],
+    "results" : [ 4, 5 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(cpu int, perCPUBuffer int, watermark int) (*github.com/cilium/ebpf/perf.perfEventRing, error)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "cpu",
+        "type" : 2
+      }, {
+        "name" : "perCPUBuffer",
+        "type" : 2
+      }, {
+        "name" : "watermark",
+        "type" : 2
+      } ],
+      "name" : "(cpu int, perCPUBuffer int, watermark int)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      }, {
+        "name" : "",
+        "type" : 21
+      } ],
+      "name" : "(*github.com/cilium/ebpf/perf.perfEventRing, error)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "elem" : 5,
+      "name" : "*github.com/cilium/ebpf/perf.perfEventRing",
+      "type" : "Pointer",
+      "underlying" : 4
+    }, {
+      "local-name" : "perfEventRing",
+      "name" : "github.com/cilium/ebpf/perf.perfEventRing",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "cpu",
+        "type" : 2
+      }, {
+        "name" : "mmap",
+        "type" : 7
+      }, {
+        "name" : "ringReader",
+        "type" : 9
+      } ],
+      "name" : "struct{fd int; cpu int; mmap []byte; *github.com/cilium/ebpf/perf.ringReader}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "elem" : 8,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 7
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "elem" : 10,
+      "name" : "*github.com/cilium/ebpf/perf.ringReader",
+      "type" : "Pointer",
+      "underlying" : 9
+    }, {
+      "local-name" : "ringReader",
+      "name" : "github.com/cilium/ebpf/perf.ringReader",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "meta",
+        "type" : 12
+      }, {
+        "name" : "head",
+        "type" : 17
+      }, {
+        "name" : "tail",
+        "type" : 17
+      }, {
+        "name" : "mask",
+        "type" : 17
+      }, {
+        "name" : "ring",
+        "type" : 7
+      } ],
+      "name" : "struct{meta *github.com/cilium/ebpf/internal/unix.PerfEventMmapPage; head uint64; tail uint64; mask uint64; ring []byte}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "elem" : 13,
+      "name" : "*github.com/cilium/ebpf/internal/unix.PerfEventMmapPage",
+      "type" : "Pointer",
+      "underlying" : 12
+    }, {
+      "local-name" : "PerfEventMmapPage",
+      "name" : "github.com/cilium/ebpf/internal/unix.PerfEventMmapPage",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 14
+    }, {
+      "fields" : [ {
+        "name" : "Version",
+        "type" : 15
+      }, {
+        "name" : "Compat_version",
+        "type" : 15
+      }, {
+        "name" : "Lock",
+        "type" : 15
+      }, {
+        "name" : "Index",
+        "type" : 15
+      }, {
+        "name" : "Offset",
+        "type" : 16
+      }, {
+        "name" : "Time_enabled",
+        "type" : 17
+      }, {
+        "name" : "Time_running",
+        "type" : 17
+      }, {
+        "name" : "Capabilities",
+        "type" : 17
+      }, {
+        "name" : "Pmc_width",
+        "type" : 18
+      }, {
+        "name" : "Time_shift",
+        "type" : 18
+      }, {
+        "name" : "Time_mult",
+        "type" : 15
+      }, {
+        "name" : "Time_offset",
+        "type" : 17
+      }, {
+        "name" : "Time_zero",
+        "type" : 17
+      }, {
+        "name" : "Size",
+        "type" : 15
+      }, {
+        "name" : "_",
+        "type" : 19
+      }, {
+        "name" : "Data_head",
+        "type" : 17
+      }, {
+        "name" : "Data_tail",
+        "type" : 17
+      }, {
+        "name" : "Data_offset",
+        "type" : 17
+      }, {
+        "name" : "Data_size",
+        "type" : 17
+      }, {
+        "name" : "Aux_head",
+        "type" : 17
+      }, {
+        "name" : "Aux_tail",
+        "type" : 17
+      }, {
+        "name" : "Aux_offset",
+        "type" : 17
+      }, {
+        "name" : "Aux_size",
+        "type" : 17
+      } ],
+      "name" : "struct{Version uint32; Compat_version uint32; Lock uint32; Index uint32; Offset int64; Time_enabled uint64; Time_running uint64; Capabilities uint64; Pmc_width uint16; Time_shift uint16; Time_mult uint32; Time_offset uint64; Time_zero uint64; Size uint32; _ [948]uint8; Data_head uint64; Data_tail uint64; Data_offset uint64; Data_size uint64; Aux_head uint64; Aux_tail uint64; Aux_offset uint64; Aux_size uint64}",
+      "type" : "Struct",
+      "underlying" : 14
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 16
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "elem" : 20,
+      "name" : "[948]uint8",
+      "type" : "Array",
+      "underlying" : 19
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 23
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 22
+    }, {
+      "name" : "func() string",
+      "params" : 24,
+      "recv" : 0,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 23,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 26
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 25
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 26
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 27
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 28
+    }, {
+      "name" : "func(format string, args ...interface{}) error",
+      "params" : 30,
+      "recv" : -1,
+      "results" : 33,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 26
+      }, {
+        "name" : "args",
+        "type" : 31
+      } ],
+      "name" : "(format string, args []interface{})",
+      "type" : "Tuple",
+      "underlying" : 30
+    }, {
+      "elem" : 32,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 31
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 32
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 21
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 33
+    }, {
+      "name" : "func() int",
+      "params" : 24,
+      "recv" : -1,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 34,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 35
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      }, {
+        "name" : "",
+        "type" : 21
+      } ],
+      "name" : "(int, error)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "func(cpu int, watermark int) (int, error)",
+      "params" : 38,
+      "recv" : -1,
+      "results" : 36,
+      "type" : "Signature",
+      "underlying" : 37,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "cpu",
+        "type" : 2
+      }, {
+        "name" : "watermark",
+        "type" : 2
+      } ],
+      "name" : "(cpu int, watermark int)",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "name" : "func(err error, message string) error",
+      "params" : 40,
+      "recv" : -1,
+      "results" : 33,
+      "type" : "Signature",
+      "underlying" : 39,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 21
+      }, {
+        "name" : "message",
+        "type" : 26
+      } ],
+      "name" : "(err error, message string)",
+      "type" : "Tuple",
+      "underlying" : 40
+    }, {
+      "name" : "func(fd int, nonblocking bool) (err error)",
+      "params" : 42,
+      "recv" : -1,
+      "results" : 44,
+      "type" : "Signature",
+      "underlying" : 41,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "nonblocking",
+        "type" : 43
+      } ],
+      "name" : "(fd int, nonblocking bool)",
+      "type" : "Tuple",
+      "underlying" : 42
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 43
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 21
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 44
+    }, {
+      "name" : "func(fd int) (err error)",
+      "params" : 46,
+      "recv" : -1,
+      "results" : 44,
+      "type" : "Signature",
+      "underlying" : 45,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      } ],
+      "name" : "(fd int)",
+      "type" : "Tuple",
+      "underlying" : 46
+    }, {
+      "fields" : [ {
+        "name" : "data",
+        "type" : 7
+      }, {
+        "name" : "err",
+        "type" : 21
+      } ],
+      "name" : "(data []byte, err error)",
+      "type" : "Tuple",
+      "underlying" : 47
+    }, {
+      "name" : "func(fd int, offset int64, length int, prot int, flags int) (data []byte, err error)",
+      "params" : 49,
+      "recv" : -1,
+      "results" : 47,
+      "type" : "Signature",
+      "underlying" : 48,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "offset",
+        "type" : 16
+      }, {
+        "name" : "length",
+        "type" : 2
+      }, {
+        "name" : "prot",
+        "type" : 2
+      }, {
+        "name" : "flags",
+        "type" : 2
+      } ],
+      "name" : "(fd int, offset int64, length int, prot int, flags int)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 4,
+      "type" : "Basic",
+      "underlying" : 50
+    }, {
+      "elem" : 8,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 51
+    }, {
+      "name" : "func(meta *github.com/cilium/ebpf/internal/unix.PerfEventMmapPage, ring []byte) *github.com/cilium/ebpf/perf.ringReader",
+      "params" : 53,
+      "recv" : -1,
+      "results" : 54,
+      "type" : "Signature",
+      "underlying" : 52,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "meta",
+        "type" : 12
+      }, {
+        "name" : "ring",
+        "type" : 7
+      } ],
+      "name" : "(meta *github.com/cilium/ebpf/internal/unix.PerfEventMmapPage, ring []byte)",
+      "type" : "Tuple",
+      "underlying" : 53
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(*github.com/cilium/ebpf/perf.ringReader)",
+      "type" : "Tuple",
+      "underlying" : 54
+    }, {
+      "name" : "func(obj interface{}, finalizer interface{})",
+      "params" : 56,
+      "recv" : -1,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 55,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "obj",
+        "type" : 32
+      }, {
+        "name" : "finalizer",
+        "type" : 32
+      } ],
+      "name" : "(obj interface{}, finalizer interface{})",
+      "type" : "Tuple",
+      "underlying" : 56
+    }, {
+      "name" : "func(*github.com/cilium/ebpf/perf.perfEventRing)",
+      "params" : 58,
+      "recv" : -1,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 57,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(*github.com/cilium/ebpf/perf.perfEventRing)",
+      "type" : "Tuple",
+      "underlying" : 58
+    }, {
+      "name" : "func()",
+      "params" : 24,
+      "recv" : 21,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 59,
+      "variadic" : false
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "cpu",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "perCPUBuffer",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "watermark",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "[res1]",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "pageSize",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "nPages",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "size",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "mmap",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "meta",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "cpu",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "mmap",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "ringReader",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "Data_offset",
+      "package" : 5,
+      "type" : 17,
+      "exported" : true
+    }, {
+      "name" : "Data_size",
+      "package" : 5,
+      "type" : 17,
+      "exported" : true
+    }, {
+      "name" : "ring",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "ring",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

@@ -1,0 +1,872 @@
+{
+  "usage" : {
+    "file" : "config.go",
+    "label1" : "delegate",
+    "label2" : "atomic",
+    "line" : "413",
+    "module" : "go.elastic.co/apm",
+    "pkg" : "go.elastic.co/apm",
+    "project" : "elastic/beats",
+    "snippet" : "unsafe.Pointer(oldConfig),",
+    "version" : "v1.7.2"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1, 3 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 407,
+      "ast" : {
+        "condition" : null,
+        "kind" : "statement",
+        "type" : "for"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 418,
+      "code" : "for {\n\toldConfig := t.instrumentationConfig()\n\tnewConfig := *oldConfig\n\tf(&newConfig)\n\tif atomic.CompareAndSwapPointer(\n\t\t(*unsafe.Pointer)(unsafe.Pointer(&t.instrumentationConfigInternal)),\n\t\tunsafe.Pointer(oldConfig),\n\t\tunsafe.Pointer(&newConfig),\n\t) {\n\t\treturn\n\t}\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 2, 3, 1 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 408,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "oldConfig"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "instrumentationConfig"
+            },
+            "go-type" : 41,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "t",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 408,
+      "code" : "oldConfig := t.instrumentationConfig()",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 3, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 2, 3, 1 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 409,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "newConfig"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "oldConfig",
+              "variable" : 3
+            }
+          },
+          "type" : "star"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 409,
+      "code" : "newConfig := *oldConfig",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 3, 1, 4, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 2, 3, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 410,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 4,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "newConfig",
+                "variable" : 4
+              }
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "f",
+              "variable" : 2
+            }
+          },
+          "go-type" : 38,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 410,
+      "code" : "f(&newConfig)",
+      "entry" : false,
+      "use-vars" : [ 2, 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 2, 7 ],
+      "in-vars" : [ 3, 1, 4, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 411,
+      "ast" : {
+        "condition" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 303,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 13,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 303,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 45,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 45,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 303,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 13,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 303,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 303,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 47,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "instrumentationConfigInternal",
+                    "variable" : 5
+                  },
+                  "go-type" : 4,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 0,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "t",
+                      "variable" : 1
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 303,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 13,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 303,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 303,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "oldConfig",
+                "variable" : 3
+              }
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 303,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 13,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 303,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 303,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 4,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 5,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "newConfig",
+                  "variable" : 4
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 43,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 14,
+              "value" : "atomic"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "CompareAndSwapPointer"
+            }
+          },
+          "go-type" : 11,
+          "kind" : "expression",
+          "type" : "call"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 417,
+      "code" : "if atomic.CompareAndSwapPointer(\n\t(*unsafe.Pointer)(unsafe.Pointer(&t.instrumentationConfigInternal)),\n\tunsafe.Pointer(oldConfig),\n\tunsafe.Pointer(&newConfig),\n) {\n\treturn\n}",
+      "entry" : false,
+      "use-vars" : [ 4, 1, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 416,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 416,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func (t *Tracer) updateInstrumentationConfig(f func(cfg *instrumentationConfig)) {\n\tfor {\n\t\toldConfig := t.instrumentationConfig()\n\t\tnewConfig := *oldConfig\n\t\tf(&newConfig)\n\t\tif atomic.CompareAndSwapPointer(\n\t\t\t(*unsafe.Pointer)(unsafe.Pointer(&t.instrumentationConfigInternal)),\n\t\t\tunsafe.Pointer(oldConfig),\n\t\t\tunsafe.Pointer(&newConfig),\n\t\t) {\n\t\t\treturn\n\t\t}\n\t}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "updateInstrumentationConfig",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "instrumentationConfig",
+      "package" : 0,
+      "type" : 41,
+      "exported" : false
+    }, {
+      "name" : "CompareAndSwapPointer",
+      "package" : 14,
+      "type" : 43,
+      "exported" : true
+    } ],
+    "line-end" : 419,
+    "line-start" : 406,
+    "names" : [ "updateInstrumentationConfig" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "apm",
+      "path" : "go.elastic.co/apm"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "transport",
+      "path" : "go.elastic.co/apm/transport"
+    }, {
+      "name" : "context",
+      "path" : "context"
+    }, {
+      "name" : "io",
+      "path" : "io"
+    }, {
+      "name" : "model",
+      "path" : "go.elastic.co/apm/model"
+    }, {
+      "name" : "wildcard",
+      "path" : "go.elastic.co/apm/internal/wildcard"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "stacktrace",
+      "path" : "go.elastic.co/apm/stacktrace"
+    }, {
+      "name" : "apmconfig",
+      "path" : "go.elastic.co/apm/apmconfig"
+    }, {
+      "name" : "url",
+      "path" : "net/url"
+    }, {
+      "name" : "http",
+      "path" : "net/http"
+    }, {
+      "name" : "rand",
+      "path" : "math/rand"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "atomic",
+      "path" : "sync/atomic"
+    } ],
+    "params" : [ 2 ],
+    "receivers" : [ 1 ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(f func(cfg *go.elastic.co/apm.instrumentationConfig))",
+      "params" : 1,
+      "recv" : 1,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "f",
+        "type" : 2
+      } ],
+      "name" : "(f func(cfg *go.elastic.co/apm.instrumentationConfig))",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "func(cfg *go.elastic.co/apm.instrumentationConfig)",
+      "params" : 3,
+      "recv" : -1,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 2,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "cfg",
+        "type" : 4
+      } ],
+      "name" : "(cfg *go.elastic.co/apm.instrumentationConfig)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "elem" : 5,
+      "name" : "*go.elastic.co/apm.instrumentationConfig",
+      "type" : "Pointer",
+      "underlying" : 4
+    }, {
+      "local-name" : "instrumentationConfig",
+      "name" : "go.elastic.co/apm.instrumentationConfig",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "instrumentationConfigValues",
+        "type" : 7
+      }, {
+        "name" : "local",
+        "type" : 34
+      }, {
+        "name" : "remote",
+        "type" : 39
+      } ],
+      "name" : "struct{go.elastic.co/apm.instrumentationConfigValues; local map[string]func(*go.elastic.co/apm.instrumentationConfigValues); remote map[string]struct{}}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "local-name" : "instrumentationConfigValues",
+      "name" : "go.elastic.co/apm.instrumentationConfigValues",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "captureBody",
+        "type" : 9
+      }, {
+        "name" : "captureHeaders",
+        "type" : 11
+      }, {
+        "name" : "maxSpans",
+        "type" : 10
+      }, {
+        "name" : "sampler",
+        "type" : 12
+      }, {
+        "name" : "spanFramesMinDuration",
+        "type" : 32
+      }, {
+        "name" : "stackTraceLimit",
+        "type" : 10
+      }, {
+        "name" : "propagateLegacyHeader",
+        "type" : 11
+      } ],
+      "name" : "struct{captureBody go.elastic.co/apm.CaptureBodyMode; captureHeaders bool; maxSpans int; sampler go.elastic.co/apm.Sampler; spanFramesMinDuration time.Duration; stackTraceLimit int; propagateLegacyHeader bool}",
+      "type" : "Struct",
+      "underlying" : 8
+    }, {
+      "local-name" : "CaptureBodyMode",
+      "name" : "go.elastic.co/apm.CaptureBodyMode",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 10
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "local-name" : "Sampler",
+      "name" : "go.elastic.co/apm.Sampler",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "methods" : [ {
+        "name" : "Sample",
+        "type" : 14
+      } ],
+      "name" : "interface{Sample(go.elastic.co/apm.TraceContext) bool}",
+      "type" : "Interface",
+      "underlying" : 13
+    }, {
+      "name" : "func(go.elastic.co/apm.TraceContext) bool",
+      "params" : 15,
+      "recv" : 0,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 16
+      } ],
+      "name" : "(go.elastic.co/apm.TraceContext)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "local-name" : "TraceContext",
+      "name" : "go.elastic.co/apm.TraceContext",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 17
+    }, {
+      "fields" : [ {
+        "name" : "Trace",
+        "type" : 18
+      }, {
+        "name" : "Span",
+        "type" : 21
+      }, {
+        "name" : "Options",
+        "type" : 23
+      }, {
+        "name" : "State",
+        "type" : 25
+      } ],
+      "name" : "struct{Trace go.elastic.co/apm.TraceID; Span go.elastic.co/apm.SpanID; Options go.elastic.co/apm.TraceOptions; State go.elastic.co/apm.TraceState}",
+      "type" : "Struct",
+      "underlying" : 17
+    }, {
+      "local-name" : "TraceID",
+      "name" : "go.elastic.co/apm.TraceID",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "elem" : 20,
+      "name" : "[16]byte",
+      "type" : "Array",
+      "underlying" : 19
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "local-name" : "SpanID",
+      "name" : "go.elastic.co/apm.SpanID",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "elem" : 20,
+      "name" : "[8]byte",
+      "type" : "Array",
+      "underlying" : 22
+    }, {
+      "local-name" : "TraceOptions",
+      "name" : "go.elastic.co/apm.TraceOptions",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 24
+    }, {
+      "local-name" : "TraceState",
+      "name" : "go.elastic.co/apm.TraceState",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "head",
+        "type" : 27
+      } ],
+      "name" : "struct{head *go.elastic.co/apm.TraceStateEntry}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "elem" : 28,
+      "name" : "*go.elastic.co/apm.TraceStateEntry",
+      "type" : "Pointer",
+      "underlying" : 27
+    }, {
+      "local-name" : "TraceStateEntry",
+      "name" : "go.elastic.co/apm.TraceStateEntry",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 29
+    }, {
+      "fields" : [ {
+        "name" : "next",
+        "type" : 27
+      }, {
+        "name" : "Key",
+        "type" : 30
+      }, {
+        "name" : "Value",
+        "type" : 30
+      } ],
+      "name" : "struct{next *go.elastic.co/apm.TraceStateEntry; Key string; Value string}",
+      "type" : "Struct",
+      "underlying" : 29
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 11
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 31
+    }, {
+      "local-name" : "Duration",
+      "name" : "time.Duration",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 33
+    }, {
+      "elem" : 35,
+      "key" : 30,
+      "name" : "map[string]func(*go.elastic.co/apm.instrumentationConfigValues)",
+      "type" : "Map",
+      "underlying" : 34
+    }, {
+      "name" : "func(*go.elastic.co/apm.instrumentationConfigValues)",
+      "params" : 36,
+      "recv" : -1,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 37
+      } ],
+      "name" : "(*go.elastic.co/apm.instrumentationConfigValues)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "elem" : 7,
+      "name" : "*go.elastic.co/apm.instrumentationConfigValues",
+      "type" : "Pointer",
+      "underlying" : 37
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "elem" : 40,
+      "key" : 30,
+      "name" : "map[string]struct{}",
+      "type" : "Map",
+      "underlying" : 39
+    }, {
+      "fields" : [ ],
+      "name" : "struct{}",
+      "type" : "Struct",
+      "underlying" : 40
+    }, {
+      "name" : "func() *go.elastic.co/apm.instrumentationConfig",
+      "params" : 38,
+      "recv" : -1,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 41,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(*go.elastic.co/apm.instrumentationConfig)",
+      "type" : "Tuple",
+      "underlying" : 42
+    }, {
+      "name" : "func(addr *unsafe.Pointer, old unsafe.Pointer, new unsafe.Pointer) (swapped bool)",
+      "params" : 44,
+      "recv" : -1,
+      "results" : 46,
+      "type" : "Signature",
+      "underlying" : 43,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "addr",
+        "type" : 45
+      }, {
+        "name" : "old",
+        "type" : 303
+      }, {
+        "name" : "new",
+        "type" : 303
+      } ],
+      "name" : "(addr *unsafe.Pointer, old unsafe.Pointer, new unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 44
+    }, {
+      "elem" : 303,
+      "name" : "*unsafe.Pointer",
+      "type" : "Pointer",
+      "underlying" : 45
+    }, {
+      "fields" : [ {
+        "name" : "swapped",
+        "type" : 11
+      } ],
+      "name" : "(swapped bool)",
+      "type" : "Tuple",
+      "underlying" : 46
+    }, {
+      "elem" : 4,
+      "name" : "**go.elastic.co/apm.instrumentationConfig",
+      "type" : "Pointer",
+      "underlying" : 47
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "f",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "oldConfig",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "newConfig",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "instrumentationConfigInternal",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

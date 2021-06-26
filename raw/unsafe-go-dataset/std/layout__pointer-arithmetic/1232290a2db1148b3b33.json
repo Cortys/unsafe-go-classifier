@@ -1,0 +1,217 @@
+{
+  "usage" : {
+    "file" : "type.go",
+    "label1" : "pointer-arithmetic",
+    "label2" : "layout",
+    "line" : "1033",
+    "module" : "std",
+    "pkg" : "reflect",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "func add(p unsafe.Pointer, x uintptr, whySafe string) unsafe.Pointer {",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 1034,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 2,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "unsafe"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 2,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Pointer"
+            }
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "left" : {
+              "coerced-to" : {
+                "go-type" : 3,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 3,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uintptr"
+                }
+              },
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "p",
+                  "variable" : 0
+                }
+              },
+              "type" : "cast"
+            },
+            "operator" : "+",
+            "right" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "x",
+                "variable" : 1
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "cast"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1034,
+      "code" : "return unsafe.Pointer(uintptr(p) + x)",
+      "entry" : false,
+      "use-vars" : [ 0, 1 ]
+    } ],
+    "code" : "// add returns p+x.\n//\n// The whySafe string is ignored, so that the function still inlines\n// as efficiently as p+x, but all call sites should use the string to\n// record why the addition is safe, which is to say why the addition\n// does not cause x to advance to the very end of p's allocation\n// and therefore point incorrectly at the next block in memory.\nfunc add(p unsafe.Pointer, x uintptr, whySafe string) unsafe.Pointer {\n\treturn unsafe.Pointer(uintptr(p) + x)\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "add",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    } ],
+    "line-end" : 1035,
+    "line-start" : 1033,
+    "names" : [ "add" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0, 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(p unsafe.Pointer, x uintptr, whySafe string) unsafe.Pointer",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 5,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 2
+      }, {
+        "name" : "x",
+        "type" : 3
+      }, {
+        "name" : "whySafe",
+        "type" : 4
+      } ],
+      "name" : "(p unsafe.Pointer, x uintptr, whySafe string)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 5
+    } ],
+    "variables" : [ {
+      "name" : "p",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "whySafe",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

@@ -1,0 +1,738 @@
+{
+  "usage" : {
+    "file" : "syscall_linux.go",
+    "label1" : "cast-bytes",
+    "label2" : "efficiency",
+    "line" : "2025",
+    "module" : "golang.org/x/sys",
+    "pkg" : "golang.org/x/sys/unix",
+    "project" : "cilium/cilium",
+    "snippet" : "fh := (*fileHandle)(unsafe.Pointer(&buf[0]))",
+    "version" : "v0.0.0-20200420163511-1957bb5e6d1f"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0, 1 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 2022,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : null,
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "hdrSize"
+            } ],
+            "type" : "const",
+            "values" : [ {
+              "go-type" : 12,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "8"
+              }
+            } ]
+          } ],
+          "type" : "const"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2022,
+      "code" : "const hdrSize = unsafe.Sizeof(fileHandle{})",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 1, 0 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 2023,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "buf"
+          }
+        } ],
+        "right" : [ {
+          "argument" : {
+            "element" : {
+              "go-type" : 4,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 4,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "byte"
+              }
+            },
+            "go-type" : 3,
+            "kind" : "type",
+            "type" : "slice"
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "rest" : [ {
+            "go-type" : 12,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 12,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "8"
+              }
+            },
+            "operator" : "+",
+            "right" : {
+              "coerced-to" : {
+                "go-type" : 12,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 12,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uintptr"
+                }
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "arguments" : [ {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "handle",
+                    "variable" : 1
+                  }
+                } ],
+                "ellipsis" : false,
+                "function" : {
+                  "go-type" : 14,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Builtin",
+                    "kind" : "ident",
+                    "value" : "len"
+                  }
+                },
+                "go-type" : 13,
+                "kind" : "expression",
+                "type" : "call"
+              },
+              "type" : "cast"
+            },
+            "type" : "binary"
+          } ],
+          "type" : "make"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2023,
+      "code" : "buf := make([]byte, hdrSize+uintptr(len(handle)))",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 3, 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 1, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 2024,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 3,
+            "type" : "slice",
+            "three" : false,
+            "high" : null,
+            "max" : null,
+            "kind" : "expression",
+            "low" : {
+              "go-type" : 12,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "8"
+              }
+            },
+            "target" : {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "buf",
+                "variable" : 3
+              }
+            }
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "handle",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "copy"
+            }
+          },
+          "go-type" : 13,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2024,
+      "code" : "copy(buf[hdrSize:], handle)",
+      "entry" : false,
+      "use-vars" : [ 3, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 3, 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 1, 4 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 2025,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "fh"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 9,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 9,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "fileHandle"
+              }
+            },
+            "go-type" : 8,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 19,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 19,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 19,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 20,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 4,
+                "index" : {
+                  "go-type" : 13,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "buf",
+                    "variable" : 3
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2025,
+      "code" : "fh := (*fileHandle)(unsafe.Pointer(&buf[0]))",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ 4 ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 1, 4, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 2026,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Type",
+            "variable" : 5
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fh",
+              "variable" : 4
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "handleType",
+            "variable" : 0
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2026,
+      "code" : "fh.Type = handleType",
+      "entry" : false,
+      "use-vars" : [ 0, 4 ]
+    }, {
+      "update-vars" : [ 4 ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 1, 4 ],
+      "exit" : false,
+      "out-vars" : [ 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 2027,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Bytes",
+            "variable" : 6
+          },
+          "go-type" : 11,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fh",
+              "variable" : 4
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 11,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 11,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uint32"
+            }
+          },
+          "go-type" : 11,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "go-type" : 3,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "handle",
+                "variable" : 1
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 14,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2027,
+      "code" : "fh.Bytes = uint32(len(handle))",
+      "entry" : false,
+      "use-vars" : [ 1, 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 4 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 2028,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "declared" : {
+            "go-type" : 6,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 6,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "FileHandle"
+            }
+          },
+          "go-type" : 6,
+          "kind" : "literal",
+          "type" : "composite",
+          "values" : [ {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fh",
+              "variable" : 4
+            }
+          } ]
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2028,
+      "code" : "return FileHandle{fh}",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    } ],
+    "code" : "// NewFileHandle constructs a FileHandle.\nfunc NewFileHandle(handleType int32, handle []byte) FileHandle {\n\tconst hdrSize = unsafe.Sizeof(fileHandle{})\n\tbuf := make([]byte, hdrSize+uintptr(len(handle)))\n\tcopy(buf[hdrSize:], handle)\n\tfh := (*fileHandle)(unsafe.Pointer(&buf[0]))\n\tfh.Type = handleType\n\tfh.Bytes = uint32(len(handle))\n\treturn FileHandle{fh}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "NewFileHandle",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    } ],
+    "line-end" : 2029,
+    "line-start" : 2021,
+    "names" : [ "NewFileHandle" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0, 1 ],
+    "receivers" : [ ],
+    "results" : [ 2 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(handleType int32, handle []byte) golang.org/x/sys/unix.FileHandle",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 5,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "handleType",
+        "type" : 2
+      }, {
+        "name" : "handle",
+        "type" : 3
+      } ],
+      "name" : "(handleType int32, handle []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 3
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(golang.org/x/sys/unix.FileHandle)",
+      "type" : "Tuple",
+      "underlying" : 5
+    }, {
+      "local-name" : "FileHandle",
+      "name" : "golang.org/x/sys/unix.FileHandle",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "fileHandle",
+        "type" : 8
+      } ],
+      "name" : "struct{*golang.org/x/sys/unix.fileHandle}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
+      "elem" : 9,
+      "name" : "*golang.org/x/sys/unix.fileHandle",
+      "type" : "Pointer",
+      "underlying" : 8
+    }, {
+      "local-name" : "fileHandle",
+      "name" : "golang.org/x/sys/unix.fileHandle",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 10
+    }, {
+      "fields" : [ {
+        "name" : "Bytes",
+        "type" : 11
+      }, {
+        "name" : "Type",
+        "type" : 2
+      } ],
+      "name" : "struct{Bytes uint32; Type int32}",
+      "type" : "Struct",
+      "underlying" : 10
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func([]byte) int",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 16,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "name" : "func([]byte, []byte) int",
+      "params" : 18,
+      "recv" : -1,
+      "results" : 16,
+      "type" : "Signature",
+      "underlying" : 17,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      }, {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "([]byte, []byte)",
+      "type" : "Tuple",
+      "underlying" : 18
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "elem" : 4,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 20
+    } ],
+    "variables" : [ {
+      "name" : "handleType",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "handle",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "buf",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "fh",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "Type",
+      "package" : 0,
+      "type" : 2,
+      "exported" : true
+    }, {
+      "name" : "Bytes",
+      "package" : 0,
+      "type" : 11,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

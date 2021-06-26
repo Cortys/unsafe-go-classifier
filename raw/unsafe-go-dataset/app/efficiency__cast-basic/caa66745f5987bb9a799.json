@@ -1,0 +1,807 @@
+{
+  "usage" : {
+    "file" : "msghdr_linux.go",
+    "label1" : "cast-basic",
+    "label2" : "efficiency",
+    "line" : "18",
+    "module" : "golang.org/x/net",
+    "pkg" : "golang.org/x/net/internal/socket",
+    "project" : "elastic/beats",
+    "snippet" : "h.Name = (*byte)(unsafe.Pointer(&sa[0]))",
+    "version" : "v0.0.0-20200202094626-16171245cfb2"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 3, 0, 4, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3, 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 3, 0, 4, 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0, 4, 5, 1, 2 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 10,
+      "ast" : {
+        "is-assign" : false,
+        "key" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "i"
+          }
+        },
+        "kind" : "statement",
+        "target" : {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "vs",
+            "variable" : 1
+          }
+        },
+        "type" : "range",
+        "value" : null
+      },
+      "assign-vars" : [ ],
+      "line-end" : 12,
+      "code" : "for i := range vs {\n\tvs[i].set(bs[i])\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 2, 3, 0, 4, 5, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2, 3, 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 11,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 9,
+            "index" : {
+              "go-type" : 13,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "i",
+                "variable" : 5
+              }
+            },
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 8,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "bs",
+                "variable" : 2
+              }
+            },
+            "type" : "index"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "set"
+            },
+            "go-type" : 11,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 3,
+              "index" : {
+                "go-type" : 13,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "i",
+                  "variable" : 5
+                }
+              },
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "vs",
+                  "variable" : 1
+                }
+              },
+              "type" : "index"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 11,
+      "code" : "vs[i].set(bs[i])",
+      "entry" : false,
+      "use-vars" : [ 2, 5, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 3, 0, 4, 1 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 13,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "vs",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "setIov"
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "h",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 13,
+      "code" : "h.setIov(vs)",
+      "entry" : false,
+      "use-vars" : [ 0, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 7 ],
+      "in-vars" : [ 3, 0, 4 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 14,
+      "ast" : {
+        "condition" : {
+          "go-type" : 16,
+          "kind" : "expression",
+          "left" : {
+            "arguments" : [ {
+              "go-type" : 9,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "oob",
+                "variable" : 3
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 17,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "operator" : ">",
+          "right" : {
+            "go-type" : 13,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 16,
+      "code" : "if len(oob) > 0 {\n\th.setControl(oob)\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 3, 0, 4 ],
+      "exit" : false,
+      "out-vars" : [ 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 15,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 9,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "oob",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "setControl"
+            },
+            "go-type" : 11,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "h",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 15,
+      "code" : "h.setControl(oob)",
+      "entry" : false,
+      "use-vars" : [ 3, 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1, 8 ],
+      "in-vars" : [ 0, 4 ],
+      "exit" : false,
+      "out-vars" : [ 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 17,
+      "ast" : {
+        "condition" : {
+          "go-type" : 16,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 9,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "sa",
+              "variable" : 4
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 20,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 20,
+      "code" : "if sa != nil {\n\th.Name = (*byte)(unsafe.Pointer(&sa[0]))\n\th.Namelen = uint32(len(sa))\n}",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ 0 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 0, 4 ],
+      "exit" : false,
+      "out-vars" : [ 0, 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 18,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Name",
+            "variable" : 6
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "h",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "go-type" : 6,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 6,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "byte"
+              }
+            },
+            "go-type" : 5,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 21,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 21,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 21,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 6,
+                "index" : {
+                  "go-type" : 13,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 9,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "sa",
+                    "variable" : 4
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 18,
+      "code" : "h.Name = (*byte)(unsafe.Pointer(&sa[0]))",
+      "entry" : false,
+      "use-vars" : [ 4, 0 ]
+    }, {
+      "update-vars" : [ 0 ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0, 4 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 19,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Namelen",
+            "variable" : 7
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "h",
+              "variable" : 0
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 3,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 3,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uint32"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "go-type" : 9,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "sa",
+                "variable" : 4
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 17,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 19,
+      "code" : "h.Namelen = uint32(len(sa))",
+      "entry" : false,
+      "use-vars" : [ 4, 0 ]
+    } ],
+    "code" : "func (h *msghdr) pack(vs []iovec, bs [][]byte, oob []byte, sa []byte) {\n\tfor i := range vs {\n\t\tvs[i].set(bs[i])\n\t}\n\th.setIov(vs)\n\tif len(oob) > 0 {\n\t\th.setControl(oob)\n\t}\n\tif sa != nil {\n\t\th.Name = (*byte)(unsafe.Pointer(&sa[0]))\n\t\th.Namelen = uint32(len(sa))\n\t}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "pack",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "set",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    }, {
+      "name" : "setIov",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "setControl",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    } ],
+    "line-end" : 21,
+    "line-start" : 9,
+    "names" : [ "pack" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "socket",
+      "path" : "golang.org/x/net/internal/socket"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1, 2, 3, 4 ],
+    "receivers" : [ 0 ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(vs []golang.org/x/net/internal/socket.iovec, bs [][]byte, oob []byte, sa []byte)",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "vs",
+        "type" : 2
+      }, {
+        "name" : "bs",
+        "type" : 8
+      }, {
+        "name" : "oob",
+        "type" : 9
+      }, {
+        "name" : "sa",
+        "type" : 9
+      } ],
+      "name" : "(vs []golang.org/x/net/internal/socket.iovec, bs [][]byte, oob []byte, sa []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]golang.org/x/net/internal/socket.iovec",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "local-name" : "iovec",
+      "name" : "golang.org/x/net/internal/socket.iovec",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "Base",
+        "type" : 5
+      }, {
+        "name" : "Len",
+        "type" : 7
+      } ],
+      "name" : "struct{Base *byte; Len uint64}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "elem" : 6,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "elem" : 9,
+      "name" : "[][]byte",
+      "type" : "Slice",
+      "underlying" : 8
+    }, {
+      "elem" : 6,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 9
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "name" : "func(b []byte)",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 9
+      } ],
+      "name" : "(b []byte)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func(vs []golang.org/x/net/internal/socket.iovec)",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "vs",
+        "type" : 2
+      } ],
+      "name" : "(vs []golang.org/x/net/internal/socket.iovec)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 16
+    }, {
+      "name" : "func([]byte) int",
+      "params" : 18,
+      "recv" : -1,
+      "results" : 19,
+      "type" : "Signature",
+      "underlying" : 17,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 18
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 19
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 21
+    } ],
+    "variables" : [ {
+      "name" : "h",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "vs",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "bs",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "oob",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "sa",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "i",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "Name",
+      "package" : 0,
+      "type" : 5,
+      "exported" : true
+    }, {
+      "name" : "Namelen",
+      "package" : 0,
+      "type" : 3,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

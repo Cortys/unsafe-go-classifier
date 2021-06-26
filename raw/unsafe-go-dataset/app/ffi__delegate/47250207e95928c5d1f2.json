@@ -1,0 +1,584 @@
+{
+  "usage" : {
+    "file" : "sctp.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "205",
+    "module" : "github.com/ishidawataru/sctp",
+    "pkg" : "github.com/ishidawataru/sctp",
+    "project" : "cilium/cilium",
+    "snippet" : "_, _, err := setsockopt(fd, SCTP_INITMSG, uintptr(unsafe.Pointer(&param)), uintptr(optlen))",
+    "version" : "v0.0.0-20180213033435-07191f837fed"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 201,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "param"
+          }
+        } ],
+        "right" : [ {
+          "declared" : {
+            "go-type" : 10,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 10,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "InitMsg"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "literal",
+          "type" : "composite",
+          "values" : [ {
+            "go-type" : -1,
+            "key" : {
+              "go-type" : -1,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "NumOstreams",
+                "variable" : 4
+              }
+            },
+            "kind" : "expression",
+            "type" : "key-value",
+            "value" : {
+              "coerced-to" : {
+                "go-type" : 12,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 12,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uint16"
+                }
+              },
+              "go-type" : 12,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "num",
+                  "variable" : 2
+                }
+              },
+              "type" : "cast"
+            }
+          } ]
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 203,
+      "code" : "param := InitMsg{\n\tNumOstreams: uint16(num),\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 5, 1 ],
+      "exit" : false,
+      "out-vars" : [ 6, 5, 1 ],
+      "decl-vars" : [ 6 ],
+      "line-start" : 204,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "optlen"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 13,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "8"
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 204,
+      "code" : "optlen := unsafe.Sizeof(param)",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 6, 5, 1 ],
+      "exit" : false,
+      "out-vars" : [ 7 ],
+      "decl-vars" : [ 8, 9, 7 ],
+      "line-start" : 205,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 13,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "2"
+            }
+          }, {
+            "coerced-to" : {
+              "go-type" : 13,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 13,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 17,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 17,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 17,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 18,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 10,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "param",
+                    "variable" : 5
+                  }
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 13,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 13,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 13,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 13,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "optlen",
+                "variable" : 6
+              }
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "setsockopt"
+            }
+          },
+          "go-type" : 14,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 205,
+      "code" : "_, _, err := setsockopt(fd, SCTP_INITMSG, uintptr(unsafe.Pointer(&param)), uintptr(optlen))",
+      "entry" : false,
+      "use-vars" : [ 6, 1, 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 7 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 206,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 7
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 206,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 7 ]
+    } ],
+    "code" : "func setNumOstreams(fd, num int) error {\n\tparam := InitMsg{\n\t\tNumOstreams: uint16(num),\n\t}\n\toptlen := unsafe.Sizeof(param)\n\t_, _, err := setsockopt(fd, SCTP_INITMSG, uintptr(unsafe.Pointer(&param)), uintptr(optlen))\n\treturn err\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "setNumOstreams",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "setsockopt",
+      "package" : 0,
+      "type" : 15,
+      "exported" : false
+    } ],
+    "line-end" : 207,
+    "line-start" : 200,
+    "names" : [ "setNumOstreams" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "sctp",
+      "path" : "github.com/ishidawataru/sctp"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(fd int, num int) error",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "num",
+        "type" : 2
+      } ],
+      "name" : "(fd int, num int)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 6
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 5
+    }, {
+      "name" : "func() string",
+      "params" : 7,
+      "recv" : 0,
+      "results" : 8,
+      "type" : "Signature",
+      "underlying" : 6,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 8
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "local-name" : "InitMsg",
+      "name" : "github.com/ishidawataru/sctp.InitMsg",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "NumOstreams",
+        "type" : 12
+      }, {
+        "name" : "MaxInstreams",
+        "type" : 12
+      }, {
+        "name" : "MaxAttempts",
+        "type" : 12
+      }, {
+        "name" : "MaxInitTimeout",
+        "type" : 12
+      } ],
+      "name" : "struct{NumOstreams uint16; MaxInstreams uint16; MaxAttempts uint16; MaxInitTimeout uint16}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      }, {
+        "name" : "",
+        "type" : 13
+      }, {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(uintptr, uintptr, error)",
+      "type" : "Tuple",
+      "underlying" : 14
+    }, {
+      "name" : "func(fd int, optname uintptr, optval uintptr, optlen uintptr) (uintptr, uintptr, error)",
+      "params" : 16,
+      "recv" : -1,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 15,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "optname",
+        "type" : 13
+      }, {
+        "name" : "optval",
+        "type" : 13
+      }, {
+        "name" : "optlen",
+        "type" : 13
+      } ],
+      "name" : "(fd int, optname uintptr, optval uintptr, optlen uintptr)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 17
+    }, {
+      "elem" : 10,
+      "name" : "*github.com/ishidawataru/sctp.InitMsg",
+      "type" : "Pointer",
+      "underlying" : 18
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "num",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "NumOstreams",
+      "package" : 0,
+      "type" : 12,
+      "exported" : true
+    }, {
+      "name" : "param",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "optlen",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

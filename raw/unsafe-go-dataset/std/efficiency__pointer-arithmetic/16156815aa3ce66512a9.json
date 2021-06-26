@@ -1,0 +1,504 @@
+{
+  "usage" : {
+    "file" : "syscall_linux.go",
+    "label1" : "pointer-arithmetic",
+    "label2" : "efficiency",
+    "line" : "2050",
+    "module" : "golang.org/x/sys",
+    "pkg" : "golang.org/x/sys/unix",
+    "project" : "mattermost/mattermost-server",
+    "snippet" : "return (*[1 << 30]byte)(unsafe.Pointer(uintptr(unsafe.Pointer(&fh.fileHandle.Type)) + 4))[:n:n]",
+    "version" : "v0.0.0-20200515095857-1151b9dac4a9"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 2046,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "n"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Size"
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "fh",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2046,
+      "code" : "n := fh.Size()",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 5 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 2047,
+      "ast" : {
+        "condition" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 2
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2049,
+      "code" : "if n == 0 {\n\treturn nil\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 2048,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2048,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 2050,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "type" : "slice",
+          "three" : true,
+          "high" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 2
+            }
+          },
+          "max" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 2
+            }
+          },
+          "kind" : "expression",
+          "low" : null,
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "element" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "byte"
+                  }
+                },
+                "go-type" : 11,
+                "kind" : "type",
+                "length" : {
+                  "go-type" : 12,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "1073741824"
+                  }
+                },
+                "type" : "array"
+              },
+              "go-type" : 10,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 10,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 13,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 13,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 13,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 14,
+                "kind" : "expression",
+                "left" : {
+                  "coerced-to" : {
+                    "go-type" : 14,
+                    "kind" : "type",
+                    "type" : "identifier",
+                    "value" : {
+                      "go-type" : 14,
+                      "ident-kind" : "TypeName",
+                      "kind" : "ident",
+                      "value" : "uintptr"
+                    }
+                  },
+                  "go-type" : 14,
+                  "kind" : "expression",
+                  "target" : {
+                    "coerced-to" : {
+                      "go-type" : 13,
+                      "kind" : "type",
+                      "qualifier" : {
+                        "ident-kind" : "PkgName",
+                        "kind" : "ident",
+                        "package" : 1,
+                        "value" : "unsafe"
+                      },
+                      "type" : "identifier",
+                      "value" : {
+                        "go-type" : 13,
+                        "ident-kind" : "TypeName",
+                        "kind" : "ident",
+                        "value" : "Pointer"
+                      }
+                    },
+                    "go-type" : 13,
+                    "kind" : "expression",
+                    "target" : {
+                      "go-type" : 15,
+                      "kind" : "expression",
+                      "operator" : "&",
+                      "target" : {
+                        "field" : {
+                          "ident-kind" : "Var",
+                          "kind" : "ident",
+                          "value" : "Type",
+                          "variable" : 4
+                        },
+                        "go-type" : 7,
+                        "kind" : "expression",
+                        "target" : {
+                          "field" : {
+                            "ident-kind" : "Var",
+                            "kind" : "ident",
+                            "value" : "fileHandle",
+                            "variable" : 3
+                          },
+                          "go-type" : 3,
+                          "kind" : "expression",
+                          "target" : {
+                            "go-type" : 0,
+                            "kind" : "expression",
+                            "type" : "identifier",
+                            "value" : {
+                              "ident-kind" : "Var",
+                              "kind" : "ident",
+                              "value" : "fh",
+                              "variable" : 0
+                            }
+                          },
+                          "type" : "selector"
+                        },
+                        "type" : "selector"
+                      },
+                      "type" : "unary"
+                    },
+                    "type" : "cast"
+                  },
+                  "type" : "cast"
+                },
+                "operator" : "+",
+                "right" : {
+                  "go-type" : 14,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "4"
+                  }
+                },
+                "type" : "binary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2050,
+      "code" : "return (*[1 << 30]byte)(unsafe.Pointer(uintptr(unsafe.Pointer(&fh.fileHandle.Type)) + 4))[:n:n]",
+      "entry" : false,
+      "use-vars" : [ 2, 0 ]
+    } ],
+    "code" : "func (fh *FileHandle) Bytes() []byte {\n\tn := fh.Size()\n\tif n == 0 {\n\t\treturn nil\n\t}\n\treturn (*[1 << 30]byte)(unsafe.Pointer(uintptr(unsafe.Pointer(&fh.fileHandle.Type)) + 4))[:n:n]\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Bytes",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "Size",
+      "package" : 0,
+      "type" : 6,
+      "exported" : true
+    } ],
+    "line-end" : 2051,
+    "line-start" : 2045,
+    "names" : [ "Bytes" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 0 ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() []byte",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 3
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "func() int",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 6,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "elem" : 11,
+      "name" : "*[1073741824]byte",
+      "type" : "Pointer",
+      "underlying" : 10
+    }, {
+      "elem" : 4,
+      "name" : "[1073741824]byte",
+      "type" : "Array",
+      "underlying" : 11
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "elem" : 7,
+      "name" : "*int32",
+      "type" : "Pointer",
+      "underlying" : 15
+    } ],
+    "variables" : [ {
+      "name" : "fh",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "fileHandle",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "Type",
+      "package" : 0,
+      "type" : 7,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

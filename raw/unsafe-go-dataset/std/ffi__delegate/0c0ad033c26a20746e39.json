@@ -1,0 +1,802 @@
+{
+  "usage" : {
+    "file" : "syscall_unix.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "192",
+    "module" : "std",
+    "pkg" : "syscall",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "race.WriteRange(unsafe.Pointer(&p[0]), n)",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 2, 1, 5 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 4, 3 ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 5, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 3, 2, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 189,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "n",
+            "variable" : 3
+          }
+        }, {
+          "go-type" : 6,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 4
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fd",
+              "variable" : 1
+            }
+          }, {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 2
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "read"
+            }
+          },
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 4, 3 ],
+      "line-end" : 189,
+      "code" : "n, err = read(fd, p)",
+      "entry" : false,
+      "use-vars" : [ 1, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 8 ],
+      "in-vars" : [ 2, 5, 4, 3 ],
+      "exit" : false,
+      "out-vars" : [ 4, 3, 2, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 190,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "false"
+          }
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 197,
+      "code" : "if race.Enabled {\n\tif n > 0 {\n\t\trace.WriteRange(unsafe.Pointer(&p[0]), n)\n\t}\n\tif err == nil {\n\t\trace.Acquire(unsafe.Pointer(&ioSync))\n\t}\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 6 ],
+      "in-vars" : [ 5, 4, 3, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 3, 2, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 191,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 3
+            }
+          },
+          "operator" : ">",
+          "right" : {
+            "go-type" : 2,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 193,
+      "code" : "if n > 0 {\n\trace.WriteRange(unsafe.Pointer(&p[0]), n)\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 4, 3, 2, 5 ],
+      "exit" : false,
+      "out-vars" : [ 2, 5, 4, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 192,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 16,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 16,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 16,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 17,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 4,
+                "index" : {
+                  "go-type" : 2,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "p",
+                    "variable" : 2
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "race"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "WriteRange"
+            }
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 192,
+      "code" : "race.WriteRange(unsafe.Pointer(&p[0]), n)",
+      "entry" : false,
+      "use-vars" : [ 2, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7, 8 ],
+      "in-vars" : [ 2, 5, 4, 3 ],
+      "exit" : false,
+      "out-vars" : [ 3, 2, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 194,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 4
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 18,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 196,
+      "code" : "if err == nil {\n\trace.Acquire(unsafe.Pointer(&ioSync))\n}",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 3, 2, 5 ],
+      "exit" : false,
+      "out-vars" : [ 3, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 195,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 16,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 16,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 16,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 21,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 12,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "ioSync",
+                  "variable" : 5
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 19,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 2,
+              "value" : "race"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Acquire"
+            }
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 195,
+      "code" : "race.Acquire(unsafe.Pointer(&ioSync))",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9, 10 ],
+      "in-vars" : [ 3, 2 ],
+      "exit" : false,
+      "out-vars" : [ 3, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 198,
+      "ast" : {
+        "condition" : {
+          "go-type" : 13,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 13,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "n",
+                "variable" : 3
+              }
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 2,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 200,
+      "code" : "if msanenabled && n > 0 {\n\tmsanWrite(unsafe.Pointer(&p[0]), n)\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 3, 2 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 199,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 16,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 16,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 16,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 17,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 4,
+                "index" : {
+                  "go-type" : 2,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 3,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "p",
+                    "variable" : 2
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "n",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "msanWrite"
+            }
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 199,
+      "code" : "msanWrite(unsafe.Pointer(&p[0]), n)",
+      "entry" : false,
+      "use-vars" : [ 3, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 201,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 201,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func Read(fd int, p []byte) (n int, err error) {\n\tn, err = read(fd, p)\n\tif race.Enabled {\n\t\tif n > 0 {\n\t\t\trace.WriteRange(unsafe.Pointer(&p[0]), n)\n\t\t}\n\t\tif err == nil {\n\t\t\trace.Acquire(unsafe.Pointer(&ioSync))\n\t\t}\n\t}\n\tif msanenabled && n > 0 {\n\t\tmsanWrite(unsafe.Pointer(&p[0]), n)\n\t}\n\treturn\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Read",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "read",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "WriteRange",
+      "package" : 2,
+      "type" : 14,
+      "exported" : true
+    }, {
+      "name" : "Acquire",
+      "package" : 2,
+      "type" : 19,
+      "exported" : true
+    }, {
+      "name" : "msanWrite",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    } ],
+    "line-end" : 202,
+    "line-start" : 188,
+    "names" : [ "Read" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "race",
+      "path" : "internal/race"
+    } ],
+    "params" : [ 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3, 4 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(fd int, p []byte) (n int, err error)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 5,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 2
+      }, {
+        "name" : "p",
+        "type" : 3
+      } ],
+      "name" : "(fd int, p []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 3
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "n",
+        "type" : 2
+      }, {
+        "name" : "err",
+        "type" : 6
+      } ],
+      "name" : "(n int, err error)",
+      "type" : "Tuple",
+      "underlying" : 5
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 8
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 7
+    }, {
+      "name" : "func() string",
+      "params" : 9,
+      "recv" : 0,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 11
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func(addr unsafe.Pointer, len int)",
+      "params" : 15,
+      "recv" : -1,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "addr",
+        "type" : 16
+      }, {
+        "name" : "len",
+        "type" : 2
+      } ],
+      "name" : "(addr unsafe.Pointer, len int)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 16
+    }, {
+      "elem" : 4,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 17
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "name" : "func(addr unsafe.Pointer)",
+      "params" : 20,
+      "recv" : -1,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 19,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "addr",
+        "type" : 16
+      } ],
+      "name" : "(addr unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "elem" : 12,
+      "name" : "*int64",
+      "type" : "Pointer",
+      "underlying" : 21
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "fd",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "ioSync",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

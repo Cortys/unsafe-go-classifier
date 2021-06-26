@@ -1,0 +1,805 @@
+{
+  "usage" : {
+    "file" : "zsyscall_linux_amd64.go",
+    "label1" : "syscall",
+    "label2" : "no-gc",
+    "line" : "2492",
+    "module" : "golang.org/x/sys",
+    "pkg" : "golang.org/x/sys/unix",
+    "project" : "elastic/beats",
+    "snippet" : "_, _, e1 := Syscall(SYS_UTIME, uintptr(unsafe.Pointer(_p0)), uintptr(unsafe.Pointer(buf)), 0)",
+    "version" : "v0.0.0-20200106162015-b016eb3dc98e"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 2487,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "contained" : {
+                "go-type" : 14,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 14,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "byte"
+                }
+              },
+              "go-type" : 13,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "_p0"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2487,
+      "code" : "var _p0 *byte",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 3, 4 ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 2, 1 ],
+      "exit" : false,
+      "out-vars" : [ 3, 4, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 2488,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 13,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "_p0",
+            "variable" : 4
+          }
+        }, {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 3
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "path",
+              "variable" : 1
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 16,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "BytePtrFromString"
+            }
+          },
+          "go-type" : 15,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 3, 4 ],
+      "line-end" : 2488,
+      "code" : "_p0, err = BytePtrFromString(path)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 6 ],
+      "in-vars" : [ 3, 4, 2 ],
+      "exit" : false,
+      "out-vars" : [ 4, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 2489,
+      "ast" : {
+        "condition" : {
+          "go-type" : 18,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 3
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 19,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2491,
+      "code" : "if err != nil {\n\treturn\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 2490,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2490,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 4, 2 ],
+      "exit" : false,
+      "out-vars" : [ 5 ],
+      "decl-vars" : [ 6, 7, 5 ],
+      "line-start" : 2492,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "e1"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 21,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "132"
+            }
+          }, {
+            "coerced-to" : {
+              "go-type" : 21,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 21,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 21,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 25,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 2,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 25,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 25,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 13,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "_p0",
+                  "variable" : 4
+                }
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 21,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 21,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 21,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 25,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 2,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 25,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 25,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 3,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "buf",
+                  "variable" : 2
+                }
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 21,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 23,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Syscall"
+            }
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2492,
+      "code" : "_, _, e1 := Syscall(SYS_UTIME, uintptr(unsafe.Pointer(_p0)), uintptr(unsafe.Pointer(buf)), 0)",
+      "entry" : false,
+      "use-vars" : [ 4, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 9 ],
+      "in-vars" : [ 5 ],
+      "exit" : false,
+      "out-vars" : [ 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 2493,
+      "ast" : {
+        "condition" : {
+          "go-type" : 18,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "e1",
+              "variable" : 5
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 22,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2495,
+      "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ 3 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 5 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 2494,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 3
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "e1",
+              "variable" : 5
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 26,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "errnoErr"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 3 ],
+      "line-end" : 2494,
+      "code" : "err = errnoErr(e1)",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 2496,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 2496,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func Utime(path string, buf *Utimbuf) (err error) {\n\tvar _p0 *byte\n\t_p0, err = BytePtrFromString(path)\n\tif err != nil {\n\t\treturn\n\t}\n\t_, _, e1 := Syscall(SYS_UTIME, uintptr(unsafe.Pointer(_p0)), uintptr(unsafe.Pointer(buf)), 0)\n\tif e1 != 0 {\n\t\terr = errnoErr(e1)\n\t}\n\treturn\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Utime",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "BytePtrFromString",
+      "package" : 0,
+      "type" : 16,
+      "exported" : true
+    }, {
+      "name" : "Syscall",
+      "package" : 0,
+      "type" : 23,
+      "exported" : true
+    }, {
+      "name" : "errnoErr",
+      "package" : 0,
+      "type" : 26,
+      "exported" : false
+    } ],
+    "line-end" : 2497,
+    "line-start" : 2486,
+    "names" : [ "Utime" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "unix",
+      "path" : "golang.org/x/sys/unix"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(path string, buf *golang.org/x/sys/unix.Utimbuf) (err error)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "path",
+        "type" : 2
+      }, {
+        "name" : "buf",
+        "type" : 3
+      } ],
+      "name" : "(path string, buf *golang.org/x/sys/unix.Utimbuf)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "*golang.org/x/sys/unix.Utimbuf",
+      "type" : "Pointer",
+      "underlying" : 3
+    }, {
+      "local-name" : "Utimbuf",
+      "name" : "golang.org/x/sys/unix.Utimbuf",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "fields" : [ {
+        "name" : "Actime",
+        "type" : 6
+      }, {
+        "name" : "Modtime",
+        "type" : 6
+      } ],
+      "name" : "struct{Actime int64; Modtime int64}",
+      "type" : "Struct",
+      "underlying" : 5
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 8
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 10
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 9
+    }, {
+      "name" : "func() string",
+      "params" : 11,
+      "recv" : 0,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 10,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "elem" : 14,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 13
+      }, {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(*byte, error)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "name" : "func(s string) (*byte, error)",
+      "params" : 17,
+      "recv" : -1,
+      "results" : 15,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 2
+      } ],
+      "name" : "(s string)",
+      "type" : "Tuple",
+      "underlying" : 17
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "r1",
+        "type" : 21
+      }, {
+        "name" : "r2",
+        "type" : 21
+      }, {
+        "name" : "err",
+        "type" : 22
+      } ],
+      "name" : "(r1 uintptr, r2 uintptr, err syscall.Errno)",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "local-name" : "Errno",
+      "name" : "syscall.Errno",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 21
+    }, {
+      "name" : "func(trap uintptr, a1 uintptr, a2 uintptr, a3 uintptr) (r1 uintptr, r2 uintptr, err syscall.Errno)",
+      "params" : 24,
+      "recv" : -1,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 23,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "trap",
+        "type" : 21
+      }, {
+        "name" : "a1",
+        "type" : 21
+      }, {
+        "name" : "a2",
+        "type" : 21
+      }, {
+        "name" : "a3",
+        "type" : 21
+      } ],
+      "name" : "(trap uintptr, a1 uintptr, a2 uintptr, a3 uintptr)",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 2,
+      "type" : "Basic",
+      "underlying" : 25
+    }, {
+      "name" : "func(e syscall.Errno) error",
+      "params" : 27,
+      "recv" : -1,
+      "results" : 28,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "e",
+        "type" : 22
+      } ],
+      "name" : "(e syscall.Errno)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 28
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "path",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "buf",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "_p0",
+      "package" : 0,
+      "type" : 13,
+      "exported" : false
+    }, {
+      "name" : "e1",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

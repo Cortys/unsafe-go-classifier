@@ -1,0 +1,1338 @@
+{
+  "usage" : {
+    "file" : "generic_cmp_vv.go",
+    "label1" : "memory-access",
+    "label2" : "layout",
+    "line" : "3418",
+    "module" : "gorgonia.org/tensor",
+    "pkg" : "gorgonia.org/tensor/internal/execution",
+    "project" : "gorgonia/gorgonia",
+    "snippet" : "func EqIterUnsafePointer(a []unsafe.Pointer, b []unsafe.Pointer, retVal []bool, ait Iterator, bit Iterator, rit Iterator) (err error) {",
+    "version" : "v0.9.6"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 12, 10, 11, 9, 7, 8 ],
+      "exit" : false,
+      "out-vars" : [ 10, 11, 9, 7, 8, 12 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 9, 7, 8, 12, 10, 11 ],
+      "exit" : false,
+      "out-vars" : [ 10, 11, 9, 7, 8, 12 ],
+      "decl-vars" : [ 14, 15, 16 ],
+      "line-start" : 3419,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 12,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 12,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "i"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "j"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "k"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3419,
+      "code" : "var i, j, k int",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 7, 8, 12, 10, 11, 9 ],
+      "exit" : false,
+      "out-vars" : [ 9, 7, 8, 12, 10, 11 ],
+      "decl-vars" : [ 17, 18, 19 ],
+      "line-start" : 3420,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 5,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 5,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "bool"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "validi"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "validj"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "validk"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3420,
+      "code" : "var validi, validj, validk bool",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6, 19 ],
+      "in-vars" : [ 12, 10, 11, 9, 7, 8 ],
+      "exit" : false,
+      "out-vars" : [ 9, 7, 8, 12, 10, 11 ],
+      "decl-vars" : [ ],
+      "line-start" : 3421,
+      "ast" : {
+        "condition" : null,
+        "kind" : "statement",
+        "type" : "for"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3437,
+      "code" : "for {\n\tif i, validi, err = ait.NextValidity(); err != nil {\n\t\terr = handleNoOp(err)\n\t\tbreak\n\t}\n\tif j, validj, err = bit.NextValidity(); err != nil {\n\t\terr = handleNoOp(err)\n\t\tbreak\n\t}\n\tif k, validk, err = rit.NextValidity(); err != nil {\n\t\terr = handleNoOp(err)\n\t\tbreak\n\t}\n\tif validi && validj && validk {\n\t\tretVal[k] = a[i] == b[j]\n\t}\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7, 10 ],
+      "in-vars" : [ 17, 15, 10, 7, 8, 13, 12, 11, 9 ],
+      "exit" : false,
+      "out-vars" : [ 11, 9, 7, 13, 12, 17, 15, 10, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 3422,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 13
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3425,
+      "code" : "if i, validi, err = ait.NextValidity(); err != nil {\n\terr = handleNoOp(err)\n\tbreak\n}",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ 13, 17, 15 ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 10, 11, 9, 7, 8, 12 ],
+      "exit" : false,
+      "out-vars" : [ 8, 13, 15, 10, 11, 9, 7, 12, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 3422,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "i",
+            "variable" : 15
+          }
+        }, {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "validi",
+            "variable" : 17
+          }
+        }, {
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 13
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "NextValidity"
+            },
+            "go-type" : 24,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "ait",
+                "variable" : 10
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 13, 17, 15 ],
+      "line-end" : 3422,
+      "code" : "i, validi, err = ait.NextValidity()",
+      "entry" : false,
+      "use-vars" : [ 10 ]
+    }, {
+      "update-vars" : [ 13 ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 13 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3423,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 13
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 13
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "handleNoOp"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 13 ],
+      "line-end" : 3423,
+      "code" : "err = handleNoOp(err)",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3424,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "break"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3424,
+      "code" : "break",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11, 14 ],
+      "in-vars" : [ 13, 12, 10, 11, 7, 17, 18, 16, 15, 9, 8 ],
+      "exit" : false,
+      "out-vars" : [ 18, 16, 15, 8, 13, 12, 17, 7, 10, 11, 9 ],
+      "decl-vars" : [ ],
+      "line-start" : 3426,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 13
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3429,
+      "code" : "if j, validj, err = bit.NextValidity(); err != nil {\n\terr = handleNoOp(err)\n\tbreak\n}",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ 13, 18, 16 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 7, 8, 12, 17, 15, 10, 11, 9 ],
+      "exit" : false,
+      "out-vars" : [ 18, 16, 15, 10, 13, 12, 17, 8, 11, 9, 7 ],
+      "decl-vars" : [ ],
+      "line-start" : 3426,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "j",
+            "variable" : 16
+          }
+        }, {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "validj",
+            "variable" : 18
+          }
+        }, {
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 13
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "NextValidity"
+            },
+            "go-type" : 24,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "bit",
+                "variable" : 11
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 16, 13, 18 ],
+      "line-end" : 3426,
+      "code" : "j, validj, err = bit.NextValidity()",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ 13 ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 13 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3427,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 13
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 13
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "handleNoOp"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 13 ],
+      "line-end" : 3427,
+      "code" : "err = handleNoOp(err)",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3428,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "break"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3428,
+      "code" : "break",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15, 17 ],
+      "in-vars" : [ 13, 14, 16, 15, 11, 7, 19, 12, 17, 18, 10, 9, 8 ],
+      "exit" : false,
+      "out-vars" : [ 13, 17, 16, 15, 11, 7, 8, 19, 14, 12, 18, 10, 9 ],
+      "decl-vars" : [ ],
+      "line-start" : 3430,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 13
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3433,
+      "code" : "if k, validk, err = rit.NextValidity(); err != nil {\n\terr = handleNoOp(err)\n\tbreak\n}",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ 13, 19, 14 ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 18, 15, 10, 11, 9, 12, 17, 16, 7, 8 ],
+      "exit" : false,
+      "out-vars" : [ 16, 10, 9, 7, 8, 15, 11, 13, 19, 14, 12, 17, 18 ],
+      "decl-vars" : [ ],
+      "line-start" : 3430,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k",
+            "variable" : 14
+          }
+        }, {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "validk",
+            "variable" : 19
+          }
+        }, {
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 13
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "NextValidity"
+            },
+            "go-type" : 24,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 6,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "rit",
+                "variable" : 12
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 13, 14, 19 ],
+      "line-end" : 3430,
+      "code" : "k, validk, err = rit.NextValidity()",
+      "entry" : false,
+      "use-vars" : [ 12 ]
+    }, {
+      "update-vars" : [ 13 ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 13 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3431,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 13
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 17,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 13
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "handleNoOp"
+            }
+          },
+          "go-type" : 17,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 13 ],
+      "line-end" : 3431,
+      "code" : "err = handleNoOp(err)",
+      "entry" : false,
+      "use-vars" : [ 13 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3432,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "break"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3432,
+      "code" : "break",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 18 ],
+      "in-vars" : [ 10, 9, 7, 19, 12, 17, 16, 15, 14, 18, 11, 8 ],
+      "exit" : false,
+      "out-vars" : [ 7, 14, 16, 15, 10, 11, 12, 9, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 3434,
+      "ast" : {
+        "condition" : {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "validi",
+                "variable" : 17
+              }
+            },
+            "operator" : "&&",
+            "right" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "validj",
+                "variable" : 18
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "validk",
+              "variable" : 19
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3436,
+      "code" : "if validi && validj && validk {\n\tretVal[k] = a[i] == b[j]\n}",
+      "entry" : false,
+      "use-vars" : [ 19, 17, 18 ]
+    }, {
+      "update-vars" : [ 9 ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 12, 16, 11, 9, 8, 14, 15, 10, 7 ],
+      "exit" : false,
+      "out-vars" : [ 12, 10, 11, 9, 7, 8 ],
+      "decl-vars" : [ ],
+      "line-start" : 3435,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 5,
+          "index" : {
+            "go-type" : 12,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "k",
+              "variable" : 14
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "retVal",
+              "variable" : 9
+            }
+          },
+          "type" : "index"
+        } ],
+        "right" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "index" : {
+              "go-type" : 12,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "i",
+                "variable" : 15
+              }
+            },
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "a",
+                "variable" : 7
+              }
+            },
+            "type" : "index"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 3,
+            "index" : {
+              "go-type" : 12,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "j",
+                "variable" : 16
+              }
+            },
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "b",
+                "variable" : 8
+              }
+            },
+            "type" : "index"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3435,
+      "code" : "retVal[k] = a[i] == b[j]",
+      "entry" : false,
+      "use-vars" : [ 9, 14, 7, 15, 8, 16 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 3438,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 3438,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func EqIterUnsafePointer(a []unsafe.Pointer, b []unsafe.Pointer, retVal []bool, ait Iterator, bit Iterator, rit Iterator) (err error) {\n\tvar i, j, k int\n\tvar validi, validj, validk bool\n\tfor {\n\t\tif i, validi, err = ait.NextValidity(); err != nil {\n\t\t\terr = handleNoOp(err)\n\t\t\tbreak\n\t\t}\n\t\tif j, validj, err = bit.NextValidity(); err != nil {\n\t\t\terr = handleNoOp(err)\n\t\t\tbreak\n\t\t}\n\t\tif k, validk, err = rit.NextValidity(); err != nil {\n\t\t\terr = handleNoOp(err)\n\t\t\tbreak\n\t\t}\n\t\tif validi && validj && validk {\n\t\t\tretVal[k] = a[i] == b[j]\n\t\t}\n\t}\n\treturn\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "EqIterUnsafePointer",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "NextValidity",
+      "package" : 0,
+      "type" : 24,
+      "exported" : true
+    }, {
+      "name" : "handleNoOp",
+      "package" : 0,
+      "type" : 30,
+      "exported" : false
+    } ],
+    "line-end" : 3439,
+    "line-start" : 3418,
+    "names" : [ "EqIterUnsafePointer" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "execution",
+      "path" : "gorgonia.org/tensor/internal/execution"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 7, 8, 9, 10, 11, 12 ],
+    "receivers" : [ ],
+    "results" : [ 13 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(a []unsafe.Pointer, b []unsafe.Pointer, retVal []bool, ait gorgonia.org/tensor/internal/execution.Iterator, bit gorgonia.org/tensor/internal/execution.Iterator, rit gorgonia.org/tensor/internal/execution.Iterator) (err error)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 27,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "b",
+        "type" : 2
+      }, {
+        "name" : "retVal",
+        "type" : 4
+      }, {
+        "name" : "ait",
+        "type" : 6
+      }, {
+        "name" : "bit",
+        "type" : 6
+      }, {
+        "name" : "rit",
+        "type" : 6
+      } ],
+      "name" : "(a []unsafe.Pointer, b []unsafe.Pointer, retVal []bool, ait gorgonia.org/tensor/internal/execution.Iterator, bit gorgonia.org/tensor/internal/execution.Iterator, rit gorgonia.org/tensor/internal/execution.Iterator)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]unsafe.Pointer",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "elem" : 5,
+      "name" : "[]bool",
+      "type" : "Slice",
+      "underlying" : 4
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "local-name" : "Iterator",
+      "name" : "gorgonia.org/tensor/internal/execution.Iterator",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "methods" : [ {
+        "name" : "Coord",
+        "type" : 8
+      }, {
+        "name" : "Done",
+        "type" : 13
+      }, {
+        "name" : "Next",
+        "type" : 15
+      }, {
+        "name" : "NextInvalid",
+        "type" : 22
+      }, {
+        "name" : "NextValid",
+        "type" : 22
+      }, {
+        "name" : "NextValidity",
+        "type" : 24
+      }, {
+        "name" : "Reset",
+        "type" : 26
+      }, {
+        "name" : "SetForward",
+        "type" : 26
+      }, {
+        "name" : "SetReverse",
+        "type" : 26
+      }, {
+        "name" : "Start",
+        "type" : 15
+      } ],
+      "name" : "interface{Coord() []int; Done() bool; Next() (int, error); NextInvalid() (int, int, error); NextValid() (int, int, error); NextValidity() (int, bool, error); Reset(); SetForward(); SetReverse(); Start() (int, error)}",
+      "type" : "Interface",
+      "underlying" : 7
+    }, {
+      "name" : "func() []int",
+      "params" : 9,
+      "recv" : 0,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 11
+      } ],
+      "name" : "([]int)",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "elem" : 12,
+      "name" : "[]int",
+      "type" : "Slice",
+      "underlying" : 11
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 12
+    }, {
+      "name" : "func() bool",
+      "params" : 9,
+      "recv" : 1,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 13,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 14
+    }, {
+      "name" : "func() (int, error)",
+      "params" : 9,
+      "recv" : 3,
+      "results" : 16,
+      "type" : "Signature",
+      "underlying" : 15,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 12
+      }, {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(int, error)",
+      "type" : "Tuple",
+      "underlying" : 16
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 19
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 18
+    }, {
+      "name" : "func() string",
+      "params" : 9,
+      "recv" : 2,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 19,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 21
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "name" : "func() (int, int, error)",
+      "params" : 9,
+      "recv" : 4,
+      "results" : 23,
+      "type" : "Signature",
+      "underlying" : 22,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 12
+      }, {
+        "name" : "",
+        "type" : 12
+      }, {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(int, int, error)",
+      "type" : "Tuple",
+      "underlying" : 23
+    }, {
+      "name" : "func() (int, bool, error)",
+      "params" : 9,
+      "recv" : 5,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 24,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 12
+      }, {
+        "name" : "",
+        "type" : 5
+      }, {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(int, bool, error)",
+      "type" : "Tuple",
+      "underlying" : 25
+    }, {
+      "name" : "func()",
+      "params" : 9,
+      "recv" : 6,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 17
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 28
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 29
+    }, {
+      "name" : "func(err error) error",
+      "params" : 27,
+      "recv" : -1,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 30,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 31
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : -1,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "a",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "retVal",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "ait",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "bit",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "rit",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "k",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "i",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "j",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "validi",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "validj",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "validk",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

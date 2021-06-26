@@ -1,0 +1,1111 @@
+{
+  "usage" : {
+    "file" : "value.go",
+    "label1" : "cast-pointer",
+    "label2" : "types",
+    "line" : "1444",
+    "module" : "std",
+    "pkg" : "reflect",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "return **(**uintptr)(unsafe.Pointer(&f))",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 1431,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "k"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "kind"
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "v",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1431,
+      "code" : "k := v.kind()",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 6, 14, 16 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 1432,
+      "ast" : {
+        "condition" : {
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "k",
+            "variable" : 2
+          }
+        },
+        "kind" : "statement",
+        "type" : "switch"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1456,
+      "code" : "switch k {\ncase Chan, Map, Ptr, UnsafePointer:\n\treturn uintptr(v.pointer())\ncase Func:\n\tif v.flag&flagMethod != 0 {\n\n\t\tf := methodValueCall\n\t\treturn **(**uintptr)(unsafe.Pointer(&f))\n\t}\n\tp := v.pointer()\n\n\tif p != nil {\n\t\tp = *(*unsafe.Pointer)(p)\n\t}\n\treturn uintptr(p)\n\ncase Slice:\n\treturn (*SliceHeader)(v.ptr).Data\n}",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 1433,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "18"
+          }
+        }, {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "21"
+          }
+        }, {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "22"
+          }
+        }, {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "26"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1434,
+      "code" : "case Chan, Map, Ptr, UnsafePointer:\n\treturn uintptr(v.pointer())",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 1434,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 3,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 3,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uintptr"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "pointer"
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "v",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1434,
+      "code" : "return uintptr(v.pointer())",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 1435,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "19"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1452,
+      "code" : "case Func:\n\tif v.flag&flagMethod != 0 {\n\n\t\tf := methodValueCall\n\t\treturn **(**uintptr)(unsafe.Pointer(&f))\n\t}\n\tp := v.pointer()\n\n\tif p != nil {\n\t\tp = *(*unsafe.Pointer)(p)\n\t}\n\treturn uintptr(p)",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 10 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 1436,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 18,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "flag",
+                "variable" : 3
+              },
+              "go-type" : 18,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "v",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "&",
+            "right" : {
+              "go-type" : 18,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "512"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 18,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1445,
+      "code" : "if v.flag&flagMethod != 0 {\n\n\tf := methodValueCall\n\treturn **(**uintptr)(unsafe.Pointer(&f))\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ 4 ],
+      "decl-vars" : [ 4 ],
+      "line-start" : 1443,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "f"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 11,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Func",
+            "kind" : "ident",
+            "value" : "methodValueCall"
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1443,
+      "code" : "f := methodValueCall",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 4 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 1444,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 12,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "contained" : {
+                    "go-type" : 3,
+                    "kind" : "type",
+                    "type" : "identifier",
+                    "value" : {
+                      "go-type" : 3,
+                      "ident-kind" : "TypeName",
+                      "kind" : "ident",
+                      "value" : "uintptr"
+                    }
+                  },
+                  "go-type" : 12,
+                  "kind" : "type",
+                  "type" : "pointer"
+                },
+                "go-type" : 13,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 13,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 10,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 10,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 10,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 14,
+                  "kind" : "expression",
+                  "operator" : "&",
+                  "target" : {
+                    "go-type" : 11,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "f",
+                      "variable" : 4
+                    }
+                  },
+                  "type" : "unary"
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "star"
+          },
+          "type" : "star"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1444,
+      "code" : "return **(**uintptr)(unsafe.Pointer(&f))",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 5 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 1446,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "pointer"
+            },
+            "go-type" : 8,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "v",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1446,
+      "code" : "p := v.pointer()",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12, 13 ],
+      "in-vars" : [ 5 ],
+      "exit" : false,
+      "out-vars" : [ 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 1449,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 5
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1451,
+      "code" : "if p != nil {\n\tp = *(*unsafe.Pointer)(p)\n}",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ 5 ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 5 ],
+      "exit" : false,
+      "out-vars" : [ 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 1450,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "p",
+            "variable" : 5
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 10,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 10,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 10,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 15,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 15,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 10,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 5
+              }
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 5 ],
+      "line-end" : 1450,
+      "code" : "p = *(*unsafe.Pointer)(p)",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 5 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 1452,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "coerced-to" : {
+            "go-type" : 3,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 3,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "uintptr"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 5
+            }
+          },
+          "type" : "cast"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1452,
+      "code" : "return uintptr(p)",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 1454,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 4,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "23"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1455,
+      "code" : "case Slice:\n\treturn (*SliceHeader)(v.ptr).Data",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 1455,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Data",
+            "variable" : 7
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 17,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 17,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "SliceHeader"
+                }
+              },
+              "go-type" : 16,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 16,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "ptr",
+                "variable" : 6
+              },
+              "go-type" : 10,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "v",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          },
+          "type" : "selector"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1455,
+      "code" : "return (*SliceHeader)(v.ptr).Data",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 1457,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 23,
+            "kind" : "expression",
+            "operator" : "&",
+            "target" : {
+              "declared" : {
+                "go-type" : 24,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 24,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "ValueError"
+                }
+              },
+              "go-type" : 24,
+              "kind" : "literal",
+              "type" : "composite",
+              "values" : [ {
+                "go-type" : 26,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "STRING",
+                  "value" : "reflect.Value.Pointer"
+                }
+              }, {
+                "arguments" : [ ],
+                "ellipsis" : false,
+                "function" : {
+                  "field" : {
+                    "ident-kind" : "Func",
+                    "kind" : "ident",
+                    "value" : "kind"
+                  },
+                  "go-type" : 6,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 0,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "v",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "go-type" : 4,
+                "kind" : "expression",
+                "type" : "call"
+              } ]
+            },
+            "type" : "unary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 20,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "panic"
+            }
+          },
+          "go-type" : 1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1457,
+      "code" : "panic(&ValueError{\"reflect.Value.Pointer\", v.kind()})",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    } ],
+    "code" : "// Pointer returns v's value as a uintptr.\n// It returns uintptr instead of unsafe.Pointer so that\n// code using reflect cannot obtain unsafe.Pointers\n// without importing the unsafe package explicitly.\n// It panics if v's Kind is not Chan, Func, Map, Ptr, Slice, or UnsafePointer.\n//\n// If v's Kind is Func, the returned pointer is an underlying\n// code pointer, but not necessarily enough to identify a\n// single function uniquely. The only guarantee is that the\n// result is zero if and only if v is a nil func Value.\n//\n// If v's Kind is Slice, the returned pointer is to the first\n// element of the slice. If the slice is nil the returned value\n// is 0.  If the slice is empty but non-nil the return value is non-zero.\nfunc (v Value) Pointer() uintptr {\n\n\tk := v.kind()\n\tswitch k {\n\tcase Chan, Map, Ptr, UnsafePointer:\n\t\treturn uintptr(v.pointer())\n\tcase Func:\n\t\tif v.flag&flagMethod != 0 {\n\n\t\t\tf := methodValueCall\n\t\t\treturn **(**uintptr)(unsafe.Pointer(&f))\n\t\t}\n\t\tp := v.pointer()\n\n\t\tif p != nil {\n\t\t\tp = *(*unsafe.Pointer)(p)\n\t\t}\n\t\treturn uintptr(p)\n\n\tcase Slice:\n\t\treturn (*SliceHeader)(v.ptr).Data\n\t}\n\tpanic(&ValueError{\"reflect.Value.Pointer\", v.kind()})\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "Pointer",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "kind",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "pointer",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "methodValueCall",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    } ],
+    "line-end" : 1458,
+    "line-start" : 1429,
+    "names" : [ "Pointer" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 0 ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() uintptr",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "local-name" : "Kind",
+      "name" : "reflect.Kind",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "func() reflect.Kind",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 7,
+      "type" : "Signature",
+      "underlying" : 6,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(reflect.Kind)",
+      "type" : "Tuple",
+      "underlying" : 7
+    }, {
+      "name" : "func() unsafe.Pointer",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 10
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "func()",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "elem" : 3,
+      "name" : "*uintptr",
+      "type" : "Pointer",
+      "underlying" : 12
+    }, {
+      "elem" : 12,
+      "name" : "**uintptr",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "elem" : 11,
+      "name" : "*func()",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "elem" : 10,
+      "name" : "*unsafe.Pointer",
+      "type" : "Pointer",
+      "underlying" : 15
+    }, {
+      "elem" : 17,
+      "name" : "*reflect.SliceHeader",
+      "type" : "Pointer",
+      "underlying" : 16
+    }, {
+      "local-name" : "SliceHeader",
+      "name" : "reflect.SliceHeader",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "fields" : [ {
+        "name" : "Data",
+        "type" : 3
+      }, {
+        "name" : "Len",
+        "type" : 19
+      }, {
+        "name" : "Cap",
+        "type" : 19
+      } ],
+      "name" : "struct{Data uintptr; Len int; Cap int}",
+      "type" : "Struct",
+      "underlying" : 18
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "name" : "func(interface{})",
+      "params" : 21,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 20,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
+      "underlying" : 21
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 22
+    }, {
+      "elem" : 24,
+      "name" : "*reflect.ValueError",
+      "type" : "Pointer",
+      "underlying" : 23
+    }, {
+      "local-name" : "ValueError",
+      "name" : "reflect.ValueError",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 25
+    }, {
+      "fields" : [ {
+        "name" : "Method",
+        "type" : 26
+      }, {
+        "name" : "Kind",
+        "type" : 4
+      } ],
+      "name" : "struct{Method string; Kind reflect.Kind}",
+      "type" : "Struct",
+      "underlying" : 25
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 26
+    } ],
+    "variables" : [ {
+      "name" : "v",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "k",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "flag",
+      "package" : 0,
+      "type" : 18,
+      "exported" : false
+    }, {
+      "name" : "f",
+      "package" : 0,
+      "type" : 11,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "ptr",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "Data",
+      "package" : 0,
+      "type" : 3,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

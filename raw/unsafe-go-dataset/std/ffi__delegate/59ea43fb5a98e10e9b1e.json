@@ -1,0 +1,801 @@
+{
+  "usage" : {
+    "file" : "string.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "150",
+    "module" : "std",
+    "pkg" : "runtime",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "msanread(unsafe.Pointer(&b[0]), uintptr(len(b)))",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 143,
+      "ast" : {
+        "condition" : {
+          "go-type" : 6,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "left" : {
+              "arguments" : [ {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "b",
+                  "variable" : 0
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 8,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 7,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 148,
+      "code" : "if raceenabled && len(b) > 0 {\n\tracereadrangepc(unsafe.Pointer(&b[0]),\n\t\tuintptr(len(b)),\n\t\tgetcallerpc(),\n\t\tfuncPC(slicebytetostringtmp))\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 144,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 14,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 14,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 16,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 3,
+                "index" : {
+                  "go-type" : 7,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "b",
+                    "variable" : 0
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 15,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 15,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 15,
+            "kind" : "expression",
+            "target" : {
+              "arguments" : [ {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "b",
+                  "variable" : 0
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 8,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "type" : "cast"
+          }, {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 17,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "getcallerpc"
+              }
+            },
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "call"
+          }, {
+            "arguments" : [ {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "slicebytetostringtmp"
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 19,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "funcPC"
+              }
+            },
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 12,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "racereadrangepc"
+            }
+          },
+          "go-type" : 11,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 147,
+      "code" : "racereadrangepc(unsafe.Pointer(&b[0]),\n\tuintptr(len(b)),\n\tgetcallerpc(),\n\tfuncPC(slicebytetostringtmp))",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 6 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 149,
+      "ast" : {
+        "condition" : {
+          "go-type" : 6,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "left" : {
+              "arguments" : [ {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "b",
+                  "variable" : 0
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 8,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "operator" : ">",
+            "right" : {
+              "go-type" : 7,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 151,
+      "code" : "if msanenabled && len(b) > 0 {\n\tmsanread(unsafe.Pointer(&b[0]), uintptr(len(b)))\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 150,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 14,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 14,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 16,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 3,
+                "index" : {
+                  "go-type" : 7,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "b",
+                    "variable" : 0
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 15,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 15,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "uintptr"
+              }
+            },
+            "go-type" : 15,
+            "kind" : "expression",
+            "target" : {
+              "arguments" : [ {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "b",
+                  "variable" : 0
+                }
+              } ],
+              "ellipsis" : false,
+              "function" : {
+                "go-type" : 8,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Builtin",
+                  "kind" : "ident",
+                  "value" : "len"
+                }
+              },
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "msanread"
+            }
+          },
+          "go-type" : 11,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 150,
+      "code" : "msanread(unsafe.Pointer(&b[0]), uintptr(len(b)))",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 152,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 5,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 5,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "string"
+                }
+              },
+              "go-type" : 24,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 24,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 14,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 14,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 14,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 25,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "b",
+                    "variable" : 0
+                  }
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 152,
+      "code" : "return *(*string)(unsafe.Pointer(&b))",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    } ],
+    "code" : "// slicebytetostringtmp returns a \"string\" referring to the actual []byte bytes.\n//\n// Callers need to ensure that the returned string will not be used after\n// the calling goroutine modifies the original slice or synchronizes with\n// another goroutine.\n//\n// The function is only called when instrumenting\n// and otherwise intrinsified by the compiler.\n//\n// Some internal compiler optimizations use this function.\n// - Used for m[T1{... Tn{..., string(k), ...} ...}] and m[string(k)]\n//   where k is []byte, T1 to Tn is a nesting of struct and array literals.\n// - Used for \"<\"+string(b)+\">\" concatenation where b is []byte.\n// - Used for string(b)==\"foo\" comparison where b is []byte.\nfunc slicebytetostringtmp(b []byte) string {\n\tif raceenabled && len(b) > 0 {\n\t\tracereadrangepc(unsafe.Pointer(&b[0]),\n\t\t\tuintptr(len(b)),\n\t\t\tgetcallerpc(),\n\t\t\tfuncPC(slicebytetostringtmp))\n\t}\n\tif msanenabled && len(b) > 0 {\n\t\tmsanread(unsafe.Pointer(&b[0]), uintptr(len(b)))\n\t}\n\treturn *(*string)(unsafe.Pointer(&b))\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "slicebytetostringtmp",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "racereadrangepc",
+      "package" : 0,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "getcallerpc",
+      "package" : 0,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "funcPC",
+      "package" : 0,
+      "type" : 19,
+      "exported" : false
+    }, {
+      "name" : "msanread",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    } ],
+    "line-end" : 153,
+    "line-start" : 142,
+    "names" : [ "slicebytetostringtmp" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "runtime",
+      "path" : "runtime"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0 ],
+    "receivers" : [ ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(b []byte) string",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 2
+      } ],
+      "name" : "(b []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 4
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "name" : "func([]byte) int",
+      "params" : 9,
+      "recv" : -1,
+      "results" : 10,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "name" : "func(addr unsafe.Pointer, sz uintptr, callerpc uintptr, pc uintptr)",
+      "params" : 13,
+      "recv" : -1,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 12,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "addr",
+        "type" : 14
+      }, {
+        "name" : "sz",
+        "type" : 15
+      }, {
+        "name" : "callerpc",
+        "type" : 15
+      }, {
+        "name" : "pc",
+        "type" : 15
+      } ],
+      "name" : "(addr unsafe.Pointer, sz uintptr, callerpc uintptr, pc uintptr)",
+      "type" : "Tuple",
+      "underlying" : 13
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
+      "elem" : 3,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 16
+    }, {
+      "name" : "func() uintptr",
+      "params" : 11,
+      "recv" : -1,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 17,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 18
+    }, {
+      "name" : "func(f interface{}) uintptr",
+      "params" : 20,
+      "recv" : -1,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 19,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "f",
+        "type" : 21
+      } ],
+      "name" : "(f interface{})",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 21
+    }, {
+      "name" : "func(addr unsafe.Pointer, sz uintptr)",
+      "params" : 23,
+      "recv" : -1,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 22,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "addr",
+        "type" : 14
+      }, {
+        "name" : "sz",
+        "type" : 15
+      } ],
+      "name" : "(addr unsafe.Pointer, sz uintptr)",
+      "type" : "Tuple",
+      "underlying" : 23
+    }, {
+      "elem" : 5,
+      "name" : "*string",
+      "type" : "Pointer",
+      "underlying" : 24
+    }, {
+      "elem" : 2,
+      "name" : "*[]byte",
+      "type" : "Pointer",
+      "underlying" : 25
+    } ],
+    "variables" : [ {
+      "name" : "b",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

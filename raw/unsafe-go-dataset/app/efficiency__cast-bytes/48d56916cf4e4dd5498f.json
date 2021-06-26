@@ -1,0 +1,2308 @@
+{
+  "usage" : {
+    "file" : "bolt_unix.go",
+    "label1" : "cast-bytes",
+    "label2" : "efficiency",
+    "line" : "67",
+    "module" : "github.com/coreos/bbolt",
+    "pkg" : "github.com/coreos/bbolt",
+    "project" : "elastic/beats",
+    "snippet" : "db.data = (*[maxMapSize]byte)(unsafe.Pointer(&b[0]))",
+    "version" : "v1.3.1-coreos.6.0.20180318001526-af9db2027c98"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 7, 2 ],
+      "decl-vars" : [ 6, 7 ],
+      "line-start" : 53,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "b"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 6,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 6,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int"
+              }
+            },
+            "go-type" : 6,
+            "kind" : "expression",
+            "target" : {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Fd"
+                },
+                "go-type" : 144,
+                "kind" : "expression",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "file",
+                    "variable" : 4
+                  },
+                  "go-type" : 10,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "db",
+                      "variable" : 1
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "selector"
+              },
+              "go-type" : 24,
+              "kind" : "expression",
+              "type" : "call"
+            },
+            "type" : "cast"
+          }, {
+            "go-type" : 8,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          }, {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "sz",
+              "variable" : 2
+            }
+          }, {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "1"
+            }
+          }, {
+            "go-type" : 6,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 6,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "1"
+              }
+            },
+            "operator" : "|",
+            "right" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "MmapFlags",
+                "variable" : 5
+              },
+              "go-type" : 6,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "db",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "binary"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 142,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 4,
+              "value" : "syscall"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Mmap"
+            }
+          },
+          "go-type" : 141,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 53,
+      "code" : "b, err := syscall.Mmap(int(db.file.Fd()), 0, sz, syscall.PROT_READ, syscall.MAP_SHARED|db.MmapFlags)",
+      "entry" : false,
+      "use-vars" : [ 2, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 5 ],
+      "in-vars" : [ 6, 1, 7, 2 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 7, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 54,
+      "ast" : {
+        "condition" : {
+          "go-type" : 146,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 130,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 6
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 147,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 56,
+      "code" : "if err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 55,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 130,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 6
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 55,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 6 ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 1, 7, 2 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 7, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 59,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 130,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 6
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 34,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "b",
+              "variable" : 7
+            }
+          }, {
+            "go-type" : 6,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "1"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 148,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "madvise"
+            }
+          },
+          "go-type" : 130,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 6 ],
+      "line-end" : 59,
+      "code" : "err = madvise(b, syscall.MADV_RANDOM)",
+      "entry" : false,
+      "use-vars" : [ 7 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7, 8 ],
+      "in-vars" : [ 7, 2, 6, 1 ],
+      "exit" : false,
+      "out-vars" : [ 6, 1, 7, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 60,
+      "ast" : {
+        "condition" : {
+          "go-type" : 146,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 146,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 130,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "err",
+                "variable" : 6
+              }
+            },
+            "operator" : "!=",
+            "right" : {
+              "go-type" : 147,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Nil",
+                "kind" : "ident",
+                "value" : "nil"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "&&",
+          "right" : {
+            "go-type" : 146,
+            "kind" : "expression",
+            "left" : {
+              "go-type" : 130,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "err",
+                "variable" : 6
+              }
+            },
+            "operator" : "!=",
+            "right" : {
+              "go-type" : 151,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "38"
+              }
+            },
+            "type" : "binary"
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 63,
+      "code" : "if err != nil && err != syscall.ENOSYS {\n\n\treturn fmt.Errorf(\"madvise: %s\", err)\n}",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 6 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 62,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "arguments" : [ {
+            "go-type" : 9,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "madvise: %s"
+            }
+          }, {
+            "go-type" : 130,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 6
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 152,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 7,
+              "value" : "fmt"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 130,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 62,
+      "code" : "return fmt.Errorf(\"madvise: %s\", err)",
+      "entry" : false,
+      "use-vars" : [ 6 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 1, 7, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 7, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 66,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "dataref",
+            "variable" : 8
+          },
+          "go-type" : 34,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "db",
+              "variable" : 1
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 34,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "b",
+            "variable" : 7
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 66,
+      "code" : "db.dataref = b",
+      "entry" : false,
+      "use-vars" : [ 7, 1 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 1, 7, 2 ],
+      "exit" : false,
+      "out-vars" : [ 1, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 67,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "data",
+            "variable" : 9
+          },
+          "go-type" : 35,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "db",
+              "variable" : 1
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "element" : {
+                "go-type" : 30,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 30,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "byte"
+                }
+              },
+              "go-type" : 36,
+              "kind" : "type",
+              "length" : {
+                "go-type" : 155,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "281474976710655"
+                }
+              },
+              "type" : "array"
+            },
+            "go-type" : 35,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 35,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 96,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 6,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 96,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 96,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 29,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 30,
+                "index" : {
+                  "go-type" : 6,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "0"
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 34,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "b",
+                    "variable" : 7
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 67,
+      "code" : "db.data = (*[maxMapSize]byte)(unsafe.Pointer(&b[0]))",
+      "entry" : false,
+      "use-vars" : [ 1, 7 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 1, 2 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 68,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "datasz",
+            "variable" : 10
+          },
+          "go-type" : 6,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "db",
+              "variable" : 1
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 6,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "sz",
+            "variable" : 2
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 68,
+      "code" : "db.datasz = sz",
+      "entry" : false,
+      "use-vars" : [ 2, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 69,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 147,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 69,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// mmap memory maps a DB's data file.\nfunc mmap(db *DB, sz int) error {\n\n\tb, err := syscall.Mmap(int(db.file.Fd()), 0, sz, syscall.PROT_READ, syscall.MAP_SHARED|db.MmapFlags)\n\tif err != nil {\n\t\treturn err\n\t}\n\n\terr = madvise(b, syscall.MADV_RANDOM)\n\tif err != nil && err != syscall.ENOSYS {\n\n\t\treturn fmt.Errorf(\"madvise: %s\", err)\n\t}\n\n\tdb.dataref = b\n\tdb.data = (*[maxMapSize]byte)(unsafe.Pointer(&b[0]))\n\tdb.datasz = sz\n\treturn nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "mmap",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Mmap",
+      "package" : 4,
+      "type" : 142,
+      "exported" : true
+    }, {
+      "name" : "Fd",
+      "package" : 2,
+      "type" : 144,
+      "exported" : true
+    }, {
+      "name" : "madvise",
+      "package" : 0,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "Errorf",
+      "package" : 7,
+      "type" : 152,
+      "exported" : true
+    } ],
+    "line-end" : 70,
+    "line-start" : 51,
+    "names" : [ "mmap" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "bolt",
+      "path" : "github.com/coreos/bbolt"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "os",
+      "path" : "os"
+    }, {
+      "name" : "poll",
+      "path" : "internal/poll"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "fmt",
+      "path" : "fmt"
+    } ],
+    "params" : [ 1, 2 ],
+    "receivers" : [ ],
+    "results" : [ 3 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(db *github.com/coreos/bbolt.DB, sz int) error",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 129,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "db",
+        "type" : 2
+      }, {
+        "name" : "sz",
+        "type" : 6
+      } ],
+      "name" : "(db *github.com/coreos/bbolt.DB, sz int)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "*github.com/coreos/bbolt.DB",
+      "type" : "Pointer",
+      "underlying" : 2
+    }, {
+      "local-name" : "DB",
+      "name" : "github.com/coreos/bbolt.DB",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "fields" : [ {
+        "name" : "StrictMode",
+        "type" : 5
+      }, {
+        "name" : "NoSync",
+        "type" : 5
+      }, {
+        "name" : "NoFreelistSync",
+        "type" : 5
+      }, {
+        "name" : "NoGrowSync",
+        "type" : 5
+      }, {
+        "name" : "MmapFlags",
+        "type" : 6
+      }, {
+        "name" : "MaxBatchSize",
+        "type" : 6
+      }, {
+        "name" : "MaxBatchDelay",
+        "type" : 7
+      }, {
+        "name" : "AllocSize",
+        "type" : 6
+      }, {
+        "name" : "path",
+        "type" : 9
+      }, {
+        "name" : "file",
+        "type" : 10
+      }, {
+        "name" : "lockfile",
+        "type" : 10
+      }, {
+        "name" : "dataref",
+        "type" : 34
+      }, {
+        "name" : "data",
+        "type" : 35
+      }, {
+        "name" : "datasz",
+        "type" : 6
+      }, {
+        "name" : "filesz",
+        "type" : 6
+      }, {
+        "name" : "meta0",
+        "type" : 37
+      }, {
+        "name" : "meta1",
+        "type" : 37
+      }, {
+        "name" : "pageSize",
+        "type" : 6
+      }, {
+        "name" : "opened",
+        "type" : 5
+      }, {
+        "name" : "rwtx",
+        "type" : 44
+      }, {
+        "name" : "txs",
+        "type" : 73
+      }, {
+        "name" : "stats",
+        "type" : 74
+      }, {
+        "name" : "freelist",
+        "type" : 76
+      }, {
+        "name" : "freelistLoad",
+        "type" : 87
+      }, {
+        "name" : "pagePool",
+        "type" : 92
+      }, {
+        "name" : "batchMu",
+        "type" : 89
+      }, {
+        "name" : "batch",
+        "type" : 100
+      }, {
+        "name" : "rwlock",
+        "type" : 89
+      }, {
+        "name" : "metalock",
+        "type" : 89
+      }, {
+        "name" : "mmaplock",
+        "type" : 135
+      }, {
+        "name" : "statlock",
+        "type" : 135
+      }, {
+        "name" : "ops",
+        "type" : 137
+      }, {
+        "name" : "readOnly",
+        "type" : 5
+      } ],
+      "name" : "struct{StrictMode bool; NoSync bool; NoFreelistSync bool; NoGrowSync bool; MmapFlags int; MaxBatchSize int; MaxBatchDelay time.Duration; AllocSize int; path string; file *os.File; lockfile *os.File; dataref []byte; data *[281474976710655]byte; datasz int; filesz int; meta0 *github.com/coreos/bbolt.meta; meta1 *github.com/coreos/bbolt.meta; pageSize int; opened bool; rwtx *github.com/coreos/bbolt.Tx; txs []*github.com/coreos/bbolt.Tx; stats github.com/coreos/bbolt.Stats; freelist *github.com/coreos/bbolt.freelist; freelistLoad sync.Once; pagePool sync.Pool; batchMu sync.Mutex; batch *github.com/coreos/bbolt.batch; rwlock sync.Mutex; metalock sync.Mutex; mmaplock sync.RWMutex; statlock sync.RWMutex; ops struct{writeAt func(b []byte, off int64) (n int, err error)}; readOnly bool}",
+      "type" : "Struct",
+      "underlying" : 4
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 5
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 6
+    }, {
+      "local-name" : "Duration",
+      "name" : "time.Duration",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "elem" : 11,
+      "name" : "*os.File",
+      "type" : "Pointer",
+      "underlying" : 10
+    }, {
+      "local-name" : "File",
+      "name" : "os.File",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "file",
+        "type" : 13
+      } ],
+      "name" : "struct{*os.file}",
+      "type" : "Struct",
+      "underlying" : 12
+    }, {
+      "elem" : 14,
+      "name" : "*os.file",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "local-name" : "file",
+      "name" : "os.file",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "fields" : [ {
+        "name" : "pfd",
+        "type" : 16
+      }, {
+        "name" : "name",
+        "type" : 9
+      }, {
+        "name" : "dirinfo",
+        "type" : 31
+      }, {
+        "name" : "nonblock",
+        "type" : 5
+      }, {
+        "name" : "stdoutOrErr",
+        "type" : 5
+      }, {
+        "name" : "appendMode",
+        "type" : 5
+      } ],
+      "name" : "struct{pfd internal/poll.FD; name string; dirinfo *os.dirInfo; nonblock bool; stdoutOrErr bool; appendMode bool}",
+      "type" : "Struct",
+      "underlying" : 15
+    }, {
+      "local-name" : "FD",
+      "name" : "internal/poll.FD",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 17
+    }, {
+      "fields" : [ {
+        "name" : "fdmu",
+        "type" : 18
+      }, {
+        "name" : "Sysfd",
+        "type" : 6
+      }, {
+        "name" : "pd",
+        "type" : 22
+      }, {
+        "name" : "iovecs",
+        "type" : 25
+      }, {
+        "name" : "csema",
+        "type" : 21
+      }, {
+        "name" : "isBlocking",
+        "type" : 21
+      }, {
+        "name" : "IsStream",
+        "type" : 5
+      }, {
+        "name" : "ZeroReadIsEOF",
+        "type" : 5
+      }, {
+        "name" : "isFile",
+        "type" : 5
+      } ],
+      "name" : "struct{fdmu internal/poll.fdMutex; Sysfd int; pd internal/poll.pollDesc; iovecs *[]syscall.Iovec; csema uint32; isBlocking uint32; IsStream bool; ZeroReadIsEOF bool; isFile bool}",
+      "type" : "Struct",
+      "underlying" : 17
+    }, {
+      "local-name" : "fdMutex",
+      "name" : "internal/poll.fdMutex",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "fields" : [ {
+        "name" : "state",
+        "type" : 20
+      }, {
+        "name" : "rsema",
+        "type" : 21
+      }, {
+        "name" : "wsema",
+        "type" : 21
+      } ],
+      "name" : "struct{state uint64; rsema uint32; wsema uint32}",
+      "type" : "Struct",
+      "underlying" : 19
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 20
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "local-name" : "pollDesc",
+      "name" : "internal/poll.pollDesc",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 23
+    }, {
+      "fields" : [ {
+        "name" : "runtimeCtx",
+        "type" : 24
+      } ],
+      "name" : "struct{runtimeCtx uintptr}",
+      "type" : "Struct",
+      "underlying" : 23
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 24
+    }, {
+      "elem" : 26,
+      "name" : "*[]syscall.Iovec",
+      "type" : "Pointer",
+      "underlying" : 25
+    }, {
+      "elem" : 27,
+      "name" : "[]syscall.Iovec",
+      "type" : "Slice",
+      "underlying" : 26
+    }, {
+      "local-name" : "Iovec",
+      "name" : "syscall.Iovec",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 28
+    }, {
+      "fields" : [ {
+        "name" : "Base",
+        "type" : 29
+      }, {
+        "name" : "Len",
+        "type" : 20
+      } ],
+      "name" : "struct{Base *byte; Len uint64}",
+      "type" : "Struct",
+      "underlying" : 28
+    }, {
+      "elem" : 30,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 29
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 30
+    }, {
+      "elem" : 32,
+      "name" : "*os.dirInfo",
+      "type" : "Pointer",
+      "underlying" : 31
+    }, {
+      "local-name" : "dirInfo",
+      "name" : "os.dirInfo",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "buf",
+        "type" : 34
+      }, {
+        "name" : "nbuf",
+        "type" : 6
+      }, {
+        "name" : "bufp",
+        "type" : 6
+      } ],
+      "name" : "struct{buf []byte; nbuf int; bufp int}",
+      "type" : "Struct",
+      "underlying" : 33
+    }, {
+      "elem" : 30,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 34
+    }, {
+      "elem" : 36,
+      "name" : "*[281474976710655]byte",
+      "type" : "Pointer",
+      "underlying" : 35
+    }, {
+      "elem" : 30,
+      "name" : "[281474976710655]byte",
+      "type" : "Array",
+      "underlying" : 36
+    }, {
+      "elem" : 38,
+      "name" : "*github.com/coreos/bbolt.meta",
+      "type" : "Pointer",
+      "underlying" : 37
+    }, {
+      "local-name" : "meta",
+      "name" : "github.com/coreos/bbolt.meta",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 39
+    }, {
+      "fields" : [ {
+        "name" : "magic",
+        "type" : 21
+      }, {
+        "name" : "version",
+        "type" : 21
+      }, {
+        "name" : "pageSize",
+        "type" : 21
+      }, {
+        "name" : "flags",
+        "type" : 21
+      }, {
+        "name" : "root",
+        "type" : 40
+      }, {
+        "name" : "freelist",
+        "type" : 42
+      }, {
+        "name" : "pgid",
+        "type" : 42
+      }, {
+        "name" : "txid",
+        "type" : 43
+      }, {
+        "name" : "checksum",
+        "type" : 20
+      } ],
+      "name" : "struct{magic uint32; version uint32; pageSize uint32; flags uint32; root github.com/coreos/bbolt.bucket; freelist github.com/coreos/bbolt.pgid; pgid github.com/coreos/bbolt.pgid; txid github.com/coreos/bbolt.txid; checksum uint64}",
+      "type" : "Struct",
+      "underlying" : 39
+    }, {
+      "local-name" : "bucket",
+      "name" : "github.com/coreos/bbolt.bucket",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 41
+    }, {
+      "fields" : [ {
+        "name" : "root",
+        "type" : 42
+      }, {
+        "name" : "sequence",
+        "type" : 20
+      } ],
+      "name" : "struct{root github.com/coreos/bbolt.pgid; sequence uint64}",
+      "type" : "Struct",
+      "underlying" : 41
+    }, {
+      "local-name" : "pgid",
+      "name" : "github.com/coreos/bbolt.pgid",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 20
+    }, {
+      "local-name" : "txid",
+      "name" : "github.com/coreos/bbolt.txid",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 20
+    }, {
+      "elem" : 45,
+      "name" : "*github.com/coreos/bbolt.Tx",
+      "type" : "Pointer",
+      "underlying" : 44
+    }, {
+      "local-name" : "Tx",
+      "name" : "github.com/coreos/bbolt.Tx",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 46
+    }, {
+      "fields" : [ {
+        "name" : "writable",
+        "type" : 5
+      }, {
+        "name" : "managed",
+        "type" : 5
+      }, {
+        "name" : "db",
+        "type" : 2
+      }, {
+        "name" : "meta",
+        "type" : 37
+      }, {
+        "name" : "root",
+        "type" : 47
+      }, {
+        "name" : "pages",
+        "type" : 67
+      }, {
+        "name" : "stats",
+        "type" : 68
+      }, {
+        "name" : "commitHandlers",
+        "type" : 70
+      }, {
+        "name" : "WriteFlag",
+        "type" : 6
+      } ],
+      "name" : "struct{writable bool; managed bool; db *github.com/coreos/bbolt.DB; meta *github.com/coreos/bbolt.meta; root github.com/coreos/bbolt.Bucket; pages map[github.com/coreos/bbolt.pgid]*github.com/coreos/bbolt.page; stats github.com/coreos/bbolt.TxStats; commitHandlers []func(); WriteFlag int}",
+      "type" : "Struct",
+      "underlying" : 46
+    }, {
+      "local-name" : "Bucket",
+      "name" : "github.com/coreos/bbolt.Bucket",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 48
+    }, {
+      "fields" : [ {
+        "name" : "bucket",
+        "type" : 49
+      }, {
+        "name" : "tx",
+        "type" : 44
+      }, {
+        "name" : "buckets",
+        "type" : 50
+      }, {
+        "name" : "page",
+        "type" : 52
+      }, {
+        "name" : "rootNode",
+        "type" : 56
+      }, {
+        "name" : "nodes",
+        "type" : 65
+      }, {
+        "name" : "FillPercent",
+        "type" : 66
+      } ],
+      "name" : "struct{*github.com/coreos/bbolt.bucket; tx *github.com/coreos/bbolt.Tx; buckets map[string]*github.com/coreos/bbolt.Bucket; page *github.com/coreos/bbolt.page; rootNode *github.com/coreos/bbolt.node; nodes map[github.com/coreos/bbolt.pgid]*github.com/coreos/bbolt.node; FillPercent float64}",
+      "type" : "Struct",
+      "underlying" : 48
+    }, {
+      "elem" : 40,
+      "name" : "*github.com/coreos/bbolt.bucket",
+      "type" : "Pointer",
+      "underlying" : 49
+    }, {
+      "elem" : 51,
+      "key" : 9,
+      "name" : "map[string]*github.com/coreos/bbolt.Bucket",
+      "type" : "Map",
+      "underlying" : 50
+    }, {
+      "elem" : 47,
+      "name" : "*github.com/coreos/bbolt.Bucket",
+      "type" : "Pointer",
+      "underlying" : 51
+    }, {
+      "elem" : 53,
+      "name" : "*github.com/coreos/bbolt.page",
+      "type" : "Pointer",
+      "underlying" : 52
+    }, {
+      "local-name" : "page",
+      "name" : "github.com/coreos/bbolt.page",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "fields" : [ {
+        "name" : "id",
+        "type" : 42
+      }, {
+        "name" : "flags",
+        "type" : 55
+      }, {
+        "name" : "count",
+        "type" : 55
+      }, {
+        "name" : "overflow",
+        "type" : 21
+      }, {
+        "name" : "ptr",
+        "type" : 24
+      } ],
+      "name" : "struct{id github.com/coreos/bbolt.pgid; flags uint16; count uint16; overflow uint32; ptr uintptr}",
+      "type" : "Struct",
+      "underlying" : 54
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 55
+    }, {
+      "elem" : 57,
+      "name" : "*github.com/coreos/bbolt.node",
+      "type" : "Pointer",
+      "underlying" : 56
+    }, {
+      "local-name" : "node",
+      "name" : "github.com/coreos/bbolt.node",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 58
+    }, {
+      "fields" : [ {
+        "name" : "bucket",
+        "type" : 51
+      }, {
+        "name" : "isLeaf",
+        "type" : 5
+      }, {
+        "name" : "unbalanced",
+        "type" : 5
+      }, {
+        "name" : "spilled",
+        "type" : 5
+      }, {
+        "name" : "key",
+        "type" : 34
+      }, {
+        "name" : "pgid",
+        "type" : 42
+      }, {
+        "name" : "parent",
+        "type" : 56
+      }, {
+        "name" : "children",
+        "type" : 59
+      }, {
+        "name" : "inodes",
+        "type" : 61
+      } ],
+      "name" : "struct{bucket *github.com/coreos/bbolt.Bucket; isLeaf bool; unbalanced bool; spilled bool; key []byte; pgid github.com/coreos/bbolt.pgid; parent *github.com/coreos/bbolt.node; children github.com/coreos/bbolt.nodes; inodes github.com/coreos/bbolt.inodes}",
+      "type" : "Struct",
+      "underlying" : 58
+    }, {
+      "local-name" : "nodes",
+      "name" : "github.com/coreos/bbolt.nodes",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 60
+    }, {
+      "elem" : 56,
+      "name" : "[]*github.com/coreos/bbolt.node",
+      "type" : "Slice",
+      "underlying" : 60
+    }, {
+      "local-name" : "inodes",
+      "name" : "github.com/coreos/bbolt.inodes",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 62
+    }, {
+      "elem" : 63,
+      "name" : "[]github.com/coreos/bbolt.inode",
+      "type" : "Slice",
+      "underlying" : 62
+    }, {
+      "local-name" : "inode",
+      "name" : "github.com/coreos/bbolt.inode",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 64
+    }, {
+      "fields" : [ {
+        "name" : "flags",
+        "type" : 21
+      }, {
+        "name" : "pgid",
+        "type" : 42
+      }, {
+        "name" : "key",
+        "type" : 34
+      }, {
+        "name" : "value",
+        "type" : 34
+      } ],
+      "name" : "struct{flags uint32; pgid github.com/coreos/bbolt.pgid; key []byte; value []byte}",
+      "type" : "Struct",
+      "underlying" : 64
+    }, {
+      "elem" : 56,
+      "key" : 42,
+      "name" : "map[github.com/coreos/bbolt.pgid]*github.com/coreos/bbolt.node",
+      "type" : "Map",
+      "underlying" : 65
+    }, {
+      "name" : "float64",
+      "type" : "Basic",
+      "underlying" : 66
+    }, {
+      "elem" : 52,
+      "key" : 42,
+      "name" : "map[github.com/coreos/bbolt.pgid]*github.com/coreos/bbolt.page",
+      "type" : "Map",
+      "underlying" : 67
+    }, {
+      "local-name" : "TxStats",
+      "name" : "github.com/coreos/bbolt.TxStats",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 69
+    }, {
+      "fields" : [ {
+        "name" : "PageCount",
+        "type" : 6
+      }, {
+        "name" : "PageAlloc",
+        "type" : 6
+      }, {
+        "name" : "CursorCount",
+        "type" : 6
+      }, {
+        "name" : "NodeCount",
+        "type" : 6
+      }, {
+        "name" : "NodeDeref",
+        "type" : 6
+      }, {
+        "name" : "Rebalance",
+        "type" : 6
+      }, {
+        "name" : "RebalanceTime",
+        "type" : 7
+      }, {
+        "name" : "Split",
+        "type" : 6
+      }, {
+        "name" : "Spill",
+        "type" : 6
+      }, {
+        "name" : "SpillTime",
+        "type" : 7
+      }, {
+        "name" : "Write",
+        "type" : 6
+      }, {
+        "name" : "WriteTime",
+        "type" : 7
+      } ],
+      "name" : "struct{PageCount int; PageAlloc int; CursorCount int; NodeCount int; NodeDeref int; Rebalance int; RebalanceTime time.Duration; Split int; Spill int; SpillTime time.Duration; Write int; WriteTime time.Duration}",
+      "type" : "Struct",
+      "underlying" : 69
+    }, {
+      "elem" : 71,
+      "name" : "[]func()",
+      "type" : "Slice",
+      "underlying" : 70
+    }, {
+      "name" : "func()",
+      "params" : 72,
+      "recv" : -1,
+      "results" : 72,
+      "type" : "Signature",
+      "underlying" : 71,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 72
+    }, {
+      "elem" : 44,
+      "name" : "[]*github.com/coreos/bbolt.Tx",
+      "type" : "Slice",
+      "underlying" : 73
+    }, {
+      "local-name" : "Stats",
+      "name" : "github.com/coreos/bbolt.Stats",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 75
+    }, {
+      "fields" : [ {
+        "name" : "FreePageN",
+        "type" : 6
+      }, {
+        "name" : "PendingPageN",
+        "type" : 6
+      }, {
+        "name" : "FreeAlloc",
+        "type" : 6
+      }, {
+        "name" : "FreelistInuse",
+        "type" : 6
+      }, {
+        "name" : "TxN",
+        "type" : 6
+      }, {
+        "name" : "OpenTxN",
+        "type" : 6
+      }, {
+        "name" : "TxStats",
+        "type" : 68
+      } ],
+      "name" : "struct{FreePageN int; PendingPageN int; FreeAlloc int; FreelistInuse int; TxN int; OpenTxN int; TxStats github.com/coreos/bbolt.TxStats}",
+      "type" : "Struct",
+      "underlying" : 75
+    }, {
+      "elem" : 77,
+      "name" : "*github.com/coreos/bbolt.freelist",
+      "type" : "Pointer",
+      "underlying" : 76
+    }, {
+      "local-name" : "freelist",
+      "name" : "github.com/coreos/bbolt.freelist",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 78
+    }, {
+      "fields" : [ {
+        "name" : "ids",
+        "type" : 79
+      }, {
+        "name" : "allocs",
+        "type" : 80
+      }, {
+        "name" : "pending",
+        "type" : 81
+      }, {
+        "name" : "cache",
+        "type" : 86
+      } ],
+      "name" : "struct{ids []github.com/coreos/bbolt.pgid; allocs map[github.com/coreos/bbolt.pgid]github.com/coreos/bbolt.txid; pending map[github.com/coreos/bbolt.txid]*github.com/coreos/bbolt.txPending; cache map[github.com/coreos/bbolt.pgid]bool}",
+      "type" : "Struct",
+      "underlying" : 78
+    }, {
+      "elem" : 42,
+      "name" : "[]github.com/coreos/bbolt.pgid",
+      "type" : "Slice",
+      "underlying" : 79
+    }, {
+      "elem" : 43,
+      "key" : 42,
+      "name" : "map[github.com/coreos/bbolt.pgid]github.com/coreos/bbolt.txid",
+      "type" : "Map",
+      "underlying" : 80
+    }, {
+      "elem" : 82,
+      "key" : 43,
+      "name" : "map[github.com/coreos/bbolt.txid]*github.com/coreos/bbolt.txPending",
+      "type" : "Map",
+      "underlying" : 81
+    }, {
+      "elem" : 83,
+      "name" : "*github.com/coreos/bbolt.txPending",
+      "type" : "Pointer",
+      "underlying" : 82
+    }, {
+      "local-name" : "txPending",
+      "name" : "github.com/coreos/bbolt.txPending",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 84
+    }, {
+      "fields" : [ {
+        "name" : "ids",
+        "type" : 79
+      }, {
+        "name" : "alloctx",
+        "type" : 85
+      }, {
+        "name" : "lastReleaseBegin",
+        "type" : 43
+      } ],
+      "name" : "struct{ids []github.com/coreos/bbolt.pgid; alloctx []github.com/coreos/bbolt.txid; lastReleaseBegin github.com/coreos/bbolt.txid}",
+      "type" : "Struct",
+      "underlying" : 84
+    }, {
+      "elem" : 43,
+      "name" : "[]github.com/coreos/bbolt.txid",
+      "type" : "Slice",
+      "underlying" : 85
+    }, {
+      "elem" : 5,
+      "key" : 42,
+      "name" : "map[github.com/coreos/bbolt.pgid]bool",
+      "type" : "Map",
+      "underlying" : 86
+    }, {
+      "local-name" : "Once",
+      "name" : "sync.Once",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 88
+    }, {
+      "fields" : [ {
+        "name" : "done",
+        "type" : 21
+      }, {
+        "name" : "m",
+        "type" : 89
+      } ],
+      "name" : "struct{done uint32; m sync.Mutex}",
+      "type" : "Struct",
+      "underlying" : 88
+    }, {
+      "local-name" : "Mutex",
+      "name" : "sync.Mutex",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 90
+    }, {
+      "fields" : [ {
+        "name" : "state",
+        "type" : 91
+      }, {
+        "name" : "sema",
+        "type" : 21
+      } ],
+      "name" : "struct{state int32; sema uint32}",
+      "type" : "Struct",
+      "underlying" : 90
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 91
+    }, {
+      "local-name" : "Pool",
+      "name" : "sync.Pool",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 93
+    }, {
+      "fields" : [ {
+        "name" : "noCopy",
+        "type" : 94
+      }, {
+        "name" : "local",
+        "type" : 96
+      }, {
+        "name" : "localSize",
+        "type" : 24
+      }, {
+        "name" : "victim",
+        "type" : 96
+      }, {
+        "name" : "victimSize",
+        "type" : 24
+      }, {
+        "name" : "New",
+        "type" : 97
+      } ],
+      "name" : "struct{noCopy sync.noCopy; local unsafe.Pointer; localSize uintptr; victim unsafe.Pointer; victimSize uintptr; New func() interface{}}",
+      "type" : "Struct",
+      "underlying" : 93
+    }, {
+      "local-name" : "noCopy",
+      "name" : "sync.noCopy",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 95
+    }, {
+      "fields" : [ ],
+      "name" : "struct{}",
+      "type" : "Struct",
+      "underlying" : 95
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 6,
+      "type" : "Basic",
+      "underlying" : 96
+    }, {
+      "name" : "func() interface{}",
+      "params" : 72,
+      "recv" : -1,
+      "results" : 98,
+      "type" : "Signature",
+      "underlying" : 97,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 99
+      } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
+      "underlying" : 98
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 99
+    }, {
+      "elem" : 101,
+      "name" : "*github.com/coreos/bbolt.batch",
+      "type" : "Pointer",
+      "underlying" : 100
+    }, {
+      "local-name" : "batch",
+      "name" : "github.com/coreos/bbolt.batch",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 102
+    }, {
+      "fields" : [ {
+        "name" : "db",
+        "type" : 2
+      }, {
+        "name" : "timer",
+        "type" : 103
+      }, {
+        "name" : "start",
+        "type" : 87
+      }, {
+        "name" : "calls",
+        "type" : 124
+      } ],
+      "name" : "struct{db *github.com/coreos/bbolt.DB; timer *time.Timer; start sync.Once; calls []github.com/coreos/bbolt.call}",
+      "type" : "Struct",
+      "underlying" : 102
+    }, {
+      "elem" : 104,
+      "name" : "*time.Timer",
+      "type" : "Pointer",
+      "underlying" : 103
+    }, {
+      "local-name" : "Timer",
+      "name" : "time.Timer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 105
+    }, {
+      "fields" : [ {
+        "name" : "C",
+        "type" : 106
+      }, {
+        "name" : "r",
+        "type" : 120
+      } ],
+      "name" : "struct{C <-chan time.Time; r time.runtimeTimer}",
+      "type" : "Struct",
+      "underlying" : 105
+    }, {
+      "dir" : "recv",
+      "elem" : 107,
+      "name" : "<-chan time.Time",
+      "type" : "Chan",
+      "underlying" : 106
+    }, {
+      "local-name" : "Time",
+      "name" : "time.Time",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 108
+    }, {
+      "fields" : [ {
+        "name" : "wall",
+        "type" : 20
+      }, {
+        "name" : "ext",
+        "type" : 8
+      }, {
+        "name" : "loc",
+        "type" : 109
+      } ],
+      "name" : "struct{wall uint64; ext int64; loc *time.Location}",
+      "type" : "Struct",
+      "underlying" : 108
+    }, {
+      "elem" : 110,
+      "name" : "*time.Location",
+      "type" : "Pointer",
+      "underlying" : 109
+    }, {
+      "local-name" : "Location",
+      "name" : "time.Location",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 111
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 9
+      }, {
+        "name" : "zone",
+        "type" : 112
+      }, {
+        "name" : "tx",
+        "type" : 115
+      }, {
+        "name" : "cacheStart",
+        "type" : 8
+      }, {
+        "name" : "cacheEnd",
+        "type" : 8
+      }, {
+        "name" : "cacheZone",
+        "type" : 119
+      } ],
+      "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
+      "type" : "Struct",
+      "underlying" : 111
+    }, {
+      "elem" : 113,
+      "name" : "[]time.zone",
+      "type" : "Slice",
+      "underlying" : 112
+    }, {
+      "local-name" : "zone",
+      "name" : "time.zone",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 114
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 9
+      }, {
+        "name" : "offset",
+        "type" : 6
+      }, {
+        "name" : "isDST",
+        "type" : 5
+      } ],
+      "name" : "struct{name string; offset int; isDST bool}",
+      "type" : "Struct",
+      "underlying" : 114
+    }, {
+      "elem" : 116,
+      "name" : "[]time.zoneTrans",
+      "type" : "Slice",
+      "underlying" : 115
+    }, {
+      "local-name" : "zoneTrans",
+      "name" : "time.zoneTrans",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 117
+    }, {
+      "fields" : [ {
+        "name" : "when",
+        "type" : 8
+      }, {
+        "name" : "index",
+        "type" : 118
+      }, {
+        "name" : "isstd",
+        "type" : 5
+      }, {
+        "name" : "isutc",
+        "type" : 5
+      } ],
+      "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
+      "type" : "Struct",
+      "underlying" : 117
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 118
+    }, {
+      "elem" : 113,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 119
+    }, {
+      "local-name" : "runtimeTimer",
+      "name" : "time.runtimeTimer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 121
+    }, {
+      "fields" : [ {
+        "name" : "pp",
+        "type" : 24
+      }, {
+        "name" : "when",
+        "type" : 8
+      }, {
+        "name" : "period",
+        "type" : 8
+      }, {
+        "name" : "f",
+        "type" : 122
+      }, {
+        "name" : "arg",
+        "type" : 99
+      }, {
+        "name" : "seq",
+        "type" : 24
+      }, {
+        "name" : "nextwhen",
+        "type" : 8
+      }, {
+        "name" : "status",
+        "type" : 21
+      } ],
+      "name" : "struct{pp uintptr; when int64; period int64; f func(interface{}, uintptr); arg interface{}; seq uintptr; nextwhen int64; status uint32}",
+      "type" : "Struct",
+      "underlying" : 121
+    }, {
+      "name" : "func(interface{}, uintptr)",
+      "params" : 123,
+      "recv" : -1,
+      "results" : 72,
+      "type" : "Signature",
+      "underlying" : 122,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 99
+      }, {
+        "name" : "",
+        "type" : 24
+      } ],
+      "name" : "(interface{}, uintptr)",
+      "type" : "Tuple",
+      "underlying" : 123
+    }, {
+      "elem" : 125,
+      "name" : "[]github.com/coreos/bbolt.call",
+      "type" : "Slice",
+      "underlying" : 124
+    }, {
+      "local-name" : "call",
+      "name" : "github.com/coreos/bbolt.call",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 126
+    }, {
+      "fields" : [ {
+        "name" : "fn",
+        "type" : 127
+      }, {
+        "name" : "err",
+        "type" : 134
+      } ],
+      "name" : "struct{fn func(*github.com/coreos/bbolt.Tx) error; err chan<- error}",
+      "type" : "Struct",
+      "underlying" : 126
+    }, {
+      "name" : "func(*github.com/coreos/bbolt.Tx) error",
+      "params" : 128,
+      "recv" : -1,
+      "results" : 129,
+      "type" : "Signature",
+      "underlying" : 127,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 44
+      } ],
+      "name" : "(*github.com/coreos/bbolt.Tx)",
+      "type" : "Tuple",
+      "underlying" : 128
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 130
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 129
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 131
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 132
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 131
+    }, {
+      "name" : "func() string",
+      "params" : 72,
+      "recv" : 0,
+      "results" : 133,
+      "type" : "Signature",
+      "underlying" : 132,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 133
+    }, {
+      "dir" : "send",
+      "elem" : 130,
+      "name" : "chan<- error",
+      "type" : "Chan",
+      "underlying" : 134
+    }, {
+      "local-name" : "RWMutex",
+      "name" : "sync.RWMutex",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 136
+    }, {
+      "fields" : [ {
+        "name" : "w",
+        "type" : 89
+      }, {
+        "name" : "writerSem",
+        "type" : 21
+      }, {
+        "name" : "readerSem",
+        "type" : 21
+      }, {
+        "name" : "readerCount",
+        "type" : 91
+      }, {
+        "name" : "readerWait",
+        "type" : 91
+      } ],
+      "name" : "struct{w sync.Mutex; writerSem uint32; readerSem uint32; readerCount int32; readerWait int32}",
+      "type" : "Struct",
+      "underlying" : 136
+    }, {
+      "fields" : [ {
+        "name" : "writeAt",
+        "type" : 138
+      } ],
+      "name" : "struct{writeAt func(b []byte, off int64) (n int, err error)}",
+      "type" : "Struct",
+      "underlying" : 137
+    }, {
+      "name" : "func(b []byte, off int64) (n int, err error)",
+      "params" : 139,
+      "recv" : -1,
+      "results" : 140,
+      "type" : "Signature",
+      "underlying" : 138,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 34
+      }, {
+        "name" : "off",
+        "type" : 8
+      } ],
+      "name" : "(b []byte, off int64)",
+      "type" : "Tuple",
+      "underlying" : 139
+    }, {
+      "fields" : [ {
+        "name" : "n",
+        "type" : 6
+      }, {
+        "name" : "err",
+        "type" : 130
+      } ],
+      "name" : "(n int, err error)",
+      "type" : "Tuple",
+      "underlying" : 140
+    }, {
+      "fields" : [ {
+        "name" : "data",
+        "type" : 34
+      }, {
+        "name" : "err",
+        "type" : 130
+      } ],
+      "name" : "(data []byte, err error)",
+      "type" : "Tuple",
+      "underlying" : 141
+    }, {
+      "name" : "func(fd int, offset int64, length int, prot int, flags int) (data []byte, err error)",
+      "params" : 143,
+      "recv" : -1,
+      "results" : 141,
+      "type" : "Signature",
+      "underlying" : 142,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fd",
+        "type" : 6
+      }, {
+        "name" : "offset",
+        "type" : 8
+      }, {
+        "name" : "length",
+        "type" : 6
+      }, {
+        "name" : "prot",
+        "type" : 6
+      }, {
+        "name" : "flags",
+        "type" : 6
+      } ],
+      "name" : "(fd int, offset int64, length int, prot int, flags int)",
+      "type" : "Tuple",
+      "underlying" : 143
+    }, {
+      "name" : "func() uintptr",
+      "params" : 72,
+      "recv" : -1,
+      "results" : 145,
+      "type" : "Signature",
+      "underlying" : 144,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 24
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 145
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 146
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 147
+    }, {
+      "name" : "func(b []byte, advice int) (err error)",
+      "params" : 149,
+      "recv" : -1,
+      "results" : 150,
+      "type" : "Signature",
+      "underlying" : 148,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 34
+      }, {
+        "name" : "advice",
+        "type" : 6
+      } ],
+      "name" : "(b []byte, advice int)",
+      "type" : "Tuple",
+      "underlying" : 149
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 130
+      } ],
+      "name" : "(err error)",
+      "type" : "Tuple",
+      "underlying" : 150
+    }, {
+      "local-name" : "Errno",
+      "name" : "syscall.Errno",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "name" : "func(format string, a ...interface{}) error",
+      "params" : 153,
+      "recv" : -1,
+      "results" : 129,
+      "type" : "Signature",
+      "underlying" : 152,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 9
+      }, {
+        "name" : "a",
+        "type" : 154
+      } ],
+      "name" : "(format string, a []interface{})",
+      "type" : "Tuple",
+      "underlying" : 153
+    }, {
+      "elem" : 99,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 154
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 155
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 130,
+      "exported" : false
+    }, {
+      "name" : "db",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "sz",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 130,
+      "exported" : false
+    }, {
+      "name" : "file",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "MmapFlags",
+      "package" : 0,
+      "type" : 6,
+      "exported" : true
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 130,
+      "exported" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "dataref",
+      "package" : 0,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "data",
+      "package" : 0,
+      "type" : 35,
+      "exported" : false
+    }, {
+      "name" : "datasz",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

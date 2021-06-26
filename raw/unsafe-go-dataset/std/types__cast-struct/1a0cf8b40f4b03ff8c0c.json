@@ -1,0 +1,2305 @@
+{
+  "usage" : {
+    "file" : "type.go",
+    "label1" : "cast-struct",
+    "label2" : "types",
+    "line" : "748",
+    "module" : "std",
+    "pkg" : "reflect",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "return &(*u)(unsafe.Pointer(t)).u",
+    "version" : "std"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 695,
+      "ast" : {
+        "condition" : {
+          "go-type" : 10,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 4,
+            "kind" : "expression",
+            "left" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "tflag",
+                "variable" : 2
+              },
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "t",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            },
+            "operator" : "&",
+            "right" : {
+              "go-type" : 4,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "1"
+              }
+            },
+            "type" : "binary"
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 4,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 697,
+      "code" : "if t.tflag&tflagUncommon == 0 {\n\treturn nil\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 696,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 11,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 696,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5, 7, 10, 13, 16, 19, 22, 25, 28 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 698,
+      "ast" : {
+        "condition" : {
+          "arguments" : [ ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Kind"
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "t",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 12,
+          "kind" : "expression",
+          "type" : "call"
+        },
+        "kind" : "statement",
+        "type" : "switch"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 749,
+      "code" : "switch t.Kind() {\ncase Struct:\n\treturn &(*structTypeUncommon)(unsafe.Pointer(t)).u\ncase Ptr:\n\ttype u struct {\n\t\tptrType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ncase Func:\n\ttype u struct {\n\t\tfuncType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ncase Slice:\n\ttype u struct {\n\t\tsliceType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ncase Array:\n\ttype u struct {\n\t\tarrayType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ncase Chan:\n\ttype u struct {\n\t\tchanType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ncase Map:\n\ttype u struct {\n\t\tmapType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ncase Interface:\n\ttype u struct {\n\t\tinterfaceType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\ndefault:\n\ttype u struct {\n\t\trtype\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u\n}",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 699,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "25"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 700,
+      "code" : "case Struct:\n\treturn &(*structTypeUncommon)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 700,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 3
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 17,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 17,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "structTypeUncommon"
+                  }
+                },
+                "go-type" : 16,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 16,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 700,
+      "code" : "return &(*structTypeUncommon)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 701,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "22"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 706,
+      "code" : "case Ptr:\n\ttype u struct {\n\t\tptrType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 702,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 27,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 27,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "ptrType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 26,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 705,
+      "code" : "type u struct {\n\tptrType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 706,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 4
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 706,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 707,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "19"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 712,
+      "code" : "case Func:\n\ttype u struct {\n\t\tfuncType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 708,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 32,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 32,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "funcType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 31,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 711,
+      "code" : "type u struct {\n\tfuncType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 712,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 5
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 712,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 713,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "23"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 718,
+      "code" : "case Slice:\n\ttype u struct {\n\t\tsliceType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 714,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 35,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 35,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "sliceType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 34,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 717,
+      "code" : "type u struct {\n\tsliceType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 718,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 6
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 718,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 719,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "17"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 724,
+      "code" : "case Array:\n\ttype u struct {\n\t\tarrayType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 18 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 720,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 37,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 37,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "arrayType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 36,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 723,
+      "code" : "type u struct {\n\tarrayType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 724,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 7
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 724,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 20 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 725,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "18"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 730,
+      "code" : "case Chan:\n\ttype u struct {\n\t\tchanType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 21 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 726,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 40,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 40,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "chanType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 39,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 729,
+      "code" : "type u struct {\n\tchanType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 730,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 8
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 730,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 23 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 731,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "21"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 736,
+      "code" : "case Map:\n\ttype u struct {\n\t\tmapType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 732,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 43,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 43,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "mapType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 42,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 735,
+      "code" : "type u struct {\n\tmapType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 736,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 9
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 736,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 26 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 737,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 12,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "20"
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 742,
+      "code" : "case Interface:\n\ttype u struct {\n\t\tinterfaceType\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 27 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 738,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 49,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 49,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "interfaceType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 48,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 741,
+      "code" : "type u struct {\n\tinterfaceType\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 742,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 10
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 742,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 29 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 743,
+      "ast" : {
+        "expressions" : [ ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 748,
+      "code" : "default:\n\ttype u struct {\n\t\trtype\n\t\tu uncommonType\n\t}\n\treturn &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 30 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 744,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "binds" : [ {
+            "name" : {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "u"
+            },
+            "value" : {
+              "fields" : [ {
+                "declared-type" : {
+                  "go-type" : 1,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 1,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "rtype"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ ],
+                "tag" : null
+              }, {
+                "declared-type" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "uncommonType"
+                  }
+                },
+                "kind" : "field",
+                "names" : [ {
+                  "ident-kind" : "NoKind",
+                  "kind" : "ident",
+                  "value" : "u"
+                } ],
+                "tag" : null
+              } ],
+              "go-type" : 54,
+              "kind" : "type",
+              "type" : "struct"
+            }
+          } ],
+          "kind" : "decl",
+          "type" : "type-alias"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 747,
+      "code" : "type u struct {\n\trtype\n\tu uncommonType\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 748,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "u",
+              "variable" : 11
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "u"
+                  }
+                },
+                "go-type" : 29,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 29,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 8,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 1,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 8,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 8,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "t",
+                    "variable" : 0
+                  }
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            },
+            "type" : "selector"
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 748,
+      "code" : "return &(*u)(unsafe.Pointer(t)).u",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    } ],
+    "code" : "func (t *rtype) uncommon() *uncommonType {\n\tif t.tflag&tflagUncommon == 0 {\n\t\treturn nil\n\t}\n\tswitch t.Kind() {\n\tcase Struct:\n\t\treturn &(*structTypeUncommon)(unsafe.Pointer(t)).u\n\tcase Ptr:\n\t\ttype u struct {\n\t\t\tptrType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tcase Func:\n\t\ttype u struct {\n\t\t\tfuncType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tcase Slice:\n\t\ttype u struct {\n\t\t\tsliceType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tcase Array:\n\t\ttype u struct {\n\t\t\tarrayType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tcase Chan:\n\t\ttype u struct {\n\t\t\tchanType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tcase Map:\n\t\ttype u struct {\n\t\t\tmapType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tcase Interface:\n\t\ttype u struct {\n\t\t\tinterfaceType\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\tdefault:\n\t\ttype u struct {\n\t\t\trtype\n\t\t\tu uncommonType\n\t\t}\n\t\treturn &(*u)(unsafe.Pointer(t)).u\n\t}\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "uncommon",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Kind",
+      "package" : 0,
+      "type" : 14,
+      "exported" : true
+    } ],
+    "line-end" : 750,
+    "line-start" : 694,
+    "names" : [ "uncommon" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 0 ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() *reflect.uncommonType",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(*reflect.uncommonType)",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "*reflect.uncommonType",
+      "type" : "Pointer",
+      "underlying" : 3
+    }, {
+      "local-name" : "uncommonType",
+      "name" : "reflect.uncommonType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 5
+    }, {
+      "fields" : [ {
+        "name" : "pkgPath",
+        "type" : 6
+      }, {
+        "name" : "mcount",
+        "type" : 8
+      }, {
+        "name" : "xcount",
+        "type" : 8
+      }, {
+        "name" : "moff",
+        "type" : 9
+      }, {
+        "name" : "_",
+        "type" : 9
+      } ],
+      "name" : "struct{pkgPath reflect.nameOff; mcount uint16; xcount uint16; moff uint32; _ uint32}",
+      "type" : "Struct",
+      "underlying" : 5
+    }, {
+      "local-name" : "nameOff",
+      "name" : "reflect.nameOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 11
+    }, {
+      "local-name" : "Kind",
+      "name" : "reflect.Kind",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "name" : "func() reflect.Kind",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 15,
+      "type" : "Signature",
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 12
+      } ],
+      "name" : "(reflect.Kind)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "elem" : 17,
+      "name" : "*reflect.structTypeUncommon",
+      "type" : "Pointer",
+      "underlying" : 16
+    }, {
+      "local-name" : "structTypeUncommon",
+      "name" : "reflect.structTypeUncommon",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "fields" : [ {
+        "name" : "structType",
+        "type" : 19
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.structType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 18
+    }, {
+      "local-name" : "structType",
+      "name" : "reflect.structType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 20
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "pkgPath",
+        "type" : 21
+      }, {
+        "name" : "fields",
+        "type" : 23
+      } ],
+      "name" : "struct{reflect.rtype; pkgPath reflect.name; fields []reflect.structField}",
+      "type" : "Struct",
+      "underlying" : 20
+    }, {
+      "local-name" : "name",
+      "name" : "reflect.name",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "fields" : [ {
+        "name" : "bytes",
+        "type" : 11
+      } ],
+      "name" : "struct{bytes *byte}",
+      "type" : "Struct",
+      "underlying" : 22
+    }, {
+      "elem" : 24,
+      "name" : "[]reflect.structField",
+      "type" : "Slice",
+      "underlying" : 23
+    }, {
+      "local-name" : "structField",
+      "name" : "reflect.structField",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 25
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 21
+      }, {
+        "name" : "typ",
+        "type" : 0
+      }, {
+        "name" : "offsetEmbed",
+        "type" : 3
+      } ],
+      "name" : "struct{name reflect.name; typ *reflect.rtype; offsetEmbed uintptr}",
+      "type" : "Struct",
+      "underlying" : 25
+    }, {
+      "fields" : [ {
+        "name" : "ptrType",
+        "type" : 27
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.ptrType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "local-name" : "ptrType",
+      "name" : "reflect.ptrType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 28
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "elem",
+        "type" : 0
+      } ],
+      "name" : "struct{reflect.rtype; elem *reflect.rtype}",
+      "type" : "Struct",
+      "underlying" : 28
+    }, {
+      "elem" : 30,
+      "name" : "*reflect.u",
+      "type" : "Pointer",
+      "underlying" : 29
+    }, {
+      "local-name" : "u",
+      "name" : "reflect.u",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "funcType",
+        "type" : 32
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.funcType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 31
+    }, {
+      "local-name" : "funcType",
+      "name" : "reflect.funcType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "inCount",
+        "type" : 8
+      }, {
+        "name" : "outCount",
+        "type" : 8
+      } ],
+      "name" : "struct{reflect.rtype; inCount uint16; outCount uint16}",
+      "type" : "Struct",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "sliceType",
+        "type" : 35
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.sliceType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 34
+    }, {
+      "local-name" : "sliceType",
+      "name" : "reflect.sliceType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 28
+    }, {
+      "fields" : [ {
+        "name" : "arrayType",
+        "type" : 37
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.arrayType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 36
+    }, {
+      "local-name" : "arrayType",
+      "name" : "reflect.arrayType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 38
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "elem",
+        "type" : 0
+      }, {
+        "name" : "slice",
+        "type" : 0
+      }, {
+        "name" : "len",
+        "type" : 3
+      } ],
+      "name" : "struct{reflect.rtype; elem *reflect.rtype; slice *reflect.rtype; len uintptr}",
+      "type" : "Struct",
+      "underlying" : 38
+    }, {
+      "fields" : [ {
+        "name" : "chanType",
+        "type" : 40
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.chanType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 39
+    }, {
+      "local-name" : "chanType",
+      "name" : "reflect.chanType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 41
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "elem",
+        "type" : 0
+      }, {
+        "name" : "dir",
+        "type" : 3
+      } ],
+      "name" : "struct{reflect.rtype; elem *reflect.rtype; dir uintptr}",
+      "type" : "Struct",
+      "underlying" : 41
+    }, {
+      "fields" : [ {
+        "name" : "mapType",
+        "type" : 43
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.mapType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 42
+    }, {
+      "local-name" : "mapType",
+      "name" : "reflect.mapType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 44
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "key",
+        "type" : 0
+      }, {
+        "name" : "elem",
+        "type" : 0
+      }, {
+        "name" : "bucket",
+        "type" : 0
+      }, {
+        "name" : "hasher",
+        "type" : 45
+      }, {
+        "name" : "keysize",
+        "type" : 5
+      }, {
+        "name" : "valuesize",
+        "type" : 5
+      }, {
+        "name" : "bucketsize",
+        "type" : 8
+      }, {
+        "name" : "flags",
+        "type" : 9
+      } ],
+      "name" : "struct{reflect.rtype; key *reflect.rtype; elem *reflect.rtype; bucket *reflect.rtype; hasher func(unsafe.Pointer, uintptr) uintptr; keysize uint8; valuesize uint8; bucketsize uint16; flags uint32}",
+      "type" : "Struct",
+      "underlying" : 44
+    }, {
+      "name" : "func(unsafe.Pointer, uintptr) uintptr",
+      "params" : 46,
+      "recv" : -1,
+      "results" : 47,
+      "type" : "Signature",
+      "underlying" : 45,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      }, {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(unsafe.Pointer, uintptr)",
+      "type" : "Tuple",
+      "underlying" : 46
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 47
+    }, {
+      "fields" : [ {
+        "name" : "interfaceType",
+        "type" : 49
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.interfaceType; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 48
+    }, {
+      "local-name" : "interfaceType",
+      "name" : "reflect.interfaceType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 50
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "pkgPath",
+        "type" : 21
+      }, {
+        "name" : "methods",
+        "type" : 51
+      } ],
+      "name" : "struct{reflect.rtype; pkgPath reflect.name; methods []reflect.imethod}",
+      "type" : "Struct",
+      "underlying" : 50
+    }, {
+      "elem" : 52,
+      "name" : "[]reflect.imethod",
+      "type" : "Slice",
+      "underlying" : 51
+    }, {
+      "local-name" : "imethod",
+      "name" : "reflect.imethod",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 53
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 6
+      }, {
+        "name" : "typ",
+        "type" : 13
+      } ],
+      "name" : "struct{name reflect.nameOff; typ reflect.typeOff}",
+      "type" : "Struct",
+      "underlying" : 53
+    }, {
+      "fields" : [ {
+        "name" : "rtype",
+        "type" : 1
+      }, {
+        "name" : "u",
+        "type" : 4
+      } ],
+      "name" : "struct{reflect.rtype; u reflect.uncommonType}",
+      "type" : "Struct",
+      "underlying" : 54
+    } ],
+    "variables" : [ {
+      "name" : "t",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "tflag",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "u",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

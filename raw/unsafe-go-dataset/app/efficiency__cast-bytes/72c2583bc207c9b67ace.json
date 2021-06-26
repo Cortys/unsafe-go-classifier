@@ -1,0 +1,2617 @@
+{
+  "usage" : {
+    "file" : "tx.go",
+    "label1" : "cast-bytes",
+    "label2" : "efficiency",
+    "line" : "536",
+    "module" : "github.com/coreos/bbolt",
+    "pkg" : "github.com/coreos/bbolt",
+    "project" : "elastic/beats",
+    "snippet" : "ptr = (*[maxAllocSize]byte)(unsafe.Pointer(&ptr[sz]))",
+    "version" : "v1.3.1-coreos.6.0.20180318001526-af9db2027c98"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ 5 ],
+      "line-start" : 497,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "pages"
+          }
+        } ],
+        "right" : [ {
+          "argument" : {
+            "go-type" : 8,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 8,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "pages"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "rest" : [ {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          }, {
+            "arguments" : [ {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "pages",
+                "variable" : 4
+              },
+              "go-type" : 129,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tx",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 10,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Builtin",
+                "kind" : "ident",
+                "value" : "len"
+              }
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "call"
+          } ],
+          "type" : "make"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 497,
+      "code" : "pages := make(pages, 0, len(tx.pages))",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 5 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 6, 3 ],
+      "decl-vars" : [ 6, 7 ],
+      "line-start" : 498,
+      "ast" : {
+        "is-assign" : false,
+        "key" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        },
+        "kind" : "statement",
+        "target" : {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "pages",
+            "variable" : 4
+          },
+          "go-type" : 129,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "tx",
+              "variable" : 1
+            }
+          },
+          "type" : "selector"
+        },
+        "type" : "range",
+        "value" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p"
+          }
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 500,
+      "code" : "for _, p := range tx.pages {\n\tpages = append(pages, p)\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 5 ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 1, 5, 6, 3 ],
+      "exit" : false,
+      "out-vars" : [ 5, 3, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 499,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "pages",
+            "variable" : 5
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pages",
+              "variable" : 5
+            }
+          }, {
+            "go-type" : 114,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 6
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 13,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "append"
+            }
+          },
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 5 ],
+      "line-end" : 499,
+      "code" : "pages = append(pages, p)",
+      "entry" : false,
+      "use-vars" : [ 5, 6 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 502,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "pages",
+            "variable" : 4
+          },
+          "go-type" : 129,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 0,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "tx",
+              "variable" : 1
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "argument" : {
+            "go-type" : 129,
+            "key" : {
+              "go-type" : 42,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 42,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "pgid"
+              }
+            },
+            "kind" : "type",
+            "type" : "map",
+            "value" : {
+              "contained" : {
+                "go-type" : 115,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 115,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "page"
+                }
+              },
+              "go-type" : 114,
+              "kind" : "type",
+              "type" : "pointer"
+            }
+          },
+          "go-type" : 129,
+          "kind" : "expression",
+          "rest" : [ ],
+          "type" : "make"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 502,
+      "code" : "tx.pages = make(map[pgid]*page)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 503,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 8,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pages",
+              "variable" : 5
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 16,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 7,
+              "value" : "sort"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Sort"
+            }
+          },
+          "go-type" : 1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 503,
+      "code" : "sort.Sort(pages)",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8, 25 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 3, 11, 1, 5 ],
+      "decl-vars" : [ 11, 26 ],
+      "line-start" : 506,
+      "ast" : {
+        "is-assign" : false,
+        "key" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        },
+        "kind" : "statement",
+        "target" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "pages",
+            "variable" : 5
+          }
+        },
+        "type" : "range",
+        "value" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p"
+          }
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 538,
+      "code" : "for _, p := range pages {\n\tsize := (int(p.overflow) + 1) * tx.db.pageSize\n\toffset := int64(p.id) * int64(tx.db.pageSize)\n\n\tptr := (*[maxAllocSize]byte)(unsafe.Pointer(p))\n\tfor {\n\n\t\tsz := size\n\t\tif sz > maxAllocSize-1 {\n\t\t\tsz = maxAllocSize - 1\n\t\t}\n\n\t\tbuf := ptr[:sz]\n\t\tif _, err := tx.db.ops.writeAt(buf, offset); err != nil {\n\t\t\treturn err\n\t\t}\n\n\t\ttx.stats.Write++\n\n\t\tsize -= sz\n\t\tif size == 0 {\n\t\t\tbreak\n\t\t}\n\n\t\toffset += int64(sz)\n\t\tptr = (*[maxAllocSize]byte)(unsafe.Pointer(&ptr[sz]))\n\t}\n}",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9 ],
+      "in-vars" : [ 5, 3, 11, 1 ],
+      "exit" : false,
+      "out-vars" : [ 11, 1, 5, 16, 3 ],
+      "decl-vars" : [ 16 ],
+      "line-start" : 507,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "size"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 7,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 7,
+              "kind" : "expression",
+              "left" : {
+                "coerced-to" : {
+                  "go-type" : 7,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 7,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "int"
+                  }
+                },
+                "go-type" : 7,
+                "kind" : "expression",
+                "target" : {
+                  "field" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "overflow",
+                    "variable" : 12
+                  },
+                  "go-type" : 21,
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 114,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "p",
+                      "variable" : 11
+                    }
+                  },
+                  "type" : "selector"
+                },
+                "type" : "cast"
+              },
+              "operator" : "+",
+              "right" : {
+                "go-type" : 7,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "1"
+                }
+              },
+              "type" : "binary"
+            },
+            "type" : "paren"
+          },
+          "operator" : "*",
+          "right" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pageSize",
+              "variable" : 14
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "db",
+                "variable" : 13
+              },
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tx",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 507,
+      "code" : "size := (int(p.overflow) + 1) * tx.db.pageSize",
+      "entry" : false,
+      "use-vars" : [ 11, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 11, 1, 5, 16, 3 ],
+      "exit" : false,
+      "out-vars" : [ 22, 1, 5, 16, 3, 11 ],
+      "decl-vars" : [ 22 ],
+      "line-start" : 508,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "offset"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "left" : {
+            "coerced-to" : {
+              "go-type" : 9,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 9,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int64"
+              }
+            },
+            "go-type" : 9,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "id",
+                "variable" : 15
+              },
+              "go-type" : 42,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 114,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "p",
+                  "variable" : 11
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          },
+          "operator" : "*",
+          "right" : {
+            "coerced-to" : {
+              "go-type" : 9,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 9,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int64"
+              }
+            },
+            "go-type" : 9,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "pageSize",
+                "variable" : 14
+              },
+              "go-type" : 7,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "db",
+                  "variable" : 13
+                },
+                "go-type" : 4,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "tx",
+                    "variable" : 1
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          },
+          "type" : "binary"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 508,
+      "code" : "offset := int64(p.id) * int64(tx.db.pageSize)",
+      "entry" : false,
+      "use-vars" : [ 11, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 11, 22, 1, 5, 16, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 16, 3, 22, 18 ],
+      "decl-vars" : [ 18 ],
+      "line-start" : 511,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ptr"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "element" : {
+                "go-type" : 30,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 30,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "byte"
+                }
+              },
+              "go-type" : 26,
+              "kind" : "type",
+              "length" : {
+                "go-type" : 27,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "2147483647"
+                }
+              },
+              "type" : "array"
+            },
+            "go-type" : 25,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 69,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 6,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 69,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 69,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 114,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "p",
+                "variable" : 11
+              }
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 511,
+      "code" : "ptr := (*[maxAllocSize]byte)(unsafe.Pointer(p))",
+      "entry" : false,
+      "use-vars" : [ 11 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7, 12 ],
+      "in-vars" : [ 1, 5, 16, 3, 22, 18 ],
+      "exit" : false,
+      "out-vars" : [ 3, 22, 18, 1, 5, 16 ],
+      "decl-vars" : [ ],
+      "line-start" : 512,
+      "ast" : {
+        "condition" : null,
+        "kind" : "statement",
+        "type" : "for"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 537,
+      "code" : "for {\n\n\tsz := size\n\tif sz > maxAllocSize-1 {\n\t\tsz = maxAllocSize - 1\n\t}\n\n\tbuf := ptr[:sz]\n\tif _, err := tx.db.ops.writeAt(buf, offset); err != nil {\n\t\treturn err\n\t}\n\n\ttx.stats.Write++\n\n\tsize -= sz\n\tif size == 0 {\n\t\tbreak\n\t}\n\n\toffset += int64(sz)\n\tptr = (*[maxAllocSize]byte)(unsafe.Pointer(&ptr[sz]))\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 13 ],
+      "in-vars" : [ 18, 1, 5, 16, 3, 22 ],
+      "exit" : false,
+      "out-vars" : [ 17, 22, 18, 1, 5, 16, 3 ],
+      "decl-vars" : [ 17 ],
+      "line-start" : 514,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "sz"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "size",
+            "variable" : 16
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 514,
+      "code" : "sz := size",
+      "entry" : false,
+      "use-vars" : [ 16 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14, 15 ],
+      "in-vars" : [ 17, 22, 18, 1, 5, 16, 3 ],
+      "exit" : false,
+      "out-vars" : [ 22, 18, 1, 5, 16, 3, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 515,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "sz",
+              "variable" : 17
+            }
+          },
+          "operator" : ">",
+          "right" : {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "2147483646"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 517,
+      "code" : "if sz > maxAllocSize-1 {\n\tsz = maxAllocSize - 1\n}",
+      "entry" : false,
+      "use-vars" : [ 17 ]
+    }, {
+      "update-vars" : [ 17 ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 3, 22, 18, 1, 5, 16 ],
+      "exit" : false,
+      "out-vars" : [ 16, 3, 17, 22, 18, 1, 5 ],
+      "decl-vars" : [ ],
+      "line-start" : 516,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "sz",
+            "variable" : 17
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 7,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "2147483646"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 17 ],
+      "line-end" : 516,
+      "code" : "sz = maxAllocSize - 1",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17 ],
+      "in-vars" : [ 5, 16, 3, 17, 22, 18, 1 ],
+      "exit" : false,
+      "out-vars" : [ 16, 3, 17, 22, 21, 18, 1, 5 ],
+      "decl-vars" : [ 21 ],
+      "line-start" : 520,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "buf"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 34,
+          "type" : "slice",
+          "three" : false,
+          "high" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "sz",
+              "variable" : 17
+            }
+          },
+          "max" : null,
+          "kind" : "expression",
+          "low" : null,
+          "target" : {
+            "go-type" : 25,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ptr",
+              "variable" : 18
+            }
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 520,
+      "code" : "buf := ptr[:sz]",
+      "entry" : false,
+      "use-vars" : [ 18, 17 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 18, 19 ],
+      "in-vars" : [ 22, 18, 1, 23, 5, 16, 3, 17 ],
+      "exit" : false,
+      "out-vars" : [ 1, 23, 5, 16, 3, 17, 22, 18 ],
+      "decl-vars" : [ ],
+      "line-start" : 521,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 23
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 523,
+      "code" : "if _, err := tx.db.ops.writeAt(buf, offset); err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 23 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 1, 5, 16, 3, 17, 22, 21, 18 ],
+      "exit" : false,
+      "out-vars" : [ 5, 16, 3, 17, 22, 18, 1, 23 ],
+      "decl-vars" : [ 23, 27 ],
+      "line-start" : 521,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 34,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "buf",
+              "variable" : 21
+            }
+          }, {
+            "go-type" : 9,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "offset",
+              "variable" : 22
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "writeAt",
+              "variable" : 20
+            },
+            "go-type" : 106,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "ops",
+                "variable" : 19
+              },
+              "go-type" : 105,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "db",
+                  "variable" : 13
+                },
+                "go-type" : 4,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "tx",
+                    "variable" : 1
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 108,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 521,
+      "code" : "_, err := tx.db.ops.writeAt(buf, offset)",
+      "entry" : false,
+      "use-vars" : [ 21, 22, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 23 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 522,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 23
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 522,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 23 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 20 ],
+      "in-vars" : [ 1, 5, 16, 3, 17, 22, 18 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 16, 3, 17, 22, 18 ],
+      "decl-vars" : [ ],
+      "line-start" : 526,
+      "ast" : {
+        "kind" : "statement",
+        "operation" : "++",
+        "target" : {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "Write",
+            "variable" : 25
+          },
+          "go-type" : 7,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "stats",
+              "variable" : 24
+            },
+            "go-type" : 47,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "tx",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "selector"
+        },
+        "type" : "crement"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 526,
+      "code" : "tx.stats.Write++",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 16 ],
+      "successors" : [ 21 ],
+      "in-vars" : [ 3, 17, 22, 18, 1, 5, 16 ],
+      "exit" : false,
+      "out-vars" : [ 5, 16, 3, 17, 22, 18, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 529,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "size",
+            "variable" : 16
+          }
+        } ],
+        "operator" : "-",
+        "right" : [ {
+          "go-type" : 7,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "sz",
+            "variable" : 17
+          }
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 16 ],
+      "line-end" : 529,
+      "code" : "size -= sz",
+      "entry" : false,
+      "use-vars" : [ 16, 17 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 22, 23 ],
+      "in-vars" : [ 5, 16, 3, 17, 22, 18, 1 ],
+      "exit" : false,
+      "out-vars" : [ 18, 1, 5, 16, 3, 17, 22 ],
+      "decl-vars" : [ ],
+      "line-start" : 530,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 16
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 532,
+      "code" : "if size == 0 {\n\tbreak\n}",
+      "entry" : false,
+      "use-vars" : [ 16 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 531,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "break"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 531,
+      "code" : "break",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 22 ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 1, 5, 16, 3, 17, 22, 18 ],
+      "exit" : false,
+      "out-vars" : [ 22, 18, 1, 5, 16, 3, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 535,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "offset",
+            "variable" : 22
+          }
+        } ],
+        "operator" : "+",
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 9,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 9,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int64"
+            }
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "sz",
+              "variable" : 17
+            }
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign-operator"
+      },
+      "assign-vars" : [ 22 ],
+      "line-end" : 535,
+      "code" : "offset += int64(sz)",
+      "entry" : false,
+      "use-vars" : [ 17, 22 ]
+    }, {
+      "update-vars" : [ 18 ],
+      "successors" : [ 11 ],
+      "in-vars" : [ 3, 17, 22, 18, 1, 5, 16 ],
+      "exit" : false,
+      "out-vars" : [ 3, 22, 18, 1, 5, 16 ],
+      "decl-vars" : [ ],
+      "line-start" : 536,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 25,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ptr",
+            "variable" : 18
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "contained" : {
+              "element" : {
+                "go-type" : 30,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 30,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "byte"
+                }
+              },
+              "go-type" : 26,
+              "kind" : "type",
+              "length" : {
+                "go-type" : 27,
+                "kind" : "constant",
+                "value" : {
+                  "type" : "INT",
+                  "value" : "2147483647"
+                }
+              },
+              "type" : "array"
+            },
+            "go-type" : 25,
+            "kind" : "type",
+            "type" : "pointer"
+          },
+          "go-type" : 25,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "go-type" : 69,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 6,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 69,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 69,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 29,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 30,
+                "index" : {
+                  "go-type" : 7,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "sz",
+                    "variable" : 17
+                  }
+                },
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 25,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "ptr",
+                    "variable" : 18
+                  }
+                },
+                "type" : "index"
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 18 ],
+      "line-end" : 536,
+      "code" : "ptr = (*[maxAllocSize]byte)(unsafe.Pointer(&ptr[sz]))",
+      "entry" : false,
+      "use-vars" : [ 18, 17 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 27, 29 ],
+      "in-vars" : [ 3, 1, 5 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 541,
+      "ast" : {
+        "condition" : {
+          "go-type" : 3,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "operator" : "!",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "NoSync",
+                "variable" : 28
+              },
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "db",
+                  "variable" : 13
+                },
+                "go-type" : 4,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "tx",
+                    "variable" : 1
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "type" : "unary"
+          },
+          "operator" : "||",
+          "right" : {
+            "go-type" : 3,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "false"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 545,
+      "code" : "if !tx.db.NoSync || IgnoreNoSync {\n\tif err := fdatasync(tx.db); err != nil {\n\t\treturn err\n\t}\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 28, 29 ],
+      "in-vars" : [ 29, 5, 3, 1 ],
+      "exit" : false,
+      "out-vars" : [ 1, 29, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 542,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 29
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 29,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 544,
+      "code" : "if err := fdatasync(tx.db); err != nil {\n\treturn err\n}",
+      "entry" : false,
+      "use-vars" : [ 29 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 26 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 29, 5, 3 ],
+      "decl-vars" : [ 29 ],
+      "line-start" : 542,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "err"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "db",
+              "variable" : 13
+            },
+            "go-type" : 4,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "tx",
+                "variable" : 1
+              }
+            },
+            "type" : "selector"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 30,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "fdatasync"
+            }
+          },
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 542,
+      "code" : "err := fdatasync(tx.db)",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 29 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 543,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 29
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 543,
+      "code" : "return err",
+      "entry" : false,
+      "use-vars" : [ 29 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 30, 36 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 30, 3 ],
+      "decl-vars" : [ 30, 33 ],
+      "line-start" : 548,
+      "ast" : {
+        "is-assign" : false,
+        "key" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        },
+        "kind" : "statement",
+        "target" : {
+          "go-type" : 8,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "pages",
+            "variable" : 5
+          }
+        },
+        "type" : "range",
+        "value" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "p"
+          }
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 562,
+      "code" : "for _, p := range pages {\n\n\tif int(p.overflow) != 0 {\n\t\tcontinue\n\t}\n\n\tbuf := (*[maxAllocSize]byte)(unsafe.Pointer(p))[:tx.db.pageSize]\n\n\tfor i := range buf {\n\t\tbuf[i] = 0\n\t}\n\ttx.db.pagePool.Put(buf)\n}",
+      "entry" : false,
+      "use-vars" : [ 5 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 31, 32 ],
+      "in-vars" : [ 1, 5, 30, 3 ],
+      "exit" : false,
+      "out-vars" : [ 5, 30, 3, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 551,
+      "ast" : {
+        "condition" : {
+          "go-type" : 28,
+          "kind" : "expression",
+          "left" : {
+            "coerced-to" : {
+              "go-type" : 7,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 7,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int"
+              }
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "overflow",
+                "variable" : 12
+              },
+              "go-type" : 21,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 114,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "p",
+                  "variable" : 30
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "cast"
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 7,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 553,
+      "code" : "if int(p.overflow) != 0 {\n\tcontinue\n}",
+      "entry" : false,
+      "use-vars" : [ 30 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 33 ],
+      "in-vars" : [ 3, 1, 5 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 552,
+      "ast" : {
+        "kind" : "statement",
+        "label" : null,
+        "type" : "continue"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 552,
+      "code" : "continue",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 33 ],
+      "in-vars" : [ 1, 5, 30 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ 3 ],
+      "line-start" : 555,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "buf"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 34,
+          "type" : "slice",
+          "three" : false,
+          "high" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "pageSize",
+              "variable" : 14
+            },
+            "go-type" : 7,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "db",
+                "variable" : 13
+              },
+              "go-type" : 4,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "tx",
+                  "variable" : 1
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "max" : null,
+          "kind" : "expression",
+          "low" : null,
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "element" : {
+                  "go-type" : 30,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 30,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "byte"
+                  }
+                },
+                "go-type" : 26,
+                "kind" : "type",
+                "length" : {
+                  "go-type" : 27,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "2147483647"
+                  }
+                },
+                "type" : "array"
+              },
+              "go-type" : 25,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 25,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 69,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 6,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 69,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 69,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 114,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "p",
+                  "variable" : 30
+                }
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          }
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 555,
+      "code" : "buf := (*[maxAllocSize]byte)(unsafe.Pointer(p))[:tx.db.pageSize]",
+      "entry" : false,
+      "use-vars" : [ 30, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 34, 35 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 31, 1, 5, 3 ],
+      "decl-vars" : [ 31 ],
+      "line-start" : 558,
+      "ast" : {
+        "is-assign" : false,
+        "key" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "i"
+          }
+        },
+        "kind" : "statement",
+        "target" : {
+          "go-type" : 34,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "buf",
+            "variable" : 3
+          }
+        },
+        "type" : "range",
+        "value" : null
+      },
+      "assign-vars" : [ ],
+      "line-end" : 560,
+      "code" : "for i := range buf {\n\tbuf[i] = 0\n}",
+      "entry" : false,
+      "use-vars" : [ 3 ]
+    }, {
+      "update-vars" : [ 3 ],
+      "successors" : [ 33 ],
+      "in-vars" : [ 5, 3, 31, 1 ],
+      "exit" : false,
+      "out-vars" : [ 5, 3, 1 ],
+      "decl-vars" : [ ],
+      "line-start" : 559,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 30,
+          "index" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "i",
+              "variable" : 31
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 34,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "buf",
+              "variable" : 3
+            }
+          },
+          "type" : "index"
+        } ],
+        "right" : [ {
+          "go-type" : 30,
+          "kind" : "constant",
+          "value" : {
+            "type" : "INT",
+            "value" : "0"
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 559,
+      "code" : "buf[i] = 0",
+      "entry" : false,
+      "use-vars" : [ 3, 31 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 29 ],
+      "in-vars" : [ 1, 5, 3 ],
+      "exit" : false,
+      "out-vars" : [ 1, 5, 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 561,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 34,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "buf",
+              "variable" : 3
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Put"
+            },
+            "go-type" : 32,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "pagePool",
+                "variable" : 32
+              },
+              "go-type" : 65,
+              "kind" : "expression",
+              "target" : {
+                "field" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "db",
+                  "variable" : 13
+                },
+                "go-type" : 4,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 0,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "tx",
+                    "variable" : 1
+                  }
+                },
+                "type" : "selector"
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 561,
+      "code" : "tx.db.pagePool.Put(buf)",
+      "entry" : false,
+      "use-vars" : [ 3, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 564,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 29,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 564,
+      "code" : "return nil",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// write writes any dirty pages to disk.\nfunc (tx *Tx) write() error {\n\n\tpages := make(pages, 0, len(tx.pages))\n\tfor _, p := range tx.pages {\n\t\tpages = append(pages, p)\n\t}\n\n\ttx.pages = make(map[pgid]*page)\n\tsort.Sort(pages)\n\n\tfor _, p := range pages {\n\t\tsize := (int(p.overflow) + 1) * tx.db.pageSize\n\t\toffset := int64(p.id) * int64(tx.db.pageSize)\n\n\t\tptr := (*[maxAllocSize]byte)(unsafe.Pointer(p))\n\t\tfor {\n\n\t\t\tsz := size\n\t\t\tif sz > maxAllocSize-1 {\n\t\t\t\tsz = maxAllocSize - 1\n\t\t\t}\n\n\t\t\tbuf := ptr[:sz]\n\t\t\tif _, err := tx.db.ops.writeAt(buf, offset); err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\n\t\t\ttx.stats.Write++\n\n\t\t\tsize -= sz\n\t\t\tif size == 0 {\n\t\t\t\tbreak\n\t\t\t}\n\n\t\t\toffset += int64(sz)\n\t\t\tptr = (*[maxAllocSize]byte)(unsafe.Pointer(&ptr[sz]))\n\t\t}\n\t}\n\n\tif !tx.db.NoSync || IgnoreNoSync {\n\t\tif err := fdatasync(tx.db); err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\n\tfor _, p := range pages {\n\n\t\tif int(p.overflow) != 0 {\n\t\t\tcontinue\n\t\t}\n\n\t\tbuf := (*[maxAllocSize]byte)(unsafe.Pointer(p))[:tx.db.pageSize]\n\n\t\tfor i := range buf {\n\t\t\tbuf[i] = 0\n\t\t}\n\t\ttx.db.pagePool.Put(buf)\n\t}\n\n\treturn nil\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "write",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "Sort",
+      "package" : 7,
+      "type" : 16,
+      "exported" : true
+    }, {
+      "name" : "fdatasync",
+      "package" : 0,
+      "type" : 30,
+      "exported" : false
+    }, {
+      "name" : "Put",
+      "package" : 5,
+      "type" : 32,
+      "exported" : true
+    } ],
+    "line-end" : 565,
+    "line-start" : 495,
+    "names" : [ "write" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "bolt",
+      "path" : "github.com/coreos/bbolt"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "os",
+      "path" : "os"
+    }, {
+      "name" : "poll",
+      "path" : "internal/poll"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "sort",
+      "path" : "sort"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 1 ],
+    "results" : [ 2 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() error",
+      "params" : 1,
+      "recv" : 1,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 5
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 4
+    }, {
+      "name" : "func() string",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 6,
+      "type" : "Signature",
+      "underlying" : 5,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 6
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "local-name" : "pages",
+      "name" : "github.com/coreos/bbolt.pages",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "elem" : 114,
+      "name" : "[]*github.com/coreos/bbolt.page",
+      "type" : "Slice",
+      "underlying" : 9
+    }, {
+      "name" : "func(map[github.com/coreos/bbolt.pgid]*github.com/coreos/bbolt.page) int",
+      "params" : 11,
+      "recv" : -1,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 10,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 129
+      } ],
+      "name" : "(map[github.com/coreos/bbolt.pgid]*github.com/coreos/bbolt.page)",
+      "type" : "Tuple",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "name" : "func(github.com/coreos/bbolt.pages, ...*github.com/coreos/bbolt.page) github.com/coreos/bbolt.pages",
+      "params" : 14,
+      "recv" : -1,
+      "results" : 15,
+      "type" : "Signature",
+      "underlying" : 13,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      }, {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(github.com/coreos/bbolt.pages, []*github.com/coreos/bbolt.page)",
+      "type" : "Tuple",
+      "underlying" : 14
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 8
+      } ],
+      "name" : "(github.com/coreos/bbolt.pages)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "name" : "func(data sort.Interface)",
+      "params" : 17,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "data",
+        "type" : 18
+      } ],
+      "name" : "(data sort.Interface)",
+      "type" : "Tuple",
+      "underlying" : 17
+    }, {
+      "local-name" : "Interface",
+      "name" : "sort.Interface",
+      "package" : 7,
+      "type" : "Named",
+      "underlying" : 19
+    }, {
+      "methods" : [ {
+        "name" : "Len",
+        "type" : 20
+      }, {
+        "name" : "Less",
+        "type" : 21
+      }, {
+        "name" : "Swap",
+        "type" : 24
+      } ],
+      "name" : "interface{Len() int; Less(i int, j int) bool; Swap(i int, j int)}",
+      "type" : "Interface",
+      "underlying" : 19
+    }, {
+      "name" : "func() int",
+      "params" : 1,
+      "recv" : 8,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 20,
+      "variadic" : false
+    }, {
+      "name" : "func(i int, j int) bool",
+      "params" : 22,
+      "recv" : 9,
+      "results" : 23,
+      "type" : "Signature",
+      "underlying" : 21,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 7
+      }, {
+        "name" : "j",
+        "type" : 7
+      } ],
+      "name" : "(i int, j int)",
+      "type" : "Tuple",
+      "underlying" : 22
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 23
+    }, {
+      "name" : "func(i int, j int)",
+      "params" : 22,
+      "recv" : 10,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 24,
+      "variadic" : false
+    }, {
+      "elem" : 26,
+      "name" : "*[2147483647]byte",
+      "type" : "Pointer",
+      "underlying" : 25
+    }, {
+      "elem" : 30,
+      "name" : "[2147483647]byte",
+      "type" : "Array",
+      "underlying" : 26
+    }, {
+      "name" : "untyped int",
+      "type" : "Basic",
+      "underlying" : 27
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 28
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 29
+    }, {
+      "name" : "func(db *github.com/coreos/bbolt.DB) error",
+      "params" : 31,
+      "recv" : -1,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 30,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "db",
+        "type" : 4
+      } ],
+      "name" : "(db *github.com/coreos/bbolt.DB)",
+      "type" : "Tuple",
+      "underlying" : 31
+    }, {
+      "name" : "func(x interface{})",
+      "params" : 33,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 32,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "x",
+        "type" : 72
+      } ],
+      "name" : "(x interface{})",
+      "type" : "Tuple",
+      "underlying" : 33
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : -1,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "tx",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "buf",
+      "package" : 0,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "pages",
+      "package" : 0,
+      "type" : 129,
+      "exported" : false
+    }, {
+      "name" : "pages",
+      "package" : 0,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 114,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 42,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 18,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 18,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 7,
+      "type" : 18,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 114,
+      "exported" : false
+    }, {
+      "name" : "overflow",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false
+    }, {
+      "name" : "db",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "pageSize",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "id",
+      "package" : 0,
+      "type" : 42,
+      "exported" : false
+    }, {
+      "name" : "size",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "sz",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "ptr",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false
+    }, {
+      "name" : "ops",
+      "package" : 0,
+      "type" : 105,
+      "exported" : false
+    }, {
+      "name" : "writeAt",
+      "package" : 0,
+      "type" : 106,
+      "exported" : false
+    }, {
+      "name" : "buf",
+      "package" : 0,
+      "type" : 34,
+      "exported" : false
+    }, {
+      "name" : "offset",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "stats",
+      "package" : 0,
+      "type" : 47,
+      "exported" : false
+    }, {
+      "name" : "Write",
+      "package" : 0,
+      "type" : 7,
+      "exported" : true
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "NoSync",
+      "package" : 0,
+      "type" : 3,
+      "exported" : true
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 114,
+      "exported" : false
+    }, {
+      "name" : "i",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "pagePool",
+      "package" : 0,
+      "type" : 65,
+      "exported" : false
+    }, {
+      "name" : "_",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

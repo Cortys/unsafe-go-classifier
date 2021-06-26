@@ -1,0 +1,742 @@
+{
+  "usage" : {
+    "file" : "xfrm_state_linux.go",
+    "label1" : "cast-basic",
+    "label2" : "serialization",
+    "line" : "213",
+    "module" : "github.com/vishvananda/netlink",
+    "pkg" : "github.com/vishvananda/netlink/nl",
+    "project" : "cilium/cilium",
+    "snippet" : "ret.AlgKeyLen = *(*uint32)(unsafe.Pointer(&b[64]))",
+    "version" : "v1.1.1-0.20200210222539-bfba8e4149db"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 211,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "ret"
+          }
+        } ],
+        "right" : [ {
+          "declared" : {
+            "go-type" : 6,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 6,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "XfrmAlgoAuth"
+            }
+          },
+          "go-type" : 6,
+          "kind" : "literal",
+          "type" : "composite",
+          "values" : [ ]
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 211,
+      "code" : "ret := XfrmAlgoAuth{}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 0, 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 212,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 2,
+            "type" : "slice",
+            "three" : false,
+            "high" : null,
+            "max" : null,
+            "kind" : "expression",
+            "low" : null,
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "AlgName",
+                "variable" : 3
+              },
+              "go-type" : 8,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 6,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "ret",
+                  "variable" : 2
+                }
+              },
+              "type" : "selector"
+            }
+          }, {
+            "go-type" : 2,
+            "type" : "slice",
+            "three" : false,
+            "high" : {
+              "go-type" : 10,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "64"
+              }
+            },
+            "max" : null,
+            "kind" : "expression",
+            "low" : {
+              "go-type" : 10,
+              "kind" : "constant",
+              "value" : {
+                "type" : "INT",
+                "value" : "0"
+              }
+            },
+            "target" : {
+              "go-type" : 2,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "b",
+                "variable" : 0
+              }
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Builtin",
+              "kind" : "ident",
+              "value" : "copy"
+            }
+          },
+          "go-type" : 10,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 212,
+      "code" : "copy(ret.AlgName[:], b[0:64])",
+      "entry" : false,
+      "use-vars" : [ 2, 0 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 213,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "AlgKeyLen",
+            "variable" : 4
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ret",
+              "variable" : 2
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 9,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 9,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uint32"
+                }
+              },
+              "go-type" : 14,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 15,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 15,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 15,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 16,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 3,
+                  "index" : {
+                    "go-type" : 10,
+                    "kind" : "constant",
+                    "value" : {
+                      "type" : "INT",
+                      "value" : "64"
+                    }
+                  },
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "b",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "index"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 213,
+      "code" : "ret.AlgKeyLen = *(*uint32)(unsafe.Pointer(&b[64]))",
+      "entry" : false,
+      "use-vars" : [ 2, 0 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 214,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "AlgTruncLen",
+            "variable" : 5
+          },
+          "go-type" : 9,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ret",
+              "variable" : 2
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 9,
+          "kind" : "expression",
+          "target" : {
+            "coerced-to" : {
+              "contained" : {
+                "go-type" : 9,
+                "kind" : "type",
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 9,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "uint32"
+                }
+              },
+              "go-type" : 14,
+              "kind" : "type",
+              "type" : "pointer"
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "target" : {
+              "coerced-to" : {
+                "go-type" : 15,
+                "kind" : "type",
+                "qualifier" : {
+                  "ident-kind" : "PkgName",
+                  "kind" : "ident",
+                  "package" : 1,
+                  "value" : "unsafe"
+                },
+                "type" : "identifier",
+                "value" : {
+                  "go-type" : 15,
+                  "ident-kind" : "TypeName",
+                  "kind" : "ident",
+                  "value" : "Pointer"
+                }
+              },
+              "go-type" : 15,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 16,
+                "kind" : "expression",
+                "operator" : "&",
+                "target" : {
+                  "go-type" : 3,
+                  "index" : {
+                    "go-type" : 10,
+                    "kind" : "constant",
+                    "value" : {
+                      "type" : "INT",
+                      "value" : "68"
+                    }
+                  },
+                  "kind" : "expression",
+                  "target" : {
+                    "go-type" : 2,
+                    "kind" : "expression",
+                    "type" : "identifier",
+                    "value" : {
+                      "ident-kind" : "Var",
+                      "kind" : "ident",
+                      "value" : "b",
+                      "variable" : 0
+                    }
+                  },
+                  "type" : "index"
+                },
+                "type" : "unary"
+              },
+              "type" : "cast"
+            },
+            "type" : "cast"
+          },
+          "type" : "star"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 214,
+      "code" : "ret.AlgTruncLen = *(*uint32)(unsafe.Pointer(&b[68]))",
+      "entry" : false,
+      "use-vars" : [ 0, 2 ]
+    }, {
+      "update-vars" : [ 2 ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 2, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2 ],
+      "decl-vars" : [ ],
+      "line-start" : 215,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "field" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "AlgKey",
+            "variable" : 6
+          },
+          "go-type" : 2,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ret",
+              "variable" : 2
+            }
+          },
+          "type" : "selector"
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "type" : "slice",
+          "three" : false,
+          "high" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Len"
+              },
+              "go-type" : 17,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 6,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "ret",
+                  "variable" : 2
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 10,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "max" : null,
+          "kind" : "expression",
+          "low" : {
+            "go-type" : 10,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "72"
+            }
+          },
+          "target" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "b",
+              "variable" : 0
+            }
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 215,
+      "code" : "ret.AlgKey = b[72:ret.Len()]",
+      "entry" : false,
+      "use-vars" : [ 0, 2 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 2 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 216,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 5,
+          "kind" : "expression",
+          "operator" : "&",
+          "target" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ret",
+              "variable" : 2
+            }
+          },
+          "type" : "unary"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 216,
+      "code" : "return &ret",
+      "entry" : false,
+      "use-vars" : [ 2 ]
+    } ],
+    "code" : "func DeserializeXfrmAlgoAuth(b []byte) *XfrmAlgoAuth {\n\tret := XfrmAlgoAuth{}\n\tcopy(ret.AlgName[:], b[0:64])\n\tret.AlgKeyLen = *(*uint32)(unsafe.Pointer(&b[64]))\n\tret.AlgTruncLen = *(*uint32)(unsafe.Pointer(&b[68]))\n\tret.AlgKey = b[72:ret.Len()]\n\treturn &ret\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "DeserializeXfrmAlgoAuth",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "Len",
+      "package" : 0,
+      "type" : 17,
+      "exported" : true
+    } ],
+    "line-end" : 217,
+    "line-start" : 210,
+    "names" : [ "DeserializeXfrmAlgoAuth" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "nl",
+      "path" : "github.com/vishvananda/netlink/nl"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0 ],
+    "receivers" : [ ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(b []byte) *github.com/vishvananda/netlink/nl.XfrmAlgoAuth",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 2
+      } ],
+      "name" : "(b []byte)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "elem" : 3,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 2
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 3
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(*github.com/vishvananda/netlink/nl.XfrmAlgoAuth)",
+      "type" : "Tuple",
+      "underlying" : 4
+    }, {
+      "elem" : 6,
+      "name" : "*github.com/vishvananda/netlink/nl.XfrmAlgoAuth",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "local-name" : "XfrmAlgoAuth",
+      "name" : "github.com/vishvananda/netlink/nl.XfrmAlgoAuth",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "AlgName",
+        "type" : 8
+      }, {
+        "name" : "AlgKeyLen",
+        "type" : 9
+      }, {
+        "name" : "AlgTruncLen",
+        "type" : 9
+      }, {
+        "name" : "AlgKey",
+        "type" : 2
+      } ],
+      "name" : "struct{AlgName [64]byte; AlgKeyLen uint32; AlgTruncLen uint32; AlgKey []byte}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
+      "elem" : 3,
+      "name" : "[64]byte",
+      "type" : "Array",
+      "underlying" : 8
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 10
+    }, {
+      "name" : "func([]byte, []byte) int",
+      "params" : 12,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 11,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      }, {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "([]byte, []byte)",
+      "type" : "Tuple",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 10
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 13
+    }, {
+      "elem" : 9,
+      "name" : "*uint32",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
+      "elem" : 3,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 16
+    }, {
+      "name" : "func() int",
+      "params" : 18,
+      "recv" : -1,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 17,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 18
+    } ],
+    "variables" : [ {
+      "name" : "b",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "ret",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "AlgName",
+      "package" : 0,
+      "type" : 8,
+      "exported" : true
+    }, {
+      "name" : "AlgKeyLen",
+      "package" : 0,
+      "type" : 9,
+      "exported" : true
+    }, {
+      "name" : "AlgTruncLen",
+      "package" : 0,
+      "type" : 9,
+      "exported" : true
+    }, {
+      "name" : "AlgKey",
+      "package" : 0,
+      "type" : 2,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

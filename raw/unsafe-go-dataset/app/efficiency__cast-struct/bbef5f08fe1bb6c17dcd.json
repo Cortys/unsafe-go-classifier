@@ -1,0 +1,683 @@
+{
+  "usage" : {
+    "file" : "bucket.go",
+    "label1" : "cast-struct",
+    "label2" : "efficiency",
+    "line" : "620",
+    "module" : "go.etcd.io/bbolt",
+    "pkg" : "go.etcd.io/bbolt",
+    "project" : "kubernetes/kubernetes",
+    "snippet" : "var bucket = (*bucket)(unsafe.Pointer(&value[0]))",
+    "version" : "v1.3.3"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ 0 ],
+      "decl-vars" : [ 3, 0 ],
+      "line-start" : 616,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : null,
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "n"
+            } ],
+            "type" : "var",
+            "values" : [ {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "rootNode",
+                "variable" : 2
+              },
+              "go-type" : 146,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 0,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "b",
+                  "variable" : 0
+                }
+              },
+              "type" : "selector"
+            } ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 616,
+      "code" : "// Allocate the appropriate size.\nvar n = b.rootNode",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4 ],
+      "in-vars" : [ 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0 ],
+      "decl-vars" : [ 3, 4 ],
+      "line-start" : 617,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : null,
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "value"
+            } ],
+            "type" : "var",
+            "values" : [ {
+              "argument" : {
+                "element" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "byte"
+                  }
+                },
+                "go-type" : 3,
+                "kind" : "type",
+                "type" : "slice"
+              },
+              "go-type" : 3,
+              "kind" : "expression",
+              "rest" : [ {
+                "go-type" : 17,
+                "kind" : "expression",
+                "left" : {
+                  "go-type" : 17,
+                  "kind" : "constant",
+                  "value" : {
+                    "type" : "INT",
+                    "value" : "16"
+                  }
+                },
+                "operator" : "+",
+                "right" : {
+                  "arguments" : [ ],
+                  "ellipsis" : false,
+                  "function" : {
+                    "field" : {
+                      "ident-kind" : "Func",
+                      "kind" : "ident",
+                      "value" : "size"
+                    },
+                    "go-type" : 80,
+                    "kind" : "expression",
+                    "target" : {
+                      "go-type" : 146,
+                      "kind" : "expression",
+                      "type" : "identifier",
+                      "value" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "n",
+                        "variable" : 3
+                      }
+                    },
+                    "type" : "selector"
+                  },
+                  "go-type" : 17,
+                  "kind" : "expression",
+                  "type" : "call"
+                },
+                "type" : "binary"
+              } ],
+              "type" : "make"
+            } ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 617,
+      "code" : "var value = make([]byte, bucketHeaderSize+n.size())",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 5 ],
+      "in-vars" : [ 3, 0 ],
+      "exit" : false,
+      "out-vars" : [ 3, 0 ],
+      "decl-vars" : [ 5, 4 ],
+      "line-start" : 620,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : null,
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "bucket"
+            } ],
+            "type" : "var",
+            "values" : [ {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 4,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 4,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "bucket"
+                  }
+                },
+                "go-type" : 3,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 3,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 97,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 6,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 97,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 97,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 42,
+                  "kind" : "expression",
+                  "operator" : "&",
+                  "target" : {
+                    "go-type" : 4,
+                    "index" : {
+                      "go-type" : 17,
+                      "kind" : "constant",
+                      "value" : {
+                        "type" : "INT",
+                        "value" : "0"
+                      }
+                    },
+                    "kind" : "expression",
+                    "target" : {
+                      "go-type" : 3,
+                      "kind" : "expression",
+                      "type" : "identifier",
+                      "value" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "value",
+                        "variable" : 4
+                      }
+                    },
+                    "type" : "index"
+                  },
+                  "type" : "unary"
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            } ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 620,
+      "code" : "// Write a bucket header.\nvar bucket = (*bucket)(unsafe.Pointer(&value[0]))",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 0, 3 ],
+      "exit" : false,
+      "out-vars" : [ 3 ],
+      "decl-vars" : [ ],
+      "line-start" : 621,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 4,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 3,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "bucket",
+              "variable" : 5
+            }
+          },
+          "type" : "star"
+        } ],
+        "right" : [ {
+          "go-type" : 4,
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "bucket",
+              "variable" : 6
+            },
+            "go-type" : 3,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 0,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "b",
+                "variable" : 0
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "star"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 621,
+      "code" : "*bucket = *b.bucket",
+      "entry" : false,
+      "use-vars" : [ 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 3 ],
+      "exit" : false,
+      "out-vars" : [ 3, 4, 7 ],
+      "decl-vars" : [ 4, 7 ],
+      "line-start" : 624,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : null,
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "p"
+            } ],
+            "type" : "var",
+            "values" : [ {
+              "coerced-to" : {
+                "contained" : {
+                  "go-type" : 140,
+                  "kind" : "type",
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 140,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "page"
+                  }
+                },
+                "go-type" : 139,
+                "kind" : "type",
+                "type" : "pointer"
+              },
+              "go-type" : 139,
+              "kind" : "expression",
+              "target" : {
+                "coerced-to" : {
+                  "go-type" : 97,
+                  "kind" : "type",
+                  "qualifier" : {
+                    "ident-kind" : "PkgName",
+                    "kind" : "ident",
+                    "package" : 6,
+                    "value" : "unsafe"
+                  },
+                  "type" : "identifier",
+                  "value" : {
+                    "go-type" : 97,
+                    "ident-kind" : "TypeName",
+                    "kind" : "ident",
+                    "value" : "Pointer"
+                  }
+                },
+                "go-type" : 97,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 42,
+                  "kind" : "expression",
+                  "operator" : "&",
+                  "target" : {
+                    "go-type" : 4,
+                    "index" : {
+                      "go-type" : 17,
+                      "kind" : "constant",
+                      "value" : {
+                        "type" : "INT",
+                        "value" : "16"
+                      }
+                    },
+                    "kind" : "expression",
+                    "target" : {
+                      "go-type" : 3,
+                      "kind" : "expression",
+                      "type" : "identifier",
+                      "value" : {
+                        "ident-kind" : "Var",
+                        "kind" : "ident",
+                        "value" : "value",
+                        "variable" : 4
+                      }
+                    },
+                    "type" : "index"
+                  },
+                  "type" : "unary"
+                },
+                "type" : "cast"
+              },
+              "type" : "cast"
+            } ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 624,
+      "code" : "// Convert byte slice to a fake page and write the root node.\nvar p = (*page)(unsafe.Pointer(&value[bucketHeaderSize]))",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 7, 3, 4 ],
+      "exit" : false,
+      "out-vars" : [ 4 ],
+      "decl-vars" : [ ],
+      "line-start" : 625,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 139,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "p",
+              "variable" : 7
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "write"
+            },
+            "go-type" : 5,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 146,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "n",
+                "variable" : 3
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 1,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 625,
+      "code" : "n.write(p)",
+      "entry" : false,
+      "use-vars" : [ 7, 3 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 4 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 627,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 3,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "value",
+            "variable" : 4
+          }
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 627,
+      "code" : "return value",
+      "entry" : false,
+      "use-vars" : [ 4 ]
+    } ],
+    "code" : "// write allocates and writes a bucket to a byte slice.\nfunc (b *Bucket) write() []byte {\n\t// Allocate the appropriate size.\n\tvar n = b.rootNode\n\tvar value = make([]byte, bucketHeaderSize+n.size())\n\n\t// Write a bucket header.\n\tvar bucket = (*bucket)(unsafe.Pointer(&value[0]))\n\t*bucket = *b.bucket\n\n\t// Convert byte slice to a fake page and write the root node.\n\tvar p = (*page)(unsafe.Pointer(&value[bucketHeaderSize]))\n\tn.write(p)\n\n\treturn value\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "write",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "size",
+      "package" : 0,
+      "type" : 80,
+      "exported" : false
+    }, {
+      "name" : "write",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    } ],
+    "line-end" : 628,
+    "line-start" : 614,
+    "names" : [ "write" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "bbolt",
+      "path" : "go.etcd.io/bbolt"
+    }, {
+      "name" : "time",
+      "path" : "time"
+    }, {
+      "name" : "os",
+      "path" : "os"
+    }, {
+      "name" : "poll",
+      "path" : "internal/poll"
+    }, {
+      "name" : "syscall",
+      "path" : "syscall"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ ],
+    "receivers" : [ 0 ],
+    "results" : [ 1 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func() []byte",
+      "params" : 1,
+      "recv" : 0,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 2
+    }, {
+      "elem" : 4,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 3
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "name" : "func(p *go.etcd.io/bbolt.page)",
+      "params" : 6,
+      "recv" : -1,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 5,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 139
+      } ],
+      "name" : "(p *go.etcd.io/bbolt.page)",
+      "type" : "Tuple",
+      "underlying" : 6
+    } ],
+    "variables" : [ {
+      "name" : "b",
+      "package" : 0,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "[res0]",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "rootNode",
+      "package" : 0,
+      "type" : 146,
+      "exported" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 146,
+      "exported" : false
+    }, {
+      "name" : "value",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "bucket",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "bucket",
+      "package" : 0,
+      "type" : 3,
+      "exported" : false
+    }, {
+      "name" : "p",
+      "package" : 0,
+      "type" : 139,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

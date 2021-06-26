@@ -1,0 +1,6547 @@
+{
+  "usage" : {
+    "file" : "arith.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "232",
+    "module" : "gorgonia.org/gorgonia",
+    "pkg" : "gorgonia.org/gorgonia/cuda",
+    "project" : "gorgonia/gorgonia",
+    "snippet" : "unsafe.Pointer(&mem),",
+    "version" : "project"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 64, 65, 66, 63, 67 ],
+      "exit" : false,
+      "out-vars" : [ 64, 65, 66, 63, 67 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3 ],
+      "in-vars" : [ 64, 65, 66, 63, 67 ],
+      "exit" : false,
+      "out-vars" : [ 70, 67, 64, 65, 66, 63 ],
+      "decl-vars" : [ 70 ],
+      "line-start" : 183,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "name"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "a",
+              "variable" : 64
+            }
+          }, {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "leftTensor",
+              "variable" : 66
+            }
+          }, {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "sub"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 211,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "constructName1"
+            }
+          },
+          "go-type" : 37,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 183,
+      "code" : "name := constructName1(a, leftTensor, \"sub\")",
+      "entry" : false,
+      "use-vars" : [ 64, 66 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 4, 5 ],
+      "in-vars" : [ 64, 65, 66, 63, 70, 67 ],
+      "exit" : false,
+      "out-vars" : [ 64, 65, 66, 63, 70, 67 ],
+      "decl-vars" : [ ],
+      "line-start" : 184,
+      "ast" : {
+        "condition" : {
+          "go-type" : 14,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "arguments" : [ {
+              "go-type" : 37,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "name",
+                "variable" : 70
+              }
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "HasFunc"
+              },
+              "go-type" : 213,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 32,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "e",
+                  "variable" : 63
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 186,
+      "code" : "if !e.HasFunc(name) {\n\treturn nil, errors.Errorf(\"Unable to perform SubScalar(). The tensor engine does not have the function %q\", name)\n}",
+      "entry" : false,
+      "use-vars" : [ 63, 70 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 70 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 185,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 214,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "Unable to perform SubScalar(). The tensor engine does not have the function %q"
+            }
+          }, {
+            "go-type" : 37,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "name",
+              "variable" : 70
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 215,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 12,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 185,
+      "code" : "return nil, errors.Errorf(\"Unable to perform SubScalar(). The tensor engine does not have the function %q\", name)",
+      "entry" : false,
+      "use-vars" : [ 70 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 6 ],
+      "in-vars" : [ 63, 70, 67, 64, 65, 66 ],
+      "exit" : false,
+      "out-vars" : [ 63, 70, 67, 64, 65, 66 ],
+      "decl-vars" : [ 71 ],
+      "line-start" : 188,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 108,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "tensor"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 108,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Memory"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "bMem"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 188,
+      "code" : "var bMem tensor.Memory",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 8 ],
+      "in-vars" : [ 67, 64, 65, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 64, 65, 66, 63, 70, 67 ],
+      "decl-vars" : [ 72 ],
+      "line-start" : 189,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 14,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 14,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "bool"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "ok"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 189,
+      "code" : "var ok bool",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 9, 11 ],
+      "in-vars" : [ 67, 64, 72, 71, 65, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 71, 65, 66, 63, 70, 67, 64 ],
+      "decl-vars" : [ ],
+      "line-start" : 190,
+      "ast" : {
+        "condition" : {
+          "go-type" : 14,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "ok",
+              "variable" : 72
+            }
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 192,
+      "code" : "if bMem, ok = b.(tensor.Memory); !ok {\n\treturn nil, errors.Errorf(\"b has to be a tensor.Memory. Got %T instead\", b)\n}",
+      "entry" : false,
+      "use-vars" : [ 72 ]
+    }, {
+      "update-vars" : [ 72, 71 ],
+      "successors" : [ 7 ],
+      "in-vars" : [ 63, 70, 67, 64, 65, 66 ],
+      "exit" : false,
+      "out-vars" : [ 64, 72, 71, 65, 66, 63, 70, 67 ],
+      "decl-vars" : [ ],
+      "line-start" : 190,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 108,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "bMem",
+            "variable" : 71
+          }
+        }, {
+          "go-type" : 14,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "ok",
+            "variable" : 72
+          }
+        } ],
+        "right" : [ {
+          "asserted" : {
+            "go-type" : 108,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 1,
+              "value" : "tensor"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 108,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "Memory"
+            }
+          },
+          "go-type" : 218,
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "b",
+              "variable" : 65
+            }
+          },
+          "type" : "type-assert"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 72, 71 ],
+      "line-end" : 190,
+      "code" : "bMem, ok = b.(tensor.Memory)",
+      "entry" : false,
+      "use-vars" : [ 65 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 65 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 191,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 214,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "b has to be a tensor.Memory. Got %T instead"
+            }
+          }, {
+            "go-type" : 6,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "b",
+              "variable" : 65
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 215,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 12,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Errorf"
+            }
+          },
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 191,
+      "code" : "return nil, errors.Errorf(\"b has to be a tensor.Memory. Got %T instead\", b)",
+      "entry" : false,
+      "use-vars" : [ 65 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 12, 13 ],
+      "in-vars" : [ 63, 70, 67, 69, 64, 71, 66 ],
+      "exit" : false,
+      "out-vars" : [ 70, 67, 69, 64, 71, 66, 63 ],
+      "decl-vars" : [ ],
+      "line-start" : 194,
+      "ast" : {
+        "condition" : {
+          "go-type" : 221,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 90,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 69
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 214,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 196,
+      "code" : "if err = unaryCheck(a); err != nil {\n\treturn nil, errors.Wrap(err, \"Basic checks failed for SubScalar\")\n}",
+      "entry" : false,
+      "use-vars" : [ 69 ]
+    }, {
+      "update-vars" : [ 69 ],
+      "successors" : [ 10 ],
+      "in-vars" : [ 64, 71, 66, 63, 70, 67 ],
+      "exit" : false,
+      "out-vars" : [ 66, 63, 70, 67, 69, 64, 71 ],
+      "decl-vars" : [ ],
+      "line-start" : 194,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 69
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "a",
+              "variable" : 64
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 219,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "unaryCheck"
+            }
+          },
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 69 ],
+      "line-end" : 194,
+      "code" : "err = unaryCheck(a)",
+      "entry" : false,
+      "use-vars" : [ 64 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 69 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 195,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 214,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 90,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 69
+            }
+          }, {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "Basic checks failed for SubScalar"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 222,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 12,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Wrap"
+            }
+          },
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 195,
+      "code" : "return nil, errors.Wrap(err, \"Basic checks failed for SubScalar\")",
+      "entry" : false,
+      "use-vars" : [ 69 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 14 ],
+      "in-vars" : [ 67, 64, 71, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 64, 71, 66, 63, 70, 67 ],
+      "decl-vars" : [ 86 ],
+      "line-start" : 198,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 224,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 1,
+                "value" : "tensor"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 224,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "DenseTensor"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "reuse"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 198,
+      "code" : "var reuse tensor.DenseTensor",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 16 ],
+      "in-vars" : [ 70, 67, 64, 71, 66, 63 ],
+      "exit" : false,
+      "out-vars" : [ 67, 64, 71, 66, 63, 70 ],
+      "decl-vars" : [ 87, 88 ],
+      "line-start" : 199,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 14,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 14,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "bool"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "safe"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "toReuse"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 199,
+      "code" : "var safe, toReuse bool",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 17, 18 ],
+      "in-vars" : [ 66, 87, 88, 69, 64, 71, 86, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 69, 64, 71, 87, 88, 86, 66, 63, 70 ],
+      "decl-vars" : [ ],
+      "line-start" : 200,
+      "ast" : {
+        "condition" : {
+          "go-type" : 221,
+          "kind" : "expression",
+          "left" : {
+            "go-type" : 90,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 69
+            }
+          },
+          "operator" : "!=",
+          "right" : {
+            "go-type" : 214,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Nil",
+              "kind" : "ident",
+              "value" : "nil"
+            }
+          },
+          "type" : "binary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 202,
+      "code" : "if reuse, safe, toReuse, _, _, err = handleFuncOpts(a.Shape(), a.Dtype(), a.DataOrder(), true, opts...); err != nil {\n\treturn nil, errors.Wrap(err, \"Unable to handle funcOpts\")\n}",
+      "entry" : false,
+      "use-vars" : [ 69 ]
+    }, {
+      "update-vars" : [ 86, 87, 88, 69 ],
+      "successors" : [ 15 ],
+      "in-vars" : [ 67, 64, 71, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 66, 63, 70, 87, 69, 64, 88, 86, 71 ],
+      "decl-vars" : [ ],
+      "line-start" : 200,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 224,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "reuse",
+            "variable" : 86
+          }
+        }, {
+          "go-type" : 14,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "safe",
+            "variable" : 87
+          }
+        }, {
+          "go-type" : 14,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "toReuse",
+            "variable" : 88
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "_"
+          }
+        }, {
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "err",
+            "variable" : 69
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Shape"
+              },
+              "go-type" : 158,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 64
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 160,
+            "kind" : "expression",
+            "type" : "call"
+          }, {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Dtype"
+              },
+              "go-type" : 100,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 64
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 15,
+            "kind" : "expression",
+            "type" : "call"
+          }, {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "DataOrder"
+              },
+              "go-type" : 97,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 64
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 99,
+            "kind" : "expression",
+            "type" : "call"
+          }, {
+            "go-type" : 14,
+            "kind" : "constant",
+            "value" : {
+              "type" : "BOOL",
+              "value" : "true"
+            }
+          }, {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "opts",
+              "variable" : 67
+            }
+          } ],
+          "ellipsis" : true,
+          "function" : {
+            "go-type" : 265,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "handleFuncOpts"
+            }
+          },
+          "go-type" : 264,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 86, 88, 87, 69 ],
+      "line-end" : 200,
+      "code" : "reuse, safe, toReuse, _, _, err = handleFuncOpts(a.Shape(), a.Dtype(), a.DataOrder(), true, opts...)",
+      "entry" : false,
+      "use-vars" : [ 64, 67 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ 69 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 201,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 214,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 90,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "err",
+              "variable" : 69
+            }
+          }, {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "Unable to handle funcOpts"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 222,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 12,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "Wrap"
+            }
+          },
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 201,
+      "code" : "return nil, errors.Wrap(err, \"Unable to handle funcOpts\")",
+      "entry" : false,
+      "use-vars" : [ 69 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 19 ],
+      "in-vars" : [ 70, 87, 88, 64, 86, 71, 66, 63 ],
+      "exit" : false,
+      "out-vars" : [ 87, 88, 64, 86, 71, 66, 63, 70 ],
+      "decl-vars" : [ 89, 90 ],
+      "line-start" : 204,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 58,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 10,
+                "value" : "cu"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 58,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "DevicePtr"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "mem"
+            }, {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "memB"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 204,
+      "code" : "var mem, memB cu.DevicePtr",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 20 ],
+      "in-vars" : [ 88, 64, 86, 71, 66, 63, 70, 87 ],
+      "exit" : false,
+      "out-vars" : [ 71, 66, 63, 70, 87, 88, 64, 86 ],
+      "decl-vars" : [ 91 ],
+      "line-start" : 205,
+      "ast" : {
+        "kind" : "statement",
+        "target" : {
+          "kind" : "decl",
+          "specs" : [ {
+            "comments" : [ ],
+            "declared-type" : {
+              "go-type" : 115,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 115,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int64"
+              }
+            },
+            "kind" : "spec",
+            "names" : [ {
+              "ident-kind" : "NoKind",
+              "kind" : "ident",
+              "value" : "size"
+            } ],
+            "type" : "var",
+            "values" : [ ]
+          } ],
+          "type" : "var"
+        },
+        "type" : "declaration"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 205,
+      "code" : "var size int64",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 21, 28, 32 ],
+      "in-vars" : [ 88, 64, 86, 71, 66, 63, 70, 87 ],
+      "exit" : false,
+      "out-vars" : [ 87, 88, 64, 86, 71, 66, 63, 70 ],
+      "decl-vars" : [ ],
+      "line-start" : 207,
+      "ast" : {
+        "condition" : null,
+        "kind" : "statement",
+        "type" : "switch"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 222,
+      "code" : "switch {\ncase toReuse:\n\tmem = cu.DevicePtr(reuse.Uintptr())\n\tmemA := cu.DevicePtr(a.Uintptr())\n\tmemSize := int64(a.MemSize())\n\te.memcpy(mem, memA, memSize)\n\n\tsize = int64(logicalSize(reuse.Shape()))\n\tretVal = reuse\ncase !safe:\n\tmem = cu.DevicePtr(a.Uintptr())\n\tretVal = a\n\tsize = int64(logicalSize(a.Shape()))\ndefault:\n\treturn nil, errors.New(\"Impossible state: A reuse tensor must be passed in, or the operation must be unsafe. Incr and safe operations are not supported\")\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 22 ],
+      "in-vars" : [ 71, 66, 63, 70, 88, 64, 86 ],
+      "exit" : false,
+      "out-vars" : [ 66, 63, 70, 64, 86, 71 ],
+      "decl-vars" : [ ],
+      "line-start" : 208,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 14,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "toReuse",
+            "variable" : 88
+          }
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 215,
+      "code" : "case toReuse:\n\tmem = cu.DevicePtr(reuse.Uintptr())\n\tmemA := cu.DevicePtr(a.Uintptr())\n\tmemSize := int64(a.MemSize())\n\te.memcpy(mem, memA, memSize)\n\n\tsize = int64(logicalSize(reuse.Shape()))\n\tretVal = reuse",
+      "entry" : false,
+      "use-vars" : [ 88 ]
+    }, {
+      "update-vars" : [ 90 ],
+      "successors" : [ 23 ],
+      "in-vars" : [ 63, 70, 64, 86, 71, 66 ],
+      "exit" : false,
+      "out-vars" : [ 66, 63, 70, 90, 64, 86, 71 ],
+      "decl-vars" : [ ],
+      "line-start" : 209,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "mem",
+            "variable" : 90
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 58,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 10,
+              "value" : "cu"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 58,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "DevicePtr"
+            }
+          },
+          "go-type" : 58,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Uintptr"
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 224,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "reuse",
+                  "variable" : 86
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 39,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 90 ],
+      "line-end" : 209,
+      "code" : "mem = cu.DevicePtr(reuse.Uintptr())",
+      "entry" : false,
+      "use-vars" : [ 86 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 24 ],
+      "in-vars" : [ 86, 71, 66, 63, 70, 90, 64 ],
+      "exit" : false,
+      "out-vars" : [ 92, 64, 86, 71, 66, 63, 70, 90 ],
+      "decl-vars" : [ 92 ],
+      "line-start" : 210,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "memA"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 58,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 10,
+              "value" : "cu"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 58,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "DevicePtr"
+            }
+          },
+          "go-type" : 58,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Uintptr"
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 64
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 39,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 210,
+      "code" : "memA := cu.DevicePtr(a.Uintptr())",
+      "entry" : false,
+      "use-vars" : [ 64 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 25 ],
+      "in-vars" : [ 64, 86, 71, 66, 63, 70, 90, 92 ],
+      "exit" : false,
+      "out-vars" : [ 86, 71, 66, 63, 70, 90, 92, 93 ],
+      "decl-vars" : [ 93 ],
+      "line-start" : 211,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "memSize"
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 115,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 115,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int64"
+            }
+          },
+          "go-type" : 115,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "MemSize"
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 64
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 39,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 211,
+      "code" : "memSize := int64(a.MemSize())",
+      "entry" : false,
+      "use-vars" : [ 64 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 26 ],
+      "in-vars" : [ 90, 92, 93, 86, 71, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 66, 63, 70, 90, 86, 71 ],
+      "decl-vars" : [ ],
+      "line-start" : 212,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 58,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "mem",
+              "variable" : 90
+            }
+          }, {
+            "go-type" : 58,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "memA",
+              "variable" : 92
+            }
+          }, {
+            "go-type" : 115,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "memSize",
+              "variable" : 93
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "memcpy"
+            },
+            "go-type" : 267,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 32,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "e",
+                "variable" : 63
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 212,
+      "code" : "e.memcpy(mem, memA, memSize)",
+      "entry" : false,
+      "use-vars" : [ 63, 90, 92, 93 ]
+    }, {
+      "update-vars" : [ 91 ],
+      "successors" : [ 27 ],
+      "in-vars" : [ 90, 86, 71, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 63, 70, 90, 86, 71, 91, 66 ],
+      "decl-vars" : [ ],
+      "line-start" : 214,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 115,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "size",
+            "variable" : 91
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 115,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 115,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int64"
+            }
+          },
+          "go-type" : 115,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Shape"
+                },
+                "go-type" : 158,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 224,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "reuse",
+                    "variable" : 86
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 160,
+              "kind" : "expression",
+              "type" : "call"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 269,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "logicalSize"
+              }
+            },
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 91 ],
+      "line-end" : 214,
+      "code" : "size = int64(logicalSize(reuse.Shape()))",
+      "entry" : false,
+      "use-vars" : [ 86 ]
+    }, {
+      "update-vars" : [ 68 ],
+      "successors" : [ 34 ],
+      "in-vars" : [ 90, 86, 71, 91, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 90, 71, 91, 66, 63, 70 ],
+      "decl-vars" : [ ],
+      "line-start" : 215,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "retVal",
+            "variable" : 68
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 224,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "reuse",
+            "variable" : 86
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 68 ],
+      "line-end" : 215,
+      "code" : "retVal = reuse",
+      "entry" : false,
+      "use-vars" : [ 86 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 29 ],
+      "in-vars" : [ 63, 70, 87, 64, 71, 66 ],
+      "exit" : false,
+      "out-vars" : [ 70, 64, 71, 66, 63 ],
+      "decl-vars" : [ ],
+      "line-start" : 216,
+      "ast" : {
+        "expressions" : [ {
+          "go-type" : 14,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "safe",
+              "variable" : 87
+            }
+          },
+          "type" : "unary"
+        } ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 219,
+      "code" : "case !safe:\n\tmem = cu.DevicePtr(a.Uintptr())\n\tretVal = a\n\tsize = int64(logicalSize(a.Shape()))",
+      "entry" : false,
+      "use-vars" : [ 87 ]
+    }, {
+      "update-vars" : [ 90 ],
+      "successors" : [ 30 ],
+      "in-vars" : [ 71, 66, 63, 70, 64 ],
+      "exit" : false,
+      "out-vars" : [ 71, 66, 63, 70, 90, 64 ],
+      "decl-vars" : [ ],
+      "line-start" : 217,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "mem",
+            "variable" : 90
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 58,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 10,
+              "value" : "cu"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 58,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "DevicePtr"
+            }
+          },
+          "go-type" : 58,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Uintptr"
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 2,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "a",
+                  "variable" : 64
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 39,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 90 ],
+      "line-end" : 217,
+      "code" : "mem = cu.DevicePtr(a.Uintptr())",
+      "entry" : false,
+      "use-vars" : [ 64 ]
+    }, {
+      "update-vars" : [ 68 ],
+      "successors" : [ 31 ],
+      "in-vars" : [ 64, 71, 66, 63, 70, 90 ],
+      "exit" : false,
+      "out-vars" : [ 71, 66, 63, 70, 90, 64 ],
+      "decl-vars" : [ ],
+      "line-start" : 218,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "retVal",
+            "variable" : 68
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 2,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "a",
+            "variable" : 64
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 68 ],
+      "line-end" : 218,
+      "code" : "retVal = a",
+      "entry" : false,
+      "use-vars" : [ 64 ]
+    }, {
+      "update-vars" : [ 91 ],
+      "successors" : [ 34 ],
+      "in-vars" : [ 64, 71, 66, 63, 70, 90 ],
+      "exit" : false,
+      "out-vars" : [ 71, 91, 66, 63, 70, 90 ],
+      "decl-vars" : [ ],
+      "line-start" : 219,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 115,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "size",
+            "variable" : 91
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 115,
+            "kind" : "type",
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 115,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "int64"
+            }
+          },
+          "go-type" : 115,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ {
+              "arguments" : [ ],
+              "ellipsis" : false,
+              "function" : {
+                "field" : {
+                  "ident-kind" : "Func",
+                  "kind" : "ident",
+                  "value" : "Shape"
+                },
+                "go-type" : 158,
+                "kind" : "expression",
+                "target" : {
+                  "go-type" : 2,
+                  "kind" : "expression",
+                  "type" : "identifier",
+                  "value" : {
+                    "ident-kind" : "Var",
+                    "kind" : "ident",
+                    "value" : "a",
+                    "variable" : 64
+                  }
+                },
+                "type" : "selector"
+              },
+              "go-type" : 160,
+              "kind" : "expression",
+              "type" : "call"
+            } ],
+            "ellipsis" : false,
+            "function" : {
+              "go-type" : 269,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "logicalSize"
+              }
+            },
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 91 ],
+      "line-end" : 219,
+      "code" : "size = int64(logicalSize(a.Shape()))",
+      "entry" : false,
+      "use-vars" : [ 64 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 33 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 220,
+      "ast" : {
+        "expressions" : [ ],
+        "kind" : "statement",
+        "type" : "case-clause"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 221,
+      "code" : "default:\n\treturn nil, errors.New(\"Impossible state: A reuse tensor must be passed in, or the operation must be unsafe. Incr and safe operations are not supported\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 221,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ {
+          "go-type" : 214,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Nil",
+            "kind" : "ident",
+            "value" : "nil"
+          }
+        }, {
+          "arguments" : [ {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "Impossible state: A reuse tensor must be passed in, or the operation must be unsafe. Incr and safe operations are not supported"
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 271,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 12,
+              "value" : "errors"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "New"
+            }
+          },
+          "go-type" : 90,
+          "kind" : "expression",
+          "type" : "call"
+        } ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 221,
+      "code" : "return nil, errors.New(\"Impossible state: A reuse tensor must be passed in, or the operation must be unsafe. Incr and safe operations are not supported\")",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ 89 ],
+      "successors" : [ 35 ],
+      "in-vars" : [ 71, 91, 66, 63, 70, 90 ],
+      "exit" : false,
+      "out-vars" : [ 91, 66, 63, 70, 90, 89 ],
+      "decl-vars" : [ ],
+      "line-start" : 224,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "memB",
+            "variable" : 89
+          }
+        } ],
+        "right" : [ {
+          "coerced-to" : {
+            "go-type" : 58,
+            "kind" : "type",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 10,
+              "value" : "cu"
+            },
+            "type" : "identifier",
+            "value" : {
+              "go-type" : 58,
+              "ident-kind" : "TypeName",
+              "kind" : "ident",
+              "value" : "DevicePtr"
+            }
+          },
+          "go-type" : 58,
+          "kind" : "expression",
+          "target" : {
+            "arguments" : [ ],
+            "ellipsis" : false,
+            "function" : {
+              "field" : {
+                "ident-kind" : "Func",
+                "kind" : "ident",
+                "value" : "Uintptr"
+              },
+              "go-type" : 79,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 108,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "bMem",
+                  "variable" : 71
+                }
+              },
+              "type" : "selector"
+            },
+            "go-type" : 39,
+            "kind" : "expression",
+            "type" : "call"
+          },
+          "type" : "cast"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 89 ],
+      "line-end" : 224,
+      "code" : "memB = cu.DevicePtr(bMem.Uintptr())",
+      "entry" : false,
+      "use-vars" : [ 71 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 36, 37 ],
+      "in-vars" : [ 90, 89, 91, 66, 63, 70 ],
+      "exit" : false,
+      "out-vars" : [ 91, 63, 70, 90, 89 ],
+      "decl-vars" : [ ],
+      "line-start" : 225,
+      "ast" : {
+        "condition" : {
+          "go-type" : 14,
+          "kind" : "expression",
+          "operator" : "!",
+          "target" : {
+            "go-type" : 14,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "leftTensor",
+              "variable" : 66
+            }
+          },
+          "type" : "unary"
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 227,
+      "code" : "if !leftTensor {\n\tmem, memB = memB, mem\n}",
+      "entry" : false,
+      "use-vars" : [ 66 ]
+    }, {
+      "update-vars" : [ 89, 90 ],
+      "successors" : [ 37 ],
+      "in-vars" : [ 91, 63, 70, 90, 89 ],
+      "exit" : false,
+      "out-vars" : [ 91, 63, 70, 90, 89 ],
+      "decl-vars" : [ ],
+      "line-start" : 226,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "mem",
+            "variable" : 90
+          }
+        }, {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "memB",
+            "variable" : 89
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "memB",
+            "variable" : 89
+          }
+        }, {
+          "go-type" : 58,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "mem",
+            "variable" : 90
+          }
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ 89, 90 ],
+      "line-end" : 226,
+      "code" : "mem, memB = memB, mem",
+      "entry" : false,
+      "use-vars" : [ 89, 90 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 38 ],
+      "in-vars" : [ 91, 63, 70, 90, 89 ],
+      "exit" : false,
+      "out-vars" : [ 63, 70, 90, 89, 91, 95 ],
+      "decl-vars" : [ 95 ],
+      "line-start" : 229,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "fn"
+          }
+        } ],
+        "right" : [ {
+          "go-type" : 128,
+          "index" : {
+            "go-type" : 37,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "name",
+              "variable" : 70
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "field" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "f",
+              "variable" : 94
+            },
+            "go-type" : 332,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 32,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "e",
+                "variable" : 63
+              }
+            },
+            "type" : "selector"
+          },
+          "type" : "index"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 229,
+      "code" : "fn := e.f[name]",
+      "entry" : false,
+      "use-vars" : [ 63, 70 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 39 ],
+      "in-vars" : [ 63, 70, 90, 89, 91, 95 ],
+      "exit" : false,
+      "out-vars" : [ 95, 63, 90, 96, 97, 98, 99, 91, 70, 89, 100, 101 ],
+      "decl-vars" : [ 97, 100, 96, 98, 99, 101 ],
+      "line-start" : 230,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "gridDimX"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "gridDimY"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "gridDimZ"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "blockDimX"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "blockDimY"
+          }
+        }, {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "blockDimZ"
+          }
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "coerced-to" : {
+              "go-type" : 22,
+              "kind" : "type",
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 22,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "int"
+              }
+            },
+            "go-type" : 22,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 115,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "size",
+                "variable" : 91
+              }
+            },
+            "type" : "cast"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "ElemGridSize"
+            },
+            "go-type" : 274,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 32,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "e",
+                "variable" : 63
+              }
+            },
+            "type" : "selector"
+          },
+          "go-type" : 273,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 230,
+      "code" : "gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ := e.ElemGridSize(int(size))",
+      "entry" : false,
+      "use-vars" : [ 91, 63 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 40 ],
+      "in-vars" : [ 97, 101, 98, 95, 63, 89, 96, 99, 91, 70, 90, 100 ],
+      "exit" : false,
+      "out-vars" : [ 91, 70, 90, 100, 97, 98, 99, 95, 63, 102, 96, 101 ],
+      "decl-vars" : [ 102 ],
+      "line-start" : 231,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "args"
+          }
+        } ],
+        "right" : [ {
+          "declared" : {
+            "element" : {
+              "go-type" : 69,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 3,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 69,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 137,
+            "kind" : "type",
+            "type" : "slice"
+          },
+          "go-type" : 137,
+          "kind" : "literal",
+          "type" : "composite",
+          "values" : [ {
+            "coerced-to" : {
+              "go-type" : 69,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 3,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 69,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 69,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 276,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 58,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "mem",
+                  "variable" : 90
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 69,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 3,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 69,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 69,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 276,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 58,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "memB",
+                  "variable" : 89
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          }, {
+            "coerced-to" : {
+              "go-type" : 69,
+              "kind" : "type",
+              "qualifier" : {
+                "ident-kind" : "PkgName",
+                "kind" : "ident",
+                "package" : 3,
+                "value" : "unsafe"
+              },
+              "type" : "identifier",
+              "value" : {
+                "go-type" : 69,
+                "ident-kind" : "TypeName",
+                "kind" : "ident",
+                "value" : "Pointer"
+              }
+            },
+            "go-type" : 69,
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 277,
+              "kind" : "expression",
+              "operator" : "&",
+              "target" : {
+                "go-type" : 115,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "size",
+                  "variable" : 91
+                }
+              },
+              "type" : "unary"
+            },
+            "type" : "cast"
+          } ]
+        } ],
+        "type" : "define"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 235,
+      "code" : "args := []unsafe.Pointer{\n\tunsafe.Pointer(&mem),\n\tunsafe.Pointer(&memB),\n\tunsafe.Pointer(&size),\n}",
+      "entry" : false,
+      "use-vars" : [ 91, 90, 89 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 41 ],
+      "in-vars" : [ 99, 91, 95, 63, 70, 100, 97, 101, 90, 102, 96, 98 ],
+      "exit" : false,
+      "out-vars" : [ 96, 98, 99, 95, 70, 90, 102, 100, 97, 101, 91, 63 ],
+      "decl-vars" : [ ],
+      "line-start" : 236,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "gx %d, gy %d, gz %d | bx %d by %d, bz %d"
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "gridDimX",
+              "variable" : 97
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "gridDimY",
+              "variable" : 101
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "gridDimZ",
+              "variable" : 99
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "blockDimX",
+              "variable" : 98
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "blockDimY",
+              "variable" : 96
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "blockDimZ",
+              "variable" : 100
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 278,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "logf"
+            }
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 236,
+      "code" : "logf(\"gx %d, gy %d, gz %d | bx %d by %d, bz %d\", gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ)",
+      "entry" : false,
+      "use-vars" : [ 97, 101, 99, 98, 96, 100 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 42 ],
+      "in-vars" : [ 98, 99, 91, 90, 100, 96, 97, 95, 63, 70, 102, 101 ],
+      "exit" : false,
+      "out-vars" : [ 91, 95, 90, 101, 98, 99, 63, 102, 100, 96, 97 ],
+      "decl-vars" : [ ],
+      "line-start" : 237,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "CUDADO %q, Mem: %v size %v, args %v"
+            }
+          }, {
+            "go-type" : 37,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "name",
+              "variable" : 70
+            }
+          }, {
+            "go-type" : 58,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "mem",
+              "variable" : 90
+            }
+          }, {
+            "go-type" : 115,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 91
+            }
+          }, {
+            "go-type" : 137,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "args",
+              "variable" : 102
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 278,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "logf"
+            }
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 237,
+      "code" : "logf(\"CUDADO %q, Mem: %v size %v, args %v\", name, mem, size, args)",
+      "entry" : false,
+      "use-vars" : [ 102, 70, 90, 91 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 43 ],
+      "in-vars" : [ 91, 63, 90, 100, 96, 101, 98, 99, 95, 102, 97 ],
+      "exit" : false,
+      "out-vars" : [ 63, 102, 101, 98, 95, 100, 96, 97, 99 ],
+      "decl-vars" : [ ],
+      "line-start" : 238,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 37,
+            "kind" : "constant",
+            "value" : {
+              "type" : "STRING",
+              "value" : "LaunchKernel Params. mem: %v. Size %v"
+            }
+          }, {
+            "go-type" : 58,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "mem",
+              "variable" : 90
+            }
+          }, {
+            "go-type" : 115,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 91
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 278,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "logf"
+            }
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 238,
+      "code" : "logf(\"LaunchKernel Params. mem: %v. Size %v\", mem, size)",
+      "entry" : false,
+      "use-vars" : [ 90, 91 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 44 ],
+      "in-vars" : [ 99, 63, 102, 100, 97, 95, 96, 101, 98 ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 239,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 128,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fn",
+              "variable" : 95
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "gridDimX",
+              "variable" : 97
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "gridDimY",
+              "variable" : 101
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "gridDimZ",
+              "variable" : 99
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "blockDimX",
+              "variable" : 98
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "blockDimY",
+              "variable" : 96
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "blockDimZ",
+              "variable" : 100
+            }
+          }, {
+            "go-type" : 22,
+            "kind" : "constant",
+            "value" : {
+              "type" : "INT",
+              "value" : "0"
+            }
+          }, {
+            "go-type" : 70,
+            "kind" : "expression",
+            "qualifier" : {
+              "ident-kind" : "PkgName",
+              "kind" : "ident",
+              "package" : 10,
+              "value" : "cu"
+            },
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "NoStream",
+              "variable" : 104
+            }
+          }, {
+            "go-type" : 137,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "args",
+              "variable" : 102
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "field" : {
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "LaunchAndSync"
+            },
+            "go-type" : 280,
+            "kind" : "expression",
+            "target" : {
+              "field" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "c",
+                "variable" : 103
+              },
+              "go-type" : 318,
+              "kind" : "expression",
+              "target" : {
+                "go-type" : 32,
+                "kind" : "expression",
+                "type" : "identifier",
+                "value" : {
+                  "ident-kind" : "Var",
+                  "kind" : "ident",
+                  "value" : "e",
+                  "variable" : 63
+                }
+              },
+              "type" : "selector"
+            },
+            "type" : "selector"
+          },
+          "go-type" : 20,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 239,
+      "code" : "e.c.LaunchAndSync(fn, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, 0, cu.NoStream, args)",
+      "entry" : false,
+      "use-vars" : [ 102, 101, 99, 98, 100, 63, 96, 97, 95 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 240,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 240,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "// SubScalar implements tensor.Suber. It does not support safe or increment operation options and will return an error if those options are passed in\nfunc (e *Engine) SubScalar(a tensor.Tensor, b interface{}, leftTensor bool, opts ...tensor.FuncOpt) (retVal tensor.Tensor, err error) {\n\tname := constructName1(a, leftTensor, \"sub\")\n\tif !e.HasFunc(name) {\n\t\treturn nil, errors.Errorf(\"Unable to perform SubScalar(). The tensor engine does not have the function %q\", name)\n\t}\n\n\tvar bMem tensor.Memory\n\tvar ok bool\n\tif bMem, ok = b.(tensor.Memory); !ok {\n\t\treturn nil, errors.Errorf(\"b has to be a tensor.Memory. Got %T instead\", b)\n\t}\n\n\tif err = unaryCheck(a); err != nil {\n\t\treturn nil, errors.Wrap(err, \"Basic checks failed for SubScalar\")\n\t}\n\n\tvar reuse tensor.DenseTensor\n\tvar safe, toReuse bool\n\tif reuse, safe, toReuse, _, _, err = handleFuncOpts(a.Shape(), a.Dtype(), a.DataOrder(), true, opts...); err != nil {\n\t\treturn nil, errors.Wrap(err, \"Unable to handle funcOpts\")\n\t}\n\n\tvar mem, memB cu.DevicePtr\n\tvar size int64\n\n\tswitch {\n\tcase toReuse:\n\t\tmem = cu.DevicePtr(reuse.Uintptr())\n\t\tmemA := cu.DevicePtr(a.Uintptr())\n\t\tmemSize := int64(a.MemSize())\n\t\te.memcpy(mem, memA, memSize)\n\n\t\tsize = int64(logicalSize(reuse.Shape()))\n\t\tretVal = reuse\n\tcase !safe:\n\t\tmem = cu.DevicePtr(a.Uintptr())\n\t\tretVal = a\n\t\tsize = int64(logicalSize(a.Shape()))\n\tdefault:\n\t\treturn nil, errors.New(\"Impossible state: A reuse tensor must be passed in, or the operation must be unsafe. Incr and safe operations are not supported\")\n\t}\n\n\tmemB = cu.DevicePtr(bMem.Uintptr())\n\tif !leftTensor {\n\t\tmem, memB = memB, mem\n\t}\n\n\tfn := e.f[name]\n\tgridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ := e.ElemGridSize(int(size))\n\targs := []unsafe.Pointer{\n\t\tunsafe.Pointer(&mem),\n\t\tunsafe.Pointer(&memB),\n\t\tunsafe.Pointer(&size),\n\t}\n\tlogf(\"gx %d, gy %d, gz %d | bx %d by %d, bz %d\", gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ)\n\tlogf(\"CUDADO %q, Mem: %v size %v, args %v\", name, mem, size, args)\n\tlogf(\"LaunchKernel Params. mem: %v. Size %v\", mem, size)\n\te.c.LaunchAndSync(fn, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, 0, cu.NoStream, args)\n\treturn\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "SubScalar",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    }, {
+      "name" : "constructName1",
+      "package" : 0,
+      "type" : 211,
+      "exported" : false
+    }, {
+      "name" : "HasFunc",
+      "package" : 0,
+      "type" : 213,
+      "exported" : true
+    }, {
+      "name" : "Errorf",
+      "package" : 12,
+      "type" : 215,
+      "exported" : true
+    }, {
+      "name" : "unaryCheck",
+      "package" : 0,
+      "type" : 219,
+      "exported" : false
+    }, {
+      "name" : "Wrap",
+      "package" : 12,
+      "type" : 222,
+      "exported" : true
+    }, {
+      "name" : "handleFuncOpts",
+      "package" : 0,
+      "type" : 265,
+      "exported" : false
+    }, {
+      "name" : "Shape",
+      "package" : 1,
+      "type" : 158,
+      "exported" : true
+    }, {
+      "name" : "Dtype",
+      "package" : 1,
+      "type" : 100,
+      "exported" : true
+    }, {
+      "name" : "DataOrder",
+      "package" : 1,
+      "type" : 97,
+      "exported" : true
+    }, {
+      "name" : "Uintptr",
+      "package" : 1,
+      "type" : 79,
+      "exported" : true
+    }, {
+      "name" : "MemSize",
+      "package" : 1,
+      "type" : 79,
+      "exported" : true
+    }, {
+      "name" : "memcpy",
+      "package" : 0,
+      "type" : 267,
+      "exported" : false
+    }, {
+      "name" : "logicalSize",
+      "package" : 0,
+      "type" : 269,
+      "exported" : false
+    }, {
+      "name" : "New",
+      "package" : 12,
+      "type" : 271,
+      "exported" : true
+    }, {
+      "name" : "Uintptr",
+      "package" : 1,
+      "type" : 79,
+      "exported" : true
+    }, {
+      "name" : "ElemGridSize",
+      "package" : 0,
+      "type" : 274,
+      "exported" : true
+    }, {
+      "name" : "logf",
+      "package" : 0,
+      "type" : 278,
+      "exported" : false
+    }, {
+      "name" : "LaunchAndSync",
+      "package" : 10,
+      "type" : 280,
+      "exported" : true
+    } ],
+    "line-end" : 241,
+    "line-start" : 182,
+    "names" : [ "SubScalar" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "cuda",
+      "path" : "gorgonia.org/gorgonia/cuda"
+    }, {
+      "name" : "tensor",
+      "path" : "gorgonia.org/tensor"
+    }, {
+      "name" : "reflect",
+      "path" : "reflect"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    }, {
+      "name" : "fmt",
+      "path" : "fmt"
+    }, {
+      "name" : "gob",
+      "path" : "encoding/gob"
+    }, {
+      "name" : "io",
+      "path" : "io"
+    }, {
+      "name" : "storage",
+      "path" : "gorgonia.org/tensor/internal/storage"
+    }, {
+      "name" : "sync",
+      "path" : "sync"
+    }, {
+      "name" : "cublas",
+      "path" : "gorgonia.org/cu/blas"
+    }, {
+      "name" : "cu",
+      "path" : "gorgonia.org/cu"
+    }, {
+      "name" : "cudnn",
+      "path" : "gorgonia.org/cu/dnn"
+    }, {
+      "name" : "errors",
+      "path" : "github.com/pkg/errors"
+    } ],
+    "params" : [ 64, 65, 66, 67 ],
+    "receivers" : [ 63 ],
+    "results" : [ 68, 69 ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(a gorgonia.org/tensor.Tensor, b interface{}, leftTensor bool, opts ...gorgonia.org/tensor.FuncOpt) (retVal gorgonia.org/tensor.Tensor, err error)",
+      "params" : 1,
+      "recv" : 63,
+      "results" : 210,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "b",
+        "type" : 6
+      }, {
+        "name" : "leftTensor",
+        "type" : 14
+      }, {
+        "name" : "opts",
+        "type" : 7
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, b interface{}, leftTensor bool, opts []gorgonia.org/tensor.FuncOpt)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "local-name" : "Tensor",
+      "name" : "gorgonia.org/tensor.Tensor",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 3
+    }, {
+      "methods" : [ {
+        "name" : "Apply",
+        "type" : 4
+      }, {
+        "name" : "At",
+        "type" : 92
+      }, {
+        "name" : "Clone",
+        "type" : 95
+      }, {
+        "name" : "Data",
+        "type" : 95
+      }, {
+        "name" : "DataOrder",
+        "type" : 97
+      }, {
+        "name" : "DataSize",
+        "type" : 19
+      }, {
+        "name" : "Dims",
+        "type" : 19
+      }, {
+        "name" : "Dtype",
+        "type" : 100
+      }, {
+        "name" : "Engine",
+        "type" : 102
+      }, {
+        "name" : "Eq",
+        "type" : 126
+      }, {
+        "name" : "Format",
+        "type" : 127
+      }, {
+        "name" : "GobDecode",
+        "type" : 142
+      }, {
+        "name" : "GobEncode",
+        "type" : 144
+      }, {
+        "name" : "IsManuallyManaged",
+        "type" : 29
+      }, {
+        "name" : "IsNativelyAccessible",
+        "type" : 29
+      }, {
+        "name" : "IsScalar",
+        "type" : 29
+      }, {
+        "name" : "Iterator",
+        "type" : 146
+      }, {
+        "name" : "MemSize",
+        "type" : 79
+      }, {
+        "name" : "Memset",
+        "type" : 161
+      }, {
+        "name" : "Pointer",
+        "type" : 110
+      }, {
+        "name" : "ReadNpy",
+        "type" : 162
+      }, {
+        "name" : "RequiresIterator",
+        "type" : 29
+      }, {
+        "name" : "Reshape",
+        "type" : 168
+      }, {
+        "name" : "ScalarValue",
+        "type" : 95
+      }, {
+        "name" : "SetAt",
+        "type" : 169
+      }, {
+        "name" : "Shape",
+        "type" : 158
+      }, {
+        "name" : "Size",
+        "type" : 19
+      }, {
+        "name" : "Slice",
+        "type" : 171
+      }, {
+        "name" : "Strides",
+        "type" : 150
+      }, {
+        "name" : "String",
+        "type" : 78
+      }, {
+        "name" : "T",
+        "type" : 181
+      }, {
+        "name" : "Transpose",
+        "type" : 183
+      }, {
+        "name" : "UT",
+        "type" : 157
+      }, {
+        "name" : "Uintptr",
+        "type" : 79
+      }, {
+        "name" : "WriteNpy",
+        "type" : 184
+      }, {
+        "name" : "Zero",
+        "type" : 157
+      }, {
+        "name" : "arr",
+        "type" : 188
+      }, {
+        "name" : "arrPtr",
+        "type" : 14
+      }, {
+        "name" : "hdr",
+        "type" : 194
+      }, {
+        "name" : "standardEngine",
+        "type" : 197
+      } ],
+      "name" : "interface{Apply(fn interface{}, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error); At(...int) (interface{}, error); DataOrder() gorgonia.org/tensor.DataOrder; DataSize() int; Dims() int; Dtype() gorgonia.org/tensor.Dtype; Engine() gorgonia.org/tensor.Engine; IsManuallyManaged() bool; IsNativelyAccessible() bool; IsScalar() bool; Iterator() gorgonia.org/tensor.Iterator; MemSize() uintptr; Pointer() unsafe.Pointer; ReadNpy(io.Reader) error; RequiresIterator() bool; Reshape(...int) error; ScalarValue() interface{}; SetAt(v interface{}, coord ...int) error; Shape() gorgonia.org/tensor.Shape; Size() int; Strides() []int; T(axes ...int) error; Transpose() error; UT(); Uintptr() uintptr; WriteNpy(io.Writer) error; standardEngine() gorgonia.org/tensor.standardEngine; gorgonia.org/tensor.Cloner; gorgonia.org/tensor.Dataer; gorgonia.org/tensor.Eq; fmt.Formatter; encoding/gob.GobDecoder; encoding/gob.GobEncoder; gorgonia.org/tensor.MemSetter; gorgonia.org/tensor.Slicer; fmt.Stringer; gorgonia.org/tensor.Zeroer; gorgonia.org/tensor.arrayer; gorgonia.org/tensor.headerer}",
+      "type" : "Interface",
+      "underlying" : 3
+    }, {
+      "name" : "func(fn interface{}, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error)",
+      "params" : 5,
+      "recv" : 17,
+      "results" : 89,
+      "type" : "Signature",
+      "underlying" : 4,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "fn",
+        "type" : 6
+      }, {
+        "name" : "opts",
+        "type" : 7
+      } ],
+      "name" : "(fn interface{}, opts []gorgonia.org/tensor.FuncOpt)",
+      "type" : "Tuple",
+      "underlying" : 5
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 6
+    }, {
+      "elem" : 8,
+      "name" : "[]gorgonia.org/tensor.FuncOpt",
+      "type" : "Slice",
+      "underlying" : 7
+    }, {
+      "local-name" : "FuncOpt",
+      "name" : "gorgonia.org/tensor.FuncOpt",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "name" : "func(*gorgonia.org/tensor.OpOpt)",
+      "params" : 10,
+      "recv" : -1,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 9,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 11
+      } ],
+      "name" : "(*gorgonia.org/tensor.OpOpt)",
+      "type" : "Tuple",
+      "underlying" : 10
+    }, {
+      "elem" : 12,
+      "name" : "*gorgonia.org/tensor.OpOpt",
+      "type" : "Pointer",
+      "underlying" : 11
+    }, {
+      "local-name" : "OpOpt",
+      "name" : "gorgonia.org/tensor.OpOpt",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "fields" : [ {
+        "name" : "reuse",
+        "type" : 2
+      }, {
+        "name" : "incr",
+        "type" : 2
+      }, {
+        "name" : "unsafe",
+        "type" : 14
+      }, {
+        "name" : "same",
+        "type" : 14
+      }, {
+        "name" : "t",
+        "type" : 15
+      } ],
+      "name" : "struct{reuse gorgonia.org/tensor.Tensor; incr gorgonia.org/tensor.Tensor; unsafe bool; same bool; t gorgonia.org/tensor.Dtype}",
+      "type" : "Struct",
+      "underlying" : 13
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "local-name" : "Dtype",
+      "name" : "gorgonia.org/tensor.Dtype",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 16
+    }, {
+      "fields" : [ {
+        "name" : "Type",
+        "type" : 17
+      } ],
+      "name" : "struct{reflect.Type}",
+      "type" : "Struct",
+      "underlying" : 16
+    }, {
+      "local-name" : "Type",
+      "name" : "reflect.Type",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "methods" : [ {
+        "name" : "Align",
+        "type" : 19
+      }, {
+        "name" : "AssignableTo",
+        "type" : 23
+      }, {
+        "name" : "Bits",
+        "type" : 19
+      }, {
+        "name" : "ChanDir",
+        "type" : 26
+      }, {
+        "name" : "Comparable",
+        "type" : 29
+      }, {
+        "name" : "ConvertibleTo",
+        "type" : 23
+      }, {
+        "name" : "Elem",
+        "type" : 30
+      }, {
+        "name" : "Field",
+        "type" : 32
+      }, {
+        "name" : "FieldAlign",
+        "type" : 19
+      }, {
+        "name" : "FieldByIndex",
+        "type" : 41
+      }, {
+        "name" : "FieldByName",
+        "type" : 43
+      }, {
+        "name" : "FieldByNameFunc",
+        "type" : 46
+      }, {
+        "name" : "Implements",
+        "type" : 23
+      }, {
+        "name" : "In",
+        "type" : 50
+      }, {
+        "name" : "IsVariadic",
+        "type" : 29
+      }, {
+        "name" : "Key",
+        "type" : 30
+      }, {
+        "name" : "Kind",
+        "type" : 51
+      }, {
+        "name" : "Len",
+        "type" : 19
+      }, {
+        "name" : "Method",
+        "type" : 55
+      }, {
+        "name" : "MethodByName",
+        "type" : 76
+      }, {
+        "name" : "Name",
+        "type" : 78
+      }, {
+        "name" : "NumField",
+        "type" : 19
+      }, {
+        "name" : "NumIn",
+        "type" : 19
+      }, {
+        "name" : "NumMethod",
+        "type" : 19
+      }, {
+        "name" : "NumOut",
+        "type" : 19
+      }, {
+        "name" : "Out",
+        "type" : 50
+      }, {
+        "name" : "PkgPath",
+        "type" : 78
+      }, {
+        "name" : "Size",
+        "type" : 79
+      }, {
+        "name" : "String",
+        "type" : 78
+      }, {
+        "name" : "common",
+        "type" : 81
+      }, {
+        "name" : "uncommon",
+        "type" : 83
+      } ],
+      "name" : "interface{Align() int; AssignableTo(u reflect.Type) bool; Bits() int; ChanDir() reflect.ChanDir; Comparable() bool; ConvertibleTo(u reflect.Type) bool; Elem() reflect.Type; Field(i int) reflect.StructField; FieldAlign() int; FieldByIndex(index []int) reflect.StructField; FieldByName(name string) (reflect.StructField, bool); FieldByNameFunc(match func(string) bool) (reflect.StructField, bool); Implements(u reflect.Type) bool; In(i int) reflect.Type; IsVariadic() bool; Key() reflect.Type; Kind() reflect.Kind; Len() int; Method(int) reflect.Method; MethodByName(string) (reflect.Method, bool); Name() string; NumField() int; NumIn() int; NumMethod() int; NumOut() int; Out(i int) reflect.Type; PkgPath() string; Size() uintptr; String() string; common() *reflect.rtype; uncommon() *reflect.uncommonType}",
+      "type" : "Interface",
+      "underlying" : 18
+    }, {
+      "name" : "func() int",
+      "params" : 20,
+      "recv" : 0,
+      "results" : 21,
+      "type" : "Signature",
+      "underlying" : 19,
+      "variadic" : false
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 20
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 21
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 22
+    }, {
+      "name" : "func(u reflect.Type) bool",
+      "params" : 24,
+      "recv" : 1,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 23,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "u",
+        "type" : 17
+      } ],
+      "name" : "(u reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 14
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 25
+    }, {
+      "name" : "func() reflect.ChanDir",
+      "params" : 20,
+      "recv" : 2,
+      "results" : 27,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 28
+      } ],
+      "name" : "(reflect.ChanDir)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "local-name" : "ChanDir",
+      "name" : "reflect.ChanDir",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "name" : "func() bool",
+      "params" : 20,
+      "recv" : 3,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : false
+    }, {
+      "name" : "func() reflect.Type",
+      "params" : 20,
+      "recv" : 4,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 30,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 17
+      } ],
+      "name" : "(reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 31
+    }, {
+      "name" : "func(i int) reflect.StructField",
+      "params" : 33,
+      "recv" : 5,
+      "results" : 34,
+      "type" : "Signature",
+      "underlying" : 32,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 22
+      } ],
+      "name" : "(i int)",
+      "type" : "Tuple",
+      "underlying" : 33
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 35
+      } ],
+      "name" : "(reflect.StructField)",
+      "type" : "Tuple",
+      "underlying" : 34
+    }, {
+      "local-name" : "StructField",
+      "name" : "reflect.StructField",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 36
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 37
+      }, {
+        "name" : "PkgPath",
+        "type" : 37
+      }, {
+        "name" : "Type",
+        "type" : 17
+      }, {
+        "name" : "Tag",
+        "type" : 38
+      }, {
+        "name" : "Offset",
+        "type" : 39
+      }, {
+        "name" : "Index",
+        "type" : 40
+      }, {
+        "name" : "Anonymous",
+        "type" : 14
+      } ],
+      "name" : "struct{Name string; PkgPath string; Type reflect.Type; Tag reflect.StructTag; Offset uintptr; Index []int; Anonymous bool}",
+      "type" : "Struct",
+      "underlying" : 36
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 37
+    }, {
+      "local-name" : "StructTag",
+      "name" : "reflect.StructTag",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 37
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 39
+    }, {
+      "elem" : 22,
+      "name" : "[]int",
+      "type" : "Slice",
+      "underlying" : 40
+    }, {
+      "name" : "func(index []int) reflect.StructField",
+      "params" : 42,
+      "recv" : 6,
+      "results" : 34,
+      "type" : "Signature",
+      "underlying" : 41,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "index",
+        "type" : 40
+      } ],
+      "name" : "(index []int)",
+      "type" : "Tuple",
+      "underlying" : 42
+    }, {
+      "name" : "func(name string) (reflect.StructField, bool)",
+      "params" : 44,
+      "recv" : 7,
+      "results" : 45,
+      "type" : "Signature",
+      "underlying" : 43,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 37
+      } ],
+      "name" : "(name string)",
+      "type" : "Tuple",
+      "underlying" : 44
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 35
+      }, {
+        "name" : "",
+        "type" : 14
+      } ],
+      "name" : "(reflect.StructField, bool)",
+      "type" : "Tuple",
+      "underlying" : 45
+    }, {
+      "name" : "func(match func(string) bool) (reflect.StructField, bool)",
+      "params" : 47,
+      "recv" : 8,
+      "results" : 45,
+      "type" : "Signature",
+      "underlying" : 46,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "match",
+        "type" : 48
+      } ],
+      "name" : "(match func(string) bool)",
+      "type" : "Tuple",
+      "underlying" : 47
+    }, {
+      "name" : "func(string) bool",
+      "params" : 49,
+      "recv" : -1,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 48,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 37
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "name" : "func(i int) reflect.Type",
+      "params" : 33,
+      "recv" : 9,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 50,
+      "variadic" : false
+    }, {
+      "name" : "func() reflect.Kind",
+      "params" : 20,
+      "recv" : 10,
+      "results" : 52,
+      "type" : "Signature",
+      "underlying" : 51,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 53
+      } ],
+      "name" : "(reflect.Kind)",
+      "type" : "Tuple",
+      "underlying" : 52
+    }, {
+      "local-name" : "Kind",
+      "name" : "reflect.Kind",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 54
+    }, {
+      "name" : "func(int) reflect.Method",
+      "params" : 21,
+      "recv" : 11,
+      "results" : 56,
+      "type" : "Signature",
+      "underlying" : 55,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 57
+      } ],
+      "name" : "(reflect.Method)",
+      "type" : "Tuple",
+      "underlying" : 56
+    }, {
+      "local-name" : "Method",
+      "name" : "reflect.Method",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 58
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 37
+      }, {
+        "name" : "PkgPath",
+        "type" : 37
+      }, {
+        "name" : "Type",
+        "type" : 17
+      }, {
+        "name" : "Func",
+        "type" : 59
+      }, {
+        "name" : "Index",
+        "type" : 22
+      } ],
+      "name" : "struct{Name string; PkgPath string; Type reflect.Type; Func reflect.Value; Index int}",
+      "type" : "Struct",
+      "underlying" : 58
+    }, {
+      "local-name" : "Value",
+      "name" : "reflect.Value",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 60
+    }, {
+      "fields" : [ {
+        "name" : "typ",
+        "type" : 61
+      }, {
+        "name" : "ptr",
+        "type" : 69
+      }, {
+        "name" : "flag",
+        "type" : 75
+      } ],
+      "name" : "struct{typ *reflect.rtype; ptr unsafe.Pointer; reflect.flag}",
+      "type" : "Struct",
+      "underlying" : 60
+    }, {
+      "elem" : 62,
+      "name" : "*reflect.rtype",
+      "type" : "Pointer",
+      "underlying" : 61
+    }, {
+      "local-name" : "rtype",
+      "name" : "reflect.rtype",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 63
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 39
+      }, {
+        "name" : "ptrdata",
+        "type" : 39
+      }, {
+        "name" : "hash",
+        "type" : 64
+      }, {
+        "name" : "tflag",
+        "type" : 65
+      }, {
+        "name" : "align",
+        "type" : 66
+      }, {
+        "name" : "fieldAlign",
+        "type" : 66
+      }, {
+        "name" : "kind",
+        "type" : 66
+      }, {
+        "name" : "equal",
+        "type" : 67
+      }, {
+        "name" : "gcdata",
+        "type" : 70
+      }, {
+        "name" : "str",
+        "type" : 72
+      }, {
+        "name" : "ptrToThis",
+        "type" : 74
+      } ],
+      "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag reflect.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str reflect.nameOff; ptrToThis reflect.typeOff}",
+      "type" : "Struct",
+      "underlying" : 63
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 64
+    }, {
+      "local-name" : "tflag",
+      "name" : "reflect.tflag",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 66
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 66
+    }, {
+      "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
+      "params" : 68,
+      "recv" : -1,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 67,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 69
+      }, {
+        "name" : "",
+        "type" : 69
+      } ],
+      "name" : "(unsafe.Pointer, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 68
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 3,
+      "type" : "Basic",
+      "underlying" : 69
+    }, {
+      "elem" : 71,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 70
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 71
+    }, {
+      "local-name" : "nameOff",
+      "name" : "reflect.nameOff",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 73
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 73
+    }, {
+      "local-name" : "typeOff",
+      "name" : "reflect.typeOff",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 73
+    }, {
+      "local-name" : "flag",
+      "name" : "reflect.flag",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 39
+    }, {
+      "name" : "func(string) (reflect.Method, bool)",
+      "params" : 49,
+      "recv" : 12,
+      "results" : 77,
+      "type" : "Signature",
+      "underlying" : 76,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 57
+      }, {
+        "name" : "",
+        "type" : 14
+      } ],
+      "name" : "(reflect.Method, bool)",
+      "type" : "Tuple",
+      "underlying" : 77
+    }, {
+      "name" : "func() string",
+      "params" : 20,
+      "recv" : 13,
+      "results" : 49,
+      "type" : "Signature",
+      "underlying" : 78,
+      "variadic" : false
+    }, {
+      "name" : "func() uintptr",
+      "params" : 20,
+      "recv" : 14,
+      "results" : 80,
+      "type" : "Signature",
+      "underlying" : 79,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 39
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 80
+    }, {
+      "name" : "func() *reflect.rtype",
+      "params" : 20,
+      "recv" : 15,
+      "results" : 82,
+      "type" : "Signature",
+      "underlying" : 81,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 61
+      } ],
+      "name" : "(*reflect.rtype)",
+      "type" : "Tuple",
+      "underlying" : 82
+    }, {
+      "name" : "func() *reflect.uncommonType",
+      "params" : 20,
+      "recv" : 16,
+      "results" : 84,
+      "type" : "Signature",
+      "underlying" : 83,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 85
+      } ],
+      "name" : "(*reflect.uncommonType)",
+      "type" : "Tuple",
+      "underlying" : 84
+    }, {
+      "elem" : 86,
+      "name" : "*reflect.uncommonType",
+      "type" : "Pointer",
+      "underlying" : 85
+    }, {
+      "local-name" : "uncommonType",
+      "name" : "reflect.uncommonType",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 87
+    }, {
+      "fields" : [ {
+        "name" : "pkgPath",
+        "type" : 72
+      }, {
+        "name" : "mcount",
+        "type" : 88
+      }, {
+        "name" : "xcount",
+        "type" : 88
+      }, {
+        "name" : "moff",
+        "type" : 64
+      }, {
+        "name" : "_",
+        "type" : 64
+      } ],
+      "name" : "struct{pkgPath reflect.nameOff; mcount uint16; xcount uint16; moff uint32; _ uint32}",
+      "type" : "Struct",
+      "underlying" : 87
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 88
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(gorgonia.org/tensor.Tensor, error)",
+      "type" : "Tuple",
+      "underlying" : 89
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 91
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 78
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 91
+    }, {
+      "name" : "func(...int) (interface{}, error)",
+      "params" : 93,
+      "recv" : 18,
+      "results" : 94,
+      "type" : "Signature",
+      "underlying" : 92,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 40
+      } ],
+      "name" : "([]int)",
+      "type" : "Tuple",
+      "underlying" : 93
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(interface{}, error)",
+      "type" : "Tuple",
+      "underlying" : 94
+    }, {
+      "name" : "func() interface{}",
+      "params" : 20,
+      "recv" : 19,
+      "results" : 96,
+      "type" : "Signature",
+      "underlying" : 95,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
+      "underlying" : 96
+    }, {
+      "name" : "func() gorgonia.org/tensor.DataOrder",
+      "params" : 20,
+      "recv" : 20,
+      "results" : 98,
+      "type" : "Signature",
+      "underlying" : 97,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 99
+      } ],
+      "name" : "(gorgonia.org/tensor.DataOrder)",
+      "type" : "Tuple",
+      "underlying" : 98
+    }, {
+      "local-name" : "DataOrder",
+      "name" : "gorgonia.org/tensor.DataOrder",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 71
+    }, {
+      "name" : "func() gorgonia.org/tensor.Dtype",
+      "params" : 20,
+      "recv" : 21,
+      "results" : 101,
+      "type" : "Signature",
+      "underlying" : 100,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 15
+      } ],
+      "name" : "(gorgonia.org/tensor.Dtype)",
+      "type" : "Tuple",
+      "underlying" : 101
+    }, {
+      "name" : "func() gorgonia.org/tensor.Engine",
+      "params" : 20,
+      "recv" : 30,
+      "results" : 103,
+      "type" : "Signature",
+      "underlying" : 102,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 104
+      } ],
+      "name" : "(gorgonia.org/tensor.Engine)",
+      "type" : "Tuple",
+      "underlying" : 103
+    }, {
+      "local-name" : "Engine",
+      "name" : "gorgonia.org/tensor.Engine",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 105
+    }, {
+      "methods" : [ {
+        "name" : "Accessible",
+        "type" : 106
+      }, {
+        "name" : "Alloc",
+        "type" : 113
+      }, {
+        "name" : "AllocAccessible",
+        "type" : 29
+      }, {
+        "name" : "Free",
+        "type" : 116
+      }, {
+        "name" : "Memclr",
+        "type" : 119
+      }, {
+        "name" : "Memcpy",
+        "type" : 120
+      }, {
+        "name" : "Memset",
+        "type" : 122
+      }, {
+        "name" : "WorksWith",
+        "type" : 124
+      } ],
+      "name" : "interface{Accessible(mem gorgonia.org/tensor.Memory) (gorgonia.org/tensor.Memory, error); Alloc(size int64) (gorgonia.org/tensor.Memory, error); AllocAccessible() bool; Free(mem gorgonia.org/tensor.Memory, size int64) error; Memclr(mem gorgonia.org/tensor.Memory); Memcpy(dst gorgonia.org/tensor.Memory, src gorgonia.org/tensor.Memory) error; Memset(mem gorgonia.org/tensor.Memory, val interface{}) error; WorksWith(order gorgonia.org/tensor.DataOrder) bool}",
+      "type" : "Interface",
+      "underlying" : 105
+    }, {
+      "name" : "func(mem gorgonia.org/tensor.Memory) (gorgonia.org/tensor.Memory, error)",
+      "params" : 107,
+      "recv" : 23,
+      "results" : 112,
+      "type" : "Signature",
+      "underlying" : 106,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "mem",
+        "type" : 108
+      } ],
+      "name" : "(mem gorgonia.org/tensor.Memory)",
+      "type" : "Tuple",
+      "underlying" : 107
+    }, {
+      "local-name" : "Memory",
+      "name" : "gorgonia.org/tensor.Memory",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 109
+    }, {
+      "methods" : [ {
+        "name" : "MemSize",
+        "type" : 79
+      }, {
+        "name" : "Pointer",
+        "type" : 110
+      }, {
+        "name" : "Uintptr",
+        "type" : 79
+      } ],
+      "name" : "interface{MemSize() uintptr; Pointer() unsafe.Pointer; Uintptr() uintptr}",
+      "type" : "Interface",
+      "underlying" : 109
+    }, {
+      "name" : "func() unsafe.Pointer",
+      "params" : 20,
+      "recv" : 22,
+      "results" : 111,
+      "type" : "Signature",
+      "underlying" : 110,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 69
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 111
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 108
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(gorgonia.org/tensor.Memory, error)",
+      "type" : "Tuple",
+      "underlying" : 112
+    }, {
+      "name" : "func(size int64) (gorgonia.org/tensor.Memory, error)",
+      "params" : 114,
+      "recv" : 24,
+      "results" : 112,
+      "type" : "Signature",
+      "underlying" : 113,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 115
+      } ],
+      "name" : "(size int64)",
+      "type" : "Tuple",
+      "underlying" : 114
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 115
+    }, {
+      "name" : "func(mem gorgonia.org/tensor.Memory, size int64) error",
+      "params" : 117,
+      "recv" : 25,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 116,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "mem",
+        "type" : 108
+      }, {
+        "name" : "size",
+        "type" : 115
+      } ],
+      "name" : "(mem gorgonia.org/tensor.Memory, size int64)",
+      "type" : "Tuple",
+      "underlying" : 117
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 118
+    }, {
+      "name" : "func(mem gorgonia.org/tensor.Memory)",
+      "params" : 107,
+      "recv" : 26,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 119,
+      "variadic" : false
+    }, {
+      "name" : "func(dst gorgonia.org/tensor.Memory, src gorgonia.org/tensor.Memory) error",
+      "params" : 121,
+      "recv" : 27,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 120,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "dst",
+        "type" : 108
+      }, {
+        "name" : "src",
+        "type" : 108
+      } ],
+      "name" : "(dst gorgonia.org/tensor.Memory, src gorgonia.org/tensor.Memory)",
+      "type" : "Tuple",
+      "underlying" : 121
+    }, {
+      "name" : "func(mem gorgonia.org/tensor.Memory, val interface{}) error",
+      "params" : 123,
+      "recv" : 28,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 122,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "mem",
+        "type" : 108
+      }, {
+        "name" : "val",
+        "type" : 6
+      } ],
+      "name" : "(mem gorgonia.org/tensor.Memory, val interface{})",
+      "type" : "Tuple",
+      "underlying" : 123
+    }, {
+      "name" : "func(order gorgonia.org/tensor.DataOrder) bool",
+      "params" : 125,
+      "recv" : 29,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 124,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "order",
+        "type" : 99
+      } ],
+      "name" : "(order gorgonia.org/tensor.DataOrder)",
+      "type" : "Tuple",
+      "underlying" : 125
+    }, {
+      "name" : "func(interface{}) bool",
+      "params" : 96,
+      "recv" : 31,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 126,
+      "variadic" : false
+    }, {
+      "name" : "func(f fmt.State, c rune)",
+      "params" : 128,
+      "recv" : 36,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 127,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "f",
+        "type" : 129
+      }, {
+        "name" : "c",
+        "type" : 141
+      } ],
+      "name" : "(f fmt.State, c rune)",
+      "type" : "Tuple",
+      "underlying" : 128
+    }, {
+      "local-name" : "State",
+      "name" : "fmt.State",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 130
+    }, {
+      "methods" : [ {
+        "name" : "Flag",
+        "type" : 131
+      }, {
+        "name" : "Precision",
+        "type" : 133
+      }, {
+        "name" : "Width",
+        "type" : 135
+      }, {
+        "name" : "Write",
+        "type" : 137
+      } ],
+      "name" : "interface{Flag(c int) bool; Precision() (prec int, ok bool); Width() (wid int, ok bool); Write(b []byte) (n int, err error)}",
+      "type" : "Interface",
+      "underlying" : 130
+    }, {
+      "name" : "func(c int) bool",
+      "params" : 132,
+      "recv" : 32,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 131,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "c",
+        "type" : 22
+      } ],
+      "name" : "(c int)",
+      "type" : "Tuple",
+      "underlying" : 132
+    }, {
+      "name" : "func() (prec int, ok bool)",
+      "params" : 20,
+      "recv" : 33,
+      "results" : 134,
+      "type" : "Signature",
+      "underlying" : 133,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "prec",
+        "type" : 22
+      }, {
+        "name" : "ok",
+        "type" : 14
+      } ],
+      "name" : "(prec int, ok bool)",
+      "type" : "Tuple",
+      "underlying" : 134
+    }, {
+      "name" : "func() (wid int, ok bool)",
+      "params" : 20,
+      "recv" : 34,
+      "results" : 136,
+      "type" : "Signature",
+      "underlying" : 135,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "wid",
+        "type" : 22
+      }, {
+        "name" : "ok",
+        "type" : 14
+      } ],
+      "name" : "(wid int, ok bool)",
+      "type" : "Tuple",
+      "underlying" : 136
+    }, {
+      "name" : "func(b []byte) (n int, err error)",
+      "params" : 138,
+      "recv" : 35,
+      "results" : 140,
+      "type" : "Signature",
+      "underlying" : 137,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "b",
+        "type" : 139
+      } ],
+      "name" : "(b []byte)",
+      "type" : "Tuple",
+      "underlying" : 138
+    }, {
+      "elem" : 71,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 139
+    }, {
+      "fields" : [ {
+        "name" : "n",
+        "type" : 22
+      }, {
+        "name" : "err",
+        "type" : 90
+      } ],
+      "name" : "(n int, err error)",
+      "type" : "Tuple",
+      "underlying" : 140
+    }, {
+      "name" : "rune",
+      "type" : "Basic",
+      "underlying" : 141
+    }, {
+      "name" : "func([]byte) error",
+      "params" : 143,
+      "recv" : 37,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 142,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 139
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 143
+    }, {
+      "name" : "func() ([]byte, error)",
+      "params" : 20,
+      "recv" : 38,
+      "results" : 145,
+      "type" : "Signature",
+      "underlying" : 144,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 139
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "([]byte, error)",
+      "type" : "Tuple",
+      "underlying" : 145
+    }, {
+      "name" : "func() gorgonia.org/tensor.Iterator",
+      "params" : 20,
+      "recv" : 45,
+      "results" : 147,
+      "type" : "Signature",
+      "underlying" : 146,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 148
+      } ],
+      "name" : "(gorgonia.org/tensor.Iterator)",
+      "type" : "Tuple",
+      "underlying" : 147
+    }, {
+      "local-name" : "Iterator",
+      "name" : "gorgonia.org/tensor.Iterator",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 149
+    }, {
+      "methods" : [ {
+        "name" : "Coord",
+        "type" : 150
+      }, {
+        "name" : "Done",
+        "type" : 29
+      }, {
+        "name" : "Next",
+        "type" : 151
+      }, {
+        "name" : "NextInvalid",
+        "type" : 153
+      }, {
+        "name" : "NextValid",
+        "type" : 153
+      }, {
+        "name" : "NextValidity",
+        "type" : 155
+      }, {
+        "name" : "Reset",
+        "type" : 157
+      }, {
+        "name" : "SetForward",
+        "type" : 157
+      }, {
+        "name" : "SetReverse",
+        "type" : 157
+      }, {
+        "name" : "Shape",
+        "type" : 158
+      }, {
+        "name" : "Start",
+        "type" : 151
+      } ],
+      "name" : "interface{Coord() []int; Done() bool; Next() (int, error); NextInvalid() (int, int, error); NextValid() (int, int, error); NextValidity() (int, bool, error); Reset(); SetForward(); SetReverse(); Shape() gorgonia.org/tensor.Shape; Start() (int, error)}",
+      "type" : "Interface",
+      "underlying" : 149
+    }, {
+      "name" : "func() []int",
+      "params" : 20,
+      "recv" : 39,
+      "results" : 93,
+      "type" : "Signature",
+      "underlying" : 150,
+      "variadic" : false
+    }, {
+      "name" : "func() (int, error)",
+      "params" : 20,
+      "recv" : 40,
+      "results" : 152,
+      "type" : "Signature",
+      "underlying" : 151,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(int, error)",
+      "type" : "Tuple",
+      "underlying" : 152
+    }, {
+      "name" : "func() (int, int, error)",
+      "params" : 20,
+      "recv" : 41,
+      "results" : 154,
+      "type" : "Signature",
+      "underlying" : 153,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      }, {
+        "name" : "",
+        "type" : 22
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(int, int, error)",
+      "type" : "Tuple",
+      "underlying" : 154
+    }, {
+      "name" : "func() (int, bool, error)",
+      "params" : 20,
+      "recv" : 42,
+      "results" : 156,
+      "type" : "Signature",
+      "underlying" : 155,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      }, {
+        "name" : "",
+        "type" : 14
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(int, bool, error)",
+      "type" : "Tuple",
+      "underlying" : 156
+    }, {
+      "name" : "func()",
+      "params" : 20,
+      "recv" : 43,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 157,
+      "variadic" : false
+    }, {
+      "name" : "func() gorgonia.org/tensor.Shape",
+      "params" : 20,
+      "recv" : 44,
+      "results" : 159,
+      "type" : "Signature",
+      "underlying" : 158,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 160
+      } ],
+      "name" : "(gorgonia.org/tensor.Shape)",
+      "type" : "Tuple",
+      "underlying" : 159
+    }, {
+      "local-name" : "Shape",
+      "name" : "gorgonia.org/tensor.Shape",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 40
+    }, {
+      "name" : "func(interface{}) error",
+      "params" : 96,
+      "recv" : 46,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 161,
+      "variadic" : false
+    }, {
+      "name" : "func(io.Reader) error",
+      "params" : 163,
+      "recv" : 48,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 162,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 164
+      } ],
+      "name" : "(io.Reader)",
+      "type" : "Tuple",
+      "underlying" : 163
+    }, {
+      "local-name" : "Reader",
+      "name" : "io.Reader",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 165
+    }, {
+      "methods" : [ {
+        "name" : "Read",
+        "type" : 166
+      } ],
+      "name" : "interface{Read(p []byte) (n int, err error)}",
+      "type" : "Interface",
+      "underlying" : 165
+    }, {
+      "name" : "func(p []byte) (n int, err error)",
+      "params" : 167,
+      "recv" : 47,
+      "results" : 140,
+      "type" : "Signature",
+      "underlying" : 166,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 139
+      } ],
+      "name" : "(p []byte)",
+      "type" : "Tuple",
+      "underlying" : 167
+    }, {
+      "name" : "func(...int) error",
+      "params" : 93,
+      "recv" : 49,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 168,
+      "variadic" : true
+    }, {
+      "name" : "func(v interface{}, coord ...int) error",
+      "params" : 170,
+      "recv" : 50,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 169,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "v",
+        "type" : 6
+      }, {
+        "name" : "coord",
+        "type" : 40
+      } ],
+      "name" : "(v interface{}, coord []int)",
+      "type" : "Tuple",
+      "underlying" : 170
+    }, {
+      "name" : "func(...gorgonia.org/tensor.Slice) (gorgonia.org/tensor.View, error)",
+      "params" : 172,
+      "recv" : 62,
+      "results" : 176,
+      "type" : "Signature",
+      "underlying" : 171,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 173
+      } ],
+      "name" : "([]gorgonia.org/tensor.Slice)",
+      "type" : "Tuple",
+      "underlying" : 172
+    }, {
+      "elem" : 174,
+      "name" : "[]gorgonia.org/tensor.Slice",
+      "type" : "Slice",
+      "underlying" : 173
+    }, {
+      "local-name" : "Slice",
+      "name" : "gorgonia.org/tensor.Slice",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 175
+    }, {
+      "methods" : [ {
+        "name" : "End",
+        "type" : 19
+      }, {
+        "name" : "Start",
+        "type" : 19
+      }, {
+        "name" : "Step",
+        "type" : 19
+      } ],
+      "name" : "interface{End() int; Start() int; Step() int}",
+      "type" : "Interface",
+      "underlying" : 175
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 177
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(gorgonia.org/tensor.View, error)",
+      "type" : "Tuple",
+      "underlying" : 176
+    }, {
+      "local-name" : "View",
+      "name" : "gorgonia.org/tensor.View",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 178
+    }, {
+      "methods" : [ {
+        "name" : "Apply",
+        "type" : 4
+      }, {
+        "name" : "At",
+        "type" : 92
+      }, {
+        "name" : "Clone",
+        "type" : 95
+      }, {
+        "name" : "Data",
+        "type" : 95
+      }, {
+        "name" : "DataOrder",
+        "type" : 97
+      }, {
+        "name" : "DataSize",
+        "type" : 19
+      }, {
+        "name" : "Dims",
+        "type" : 19
+      }, {
+        "name" : "Dtype",
+        "type" : 100
+      }, {
+        "name" : "Engine",
+        "type" : 102
+      }, {
+        "name" : "Eq",
+        "type" : 126
+      }, {
+        "name" : "Format",
+        "type" : 127
+      }, {
+        "name" : "GobDecode",
+        "type" : 142
+      }, {
+        "name" : "GobEncode",
+        "type" : 144
+      }, {
+        "name" : "IsManuallyManaged",
+        "type" : 29
+      }, {
+        "name" : "IsMaterializable",
+        "type" : 29
+      }, {
+        "name" : "IsNativelyAccessible",
+        "type" : 29
+      }, {
+        "name" : "IsScalar",
+        "type" : 29
+      }, {
+        "name" : "IsView",
+        "type" : 29
+      }, {
+        "name" : "Iterator",
+        "type" : 146
+      }, {
+        "name" : "Materialize",
+        "type" : 179
+      }, {
+        "name" : "MemSize",
+        "type" : 79
+      }, {
+        "name" : "Memset",
+        "type" : 161
+      }, {
+        "name" : "Pointer",
+        "type" : 110
+      }, {
+        "name" : "ReadNpy",
+        "type" : 162
+      }, {
+        "name" : "RequiresIterator",
+        "type" : 29
+      }, {
+        "name" : "Reshape",
+        "type" : 168
+      }, {
+        "name" : "ScalarValue",
+        "type" : 95
+      }, {
+        "name" : "SetAt",
+        "type" : 169
+      }, {
+        "name" : "Shape",
+        "type" : 158
+      }, {
+        "name" : "Size",
+        "type" : 19
+      }, {
+        "name" : "Slice",
+        "type" : 171
+      }, {
+        "name" : "Strides",
+        "type" : 150
+      }, {
+        "name" : "String",
+        "type" : 78
+      }, {
+        "name" : "T",
+        "type" : 181
+      }, {
+        "name" : "Transpose",
+        "type" : 183
+      }, {
+        "name" : "UT",
+        "type" : 157
+      }, {
+        "name" : "Uintptr",
+        "type" : 79
+      }, {
+        "name" : "WriteNpy",
+        "type" : 184
+      }, {
+        "name" : "Zero",
+        "type" : 157
+      }, {
+        "name" : "arr",
+        "type" : 188
+      }, {
+        "name" : "arrPtr",
+        "type" : 14
+      }, {
+        "name" : "hdr",
+        "type" : 194
+      }, {
+        "name" : "standardEngine",
+        "type" : 197
+      } ],
+      "name" : "interface{IsMaterializable() bool; IsView() bool; Materialize() gorgonia.org/tensor.Tensor; gorgonia.org/tensor.Tensor}",
+      "type" : "Interface",
+      "underlying" : 178
+    }, {
+      "name" : "func() gorgonia.org/tensor.Tensor",
+      "params" : 20,
+      "recv" : 51,
+      "results" : 180,
+      "type" : "Signature",
+      "underlying" : 179,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(gorgonia.org/tensor.Tensor)",
+      "type" : "Tuple",
+      "underlying" : 180
+    }, {
+      "name" : "func(axes ...int) error",
+      "params" : 182,
+      "recv" : 52,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 181,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "axes",
+        "type" : 40
+      } ],
+      "name" : "(axes []int)",
+      "type" : "Tuple",
+      "underlying" : 182
+    }, {
+      "name" : "func() error",
+      "params" : 20,
+      "recv" : 53,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 183,
+      "variadic" : false
+    }, {
+      "name" : "func(io.Writer) error",
+      "params" : 185,
+      "recv" : 54,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 184,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 186
+      } ],
+      "name" : "(io.Writer)",
+      "type" : "Tuple",
+      "underlying" : 185
+    }, {
+      "local-name" : "Writer",
+      "name" : "io.Writer",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 187
+    }, {
+      "methods" : [ {
+        "name" : "Write",
+        "type" : 166
+      } ],
+      "name" : "interface{Write(p []byte) (n int, err error)}",
+      "type" : "Interface",
+      "underlying" : 187
+    }, {
+      "name" : "func() gorgonia.org/tensor.array",
+      "params" : 20,
+      "recv" : 55,
+      "results" : 189,
+      "type" : "Signature",
+      "underlying" : 188,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 190
+      } ],
+      "name" : "(gorgonia.org/tensor.array)",
+      "type" : "Tuple",
+      "underlying" : 189
+    }, {
+      "local-name" : "array",
+      "name" : "gorgonia.org/tensor.array",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 191
+    }, {
+      "fields" : [ {
+        "name" : "Header",
+        "type" : 192
+      }, {
+        "name" : "t",
+        "type" : 15
+      }, {
+        "name" : "v",
+        "type" : 6
+      } ],
+      "name" : "struct{gorgonia.org/tensor/internal/storage.Header; t gorgonia.org/tensor.Dtype; v interface{}}",
+      "type" : "Struct",
+      "underlying" : 191
+    }, {
+      "local-name" : "Header",
+      "name" : "gorgonia.org/tensor/internal/storage.Header",
+      "package" : 7,
+      "type" : "Named",
+      "underlying" : 193
+    }, {
+      "fields" : [ {
+        "name" : "Ptr",
+        "type" : 69
+      }, {
+        "name" : "L",
+        "type" : 22
+      }, {
+        "name" : "C",
+        "type" : 22
+      } ],
+      "name" : "struct{Ptr unsafe.Pointer; L int; C int}",
+      "type" : "Struct",
+      "underlying" : 193
+    }, {
+      "name" : "func() *gorgonia.org/tensor/internal/storage.Header",
+      "params" : 20,
+      "recv" : 56,
+      "results" : 195,
+      "type" : "Signature",
+      "underlying" : 194,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 196
+      } ],
+      "name" : "(*gorgonia.org/tensor/internal/storage.Header)",
+      "type" : "Tuple",
+      "underlying" : 195
+    }, {
+      "elem" : 192,
+      "name" : "*gorgonia.org/tensor/internal/storage.Header",
+      "type" : "Pointer",
+      "underlying" : 196
+    }, {
+      "name" : "func() gorgonia.org/tensor.standardEngine",
+      "params" : 20,
+      "recv" : 61,
+      "results" : 198,
+      "type" : "Signature",
+      "underlying" : 197,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 199
+      } ],
+      "name" : "(gorgonia.org/tensor.standardEngine)",
+      "type" : "Tuple",
+      "underlying" : 198
+    }, {
+      "local-name" : "standardEngine",
+      "name" : "gorgonia.org/tensor.standardEngine",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 200
+    }, {
+      "methods" : [ {
+        "name" : "Accessible",
+        "type" : 106
+      }, {
+        "name" : "Add",
+        "type" : 201
+      }, {
+        "name" : "AddScalar",
+        "type" : 21
+      }, {
+        "name" : "Alloc",
+        "type" : 113
+      }, {
+        "name" : "AllocAccessible",
+        "type" : 29
+      }, {
+        "name" : "Div",
+        "type" : 201
+      }, {
+        "name" : "DivScalar",
+        "type" : 21
+      }, {
+        "name" : "Dot",
+        "type" : 201
+      }, {
+        "name" : "ElEq",
+        "type" : 201
+      }, {
+        "name" : "ElNe",
+        "type" : 201
+      }, {
+        "name" : "EqScalar",
+        "type" : 21
+      }, {
+        "name" : "FMA",
+        "type" : 203
+      }, {
+        "name" : "FMAScalar",
+        "type" : 24
+      }, {
+        "name" : "Free",
+        "type" : 116
+      }, {
+        "name" : "Gt",
+        "type" : 201
+      }, {
+        "name" : "GtScalar",
+        "type" : 21
+      }, {
+        "name" : "Gte",
+        "type" : 201
+      }, {
+        "name" : "GteScalar",
+        "type" : 21
+      }, {
+        "name" : "Lt",
+        "type" : 201
+      }, {
+        "name" : "LtScalar",
+        "type" : 21
+      }, {
+        "name" : "Lte",
+        "type" : 201
+      }, {
+        "name" : "LteScalar",
+        "type" : 21
+      }, {
+        "name" : "MatMul",
+        "type" : 205
+      }, {
+        "name" : "MatVecMul",
+        "type" : 205
+      }, {
+        "name" : "Memclr",
+        "type" : 119
+      }, {
+        "name" : "Memcpy",
+        "type" : 120
+      }, {
+        "name" : "Memset",
+        "type" : 122
+      }, {
+        "name" : "Mod",
+        "type" : 201
+      }, {
+        "name" : "ModScalar",
+        "type" : 21
+      }, {
+        "name" : "Mul",
+        "type" : 201
+      }, {
+        "name" : "MulScalar",
+        "type" : 21
+      }, {
+        "name" : "NeScalar",
+        "type" : 21
+      }, {
+        "name" : "Outer",
+        "type" : 205
+      }, {
+        "name" : "Pow",
+        "type" : 201
+      }, {
+        "name" : "PowScalar",
+        "type" : 21
+      }, {
+        "name" : "SVD",
+        "type" : 207
+      }, {
+        "name" : "Sub",
+        "type" : 201
+      }, {
+        "name" : "SubScalar",
+        "type" : 21
+      }, {
+        "name" : "WorksWith",
+        "type" : 124
+      } ],
+      "name" : "interface{gorgonia.org/tensor.Adder; gorgonia.org/tensor.Diver; gorgonia.org/tensor.Dotter; gorgonia.org/tensor.ElEqer; gorgonia.org/tensor.Engine; gorgonia.org/tensor.FMAer; gorgonia.org/tensor.Gteer; gorgonia.org/tensor.Gter; gorgonia.org/tensor.Lteer; gorgonia.org/tensor.Lter; gorgonia.org/tensor.MatMuler; gorgonia.org/tensor.MatVecMuler; gorgonia.org/tensor.Moder; gorgonia.org/tensor.Muler; gorgonia.org/tensor.OuterProder; gorgonia.org/tensor.Power; gorgonia.org/tensor.SVDer; gorgonia.org/tensor.Suber}",
+      "type" : "Interface",
+      "underlying" : 200
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error)",
+      "params" : 202,
+      "recv" : 57,
+      "results" : 89,
+      "type" : "Signature",
+      "underlying" : 201,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "b",
+        "type" : 2
+      }, {
+        "name" : "opts",
+        "type" : 7
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, opts []gorgonia.org/tensor.FuncOpt)",
+      "type" : "Tuple",
+      "underlying" : 202
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, x gorgonia.org/tensor.Tensor, y gorgonia.org/tensor.Tensor) (gorgonia.org/tensor.Tensor, error)",
+      "params" : 204,
+      "recv" : 58,
+      "results" : 89,
+      "type" : "Signature",
+      "underlying" : 203,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "x",
+        "type" : 2
+      }, {
+        "name" : "y",
+        "type" : 2
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, x gorgonia.org/tensor.Tensor, y gorgonia.org/tensor.Tensor)",
+      "type" : "Tuple",
+      "underlying" : 204
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, preallocated gorgonia.org/tensor.Tensor) error",
+      "params" : 206,
+      "recv" : 59,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 205,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "b",
+        "type" : 2
+      }, {
+        "name" : "preallocated",
+        "type" : 2
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, preallocated gorgonia.org/tensor.Tensor)",
+      "type" : "Tuple",
+      "underlying" : 206
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, uv bool, full bool) (s gorgonia.org/tensor.Tensor, u gorgonia.org/tensor.Tensor, v gorgonia.org/tensor.Tensor, err error)",
+      "params" : 208,
+      "recv" : 60,
+      "results" : 209,
+      "type" : "Signature",
+      "underlying" : 207,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "uv",
+        "type" : 14
+      }, {
+        "name" : "full",
+        "type" : 14
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, uv bool, full bool)",
+      "type" : "Tuple",
+      "underlying" : 208
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 2
+      }, {
+        "name" : "u",
+        "type" : 2
+      }, {
+        "name" : "v",
+        "type" : 2
+      }, {
+        "name" : "err",
+        "type" : 90
+      } ],
+      "name" : "(s gorgonia.org/tensor.Tensor, u gorgonia.org/tensor.Tensor, v gorgonia.org/tensor.Tensor, err error)",
+      "type" : "Tuple",
+      "underlying" : 209
+    }, {
+      "fields" : [ {
+        "name" : "retVal",
+        "type" : 2
+      }, {
+        "name" : "err",
+        "type" : 90
+      } ],
+      "name" : "(retVal gorgonia.org/tensor.Tensor, err error)",
+      "type" : "Tuple",
+      "underlying" : 210
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, leftTensor bool, fn string) (name string)",
+      "params" : 212,
+      "recv" : -1,
+      "results" : 44,
+      "type" : "Signature",
+      "underlying" : 211,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      }, {
+        "name" : "leftTensor",
+        "type" : 14
+      }, {
+        "name" : "fn",
+        "type" : 37
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, leftTensor bool, fn string)",
+      "type" : "Tuple",
+      "underlying" : 212
+    }, {
+      "name" : "func(name string) bool",
+      "params" : 44,
+      "recv" : -1,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 213,
+      "variadic" : false
+    }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 214
+    }, {
+      "name" : "func(format string, args ...interface{}) error",
+      "params" : 216,
+      "recv" : -1,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 215,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 37
+      }, {
+        "name" : "args",
+        "type" : 217
+      } ],
+      "name" : "(format string, args []interface{})",
+      "type" : "Tuple",
+      "underlying" : 216
+    }, {
+      "elem" : 6,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 217
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 108
+      }, {
+        "name" : "",
+        "type" : 14
+      } ],
+      "name" : "(gorgonia.org/tensor.Memory, bool)",
+      "type" : "Tuple",
+      "underlying" : 218
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor) error",
+      "params" : 220,
+      "recv" : -1,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 219,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 2
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor)",
+      "type" : "Tuple",
+      "underlying" : 220
+    }, {
+      "name" : "untyped bool",
+      "type" : "Basic",
+      "underlying" : 221
+    }, {
+      "name" : "func(err error, message string) error",
+      "params" : 223,
+      "recv" : -1,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 222,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "err",
+        "type" : 90
+      }, {
+        "name" : "message",
+        "type" : 37
+      } ],
+      "name" : "(err error, message string)",
+      "type" : "Tuple",
+      "underlying" : 223
+    }, {
+      "local-name" : "unsafeMem",
+      "name" : "gorgonia.org/tensor.unsafeMem",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 225
+    }, {
+      "methods" : [ {
+        "name" : "Float32s",
+        "type" : 226
+      }, {
+        "name" : "Float64s",
+        "type" : 226
+      }, {
+        "name" : "GetF32",
+        "type" : 229
+      }, {
+        "name" : "GetF64",
+        "type" : 231
+      }, {
+        "name" : "Set",
+        "type" : 233
+      } ],
+      "name" : "interface{Float32s() []float32; Float64s() []float64; GetF32(i int) float32; GetF64(i int) float64; Set(i int, x interface{})}",
+      "type" : "Interface",
+      "underlying" : 225
+    }, {
+      "name" : "func() []float64",
+      "params" : 20,
+      "recv" : 73,
+      "results" : 227,
+      "type" : "Signature",
+      "underlying" : 226,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 228
+      } ],
+      "name" : "([]float64)",
+      "type" : "Tuple",
+      "underlying" : 227
+    }, {
+      "elem" : 115,
+      "name" : "[]float64",
+      "type" : "Slice",
+      "underlying" : 228
+    }, {
+      "name" : "func() *gorgonia.org/tensor.AP",
+      "params" : 20,
+      "recv" : 74,
+      "results" : 230,
+      "type" : "Signature",
+      "underlying" : 229,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 231
+      } ],
+      "name" : "(*gorgonia.org/tensor.AP)",
+      "type" : "Tuple",
+      "underlying" : 230
+    }, {
+      "elem" : 232,
+      "name" : "*gorgonia.org/tensor.AP",
+      "type" : "Pointer",
+      "underlying" : 231
+    }, {
+      "local-name" : "AP",
+      "name" : "gorgonia.org/tensor.AP",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 233
+    }, {
+      "fields" : [ {
+        "name" : "shape",
+        "type" : 160
+      }, {
+        "name" : "strides",
+        "type" : 40
+      }, {
+        "name" : "fin",
+        "type" : 14
+      }, {
+        "name" : "o",
+        "type" : 99
+      }, {
+        "name" : "Δ",
+        "type" : 234
+      } ],
+      "name" : "struct{shape gorgonia.org/tensor.Shape; strides []int; fin bool; o gorgonia.org/tensor.DataOrder; Δ gorgonia.org/tensor.Triangle}",
+      "type" : "Struct",
+      "underlying" : 233
+    }, {
+      "local-name" : "Triangle",
+      "name" : "gorgonia.org/tensor.Triangle",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 71
+    }, {
+      "name" : "func(other gorgonia.org/tensor.Tensor) (retVal interface{}, err error)",
+      "params" : 236,
+      "recv" : 75,
+      "results" : 237,
+      "type" : "Signature",
+      "underlying" : 235,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "other",
+        "type" : 2
+      } ],
+      "name" : "(other gorgonia.org/tensor.Tensor)",
+      "type" : "Tuple",
+      "underlying" : 236
+    }, {
+      "fields" : [ {
+        "name" : "retVal",
+        "type" : 6
+      }, {
+        "name" : "err",
+        "type" : 90
+      } ],
+      "name" : "(retVal interface{}, err error)",
+      "type" : "Tuple",
+      "underlying" : 237
+    }, {
+      "name" : "func(other gorgonia.org/tensor.Tensor, opts ...gorgonia.org/tensor.FuncOpt) (retVal *gorgonia.org/tensor.Dense, err error)",
+      "params" : 239,
+      "recv" : 76,
+      "results" : 240,
+      "type" : "Signature",
+      "underlying" : 238,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "other",
+        "type" : 2
+      }, {
+        "name" : "opts",
+        "type" : 7
+      } ],
+      "name" : "(other gorgonia.org/tensor.Tensor, opts []gorgonia.org/tensor.FuncOpt)",
+      "type" : "Tuple",
+      "underlying" : 239
+    }, {
+      "fields" : [ {
+        "name" : "retVal",
+        "type" : 241
+      }, {
+        "name" : "err",
+        "type" : 90
+      } ],
+      "name" : "(retVal *gorgonia.org/tensor.Dense, err error)",
+      "type" : "Tuple",
+      "underlying" : 240
+    }, {
+      "elem" : 242,
+      "name" : "*gorgonia.org/tensor.Dense",
+      "type" : "Pointer",
+      "underlying" : 241
+    }, {
+      "local-name" : "Dense",
+      "name" : "gorgonia.org/tensor.Dense",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 243
+    }, {
+      "fields" : [ {
+        "name" : "AP",
+        "type" : 232
+      }, {
+        "name" : "array",
+        "type" : 190
+      }, {
+        "name" : "flag",
+        "type" : 244
+      }, {
+        "name" : "e",
+        "type" : 104
+      }, {
+        "name" : "oe",
+        "type" : 199
+      }, {
+        "name" : "old",
+        "type" : 232
+      }, {
+        "name" : "transposeWith",
+        "type" : 40
+      }, {
+        "name" : "viewOf",
+        "type" : 39
+      }, {
+        "name" : "mask",
+        "type" : 245
+      }, {
+        "name" : "maskIsSoft",
+        "type" : 14
+      } ],
+      "name" : "struct{gorgonia.org/tensor.AP; gorgonia.org/tensor.array; flag gorgonia.org/tensor.MemoryFlag; e gorgonia.org/tensor.Engine; oe gorgonia.org/tensor.standardEngine; old gorgonia.org/tensor.AP; transposeWith []int; viewOf uintptr; mask []bool; maskIsSoft bool}",
+      "type" : "Struct",
+      "underlying" : 243
+    }, {
+      "local-name" : "MemoryFlag",
+      "name" : "gorgonia.org/tensor.MemoryFlag",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 71
+    }, {
+      "elem" : 14,
+      "name" : "[]bool",
+      "type" : "Slice",
+      "underlying" : 245
+    }, {
+      "name" : "func(other gorgonia.org/tensor.Tensor, axesA []int, axesB []int) (retVal *gorgonia.org/tensor.Dense, err error)",
+      "params" : 247,
+      "recv" : 77,
+      "results" : 240,
+      "type" : "Signature",
+      "underlying" : 246,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "other",
+        "type" : 2
+      }, {
+        "name" : "axesA",
+        "type" : 40
+      }, {
+        "name" : "axesB",
+        "type" : 40
+      } ],
+      "name" : "(other gorgonia.org/tensor.Tensor, axesA []int, axesB []int)",
+      "type" : "Tuple",
+      "underlying" : 247
+    }, {
+      "name" : "func() *gorgonia.org/tensor.Dense",
+      "params" : 20,
+      "recv" : 78,
+      "results" : 249,
+      "type" : "Signature",
+      "underlying" : 248,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 241
+      } ],
+      "name" : "(*gorgonia.org/tensor.Dense)",
+      "type" : "Tuple",
+      "underlying" : 249
+    }, {
+      "name" : "func(dims ...int) error",
+      "params" : 251,
+      "recv" : 79,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 250,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "dims",
+        "type" : 40
+      } ],
+      "name" : "(dims []int)",
+      "type" : "Tuple",
+      "underlying" : 251
+    }, {
+      "name" : "func(*gorgonia.org/tensor.AP)",
+      "params" : 230,
+      "recv" : 80,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 252,
+      "variadic" : false
+    }, {
+      "name" : "func(o gorgonia.org/tensor.DataOrder)",
+      "params" : 254,
+      "recv" : 81,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 253,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "o",
+        "type" : 99
+      } ],
+      "name" : "(o gorgonia.org/tensor.DataOrder)",
+      "type" : "Tuple",
+      "underlying" : 254
+    }, {
+      "name" : "func(ap *gorgonia.org/tensor.AP)",
+      "params" : 256,
+      "recv" : 82,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 255,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "ap",
+        "type" : 231
+      } ],
+      "name" : "(ap *gorgonia.org/tensor.AP)",
+      "type" : "Tuple",
+      "underlying" : 256
+    }, {
+      "name" : "func(*gorgonia.org/tensor.Dense)",
+      "params" : 249,
+      "recv" : 83,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 257,
+      "variadic" : false
+    }, {
+      "name" : "func(axis int, others ...gorgonia.org/tensor.DenseTensor) (gorgonia.org/tensor.DenseTensor, error)",
+      "params" : 259,
+      "recv" : 84,
+      "results" : 261,
+      "type" : "Signature",
+      "underlying" : 258,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "axis",
+        "type" : 22
+      }, {
+        "name" : "others",
+        "type" : 260
+      } ],
+      "name" : "(axis int, others []gorgonia.org/tensor.DenseTensor)",
+      "type" : "Tuple",
+      "underlying" : 259
+    }, {
+      "elem" : 224,
+      "name" : "[]gorgonia.org/tensor.DenseTensor",
+      "type" : "Slice",
+      "underlying" : 260
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 224
+      }, {
+        "name" : "",
+        "type" : 90
+      } ],
+      "name" : "(gorgonia.org/tensor.DenseTensor, error)",
+      "type" : "Tuple",
+      "underlying" : 261
+    }, {
+      "name" : "func(i int, transposePat []int, strides []int) int",
+      "params" : 263,
+      "recv" : 85,
+      "results" : 21,
+      "type" : "Signature",
+      "underlying" : 262,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 22
+      }, {
+        "name" : "transposePat",
+        "type" : 40
+      }, {
+        "name" : "strides",
+        "type" : 40
+      } ],
+      "name" : "(i int, transposePat []int, strides []int)",
+      "type" : "Tuple",
+      "underlying" : 263
+    }, {
+      "fields" : [ {
+        "name" : "reuse",
+        "type" : 224
+      }, {
+        "name" : "safe",
+        "type" : 14
+      }, {
+        "name" : "toReuse",
+        "type" : 14
+      }, {
+        "name" : "incr",
+        "type" : 14
+      }, {
+        "name" : "same",
+        "type" : 14
+      }, {
+        "name" : "err",
+        "type" : 90
+      } ],
+      "name" : "(reuse gorgonia.org/tensor.DenseTensor, safe bool, toReuse bool, incr bool, same bool, err error)",
+      "type" : "Tuple",
+      "underlying" : 264
+    }, {
+      "name" : "func(expShape gorgonia.org/tensor.Shape, expType gorgonia.org/tensor.Dtype, o gorgonia.org/tensor.DataOrder, strict bool, opts ...gorgonia.org/tensor.FuncOpt) (reuse gorgonia.org/tensor.DenseTensor, safe bool, toReuse bool, incr bool, same bool, err error)",
+      "params" : 266,
+      "recv" : -1,
+      "results" : 264,
+      "type" : "Signature",
+      "underlying" : 265,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "expShape",
+        "type" : 160
+      }, {
+        "name" : "expType",
+        "type" : 15
+      }, {
+        "name" : "o",
+        "type" : 99
+      }, {
+        "name" : "strict",
+        "type" : 14
+      }, {
+        "name" : "opts",
+        "type" : 7
+      } ],
+      "name" : "(expShape gorgonia.org/tensor.Shape, expType gorgonia.org/tensor.Dtype, o gorgonia.org/tensor.DataOrder, strict bool, opts []gorgonia.org/tensor.FuncOpt)",
+      "type" : "Tuple",
+      "underlying" : 266
+    }, {
+      "name" : "func(dst gorgonia.org/cu.DevicePtr, src gorgonia.org/cu.DevicePtr, size int64)",
+      "params" : 268,
+      "recv" : -1,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 267,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "dst",
+        "type" : 58
+      }, {
+        "name" : "src",
+        "type" : 58
+      }, {
+        "name" : "size",
+        "type" : 115
+      } ],
+      "name" : "(dst gorgonia.org/cu.DevicePtr, src gorgonia.org/cu.DevicePtr, size int64)",
+      "type" : "Tuple",
+      "underlying" : 268
+    }, {
+      "name" : "func(s gorgonia.org/tensor.Shape) int",
+      "params" : 270,
+      "recv" : -1,
+      "results" : 21,
+      "type" : "Signature",
+      "underlying" : 269,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "s",
+        "type" : 160
+      } ],
+      "name" : "(s gorgonia.org/tensor.Shape)",
+      "type" : "Tuple",
+      "underlying" : 270
+    }, {
+      "name" : "func(message string) error",
+      "params" : 272,
+      "recv" : -1,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 271,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "message",
+        "type" : 37
+      } ],
+      "name" : "(message string)",
+      "type" : "Tuple",
+      "underlying" : 272
+    }, {
+      "fields" : [ {
+        "name" : "gridDimX",
+        "type" : 22
+      }, {
+        "name" : "gridDimY",
+        "type" : 22
+      }, {
+        "name" : "gridDimZ",
+        "type" : 22
+      }, {
+        "name" : "blockDimX",
+        "type" : 22
+      }, {
+        "name" : "blockDimY",
+        "type" : 22
+      }, {
+        "name" : "blockDimZ",
+        "type" : 22
+      } ],
+      "name" : "(gridDimX int, gridDimY int, gridDimZ int, blockDimX int, blockDimY int, blockDimZ int)",
+      "type" : "Tuple",
+      "underlying" : 273
+    }, {
+      "name" : "func(n int) (gridDimX int, gridDimY int, gridDimZ int, blockDimX int, blockDimY int, blockDimZ int)",
+      "params" : 275,
+      "recv" : -1,
+      "results" : 273,
+      "type" : "Signature",
+      "underlying" : 274,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "n",
+        "type" : 22
+      } ],
+      "name" : "(n int)",
+      "type" : "Tuple",
+      "underlying" : 275
+    }, {
+      "elem" : 58,
+      "name" : "*gorgonia.org/cu.DevicePtr",
+      "type" : "Pointer",
+      "underlying" : 276
+    }, {
+      "elem" : 115,
+      "name" : "*int64",
+      "type" : "Pointer",
+      "underlying" : 277
+    }, {
+      "name" : "func(format string, others ...interface{})",
+      "params" : 279,
+      "recv" : -1,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 278,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "format",
+        "type" : 37
+      }, {
+        "name" : "others",
+        "type" : 217
+      } ],
+      "name" : "(format string, others []interface{})",
+      "type" : "Tuple",
+      "underlying" : 279
+    }, {
+      "name" : "func(function gorgonia.org/cu.Function, gridDimX int, gridDimY int, gridDimZ int, blockDimX int, blockDimY int, blockDimZ int, sharedMemBytes int, stream gorgonia.org/cu.Stream, kernelParams []unsafe.Pointer)",
+      "params" : 281,
+      "recv" : -1,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 280,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "function",
+        "type" : 128
+      }, {
+        "name" : "gridDimX",
+        "type" : 22
+      }, {
+        "name" : "gridDimY",
+        "type" : 22
+      }, {
+        "name" : "gridDimZ",
+        "type" : 22
+      }, {
+        "name" : "blockDimX",
+        "type" : 22
+      }, {
+        "name" : "blockDimY",
+        "type" : 22
+      }, {
+        "name" : "blockDimZ",
+        "type" : 22
+      }, {
+        "name" : "sharedMemBytes",
+        "type" : 22
+      }, {
+        "name" : "stream",
+        "type" : 70
+      }, {
+        "name" : "kernelParams",
+        "type" : 137
+      } ],
+      "name" : "(function gorgonia.org/cu.Function, gridDimX int, gridDimY int, gridDimZ int, blockDimX int, blockDimY int, blockDimZ int, sharedMemBytes int, stream gorgonia.org/cu.Stream, kernelParams []unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 281
+    } ],
+    "variables" : [ {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 0,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 108,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 104,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 4,
+      "type" : 129,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 4,
+      "type" : 129,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 4,
+      "type" : 129,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 4,
+      "type" : 129,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 4,
+      "type" : 4,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 5,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 5,
+      "type" : 8,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 148,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 10,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 6,
+      "type" : 164,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 177,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 12,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 17,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 19,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 26,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 28,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 30,
+      "exported" : false
+    }, {
+      "name" : "e",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false
+    }, {
+      "name" : "a",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false
+    }, {
+      "name" : "leftTensor",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "opts",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    }, {
+      "name" : "retVal",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 90,
+      "exported" : false
+    }, {
+      "name" : "name",
+      "package" : 0,
+      "type" : 37,
+      "exported" : false
+    }, {
+      "name" : "bMem",
+      "package" : 0,
+      "type" : 108,
+      "exported" : false
+    }, {
+      "name" : "ok",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "reuse",
+      "package" : 0,
+      "type" : 224,
+      "exported" : false
+    }, {
+      "name" : "safe",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "toReuse",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false
+    }, {
+      "name" : "memB",
+      "package" : 0,
+      "type" : 58,
+      "exported" : false
+    }, {
+      "name" : "mem",
+      "package" : 0,
+      "type" : 58,
+      "exported" : false
+    }, {
+      "name" : "size",
+      "package" : 0,
+      "type" : 115,
+      "exported" : false
+    }, {
+      "name" : "memA",
+      "package" : 0,
+      "type" : 58,
+      "exported" : false
+    }, {
+      "name" : "memSize",
+      "package" : 0,
+      "type" : 115,
+      "exported" : false
+    }, {
+      "name" : "f",
+      "package" : 0,
+      "type" : 332,
+      "exported" : false
+    }, {
+      "name" : "fn",
+      "package" : 0,
+      "type" : 128,
+      "exported" : false
+    }, {
+      "name" : "blockDimY",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "gridDimX",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "blockDimX",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "gridDimZ",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "blockDimZ",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "gridDimY",
+      "package" : 0,
+      "type" : 22,
+      "exported" : false
+    }, {
+      "name" : "args",
+      "package" : 0,
+      "type" : 137,
+      "exported" : false
+    }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 318,
+      "exported" : false
+    }, {
+      "name" : "NoStream",
+      "package" : 10,
+      "type" : 70,
+      "exported" : true
+    } ]
+  },
+  "go-version" : "1.14.3"
+}

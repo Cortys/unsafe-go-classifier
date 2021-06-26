@@ -1,0 +1,286 @@
+{
+  "usage" : {
+    "file" : "generic_map.go",
+    "label1" : "delegate",
+    "label2" : "ffi",
+    "line" : "126",
+    "module" : "gorgonia.org/tensor",
+    "pkg" : "gorgonia.org/tensor/internal/execution",
+    "project" : "gorgonia/gorgonia",
+    "snippet" : "func MapUnsafePointer(fn func(unsafe.Pointer) unsafe.Pointer, a []unsafe.Pointer) {",
+    "version" : "v0.9.6"
+  },
+  "cfg" : {
+    "blocks" : [ {
+      "update-vars" : [ ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[entry]",
+      "entry" : true,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ ],
+      "in-vars" : [ ],
+      "exit" : true,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : -1,
+      "ast" : null,
+      "assign-vars" : [ ],
+      "line-end" : -1,
+      "code" : "[exit]",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 3, 4 ],
+      "in-vars" : [ 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 2, 1, 0 ],
+      "decl-vars" : [ 2 ],
+      "line-start" : 127,
+      "ast" : {
+        "is-assign" : false,
+        "key" : {
+          "go-type" : -1,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "NoKind",
+            "kind" : "ident",
+            "value" : "i"
+          }
+        },
+        "kind" : "statement",
+        "target" : {
+          "go-type" : 5,
+          "kind" : "expression",
+          "type" : "identifier",
+          "value" : {
+            "ident-kind" : "Var",
+            "kind" : "ident",
+            "value" : "a",
+            "variable" : 1
+          }
+        },
+        "type" : "range",
+        "value" : null
+      },
+      "assign-vars" : [ ],
+      "line-end" : 129,
+      "code" : "for i := range a {\n\ta[i] = fn(a[i])\n}",
+      "entry" : false,
+      "use-vars" : [ 1 ]
+    }, {
+      "update-vars" : [ 1 ],
+      "successors" : [ 2 ],
+      "in-vars" : [ 2, 1, 0 ],
+      "exit" : false,
+      "out-vars" : [ 1, 0 ],
+      "decl-vars" : [ ],
+      "line-start" : 128,
+      "ast" : {
+        "kind" : "statement",
+        "left" : [ {
+          "go-type" : 4,
+          "index" : {
+            "go-type" : 7,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "i",
+              "variable" : 2
+            }
+          },
+          "kind" : "expression",
+          "target" : {
+            "go-type" : 5,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "a",
+              "variable" : 1
+            }
+          },
+          "type" : "index"
+        } ],
+        "right" : [ {
+          "arguments" : [ {
+            "go-type" : 4,
+            "index" : {
+              "go-type" : 7,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "i",
+                "variable" : 2
+              }
+            },
+            "kind" : "expression",
+            "target" : {
+              "go-type" : 5,
+              "kind" : "expression",
+              "type" : "identifier",
+              "value" : {
+                "ident-kind" : "Var",
+                "kind" : "ident",
+                "value" : "a",
+                "variable" : 1
+              }
+            },
+            "type" : "index"
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "fn",
+              "variable" : 0
+            }
+          },
+          "go-type" : 4,
+          "kind" : "expression",
+          "type" : "call"
+        } ],
+        "type" : "assign"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 128,
+      "code" : "a[i] = fn(a[i])",
+      "entry" : false,
+      "use-vars" : [ 2, 0, 1 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 1 ],
+      "in-vars" : [ ],
+      "exit" : false,
+      "out-vars" : [ ],
+      "decl-vars" : [ ],
+      "line-start" : 130,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "return",
+        "values" : [ ]
+      },
+      "assign-vars" : [ ],
+      "line-end" : 130,
+      "code" : "return",
+      "entry" : false,
+      "use-vars" : [ ]
+    } ],
+    "code" : "func MapUnsafePointer(fn func(unsafe.Pointer) unsafe.Pointer, a []unsafe.Pointer) {\n\tfor i := range a {\n\t\ta[i] = fn(a[i])\n\t}\n\treturn\n}",
+    "defines" : [ 0 ],
+    "functions" : [ {
+      "name" : "MapUnsafePointer",
+      "package" : 0,
+      "type" : 0,
+      "exported" : true
+    } ],
+    "line-end" : 131,
+    "line-start" : 126,
+    "names" : [ "MapUnsafePointer" ],
+    "package" : 0,
+    "packages" : [ {
+      "name" : "execution",
+      "path" : "gorgonia.org/tensor/internal/execution"
+    }, {
+      "name" : "unsafe",
+      "path" : "unsafe"
+    } ],
+    "params" : [ 0, 1 ],
+    "receivers" : [ ],
+    "results" : [ ],
+    "type" : "function",
+    "types" : [ {
+      "name" : "func(fn func(unsafe.Pointer) unsafe.Pointer, a []unsafe.Pointer)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 6,
+      "type" : "Signature",
+      "underlying" : 0,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "fn",
+        "type" : 2
+      }, {
+        "name" : "a",
+        "type" : 5
+      } ],
+      "name" : "(fn func(unsafe.Pointer) unsafe.Pointer, a []unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 1
+    }, {
+      "name" : "func(unsafe.Pointer) unsafe.Pointer",
+      "params" : 3,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 2,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 3
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 4
+    }, {
+      "elem" : 4,
+      "name" : "[]unsafe.Pointer",
+      "type" : "Slice",
+      "underlying" : 5
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 6
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 7
+    } ],
+    "variables" : [ {
+      "name" : "fn",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false
+    }, {
+      "name" : "a",
+      "package" : 0,
+      "type" : 5,
+      "exported" : false
+    }, {
+      "name" : "i",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false
+    } ]
+  },
+  "go-version" : "1.14.3"
+}
