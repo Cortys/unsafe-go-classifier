@@ -89,6 +89,8 @@ def local_seed(seed):
     np.random.set_state(state)
 
 def vec_to_unit(feat):
+  if len(feat) > 0 and isinstance(feat[0], str):
+    feat = [len(f) / 10 for f in feat]
   u = 0
   for i, s in enumerate(np.clip(feat, 0, 1), 1):
     u += (2 ** -i) * s
@@ -98,6 +100,13 @@ def vec_to_unit(feat):
 def draw_graph(
   g, y=None, with_features=False, with_colors=True,
   edge_colors=False, label_colors=True, layout="spring"):
+  if layout in {"dot", "neato"}:
+    A = nx.nx_agraph.to_agraph(g)
+    A.write("/app/plots/graph.dot")
+    A.layout(layout)
+    A.draw("/app/plots/graph.png")
+    return
+
   plt.figure()
 
   if y is not None:
@@ -268,10 +277,30 @@ def cache(f, file, format="pickle"):
 
   return res
 
+
+_cache_env_default = dict(use_cache=True)
+_cache_env = _cache_env_default
+
+
+@contextlib.contextmanager
+def cache_env(**kwargs):
+  global _cache_env, _cache_env_default
+  prev_cache_env = _cache_env
+  try:
+    _cache_env = fy.merge(_cache_env_default, kwargs)
+    yield
+  finally:
+    _cache_env = prev_cache_env
+
 def cached(dir_name=None, file_name="", format="pickle"):
   def cache_annotator(f):
     @fy.wraps(f)
-    def cached_fn(*args, **kwargs):
+    def cached_fn(*args, use_cache=None, **kwargs):
+      if use_cache is None:
+        use_cache = _cache_env["use_cache"]
+      if not use_cache:
+        return f(*args, **kwargs)
+
       fn = file_name(*args, **kwargs) if callable(file_name) else file_name
       fm = format(*args, **kwargs) if callable(format) else format
       ext = "json" if fm == "pretty_json" else fm
@@ -281,3 +310,18 @@ def cached(dir_name=None, file_name="", format="pickle"):
       return cache(lambda: f(*args, **kwargs), cache_file, fm)
     return cached_fn
   return cache_annotator
+
+class memoize:
+  def __init__(self, f):
+    self.f = f
+    self.lut = {}
+
+  def __call__(self, *args):
+    key = tuple(args)
+
+    if key in self.lut:
+      return self.lut[key]
+
+    res = self.f(*args)
+    self.lut[key] = res
+    return res

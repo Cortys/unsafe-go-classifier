@@ -49,6 +49,7 @@ mkdir -p logs
 mkdir -p evaluations
 mkdir -p data
 mkdir -p raw
+mkdir -p plots
 
 docker run --gpus all --name $CONTAINER_NAME \
 	-p $JUPYTER_PORT:8888 \
