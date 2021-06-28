@@ -97,9 +97,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 5 ],
+      "in-vars" : [ 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 5 ],
+      "out-vars" : [ 5, 1, 8 ],
       "decl-vars" : [ 8 ],
       "line-start" : 299,
       "ast" : {
@@ -298,9 +298,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 5, 8, 1 ],
+      "in-vars" : [ 1, 8, 5 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 9, 5 ],
+      "out-vars" : [ 5, 1, 9, 8 ],
       "decl-vars" : [ 9 ],
       "line-start" : 303,
       "ast" : {
@@ -333,10 +333,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 9, 5, 8 ],
+      "in-vars" : [ 1, 9, 8, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 8, 10, 1 ],
-      "decl-vars" : [ 11, 12, 10 ],
+      "out-vars" : [ 10, 5, 1, 8 ],
+      "decl-vars" : [ 11, 10, 12 ],
       "line-start" : 304,
       "ast" : {
         "kind" : "statement",
@@ -516,13 +516,13 @@
       "line-end" : 304,
       "code" : "_, _, err := getsockopt(fd, SCTP_SOCKOPT_CONNECTX3, uintptr(unsafe.Pointer(&param)), uintptr(unsafe.Pointer(&optlen)))",
       "entry" : false,
-      "use-vars" : [ 8, 9, 1 ]
+      "use-vars" : [ 1, 8, 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 8 ],
-      "in-vars" : [ 8, 10, 1, 5 ],
+      "in-vars" : [ 10, 5, 1, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 10, 1, 5 ],
+      "out-vars" : [ 5, 1, 8, 10 ],
       "decl-vars" : [ ],
       "line-start" : 305,
       "ast" : {
@@ -628,9 +628,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 10, 1, 5 ],
+      "in-vars" : [ 10, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 10, 1, 5 ],
+      "out-vars" : [ 5, 1, 10 ],
       "decl-vars" : [ ],
       "line-start" : 307,
       "ast" : {
@@ -705,9 +705,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 1, 5 ],
+      "in-vars" : [ 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 10, 14 ],
+      "out-vars" : [ 14, 10 ],
       "decl-vars" : [ 10, 15, 14 ],
       "line-start" : 310,
       "ast" : {
@@ -894,7 +894,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 10, 14 ],
+      "in-vars" : [ 14, 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -944,7 +944,7 @@
       "line-end" : 311,
       "code" : "return int(r0), err",
       "entry" : false,
-      "use-vars" : [ 14, 10 ]
+      "use-vars" : [ 10, 14 ]
     } ],
     "code" : "func SCTPConnect(fd int, addr *SCTPAddr) (int, error) {\n\tbuf := addr.ToRawSockAddrBuf()\n\tparam := GetAddrsOld{\n\t\tAddrNum: int32(len(buf)),\n\t\tAddrs:   uintptr(uintptr(unsafe.Pointer(&buf[0]))),\n\t}\n\toptlen := unsafe.Sizeof(param)\n\t_, _, err := getsockopt(fd, SCTP_SOCKOPT_CONNECTX3, uintptr(unsafe.Pointer(&param)), uintptr(unsafe.Pointer(&optlen)))\n\tif err == nil {\n\t\treturn int(param.AssocID), nil\n\t} else if err != syscall.ENOPROTOOPT {\n\t\treturn 0, err\n\t}\n\tr0, _, err := setsockopt(fd, SCTP_SOCKOPT_CONNECTX, uintptr(unsafe.Pointer(&buf[0])), uintptr(len(buf)))\n\treturn int(r0), err\n}",
     "defines" : [ 0 ],
@@ -1244,82 +1244,114 @@
       "name" : "",
       "package" : -1,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fd",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "addr",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res1]",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "buf",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "AddrNum",
       "package" : 0,
       "type" : 21,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "Addrs",
       "package" : 0,
       "type" : 22,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "param",
       "package" : 0,
       "type" : 19,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "optlen",
       "package" : 0,
       "type" : 22,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 22,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 22,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "AssocID",
       "package" : 0,
       "type" : 21,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "r0",
       "package" : 0,
       "type" : 22,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 22,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

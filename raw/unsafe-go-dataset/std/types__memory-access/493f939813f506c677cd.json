@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1, 2 ],
+      "in-vars" : [ 1, 2, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3, 4 ],
       "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2 ],
+      "out-vars" : [ 2, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 280,
       "ast" : {
@@ -113,7 +113,7 @@
       "successors" : [ 5 ],
       "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 0, 1 ],
+      "out-vars" : [ 0, 1, 2, 5 ],
       "decl-vars" : [ 5 ],
       "line-start" : 283,
       "ast" : {
@@ -160,9 +160,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 5, 0, 1, 2 ],
+      "in-vars" : [ 0, 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 1, 2 ],
+      "out-vars" : [ 0, 1, 2, 5 ],
       "decl-vars" : [ ],
       "line-start" : 284,
       "ast" : {
@@ -204,9 +204,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 5, 0, 1 ],
+      "in-vars" : [ 0, 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 5, 0 ],
+      "out-vars" : [ 2, 5, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 285,
       "ast" : {
@@ -295,9 +295,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 1, 2, 5, 0 ],
+      "in-vars" : [ 0, 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 2 ],
+      "out-vars" : [ 1, 2, 5 ],
       "decl-vars" : [ ],
       "line-start" : 287,
       "ast" : {
@@ -384,7 +384,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 1, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -435,7 +435,7 @@
       "line-end" : 293,
       "code" : "return eq(x, y)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 5 ]
+      "use-vars" : [ 5, 1, 2 ]
     } ],
     "code" : "func efaceeq(t *_type, x, y unsafe.Pointer) bool {\n\tif t == nil {\n\t\treturn true\n\t}\n\teq := t.equal\n\tif eq == nil {\n\t\tpanic(errorString(\"comparing uncomparable type \" + t.string()))\n\t}\n\tif isDirectIface(t) {\n\n\t\treturn x == y\n\t}\n\treturn eq(x, y)\n}",
     "defines" : [ 0 ],
@@ -702,32 +702,44 @@
       "name" : "t",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "x",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "y",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "equal",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "eq",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

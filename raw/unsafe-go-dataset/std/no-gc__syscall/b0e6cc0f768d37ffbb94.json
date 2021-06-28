@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 4, 1, 2, 3, 5, 7, 6 ],
+      "in-vars" : [ 4, 5, 0, 1, 7, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 5, 7, 6, 0, 4, 1, 2, 3 ],
+      "out-vars" : [ 1, 7, 6, 2, 3, 4, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 5, 7, 6, 0, 4, 1, 2, 3 ],
+      "in-vars" : [ 3, 4, 5, 0, 1, 7, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 11, 12, 13 ],
-      "decl-vars" : [ 13, 11, 10, 12 ],
+      "out-vars" : [ 10, 11, 12, 13, 6 ],
+      "decl-vars" : [ 12, 13, 11, 10 ],
       "line-start" : 72,
       "ast" : {
         "kind" : "statement",
@@ -189,13 +189,13 @@
       "line-end" : 72,
       "code" : "r1, err1, p, locked := forkAndExecInChild1(argv0, argv, envv, chroot, dir, attr, sys, pipe)",
       "entry" : false,
-      "use-vars" : [ 1, 5, 6, 7, 0, 2, 3, 4 ]
+      "use-vars" : [ 4, 6, 0, 1, 7, 2, 3, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 6, 10, 11, 12, 13 ],
+      "in-vars" : [ 12, 13, 6, 10, 11 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 12, 13 ],
+      "out-vars" : [ 13, 6, 10, 11 ],
       "decl-vars" : [ ],
       "line-start" : 73,
       "ast" : {
@@ -207,7 +207,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "locked",
-            "variable" : 11
+            "variable" : 12
           }
         },
         "kind" : "statement",
@@ -217,13 +217,13 @@
       "line-end" : 75,
       "code" : "if locked {\n\truntime_AfterFork()\n}",
       "entry" : false,
-      "use-vars" : [ 11 ]
+      "use-vars" : [ 12 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 10, 12, 13, 6 ],
+      "in-vars" : [ 13, 6, 10, 11 ],
       "exit" : false,
-      "out-vars" : [ 13, 6, 10, 12 ],
+      "out-vars" : [ 13, 6, 10, 11 ],
       "decl-vars" : [ ],
       "line-start" : 74,
       "ast" : {
@@ -255,9 +255,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 13, 6, 10, 12 ],
+      "in-vars" : [ 13, 6, 10, 11 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 12, 13 ],
+      "out-vars" : [ 10, 11, 13, 6 ],
       "decl-vars" : [ ],
       "line-start" : 76,
       "ast" : {
@@ -332,9 +332,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 6, 10, 12 ],
+      "in-vars" : [ 6, 10, 11 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 8 ],
+      "out-vars" : [ 8, 10, 6 ],
       "decl-vars" : [ ],
       "line-start" : 81,
       "ast" : {
@@ -372,7 +372,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r1",
-              "variable" : 12
+              "variable" : 11
             }
           },
           "type" : "cast"
@@ -383,13 +383,13 @@
       "line-end" : 81,
       "code" : "pid = int(r1)",
       "entry" : false,
-      "use-vars" : [ 12 ]
+      "use-vars" : [ 11 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 17 ],
-      "in-vars" : [ 6, 10, 8 ],
+      "in-vars" : [ 6, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 8 ],
+      "out-vars" : [ 10, 6, 8 ],
       "decl-vars" : [ ],
       "line-start" : 83,
       "ast" : {
@@ -486,9 +486,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 6, 10, 8 ],
+      "in-vars" : [ 6, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 8 ],
+      "out-vars" : [ 6, 8, 10 ],
       "decl-vars" : [ ],
       "line-start" : 84,
       "ast" : {
@@ -543,9 +543,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 6, 10, 8 ],
+      "in-vars" : [ 6, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 19, 6, 10, 8 ],
+      "out-vars" : [ 19, 6, 8, 10 ],
       "decl-vars" : [ 19 ],
       "line-start" : 85,
       "ast" : {
@@ -586,9 +586,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 15 ],
-      "in-vars" : [ 6, 10, 8, 19 ],
+      "in-vars" : [ 19, 6, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 19, 6, 10, 8 ],
+      "out-vars" : [ 8, 10, 19, 6 ],
       "decl-vars" : [ ],
       "line-start" : 88,
       "ast" : {
@@ -653,9 +653,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14, 15 ],
-      "in-vars" : [ 19, 10, 18, 8 ],
+      "in-vars" : [ 19, 18, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 19, 10, 18, 8 ],
+      "out-vars" : [ 8, 10, 19, 18 ],
       "decl-vars" : [ ],
       "line-start" : 89,
       "ast" : {
@@ -697,9 +697,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 6, 10, 8, 19 ],
+      "in-vars" : [ 10, 19, 6, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 19, 10, 18 ],
+      "out-vars" : [ 19, 18, 8, 10 ],
       "decl-vars" : [ 18 ],
       "line-start" : 89,
       "ast" : {
@@ -761,9 +761,9 @@
     }, {
       "update-vars" : [ 19 ],
       "successors" : [ 15 ],
-      "in-vars" : [ 10, 18, 8 ],
+      "in-vars" : [ 18, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 10, 8, 19 ],
+      "out-vars" : [ 8, 10, 19 ],
       "decl-vars" : [ ],
       "line-start" : 90,
       "ast" : {
@@ -816,9 +816,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 19, 10, 8 ],
+      "in-vars" : [ 19, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 8, 10 ],
+      "out-vars" : [ 10, 8 ],
       "decl-vars" : [ ],
       "line-start" : 93,
       "ast" : {
@@ -957,7 +957,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 10, 8 ],
+      "in-vars" : [ 8, 10 ],
       "exit" : false,
       "out-vars" : [ 8 ],
       "decl-vars" : [ ],
@@ -1539,102 +1539,142 @@
       "name" : "argv0",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "argv",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "envv",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "chroot",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "dir",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "attr",
       "package" : 0,
       "type" : 5,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "sys",
       "package" : 0,
       "type" : 12,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "pipe",
       "package" : 0,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "pid",
       "package" : 0,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 27,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "p",
       "package" : 0,
       "type" : 29,
-      "exported" : false
-    }, {
-      "name" : "locked",
-      "package" : 0,
-      "type" : 20,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "r1",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "locked",
+      "package" : 0,
+      "type" : 20,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err1",
       "package" : 0,
       "type" : 27,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "UidMappings",
       "package" : 0,
       "type" : 23,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "GidMappings",
       "package" : 0,
       "type" : 23,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "",
       "package" : -1,
       "type" : 35,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "Unshareflags",
       "package" : 0,
       "type" : 11,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 35,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err2",
       "package" : 0,
       "type" : 27,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

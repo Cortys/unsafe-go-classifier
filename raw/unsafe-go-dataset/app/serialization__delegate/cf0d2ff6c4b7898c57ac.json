@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
-      "out-vars" : [ 44, 40, 42 ],
+      "out-vars" : [ 42, 44, 40 ],
       "decl-vars" : [ 44 ],
       "line-start" : 236,
       "ast" : {
@@ -90,7 +90,7 @@
               "go-type" : 34,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 177,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -114,11 +114,11 @@
       "line-end" : 236,
       "code" : "obj := encoder.valType.UnsafeIndirect(ptr)",
       "entry" : false,
-      "use-vars" : [ 41, 40 ]
+      "use-vars" : [ 40, 41 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 44, 40, 42 ],
+      "in-vars" : [ 40, 42, 44 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -141,7 +141,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 180,
+              "go-type" : 188,
               "kind" : "expression",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -187,10 +187,10 @@
                   "value" : "ctx",
                   "variable" : 45
                 },
-                "go-type" : 3,
+                "go-type" : 180,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 0,
+                  "go-type" : 177,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -215,7 +215,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 179,
+                  "go-type" : 187,
                   "kind" : "expression",
                   "qualifier" : {
                     "ident-kind" : "PkgName",
@@ -236,7 +236,7 @@
               } ],
               "ellipsis" : false,
               "function" : {
-                "go-type" : 177,
+                "go-type" : 185,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -260,7 +260,7 @@
       "line-end" : 237,
       "code" : "encoderOfMapKey(encoder.ctx, reflect2.TypeOf(obj)).Encode(reflect2.PtrOf(obj), stream)",
       "entry" : false,
-      "use-vars" : [ 40, 44, 42 ]
+      "use-vars" : [ 42, 40, 44 ]
     } ],
     "code" : "func (encoder *dynamicMapKeyEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\tobj := encoder.valType.UnsafeIndirect(ptr)\n\tencoderOfMapKey(encoder.ctx, reflect2.TypeOf(obj)).Encode(reflect2.PtrOf(obj), stream)\n}",
     "defines" : [ 0 ],
@@ -277,12 +277,12 @@
     }, {
       "name" : "encoderOfMapKey",
       "package" : 0,
-      "type" : 177,
+      "type" : 185,
       "exported" : false
     }, {
       "name" : "TypeOf",
       "package" : 5,
-      "type" : 179,
+      "type" : 187,
       "exported" : true
     }, {
       "name" : "Encode",
@@ -292,7 +292,7 @@
     }, {
       "name" : "PtrOf",
       "package" : 5,
-      "type" : 180,
+      "type" : 188,
       "exported" : true
     } ],
     "line-end" : 238,
@@ -2032,31 +2032,93 @@
       "type" : "Interface",
       "underlying" : 176
     }, {
+      "elem" : 178,
+      "name" : "*github.com/json-iterator/go.dynamicMapKeyEncoder",
+      "type" : "Pointer",
+      "underlying" : 177
+    }, {
+      "local-name" : "dynamicMapKeyEncoder",
+      "name" : "github.com/json-iterator/go.dynamicMapKeyEncoder",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 179
+    }, {
+      "fields" : [ {
+        "name" : "ctx",
+        "type" : 180
+      }, {
+        "name" : "valType",
+        "type" : 34
+      } ],
+      "name" : "struct{ctx *github.com/json-iterator/go.ctx; valType github.com/modern-go/reflect2.Type}",
+      "type" : "Struct",
+      "underlying" : 179
+    }, {
+      "elem" : 181,
+      "name" : "*github.com/json-iterator/go.ctx",
+      "type" : "Pointer",
+      "underlying" : 180
+    }, {
+      "local-name" : "ctx",
+      "name" : "github.com/json-iterator/go.ctx",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 182
+    }, {
+      "fields" : [ {
+        "name" : "frozenConfig",
+        "type" : 6
+      }, {
+        "name" : "prefix",
+        "type" : 13
+      }, {
+        "name" : "encoders",
+        "type" : 183
+      }, {
+        "name" : "decoders",
+        "type" : 184
+      } ],
+      "name" : "struct{*github.com/json-iterator/go.frozenConfig; prefix string; encoders map[github.com/modern-go/reflect2.Type]github.com/json-iterator/go.ValEncoder; decoders map[github.com/modern-go/reflect2.Type]github.com/json-iterator/go.ValDecoder}",
+      "type" : "Struct",
+      "underlying" : 182
+    }, {
+      "elem" : 139,
+      "key" : 34,
+      "name" : "map[github.com/modern-go/reflect2.Type]github.com/json-iterator/go.ValEncoder",
+      "type" : "Map",
+      "underlying" : 183
+    }, {
+      "elem" : 122,
+      "key" : 34,
+      "name" : "map[github.com/modern-go/reflect2.Type]github.com/json-iterator/go.ValDecoder",
+      "type" : "Map",
+      "underlying" : 184
+    }, {
       "name" : "func(ctx *github.com/json-iterator/go.ctx, typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValEncoder",
-      "params" : 178,
+      "params" : 186,
       "recv" : -1,
       "results" : 138,
       "type" : "Signature",
-      "underlying" : 177,
+      "underlying" : 185,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "ctx",
-        "type" : 3
+        "type" : 180
       }, {
         "name" : "typ",
         "type" : 34
       } ],
       "name" : "(ctx *github.com/json-iterator/go.ctx, typ github.com/modern-go/reflect2.Type)",
       "type" : "Tuple",
-      "underlying" : 178
+      "underlying" : 186
     }, {
       "name" : "func(obj interface{}) github.com/modern-go/reflect2.Type",
       "params" : 42,
       "recv" : -1,
       "results" : 163,
       "type" : "Signature",
-      "underlying" : 179,
+      "underlying" : 187,
       "variadic" : false
     }, {
       "name" : "func(obj interface{}) unsafe.Pointer",
@@ -2064,239 +2126,331 @@
       "recv" : -1,
       "results" : 118,
       "type" : "Signature",
-      "underlying" : 180,
+      "underlying" : 188,
       "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 7,
       "type" : 129,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 122,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "encoder",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 177,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ptr",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "stream",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "valType",
       "package" : 0,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "obj",
       "package" : 0,
       "type" : 25,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ctx",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 180,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

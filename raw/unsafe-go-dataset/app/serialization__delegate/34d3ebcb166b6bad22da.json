@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
       "out-vars" : [ 42, 40, 41 ],
       "decl-vars" : [ ],
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 40, 44 ],
+      "out-vars" : [ 44, 40, 42 ],
       "decl-vars" : [ 44 ],
       "line-start" : 109,
       "ast" : {
@@ -90,7 +90,7 @@
               "go-type" : 154,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 177,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -114,13 +114,13 @@
       "line-end" : 109,
       "code" : "fieldPtr := encoder.field.UnsafeGet(ptr)",
       "entry" : false,
-      "use-vars" : [ 41, 40 ]
+      "use-vars" : [ 40, 41 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 42, 40, 44 ],
+      "in-vars" : [ 44, 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 40 ],
+      "out-vars" : [ 40, 42 ],
       "decl-vars" : [ ],
       "line-start" : 110,
       "ast" : {
@@ -167,7 +167,7 @@
               "go-type" : 139,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 177,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -190,21 +190,21 @@
       "line-end" : 110,
       "code" : "encoder.fieldEncoder.Encode(fieldPtr, stream)",
       "entry" : false,
-      "use-vars" : [ 44, 42, 40 ]
+      "use-vars" : [ 42, 40, 44 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 5 ],
-      "in-vars" : [ 42, 40 ],
+      "in-vars" : [ 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 40 ],
+      "out-vars" : [ 40, 42 ],
       "decl-vars" : [ ],
       "line-start" : 111,
       "ast" : {
         "condition" : {
-          "go-type" : 177,
+          "go-type" : 180,
           "kind" : "expression",
           "left" : {
-            "go-type" : 177,
+            "go-type" : 180,
             "kind" : "expression",
             "left" : {
               "field" : {
@@ -230,7 +230,7 @@
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 178,
+              "go-type" : 181,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -243,7 +243,7 @@
           },
           "operator" : "&&",
           "right" : {
-            "go-type" : 177,
+            "go-type" : 180,
             "kind" : "expression",
             "left" : {
               "field" : {
@@ -300,7 +300,7 @@
     }, {
       "update-vars" : [ 42 ],
       "successors" : [ 1 ],
-      "in-vars" : [ 42, 40 ],
+      "in-vars" : [ 40, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -358,7 +358,7 @@
                 "go-type" : 154,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 0,
+                  "go-type" : 177,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -416,7 +416,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 179,
+            "go-type" : 182,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -441,7 +441,7 @@
       "line-end" : 112,
       "code" : "stream.Error = fmt.Errorf(\"%s: %s\", encoder.field.Name(), stream.Error.Error())",
       "entry" : false,
-      "use-vars" : [ 42, 40 ]
+      "use-vars" : [ 40, 42 ]
     } ],
     "code" : "func (encoder *structFieldEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\tfieldPtr := encoder.field.UnsafeGet(ptr)\n\tencoder.fieldEncoder.Encode(fieldPtr, stream)\n\tif stream.Error != nil && stream.Error != io.EOF {\n\t\tstream.Error = fmt.Errorf(\"%s: %s\", encoder.field.Name(), stream.Error.Error())\n\t}\n}",
     "defines" : [ 0 ],
@@ -463,7 +463,7 @@
     }, {
       "name" : "Errorf",
       "package" : 8,
-      "type" : 179,
+      "type" : 182,
       "exported" : true
     }, {
       "name" : "Name",
@@ -2219,20 +2219,45 @@
       "type" : "Interface",
       "underlying" : 176
     }, {
+      "elem" : 178,
+      "name" : "*github.com/json-iterator/go.structFieldEncoder",
+      "type" : "Pointer",
+      "underlying" : 177
+    }, {
+      "local-name" : "structFieldEncoder",
+      "name" : "github.com/json-iterator/go.structFieldEncoder",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 179
+    }, {
+      "fields" : [ {
+        "name" : "field",
+        "type" : 154
+      }, {
+        "name" : "fieldEncoder",
+        "type" : 139
+      }, {
+        "name" : "omitempty",
+        "type" : 12
+      } ],
+      "name" : "struct{field github.com/modern-go/reflect2.StructField; fieldEncoder github.com/json-iterator/go.ValEncoder; omitempty bool}",
+      "type" : "Struct",
+      "underlying" : 179
+    }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 177
+      "underlying" : 180
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 178
+      "underlying" : 181
     }, {
       "name" : "func(format string, a ...interface{}) error",
-      "params" : 180,
+      "params" : 183,
       "recv" : -1,
-      "results" : 182,
+      "results" : 185,
       "type" : "Signature",
-      "underlying" : 179,
+      "underlying" : 182,
       "variadic" : true
     }, {
       "fields" : [ {
@@ -2240,16 +2265,16 @@
         "type" : 13
       }, {
         "name" : "a",
-        "type" : 181
+        "type" : 184
       } ],
       "name" : "(format string, a []interface{})",
       "type" : "Tuple",
-      "underlying" : 180
+      "underlying" : 183
     }, {
       "elem" : 25,
       "name" : "[]interface{}",
       "type" : "Slice",
-      "underlying" : 181
+      "underlying" : 184
     }, {
       "fields" : [ {
         "name" : "",
@@ -2257,248 +2282,344 @@
       } ],
       "name" : "(error)",
       "type" : "Tuple",
-      "underlying" : 182
+      "underlying" : 185
     } ],
     "variables" : [ {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 7,
       "type" : 129,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 122,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "encoder",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 177,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ptr",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "stream",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "field",
       "package" : 0,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "fieldPtr",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fieldEncoder",
       "package" : 0,
       "type" : 139,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "Error",
       "package" : 0,
       "type" : 135,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "EOF",
       "package" : 7,
       "type" : 135,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

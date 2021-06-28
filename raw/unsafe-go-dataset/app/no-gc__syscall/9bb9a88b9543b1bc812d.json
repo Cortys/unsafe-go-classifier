@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 1, 4, 3 ],
+      "in-vars" : [ 4, 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 2, 1, 4 ],
+      "out-vars" : [ 1, 2, 4, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 1, 4, 3 ],
+      "in-vars" : [ 1, 2, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 7, 3, 2, 1, 4 ],
+      "out-vars" : [ 4, 3, 1, 2, 7 ],
       "decl-vars" : [ 7 ],
       "line-start" : 15,
       "ast" : {
@@ -112,10 +112,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 2, 1, 4, 7, 3 ],
+      "in-vars" : [ 1, 2, 7, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 8, 7 ],
-      "decl-vars" : [ 9, 8, 10 ],
+      "out-vars" : [ 7, 8 ],
+      "decl-vars" : [ 8, 9, 10 ],
       "line-start" : 16,
       "ast" : {
         "kind" : "statement",
@@ -373,11 +373,11 @@
       "line-end" : 16,
       "code" : "_, _, errno := syscall.Syscall6(syscall.SYS_GETSOCKOPT, s, uintptr(level), uintptr(name), uintptr(unsafe.Pointer(&b[0])), uintptr(unsafe.Pointer(&l)), 0)",
       "entry" : false,
-      "use-vars" : [ 3, 4, 1, 2, 7 ]
+      "use-vars" : [ 1, 2, 3, 4, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 8, 7 ],
+      "in-vars" : [ 7, 8 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -443,7 +443,7 @@
       "line-end" : 17,
       "code" : "return int(l), errnoErr(errno)",
       "entry" : false,
-      "use-vars" : [ 8, 7 ]
+      "use-vars" : [ 7, 8 ]
     } ],
     "code" : "func getsockopt(s uintptr, level, name int, b []byte) (int, error) {\n\tl := uint32(len(b))\n\t_, _, errno := syscall.Syscall6(syscall.SYS_GETSOCKOPT, s, uintptr(level), uintptr(name), uintptr(unsafe.Pointer(&b[0])), uintptr(unsafe.Pointer(&l)), 0)\n\treturn int(l), errnoErr(errno)\n}",
     "defines" : [ 0 ],
@@ -700,57 +700,79 @@
       "name" : "",
       "package" : -1,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "s",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "level",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "name",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "b",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res1]",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "l",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "errno",
       "package" : 0,
       "type" : 18,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

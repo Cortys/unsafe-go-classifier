@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 1, 2, 3 ],
+      "in-vars" : [ 3, 4, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 3 ],
+      "out-vars" : [ 4, 2, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 4, 1, 2, 3 ],
+      "in-vars" : [ 4, 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 1, 2, 3 ],
+      "out-vars" : [ 2, 1, 3, 6, 4 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1036,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 4, 6, 1, 2, 3 ],
+      "in-vars" : [ 6, 4, 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 1, 2, 3, 4 ],
+      "out-vars" : [ 4, 2, 1, 3, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1037,
       "ast" : {
@@ -149,9 +149,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 4, 1, 2, 3 ],
+      "in-vars" : [ 1, 3, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 1, 2, 3 ],
+      "out-vars" : [ 3, 6, 4, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1038,
       "ast" : {
@@ -229,7 +229,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 3, 4, 6, 1, 2 ],
+      "in-vars" : [ 6, 4, 2, 1, 3 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -355,7 +355,7 @@
       "line-end" : 1040,
       "code" : "return setsockopt(fd, level, opt, p, uintptr(len(filter)*SizeofCanFilter))",
       "entry" : false,
-      "use-vars" : [ 1, 2, 3, 6, 4 ]
+      "use-vars" : [ 6, 1, 3, 4, 2 ]
     } ],
     "code" : "func SetsockoptCanRawFilter(fd, level, opt int, filter []CanFilter) error {\n\tvar p unsafe.Pointer\n\tif len(filter) > 0 {\n\t\tp = unsafe.Pointer(&filter[0])\n\t}\n\treturn setsockopt(fd, level, opt, p, uintptr(len(filter)*SizeofCanFilter))\n}",
     "defines" : [ 0 ],
@@ -571,37 +571,51 @@
       "name" : "",
       "package" : -1,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fd",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "level",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "opt",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "filter",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "p",
       "package" : 0,
       "type" : 14,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

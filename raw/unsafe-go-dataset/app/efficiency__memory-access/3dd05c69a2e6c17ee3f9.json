@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 1, 0, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 2, 4, 1 ],
+      "out-vars" : [ 2, 4, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 0, 2, 4, 1 ],
+      "in-vars" : [ 1, 0, 2, 4 ],
       "exit" : false,
       "out-vars" : [ 2, 4, 1, 5, 0 ],
       "decl-vars" : [ 5 ],
@@ -85,9 +85,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 6 ],
-      "in-vars" : [ 0, 6, 2, 4, 1, 5 ],
+      "in-vars" : [ 5, 6, 0, 2, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 5, 0, 6, 2, 4 ],
+      "out-vars" : [ 0, 2, 4, 1, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1308,
       "ast" : {
@@ -159,13 +159,13 @@
       "line-end" : 1312,
       "code" : "for start := 0; start <= len(a)-dimSize; start += dimSize {\n\tr := fn(a[start : start+dimSize])\n\tretVal[at] = r\n\tat++\n}",
       "entry" : false,
-      "use-vars" : [ 2, 6, 0 ]
+      "use-vars" : [ 6, 0, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
       "in-vars" : [ 5, 0, 2, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 4, 1, 5, 0 ],
+      "out-vars" : [ 5, 6, 0, 2, 4, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1308,
       "ast" : {
@@ -198,9 +198,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 3 ],
-      "in-vars" : [ 0, 6, 2, 4, 1, 5 ],
+      "in-vars" : [ 4, 1, 5, 6, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 6, 2, 4, 1 ],
+      "out-vars" : [ 1, 5, 6, 0, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1308,
       "ast" : {
@@ -234,13 +234,13 @@
       "line-end" : 1308,
       "code" : "start += dimSize",
       "entry" : false,
-      "use-vars" : [ 2, 6 ]
+      "use-vars" : [ 6, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 4, 1, 5, 0, 6 ],
+      "in-vars" : [ 6, 0, 2, 4, 1, 5 ],
       "exit" : false,
-      "out-vars" : [ 0, 6, 2, 4, 1, 5, 7 ],
+      "out-vars" : [ 0, 2, 4, 1, 7, 5, 6 ],
       "decl-vars" : [ 7 ],
       "line-start" : 1309,
       "ast" : {
@@ -335,13 +335,13 @@
       "line-end" : 1309,
       "code" : "r := fn(a[start : start+dimSize])",
       "entry" : false,
-      "use-vars" : [ 4, 0, 6, 2 ]
+      "use-vars" : [ 2, 4, 0, 6 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 1, 5, 7, 0, 6, 2, 4 ],
+      "in-vars" : [ 1, 7, 5, 6, 0, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 6, 2, 4, 1 ],
+      "out-vars" : [ 5, 6, 0, 2, 4, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1310,
       "ast" : {
@@ -390,13 +390,13 @@
       "line-end" : 1310,
       "code" : "retVal[at] = r",
       "entry" : false,
-      "use-vars" : [ 7, 1, 5 ]
+      "use-vars" : [ 1, 5, 7 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 0, 6, 2, 4, 1, 5 ],
+      "in-vars" : [ 1, 5, 6, 0, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 4, 1, 5, 0 ],
+      "out-vars" : [ 0, 2, 4, 1, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1311,
       "ast" : {
@@ -549,42 +549,58 @@
       "name" : "a",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "retVal",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "dimSize",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "defaultValue",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fn",
       "package" : 0,
       "type" : 5,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "at",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "start",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "r",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

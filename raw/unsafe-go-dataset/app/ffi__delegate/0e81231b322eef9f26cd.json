@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 6 ],
+      "out-vars" : [ 5, 6, 1 ],
       "decl-vars" : [ 5, 6 ],
       "line-start" : 314,
       "ast" : {
@@ -257,9 +257,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 6, 5, 1 ],
+      "in-vars" : [ 5, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 5, 1 ],
+      "out-vars" : [ 5, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 317,
       "ast" : {
@@ -274,7 +274,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 6
+              "variable" : 5
             }
           },
           "operator" : "!=",
@@ -297,11 +297,11 @@
       "line-end" : 319,
       "code" : "if err != nil {\n\treturn nil, errors.Wrapf(err, \"get object %s\", fileName)\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 6, 1 ],
+      "in-vars" : [ 5, 1 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -327,7 +327,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 6
+              "variable" : 5
             }
           }, {
             "go-type" : 2,
@@ -373,11 +373,11 @@
       "line-end" : 318,
       "code" : "return nil, errors.Wrapf(err, \"get object %s\", fileName)",
       "entry" : false,
-      "use-vars" : [ 1, 6 ]
+      "use-vars" : [ 1, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 5 ],
+      "in-vars" : [ 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -408,7 +408,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "ptr",
-                "variable" : 5
+                "variable" : 6
               }
             },
             "type" : "cast"
@@ -442,7 +442,7 @@
       "line-end" : 320,
       "code" : "return newBPFFD(uint32(ptr)), nil",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     } ],
     "code" : "func bpfGetObject(fileName string) (*bpfFD, error) {\n\tptr, err := bpfCall(_ObjGet, unsafe.Pointer(&bpfPinObjAttr{\n\t\tfileName: newPtr(unsafe.Pointer(&[]byte(fileName)[0])),\n\t}), 16)\n\tif err != nil {\n\t\treturn nil, errors.Wrapf(err, \"get object %s\", fileName)\n\t}\n\treturn newBPFFD(uint32(ptr)), nil\n}",
     "defines" : [ 0 ],
@@ -784,37 +784,51 @@
       "name" : "",
       "package" : -1,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fileName",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res1]",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fileName",
       "package" : 0,
       "type" : 22,
-      "exported" : false
-    }, {
-      "name" : "ptr",
-      "package" : 0,
-      "type" : 14,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "ptr",
+      "package" : 0,
+      "type" : 14,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

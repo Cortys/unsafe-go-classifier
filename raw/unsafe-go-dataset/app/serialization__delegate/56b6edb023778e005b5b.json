@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 42, 41, 40 ],
+      "in-vars" : [ 41, 42, 40 ],
       "exit" : false,
-      "out-vars" : [ 40, 42, 41 ],
+      "out-vars" : [ 42, 40, 41 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 42, 41, 40 ],
+      "in-vars" : [ 42, 40, 41 ],
       "exit" : false,
       "out-vars" : [ 42, 44, 40 ],
       "decl-vars" : [ 44 ],
@@ -90,7 +90,7 @@
               "go-type" : 34,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 177,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -114,7 +114,7 @@
       "line-end" : 92,
       "code" : "obj := encoder.valType.UnsafeIndirect(ptr)",
       "entry" : false,
-      "use-vars" : [ 41, 40 ]
+      "use-vars" : [ 40, 41 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 6 ],
@@ -148,7 +148,7 @@
                 "go-type" : 34,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 0,
+                  "go-type" : 177,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -209,7 +209,7 @@
       "line-end" : 96,
       "code" : "if encoder.valType.IsNullable() && reflect2.IsNil(obj) {\n\tstream.WriteNil()\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 40, 44 ]
+      "use-vars" : [ 44, 40 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
@@ -230,7 +230,7 @@
               "kind" : "ident",
               "value" : "WriteNil"
             },
-            "go-type" : 177,
+            "go-type" : 182,
             "kind" : "expression",
             "target" : {
               "go-type" : 3,
@@ -295,7 +295,7 @@
         } ],
         "right" : [ {
           "asserted" : {
-            "go-type" : 178,
+            "go-type" : 183,
             "kind" : "type",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -305,13 +305,13 @@
             },
             "type" : "identifier",
             "value" : {
-              "go-type" : 178,
+              "go-type" : 183,
               "ident-kind" : "TypeName",
               "kind" : "ident",
               "value" : "Marshaler"
             }
           },
-          "go-type" : 178,
+          "go-type" : 183,
           "kind" : "expression",
           "target" : {
             "go-type" : 25,
@@ -336,9 +336,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 46, 42 ],
+      "in-vars" : [ 42, 46 ],
       "exit" : false,
-      "out-vars" : [ 47, 48, 42 ],
+      "out-vars" : [ 42, 47, 48 ],
       "decl-vars" : [ 47, 48 ],
       "line-start" : 98,
       "ast" : {
@@ -371,10 +371,10 @@
               "kind" : "ident",
               "value" : "MarshalJSON"
             },
-            "go-type" : 180,
+            "go-type" : 185,
             "kind" : "expression",
             "target" : {
-              "go-type" : 178,
+              "go-type" : 183,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -386,7 +386,7 @@
             },
             "type" : "selector"
           },
-          "go-type" : 181,
+          "go-type" : 186,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -400,14 +400,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 47, 48, 42 ],
+      "in-vars" : [ 48, 42, 47 ],
       "exit" : false,
       "out-vars" : [ 47, 48, 42 ],
       "decl-vars" : [ ],
       "line-start" : 99,
       "ast" : {
         "condition" : {
-          "go-type" : 182,
+          "go-type" : 187,
           "kind" : "expression",
           "left" : {
             "go-type" : 135,
@@ -417,12 +417,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 48
+              "variable" : 47
             }
           },
           "operator" : "!=",
           "right" : {
-            "go-type" : 183,
+            "go-type" : 188,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -440,11 +440,11 @@
       "line-end" : 109,
       "code" : "if err != nil {\n\tstream.Error = err\n} else {\n\n\tl := len(bytes)\n\tif l > 0 && bytes[l-1] == '\\n' {\n\t\tbytes = bytes[:l-1]\n\t}\n\tstream.Write(bytes)\n}",
       "entry" : false,
-      "use-vars" : [ 48 ]
+      "use-vars" : [ 47 ]
     }, {
       "update-vars" : [ 42 ],
       "successors" : [ 1 ],
-      "in-vars" : [ 48, 42 ],
+      "in-vars" : [ 47, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -481,7 +481,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 48
+            "variable" : 47
           }
         } ],
         "type" : "assign"
@@ -490,13 +490,13 @@
       "line-end" : 100,
       "code" : "stream.Error = err",
       "entry" : false,
-      "use-vars" : [ 48, 42 ]
+      "use-vars" : [ 47, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 47, 42 ],
+      "in-vars" : [ 48, 42 ],
       "exit" : false,
-      "out-vars" : [ 50, 42, 47 ],
+      "out-vars" : [ 48, 42, 50 ],
       "decl-vars" : [ 50 ],
       "line-start" : 104,
       "ast" : {
@@ -520,12 +520,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 47
+              "variable" : 48
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 184,
+            "go-type" : 189,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -544,21 +544,21 @@
       "line-end" : 104,
       "code" : "l := len(bytes)",
       "entry" : false,
-      "use-vars" : [ 47 ]
+      "use-vars" : [ 48 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 13 ],
-      "in-vars" : [ 47, 50, 42 ],
+      "in-vars" : [ 50, 48, 42 ],
       "exit" : false,
-      "out-vars" : [ 47, 50, 42 ],
+      "out-vars" : [ 42, 50, 48 ],
       "decl-vars" : [ ],
       "line-start" : 105,
       "ast" : {
         "condition" : {
-          "go-type" : 182,
+          "go-type" : 187,
           "kind" : "expression",
           "left" : {
-            "go-type" : 182,
+            "go-type" : 187,
             "kind" : "expression",
             "left" : {
               "go-type" : 11,
@@ -584,7 +584,7 @@
           },
           "operator" : "&&",
           "right" : {
-            "go-type" : 182,
+            "go-type" : 187,
             "kind" : "expression",
             "left" : {
               "go-type" : 102,
@@ -622,7 +622,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "bytes",
-                  "variable" : 47
+                  "variable" : 48
                 }
               },
               "type" : "index"
@@ -647,13 +647,13 @@
       "line-end" : 107,
       "code" : "if l > 0 && bytes[l-1] == '\\n' {\n\tbytes = bytes[:l-1]\n}",
       "entry" : false,
-      "use-vars" : [ 50, 47 ]
+      "use-vars" : [ 50, 48 ]
     }, {
-      "update-vars" : [ 47 ],
+      "update-vars" : [ 48 ],
       "successors" : [ 13 ],
-      "in-vars" : [ 42, 47, 50 ],
+      "in-vars" : [ 50, 48, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 47 ],
+      "out-vars" : [ 48, 42 ],
       "decl-vars" : [ ],
       "line-start" : 106,
       "ast" : {
@@ -666,7 +666,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "bytes",
-            "variable" : 47
+            "variable" : 48
           }
         } ],
         "right" : [ {
@@ -709,21 +709,21 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 47
+              "variable" : 48
             }
           }
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 47 ],
+      "assign-vars" : [ 48 ],
       "line-end" : 106,
       "code" : "bytes = bytes[:l-1]",
       "entry" : false,
-      "use-vars" : [ 47, 50 ]
+      "use-vars" : [ 50, 48 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 47, 42 ],
+      "in-vars" : [ 48, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -740,7 +740,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 47
+              "variable" : 48
             }
           } ],
           "ellipsis" : false,
@@ -750,7 +750,7 @@
               "kind" : "ident",
               "value" : "Write"
             },
-            "go-type" : 187,
+            "go-type" : 192,
             "kind" : "expression",
             "target" : {
               "go-type" : 3,
@@ -765,7 +765,7 @@
             },
             "type" : "selector"
           },
-          "go-type" : 186,
+          "go-type" : 191,
           "kind" : "expression",
           "type" : "call"
         }
@@ -774,7 +774,7 @@
       "line-end" : 108,
       "code" : "stream.Write(bytes)",
       "entry" : false,
-      "use-vars" : [ 42, 47 ]
+      "use-vars" : [ 42, 48 ]
     } ],
     "code" : "func (encoder *marshalerEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\tobj := encoder.valType.UnsafeIndirect(ptr)\n\tif encoder.valType.IsNullable() && reflect2.IsNil(obj) {\n\t\tstream.WriteNil()\n\t\treturn\n\t}\n\tmarshaler := obj.(json.Marshaler)\n\tbytes, err := marshaler.MarshalJSON()\n\tif err != nil {\n\t\tstream.Error = err\n\t} else {\n\n\t\tl := len(bytes)\n\t\tif l > 0 && bytes[l-1] == '\\n' {\n\t\t\tbytes = bytes[:l-1]\n\t\t}\n\t\tstream.Write(bytes)\n\t}\n}",
     "defines" : [ 0 ],
@@ -801,17 +801,17 @@
     }, {
       "name" : "WriteNil",
       "package" : 0,
-      "type" : 177,
+      "type" : 182,
       "exported" : true
     }, {
       "name" : "MarshalJSON",
       "package" : 8,
-      "type" : 180,
+      "type" : 185,
       "exported" : true
     }, {
       "name" : "Write",
       "package" : 0,
-      "type" : 187,
+      "type" : 192,
       "exported" : true
     } ],
     "line-end" : 110,
@@ -2557,34 +2557,70 @@
       "type" : "Interface",
       "underlying" : 176
     }, {
+      "elem" : 178,
+      "name" : "*github.com/json-iterator/go.marshalerEncoder",
+      "type" : "Pointer",
+      "underlying" : 177
+    }, {
+      "local-name" : "marshalerEncoder",
+      "name" : "github.com/json-iterator/go.marshalerEncoder",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 179
+    }, {
+      "fields" : [ {
+        "name" : "checkIsEmpty",
+        "type" : 180
+      }, {
+        "name" : "valType",
+        "type" : 34
+      } ],
+      "name" : "struct{checkIsEmpty github.com/json-iterator/go.checkIsEmpty; valType github.com/modern-go/reflect2.Type}",
+      "type" : "Struct",
+      "underlying" : 179
+    }, {
+      "local-name" : "checkIsEmpty",
+      "name" : "github.com/json-iterator/go.checkIsEmpty",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 181
+    }, {
+      "methods" : [ {
+        "name" : "IsEmpty",
+        "type" : 116
+      } ],
+      "name" : "interface{IsEmpty(ptr unsafe.Pointer) bool}",
+      "type" : "Interface",
+      "underlying" : 181
+    }, {
       "name" : "func()",
       "params" : 46,
       "recv" : -1,
       "results" : 46,
       "type" : "Signature",
-      "underlying" : 177,
+      "underlying" : 182,
       "variadic" : false
     }, {
       "local-name" : "Marshaler",
       "name" : "encoding/json.Marshaler",
       "package" : 8,
       "type" : "Named",
-      "underlying" : 179
+      "underlying" : 184
     }, {
       "methods" : [ {
         "name" : "MarshalJSON",
-        "type" : 180
+        "type" : 185
       } ],
       "name" : "interface{MarshalJSON() ([]byte, error)}",
       "type" : "Interface",
-      "underlying" : 179
+      "underlying" : 184
     }, {
       "name" : "func() ([]byte, error)",
       "params" : 46,
       "recv" : 45,
-      "results" : 181,
+      "results" : 186,
       "type" : "Signature",
-      "underlying" : 180,
+      "underlying" : 185,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2596,22 +2632,22 @@
       } ],
       "name" : "([]byte, error)",
       "type" : "Tuple",
-      "underlying" : 181
+      "underlying" : 186
     }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 182
+      "underlying" : 187
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 183
+      "underlying" : 188
     }, {
       "name" : "func([]byte) int",
-      "params" : 185,
+      "params" : 190,
       "recv" : -1,
       "results" : 66,
       "type" : "Signature",
-      "underlying" : 184,
+      "underlying" : 189,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2620,7 +2656,7 @@
       } ],
       "name" : "([]byte)",
       "type" : "Tuple",
-      "underlying" : 185
+      "underlying" : 190
     }, {
       "fields" : [ {
         "name" : "nn",
@@ -2631,271 +2667,373 @@
       } ],
       "name" : "(nn int, err error)",
       "type" : "Tuple",
-      "underlying" : 186
+      "underlying" : 191
     }, {
       "name" : "func(p []byte) (nn int, err error)",
       "params" : 132,
       "recv" : -1,
-      "results" : 186,
+      "results" : 191,
       "type" : "Signature",
-      "underlying" : 187,
+      "underlying" : 192,
       "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 7,
       "type" : 129,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 122,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
       "type" : 154,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "encoder",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 177,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ptr",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "stream",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "valType",
       "package" : 0,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "obj",
       "package" : 0,
       "type" : 25,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 8,
-      "type" : 178,
-      "exported" : false
+      "type" : 183,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "marshaler",
       "package" : 0,
-      "type" : 178,
-      "exported" : false
-    }, {
-      "name" : "bytes",
-      "package" : 0,
-      "type" : 133,
-      "exported" : false
+      "type" : 183,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 135,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "bytes",
+      "package" : 0,
+      "type" : 133,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "Error",
       "package" : 0,
       "type" : 135,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "l",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

@@ -56,10 +56,10 @@
             "value" : "inuse",
             "variable" : 2
           },
-          "go-type" : 3,
+          "go-type" : 7,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -79,10 +79,10 @@
             "value" : "size",
             "variable" : 3
           },
-          "go-type" : 3,
+          "go-type" : 7,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -124,21 +124,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 7,
+              "go-type" : 11,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 7,
+                "go-type" : 11,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "mlink"
               }
             },
-            "go-type" : 6,
+            "go-type" : 10,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 6,
+          "go-type" : 10,
           "kind" : "expression",
           "target" : {
             "go-type" : 2,
@@ -165,7 +165,7 @@
       "successors" : [ 5 ],
       "in-vars" : [ 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 0 ],
+      "out-vars" : [ 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 97,
       "ast" : {
@@ -177,10 +177,10 @@
             "value" : "next",
             "variable" : 5
           },
-          "go-type" : 6,
+          "go-type" : 10,
           "kind" : "expression",
           "target" : {
-            "go-type" : 6,
+            "go-type" : 10,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -199,10 +199,10 @@
             "value" : "list",
             "variable" : 6
           },
-          "go-type" : 6,
+          "go-type" : 10,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -220,7 +220,7 @@
       "line-end" : 97,
       "code" : "v.next = f.list",
       "entry" : false,
-      "use-vars" : [ 4, 0 ]
+      "use-vars" : [ 0, 4 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 1 ],
@@ -238,10 +238,10 @@
             "value" : "list",
             "variable" : 6
           },
-          "go-type" : 6,
+          "go-type" : 10,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -254,7 +254,7 @@
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 6,
+          "go-type" : 10,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -322,42 +322,158 @@
       "name" : "()",
       "type" : "Tuple",
       "underlying" : 3
+    }, {
+      "elem" : 5,
+      "name" : "*runtime.fixalloc",
+      "type" : "Pointer",
+      "underlying" : 4
+    }, {
+      "local-name" : "fixalloc",
+      "name" : "runtime.fixalloc",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 6
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 7
+      }, {
+        "name" : "first",
+        "type" : 8
+      }, {
+        "name" : "arg",
+        "type" : 2
+      }, {
+        "name" : "list",
+        "type" : 10
+      }, {
+        "name" : "chunk",
+        "type" : 7
+      }, {
+        "name" : "nchunk",
+        "type" : 13
+      }, {
+        "name" : "inuse",
+        "type" : 7
+      }, {
+        "name" : "stat",
+        "type" : 14
+      }, {
+        "name" : "zero",
+        "type" : 16
+      } ],
+      "name" : "struct{size uintptr; first func(arg unsafe.Pointer, p unsafe.Pointer); arg unsafe.Pointer; list *runtime.mlink; chunk uintptr; nchunk uint32; inuse uintptr; stat *uint64; zero bool}",
+      "type" : "Struct",
+      "underlying" : 6
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 7
+    }, {
+      "name" : "func(arg unsafe.Pointer, p unsafe.Pointer)",
+      "params" : 9,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 8,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "arg",
+        "type" : 2
+      }, {
+        "name" : "p",
+        "type" : 2
+      } ],
+      "name" : "(arg unsafe.Pointer, p unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 9
+    }, {
+      "elem" : 11,
+      "name" : "*runtime.mlink",
+      "type" : "Pointer",
+      "underlying" : 10
+    }, {
+      "local-name" : "mlink",
+      "name" : "runtime.mlink",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "next",
+        "type" : 10
+      } ],
+      "name" : "struct{next *runtime.mlink}",
+      "type" : "Struct",
+      "underlying" : 12
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "elem" : 15,
+      "name" : "*uint64",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 16
     } ],
     "variables" : [ {
       "name" : "f",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 4,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "p",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "inuse",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 7,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "size",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 7,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "v",
       "package" : 0,
-      "type" : 6,
-      "exported" : false
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "next",
       "package" : 0,
-      "type" : 6,
-      "exported" : false
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "list",
       "package" : 0,
-      "type" : 6,
-      "exported" : false
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

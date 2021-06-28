@@ -52,35 +52,35 @@
         "type" : "return",
         "values" : [ {
           "arguments" : [ {
-            "go-type" : 17,
+            "go-type" : 23,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
                 "contained" : {
                   "element" : {
-                    "go-type" : 13,
+                    "go-type" : 19,
                     "kind" : "type",
                     "type" : "identifier",
                     "value" : {
-                      "go-type" : 13,
+                      "go-type" : 19,
                       "ident-kind" : "TypeName",
                       "kind" : "ident",
                       "value" : "byte"
                     }
                   },
-                  "go-type" : 17,
+                  "go-type" : 23,
                   "kind" : "type",
                   "type" : "slice"
                 },
-                "go-type" : 8,
+                "go-type" : 26,
                 "kind" : "type",
                 "type" : "pointer"
               },
-              "go-type" : 8,
+              "go-type" : 26,
               "kind" : "expression",
               "target" : {
                 "coerced-to" : {
-                  "go-type" : 9,
+                  "go-type" : 27,
                   "kind" : "type",
                   "qualifier" : {
                     "ident-kind" : "PkgName",
@@ -90,16 +90,16 @@
                   },
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 9,
+                    "go-type" : 27,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "Pointer"
                   }
                 },
-                "go-type" : 9,
+                "go-type" : 27,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 10,
+                  "go-type" : 28,
                   "kind" : "expression",
                   "operator" : "&",
                   "target" : {
@@ -128,7 +128,7 @@
               "kind" : "ident",
               "value" : "Get"
             },
-            "go-type" : 6,
+            "go-type" : 24,
             "kind" : "expression",
             "target" : {
               "field" : {
@@ -137,10 +137,10 @@
                 "value" : "trie",
                 "variable" : 4
               },
-              "go-type" : 3,
+              "go-type" : 9,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 6,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -163,7 +163,7 @@
       "line-end" : 17,
       "code" : "return m.trie.Get(*(*[]byte)(unsafe.Pointer(&key)))",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     } ],
     "code" : "func (m *SortedMap) Get(key string) (value interface{}, ok bool) {\n\treturn m.trie.Get(*(*[]byte)(unsafe.Pointer(&key)))\n}",
     "defines" : [ 0 ],
@@ -175,7 +175,7 @@
     }, {
       "name" : "Get",
       "package" : 0,
-      "type" : 6,
+      "type" : 24,
       "exported" : true
     } ],
     "line-end" : 18,
@@ -234,63 +234,199 @@
       "type" : "Basic",
       "underlying" : 5
     }, {
+      "elem" : 7,
+      "name" : "*github.com/k-sone/critbitgo.SortedMap",
+      "type" : "Pointer",
+      "underlying" : 6
+    }, {
+      "local-name" : "SortedMap",
+      "name" : "github.com/k-sone/critbitgo.SortedMap",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "trie",
+        "type" : 9
+      } ],
+      "name" : "struct{trie *github.com/k-sone/critbitgo.Trie}",
+      "type" : "Struct",
+      "underlying" : 8
+    }, {
+      "elem" : 10,
+      "name" : "*github.com/k-sone/critbitgo.Trie",
+      "type" : "Pointer",
+      "underlying" : 9
+    }, {
+      "local-name" : "Trie",
+      "name" : "github.com/k-sone/critbitgo.Trie",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "root",
+        "type" : 12
+      }, {
+        "name" : "size",
+        "type" : 18
+      } ],
+      "name" : "struct{root github.com/k-sone/critbitgo.node; size int}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "local-name" : "node",
+      "name" : "github.com/k-sone/critbitgo.node",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "fields" : [ {
+        "name" : "internal",
+        "type" : 14
+      }, {
+        "name" : "external",
+        "type" : 20
+      } ],
+      "name" : "struct{internal *github.com/k-sone/critbitgo.internal; external *github.com/k-sone/critbitgo.external}",
+      "type" : "Struct",
+      "underlying" : 13
+    }, {
+      "elem" : 15,
+      "name" : "*github.com/k-sone/critbitgo.internal",
+      "type" : "Pointer",
+      "underlying" : 14
+    }, {
+      "local-name" : "internal",
+      "name" : "github.com/k-sone/critbitgo.internal",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 16
+    }, {
+      "fields" : [ {
+        "name" : "child",
+        "type" : 17
+      }, {
+        "name" : "offset",
+        "type" : 18
+      }, {
+        "name" : "bit",
+        "type" : 19
+      }, {
+        "name" : "cont",
+        "type" : 5
+      } ],
+      "name" : "struct{child [2]github.com/k-sone/critbitgo.node; offset int; bit byte; cont bool}",
+      "type" : "Struct",
+      "underlying" : 16
+    }, {
+      "elem" : 12,
+      "name" : "[2]github.com/k-sone/critbitgo.node",
+      "type" : "Array",
+      "underlying" : 17
+    }, {
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 18
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "elem" : 21,
+      "name" : "*github.com/k-sone/critbitgo.external",
+      "type" : "Pointer",
+      "underlying" : 20
+    }, {
+      "local-name" : "external",
+      "name" : "github.com/k-sone/critbitgo.external",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "fields" : [ {
+        "name" : "key",
+        "type" : 23
+      }, {
+        "name" : "value",
+        "type" : 4
+      } ],
+      "name" : "struct{key []byte; value interface{}}",
+      "type" : "Struct",
+      "underlying" : 22
+    }, {
+      "elem" : 19,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 23
+    }, {
       "name" : "func(key []byte) (value interface{}, ok bool)",
-      "params" : 7,
+      "params" : 25,
       "recv" : -1,
       "results" : 3,
       "type" : "Signature",
-      "underlying" : 6,
+      "underlying" : 24,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "key",
-        "type" : 17
+        "type" : 23
       } ],
       "name" : "(key []byte)",
       "type" : "Tuple",
-      "underlying" : 7
+      "underlying" : 25
     }, {
-      "elem" : 17,
+      "elem" : 23,
       "name" : "*[]byte",
       "type" : "Pointer",
-      "underlying" : 8
+      "underlying" : 26
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 9
+      "underlying" : 27
     }, {
       "elem" : 2,
       "name" : "*string",
       "type" : "Pointer",
-      "underlying" : 10
+      "underlying" : 28
     } ],
     "variables" : [ {
       "name" : "m",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 6,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "key",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "value",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ok",
       "package" : 0,
       "type" : 5,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "trie",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 9,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

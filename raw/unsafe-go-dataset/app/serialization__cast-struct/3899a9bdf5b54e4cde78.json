@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 4, 2 ],
+      "in-vars" : [ 2, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 2 ],
+      "out-vars" : [ 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 4, 2 ],
+      "in-vars" : [ 2, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 4 ],
+      "out-vars" : [ 6, 4, 3 ],
       "decl-vars" : [ 6 ],
       "line-start" : 666,
       "ast" : {
@@ -62,25 +62,25 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 37,
+              "go-type" : 54,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 37,
+                "go-type" : 54,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "accessPolicy"
               }
             },
-            "go-type" : 36,
+            "go-type" : 53,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 36,
+          "go-type" : 53,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
-              "go-type" : 41,
+              "go-type" : 58,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -90,20 +90,20 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 41,
+                "go-type" : 58,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 41,
+            "go-type" : 58,
             "kind" : "expression",
             "target" : {
-              "go-type" : 42,
+              "go-type" : 59,
               "kind" : "expression",
               "operator" : "&",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 36,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -139,10 +139,10 @@
         "type" : "return",
         "values" : [ {
           "arguments" : [ {
-            "go-type" : 37,
+            "go-type" : 54,
             "kind" : "expression",
             "target" : {
-              "go-type" : 36,
+              "go-type" : 53,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -171,7 +171,7 @@
               "kind" : "ident",
               "value" : "EncodeElement"
             },
-            "go-type" : 43,
+            "go-type" : 60,
             "kind" : "expression",
             "target" : {
               "go-type" : 2,
@@ -195,7 +195,7 @@
       "line-end" : 667,
       "code" : "return e.EncodeElement(*ap2, start)",
       "entry" : false,
-      "use-vars" : [ 4, 3, 6 ]
+      "use-vars" : [ 3, 6, 4 ]
     } ],
     "code" : "// MarshalXML implements the xml.Marshaler interface for AccessPolicy.\nfunc (ap AccessPolicy) MarshalXML(e *xml.Encoder, start xml.StartElement) error {\n\tap2 := (*accessPolicy)(unsafe.Pointer(&ap))\n\treturn e.EncodeElement(*ap2, start)\n}",
     "defines" : [ 0 ],
@@ -207,7 +207,7 @@
     }, {
       "name" : "EncodeElement",
       "package" : 1,
-      "type" : 43,
+      "type" : 60,
       "exported" : true
     } ],
     "line-end" : 668,
@@ -528,115 +528,273 @@
       "type" : "Tuple",
       "underlying" : 35
     }, {
-      "elem" : 37,
+      "local-name" : "AccessPolicy",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.AccessPolicy",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 37
+    }, {
+      "fields" : [ {
+        "name" : "Start",
+        "type" : 38
+      }, {
+        "name" : "Expiry",
+        "type" : 38
+      }, {
+        "name" : "Permission",
+        "type" : 15
+      } ],
+      "name" : "struct{Start time.Time \"xml:\\\"Start\\\"\"; Expiry time.Time \"xml:\\\"Expiry\\\"\"; Permission string \"xml:\\\"Permission\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 37
+    }, {
+      "local-name" : "Time",
+      "name" : "time.Time",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 39
+    }, {
+      "fields" : [ {
+        "name" : "wall",
+        "type" : 40
+      }, {
+        "name" : "ext",
+        "type" : 41
+      }, {
+        "name" : "loc",
+        "type" : 42
+      } ],
+      "name" : "struct{wall uint64; ext int64; loc *time.Location}",
+      "type" : "Struct",
+      "underlying" : 39
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 40
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 41
+    }, {
+      "elem" : 43,
+      "name" : "*time.Location",
+      "type" : "Pointer",
+      "underlying" : 42
+    }, {
+      "local-name" : "Location",
+      "name" : "time.Location",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 44
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 15
+      }, {
+        "name" : "zone",
+        "type" : 45
+      }, {
+        "name" : "tx",
+        "type" : 48
+      }, {
+        "name" : "cacheStart",
+        "type" : 41
+      }, {
+        "name" : "cacheEnd",
+        "type" : 41
+      }, {
+        "name" : "cacheZone",
+        "type" : 52
+      } ],
+      "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
+      "type" : "Struct",
+      "underlying" : 44
+    }, {
+      "elem" : 46,
+      "name" : "[]time.zone",
+      "type" : "Slice",
+      "underlying" : 45
+    }, {
+      "local-name" : "zone",
+      "name" : "time.zone",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 47
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 15
+      }, {
+        "name" : "offset",
+        "type" : 18
+      }, {
+        "name" : "isDST",
+        "type" : 24
+      } ],
+      "name" : "struct{name string; offset int; isDST bool}",
+      "type" : "Struct",
+      "underlying" : 47
+    }, {
+      "elem" : 49,
+      "name" : "[]time.zoneTrans",
+      "type" : "Slice",
+      "underlying" : 48
+    }, {
+      "local-name" : "zoneTrans",
+      "name" : "time.zoneTrans",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 50
+    }, {
+      "fields" : [ {
+        "name" : "when",
+        "type" : 41
+      }, {
+        "name" : "index",
+        "type" : 51
+      }, {
+        "name" : "isstd",
+        "type" : 24
+      }, {
+        "name" : "isutc",
+        "type" : 24
+      } ],
+      "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
+      "type" : "Struct",
+      "underlying" : 50
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 51
+    }, {
+      "elem" : 46,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 52
+    }, {
+      "elem" : 54,
       "name" : "*github.com/Azure/azure-storage-blob-go/azblob.accessPolicy",
       "type" : "Pointer",
-      "underlying" : 36
+      "underlying" : 53
     }, {
       "local-name" : "accessPolicy",
       "name" : "github.com/Azure/azure-storage-blob-go/azblob.accessPolicy",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 38
+      "underlying" : 55
     }, {
       "fields" : [ {
         "name" : "Start",
-        "type" : 39
+        "type" : 56
       }, {
         "name" : "Expiry",
-        "type" : 39
+        "type" : 56
       }, {
         "name" : "Permission",
         "type" : 15
       } ],
       "name" : "struct{Start github.com/Azure/azure-storage-blob-go/azblob.timeRFC3339 \"xml:\\\"Start\\\"\"; Expiry github.com/Azure/azure-storage-blob-go/azblob.timeRFC3339 \"xml:\\\"Expiry\\\"\"; Permission string \"xml:\\\"Permission\\\"\"}",
       "type" : "Struct",
-      "underlying" : 38
+      "underlying" : 55
     }, {
       "local-name" : "timeRFC3339",
       "name" : "github.com/Azure/azure-storage-blob-go/azblob.timeRFC3339",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 40
+      "underlying" : 57
     }, {
       "fields" : [ {
         "name" : "Time",
-        "type" : 2
+        "type" : 38
       } ],
       "name" : "struct{time.Time}",
       "type" : "Struct",
-      "underlying" : 40
+      "underlying" : 57
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 5,
       "type" : "Basic",
-      "underlying" : 41
+      "underlying" : 58
     }, {
-      "elem" : 0,
+      "elem" : 36,
       "name" : "*github.com/Azure/azure-storage-blob-go/azblob.AccessPolicy",
       "type" : "Pointer",
-      "underlying" : 42
+      "underlying" : 59
     }, {
       "name" : "func(v interface{}, start encoding/xml.StartElement) error",
-      "params" : 44,
+      "params" : 61,
       "recv" : -1,
       "results" : 35,
       "type" : "Signature",
-      "underlying" : 43,
+      "underlying" : 60,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "v",
-        "type" : 45
+        "type" : 62
       }, {
         "name" : "start",
         "type" : 30
       } ],
       "name" : "(v interface{}, start encoding/xml.StartElement)",
       "type" : "Tuple",
-      "underlying" : 44
+      "underlying" : 61
     }, {
       "methods" : [ ],
       "name" : "interface{}",
       "type" : "Interface",
-      "underlying" : 45
+      "underlying" : 62
     } ],
     "variables" : [ {
       "name" : "",
       "package" : -1,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 3,
       "type" : 19,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ap",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 36,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "e",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "start",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ap2",
       "package" : 0,
-      "type" : 36,
-      "exported" : false
+      "type" : 53,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

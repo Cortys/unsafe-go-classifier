@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 3, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 2, 1 ],
+      "out-vars" : [ 1, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3, 4 ],
       "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 2, 1 ],
+      "out-vars" : [ 1, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 25,
       "ast" : {
@@ -145,7 +145,7 @@
       "successors" : [ 5 ],
       "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 6, 3 ],
+      "out-vars" : [ 2, 6, 1, 3 ],
       "decl-vars" : [ 6 ],
       "line-start" : 31,
       "ast" : {
@@ -193,9 +193,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 3, 2, 1 ],
+      "in-vars" : [ 6, 1, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 3, 7, 1 ],
+      "out-vars" : [ 1, 3, 7, 6 ],
       "decl-vars" : [ 7 ],
       "line-start" : 32,
       "ast" : {
@@ -280,13 +280,13 @@
       "line-end" : 32,
       "code" : "nPages := (perCPUBuffer + pageSize - 1) / pageSize",
       "entry" : false,
-      "use-vars" : [ 2, 6 ]
+      "use-vars" : [ 6, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 6, 3, 7, 1 ],
+      "in-vars" : [ 7, 6, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 8, 3, 1 ],
+      "out-vars" : [ 8, 1, 3 ],
       "decl-vars" : [ 8 ],
       "line-start" : 33,
       "ast" : {
@@ -358,9 +358,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 8, 3, 1 ],
+      "in-vars" : [ 8, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 9, 10, 8, 1 ],
+      "out-vars" : [ 9, 8, 1, 10 ],
       "decl-vars" : [ 10, 9 ],
       "line-start" : 35,
       "ast" : {
@@ -427,13 +427,13 @@
       "line-end" : 35,
       "code" : "fd, err := createPerfEvent(cpu, watermark)",
       "entry" : false,
-      "use-vars" : [ 3, 1 ]
+      "use-vars" : [ 1, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 11 ],
-      "in-vars" : [ 8, 1, 9, 10 ],
+      "in-vars" : [ 10, 9, 8, 1 ],
       "exit" : false,
-      "out-vars" : [ 9, 10, 8, 1 ],
+      "out-vars" : [ 10, 9, 8, 1 ],
       "decl-vars" : [ ],
       "line-start" : 36,
       "ast" : {
@@ -448,7 +448,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "operator" : "!=",
@@ -471,11 +471,11 @@
       "line-end" : 38,
       "code" : "if err != nil {\n\treturn nil, errors.Wrap(err, \"can't create perf event\")\n}",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -501,7 +501,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 9
+              "variable" : 10
             }
           }, {
             "go-type" : 26,
@@ -537,13 +537,13 @@
       "line-end" : 37,
       "code" : "return nil, errors.Wrap(err, \"can't create perf event\")",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 14 ],
-      "in-vars" : [ 8, 1, 11, 10 ],
+      "in-vars" : [ 8, 1, 11, 9 ],
       "exit" : false,
-      "out-vars" : [ 1, 11, 10, 8 ],
+      "out-vars" : [ 11, 9, 8, 1 ],
       "decl-vars" : [ ],
       "line-start" : 40,
       "ast" : {
@@ -585,9 +585,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 10, 8, 1 ],
+      "in-vars" : [ 9, 8, 1 ],
       "exit" : false,
-      "out-vars" : [ 11, 10, 8, 1 ],
+      "out-vars" : [ 1, 11, 9, 8 ],
       "decl-vars" : [ 11 ],
       "line-start" : 40,
       "ast" : {
@@ -611,7 +611,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 10
+              "variable" : 9
             }
           }, {
             "go-type" : 43,
@@ -648,11 +648,11 @@
       "line-end" : 40,
       "code" : "err := unix.SetNonblock(fd, true)",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 11, 10 ],
+      "in-vars" : [ 11, 9 ],
       "exit" : false,
       "out-vars" : [ 11 ],
       "decl-vars" : [ ],
@@ -669,7 +669,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 10
+              "variable" : 9
             }
           } ],
           "ellipsis" : false,
@@ -698,7 +698,7 @@
       "line-end" : 41,
       "code" : "unix.Close(fd)",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -739,10 +739,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 10, 8, 1 ],
+      "in-vars" : [ 9, 8, 1 ],
       "exit" : false,
-      "out-vars" : [ 9, 10, 12, 1 ],
-      "decl-vars" : [ 12, 9 ],
+      "out-vars" : [ 10, 9, 12, 1 ],
+      "decl-vars" : [ 10, 12 ],
       "line-start" : 45,
       "ast" : {
         "kind" : "statement",
@@ -763,7 +763,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 9
+            "variable" : 10
           }
         } ],
         "right" : [ {
@@ -775,7 +775,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 10
+              "variable" : 9
             }
           }, {
             "go-type" : 16,
@@ -836,13 +836,13 @@
       "line-end" : 45,
       "code" : "mmap, err := unix.Mmap(fd, 0, size, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED)",
       "entry" : false,
-      "use-vars" : [ 10, 8 ]
+      "use-vars" : [ 9, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 16, 18 ],
-      "in-vars" : [ 9, 10, 12, 1 ],
+      "in-vars" : [ 10, 9, 12, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 9, 10, 12 ],
+      "out-vars" : [ 10, 9, 12, 1 ],
       "decl-vars" : [ ],
       "line-start" : 46,
       "ast" : {
@@ -857,7 +857,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "operator" : "!=",
@@ -880,13 +880,13 @@
       "line-end" : 49,
       "code" : "if err != nil {\n\tunix.Close(fd)\n\treturn nil, err\n}",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 9, 10 ],
+      "in-vars" : [ 10, 9 ],
       "exit" : false,
-      "out-vars" : [ 9 ],
+      "out-vars" : [ 10 ],
       "decl-vars" : [ ],
       "line-start" : 47,
       "ast" : {
@@ -901,7 +901,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 10
+              "variable" : 9
             }
           } ],
           "ellipsis" : false,
@@ -930,11 +930,11 @@
       "line-end" : 47,
       "code" : "unix.Close(fd)",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -959,7 +959,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 9
+            "variable" : 10
           }
         } ]
       },
@@ -967,13 +967,13 @@
       "line-end" : 48,
       "code" : "return nil, err",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 10, 12, 1 ],
+      "in-vars" : [ 12, 1, 9 ],
       "exit" : false,
-      "out-vars" : [ 12, 13, 1, 10 ],
+      "out-vars" : [ 9, 13, 12, 1 ],
       "decl-vars" : [ 13 ],
       "line-start" : 55,
       "ast" : {
@@ -1077,7 +1077,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 10, 12, 13, 1 ],
+      "in-vars" : [ 9, 13, 12, 1 ],
       "exit" : false,
       "out-vars" : [ 20 ],
       "decl-vars" : [ 20 ],
@@ -1136,7 +1136,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "fd",
-                  "variable" : 10
+                  "variable" : 9
                 }
               }
             }, {
@@ -1332,7 +1332,7 @@
       "line-end" : 62,
       "code" : "ring := &perfEventRing{\n\tfd:         fd,\n\tcpu:        cpu,\n\tmmap:       mmap,\n\tringReader: newRingReader(meta, mmap[meta.Data_offset:meta.Data_offset+meta.Data_size]),\n}",
       "entry" : false,
-      "use-vars" : [ 10, 13, 12, 1 ]
+      "use-vars" : [ 13, 12, 1, 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
@@ -2075,112 +2075,156 @@
       "name" : "",
       "package" : -1,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "cpu",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "perCPUBuffer",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "watermark",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res1]",
       "package" : 0,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "pageSize",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "nPages",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "size",
       "package" : 0,
       "type" : 2,
-      "exported" : false
-    }, {
-      "name" : "err",
-      "package" : 0,
-      "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fd",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "err",
+      "package" : 0,
+      "type" : 21,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "mmap",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "meta",
       "package" : 0,
       "type" : 12,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fd",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "cpu",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "mmap",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "ringReader",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : true,
+      "field" : true
     }, {
       "name" : "Data_offset",
       "package" : 5,
       "type" : 17,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "Data_size",
       "package" : 5,
       "type" : 17,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "ring",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ring",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

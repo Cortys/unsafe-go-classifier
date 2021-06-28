@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4 ],
+      "out-vars" : [ 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 4, 2 ],
+      "in-vars" : [ 2, 3, 4 ],
       "exit" : false,
       "out-vars" : [ 6, 3, 4 ],
       "decl-vars" : [ 6 ],
@@ -62,25 +62,25 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 37,
+              "go-type" : 60,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 37,
+                "go-type" : 60,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "containerProperties"
               }
             },
-            "go-type" : 36,
+            "go-type" : 59,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 36,
+          "go-type" : 59,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
-              "go-type" : 41,
+              "go-type" : 64,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -90,20 +90,20 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 41,
+                "go-type" : 64,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 41,
+            "go-type" : 64,
             "kind" : "expression",
             "target" : {
-              "go-type" : 42,
+              "go-type" : 65,
               "kind" : "expression",
               "operator" : "&",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 36,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -139,10 +139,10 @@
         "type" : "return",
         "values" : [ {
           "arguments" : [ {
-            "go-type" : 37,
+            "go-type" : 60,
             "kind" : "expression",
             "target" : {
-              "go-type" : 36,
+              "go-type" : 59,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -171,7 +171,7 @@
               "kind" : "ident",
               "value" : "EncodeElement"
             },
-            "go-type" : 43,
+            "go-type" : 66,
             "kind" : "expression",
             "target" : {
               "go-type" : 2,
@@ -195,7 +195,7 @@
       "line-end" : 3228,
       "code" : "return e.EncodeElement(*cp2, start)",
       "entry" : false,
-      "use-vars" : [ 4, 3, 6 ]
+      "use-vars" : [ 3, 6, 4 ]
     } ],
     "code" : "// MarshalXML implements the xml.Marshaler interface for ContainerProperties.\nfunc (cp ContainerProperties) MarshalXML(e *xml.Encoder, start xml.StartElement) error {\n\tcp2 := (*containerProperties)(unsafe.Pointer(&cp))\n\treturn e.EncodeElement(*cp2, start)\n}",
     "defines" : [ 0 ],
@@ -207,7 +207,7 @@
     }, {
       "name" : "EncodeElement",
       "package" : 1,
-      "type" : 43,
+      "type" : 66,
       "exported" : true
     } ],
     "line-end" : 3229,
@@ -528,130 +528,338 @@
       "type" : "Tuple",
       "underlying" : 35
     }, {
-      "elem" : 37,
+      "local-name" : "ContainerProperties",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.ContainerProperties",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 37
+    }, {
+      "fields" : [ {
+        "name" : "LastModified",
+        "type" : 38
+      }, {
+        "name" : "Etag",
+        "type" : 53
+      }, {
+        "name" : "LeaseStatus",
+        "type" : 54
+      }, {
+        "name" : "LeaseState",
+        "type" : 55
+      }, {
+        "name" : "LeaseDuration",
+        "type" : 56
+      }, {
+        "name" : "PublicAccess",
+        "type" : 57
+      }, {
+        "name" : "HasImmutabilityPolicy",
+        "type" : 58
+      }, {
+        "name" : "HasLegalHold",
+        "type" : 58
+      } ],
+      "name" : "struct{LastModified time.Time \"xml:\\\"Last-Modified\\\"\"; Etag github.com/Azure/azure-storage-blob-go/azblob.ETag \"xml:\\\"Etag\\\"\"; LeaseStatus github.com/Azure/azure-storage-blob-go/azblob.LeaseStatusType \"xml:\\\"LeaseStatus\\\"\"; LeaseState github.com/Azure/azure-storage-blob-go/azblob.LeaseStateType \"xml:\\\"LeaseState\\\"\"; LeaseDuration github.com/Azure/azure-storage-blob-go/azblob.LeaseDurationType \"xml:\\\"LeaseDuration\\\"\"; PublicAccess github.com/Azure/azure-storage-blob-go/azblob.PublicAccessType \"xml:\\\"PublicAccess\\\"\"; HasImmutabilityPolicy *bool \"xml:\\\"HasImmutabilityPolicy\\\"\"; HasLegalHold *bool \"xml:\\\"HasLegalHold\\\"\"}",
+      "type" : "Struct",
+      "underlying" : 37
+    }, {
+      "local-name" : "Time",
+      "name" : "time.Time",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 39
+    }, {
+      "fields" : [ {
+        "name" : "wall",
+        "type" : 40
+      }, {
+        "name" : "ext",
+        "type" : 41
+      }, {
+        "name" : "loc",
+        "type" : 42
+      } ],
+      "name" : "struct{wall uint64; ext int64; loc *time.Location}",
+      "type" : "Struct",
+      "underlying" : 39
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 40
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 41
+    }, {
+      "elem" : 43,
+      "name" : "*time.Location",
+      "type" : "Pointer",
+      "underlying" : 42
+    }, {
+      "local-name" : "Location",
+      "name" : "time.Location",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 44
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 15
+      }, {
+        "name" : "zone",
+        "type" : 45
+      }, {
+        "name" : "tx",
+        "type" : 48
+      }, {
+        "name" : "cacheStart",
+        "type" : 41
+      }, {
+        "name" : "cacheEnd",
+        "type" : 41
+      }, {
+        "name" : "cacheZone",
+        "type" : 52
+      } ],
+      "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
+      "type" : "Struct",
+      "underlying" : 44
+    }, {
+      "elem" : 46,
+      "name" : "[]time.zone",
+      "type" : "Slice",
+      "underlying" : 45
+    }, {
+      "local-name" : "zone",
+      "name" : "time.zone",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 47
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 15
+      }, {
+        "name" : "offset",
+        "type" : 18
+      }, {
+        "name" : "isDST",
+        "type" : 24
+      } ],
+      "name" : "struct{name string; offset int; isDST bool}",
+      "type" : "Struct",
+      "underlying" : 47
+    }, {
+      "elem" : 49,
+      "name" : "[]time.zoneTrans",
+      "type" : "Slice",
+      "underlying" : 48
+    }, {
+      "local-name" : "zoneTrans",
+      "name" : "time.zoneTrans",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 50
+    }, {
+      "fields" : [ {
+        "name" : "when",
+        "type" : 41
+      }, {
+        "name" : "index",
+        "type" : 51
+      }, {
+        "name" : "isstd",
+        "type" : 24
+      }, {
+        "name" : "isutc",
+        "type" : 24
+      } ],
+      "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
+      "type" : "Struct",
+      "underlying" : 50
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 51
+    }, {
+      "elem" : 46,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 52
+    }, {
+      "local-name" : "ETag",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.ETag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "local-name" : "LeaseStatusType",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.LeaseStatusType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "local-name" : "LeaseStateType",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.LeaseStateType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "local-name" : "LeaseDurationType",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.LeaseDurationType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "local-name" : "PublicAccessType",
+      "name" : "github.com/Azure/azure-storage-blob-go/azblob.PublicAccessType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "elem" : 24,
+      "name" : "*bool",
+      "type" : "Pointer",
+      "underlying" : 58
+    }, {
+      "elem" : 60,
       "name" : "*github.com/Azure/azure-storage-blob-go/azblob.containerProperties",
       "type" : "Pointer",
-      "underlying" : 36
+      "underlying" : 59
     }, {
       "local-name" : "containerProperties",
       "name" : "github.com/Azure/azure-storage-blob-go/azblob.containerProperties",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 38
+      "underlying" : 61
     }, {
       "fields" : [ {
         "name" : "LastModified",
-        "type" : 39
+        "type" : 62
       }, {
         "name" : "Etag",
-        "type" : 17
+        "type" : 53
       }, {
         "name" : "LeaseStatus",
-        "type" : 18
+        "type" : 54
       }, {
         "name" : "LeaseState",
-        "type" : 19
+        "type" : 55
       }, {
         "name" : "LeaseDuration",
-        "type" : 20
+        "type" : 56
       }, {
         "name" : "PublicAccess",
-        "type" : 21
+        "type" : 57
       }, {
         "name" : "HasImmutabilityPolicy",
-        "type" : 22
+        "type" : 58
       }, {
         "name" : "HasLegalHold",
-        "type" : 22
+        "type" : 58
       } ],
       "name" : "struct{LastModified github.com/Azure/azure-storage-blob-go/azblob.timeRFC1123 \"xml:\\\"Last-Modified\\\"\"; Etag github.com/Azure/azure-storage-blob-go/azblob.ETag \"xml:\\\"Etag\\\"\"; LeaseStatus github.com/Azure/azure-storage-blob-go/azblob.LeaseStatusType \"xml:\\\"LeaseStatus\\\"\"; LeaseState github.com/Azure/azure-storage-blob-go/azblob.LeaseStateType \"xml:\\\"LeaseState\\\"\"; LeaseDuration github.com/Azure/azure-storage-blob-go/azblob.LeaseDurationType \"xml:\\\"LeaseDuration\\\"\"; PublicAccess github.com/Azure/azure-storage-blob-go/azblob.PublicAccessType \"xml:\\\"PublicAccess\\\"\"; HasImmutabilityPolicy *bool \"xml:\\\"HasImmutabilityPolicy\\\"\"; HasLegalHold *bool \"xml:\\\"HasLegalHold\\\"\"}",
       "type" : "Struct",
-      "underlying" : 38
+      "underlying" : 61
     }, {
       "local-name" : "timeRFC1123",
       "name" : "github.com/Azure/azure-storage-blob-go/azblob.timeRFC1123",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 40
+      "underlying" : 63
     }, {
       "fields" : [ {
         "name" : "Time",
-        "type" : 2
+        "type" : 38
       } ],
       "name" : "struct{time.Time}",
       "type" : "Struct",
-      "underlying" : 40
+      "underlying" : 63
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 5,
       "type" : "Basic",
-      "underlying" : 41
+      "underlying" : 64
     }, {
-      "elem" : 0,
+      "elem" : 36,
       "name" : "*github.com/Azure/azure-storage-blob-go/azblob.ContainerProperties",
       "type" : "Pointer",
-      "underlying" : 42
+      "underlying" : 65
     }, {
       "name" : "func(v interface{}, start encoding/xml.StartElement) error",
-      "params" : 44,
+      "params" : 67,
       "recv" : -1,
       "results" : 35,
       "type" : "Signature",
-      "underlying" : 43,
+      "underlying" : 66,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "v",
-        "type" : 45
+        "type" : 68
       }, {
         "name" : "start",
         "type" : 30
       } ],
       "name" : "(v interface{}, start encoding/xml.StartElement)",
       "type" : "Tuple",
-      "underlying" : 44
+      "underlying" : 67
     }, {
       "methods" : [ ],
       "name" : "interface{}",
       "type" : "Interface",
-      "underlying" : 45
+      "underlying" : 68
     } ],
     "variables" : [ {
       "name" : "",
       "package" : -1,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 3,
       "type" : 19,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "cp",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 36,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "e",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "start",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "cp2",
       "package" : 0,
-      "type" : 36,
-      "exported" : false
+      "type" : 59,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

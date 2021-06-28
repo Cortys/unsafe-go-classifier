@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1, 2, 5, 3 ],
+      "in-vars" : [ 2, 3, 0, 1, 5 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2, 5, 3 ],
+      "out-vars" : [ 1, 5, 2, 3, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 0, 1, 2, 5, 3 ],
+      "in-vars" : [ 5, 2, 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 5, 3, 6, 0 ],
+      "out-vars" : [ 6, 3, 0, 1, 5, 2 ],
       "decl-vars" : [ 6 ],
       "line-start" : 864,
       "ast" : {
@@ -90,7 +90,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 6, 0, 1, 2, 5, 3 ],
+      "in-vars" : [ 1, 5, 2, 6, 3, 0 ],
       "exit" : false,
       "out-vars" : [ 6, 3 ],
       "decl-vars" : [ ],
@@ -123,10 +123,10 @@
                       "kind" : "ident",
                       "value" : "reclaim"
                     },
-                    "go-type" : 37,
+                    "go-type" : 119,
                     "kind" : "expression",
                     "target" : {
-                      "go-type" : 0,
+                      "go-type" : 28,
                       "kind" : "expression",
                       "type" : "identifier",
                       "value" : {
@@ -138,13 +138,13 @@
                     },
                     "type" : "selector"
                   },
-                  "go-type" : 58,
+                  "go-type" : 86,
                   "kind" : "expression",
                   "type" : "call"
                 }
               } ],
               "condition" : {
-                "go-type" : 36,
+                "go-type" : 118,
                 "kind" : "expression",
                 "left" : {
                   "field" : {
@@ -156,7 +156,7 @@
                   "go-type" : 17,
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 0,
+                    "go-type" : 28,
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
@@ -225,7 +225,7 @@
                     "variable" : 2
                   }
                 }, {
-                  "go-type" : 23,
+                  "go-type" : 51,
                   "kind" : "expression",
                   "operator" : "&",
                   "target" : {
@@ -238,7 +238,7 @@
                     "go-type" : 14,
                     "kind" : "expression",
                     "target" : {
-                      "go-type" : 28,
+                      "go-type" : 110,
                       "kind" : "expression",
                       "type" : "identifier",
                       "value" : {
@@ -259,10 +259,10 @@
                     "kind" : "ident",
                     "value" : "allocSpan"
                   },
-                  "go-type" : 39,
+                  "go-type" : 121,
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 0,
+                    "go-type" : 28,
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
@@ -280,7 +280,7 @@
               } ],
               "type" : "assign"
             } ],
-            "go-type" : 35,
+            "go-type" : 117,
             "kind" : "literal",
             "params" : [ ],
             "results" : null,
@@ -289,7 +289,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 33,
+            "go-type" : 115,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -298,7 +298,7 @@
               "value" : "systemstack"
             }
           },
-          "go-type" : 58,
+          "go-type" : 86,
           "kind" : "expression",
           "type" : "call"
         }
@@ -307,7 +307,7 @@
       "line-end" : 872,
       "code" : "systemstack(func() {\n\n\tif h.sweepdone == 0 {\n\t\th.reclaim(npages)\n\t}\n\ts = h.allocSpan(npages, false, spanclass, &memstats.heap_inuse)\n})",
       "entry" : false,
-      "use-vars" : [ 0, 1, 5, 2, 6 ]
+      "use-vars" : [ 2, 0, 5, 6, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 8 ],
@@ -318,7 +318,7 @@
       "line-start" : 874,
       "ast" : {
         "condition" : {
-          "go-type" : 36,
+          "go-type" : 118,
           "kind" : "expression",
           "left" : {
             "go-type" : 7,
@@ -333,7 +333,7 @@
           },
           "operator" : "!=",
           "right" : {
-            "go-type" : 42,
+            "go-type" : 124,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -421,7 +421,7 @@
       "line-end" : 877,
       "code" : "if needzero && s.needzero != 0 {\n\tmemclrNoHeapPointers(unsafe.Pointer(s.base()), s.npages<<_PageShift)\n}",
       "entry" : false,
-      "use-vars" : [ 6, 3 ]
+      "use-vars" : [ 3, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
@@ -436,7 +436,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 29,
+              "go-type" : 57,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -446,13 +446,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 29,
+                "go-type" : 57,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 29,
+            "go-type" : 57,
             "kind" : "expression",
             "target" : {
               "arguments" : [ ],
@@ -463,7 +463,7 @@
                   "kind" : "ident",
                   "value" : "base"
                 },
-                "go-type" : 45,
+                "go-type" : 127,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 7,
@@ -510,7 +510,7 @@
             },
             "operator" : "<<",
             "right" : {
-              "go-type" : 47,
+              "go-type" : 129,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -521,7 +521,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 43,
+            "go-type" : 125,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -530,7 +530,7 @@
               "value" : "memclrNoHeapPointers"
             }
           },
-          "go-type" : 58,
+          "go-type" : 86,
           "kind" : "expression",
           "type" : "call"
         }
@@ -626,27 +626,27 @@
     }, {
       "name" : "systemstack",
       "package" : 0,
-      "type" : 33,
+      "type" : 115,
       "exported" : false
     }, {
       "name" : "reclaim",
       "package" : 0,
-      "type" : 37,
+      "type" : 119,
       "exported" : false
     }, {
       "name" : "allocSpan",
       "package" : 0,
-      "type" : 39,
+      "type" : 121,
       "exported" : false
     }, {
       "name" : "memclrNoHeapPointers",
       "package" : 0,
-      "type" : 43,
+      "type" : 125,
       "exported" : false
     }, {
       "name" : "base",
       "package" : 0,
-      "type" : 45,
+      "type" : 127,
       "exported" : false
     } ],
     "line-end" : 881,
@@ -915,11 +915,785 @@
       "type" : "Basic",
       "underlying" : 27
     }, {
+      "elem" : 29,
+      "name" : "*runtime.mheap",
+      "type" : "Pointer",
+      "underlying" : 28
+    }, {
+      "local-name" : "mheap",
+      "name" : "runtime.mheap",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "lock",
+        "type" : 22
+      }, {
+        "name" : "pages",
+        "type" : 31
+      }, {
+        "name" : "sweepgen",
+        "type" : 17
+      }, {
+        "name" : "sweepdone",
+        "type" : 17
+      }, {
+        "name" : "sweepers",
+        "type" : 17
+      }, {
+        "name" : "allspans",
+        "type" : 53
+      }, {
+        "name" : "sweepSpans",
+        "type" : 54
+      }, {
+        "name" : "pagesInUse",
+        "type" : 14
+      }, {
+        "name" : "pagesSwept",
+        "type" : 14
+      }, {
+        "name" : "pagesSweptBasis",
+        "type" : 14
+      }, {
+        "name" : "sweepHeapLiveBasis",
+        "type" : 14
+      }, {
+        "name" : "sweepPagesPerByte",
+        "type" : 58
+      }, {
+        "name" : "scavengeGoal",
+        "type" : 14
+      }, {
+        "name" : "reclaimIndex",
+        "type" : 14
+      }, {
+        "name" : "reclaimCredit",
+        "type" : 2
+      }, {
+        "name" : "largealloc",
+        "type" : 14
+      }, {
+        "name" : "nlargealloc",
+        "type" : 14
+      }, {
+        "name" : "largefree",
+        "type" : 14
+      }, {
+        "name" : "nlargefree",
+        "type" : 14
+      }, {
+        "name" : "nsmallfree",
+        "type" : 59
+      }, {
+        "name" : "arenas",
+        "type" : 60
+      }, {
+        "name" : "heapArenaAlloc",
+        "type" : 69
+      }, {
+        "name" : "arenaHints",
+        "type" : 71
+      }, {
+        "name" : "arena",
+        "type" : 69
+      }, {
+        "name" : "allArenas",
+        "type" : 74
+      }, {
+        "name" : "sweepArenas",
+        "type" : 74
+      }, {
+        "name" : "curArena",
+        "type" : 76
+      }, {
+        "name" : "_",
+        "type" : 17
+      }, {
+        "name" : "central",
+        "type" : 77
+      }, {
+        "name" : "spanalloc",
+        "type" : 82
+      }, {
+        "name" : "cachealloc",
+        "type" : 82
+      }, {
+        "name" : "specialfinalizeralloc",
+        "type" : 82
+      }, {
+        "name" : "specialprofilealloc",
+        "type" : 82
+      }, {
+        "name" : "speciallock",
+        "type" : 22
+      }, {
+        "name" : "arenaHintAlloc",
+        "type" : 82
+      }, {
+        "name" : "unused",
+        "type" : 90
+      } ],
+      "name" : "struct{lock runtime.mutex; pages runtime.pageAlloc; sweepgen uint32; sweepdone uint32; sweepers uint32; allspans []*runtime.mspan; sweepSpans [2]runtime.gcSweepBuf; pagesInUse uint64; pagesSwept uint64; pagesSweptBasis uint64; sweepHeapLiveBasis uint64; sweepPagesPerByte float64; scavengeGoal uint64; reclaimIndex uint64; reclaimCredit uintptr; largealloc uint64; nlargealloc uint64; largefree uint64; nlargefree uint64; nsmallfree [67]uint64; arenas [1]*[4194304]*runtime.heapArena; heapArenaAlloc runtime.linearAlloc; arenaHints *runtime.arenaHint; arena runtime.linearAlloc; allArenas []runtime.arenaIdx; sweepArenas []runtime.arenaIdx; curArena struct{base uintptr; end uintptr}; _ uint32; central [134]struct{mcentral runtime.mcentral; pad [8]byte}; spanalloc runtime.fixalloc; cachealloc runtime.fixalloc; specialfinalizeralloc runtime.fixalloc; specialprofilealloc runtime.fixalloc; speciallock runtime.mutex; arenaHintAlloc runtime.fixalloc; unused *runtime.specialfinalizer}",
+      "type" : "Struct",
+      "underlying" : 30
+    }, {
+      "local-name" : "pageAlloc",
+      "name" : "runtime.pageAlloc",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 32
+    }, {
+      "fields" : [ {
+        "name" : "summary",
+        "type" : 33
+      }, {
+        "name" : "chunks",
+        "type" : 36
+      }, {
+        "name" : "searchAddr",
+        "type" : 2
+      }, {
+        "name" : "scavAddr",
+        "type" : 2
+      }, {
+        "name" : "scavReleased",
+        "type" : 2
+      }, {
+        "name" : "start",
+        "type" : 44
+      }, {
+        "name" : "end",
+        "type" : 44
+      }, {
+        "name" : "inUse",
+        "type" : 46
+      }, {
+        "name" : "mheapLock",
+        "type" : 52
+      }, {
+        "name" : "sysStat",
+        "type" : 51
+      }, {
+        "name" : "test",
+        "type" : 5
+      } ],
+      "name" : "struct{summary [5][]runtime.pallocSum; chunks [8192]*[8192]runtime.pallocData; searchAddr uintptr; scavAddr uintptr; scavReleased uintptr; start runtime.chunkIdx; end runtime.chunkIdx; inUse runtime.addrRanges; mheapLock *runtime.mutex; sysStat *uint64; test bool}",
+      "type" : "Struct",
+      "underlying" : 32
+    }, {
+      "elem" : 34,
+      "name" : "[5][]runtime.pallocSum",
+      "type" : "Array",
+      "underlying" : 33
+    }, {
+      "elem" : 35,
+      "name" : "[]runtime.pallocSum",
+      "type" : "Slice",
+      "underlying" : 34
+    }, {
+      "local-name" : "pallocSum",
+      "name" : "runtime.pallocSum",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 14
+    }, {
+      "elem" : 37,
+      "name" : "[8192]*[8192]runtime.pallocData",
+      "type" : "Array",
+      "underlying" : 36
+    }, {
+      "elem" : 38,
+      "name" : "*[8192]runtime.pallocData",
+      "type" : "Pointer",
+      "underlying" : 37
+    }, {
+      "elem" : 39,
+      "name" : "[8192]runtime.pallocData",
+      "type" : "Array",
+      "underlying" : 38
+    }, {
+      "local-name" : "pallocData",
+      "name" : "runtime.pallocData",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 40
+    }, {
+      "fields" : [ {
+        "name" : "pallocBits",
+        "type" : 41
+      }, {
+        "name" : "scavenged",
+        "type" : 43
+      } ],
+      "name" : "struct{runtime.pallocBits; scavenged runtime.pageBits}",
+      "type" : "Struct",
+      "underlying" : 40
+    }, {
+      "local-name" : "pallocBits",
+      "name" : "runtime.pallocBits",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 42
+    }, {
+      "elem" : 14,
+      "name" : "[8]uint64",
+      "type" : "Array",
+      "underlying" : 42
+    }, {
+      "local-name" : "pageBits",
+      "name" : "runtime.pageBits",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 42
+    }, {
+      "local-name" : "chunkIdx",
+      "name" : "runtime.chunkIdx",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 45
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 45
+    }, {
+      "local-name" : "addrRanges",
+      "name" : "runtime.addrRanges",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 47
+    }, {
+      "fields" : [ {
+        "name" : "ranges",
+        "type" : 48
+      }, {
+        "name" : "sysStat",
+        "type" : 51
+      } ],
+      "name" : "struct{ranges []runtime.addrRange; sysStat *uint64}",
+      "type" : "Struct",
+      "underlying" : 47
+    }, {
+      "elem" : 49,
+      "name" : "[]runtime.addrRange",
+      "type" : "Slice",
+      "underlying" : 48
+    }, {
+      "local-name" : "addrRange",
+      "name" : "runtime.addrRange",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 50
+    }, {
+      "fields" : [ {
+        "name" : "base",
+        "type" : 2
+      }, {
+        "name" : "limit",
+        "type" : 2
+      } ],
+      "name" : "struct{base uintptr; limit uintptr}",
+      "type" : "Struct",
+      "underlying" : 50
+    }, {
+      "elem" : 14,
+      "name" : "*uint64",
+      "type" : "Pointer",
+      "underlying" : 51
+    }, {
+      "elem" : 22,
+      "name" : "*runtime.mutex",
+      "type" : "Pointer",
+      "underlying" : 52
+    }, {
+      "elem" : 7,
+      "name" : "[]*runtime.mspan",
+      "type" : "Slice",
+      "underlying" : 53
+    }, {
+      "elem" : 55,
+      "name" : "[2]runtime.gcSweepBuf",
+      "type" : "Array",
+      "underlying" : 54
+    }, {
+      "local-name" : "gcSweepBuf",
+      "name" : "runtime.gcSweepBuf",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 56
+    }, {
+      "fields" : [ {
+        "name" : "spineLock",
+        "type" : 22
+      }, {
+        "name" : "spine",
+        "type" : 57
+      }, {
+        "name" : "spineLen",
+        "type" : 2
+      }, {
+        "name" : "spineCap",
+        "type" : 2
+      }, {
+        "name" : "index",
+        "type" : 17
+      } ],
+      "name" : "struct{spineLock runtime.mutex; spine unsafe.Pointer; spineLen uintptr; spineCap uintptr; index uint32}",
+      "type" : "Struct",
+      "underlying" : 56
+    }, {
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
+      "type" : "Basic",
+      "underlying" : 57
+    }, {
+      "name" : "float64",
+      "type" : "Basic",
+      "underlying" : 58
+    }, {
+      "elem" : 14,
+      "name" : "[67]uint64",
+      "type" : "Array",
+      "underlying" : 59
+    }, {
+      "elem" : 61,
+      "name" : "[1]*[4194304]*runtime.heapArena",
+      "type" : "Array",
+      "underlying" : 60
+    }, {
+      "elem" : 62,
+      "name" : "*[4194304]*runtime.heapArena",
+      "type" : "Pointer",
+      "underlying" : 61
+    }, {
+      "elem" : 63,
+      "name" : "[4194304]*runtime.heapArena",
+      "type" : "Array",
+      "underlying" : 62
+    }, {
+      "elem" : 64,
+      "name" : "*runtime.heapArena",
+      "type" : "Pointer",
+      "underlying" : 63
+    }, {
+      "local-name" : "heapArena",
+      "name" : "runtime.heapArena",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 65
+    }, {
+      "fields" : [ {
+        "name" : "bitmap",
+        "type" : 66
+      }, {
+        "name" : "spans",
+        "type" : 67
+      }, {
+        "name" : "pageInUse",
+        "type" : 68
+      }, {
+        "name" : "pageMarks",
+        "type" : 68
+      }, {
+        "name" : "zeroedBase",
+        "type" : 2
+      } ],
+      "name" : "struct{bitmap [2097152]byte; spans [8192]*runtime.mspan; pageInUse [1024]uint8; pageMarks [1024]uint8; zeroedBase uintptr}",
+      "type" : "Struct",
+      "underlying" : 65
+    }, {
+      "elem" : 27,
+      "name" : "[2097152]byte",
+      "type" : "Array",
+      "underlying" : 66
+    }, {
+      "elem" : 7,
+      "name" : "[8192]*runtime.mspan",
+      "type" : "Array",
+      "underlying" : 67
+    }, {
+      "elem" : 4,
+      "name" : "[1024]uint8",
+      "type" : "Array",
+      "underlying" : 68
+    }, {
+      "local-name" : "linearAlloc",
+      "name" : "runtime.linearAlloc",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 70
+    }, {
+      "fields" : [ {
+        "name" : "next",
+        "type" : 2
+      }, {
+        "name" : "mapped",
+        "type" : 2
+      }, {
+        "name" : "end",
+        "type" : 2
+      } ],
+      "name" : "struct{next uintptr; mapped uintptr; end uintptr}",
+      "type" : "Struct",
+      "underlying" : 70
+    }, {
+      "elem" : 72,
+      "name" : "*runtime.arenaHint",
+      "type" : "Pointer",
+      "underlying" : 71
+    }, {
+      "local-name" : "arenaHint",
+      "name" : "runtime.arenaHint",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 73
+    }, {
+      "fields" : [ {
+        "name" : "addr",
+        "type" : 2
+      }, {
+        "name" : "down",
+        "type" : 5
+      }, {
+        "name" : "next",
+        "type" : 71
+      } ],
+      "name" : "struct{addr uintptr; down bool; next *runtime.arenaHint}",
+      "type" : "Struct",
+      "underlying" : 73
+    }, {
+      "elem" : 75,
+      "name" : "[]runtime.arenaIdx",
+      "type" : "Slice",
+      "underlying" : 74
+    }, {
+      "local-name" : "arenaIdx",
+      "name" : "runtime.arenaIdx",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 45
+    }, {
+      "fields" : [ {
+        "name" : "base",
+        "type" : 2
+      }, {
+        "name" : "end",
+        "type" : 2
+      } ],
+      "name" : "struct{base uintptr; end uintptr}",
+      "type" : "Struct",
+      "underlying" : 76
+    }, {
+      "elem" : 78,
+      "name" : "[134]struct{mcentral runtime.mcentral; pad [8]byte}",
+      "type" : "Array",
+      "underlying" : 77
+    }, {
+      "fields" : [ {
+        "name" : "mcentral",
+        "type" : 79
+      }, {
+        "name" : "pad",
+        "type" : 81
+      } ],
+      "name" : "struct{mcentral runtime.mcentral; pad [8]byte}",
+      "type" : "Struct",
+      "underlying" : 78
+    }, {
+      "local-name" : "mcentral",
+      "name" : "runtime.mcentral",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "fields" : [ {
+        "name" : "lock",
+        "type" : 22
+      }, {
+        "name" : "spanclass",
+        "type" : 3
+      }, {
+        "name" : "nonempty",
+        "type" : 11
+      }, {
+        "name" : "empty",
+        "type" : 11
+      }, {
+        "name" : "nmalloc",
+        "type" : 14
+      } ],
+      "name" : "struct{lock runtime.mutex; spanclass runtime.spanClass; nonempty runtime.mSpanList; empty runtime.mSpanList; nmalloc uint64}",
+      "type" : "Struct",
+      "underlying" : 80
+    }, {
+      "elem" : 27,
+      "name" : "[8]byte",
+      "type" : "Array",
+      "underlying" : 81
+    }, {
+      "local-name" : "fixalloc",
+      "name" : "runtime.fixalloc",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 83
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 2
+      }, {
+        "name" : "first",
+        "type" : 84
+      }, {
+        "name" : "arg",
+        "type" : 57
+      }, {
+        "name" : "list",
+        "type" : 87
+      }, {
+        "name" : "chunk",
+        "type" : 2
+      }, {
+        "name" : "nchunk",
+        "type" : 17
+      }, {
+        "name" : "inuse",
+        "type" : 2
+      }, {
+        "name" : "stat",
+        "type" : 51
+      }, {
+        "name" : "zero",
+        "type" : 5
+      } ],
+      "name" : "struct{size uintptr; first func(arg unsafe.Pointer, p unsafe.Pointer); arg unsafe.Pointer; list *runtime.mlink; chunk uintptr; nchunk uint32; inuse uintptr; stat *uint64; zero bool}",
+      "type" : "Struct",
+      "underlying" : 83
+    }, {
+      "name" : "func(arg unsafe.Pointer, p unsafe.Pointer)",
+      "params" : 85,
+      "recv" : -1,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 84,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "arg",
+        "type" : 57
+      }, {
+        "name" : "p",
+        "type" : 57
+      } ],
+      "name" : "(arg unsafe.Pointer, p unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 85
+    }, {
+      "fields" : [ ],
+      "name" : "()",
+      "type" : "Tuple",
+      "underlying" : 86
+    }, {
+      "elem" : 88,
+      "name" : "*runtime.mlink",
+      "type" : "Pointer",
+      "underlying" : 87
+    }, {
+      "local-name" : "mlink",
+      "name" : "runtime.mlink",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 89
+    }, {
+      "fields" : [ {
+        "name" : "next",
+        "type" : 87
+      } ],
+      "name" : "struct{next *runtime.mlink}",
+      "type" : "Struct",
+      "underlying" : 89
+    }, {
+      "elem" : 91,
+      "name" : "*runtime.specialfinalizer",
+      "type" : "Pointer",
+      "underlying" : 90
+    }, {
+      "local-name" : "specialfinalizer",
+      "name" : "runtime.specialfinalizer",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 92
+    }, {
+      "fields" : [ {
+        "name" : "special",
+        "type" : 25
+      }, {
+        "name" : "fn",
+        "type" : 93
+      }, {
+        "name" : "nret",
+        "type" : 2
+      }, {
+        "name" : "fint",
+        "type" : 96
+      }, {
+        "name" : "ot",
+        "type" : 107
+      } ],
+      "name" : "struct{special runtime.special; fn *runtime.funcval; nret uintptr; fint *runtime._type; ot *runtime.ptrtype}",
+      "type" : "Struct",
+      "underlying" : 92
+    }, {
+      "elem" : 94,
+      "name" : "*runtime.funcval",
+      "type" : "Pointer",
+      "underlying" : 93
+    }, {
+      "local-name" : "funcval",
+      "name" : "runtime.funcval",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 95
+    }, {
+      "fields" : [ {
+        "name" : "fn",
+        "type" : 2
+      } ],
+      "name" : "struct{fn uintptr}",
+      "type" : "Struct",
+      "underlying" : 95
+    }, {
+      "elem" : 97,
+      "name" : "*runtime._type",
+      "type" : "Pointer",
+      "underlying" : 96
+    }, {
+      "local-name" : "_type",
+      "name" : "runtime._type",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 98
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 2
+      }, {
+        "name" : "ptrdata",
+        "type" : 2
+      }, {
+        "name" : "hash",
+        "type" : 17
+      }, {
+        "name" : "tflag",
+        "type" : 99
+      }, {
+        "name" : "align",
+        "type" : 4
+      }, {
+        "name" : "fieldAlign",
+        "type" : 4
+      }, {
+        "name" : "kind",
+        "type" : 4
+      }, {
+        "name" : "equal",
+        "type" : 100
+      }, {
+        "name" : "gcdata",
+        "type" : 103
+      }, {
+        "name" : "str",
+        "type" : 104
+      }, {
+        "name" : "ptrToThis",
+        "type" : 106
+      } ],
+      "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag runtime.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str runtime.nameOff; ptrToThis runtime.typeOff}",
+      "type" : "Struct",
+      "underlying" : 98
+    }, {
+      "local-name" : "tflag",
+      "name" : "runtime.tflag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
+      "params" : 101,
+      "recv" : -1,
+      "results" : 102,
+      "type" : "Signature",
+      "underlying" : 100,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 57
+      }, {
+        "name" : "",
+        "type" : 57
+      } ],
+      "name" : "(unsafe.Pointer, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 101
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 5
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 102
+    }, {
+      "elem" : 27,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 103
+    }, {
+      "local-name" : "nameOff",
+      "name" : "runtime.nameOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 105
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 105
+    }, {
+      "local-name" : "typeOff",
+      "name" : "runtime.typeOff",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 105
+    }, {
+      "elem" : 108,
+      "name" : "*runtime.ptrtype",
+      "type" : "Pointer",
+      "underlying" : 107
+    }, {
+      "local-name" : "ptrtype",
+      "name" : "runtime.ptrtype",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 109
+    }, {
+      "fields" : [ {
+        "name" : "typ",
+        "type" : 97
+      }, {
+        "name" : "elem",
+        "type" : 96
+      } ],
+      "name" : "struct{typ runtime._type; elem *runtime._type}",
+      "type" : "Struct",
+      "underlying" : 109
+    }, {
       "local-name" : "mstats",
       "name" : "runtime.mstats",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 29
+      "underlying" : 111
     }, {
       "fields" : [ {
         "name" : "alloc",
@@ -995,10 +1769,10 @@
         "type" : 14
       }, {
         "name" : "pause_ns",
-        "type" : 30
+        "type" : 112
       }, {
         "name" : "pause_end",
-        "type" : 30
+        "type" : 112
       }, {
         "name" : "numgc",
         "type" : 17
@@ -1007,7 +1781,7 @@
         "type" : 17
       }, {
         "name" : "gc_cpu_fraction",
-        "type" : 30
+        "type" : 58
       }, {
         "name" : "enablegc",
         "type" : 5
@@ -1016,7 +1790,7 @@
         "type" : 5
       }, {
         "name" : "by_size",
-        "type" : 31
+        "type" : 113
       }, {
         "name" : "last_gc_nanotime",
         "type" : 14
@@ -1031,7 +1805,7 @@
         "type" : 14
       }, {
         "name" : "triggerRatio",
-        "type" : 30
+        "type" : 58
       }, {
         "name" : "gc_trigger",
         "type" : 14
@@ -1047,17 +1821,17 @@
       } ],
       "name" : "struct{alloc uint64; total_alloc uint64; sys uint64; nlookup uint64; nmalloc uint64; nfree uint64; heap_alloc uint64; heap_sys uint64; heap_idle uint64; heap_inuse uint64; heap_released uint64; heap_objects uint64; stacks_inuse uint64; stacks_sys uint64; mspan_inuse uint64; mspan_sys uint64; mcache_inuse uint64; mcache_sys uint64; buckhash_sys uint64; gc_sys uint64; other_sys uint64; next_gc uint64; last_gc_unix uint64; pause_total_ns uint64; pause_ns [256]uint64; pause_end [256]uint64; numgc uint32; numforcedgc uint32; gc_cpu_fraction float64; enablegc bool; debuggc bool; by_size [67]struct{size uint32; nmalloc uint64; nfree uint64}; last_gc_nanotime uint64; tinyallocs uint64; last_next_gc uint64; last_heap_inuse uint64; triggerRatio float64; gc_trigger uint64; heap_live uint64; heap_scan uint64; heap_marked uint64}",
       "type" : "Struct",
-      "underlying" : 29
+      "underlying" : 111
     }, {
       "elem" : 14,
       "name" : "[256]uint64",
       "type" : "Array",
-      "underlying" : 30
+      "underlying" : 112
     }, {
-      "elem" : 32,
+      "elem" : 114,
       "name" : "[67]struct{size uint32; nmalloc uint64; nfree uint64}",
       "type" : "Array",
-      "underlying" : 31
+      "underlying" : 113
     }, {
       "fields" : [ {
         "name" : "size",
@@ -1071,42 +1845,42 @@
       } ],
       "name" : "struct{size uint32; nmalloc uint64; nfree uint64}",
       "type" : "Struct",
-      "underlying" : 32
+      "underlying" : 114
     }, {
       "name" : "func(fn func())",
-      "params" : 34,
+      "params" : 116,
       "recv" : -1,
-      "results" : 58,
+      "results" : 86,
       "type" : "Signature",
-      "underlying" : 33,
+      "underlying" : 115,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 35
+        "type" : 117
       } ],
       "name" : "(fn func())",
       "type" : "Tuple",
-      "underlying" : 34
+      "underlying" : 116
     }, {
       "name" : "func()",
-      "params" : 58,
+      "params" : 86,
       "recv" : -1,
-      "results" : 58,
+      "results" : 86,
       "type" : "Signature",
-      "underlying" : 35,
+      "underlying" : 117,
       "variadic" : false
     }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 36
+      "underlying" : 118
     }, {
       "name" : "func(npage uintptr)",
-      "params" : 38,
+      "params" : 120,
       "recv" : -1,
-      "results" : 58,
+      "results" : 86,
       "type" : "Signature",
-      "underlying" : 37,
+      "underlying" : 119,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1115,14 +1889,14 @@
       } ],
       "name" : "(npage uintptr)",
       "type" : "Tuple",
-      "underlying" : 38
+      "underlying" : 120
     }, {
       "name" : "func(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64) (s *runtime.mspan)",
-      "params" : 40,
+      "params" : 122,
       "recv" : -1,
-      "results" : 41,
+      "results" : 123,
       "type" : "Signature",
-      "underlying" : 39,
+      "underlying" : 121,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1136,11 +1910,11 @@
         "type" : 3
       }, {
         "name" : "sysStat",
-        "type" : 23
+        "type" : 51
       } ],
       "name" : "(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64)",
       "type" : "Tuple",
-      "underlying" : 40
+      "underlying" : 122
     }, {
       "fields" : [ {
         "name" : "s",
@@ -1148,37 +1922,37 @@
       } ],
       "name" : "(s *runtime.mspan)",
       "type" : "Tuple",
-      "underlying" : 41
+      "underlying" : 123
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 42
+      "underlying" : 124
     }, {
       "name" : "func(ptr unsafe.Pointer, n uintptr)",
-      "params" : 44,
+      "params" : 126,
       "recv" : -1,
-      "results" : 58,
+      "results" : 86,
       "type" : "Signature",
-      "underlying" : 43,
+      "underlying" : 125,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "ptr",
-        "type" : 29
+        "type" : 57
       }, {
         "name" : "n",
         "type" : 2
       } ],
       "name" : "(ptr unsafe.Pointer, n uintptr)",
       "type" : "Tuple",
-      "underlying" : 44
+      "underlying" : 126
     }, {
       "name" : "func() uintptr",
-      "params" : 58,
+      "params" : 86,
       "recv" : -1,
-      "results" : 46,
+      "results" : 128,
       "type" : "Signature",
-      "underlying" : 45,
+      "underlying" : 127,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1187,67 +1961,89 @@
       } ],
       "name" : "(uintptr)",
       "type" : "Tuple",
-      "underlying" : 46
+      "underlying" : 128
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 47
+      "underlying" : 129
     } ],
     "variables" : [ {
       "name" : "h",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 28,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "npages",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "spanclass",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "needzero",
       "package" : 0,
       "type" : 5,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "memstats",
       "package" : 0,
-      "type" : 28,
-      "exported" : false
+      "type" : 110,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "s",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "sweepdone",
       "package" : 0,
       "type" : 17,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "heap_inuse",
       "package" : 0,
       "type" : 14,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "needzero",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "npages",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

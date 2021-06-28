@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 63, 64 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,14 +42,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 63, 68, 64 ],
+      "in-vars" : [ 71, 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 63, 68, 64 ],
+      "out-vars" : [ 71, 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 299,
       "ast" : {
         "condition" : {
-          "go-type" : 223,
+          "go-type" : 256,
           "kind" : "expression",
           "left" : {
             "go-type" : 100,
@@ -59,12 +59,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 68
+              "variable" : 71
             }
           },
           "operator" : "!=",
           "right" : {
-            "go-type" : 224,
+            "go-type" : 257,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -82,14 +82,14 @@
       "line-end" : 301,
       "code" : "if err := checkNativeSelectable(t, axis, Uint8); err != nil {\n\treturn nil, err\n}",
       "entry" : false,
-      "use-vars" : [ 68 ]
+      "use-vars" : [ 71 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 63, 68, 64 ],
-      "decl-vars" : [ 68 ],
+      "out-vars" : [ 71, 67, 66 ],
+      "decl-vars" : [ 71 ],
       "line-start" : 299,
       "ast" : {
         "kind" : "statement",
@@ -112,7 +112,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "t",
-              "variable" : 63
+              "variable" : 66
             }
           }, {
             "go-type" : 9,
@@ -122,7 +122,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "axis",
-              "variable" : 64
+              "variable" : 67
             }
           }, {
             "go-type" : 19,
@@ -132,12 +132,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "Uint8",
-              "variable" : 67
+              "variable" : 70
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 221,
+            "go-type" : 254,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -156,11 +156,11 @@
       "line-end" : 299,
       "code" : "err := checkNativeSelectable(t, axis, Uint8)",
       "entry" : false,
-      "use-vars" : [ 63, 64 ]
+      "use-vars" : [ 66, 67 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 68 ],
+      "in-vars" : [ 71 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -169,7 +169,7 @@
         "kind" : "statement",
         "type" : "return",
         "values" : [ {
-          "go-type" : 224,
+          "go-type" : 257,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -185,7 +185,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 68
+            "variable" : 71
           }
         } ]
       },
@@ -193,13 +193,13 @@
       "line-end" : 300,
       "code" : "return nil, err",
       "entry" : false,
-      "use-vars" : [ 68 ]
+      "use-vars" : [ 71 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 9, 13 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 66, 67 ],
       "exit" : false,
-      "out-vars" : [ 64, 63 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 303,
       "ast" : {
@@ -223,7 +223,7 @@
                   "kind" : "ident",
                   "value" : "Shape"
                 },
-                "go-type" : 174,
+                "go-type" : 184,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -233,7 +233,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "t",
-                    "variable" : 63
+                    "variable" : 66
                   }
                 },
                 "type" : "selector"
@@ -255,13 +255,13 @@
       "line-end" : 329,
       "code" : "switch t.Shape().Dims() {\ncase 0, 1:\n\tretVal = make([][]uint8, 1)\n\tretVal[0] = t.Uint8s()\ncase 2:\n\tif axis == 0 {\n\t\treturn MatrixU8(t)\n\t}\n\tfallthrough\ndefault:\n\n\tdata := t.Uint8s()\n\tstride := t.Strides()[axis]\n\tupper := ProdInts(t.Shape()[:axis+1])\n\tretVal = make([][]uint8, 0, upper)\n\tfor i, r := 0, 0; r < upper; i += stride {\n\t\thdr := &reflect.SliceHeader{\n\t\t\tData: uintptr(unsafe.Pointer(&data[i])),\n\t\t\tLen:  stride,\n\t\t\tCap:  stride,\n\t\t}\n\t\tretVal = append(retVal, *(*[]uint8)(unsafe.Pointer(hdr)))\n\t\tr++\n\t}\n\treturn retVal, nil\n\n}",
       "entry" : false,
-      "use-vars" : [ 63 ]
+      "use-vars" : [ 66 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 63 ],
+      "in-vars" : [ 66 ],
       "exit" : false,
-      "out-vars" : [ 63 ],
+      "out-vars" : [ 66 ],
       "decl-vars" : [ ],
       "line-start" : 304,
       "ast" : {
@@ -289,24 +289,24 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 65 ],
+      "update-vars" : [ 68 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 63 ],
+      "in-vars" : [ 66 ],
       "exit" : false,
-      "out-vars" : [ 65, 63 ],
+      "out-vars" : [ 68, 66 ],
       "decl-vars" : [ ],
       "line-start" : 305,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "retVal",
-            "variable" : 65
+            "variable" : 68
           }
         } ],
         "right" : [ {
@@ -323,15 +323,15 @@
                   "value" : "uint8"
                 }
               },
-              "go-type" : 220,
+              "go-type" : 253,
               "kind" : "type",
               "type" : "slice"
             },
-            "go-type" : 219,
+            "go-type" : 252,
             "kind" : "type",
             "type" : "slice"
           },
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "rest" : [ {
             "go-type" : 9,
@@ -345,15 +345,15 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 65 ],
+      "assign-vars" : [ 68 ],
       "line-end" : 305,
       "code" : "retVal = make([][]uint8, 1)",
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 65 ],
+      "update-vars" : [ 68 ],
       "successors" : [ 25 ],
-      "in-vars" : [ 65, 63 ],
+      "in-vars" : [ 68, 66 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -361,7 +361,7 @@
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 220,
+          "go-type" : 253,
           "index" : {
             "go-type" : 9,
             "kind" : "constant",
@@ -372,14 +372,14 @@
           },
           "kind" : "expression",
           "target" : {
-            "go-type" : 219,
+            "go-type" : 252,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "retVal",
-              "variable" : 65
+              "variable" : 68
             }
           },
           "type" : "index"
@@ -393,7 +393,7 @@
               "kind" : "ident",
               "value" : "Uint8s"
             },
-            "go-type" : 225,
+            "go-type" : 258,
             "kind" : "expression",
             "target" : {
               "go-type" : 2,
@@ -403,12 +403,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "t",
-                "variable" : 63
+                "variable" : 66
               }
             },
             "type" : "selector"
           },
-          "go-type" : 220,
+          "go-type" : 253,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -418,13 +418,13 @@
       "line-end" : 306,
       "code" : "retVal[0] = t.Uint8s()",
       "entry" : false,
-      "use-vars" : [ 63, 65 ]
+      "use-vars" : [ 68, 66 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 66, 67 ],
       "exit" : false,
-      "out-vars" : [ 63, 64 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 307,
       "ast" : {
@@ -447,14 +447,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11, 12 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 64, 63 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 308,
       "ast" : {
         "condition" : {
-          "go-type" : 223,
+          "go-type" : 256,
           "kind" : "expression",
           "left" : {
             "go-type" : 9,
@@ -464,7 +464,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "axis",
-              "variable" : 64
+              "variable" : 67
             }
           },
           "operator" : "==",
@@ -485,11 +485,11 @@
       "line-end" : 310,
       "code" : "if axis == 0 {\n\treturn MatrixU8(t)\n}",
       "entry" : false,
-      "use-vars" : [ 64 ]
+      "use-vars" : [ 67 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 63 ],
+      "in-vars" : [ 66 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -506,12 +506,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "t",
-              "variable" : 63
+              "variable" : 66
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 227,
+            "go-type" : 260,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -520,7 +520,7 @@
               "value" : "MatrixU8"
             }
           },
-          "go-type" : 218,
+          "go-type" : 251,
           "kind" : "expression",
           "type" : "call"
         } ]
@@ -529,13 +529,13 @@
       "line-end" : 309,
       "code" : "return MatrixU8(t)",
       "entry" : false,
-      "use-vars" : [ 63 ]
+      "use-vars" : [ 66 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 63, 64 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 311,
       "ast" : {
@@ -550,9 +550,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 63, 64 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 312,
       "ast" : {
@@ -568,10 +568,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 63, 64 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 64, 74, 63 ],
-      "decl-vars" : [ 74 ],
+      "out-vars" : [ 77, 67, 66 ],
+      "decl-vars" : [ 77 ],
       "line-start" : 314,
       "ast" : {
         "kind" : "statement",
@@ -594,7 +594,7 @@
               "kind" : "ident",
               "value" : "Uint8s"
             },
-            "go-type" : 225,
+            "go-type" : 258,
             "kind" : "expression",
             "target" : {
               "go-type" : 2,
@@ -604,12 +604,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "t",
-                "variable" : 63
+                "variable" : 66
               }
             },
             "type" : "selector"
           },
-          "go-type" : 220,
+          "go-type" : 253,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -619,14 +619,14 @@
       "line-end" : 314,
       "code" : "data := t.Uint8s()",
       "entry" : false,
-      "use-vars" : [ 63 ]
+      "use-vars" : [ 66 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 63, 64, 74 ],
+      "in-vars" : [ 77, 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 72, 63, 64, 74 ],
-      "decl-vars" : [ 72 ],
+      "out-vars" : [ 75, 77, 67, 66 ],
+      "decl-vars" : [ 75 ],
       "line-start" : 315,
       "ast" : {
         "kind" : "statement",
@@ -650,7 +650,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "axis",
-              "variable" : 64
+              "variable" : 67
             }
           },
           "kind" : "expression",
@@ -663,7 +663,7 @@
                 "kind" : "ident",
                 "value" : "Strides"
               },
-              "go-type" : 166,
+              "go-type" : 176,
               "kind" : "expression",
               "target" : {
                 "go-type" : 2,
@@ -673,7 +673,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 63
+                  "variable" : 66
                 }
               },
               "type" : "selector"
@@ -690,14 +690,14 @@
       "line-end" : 315,
       "code" : "stride := t.Strides()[axis]",
       "entry" : false,
-      "use-vars" : [ 63, 64 ]
+      "use-vars" : [ 66, 67 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 72, 63, 64, 74 ],
+      "in-vars" : [ 67, 66, 75, 77 ],
       "exit" : false,
-      "out-vars" : [ 69, 74, 72 ],
-      "decl-vars" : [ 69 ],
+      "out-vars" : [ 75, 77, 72 ],
+      "decl-vars" : [ 72 ],
       "line-start" : 316,
       "ast" : {
         "kind" : "statement",
@@ -727,7 +727,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "axis",
-                  "variable" : 64
+                  "variable" : 67
                 }
               },
               "operator" : "+",
@@ -753,7 +753,7 @@
                   "kind" : "ident",
                   "value" : "Shape"
                 },
-                "go-type" : 174,
+                "go-type" : 184,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -763,7 +763,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "t",
-                    "variable" : 63
+                    "variable" : 66
                   }
                 },
                 "type" : "selector"
@@ -775,7 +775,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 229,
+            "go-type" : 262,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -794,26 +794,26 @@
       "line-end" : 316,
       "code" : "upper := ProdInts(t.Shape()[:axis+1])",
       "entry" : false,
-      "use-vars" : [ 63, 64 ]
+      "use-vars" : [ 66, 67 ]
     }, {
-      "update-vars" : [ 65 ],
+      "update-vars" : [ 68 ],
       "successors" : [ 19 ],
-      "in-vars" : [ 72, 69, 74 ],
+      "in-vars" : [ 75, 77, 72 ],
       "exit" : false,
-      "out-vars" : [ 65, 69, 74, 72 ],
+      "out-vars" : [ 75, 77, 68, 72 ],
       "decl-vars" : [ ],
       "line-start" : 317,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "retVal",
-            "variable" : 65
+            "variable" : 68
           }
         } ],
         "right" : [ {
@@ -830,15 +830,15 @@
                   "value" : "uint8"
                 }
               },
-              "go-type" : 220,
+              "go-type" : 253,
               "kind" : "type",
               "type" : "slice"
             },
-            "go-type" : 219,
+            "go-type" : 252,
             "kind" : "type",
             "type" : "slice"
           },
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "rest" : [ {
             "go-type" : 9,
@@ -855,29 +855,29 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "upper",
-              "variable" : 69
+              "variable" : 72
             }
           } ],
           "type" : "make"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 65 ],
+      "assign-vars" : [ 68 ],
       "line-end" : 317,
       "code" : "retVal = make([][]uint8, 0, upper)",
       "entry" : false,
-      "use-vars" : [ 69 ]
+      "use-vars" : [ 72 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 24 ],
-      "in-vars" : [ 65, 69, 74, 70, 71, 72 ],
+      "in-vars" : [ 68, 72, 73, 74, 75, 77 ],
       "exit" : false,
-      "out-vars" : [ 65, 69, 74, 70, 71, 72 ],
+      "out-vars" : [ 73, 74, 75, 77, 68, 72 ],
       "decl-vars" : [ ],
       "line-start" : 318,
       "ast" : {
         "condition" : {
-          "go-type" : 223,
+          "go-type" : 256,
           "kind" : "expression",
           "left" : {
             "go-type" : 9,
@@ -887,7 +887,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r",
-              "variable" : 70
+              "variable" : 73
             }
           },
           "operator" : "<",
@@ -899,7 +899,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "upper",
-              "variable" : 69
+              "variable" : 72
             }
           },
           "type" : "binary"
@@ -911,14 +911,14 @@
       "line-end" : 326,
       "code" : "for i, r := 0, 0; r < upper; i += stride {\n\thdr := &reflect.SliceHeader{\n\t\tData: uintptr(unsafe.Pointer(&data[i])),\n\t\tLen:  stride,\n\t\tCap:  stride,\n\t}\n\tretVal = append(retVal, *(*[]uint8)(unsafe.Pointer(hdr)))\n\tr++\n}",
       "entry" : false,
-      "use-vars" : [ 70, 69 ]
+      "use-vars" : [ 73, 72 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 74, 72, 65, 69 ],
+      "in-vars" : [ 72, 75, 77, 68 ],
       "exit" : false,
-      "out-vars" : [ 69, 74, 70, 71, 72, 65 ],
-      "decl-vars" : [ 70, 71 ],
+      "out-vars" : [ 73, 74, 75, 77, 68, 72 ],
+      "decl-vars" : [ 73, 74 ],
       "line-start" : 318,
       "ast" : {
         "kind" : "statement",
@@ -964,11 +964,11 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 71 ],
+      "update-vars" : [ 74 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 65, 69, 74, 70, 71, 72 ],
+      "in-vars" : [ 72, 73, 74, 75, 77, 68 ],
       "exit" : false,
-      "out-vars" : [ 71, 72, 65, 69, 74, 70 ],
+      "out-vars" : [ 74, 75, 77, 68, 72, 73 ],
       "decl-vars" : [ ],
       "line-start" : 318,
       "ast" : {
@@ -981,7 +981,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "i",
-            "variable" : 71
+            "variable" : 74
           }
         } ],
         "operator" : "+",
@@ -993,23 +993,23 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "stride",
-            "variable" : 72
+            "variable" : 75
           }
         } ],
         "type" : "assign-operator"
       },
-      "assign-vars" : [ 71 ],
+      "assign-vars" : [ 74 ],
       "line-end" : 318,
       "code" : "i += stride",
       "entry" : false,
-      "use-vars" : [ 72, 71 ]
+      "use-vars" : [ 75, 74 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 72, 65, 69, 74, 70, 71 ],
+      "in-vars" : [ 77, 68, 72, 73, 74, 75 ],
       "exit" : false,
-      "out-vars" : [ 74, 70, 71, 72, 77, 65, 69 ],
-      "decl-vars" : [ 77 ],
+      "out-vars" : [ 72, 73, 74, 80, 75, 77, 68 ],
+      "decl-vars" : [ 80 ],
       "line-start" : 319,
       "ast" : {
         "kind" : "statement",
@@ -1024,12 +1024,12 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 232,
+          "go-type" : 265,
           "kind" : "expression",
           "operator" : "&",
           "target" : {
             "declared" : {
-              "go-type" : 233,
+              "go-type" : 266,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -1039,13 +1039,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 233,
+                "go-type" : 266,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "SliceHeader"
               }
             },
-            "go-type" : 233,
+            "go-type" : 266,
             "kind" : "literal",
             "type" : "composite",
             "values" : [ {
@@ -1058,7 +1058,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Data",
-                  "variable" : 73
+                  "variable" : 76
                 }
               },
               "kind" : "expression",
@@ -1098,7 +1098,7 @@
                   "go-type" : 18,
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 235,
+                    "go-type" : 268,
                     "kind" : "expression",
                     "operator" : "&",
                     "target" : {
@@ -1111,19 +1111,19 @@
                           "ident-kind" : "Var",
                           "kind" : "ident",
                           "value" : "i",
-                          "variable" : 71
+                          "variable" : 74
                         }
                       },
                       "kind" : "expression",
                       "target" : {
-                        "go-type" : 220,
+                        "go-type" : 253,
                         "kind" : "expression",
                         "type" : "identifier",
                         "value" : {
                           "ident-kind" : "Var",
                           "kind" : "ident",
                           "value" : "data",
-                          "variable" : 74
+                          "variable" : 77
                         }
                       },
                       "type" : "index"
@@ -1144,7 +1144,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Len",
-                  "variable" : 75
+                  "variable" : 78
                 }
               },
               "kind" : "expression",
@@ -1157,7 +1157,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "stride",
-                  "variable" : 72
+                  "variable" : 75
                 }
               }
             }, {
@@ -1170,7 +1170,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Cap",
-                  "variable" : 76
+                  "variable" : 79
                 }
               },
               "kind" : "expression",
@@ -1183,7 +1183,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "stride",
-                  "variable" : 72
+                  "variable" : 75
                 }
               }
             } ]
@@ -1196,41 +1196,41 @@
       "line-end" : 323,
       "code" : "hdr := &reflect.SliceHeader{\n\tData: uintptr(unsafe.Pointer(&data[i])),\n\tLen:  stride,\n\tCap:  stride,\n}",
       "entry" : false,
-      "use-vars" : [ 74, 71, 72 ]
+      "use-vars" : [ 75, 77, 74 ]
     }, {
-      "update-vars" : [ 65 ],
+      "update-vars" : [ 68 ],
       "successors" : [ 23 ],
-      "in-vars" : [ 65, 69, 74, 70, 71, 72, 77 ],
+      "in-vars" : [ 68, 72, 73, 74, 80, 75, 77 ],
       "exit" : false,
-      "out-vars" : [ 72, 65, 69, 74, 70, 71 ],
+      "out-vars" : [ 77, 68, 72, 73, 74, 75 ],
       "decl-vars" : [ ],
       "line-start" : 324,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "retVal",
-            "variable" : 65
+            "variable" : 68
           }
         } ],
         "right" : [ {
           "arguments" : [ {
-            "go-type" : 219,
+            "go-type" : 252,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "retVal",
-              "variable" : 65
+              "variable" : 68
             }
           }, {
-            "go-type" : 220,
+            "go-type" : 253,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
@@ -1246,15 +1246,15 @@
                       "value" : "uint8"
                     }
                   },
-                  "go-type" : 220,
+                  "go-type" : 253,
                   "kind" : "type",
                   "type" : "slice"
                 },
-                "go-type" : 239,
+                "go-type" : 272,
                 "kind" : "type",
                 "type" : "pointer"
               },
-              "go-type" : 239,
+              "go-type" : 272,
               "kind" : "expression",
               "target" : {
                 "coerced-to" : {
@@ -1277,14 +1277,14 @@
                 "go-type" : 18,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 232,
+                  "go-type" : 265,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "hdr",
-                    "variable" : 77
+                    "variable" : 80
                   }
                 },
                 "type" : "cast"
@@ -1295,7 +1295,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 236,
+            "go-type" : 269,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1304,23 +1304,23 @@
               "value" : "append"
             }
           },
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "type" : "call"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 65 ],
+      "assign-vars" : [ 68 ],
       "line-end" : 324,
       "code" : "retVal = append(retVal, *(*[]uint8)(unsafe.Pointer(hdr)))",
       "entry" : false,
-      "use-vars" : [ 65, 77 ]
+      "use-vars" : [ 80, 68 ]
     }, {
-      "update-vars" : [ 70 ],
+      "update-vars" : [ 73 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 65, 69, 74, 70, 71, 72 ],
+      "in-vars" : [ 73, 74, 75, 77, 68, 72 ],
       "exit" : false,
-      "out-vars" : [ 71, 72, 65, 69, 74, 70 ],
+      "out-vars" : [ 73, 74, 75, 77, 68, 72 ],
       "decl-vars" : [ ],
       "line-start" : 325,
       "ast" : {
@@ -1334,20 +1334,20 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "r",
-            "variable" : 70
+            "variable" : 73
           }
         },
         "type" : "crement"
       },
-      "assign-vars" : [ 70 ],
+      "assign-vars" : [ 73 ],
       "line-end" : 325,
       "code" : "r++",
       "entry" : false,
-      "use-vars" : [ 70 ]
+      "use-vars" : [ 73 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 65 ],
+      "in-vars" : [ 68 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -1356,17 +1356,17 @@
         "kind" : "statement",
         "type" : "return",
         "values" : [ {
-          "go-type" : 219,
+          "go-type" : 252,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "retVal",
-            "variable" : 65
+            "variable" : 68
           }
         }, {
-          "go-type" : 224,
+          "go-type" : 257,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -1380,7 +1380,7 @@
       "line-end" : 327,
       "code" : "return retVal, nil",
       "entry" : false,
-      "use-vars" : [ 65 ]
+      "use-vars" : [ 68 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1410,12 +1410,12 @@
     }, {
       "name" : "checkNativeSelectable",
       "package" : 0,
-      "type" : 221,
+      "type" : 254,
       "exported" : false
     }, {
       "name" : "Shape",
       "package" : 1,
-      "type" : 174,
+      "type" : 184,
       "exported" : true
     }, {
       "name" : "Dims",
@@ -1425,22 +1425,22 @@
     }, {
       "name" : "Uint8s",
       "package" : 2,
-      "type" : 225,
+      "type" : 258,
       "exported" : true
     }, {
       "name" : "MatrixU8",
       "package" : 0,
-      "type" : 227,
+      "type" : 260,
       "exported" : true
     }, {
       "name" : "Strides",
       "package" : 1,
-      "type" : 166,
+      "type" : 176,
       "exported" : true
     }, {
       "name" : "ProdInts",
       "package" : 1,
-      "type" : 229,
+      "type" : 262,
       "exported" : true
     } ],
     "line-end" : 331,
@@ -1472,15 +1472,15 @@
       "name" : "io",
       "path" : "io"
     } ],
-    "params" : [ 63, 64 ],
+    "params" : [ 66, 67 ],
     "receivers" : [ ],
-    "results" : [ 65, 66 ],
+    "results" : [ 68, 69 ],
     "type" : "function",
     "types" : [ {
       "name" : "func(t *gorgonia.org/tensor.Dense, axis int) (retVal [][]uint8, err error)",
       "params" : 1,
       "recv" : -1,
-      "results" : 218,
+      "results" : 251,
       "type" : "Signature",
       "underlying" : 0,
       "variadic" : false
@@ -1533,7 +1533,7 @@
         "type" : 42
       }, {
         "name" : "mask",
-        "type" : 217
+        "type" : 250
       }, {
         "name" : "maskIsSoft",
         "type" : 10
@@ -2564,7 +2564,7 @@
         "type" : 117
       }, {
         "name" : "AddScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Alloc",
         "type" : 102
@@ -2576,7 +2576,7 @@
         "type" : 117
       }, {
         "name" : "DivScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Dot",
         "type" : 117
@@ -2588,13 +2588,13 @@
         "type" : 117
       }, {
         "name" : "EqScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "FMA",
-        "type" : 210
+        "type" : 235
       }, {
         "name" : "FMAScalar",
-        "type" : 27
+        "type" : 239
       }, {
         "name" : "Free",
         "type" : 105
@@ -2603,31 +2603,31 @@
         "type" : 117
       }, {
         "name" : "GtScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Gte",
         "type" : 117
       }, {
         "name" : "GteScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Lt",
         "type" : 117
       }, {
         "name" : "LtScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Lte",
         "type" : 117
       }, {
         "name" : "LteScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "MatMul",
-        "type" : 212
+        "type" : 241
       }, {
         "name" : "MatVecMul",
-        "type" : 212
+        "type" : 241
       }, {
         "name" : "Memclr",
         "type" : 108
@@ -2642,34 +2642,34 @@
         "type" : 117
       }, {
         "name" : "ModScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Mul",
         "type" : 117
       }, {
         "name" : "MulScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "NeScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "Outer",
-        "type" : 212
+        "type" : 241
       }, {
         "name" : "Pow",
         "type" : 117
       }, {
         "name" : "PowScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "SVD",
-        "type" : 214
+        "type" : 245
       }, {
         "name" : "Sub",
         "type" : 117
       }, {
         "name" : "SubScalar",
-        "type" : 23
+        "type" : 233
       }, {
         "name" : "WorksWith",
         "type" : 113
@@ -2680,7 +2680,7 @@
     }, {
       "name" : "func(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error)",
       "params" : 118,
-      "recv" : 59,
+      "recv" : 61,
       "results" : 130,
       "type" : "Signature",
       "underlying" : 117,
@@ -2720,7 +2720,7 @@
         "type" : 134
       }, {
         "name" : "DataOrder",
-        "type" : 136
+        "type" : 138
       }, {
         "name" : "DataSize",
         "type" : 23
@@ -2729,22 +2729,22 @@
         "type" : 23
       }, {
         "name" : "Dtype",
-        "type" : 138
-      }, {
-        "name" : "Engine",
         "type" : 140
       }, {
-        "name" : "Eq",
+        "name" : "Engine",
         "type" : 142
       }, {
+        "name" : "Eq",
+        "type" : 144
+      }, {
         "name" : "Format",
-        "type" : 143
+        "type" : 147
       }, {
         "name" : "GobDecode",
-        "type" : 158
+        "type" : 164
       }, {
         "name" : "GobEncode",
-        "type" : 160
+        "type" : 168
       }, {
         "name" : "IsManuallyManaged",
         "type" : 32
@@ -2756,76 +2756,76 @@
         "type" : 32
       }, {
         "name" : "Iterator",
-        "type" : 162
+        "type" : 172
       }, {
         "name" : "MemSize",
         "type" : 79
       }, {
         "name" : "Memset",
-        "type" : 176
+        "type" : 186
       }, {
         "name" : "Pointer",
         "type" : 97
       }, {
         "name" : "ReadNpy",
-        "type" : 177
+        "type" : 189
       }, {
         "name" : "RequiresIterator",
         "type" : 32
       }, {
         "name" : "Reshape",
-        "type" : 183
+        "type" : 195
       }, {
         "name" : "ScalarValue",
         "type" : 134
       }, {
         "name" : "SetAt",
-        "type" : 184
+        "type" : 196
       }, {
         "name" : "Shape",
-        "type" : 174
+        "type" : 184
       }, {
         "name" : "Size",
         "type" : 23
       }, {
         "name" : "Slice",
-        "type" : 186
+        "type" : 198
       }, {
         "name" : "Strides",
-        "type" : 166
+        "type" : 176
       }, {
         "name" : "String",
         "type" : 78
       }, {
         "name" : "T",
-        "type" : 196
+        "type" : 208
       }, {
         "name" : "Transpose",
-        "type" : 198
+        "type" : 210
       }, {
         "name" : "UT",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "Uintptr",
         "type" : 79
       }, {
         "name" : "WriteNpy",
-        "type" : 199
+        "type" : 211
       }, {
         "name" : "Zero",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "arr",
-        "type" : 203
+        "type" : 215
       }, {
         "name" : "arrPtr",
-        "type" : 14
+        "type" : 219
       }, {
         "name" : "hdr",
-        "type" : 205
+        "type" : 222
       }, {
         "name" : "standardEngine",
-        "type" : 208
+        "type" : 227
       } ],
       "name" : "interface{Apply(fn interface{}, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error); At(...int) (interface{}, error); DataOrder() gorgonia.org/tensor.DataOrder; DataSize() int; Dims() int; Dtype() gorgonia.org/tensor.Dtype; Engine() gorgonia.org/tensor.Engine; IsManuallyManaged() bool; IsNativelyAccessible() bool; IsScalar() bool; Iterator() gorgonia.org/tensor.Iterator; MemSize() uintptr; Pointer() unsafe.Pointer; ReadNpy(io.Reader) error; RequiresIterator() bool; Reshape(...int) error; ScalarValue() interface{}; SetAt(v interface{}, coord ...int) error; Shape() gorgonia.org/tensor.Shape; Size() int; Strides() []int; T(axes ...int) error; Transpose() error; UT(); Uintptr() uintptr; WriteNpy(io.Writer) error; standardEngine() gorgonia.org/tensor.standardEngine; gorgonia.org/tensor.Cloner; gorgonia.org/tensor.Dataer; gorgonia.org/tensor.Eq; fmt.Formatter; encoding/gob.GobDecoder; encoding/gob.GobEncoder; gorgonia.org/tensor.MemSetter; gorgonia.org/tensor.Slicer; fmt.Stringer; gorgonia.org/tensor.Zeroer; gorgonia.org/tensor.arrayer; gorgonia.org/tensor.headerer}",
       "type" : "Interface",
@@ -2962,12 +2962,26 @@
       "type" : "Tuple",
       "underlying" : 135
     }, {
+      "local-name" : "Cloner",
+      "name" : "gorgonia.org/tensor.Cloner",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 137
+    }, {
+      "methods" : [ {
+        "name" : "Clone",
+        "type" : 134
+      } ],
+      "name" : "interface{Clone() interface{}}",
+      "type" : "Interface",
+      "underlying" : 137
+    }, {
       "name" : "func() gorgonia.org/tensor.DataOrder",
       "params" : 24,
       "recv" : 28,
-      "results" : 137,
+      "results" : 139,
       "type" : "Signature",
-      "underlying" : 136,
+      "underlying" : 138,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2976,14 +2990,14 @@
       } ],
       "name" : "(gorgonia.org/tensor.DataOrder)",
       "type" : "Tuple",
-      "underlying" : 137
+      "underlying" : 139
     }, {
       "name" : "func() gorgonia.org/tensor.Dtype",
       "params" : 24,
       "recv" : 29,
-      "results" : 139,
+      "results" : 141,
       "type" : "Signature",
-      "underlying" : 138,
+      "underlying" : 140,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2992,14 +3006,14 @@
       } ],
       "name" : "(gorgonia.org/tensor.Dtype)",
       "type" : "Tuple",
-      "underlying" : 139
+      "underlying" : 141
     }, {
       "name" : "func() gorgonia.org/tensor.Engine",
       "params" : 24,
       "recv" : 30,
-      "results" : 141,
+      "results" : 143,
       "type" : "Signature",
-      "underlying" : 140,
+      "underlying" : 142,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3008,64 +3022,78 @@
       } ],
       "name" : "(gorgonia.org/tensor.Engine)",
       "type" : "Tuple",
-      "underlying" : 141
+      "underlying" : 143
     }, {
       "name" : "func(interface{}) bool",
       "params" : 135,
       "recv" : 31,
       "results" : 28,
       "type" : "Signature",
-      "underlying" : 142,
+      "underlying" : 144,
       "variadic" : false
     }, {
+      "local-name" : "Eq",
+      "name" : "gorgonia.org/tensor.Eq",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 146
+    }, {
+      "methods" : [ {
+        "name" : "Eq",
+        "type" : 144
+      } ],
+      "name" : "interface{Eq(interface{}) bool}",
+      "type" : "Interface",
+      "underlying" : 146
+    }, {
       "name" : "func(f fmt.State, c rune)",
-      "params" : 144,
+      "params" : 148,
       "recv" : 36,
       "results" : 24,
       "type" : "Signature",
-      "underlying" : 143,
+      "underlying" : 147,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "f",
-        "type" : 145
+        "type" : 149
       }, {
         "name" : "c",
-        "type" : 157
+        "type" : 161
       } ],
       "name" : "(f fmt.State, c rune)",
       "type" : "Tuple",
-      "underlying" : 144
+      "underlying" : 148
     }, {
       "local-name" : "State",
       "name" : "fmt.State",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 146
+      "underlying" : 150
     }, {
       "methods" : [ {
         "name" : "Flag",
-        "type" : 147
-      }, {
-        "name" : "Precision",
-        "type" : 149
-      }, {
-        "name" : "Width",
         "type" : 151
       }, {
-        "name" : "Write",
+        "name" : "Precision",
         "type" : 153
+      }, {
+        "name" : "Width",
+        "type" : 155
+      }, {
+        "name" : "Write",
+        "type" : 157
       } ],
       "name" : "interface{Flag(c int) bool; Precision() (prec int, ok bool); Width() (wid int, ok bool); Write(b []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 146
+      "underlying" : 150
     }, {
       "name" : "func(c int) bool",
-      "params" : 148,
+      "params" : 152,
       "recv" : 32,
       "results" : 28,
       "type" : "Signature",
-      "underlying" : 147,
+      "underlying" : 151,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3074,14 +3102,14 @@
       } ],
       "name" : "(c int)",
       "type" : "Tuple",
-      "underlying" : 148
+      "underlying" : 152
     }, {
       "name" : "func() (prec int, ok bool)",
       "params" : 24,
       "recv" : 33,
-      "results" : 150,
+      "results" : 154,
       "type" : "Signature",
-      "underlying" : 149,
+      "underlying" : 153,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3093,14 +3121,14 @@
       } ],
       "name" : "(prec int, ok bool)",
       "type" : "Tuple",
-      "underlying" : 150
+      "underlying" : 154
     }, {
       "name" : "func() (wid int, ok bool)",
       "params" : 24,
       "recv" : 34,
-      "results" : 152,
+      "results" : 156,
       "type" : "Signature",
-      "underlying" : 151,
+      "underlying" : 155,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3112,28 +3140,28 @@
       } ],
       "name" : "(wid int, ok bool)",
       "type" : "Tuple",
-      "underlying" : 152
+      "underlying" : 156
     }, {
       "name" : "func(b []byte) (n int, err error)",
-      "params" : 154,
+      "params" : 158,
       "recv" : 35,
-      "results" : 156,
+      "results" : 160,
       "type" : "Signature",
-      "underlying" : 153,
+      "underlying" : 157,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "b",
-        "type" : 155
+        "type" : 159
       } ],
       "name" : "(b []byte)",
       "type" : "Tuple",
-      "underlying" : 154
+      "underlying" : 158
     }, {
       "elem" : 12,
       "name" : "[]byte",
       "type" : "Slice",
-      "underlying" : 155
+      "underlying" : 159
     }, {
       "fields" : [ {
         "name" : "n",
@@ -3144,121 +3172,163 @@
       } ],
       "name" : "(n int, err error)",
       "type" : "Tuple",
-      "underlying" : 156
+      "underlying" : 160
     }, {
       "name" : "rune",
       "type" : "Basic",
-      "underlying" : 157
+      "underlying" : 161
+    }, {
+      "local-name" : "Formatter",
+      "name" : "fmt.Formatter",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 163
+    }, {
+      "methods" : [ {
+        "name" : "Format",
+        "type" : 147
+      } ],
+      "name" : "interface{Format(f fmt.State, c rune)}",
+      "type" : "Interface",
+      "underlying" : 163
     }, {
       "name" : "func([]byte) error",
-      "params" : 159,
+      "params" : 165,
       "recv" : 37,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 158,
+      "underlying" : 164,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 155
+        "type" : 159
       } ],
       "name" : "([]byte)",
       "type" : "Tuple",
-      "underlying" : 159
+      "underlying" : 165
+    }, {
+      "local-name" : "GobDecoder",
+      "name" : "encoding/gob.GobDecoder",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 167
+    }, {
+      "methods" : [ {
+        "name" : "GobDecode",
+        "type" : 164
+      } ],
+      "name" : "interface{GobDecode([]byte) error}",
+      "type" : "Interface",
+      "underlying" : 167
     }, {
       "name" : "func() ([]byte, error)",
       "params" : 24,
       "recv" : 38,
-      "results" : 161,
+      "results" : 169,
       "type" : "Signature",
-      "underlying" : 160,
+      "underlying" : 168,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 155
+        "type" : 159
       }, {
         "name" : "",
         "type" : 100
       } ],
       "name" : "([]byte, error)",
       "type" : "Tuple",
-      "underlying" : 161
+      "underlying" : 169
+    }, {
+      "local-name" : "GobEncoder",
+      "name" : "encoding/gob.GobEncoder",
+      "package" : 6,
+      "type" : "Named",
+      "underlying" : 171
+    }, {
+      "methods" : [ {
+        "name" : "GobEncode",
+        "type" : 168
+      } ],
+      "name" : "interface{GobEncode() ([]byte, error)}",
+      "type" : "Interface",
+      "underlying" : 171
     }, {
       "name" : "func() gorgonia.org/tensor.Iterator",
       "params" : 24,
       "recv" : 45,
-      "results" : 163,
+      "results" : 173,
       "type" : "Signature",
-      "underlying" : 162,
+      "underlying" : 172,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 164
+        "type" : 174
       } ],
       "name" : "(gorgonia.org/tensor.Iterator)",
       "type" : "Tuple",
-      "underlying" : 163
+      "underlying" : 173
     }, {
       "local-name" : "Iterator",
       "name" : "gorgonia.org/tensor.Iterator",
       "package" : 1,
       "type" : "Named",
-      "underlying" : 165
+      "underlying" : 175
     }, {
       "methods" : [ {
         "name" : "Coord",
-        "type" : 166
+        "type" : 176
       }, {
         "name" : "Done",
         "type" : 32
       }, {
         "name" : "Next",
-        "type" : 167
+        "type" : 177
       }, {
         "name" : "NextInvalid",
-        "type" : 169
+        "type" : 179
       }, {
         "name" : "NextValid",
-        "type" : 169
+        "type" : 179
       }, {
         "name" : "NextValidity",
-        "type" : 171
+        "type" : 181
       }, {
         "name" : "Reset",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "SetForward",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "SetReverse",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "Shape",
-        "type" : 174
+        "type" : 184
       }, {
         "name" : "Start",
-        "type" : 167
+        "type" : 177
       } ],
       "name" : "interface{Coord() []int; Done() bool; Next() (int, error); NextInvalid() (int, int, error); NextValid() (int, int, error); NextValidity() (int, bool, error); Reset(); SetForward(); SetReverse(); Shape() gorgonia.org/tensor.Shape; Start() (int, error)}",
       "type" : "Interface",
-      "underlying" : 165
+      "underlying" : 175
     }, {
       "name" : "func() []int",
       "params" : 24,
       "recv" : 39,
       "results" : 132,
       "type" : "Signature",
-      "underlying" : 166,
+      "underlying" : 176,
       "variadic" : false
     }, {
       "name" : "func() (int, error)",
       "params" : 24,
       "recv" : 40,
-      "results" : 168,
+      "results" : 178,
       "type" : "Signature",
-      "underlying" : 167,
+      "underlying" : 177,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3270,14 +3340,14 @@
       } ],
       "name" : "(int, error)",
       "type" : "Tuple",
-      "underlying" : 168
+      "underlying" : 178
     }, {
       "name" : "func() (int, int, error)",
       "params" : 24,
       "recv" : 41,
-      "results" : 170,
+      "results" : 180,
       "type" : "Signature",
-      "underlying" : 169,
+      "underlying" : 179,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3292,14 +3362,14 @@
       } ],
       "name" : "(int, int, error)",
       "type" : "Tuple",
-      "underlying" : 170
+      "underlying" : 180
     }, {
       "name" : "func() (int, bool, error)",
       "params" : 24,
       "recv" : 42,
-      "results" : 172,
+      "results" : 182,
       "type" : "Signature",
-      "underlying" : 171,
+      "underlying" : 181,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3314,22 +3384,22 @@
       } ],
       "name" : "(int, bool, error)",
       "type" : "Tuple",
-      "underlying" : 172
+      "underlying" : 182
     }, {
       "name" : "func()",
       "params" : 24,
       "recv" : 43,
       "results" : 24,
       "type" : "Signature",
-      "underlying" : 173,
+      "underlying" : 183,
       "variadic" : false
     }, {
       "name" : "func() gorgonia.org/tensor.Shape",
       "params" : 24,
       "recv" : 44,
-      "results" : 175,
+      "results" : 185,
       "type" : "Signature",
-      "underlying" : 174,
+      "underlying" : 184,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3338,76 +3408,90 @@
       } ],
       "name" : "(gorgonia.org/tensor.Shape)",
       "type" : "Tuple",
-      "underlying" : 175
+      "underlying" : 185
     }, {
       "name" : "func(interface{}) error",
       "params" : 135,
       "recv" : 46,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 176,
+      "underlying" : 186,
       "variadic" : false
     }, {
+      "local-name" : "MemSetter",
+      "name" : "gorgonia.org/tensor.MemSetter",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 188
+    }, {
+      "methods" : [ {
+        "name" : "Memset",
+        "type" : 186
+      } ],
+      "name" : "interface{Memset(interface{}) error}",
+      "type" : "Interface",
+      "underlying" : 188
+    }, {
       "name" : "func(io.Reader) error",
-      "params" : 178,
+      "params" : 190,
       "recv" : 48,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 177,
+      "underlying" : 189,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 179
+        "type" : 191
       } ],
       "name" : "(io.Reader)",
       "type" : "Tuple",
-      "underlying" : 178
+      "underlying" : 190
     }, {
       "local-name" : "Reader",
       "name" : "io.Reader",
       "package" : 7,
       "type" : "Named",
-      "underlying" : 180
+      "underlying" : 192
     }, {
       "methods" : [ {
         "name" : "Read",
-        "type" : 181
+        "type" : 193
       } ],
       "name" : "interface{Read(p []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 180
+      "underlying" : 192
     }, {
       "name" : "func(p []byte) (n int, err error)",
-      "params" : 182,
+      "params" : 194,
       "recv" : 47,
-      "results" : 156,
+      "results" : 160,
       "type" : "Signature",
-      "underlying" : 181,
+      "underlying" : 193,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "p",
-        "type" : 155
+        "type" : 159
       } ],
       "name" : "(p []byte)",
       "type" : "Tuple",
-      "underlying" : 182
+      "underlying" : 194
     }, {
       "name" : "func(...int) error",
       "params" : 132,
       "recv" : 49,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 183,
+      "underlying" : 195,
       "variadic" : true
     }, {
       "name" : "func(v interface{}, coord ...int) error",
-      "params" : 185,
+      "params" : 197,
       "recv" : 50,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 184,
+      "underlying" : 196,
       "variadic" : true
     }, {
       "fields" : [ {
@@ -3419,34 +3503,34 @@
       } ],
       "name" : "(v interface{}, coord []int)",
       "type" : "Tuple",
-      "underlying" : 185
+      "underlying" : 197
     }, {
       "name" : "func(...gorgonia.org/tensor.Slice) (gorgonia.org/tensor.View, error)",
-      "params" : 187,
-      "recv" : 58,
-      "results" : 191,
+      "params" : 199,
+      "recv" : 59,
+      "results" : 203,
       "type" : "Signature",
-      "underlying" : 186,
+      "underlying" : 198,
       "variadic" : true
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 188
+        "type" : 200
       } ],
       "name" : "([]gorgonia.org/tensor.Slice)",
       "type" : "Tuple",
-      "underlying" : 187
+      "underlying" : 199
     }, {
-      "elem" : 189,
+      "elem" : 201,
       "name" : "[]gorgonia.org/tensor.Slice",
       "type" : "Slice",
-      "underlying" : 188
+      "underlying" : 200
     }, {
       "local-name" : "Slice",
       "name" : "gorgonia.org/tensor.Slice",
       "package" : 1,
       "type" : "Named",
-      "underlying" : 190
+      "underlying" : 202
     }, {
       "methods" : [ {
         "name" : "End",
@@ -3460,24 +3544,24 @@
       } ],
       "name" : "interface{End() int; Start() int; Step() int}",
       "type" : "Interface",
-      "underlying" : 190
+      "underlying" : 202
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 192
+        "type" : 204
       }, {
         "name" : "",
         "type" : 100
       } ],
       "name" : "(gorgonia.org/tensor.View, error)",
       "type" : "Tuple",
-      "underlying" : 191
+      "underlying" : 203
     }, {
       "local-name" : "View",
       "name" : "gorgonia.org/tensor.View",
       "package" : 1,
       "type" : "Named",
-      "underlying" : 193
+      "underlying" : 205
     }, {
       "methods" : [ {
         "name" : "Apply",
@@ -3493,7 +3577,7 @@
         "type" : 134
       }, {
         "name" : "DataOrder",
-        "type" : 136
+        "type" : 138
       }, {
         "name" : "DataSize",
         "type" : 23
@@ -3502,22 +3586,22 @@
         "type" : 23
       }, {
         "name" : "Dtype",
-        "type" : 138
-      }, {
-        "name" : "Engine",
         "type" : 140
       }, {
-        "name" : "Eq",
+        "name" : "Engine",
         "type" : 142
       }, {
+        "name" : "Eq",
+        "type" : 144
+      }, {
         "name" : "Format",
-        "type" : 143
+        "type" : 147
       }, {
         "name" : "GobDecode",
-        "type" : 158
+        "type" : 164
       }, {
         "name" : "GobEncode",
-        "type" : 160
+        "type" : 168
       }, {
         "name" : "IsManuallyManaged",
         "type" : 32
@@ -3535,90 +3619,90 @@
         "type" : 32
       }, {
         "name" : "Iterator",
-        "type" : 162
+        "type" : 172
       }, {
         "name" : "Materialize",
-        "type" : 194
+        "type" : 206
       }, {
         "name" : "MemSize",
         "type" : 79
       }, {
         "name" : "Memset",
-        "type" : 176
+        "type" : 186
       }, {
         "name" : "Pointer",
         "type" : 97
       }, {
         "name" : "ReadNpy",
-        "type" : 177
+        "type" : 189
       }, {
         "name" : "RequiresIterator",
         "type" : 32
       }, {
         "name" : "Reshape",
-        "type" : 183
+        "type" : 195
       }, {
         "name" : "ScalarValue",
         "type" : 134
       }, {
         "name" : "SetAt",
-        "type" : 184
+        "type" : 196
       }, {
         "name" : "Shape",
-        "type" : 174
+        "type" : 184
       }, {
         "name" : "Size",
         "type" : 23
       }, {
         "name" : "Slice",
-        "type" : 186
+        "type" : 198
       }, {
         "name" : "Strides",
-        "type" : 166
+        "type" : 176
       }, {
         "name" : "String",
         "type" : 78
       }, {
         "name" : "T",
-        "type" : 196
+        "type" : 208
       }, {
         "name" : "Transpose",
-        "type" : 198
+        "type" : 210
       }, {
         "name" : "UT",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "Uintptr",
         "type" : 79
       }, {
         "name" : "WriteNpy",
-        "type" : 199
+        "type" : 211
       }, {
         "name" : "Zero",
-        "type" : 173
+        "type" : 183
       }, {
         "name" : "arr",
-        "type" : 203
+        "type" : 215
       }, {
         "name" : "arrPtr",
-        "type" : 14
+        "type" : 219
       }, {
         "name" : "hdr",
-        "type" : 205
+        "type" : 222
       }, {
         "name" : "standardEngine",
-        "type" : 208
+        "type" : 227
       } ],
       "name" : "interface{IsMaterializable() bool; IsView() bool; Materialize() gorgonia.org/tensor.Tensor; gorgonia.org/tensor.Tensor}",
       "type" : "Interface",
-      "underlying" : 193
+      "underlying" : 205
     }, {
       "name" : "func() gorgonia.org/tensor.Tensor",
       "params" : 24,
       "recv" : 51,
-      "results" : 195,
+      "results" : 207,
       "type" : "Signature",
-      "underlying" : 194,
+      "underlying" : 206,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3627,14 +3711,14 @@
       } ],
       "name" : "(gorgonia.org/tensor.Tensor)",
       "type" : "Tuple",
-      "underlying" : 195
+      "underlying" : 207
     }, {
       "name" : "func(axes ...int) error",
-      "params" : 197,
+      "params" : 209,
       "recv" : 52,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 196,
+      "underlying" : 208,
       "variadic" : true
     }, {
       "fields" : [ {
@@ -3643,52 +3727,52 @@
       } ],
       "name" : "(axes []int)",
       "type" : "Tuple",
-      "underlying" : 197
+      "underlying" : 209
     }, {
       "name" : "func() error",
       "params" : 24,
       "recv" : 53,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 198,
+      "underlying" : 210,
       "variadic" : false
     }, {
       "name" : "func(io.Writer) error",
-      "params" : 200,
+      "params" : 212,
       "recv" : 54,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 199,
+      "underlying" : 211,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 201
+        "type" : 213
       } ],
       "name" : "(io.Writer)",
       "type" : "Tuple",
-      "underlying" : 200
+      "underlying" : 212
     }, {
       "local-name" : "Writer",
       "name" : "io.Writer",
       "package" : 7,
       "type" : "Named",
-      "underlying" : 202
+      "underlying" : 214
     }, {
       "methods" : [ {
         "name" : "Write",
-        "type" : 181
+        "type" : 193
       } ],
       "name" : "interface{Write(p []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 202
+      "underlying" : 214
     }, {
       "name" : "func() gorgonia.org/tensor.array",
       "params" : 24,
-      "recv" : 55,
-      "results" : 204,
+      "recv" : 56,
+      "results" : 216,
       "type" : "Signature",
-      "underlying" : 203,
+      "underlying" : 215,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3697,35 +3781,87 @@
       } ],
       "name" : "(gorgonia.org/tensor.array)",
       "type" : "Tuple",
-      "underlying" : 204
+      "underlying" : 216
     }, {
-      "name" : "func() *gorgonia.org/tensor/internal/storage.Header",
+      "local-name" : "arrayer",
+      "name" : "gorgonia.org/tensor.arrayer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 218
+    }, {
+      "methods" : [ {
+        "name" : "arr",
+        "type" : 215
+      }, {
+        "name" : "arrPtr",
+        "type" : 219
+      } ],
+      "name" : "interface{arr() gorgonia.org/tensor.array; arrPtr() *gorgonia.org/tensor.array}",
+      "type" : "Interface",
+      "underlying" : 218
+    }, {
+      "name" : "func() *gorgonia.org/tensor.array",
       "params" : 24,
-      "recv" : 56,
-      "results" : 206,
+      "recv" : 55,
+      "results" : 220,
       "type" : "Signature",
-      "underlying" : 205,
+      "underlying" : 219,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 207
+        "type" : 221
+      } ],
+      "name" : "(*gorgonia.org/tensor.array)",
+      "type" : "Tuple",
+      "underlying" : 220
+    }, {
+      "elem" : 14,
+      "name" : "*gorgonia.org/tensor.array",
+      "type" : "Pointer",
+      "underlying" : 221
+    }, {
+      "name" : "func() *gorgonia.org/tensor/internal/storage.Header",
+      "params" : 24,
+      "recv" : 57,
+      "results" : 223,
+      "type" : "Signature",
+      "underlying" : 222,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 224
       } ],
       "name" : "(*gorgonia.org/tensor/internal/storage.Header)",
       "type" : "Tuple",
-      "underlying" : 206
+      "underlying" : 223
     }, {
       "elem" : 16,
       "name" : "*gorgonia.org/tensor/internal/storage.Header",
       "type" : "Pointer",
-      "underlying" : 207
+      "underlying" : 224
+    }, {
+      "local-name" : "headerer",
+      "name" : "gorgonia.org/tensor.headerer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 226
+    }, {
+      "methods" : [ {
+        "name" : "hdr",
+        "type" : 222
+      } ],
+      "name" : "interface{hdr() *gorgonia.org/tensor/internal/storage.Header}",
+      "type" : "Interface",
+      "underlying" : 226
     }, {
       "name" : "func() gorgonia.org/tensor.standardEngine",
       "params" : 24,
-      "recv" : 57,
-      "results" : 209,
+      "recv" : 58,
+      "results" : 228,
       "type" : "Signature",
-      "underlying" : 208,
+      "underlying" : 227,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3734,14 +3870,70 @@
       } ],
       "name" : "(gorgonia.org/tensor.standardEngine)",
       "type" : "Tuple",
-      "underlying" : 209
+      "underlying" : 228
     }, {
-      "name" : "func(a gorgonia.org/tensor.Tensor, x gorgonia.org/tensor.Tensor, y gorgonia.org/tensor.Tensor) (gorgonia.org/tensor.Tensor, error)",
-      "params" : 211,
+      "local-name" : "Slicer",
+      "name" : "gorgonia.org/tensor.Slicer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 230
+    }, {
+      "methods" : [ {
+        "name" : "Slice",
+        "type" : 198
+      } ],
+      "name" : "interface{Slice(...gorgonia.org/tensor.Slice) (gorgonia.org/tensor.View, error)}",
+      "type" : "Interface",
+      "underlying" : 230
+    }, {
+      "local-name" : "Adder",
+      "name" : "gorgonia.org/tensor.Adder",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 232
+    }, {
+      "methods" : [ {
+        "name" : "Add",
+        "type" : 117
+      }, {
+        "name" : "AddScalar",
+        "type" : 233
+      } ],
+      "name" : "interface{Add(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error); AddScalar(a gorgonia.org/tensor.Tensor, b interface{}, leftTensor bool, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error)}",
+      "type" : "Interface",
+      "underlying" : 232
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, b interface{}, leftTensor bool, opts ...gorgonia.org/tensor.FuncOpt) (gorgonia.org/tensor.Tensor, error)",
+      "params" : 234,
       "recv" : 60,
       "results" : 130,
       "type" : "Signature",
-      "underlying" : 210,
+      "underlying" : 233,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 119
+      }, {
+        "name" : "b",
+        "type" : 89
+      }, {
+        "name" : "leftTensor",
+        "type" : 10
+      }, {
+        "name" : "opts",
+        "type" : 123
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, b interface{}, leftTensor bool, opts []gorgonia.org/tensor.FuncOpt)",
+      "type" : "Tuple",
+      "underlying" : 234
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, x gorgonia.org/tensor.Tensor, y gorgonia.org/tensor.Tensor) (gorgonia.org/tensor.Tensor, error)",
+      "params" : 236,
+      "recv" : 63,
+      "results" : 130,
+      "type" : "Signature",
+      "underlying" : 235,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3756,14 +3948,53 @@
       } ],
       "name" : "(a gorgonia.org/tensor.Tensor, x gorgonia.org/tensor.Tensor, y gorgonia.org/tensor.Tensor)",
       "type" : "Tuple",
-      "underlying" : 211
+      "underlying" : 236
+    }, {
+      "local-name" : "FMAer",
+      "name" : "gorgonia.org/tensor.FMAer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 238
+    }, {
+      "methods" : [ {
+        "name" : "FMA",
+        "type" : 235
+      }, {
+        "name" : "FMAScalar",
+        "type" : 239
+      } ],
+      "name" : "interface{FMA(a gorgonia.org/tensor.Tensor, x gorgonia.org/tensor.Tensor, y gorgonia.org/tensor.Tensor) (gorgonia.org/tensor.Tensor, error); FMAScalar(a gorgonia.org/tensor.Tensor, x interface{}, y gorgonia.org/tensor.Tensor) (gorgonia.org/tensor.Tensor, error)}",
+      "type" : "Interface",
+      "underlying" : 238
+    }, {
+      "name" : "func(a gorgonia.org/tensor.Tensor, x interface{}, y gorgonia.org/tensor.Tensor) (gorgonia.org/tensor.Tensor, error)",
+      "params" : 240,
+      "recv" : 62,
+      "results" : 130,
+      "type" : "Signature",
+      "underlying" : 239,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "a",
+        "type" : 119
+      }, {
+        "name" : "x",
+        "type" : 89
+      }, {
+        "name" : "y",
+        "type" : 119
+      } ],
+      "name" : "(a gorgonia.org/tensor.Tensor, x interface{}, y gorgonia.org/tensor.Tensor)",
+      "type" : "Tuple",
+      "underlying" : 240
     }, {
       "name" : "func(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, preallocated gorgonia.org/tensor.Tensor) error",
-      "params" : 213,
-      "recv" : 61,
+      "params" : 242,
+      "recv" : 64,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 212,
+      "underlying" : 241,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3778,14 +4009,28 @@
       } ],
       "name" : "(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, preallocated gorgonia.org/tensor.Tensor)",
       "type" : "Tuple",
-      "underlying" : 213
+      "underlying" : 242
+    }, {
+      "local-name" : "MatMuler",
+      "name" : "gorgonia.org/tensor.MatMuler",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 244
+    }, {
+      "methods" : [ {
+        "name" : "MatMul",
+        "type" : 241
+      } ],
+      "name" : "interface{MatMul(a gorgonia.org/tensor.Tensor, b gorgonia.org/tensor.Tensor, preallocated gorgonia.org/tensor.Tensor) error}",
+      "type" : "Interface",
+      "underlying" : 244
     }, {
       "name" : "func(a gorgonia.org/tensor.Tensor, uv bool, full bool) (s gorgonia.org/tensor.Tensor, u gorgonia.org/tensor.Tensor, v gorgonia.org/tensor.Tensor, err error)",
-      "params" : 215,
-      "recv" : 62,
-      "results" : 216,
+      "params" : 246,
+      "recv" : 65,
+      "results" : 247,
       "type" : "Signature",
-      "underlying" : 214,
+      "underlying" : 245,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3800,7 +4045,7 @@
       } ],
       "name" : "(a gorgonia.org/tensor.Tensor, uv bool, full bool)",
       "type" : "Tuple",
-      "underlying" : 215
+      "underlying" : 246
     }, {
       "fields" : [ {
         "name" : "s",
@@ -3817,40 +4062,54 @@
       } ],
       "name" : "(s gorgonia.org/tensor.Tensor, u gorgonia.org/tensor.Tensor, v gorgonia.org/tensor.Tensor, err error)",
       "type" : "Tuple",
-      "underlying" : 216
+      "underlying" : 247
+    }, {
+      "local-name" : "SVDer",
+      "name" : "gorgonia.org/tensor.SVDer",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 249
+    }, {
+      "methods" : [ {
+        "name" : "SVD",
+        "type" : 245
+      } ],
+      "name" : "interface{SVD(a gorgonia.org/tensor.Tensor, uv bool, full bool) (s gorgonia.org/tensor.Tensor, u gorgonia.org/tensor.Tensor, v gorgonia.org/tensor.Tensor, err error)}",
+      "type" : "Interface",
+      "underlying" : 249
     }, {
       "elem" : 10,
       "name" : "[]bool",
       "type" : "Slice",
-      "underlying" : 217
+      "underlying" : 250
     }, {
       "fields" : [ {
         "name" : "retVal",
-        "type" : 219
+        "type" : 252
       }, {
         "name" : "err",
         "type" : 100
       } ],
       "name" : "(retVal [][]uint8, err error)",
       "type" : "Tuple",
-      "underlying" : 218
+      "underlying" : 251
     }, {
-      "elem" : 220,
+      "elem" : 253,
       "name" : "[][]uint8",
       "type" : "Slice",
-      "underlying" : 219
+      "underlying" : 252
     }, {
       "elem" : 68,
       "name" : "[]uint8",
       "type" : "Slice",
-      "underlying" : 220
+      "underlying" : 253
     }, {
       "name" : "func(t *gorgonia.org/tensor.Dense, axis int, dt gorgonia.org/tensor.Dtype) error",
-      "params" : 222,
+      "params" : 255,
       "recv" : -1,
       "results" : 107,
       "type" : "Signature",
-      "underlying" : 221,
+      "underlying" : 254,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3865,38 +4124,38 @@
       } ],
       "name" : "(t *gorgonia.org/tensor.Dense, axis int, dt gorgonia.org/tensor.Dtype)",
       "type" : "Tuple",
-      "underlying" : 222
+      "underlying" : 255
     }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 223
+      "underlying" : 256
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 224
+      "underlying" : 257
     }, {
       "name" : "func() []uint8",
       "params" : 24,
       "recv" : -1,
-      "results" : 226,
+      "results" : 259,
       "type" : "Signature",
-      "underlying" : 225,
+      "underlying" : 258,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 220
+        "type" : 253
       } ],
       "name" : "([]uint8)",
       "type" : "Tuple",
-      "underlying" : 226
+      "underlying" : 259
     }, {
       "name" : "func(t *gorgonia.org/tensor.Dense) (retVal [][]uint8, err error)",
-      "params" : 228,
+      "params" : 261,
       "recv" : -1,
-      "results" : 218,
+      "results" : 251,
       "type" : "Signature",
-      "underlying" : 227,
+      "underlying" : 260,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3905,14 +4164,14 @@
       } ],
       "name" : "(t *gorgonia.org/tensor.Dense)",
       "type" : "Tuple",
-      "underlying" : 228
+      "underlying" : 261
     }, {
       "name" : "func(a []int) (retVal int)",
-      "params" : 230,
+      "params" : 263,
       "recv" : -1,
-      "results" : 231,
+      "results" : 264,
       "type" : "Signature",
-      "underlying" : 229,
+      "underlying" : 262,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3921,7 +4180,7 @@
       } ],
       "name" : "(a []int)",
       "type" : "Tuple",
-      "underlying" : 230
+      "underlying" : 263
     }, {
       "fields" : [ {
         "name" : "retVal",
@@ -3929,18 +4188,18 @@
       } ],
       "name" : "(retVal int)",
       "type" : "Tuple",
-      "underlying" : 231
+      "underlying" : 264
     }, {
-      "elem" : 233,
+      "elem" : 266,
       "name" : "*reflect.SliceHeader",
       "type" : "Pointer",
-      "underlying" : 232
+      "underlying" : 265
     }, {
       "local-name" : "SliceHeader",
       "name" : "reflect.SliceHeader",
       "package" : 4,
       "type" : "Named",
-      "underlying" : 234
+      "underlying" : 267
     }, {
       "fields" : [ {
         "name" : "Data",
@@ -3954,435 +4213,612 @@
       } ],
       "name" : "struct{Data uintptr; Len int; Cap int}",
       "type" : "Struct",
-      "underlying" : 234
+      "underlying" : 267
     }, {
       "elem" : 68,
       "name" : "*uint8",
       "type" : "Pointer",
-      "underlying" : 235
+      "underlying" : 268
     }, {
       "name" : "func([][]uint8, ...[]uint8) [][]uint8",
-      "params" : 237,
+      "params" : 270,
       "recv" : -1,
-      "results" : 238,
+      "results" : 271,
       "type" : "Signature",
-      "underlying" : 236,
+      "underlying" : 269,
       "variadic" : true
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 219
+        "type" : 252
       }, {
         "name" : "",
-        "type" : 219
+        "type" : 252
       } ],
       "name" : "([][]uint8, [][]uint8)",
       "type" : "Tuple",
-      "underlying" : 237
+      "underlying" : 270
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 219
+        "type" : 252
       } ],
       "name" : "([][]uint8)",
       "type" : "Tuple",
-      "underlying" : 238
+      "underlying" : 271
     }, {
-      "elem" : 220,
+      "elem" : 253,
       "name" : "*[]uint8",
       "type" : "Pointer",
-      "underlying" : 239
+      "underlying" : 272
     } ],
     "variables" : [ {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 4,
       "type" : 21,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 95,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 91,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 0,
-      "exported" : false
-    }, {
-      "name" : "",
-      "package" : 1,
-      "type" : 119,
-      "exported" : false
-    }, {
-      "name" : "",
-      "package" : 1,
-      "type" : 119,
-      "exported" : false
+      "type" : 136,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 2,
-      "exported" : false
+      "type" : 119,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
-      "package" : 5,
+      "package" : 1,
+      "type" : 119,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
       "type" : 145,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
-      "type" : 145,
-      "exported" : false
+      "type" : 149,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
-      "type" : 145,
-      "exported" : false
+      "type" : 149,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
-      "type" : 145,
-      "exported" : false
+      "type" : 149,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 5,
-      "type" : 4,
-      "exported" : false
+      "type" : 149,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 5,
+      "type" : 162,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
-      "type" : 6,
-      "exported" : false
+      "type" : 166,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 6,
-      "type" : 8,
-      "exported" : false
+      "type" : 170,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 164,
-      "exported" : false
+      "type" : 174,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 164,
-      "exported" : false
+      "type" : 174,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 164,
-      "exported" : false
+      "type" : 174,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 164,
-      "exported" : false
+      "type" : 174,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 164,
-      "exported" : false
+      "type" : 174,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 164,
-      "exported" : false
+      "type" : 174,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 10,
-      "exported" : false
+      "type" : 187,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 7,
-      "type" : 179,
-      "exported" : false
+      "type" : 191,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 192,
-      "exported" : false
-    }, {
-      "name" : "",
-      "package" : 1,
-      "type" : 119,
-      "exported" : false
-    }, {
-      "name" : "",
-      "package" : 1,
-      "type" : 119,
-      "exported" : false
+      "type" : 204,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
-    }, {
-      "name" : "",
-      "package" : 1,
-      "type" : 12,
-      "exported" : false
-    }, {
-      "name" : "",
-      "package" : 1,
-      "type" : 17,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
       "type" : 119,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 19,
-      "exported" : false
+      "type" : 119,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 21,
-      "exported" : false
+      "type" : 217,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 25,
-      "exported" : false
+      "type" : 217,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 29,
-      "exported" : false
+      "type" : 225,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 1,
-      "type" : 31,
-      "exported" : false
+      "type" : 119,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 229,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 231,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 231,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 237,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 237,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 243,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 248,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "t",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "axis",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "retVal",
       "package" : 0,
-      "type" : 219,
-      "exported" : false
+      "type" : 252,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 100,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "Uint8",
       "package" : 1,
       "type" : 19,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 100,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "upper",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "r",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "i",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "stride",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "Data",
       "package" : 4,
       "type" : 42,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "data",
       "package" : 0,
-      "type" : 220,
-      "exported" : false
+      "type" : 253,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "Len",
       "package" : 4,
       "type" : 9,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "Cap",
       "package" : 4,
       "type" : 9,
-      "exported" : true
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "hdr",
       "package" : 0,
-      "type" : 232,
-      "exported" : false
+      "type" : 265,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

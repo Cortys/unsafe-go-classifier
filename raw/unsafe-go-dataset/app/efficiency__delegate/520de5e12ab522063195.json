@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2, 0, 3 ],
+      "in-vars" : [ 17, 20, 18, 19 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0, 3 ],
+      "out-vars" : [ 19, 17, 20, 18 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2, 0, 3 ],
+      "in-vars" : [ 18, 19, 17, 20 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 5 ],
-      "decl-vars" : [ 5 ],
+      "out-vars" : [ 20, 22, 17 ],
+      "decl-vars" : [ 22 ],
       "line-start" : 52,
       "ast" : {
         "kind" : "statement",
@@ -68,7 +68,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "obj",
-              "variable" : 1
+              "variable" : 18
             }
           }, {
             "go-type" : 3,
@@ -78,31 +78,31 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "index",
-              "variable" : 2
+              "variable" : 19
             }
           }, {
             "field" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "elemSize",
-              "variable" : 4
+              "variable" : 21
             },
-            "go-type" : 28,
+            "go-type" : 33,
             "kind" : "expression",
             "target" : {
-              "go-type" : 0,
+              "go-type" : 5,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "type2",
-                "variable" : 0
+                "variable" : 17
               }
             },
             "type" : "selector"
           }, {
-            "go-type" : 26,
+            "go-type" : 31,
             "kind" : "constant",
             "value" : {
               "type" : "STRING",
@@ -111,7 +111,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 5,
+            "go-type" : 99,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -130,11 +130,11 @@
       "line-end" : 52,
       "code" : "elemPtr := arrayAt(obj, index, type2.elemSize, \"i < s.Len\")",
       "entry" : false,
-      "use-vars" : [ 1, 2, 0 ]
+      "use-vars" : [ 18, 19, 17 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 5, 0, 3 ],
+      "in-vars" : [ 22, 17, 20 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -148,19 +148,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "elemRType",
-              "variable" : 6
+              "variable" : 23
             },
             "go-type" : 2,
             "kind" : "expression",
             "target" : {
-              "go-type" : 0,
+              "go-type" : 5,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "type2",
-                "variable" : 0
+                "variable" : 17
               }
             },
             "type" : "selector"
@@ -172,7 +172,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "elemPtr",
-              "variable" : 5
+              "variable" : 22
             }
           }, {
             "go-type" : 2,
@@ -182,12 +182,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "elem",
-              "variable" : 3
+              "variable" : 20
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 8,
+            "go-type" : 102,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -205,7 +205,7 @@
       "line-end" : 53,
       "code" : "typedmemmove(type2.elemRType, elemPtr, elem)",
       "entry" : false,
-      "use-vars" : [ 5, 3, 0 ]
+      "use-vars" : [ 20, 17, 22 ]
     } ],
     "code" : "func (type2 *UnsafeArrayType) UnsafeSetIndex(obj unsafe.Pointer, index int, elem unsafe.Pointer) {\n\telemPtr := arrayAt(obj, index, type2.elemSize, \"i < s.Len\")\n\ttypedmemmove(type2.elemRType, elemPtr, elem)\n}",
     "defines" : [ 0 ],
@@ -217,12 +217,12 @@
     }, {
       "name" : "arrayAt",
       "package" : 0,
-      "type" : 5,
+      "type" : 99,
       "exported" : false
     }, {
       "name" : "typedmemmove",
       "package" : 0,
-      "type" : 8,
+      "type" : 102,
       "exported" : false
     } ],
     "line-end" : 54,
@@ -248,14 +248,14 @@
       "name" : "atomic",
       "path" : "sync/atomic"
     } ],
-    "params" : [ 1, 2, 3 ],
-    "receivers" : [ 0 ],
+    "params" : [ 18, 19, 20 ],
+    "receivers" : [ 17 ],
     "results" : [ ],
     "type" : "function",
     "types" : [ {
       "name" : "func(obj unsafe.Pointer, index int, elem unsafe.Pointer)",
       "params" : 1,
-      "recv" : 0,
+      "recv" : 17,
       "results" : 4,
       "type" : "Signature",
       "underlying" : 0,
@@ -290,12 +290,868 @@
       "type" : "Tuple",
       "underlying" : 4
     }, {
-      "name" : "func(p unsafe.Pointer, i int, eltSize uintptr, whySafe string) unsafe.Pointer",
-      "params" : 6,
-      "recv" : -1,
-      "results" : 7,
+      "elem" : 6,
+      "name" : "*github.com/modern-go/reflect2.UnsafeArrayType",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "local-name" : "UnsafeArrayType",
+      "name" : "github.com/modern-go/reflect2.UnsafeArrayType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "unsafeType",
+        "type" : 8
+      }, {
+        "name" : "elemRType",
+        "type" : 2
+      }, {
+        "name" : "pElemRType",
+        "type" : 2
+      }, {
+        "name" : "elemSize",
+        "type" : 33
+      }, {
+        "name" : "likePtr",
+        "type" : 19
+      } ],
+      "name" : "struct{github.com/modern-go/reflect2.unsafeType; elemRType unsafe.Pointer; pElemRType unsafe.Pointer; elemSize uintptr; likePtr bool}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
+      "local-name" : "unsafeType",
+      "name" : "github.com/modern-go/reflect2.unsafeType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 9
+    }, {
+      "fields" : [ {
+        "name" : "safeType",
+        "type" : 10
+      }, {
+        "name" : "rtype",
+        "type" : 2
+      }, {
+        "name" : "ptrRType",
+        "type" : 2
+      } ],
+      "name" : "struct{github.com/modern-go/reflect2.safeType; rtype unsafe.Pointer; ptrRType unsafe.Pointer}",
+      "type" : "Struct",
+      "underlying" : 9
+    }, {
+      "local-name" : "safeType",
+      "name" : "github.com/modern-go/reflect2.safeType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 11
+    }, {
+      "fields" : [ {
+        "name" : "Type",
+        "type" : 12
+      }, {
+        "name" : "cfg",
+        "type" : 82
+      } ],
+      "name" : "struct{reflect.Type; cfg *github.com/modern-go/reflect2.frozenConfig}",
+      "type" : "Struct",
+      "underlying" : 11
+    }, {
+      "local-name" : "Type",
+      "name" : "reflect.Type",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "methods" : [ {
+        "name" : "Align",
+        "type" : 14
+      }, {
+        "name" : "AssignableTo",
+        "type" : 16
+      }, {
+        "name" : "Bits",
+        "type" : 14
+      }, {
+        "name" : "ChanDir",
+        "type" : 20
+      }, {
+        "name" : "Comparable",
+        "type" : 23
+      }, {
+        "name" : "ConvertibleTo",
+        "type" : 16
+      }, {
+        "name" : "Elem",
+        "type" : 24
+      }, {
+        "name" : "Field",
+        "type" : 26
+      }, {
+        "name" : "FieldAlign",
+        "type" : 14
+      }, {
+        "name" : "FieldByIndex",
+        "type" : 35
+      }, {
+        "name" : "FieldByName",
+        "type" : 37
+      }, {
+        "name" : "FieldByNameFunc",
+        "type" : 40
+      }, {
+        "name" : "Implements",
+        "type" : 16
+      }, {
+        "name" : "In",
+        "type" : 44
+      }, {
+        "name" : "IsVariadic",
+        "type" : 23
+      }, {
+        "name" : "Key",
+        "type" : 24
+      }, {
+        "name" : "Kind",
+        "type" : 45
+      }, {
+        "name" : "Len",
+        "type" : 14
+      }, {
+        "name" : "Method",
+        "type" : 49
+      }, {
+        "name" : "MethodByName",
+        "type" : 69
+      }, {
+        "name" : "Name",
+        "type" : 71
+      }, {
+        "name" : "NumField",
+        "type" : 14
+      }, {
+        "name" : "NumIn",
+        "type" : 14
+      }, {
+        "name" : "NumMethod",
+        "type" : 14
+      }, {
+        "name" : "NumOut",
+        "type" : 14
+      }, {
+        "name" : "Out",
+        "type" : 44
+      }, {
+        "name" : "PkgPath",
+        "type" : 71
+      }, {
+        "name" : "Size",
+        "type" : 72
+      }, {
+        "name" : "String",
+        "type" : 71
+      }, {
+        "name" : "common",
+        "type" : 74
+      }, {
+        "name" : "uncommon",
+        "type" : 76
+      } ],
+      "name" : "interface{Align() int; AssignableTo(u reflect.Type) bool; Bits() int; ChanDir() reflect.ChanDir; Comparable() bool; ConvertibleTo(u reflect.Type) bool; Elem() reflect.Type; Field(i int) reflect.StructField; FieldAlign() int; FieldByIndex(index []int) reflect.StructField; FieldByName(name string) (reflect.StructField, bool); FieldByNameFunc(match func(string) bool) (reflect.StructField, bool); Implements(u reflect.Type) bool; In(i int) reflect.Type; IsVariadic() bool; Key() reflect.Type; Kind() reflect.Kind; Len() int; Method(int) reflect.Method; MethodByName(string) (reflect.Method, bool); Name() string; NumField() int; NumIn() int; NumMethod() int; NumOut() int; Out(i int) reflect.Type; PkgPath() string; Size() uintptr; String() string; common() *reflect.rtype; uncommon() *reflect.uncommonType}",
+      "type" : "Interface",
+      "underlying" : 13
+    }, {
+      "name" : "func() int",
+      "params" : 4,
+      "recv" : 0,
+      "results" : 15,
       "type" : "Signature",
-      "underlying" : 5,
+      "underlying" : 14,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 3
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 15
+    }, {
+      "name" : "func(u reflect.Type) bool",
+      "params" : 17,
+      "recv" : 1,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "u",
+        "type" : 12
+      } ],
+      "name" : "(u reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 17
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 19
+      } ],
+      "name" : "(bool)",
+      "type" : "Tuple",
+      "underlying" : 18
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "name" : "func() reflect.ChanDir",
+      "params" : 4,
+      "recv" : 2,
+      "results" : 21,
+      "type" : "Signature",
+      "underlying" : 20,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 22
+      } ],
+      "name" : "(reflect.ChanDir)",
+      "type" : "Tuple",
+      "underlying" : 21
+    }, {
+      "local-name" : "ChanDir",
+      "name" : "reflect.ChanDir",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 3
+    }, {
+      "name" : "func() bool",
+      "params" : 4,
+      "recv" : 3,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 23,
+      "variadic" : false
+    }, {
+      "name" : "func() reflect.Type",
+      "params" : 4,
+      "recv" : 4,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 24,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 12
+      } ],
+      "name" : "(reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 25
+    }, {
+      "name" : "func(i int) reflect.StructField",
+      "params" : 27,
+      "recv" : 5,
+      "results" : 28,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 3
+      } ],
+      "name" : "(i int)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 29
+      } ],
+      "name" : "(reflect.StructField)",
+      "type" : "Tuple",
+      "underlying" : 28
+    }, {
+      "local-name" : "StructField",
+      "name" : "reflect.StructField",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 31
+      }, {
+        "name" : "PkgPath",
+        "type" : 31
+      }, {
+        "name" : "Type",
+        "type" : 12
+      }, {
+        "name" : "Tag",
+        "type" : 32
+      }, {
+        "name" : "Offset",
+        "type" : 33
+      }, {
+        "name" : "Index",
+        "type" : 34
+      }, {
+        "name" : "Anonymous",
+        "type" : 19
+      } ],
+      "name" : "struct{Name string; PkgPath string; Type reflect.Type; Tag reflect.StructTag; Offset uintptr; Index []int; Anonymous bool}",
+      "type" : "Struct",
+      "underlying" : 30
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 31
+    }, {
+      "local-name" : "StructTag",
+      "name" : "reflect.StructTag",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 31
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 33
+    }, {
+      "elem" : 3,
+      "name" : "[]int",
+      "type" : "Slice",
+      "underlying" : 34
+    }, {
+      "name" : "func(index []int) reflect.StructField",
+      "params" : 36,
+      "recv" : 6,
+      "results" : 28,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "index",
+        "type" : 34
+      } ],
+      "name" : "(index []int)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "func(name string) (reflect.StructField, bool)",
+      "params" : 38,
+      "recv" : 7,
+      "results" : 39,
+      "type" : "Signature",
+      "underlying" : 37,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 31
+      } ],
+      "name" : "(name string)",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 29
+      }, {
+        "name" : "",
+        "type" : 19
+      } ],
+      "name" : "(reflect.StructField, bool)",
+      "type" : "Tuple",
+      "underlying" : 39
+    }, {
+      "name" : "func(match func(string) bool) (reflect.StructField, bool)",
+      "params" : 41,
+      "recv" : 8,
+      "results" : 39,
+      "type" : "Signature",
+      "underlying" : 40,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "match",
+        "type" : 42
+      } ],
+      "name" : "(match func(string) bool)",
+      "type" : "Tuple",
+      "underlying" : 41
+    }, {
+      "name" : "func(string) bool",
+      "params" : 43,
+      "recv" : -1,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 42,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 31
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 43
+    }, {
+      "name" : "func(i int) reflect.Type",
+      "params" : 27,
+      "recv" : 9,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 44,
+      "variadic" : false
+    }, {
+      "name" : "func() reflect.Kind",
+      "params" : 4,
+      "recv" : 10,
+      "results" : 46,
+      "type" : "Signature",
+      "underlying" : 45,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 47
+      } ],
+      "name" : "(reflect.Kind)",
+      "type" : "Tuple",
+      "underlying" : 46
+    }, {
+      "local-name" : "Kind",
+      "name" : "reflect.Kind",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 48
+    }, {
+      "name" : "uint",
+      "type" : "Basic",
+      "underlying" : 48
+    }, {
+      "name" : "func(int) reflect.Method",
+      "params" : 15,
+      "recv" : 11,
+      "results" : 50,
+      "type" : "Signature",
+      "underlying" : 49,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 51
+      } ],
+      "name" : "(reflect.Method)",
+      "type" : "Tuple",
+      "underlying" : 50
+    }, {
+      "local-name" : "Method",
+      "name" : "reflect.Method",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 52
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 31
+      }, {
+        "name" : "PkgPath",
+        "type" : 31
+      }, {
+        "name" : "Type",
+        "type" : 12
+      }, {
+        "name" : "Func",
+        "type" : 53
+      }, {
+        "name" : "Index",
+        "type" : 3
+      } ],
+      "name" : "struct{Name string; PkgPath string; Type reflect.Type; Func reflect.Value; Index int}",
+      "type" : "Struct",
+      "underlying" : 52
+    }, {
+      "local-name" : "Value",
+      "name" : "reflect.Value",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 54
+    }, {
+      "fields" : [ {
+        "name" : "typ",
+        "type" : 55
+      }, {
+        "name" : "ptr",
+        "type" : 2
+      }, {
+        "name" : "flag",
+        "type" : 68
+      } ],
+      "name" : "struct{typ *reflect.rtype; ptr unsafe.Pointer; reflect.flag}",
+      "type" : "Struct",
+      "underlying" : 54
+    }, {
+      "elem" : 56,
+      "name" : "*reflect.rtype",
+      "type" : "Pointer",
+      "underlying" : 55
+    }, {
+      "local-name" : "rtype",
+      "name" : "reflect.rtype",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 57
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 33
+      }, {
+        "name" : "ptrdata",
+        "type" : 33
+      }, {
+        "name" : "hash",
+        "type" : 58
+      }, {
+        "name" : "tflag",
+        "type" : 59
+      }, {
+        "name" : "align",
+        "type" : 60
+      }, {
+        "name" : "fieldAlign",
+        "type" : 60
+      }, {
+        "name" : "kind",
+        "type" : 60
+      }, {
+        "name" : "equal",
+        "type" : 61
+      }, {
+        "name" : "gcdata",
+        "type" : 63
+      }, {
+        "name" : "str",
+        "type" : 65
+      }, {
+        "name" : "ptrToThis",
+        "type" : 67
+      } ],
+      "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag reflect.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str reflect.nameOff; ptrToThis reflect.typeOff}",
+      "type" : "Struct",
+      "underlying" : 57
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 58
+    }, {
+      "local-name" : "tflag",
+      "name" : "reflect.tflag",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 60
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 60
+    }, {
+      "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
+      "params" : 62,
+      "recv" : -1,
+      "results" : 18,
+      "type" : "Signature",
+      "underlying" : 61,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      }, {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 62
+    }, {
+      "elem" : 64,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 63
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 64
+    }, {
+      "local-name" : "nameOff",
+      "name" : "reflect.nameOff",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 66
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 66
+    }, {
+      "local-name" : "typeOff",
+      "name" : "reflect.typeOff",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 66
+    }, {
+      "local-name" : "flag",
+      "name" : "reflect.flag",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "name" : "func(string) (reflect.Method, bool)",
+      "params" : 43,
+      "recv" : 12,
+      "results" : 70,
+      "type" : "Signature",
+      "underlying" : 69,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 51
+      }, {
+        "name" : "",
+        "type" : 19
+      } ],
+      "name" : "(reflect.Method, bool)",
+      "type" : "Tuple",
+      "underlying" : 70
+    }, {
+      "name" : "func() string",
+      "params" : 4,
+      "recv" : 13,
+      "results" : 43,
+      "type" : "Signature",
+      "underlying" : 71,
+      "variadic" : false
+    }, {
+      "name" : "func() uintptr",
+      "params" : 4,
+      "recv" : 14,
+      "results" : 73,
+      "type" : "Signature",
+      "underlying" : 72,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 33
+      } ],
+      "name" : "(uintptr)",
+      "type" : "Tuple",
+      "underlying" : 73
+    }, {
+      "name" : "func() *reflect.rtype",
+      "params" : 4,
+      "recv" : 15,
+      "results" : 75,
+      "type" : "Signature",
+      "underlying" : 74,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 55
+      } ],
+      "name" : "(*reflect.rtype)",
+      "type" : "Tuple",
+      "underlying" : 75
+    }, {
+      "name" : "func() *reflect.uncommonType",
+      "params" : 4,
+      "recv" : 16,
+      "results" : 77,
+      "type" : "Signature",
+      "underlying" : 76,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 78
+      } ],
+      "name" : "(*reflect.uncommonType)",
+      "type" : "Tuple",
+      "underlying" : 77
+    }, {
+      "elem" : 79,
+      "name" : "*reflect.uncommonType",
+      "type" : "Pointer",
+      "underlying" : 78
+    }, {
+      "local-name" : "uncommonType",
+      "name" : "reflect.uncommonType",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "fields" : [ {
+        "name" : "pkgPath",
+        "type" : 65
+      }, {
+        "name" : "mcount",
+        "type" : 81
+      }, {
+        "name" : "xcount",
+        "type" : 81
+      }, {
+        "name" : "moff",
+        "type" : 58
+      }, {
+        "name" : "_",
+        "type" : 58
+      } ],
+      "name" : "struct{pkgPath reflect.nameOff; mcount uint16; xcount uint16; moff uint32; _ uint32}",
+      "type" : "Struct",
+      "underlying" : 80
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 81
+    }, {
+      "elem" : 83,
+      "name" : "*github.com/modern-go/reflect2.frozenConfig",
+      "type" : "Pointer",
+      "underlying" : 82
+    }, {
+      "local-name" : "frozenConfig",
+      "name" : "github.com/modern-go/reflect2.frozenConfig",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 84
+    }, {
+      "fields" : [ {
+        "name" : "useSafeImplementation",
+        "type" : 19
+      }, {
+        "name" : "cache",
+        "type" : 85
+      } ],
+      "name" : "struct{useSafeImplementation bool; cache *github.com/modern-go/concurrent.Map}",
+      "type" : "Struct",
+      "underlying" : 84
+    }, {
+      "elem" : 86,
+      "name" : "*github.com/modern-go/concurrent.Map",
+      "type" : "Pointer",
+      "underlying" : 85
+    }, {
+      "local-name" : "Map",
+      "name" : "github.com/modern-go/concurrent.Map",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 87
+    }, {
+      "fields" : [ {
+        "name" : "Map",
+        "type" : 88
+      } ],
+      "name" : "struct{sync.Map}",
+      "type" : "Struct",
+      "underlying" : 87
+    }, {
+      "local-name" : "Map",
+      "name" : "sync.Map",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 89
+    }, {
+      "fields" : [ {
+        "name" : "mu",
+        "type" : 90
+      }, {
+        "name" : "read",
+        "type" : 92
+      }, {
+        "name" : "dirty",
+        "type" : 95
+      }, {
+        "name" : "misses",
+        "type" : 3
+      } ],
+      "name" : "struct{mu sync.Mutex; read sync/atomic.Value; dirty map[interface{}]*sync.entry; misses int}",
+      "type" : "Struct",
+      "underlying" : 89
+    }, {
+      "local-name" : "Mutex",
+      "name" : "sync.Mutex",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 91
+    }, {
+      "fields" : [ {
+        "name" : "state",
+        "type" : 66
+      }, {
+        "name" : "sema",
+        "type" : 58
+      } ],
+      "name" : "struct{state int32; sema uint32}",
+      "type" : "Struct",
+      "underlying" : 91
+    }, {
+      "local-name" : "Value",
+      "name" : "sync/atomic.Value",
+      "package" : 5,
+      "type" : "Named",
+      "underlying" : 93
+    }, {
+      "fields" : [ {
+        "name" : "v",
+        "type" : 94
+      } ],
+      "name" : "struct{v interface{}}",
+      "type" : "Struct",
+      "underlying" : 93
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 94
+    }, {
+      "elem" : 96,
+      "key" : 94,
+      "name" : "map[interface{}]*sync.entry",
+      "type" : "Map",
+      "underlying" : 95
+    }, {
+      "elem" : 97,
+      "name" : "*sync.entry",
+      "type" : "Pointer",
+      "underlying" : 96
+    }, {
+      "local-name" : "entry",
+      "name" : "sync.entry",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 98
+    }, {
+      "fields" : [ {
+        "name" : "p",
+        "type" : 2
+      } ],
+      "name" : "struct{p unsafe.Pointer}",
+      "type" : "Struct",
+      "underlying" : 98
+    }, {
+      "name" : "func(p unsafe.Pointer, i int, eltSize uintptr, whySafe string) unsafe.Pointer",
+      "params" : 100,
+      "recv" : -1,
+      "results" : 101,
+      "type" : "Signature",
+      "underlying" : 99,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -306,14 +1162,14 @@
         "type" : 3
       }, {
         "name" : "eltSize",
-        "type" : 28
+        "type" : 33
       }, {
         "name" : "whySafe",
-        "type" : 26
+        "type" : 31
       } ],
       "name" : "(p unsafe.Pointer, i int, eltSize uintptr, whySafe string)",
       "type" : "Tuple",
-      "underlying" : 6
+      "underlying" : 100
     }, {
       "fields" : [ {
         "name" : "",
@@ -321,14 +1177,14 @@
       } ],
       "name" : "(unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 7
+      "underlying" : 101
     }, {
       "name" : "func(rtype unsafe.Pointer, dst unsafe.Pointer, src unsafe.Pointer)",
-      "params" : 9,
+      "params" : 103,
       "recv" : -1,
       "results" : 4,
       "type" : "Signature",
-      "underlying" : 8,
+      "underlying" : 102,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -343,43 +1199,176 @@
       } ],
       "name" : "(rtype unsafe.Pointer, dst unsafe.Pointer, src unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 9
+      "underlying" : 103
     } ],
     "variables" : [ {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 12,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "type2",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 5,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "obj",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "index",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "elem",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "elemSize",
       "package" : 0,
-      "type" : 28,
-      "exported" : false
+      "type" : 33,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "elemPtr",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "elemRType",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

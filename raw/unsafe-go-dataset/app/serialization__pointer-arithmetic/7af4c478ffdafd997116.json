@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 0 ],
+      "out-vars" : [ 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 3 ],
+      "out-vars" : [ 3, 2 ],
       "decl-vars" : [ 3 ],
       "line-start" : 85,
       "ast" : {
@@ -131,7 +131,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 2 ],
+      "out-vars" : [ 2, 3 ],
       "decl-vars" : [ 4 ],
       "line-start" : 87,
       "ast" : {
@@ -414,7 +414,7 @@
       "successors" : [ 7 ],
       "in-vars" : [ 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 3 ],
+      "out-vars" : [ 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : 91,
       "ast" : {
@@ -605,7 +605,7 @@
       "line-end" : 93,
       "code" : "return *(*interface{})(unsafe.Pointer(&unsafeIntf{typ: urv.typ, word: ptr}))",
       "entry" : false,
-      "use-vars" : [ 3, 4 ]
+      "use-vars" : [ 4, 3 ]
     } ],
     "code" : "func rv2i(rv reflect.Value) interface{} {\n\n\turv := (*unsafeReflectValue)(unsafe.Pointer(&rv))\n\t// true references (map, func, chan, ptr - NOT slice) may be double-referenced as flagIndir\n\tvar ptr unsafe.Pointer\n\tif refBitset.isset(byte(urv.flag&(1<<5-1))) && urv.flag&unsafeFlagIndir != 0 {\n\t\tptr = *(*unsafe.Pointer)(urv.ptr)\n\t} else {\n\t\tptr = urv.ptr\n\t}\n\treturn *(*interface{})(unsafe.Pointer(&unsafeIntf{typ: urv.typ, word: ptr}))\n}",
     "defines" : [ 0 ],
@@ -916,52 +916,72 @@
       "name" : "rv",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 23,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "refBitset",
       "package" : 0,
       "type" : 24,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "urv",
       "package" : 0,
       "type" : 26,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ptr",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "flag",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "ptr",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "typ",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "typ",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "word",
       "package" : 0,
       "type" : 13,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

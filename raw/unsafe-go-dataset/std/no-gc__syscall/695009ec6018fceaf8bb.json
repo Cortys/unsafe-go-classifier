@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 2, 1, 5 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1615,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1616,
       "ast" : {
@@ -149,9 +149,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 1 ],
+      "in-vars" : [ 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1 ],
+      "out-vars" : [ 6, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1617,
       "ast" : {
@@ -229,9 +229,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 5, 1, 2 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 6 ],
+      "out-vars" : [ 6, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1619,
       "ast" : {
@@ -296,10 +296,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 6, 1 ],
+      "in-vars" : [ 2, 1, 6 ],
       "exit" : false,
       "out-vars" : [ 7, 8 ],
-      "decl-vars" : [ 9, 7, 8 ],
+      "decl-vars" : [ 7, 9, 8 ],
       "line-start" : 1621,
       "ast" : {
         "kind" : "statement",
@@ -455,13 +455,13 @@
       "line-end" : 1621,
       "code" : "r0, _, e1 := Syscall(SYS_WRITEV, uintptr(fd), uintptr(_p0), uintptr(len(iovs)))",
       "entry" : false,
-      "use-vars" : [ 2, 1, 6 ]
+      "use-vars" : [ 6, 2, 1 ]
     }, {
       "update-vars" : [ 3 ],
       "successors" : [ 8 ],
       "in-vars" : [ 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 8 ],
+      "out-vars" : [ 7 ],
       "decl-vars" : [ ],
       "line-start" : 1622,
       "ast" : {
@@ -499,7 +499,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 7
+              "variable" : 8
             }
           },
           "type" : "cast"
@@ -510,13 +510,13 @@
       "line-end" : 1622,
       "code" : "n = int(r0)",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 8 ],
+      "in-vars" : [ 7 ],
       "exit" : false,
-      "out-vars" : [ 8 ],
+      "out-vars" : [ 7 ],
       "decl-vars" : [ ],
       "line-start" : 1623,
       "ast" : {
@@ -531,7 +531,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 8
+              "variable" : 7
             }
           },
           "operator" : "!=",
@@ -552,11 +552,11 @@
       "line-end" : 1625,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 8 ],
+      "in-vars" : [ 7 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -583,7 +583,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 8
+              "variable" : 7
             }
           } ],
           "ellipsis" : false,
@@ -607,7 +607,7 @@
       "line-end" : 1624,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -893,52 +893,72 @@
       "name" : "",
       "package" : -1,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fd",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "iovs",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_zero",
       "package" : 0,
       "type" : 16,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_p0",
       "package" : 0,
       "type" : 17,
-      "exported" : false
-    }, {
-      "name" : "r0",
-      "package" : 0,
-      "type" : 16,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "e1",
       "package" : 0,
       "type" : 25,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "r0",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 16,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

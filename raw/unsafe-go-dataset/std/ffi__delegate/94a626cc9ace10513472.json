@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 1, 2, 5, 6, 0, 7 ],
+      "in-vars" : [ 1, 2, 4, 5, 6, 7, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 6, 0, 7, 4, 1 ],
+      "out-vars" : [ 6, 7, 0, 1, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 2, 5, 6, 0, 7, 4, 1 ],
+      "in-vars" : [ 4, 5, 6, 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 7, 4, 1, 2, 5 ],
+      "out-vars" : [ 1, 2, 4, 5, 6, 7, 0 ],
       "decl-vars" : [ ],
       "line-start" : 927,
       "ast" : {
@@ -109,9 +109,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 7, 4, 1, 2, 5, 6, 0 ],
+      "in-vars" : [ 7, 0, 1, 2, 4, 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 8, 4, 1, 2, 6 ],
+      "out-vars" : [ 2, 4, 5, 6, 8, 0, 1 ],
       "decl-vars" : [ 8 ],
       "line-start" : 930,
       "ast" : {
@@ -132,7 +132,7 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 16,
+              "go-type" : 17,
               "index" : {
                 "go-type" : 2,
                 "kind" : "expression",
@@ -146,14 +146,14 @@
               },
               "kind" : "expression",
               "target" : {
-                "go-type" : 15,
+                "go-type" : 16,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "fwdSig",
-                  "variable" : 5
+                  "variable" : 7
                 }
               },
               "type" : "index"
@@ -177,7 +177,7 @@
               "value" : "Loaduintptr"
             }
           },
-          "go-type" : 16,
+          "go-type" : 17,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -187,13 +187,13 @@
       "line-end" : 930,
       "code" : "fwdFn := atomic.Loaduintptr(&fwdSig[sig])",
       "entry" : false,
-      "use-vars" : [ 5, 0 ]
+      "use-vars" : [ 0, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 0, 7, 8, 4, 1, 2, 6 ],
+      "in-vars" : [ 2, 4, 5, 6, 8, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 0, 7, 8, 10, 1 ],
+      "out-vars" : [ 6, 8, 0, 1, 2, 10, 5 ],
       "decl-vars" : [ 10 ],
       "line-start" : 931,
       "ast" : {
@@ -256,9 +256,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 15 ],
-      "in-vars" : [ 6, 0, 7, 8, 10, 1, 2 ],
+      "in-vars" : [ 2, 10, 5, 6, 8, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 8, 10, 1, 2 ],
+      "out-vars" : [ 0, 1, 2, 10, 8 ],
       "decl-vars" : [ ],
       "line-start" : 934,
       "ast" : {
@@ -288,14 +288,14 @@
                   },
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 17,
+                    "go-type" : 15,
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "handlingSig",
-                      "variable" : 6
+                      "variable" : 5
                     }
                   },
                   "type" : "index"
@@ -347,7 +347,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "signalsOK",
-                "variable" : 7
+                "variable" : 6
               }
             },
             "type" : "unary"
@@ -361,13 +361,13 @@
       "line-end" : 949,
       "code" : "if atomic.Load(&handlingSig[sig]) == 0 || !signalsOK {\n\n\tif fwdFn == _SIG_IGN || (fwdFn == _SIG_DFL && flags&_SigIgn != 0) {\n\t\treturn true\n\t}\n\n\tif fwdFn == _SIG_DFL {\n\t\tsetsig(sig, _SIG_DFL)\n\t\tdieFromSignal(sig)\n\t\treturn false\n\t}\n\n\tsigfwd(fwdFn, sig, info, ctx)\n\treturn true\n}",
       "entry" : false,
-      "use-vars" : [ 7, 6, 0 ]
+      "use-vars" : [ 5, 0, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 0, 8, 10, 1, 2 ],
+      "in-vars" : [ 8, 0, 1, 2, 10 ],
       "exit" : false,
-      "out-vars" : [ 0, 8, 1, 2 ],
+      "out-vars" : [ 1, 2, 8, 0 ],
       "decl-vars" : [ ],
       "line-start" : 936,
       "ast" : {
@@ -378,7 +378,7 @@
             "go-type" : 18,
             "kind" : "expression",
             "left" : {
-              "go-type" : 16,
+              "go-type" : 17,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -390,7 +390,7 @@
             },
             "operator" : "==",
             "right" : {
-              "go-type" : 16,
+              "go-type" : 17,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -410,7 +410,7 @@
                 "go-type" : 18,
                 "kind" : "expression",
                 "left" : {
-                  "go-type" : 16,
+                  "go-type" : 17,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -422,7 +422,7 @@
                 },
                 "operator" : "==",
                 "right" : {
-                  "go-type" : 16,
+                  "go-type" : 17,
                   "kind" : "constant",
                   "value" : {
                     "type" : "INT",
@@ -484,7 +484,7 @@
       "line-end" : 938,
       "code" : "if fwdFn == _SIG_IGN || (fwdFn == _SIG_DFL && flags&_SigIgn != 0) {\n\treturn true\n}",
       "entry" : false,
-      "use-vars" : [ 10, 8 ]
+      "use-vars" : [ 8, 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -513,9 +513,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 13 ],
-      "in-vars" : [ 0, 8, 1, 2 ],
+      "in-vars" : [ 8, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0, 8 ],
+      "out-vars" : [ 8, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 941,
       "ast" : {
@@ -523,7 +523,7 @@
           "go-type" : 18,
           "kind" : "expression",
           "left" : {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -535,7 +535,7 @@
           },
           "operator" : "==",
           "right" : {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -575,7 +575,7 @@
               "variable" : 0
             }
           }, {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -675,7 +675,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 0, 8, 1, 2 ],
+      "in-vars" : [ 8, 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -685,7 +685,7 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -745,7 +745,7 @@
       "line-end" : 947,
       "code" : "sigfwd(fwdFn, sig, info, ctx)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 8, 0 ]
+      "use-vars" : [ 2, 8, 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -774,9 +774,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16, 17 ],
-      "in-vars" : [ 8, 10, 1, 2, 0 ],
+      "in-vars" : [ 10, 8, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 8, 10, 1, 2 ],
+      "out-vars" : [ 2, 10, 8, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 954,
       "ast" : {
@@ -855,9 +855,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18, 19 ],
-      "in-vars" : [ 2, 0, 8, 10, 1 ],
+      "in-vars" : [ 8, 0, 1, 2, 10 ],
       "exit" : false,
-      "out-vars" : [ 8, 10, 1, 2, 0 ],
+      "out-vars" : [ 10, 8, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 959,
       "ast" : {
@@ -865,7 +865,7 @@
           "go-type" : 18,
           "kind" : "expression",
           "left" : {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -877,7 +877,7 @@
           },
           "operator" : "==",
           "right" : {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -922,9 +922,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 1, 2, 0, 8, 10 ],
+      "in-vars" : [ 10, 8, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 8, 11, 10, 1, 2, 0 ],
+      "out-vars" : [ 0, 1, 2, 10, 11, 8 ],
       "decl-vars" : [ 11 ],
       "line-start" : 963,
       "ast" : {
@@ -988,13 +988,13 @@
       "line-end" : 963,
       "code" : "c := &sigctxt{info, ctx}",
       "entry" : false,
-      "use-vars" : [ 1, 2 ]
+      "use-vars" : [ 2, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 22 ],
-      "in-vars" : [ 11, 10, 1, 2, 0, 8 ],
+      "in-vars" : [ 11, 8, 0, 1, 2, 10 ],
       "exit" : false,
-      "out-vars" : [ 8, 11, 1, 2, 0 ],
+      "out-vars" : [ 11, 8, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 968,
       "ast" : {
@@ -1128,7 +1128,7 @@
       "line-end" : 970,
       "code" : "if (c.sigcode() == _SI_USER || flags&_SigPanic == 0) && sig != _SIGPIPE {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 10, 0, 11 ]
+      "use-vars" : [ 11, 10, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1157,9 +1157,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23 ],
-      "in-vars" : [ 1, 2, 0, 8, 11 ],
+      "in-vars" : [ 8, 0, 1, 2, 11 ],
       "exit" : false,
-      "out-vars" : [ 12, 1, 2, 0, 8 ],
+      "out-vars" : [ 12, 8, 0, 1, 2 ],
       "decl-vars" : [ 12 ],
       "line-start" : 975,
       "ast" : {
@@ -1211,9 +1211,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24, 25 ],
-      "in-vars" : [ 0, 8, 12, 1, 2 ],
+      "in-vars" : [ 12, 8, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0, 8 ],
+      "out-vars" : [ 2, 8, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 976,
       "ast" : {
@@ -1424,9 +1424,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26, 27 ],
-      "in-vars" : [ 0, 8, 1, 2 ],
+      "in-vars" : [ 8, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 2, 0 ],
+      "out-vars" : [ 1, 2, 8, 0 ],
       "decl-vars" : [ ],
       "line-start" : 981,
       "ast" : {
@@ -1434,7 +1434,7 @@
           "go-type" : 18,
           "kind" : "expression",
           "left" : {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1446,7 +1446,7 @@
           },
           "operator" : "!=",
           "right" : {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -1466,7 +1466,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27 ],
-      "in-vars" : [ 0, 8, 1, 2 ],
+      "in-vars" : [ 8, 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -1476,7 +1476,7 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 16,
+            "go-type" : 17,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1536,7 +1536,7 @@
       "line-end" : 982,
       "code" : "sigfwd(fwdFn, sig, info, ctx)",
       "entry" : false,
-      "use-vars" : [ 0, 1, 2, 8 ]
+      "use-vars" : [ 1, 2, 8, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1734,18 +1734,18 @@
       "type" : "Basic",
       "underlying" : 14
     }, {
-      "elem" : 16,
-      "name" : "[65]uintptr",
-      "type" : "Array",
-      "underlying" : 15
-    }, {
-      "name" : "uintptr",
-      "type" : "Basic",
-      "underlying" : 16
-    }, {
       "elem" : 2,
       "name" : "[65]uint32",
       "type" : "Array",
+      "underlying" : 15
+    }, {
+      "elem" : 17,
+      "name" : "[65]uintptr",
+      "type" : "Array",
+      "underlying" : 16
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
       "underlying" : 17
     }, {
       "name" : "untyped bool",
@@ -1768,14 +1768,14 @@
       "type" : "Tuple",
       "underlying" : 20
     }, {
-      "elem" : 16,
+      "elem" : 17,
       "name" : "*uintptr",
       "type" : "Pointer",
       "underlying" : 21
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "(uintptr)",
       "type" : "Tuple",
@@ -1828,7 +1828,7 @@
         "type" : 2
       }, {
         "name" : "fn",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "(i uint32, fn uintptr)",
       "type" : "Tuple",
@@ -1860,7 +1860,7 @@
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "sig",
         "type" : 2
@@ -1929,10 +1929,10 @@
         "type" : 42
       }, {
         "name" : "stackguard0",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "stackguard1",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "_panic",
         "type" : 44
@@ -1947,13 +1947,13 @@
         "type" : 57
       }, {
         "name" : "syscallsp",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "syscallpc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "stktopsp",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "param",
         "type" : 8
@@ -2025,25 +2025,25 @@
         "type" : 113
       }, {
         "name" : "sigcode0",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "sigcode1",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "sigpc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "gopc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "ancestors",
         "type" : 114
       }, {
         "name" : "startpc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "racectx",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "waiting",
         "type" : 119
@@ -2075,10 +2075,10 @@
     }, {
       "fields" : [ {
         "name" : "lo",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "hi",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{lo uintptr; hi uintptr}",
       "type" : "Struct",
@@ -2106,7 +2106,7 @@
         "type" : 44
       }, {
         "name" : "pc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "sp",
         "type" : 8
@@ -2154,10 +2154,10 @@
         "type" : 10
       }, {
         "name" : "sp",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "pc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "fn",
         "type" : 51
@@ -2172,10 +2172,10 @@
         "type" : 8
       }, {
         "name" : "varp",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "framepc",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{siz int32; started bool; heap bool; openDefer bool; sp uintptr; pc uintptr; fn *runtime.funcval; _panic *runtime._panic; link *runtime._defer; fd unsafe.Pointer; varp uintptr; framepc uintptr}",
       "type" : "Struct",
@@ -2194,7 +2194,7 @@
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{fn uintptr}",
       "type" : "Struct",
@@ -2366,10 +2366,10 @@
         "type" : 107
       }, {
         "name" : "libcallpc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "libcallsp",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "libcallg",
         "type" : 59
@@ -2378,10 +2378,10 @@
         "type" : 107
       }, {
         "name" : "vdsoSP",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "vdsoPC",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "preemptGen",
         "type" : 2
@@ -2407,10 +2407,10 @@
     }, {
       "fields" : [ {
         "name" : "sp",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "pc",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "g",
         "type" : 59
@@ -2422,10 +2422,10 @@
         "type" : 60
       }, {
         "name" : "lr",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "bp",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{sp uintptr; pc uintptr; g runtime.guintptr; ctxt unsafe.Pointer; ret runtime/internal/sys.Uintreg; lr uintptr; bp uintptr}",
       "type" : "Struct",
@@ -2435,7 +2435,7 @@
       "name" : "runtime.guintptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 16
+      "underlying" : 17
     }, {
       "local-name" : "Uintreg",
       "name" : "runtime/internal/sys.Uintreg",
@@ -2454,13 +2454,13 @@
         "type" : 42
       }, {
         "name" : "stackguard0",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "stackguard1",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "stktopsp",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{stack runtime.stack; stackguard0 uintptr; stackguard1 uintptr; stktopsp uintptr}",
       "type" : "Struct",
@@ -2477,7 +2477,7 @@
       "type" : "Array",
       "underlying" : 64
     }, {
-      "elem" : 16,
+      "elem" : 17,
       "name" : "[6]uintptr",
       "type" : "Array",
       "underlying" : 65
@@ -2494,7 +2494,7 @@
       "name" : "runtime.puintptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 16
+      "underlying" : 17
     }, {
       "name" : "int64",
       "type" : "Basic",
@@ -2519,7 +2519,7 @@
       "type" : "Named",
       "underlying" : 73
     }, {
-      "elem" : 16,
+      "elem" : 17,
       "name" : "[32]uintptr",
       "type" : "Array",
       "underlying" : 73
@@ -2532,7 +2532,7 @@
     }, {
       "fields" : [ {
         "name" : "key",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{key uintptr}",
       "type" : "Struct",
@@ -2542,7 +2542,7 @@
       "name" : "runtime.muintptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 16
+      "underlying" : 17
     }, {
       "elem" : 78,
       "name" : "*runtime.mcache",
@@ -2557,19 +2557,19 @@
     }, {
       "fields" : [ {
         "name" : "next_sample",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "local_scan",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "tiny",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "tinyoffset",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "local_tinyallocs",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "alloc",
         "type" : 80
@@ -2578,10 +2578,10 @@
         "type" : 100
       }, {
         "name" : "local_largefree",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "local_nlargefree",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "local_nsmallfree",
         "type" : 103
@@ -2620,19 +2620,19 @@
         "type" : 84
       }, {
         "name" : "startAddr",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "npages",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "manualFreeList",
         "type" : 87
       }, {
         "name" : "freeindex",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "nelems",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "allocCache",
         "type" : 7
@@ -2671,10 +2671,10 @@
         "type" : 70
       }, {
         "name" : "elemsize",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "limit",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "speciallock",
         "type" : 95
@@ -2712,7 +2712,7 @@
       "name" : "runtime.gclinkptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 16
+      "underlying" : 17
     }, {
       "elem" : 89,
       "name" : "*runtime.gcBits",
@@ -2806,13 +2806,13 @@
         "type" : 87
       }, {
         "name" : "size",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{list runtime.gclinkptr; size uintptr}",
       "type" : "Struct",
       "underlying" : 102
     }, {
-      "elem" : 16,
+      "elem" : 17,
       "name" : "[67]uintptr",
       "type" : "Array",
       "underlying" : 103
@@ -2848,22 +2848,22 @@
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "n",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "args",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "r1",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "r2",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "err",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{fn uintptr; n uintptr; args uintptr; r1 uintptr; r2 uintptr; err uintptr}",
       "type" : "Struct",
@@ -2921,13 +2921,13 @@
         "type" : 68
       }, {
         "name" : "gopc",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "struct{pcs []uintptr; goid int64; gopc uintptr}",
       "type" : "Struct",
       "underlying" : 117
     }, {
-      "elem" : 16,
+      "elem" : 17,
       "name" : "[]uintptr",
       "type" : "Slice",
       "underlying" : 118
@@ -3050,10 +3050,10 @@
     }, {
       "fields" : [ {
         "name" : "size",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "ptrdata",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "hash",
         "type" : 2
@@ -3173,7 +3173,7 @@
         "type" : 47
       }, {
         "name" : "seq",
-        "type" : 16
+        "type" : 17
       }, {
         "name" : "nextwhen",
         "type" : 68
@@ -3198,7 +3198,7 @@
         "type" : 47
       }, {
         "name" : "",
-        "type" : 16
+        "type" : 17
       } ],
       "name" : "(interface{}, uintptr)",
       "type" : "Tuple",
@@ -3236,82 +3236,114 @@
       "name" : "sig",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "info",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ctx",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "sigtable",
       "package" : 0,
       "type" : 11,
-      "exported" : false
-    }, {
-      "name" : "fwdSig",
-      "package" : 0,
-      "type" : 15,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "handlingSig",
       "package" : 0,
-      "type" : 17,
-      "exported" : false
+      "type" : 15,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "signalsOK",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "fwdSig",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fwdFn",
       "package" : 0,
-      "type" : 16,
-      "exported" : false
+      "type" : 17,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "flags",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "flags",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "c",
       "package" : 0,
       "type" : 34,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "g",
       "package" : 0,
       "type" : 39,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "m",
       "package" : 0,
       "type" : 54,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "curg",
       "package" : 0,
       "type" : 39,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "incgo",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

@@ -69,7 +69,7 @@
             },
             "kind" : "expression",
             "target" : {
-              "go-type" : 10,
+              "go-type" : 14,
               "kind" : "expression",
               "target" : {
                 "coerced-to" : {
@@ -85,10 +85,10 @@
                         "value" : "branchPageElement"
                       }
                     },
-                    "go-type" : 11,
+                    "go-type" : 15,
                     "kind" : "type",
                     "length" : {
-                      "go-type" : 12,
+                      "go-type" : 16,
                       "kind" : "constant",
                       "value" : {
                         "type" : "INT",
@@ -97,15 +97,15 @@
                     },
                     "type" : "array"
                   },
-                  "go-type" : 10,
+                  "go-type" : 14,
                   "kind" : "type",
                   "type" : "pointer"
                 },
-                "go-type" : 10,
+                "go-type" : 14,
                 "kind" : "expression",
                 "target" : {
                   "coerced-to" : {
-                    "go-type" : 13,
+                    "go-type" : 17,
                     "kind" : "type",
                     "qualifier" : {
                       "ident-kind" : "PkgName",
@@ -115,16 +115,16 @@
                     },
                     "type" : "identifier",
                     "value" : {
-                      "go-type" : 13,
+                      "go-type" : 17,
                       "ident-kind" : "TypeName",
                       "kind" : "ident",
                       "value" : "Pointer"
                     }
                   },
-                  "go-type" : 13,
+                  "go-type" : 17,
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 14,
+                    "go-type" : 18,
                     "kind" : "expression",
                     "operator" : "&",
                     "target" : {
@@ -134,10 +134,10 @@
                         "value" : "ptr",
                         "variable" : 3
                       },
-                      "go-type" : 3,
+                      "go-type" : 13,
                       "kind" : "expression",
                       "target" : {
-                        "go-type" : 0,
+                        "go-type" : 10,
                         "kind" : "expression",
                         "type" : "identifier",
                         "value" : {
@@ -166,7 +166,7 @@
       "line-end" : 73,
       "code" : "return &((*[0x7FFFFFF]branchPageElement)(unsafe.Pointer(&p.ptr)))[index]",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     } ],
     "code" : "// branchPageElement retrieves the branch node by index\nfunc (p *page) branchPageElement(index uint16) *branchPageElement {\n\treturn &((*[0x7FFFFFF]branchPageElement)(unsafe.Pointer(&p.ptr)))[index]\n}",
     "defines" : [ 0 ],
@@ -260,50 +260,93 @@
       "underlying" : 9
     }, {
       "elem" : 11,
-      "name" : "*[134217727]go.etcd.io/bbolt.branchPageElement",
+      "name" : "*go.etcd.io/bbolt.page",
       "type" : "Pointer",
       "underlying" : 10
+    }, {
+      "local-name" : "page",
+      "name" : "go.etcd.io/bbolt.page",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 12
+    }, {
+      "fields" : [ {
+        "name" : "id",
+        "type" : 8
+      }, {
+        "name" : "flags",
+        "type" : 2
+      }, {
+        "name" : "count",
+        "type" : 2
+      }, {
+        "name" : "overflow",
+        "type" : 7
+      }, {
+        "name" : "ptr",
+        "type" : 13
+      } ],
+      "name" : "struct{id go.etcd.io/bbolt.pgid; flags uint16; count uint16; overflow uint32; ptr uintptr}",
+      "type" : "Struct",
+      "underlying" : 12
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 13
+    }, {
+      "elem" : 15,
+      "name" : "*[134217727]go.etcd.io/bbolt.branchPageElement",
+      "type" : "Pointer",
+      "underlying" : 14
     }, {
       "elem" : 5,
       "name" : "[134217727]go.etcd.io/bbolt.branchPageElement",
       "type" : "Array",
-      "underlying" : 11
+      "underlying" : 15
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 12
+      "underlying" : 16
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 13
+      "underlying" : 17
     }, {
-      "elem" : 3,
+      "elem" : 13,
       "name" : "*uintptr",
       "type" : "Pointer",
-      "underlying" : 14
+      "underlying" : 18
     } ],
     "variables" : [ {
       "name" : "p",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "index",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ptr",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 13,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

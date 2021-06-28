@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 1 ],
+      "out-vars" : [ 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -56,10 +56,10 @@
             "value" : "Control",
             "variable" : 2
           },
-          "go-type" : 3,
+          "go-type" : 8,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 5,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -84,15 +84,15 @@
                 "value" : "byte"
               }
             },
-            "go-type" : 3,
+            "go-type" : 8,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 3,
+          "go-type" : 8,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
-              "go-type" : 5,
+              "go-type" : 16,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -102,22 +102,22 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 5,
+                "go-type" : 16,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 5,
+            "go-type" : 16,
             "kind" : "expression",
             "target" : {
-              "go-type" : 3,
+              "go-type" : 8,
               "kind" : "expression",
               "operator" : "&",
               "target" : {
                 "go-type" : 3,
                 "index" : {
-                  "go-type" : 6,
+                  "go-type" : 17,
                   "kind" : "constant",
                   "value" : {
                     "type" : "INT",
@@ -168,10 +168,10 @@
             "value" : "Controllen",
             "variable" : 3
           },
-          "go-type" : 9,
+          "go-type" : 14,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 5,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -185,17 +185,17 @@
         } ],
         "right" : [ {
           "coerced-to" : {
-            "go-type" : 9,
+            "go-type" : 14,
             "kind" : "type",
             "type" : "identifier",
             "value" : {
-              "go-type" : 9,
+              "go-type" : 14,
               "ident-kind" : "TypeName",
               "kind" : "ident",
               "value" : "uint64"
             }
           },
-          "go-type" : 9,
+          "go-type" : 14,
           "kind" : "expression",
           "target" : {
             "arguments" : [ {
@@ -211,7 +211,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 7,
+              "go-type" : 18,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -220,7 +220,7 @@
                 "value" : "len"
               }
             },
-            "go-type" : 6,
+            "go-type" : 17,
             "kind" : "expression",
             "type" : "call"
           },
@@ -232,7 +232,7 @@
       "line-end" : 23,
       "code" : "h.Controllen = uint64(len(b))",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     } ],
     "code" : "func (h *msghdr) setControl(b []byte) {\n\th.Control = (*byte)(unsafe.Pointer(&b[0]))\n\th.Controllen = uint64(len(b))\n}",
     "defines" : [ 0 ],
@@ -288,22 +288,109 @@
       "type" : "Tuple",
       "underlying" : 4
     }, {
+      "elem" : 6,
+      "name" : "*golang.org/x/net/internal/socket.msghdr",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "local-name" : "msghdr",
+      "name" : "golang.org/x/net/internal/socket.msghdr",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 8
+      }, {
+        "name" : "Namelen",
+        "type" : 9
+      }, {
+        "name" : "Pad_cgo_0",
+        "type" : 10
+      }, {
+        "name" : "Iov",
+        "type" : 11
+      }, {
+        "name" : "Iovlen",
+        "type" : 14
+      }, {
+        "name" : "Control",
+        "type" : 8
+      }, {
+        "name" : "Controllen",
+        "type" : 14
+      }, {
+        "name" : "Flags",
+        "type" : 15
+      }, {
+        "name" : "Pad_cgo_1",
+        "type" : 10
+      } ],
+      "name" : "struct{Name *byte; Namelen uint32; Pad_cgo_0 [4]byte; Iov *golang.org/x/net/internal/socket.iovec; Iovlen uint64; Control *byte; Controllen uint64; Flags int32; Pad_cgo_1 [4]byte}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
+      "elem" : 3,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 8
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "elem" : 3,
+      "name" : "[4]byte",
+      "type" : "Array",
+      "underlying" : 10
+    }, {
+      "elem" : 12,
+      "name" : "*golang.org/x/net/internal/socket.iovec",
+      "type" : "Pointer",
+      "underlying" : 11
+    }, {
+      "local-name" : "iovec",
+      "name" : "golang.org/x/net/internal/socket.iovec",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 13
+    }, {
+      "fields" : [ {
+        "name" : "Base",
+        "type" : 8
+      }, {
+        "name" : "Len",
+        "type" : 14
+      } ],
+      "name" : "struct{Base *byte; Len uint64}",
+      "type" : "Struct",
+      "underlying" : 13
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 14
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 15
+    }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 5
+      "underlying" : 16
     }, {
       "name" : "int",
       "type" : "Basic",
-      "underlying" : 6
+      "underlying" : 17
     }, {
       "name" : "func([]byte) int",
-      "params" : 8,
+      "params" : 19,
       "recv" : -1,
-      "results" : 9,
+      "results" : 20,
       "type" : "Signature",
-      "underlying" : 7,
+      "underlying" : 18,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -312,36 +399,44 @@
       } ],
       "name" : "([]byte)",
       "type" : "Tuple",
-      "underlying" : 8
+      "underlying" : 19
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 6
+        "type" : 17
       } ],
       "name" : "(int)",
       "type" : "Tuple",
-      "underlying" : 9
+      "underlying" : 20
     } ],
     "variables" : [ {
       "name" : "h",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 5,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "b",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "Control",
       "package" : 0,
-      "type" : 3,
-      "exported" : true
+      "type" : 8,
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "Controllen",
       "package" : 0,
-      "type" : 9,
-      "exported" : true
+      "type" : 14,
+      "exported" : true,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

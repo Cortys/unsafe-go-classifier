@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 1, 2 ],
+      "in-vars" : [ 2, 3, 1 ],
       "exit" : false,
       "out-vars" : [ 3, 1, 2 ],
       "decl-vars" : [ ],
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 1, 2, 3 ],
+      "out-vars" : [ 2, 6, 3, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 242,
       "ast" : {
@@ -85,9 +85,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 3, 6, 1, 2 ],
+      "in-vars" : [ 1, 2, 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 7, 3, 6, 1 ],
+      "out-vars" : [ 6, 7, 3, 1, 2 ],
       "decl-vars" : [ 7 ],
       "line-start" : 243,
       "ast" : {
@@ -120,9 +120,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 7, 3, 6, 1, 2 ],
+      "in-vars" : [ 6, 7, 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 5, 6 ],
+      "out-vars" : [ 6, 5 ],
       "decl-vars" : [ ],
       "line-start" : 244,
       "ast" : {
@@ -245,7 +245,7 @@
       "line-end" : 244,
       "code" : "err = getsockopt(fd, level, opt, unsafe.Pointer(&n), &vallen)",
       "entry" : false,
-      "use-vars" : [ 6, 7, 1, 2, 3 ]
+      "use-vars" : [ 3, 6, 7, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -299,7 +299,7 @@
       "line-end" : 245,
       "code" : "return int(n), err",
       "entry" : false,
-      "use-vars" : [ 5, 6 ]
+      "use-vars" : [ 6, 5 ]
     } ],
     "code" : "func GetsockoptInt(fd, level, opt int) (value int, err error) {\n\tvar n int32\n\tvallen := _Socklen(4)\n\terr = getsockopt(fd, level, opt, unsafe.Pointer(&n), &vallen)\n\treturn int(n), err\n}",
     "defines" : [ 0 ],
@@ -476,42 +476,58 @@
       "name" : "",
       "package" : -1,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "fd",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "level",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "opt",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "value",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "vallen",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

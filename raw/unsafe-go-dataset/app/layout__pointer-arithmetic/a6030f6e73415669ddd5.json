@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1 ],
+      "in-vars" : [ 1, 0 ],
       "exit" : false,
       "out-vars" : [ 1, 0 ],
       "decl-vars" : [ ],
@@ -505,7 +505,7 @@
       "line-end" : 18,
       "code" : "return len(x) > 0 && len(y) > 0 &&\n\tuintptr(unsafe.Pointer(&x[0])) <= uintptr(unsafe.Pointer(&y[len(y)-1])) &&\n\tuintptr(unsafe.Pointer(&y[0])) <= uintptr(unsafe.Pointer(&x[len(x)-1]))",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     } ],
     "code" : "// AnyOverlap reports whether x and y share memory at any (not necessarily\n// corresponding) index. The memory beyond the slice length is ignored.\nfunc AnyOverlap(x, y []byte) bool {\n\treturn len(x) > 0 && len(y) > 0 &&\n\t\tuintptr(unsafe.Pointer(&x[0])) <= uintptr(unsafe.Pointer(&y[len(y)-1])) &&\n\t\tuintptr(unsafe.Pointer(&y[0])) <= uintptr(unsafe.Pointer(&x[len(x)-1]))\n}",
     "defines" : [ 0 ],
@@ -618,17 +618,23 @@
       "name" : "x",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "y",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 5,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

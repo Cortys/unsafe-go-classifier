@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2, 3 ],
+      "in-vars" : [ 10, 11, 12 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3 ],
+      "out-vars" : [ 10, 11, 12 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,14 +42,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 6 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 11, 12, 10 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3 ],
+      "out-vars" : [ 10, 11, 12 ],
       "decl-vars" : [ ],
       "line-start" : 248,
       "ast" : {
         "condition" : {
-          "go-type" : 12,
+          "go-type" : 25,
           "kind" : "expression",
           "operator" : "!",
           "target" : {
@@ -57,19 +57,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "opened",
-              "variable" : 6
+              "variable" : 15
             },
-            "go-type" : 12,
+            "go-type" : 25,
             "kind" : "expression",
             "target" : {
-              "go-type" : 0,
+              "go-type" : 13,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "dl",
-                "variable" : 1
+                "variable" : 10
               }
             },
             "type" : "selector"
@@ -83,13 +83,13 @@
       "line-end" : 254,
       "code" : "if !dl.opened {\n\n\tif C.dpiLob_openResource(dl.dpiLob) == C.DPI_FAILURE {\n\t\treturn 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())\n\t}\n\tdl.opened = true\n}",
       "entry" : false,
-      "use-vars" : [ 1 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 1, 2, 3 ],
+      "in-vars" : [ 10, 11, 12 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3 ],
+      "out-vars" : [ 10, 11, 12 ],
       "decl-vars" : [ ],
       "line-start" : 250,
       "ast" : {
@@ -102,19 +102,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "dpiLob",
-                "variable" : 7
+                "variable" : 16
               },
-              "go-type" : 79,
+              "go-type" : 92,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 13,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "dl",
-                  "variable" : 1
+                  "variable" : 10
                 }
               },
               "type" : "selector"
@@ -166,11 +166,11 @@
       "line-end" : 252,
       "code" : "if C.dpiLob_openResource(dl.dpiLob) == C.DPI_FAILURE {\n\treturn 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())\n}",
       "entry" : false,
-      "use-vars" : [ 1 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1 ],
+      "in-vars" : [ 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -198,19 +198,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "dpiLob",
-              "variable" : 7
+              "variable" : 16
             },
-            "go-type" : 79,
+            "go-type" : 92,
             "kind" : "expression",
             "target" : {
-              "go-type" : 0,
+              "go-type" : 13,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "dl",
-                "variable" : 1
+                "variable" : 10
               }
             },
             "type" : "selector"
@@ -223,26 +223,26 @@
                 "kind" : "ident",
                 "value" : "getError"
               },
-              "go-type" : 21,
+              "go-type" : 34,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "conn",
-                  "variable" : 8
+                  "variable" : 17
                 },
-                "go-type" : 3,
+                "go-type" : 16,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 0,
+                  "go-type" : 13,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "dl",
-                    "variable" : 1
+                    "variable" : 10
                   }
                 },
                 "type" : "selector"
@@ -255,7 +255,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 13,
+            "go-type" : 100,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -279,13 +279,13 @@
       "line-end" : 251,
       "code" : "return 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())",
       "entry" : false,
-      "use-vars" : [ 1 ]
+      "use-vars" : [ 10 ]
     }, {
-      "update-vars" : [ 1 ],
+      "update-vars" : [ 10 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 2, 3 ],
+      "in-vars" : [ 10, 11, 12 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3 ],
+      "out-vars" : [ 12, 10, 11 ],
       "decl-vars" : [ ],
       "line-start" : 253,
       "ast" : {
@@ -295,25 +295,25 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "opened",
-            "variable" : 6
+            "variable" : 15
           },
-          "go-type" : 12,
+          "go-type" : 25,
           "kind" : "expression",
           "target" : {
-            "go-type" : 0,
+            "go-type" : 13,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "dl",
-              "variable" : 1
+              "variable" : 10
             }
           },
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 12,
+          "go-type" : 25,
           "kind" : "constant",
           "value" : {
             "type" : "BOOL",
@@ -326,14 +326,14 @@
       "line-end" : 253,
       "code" : "dl.opened = true",
       "entry" : false,
-      "use-vars" : [ 1 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 11, 12, 10 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 9, 3 ],
-      "decl-vars" : [ 9 ],
+      "out-vars" : [ 10, 18, 11, 12 ],
+      "decl-vars" : [ 18 ],
       "line-start" : 256,
       "ast" : {
         "kind" : "statement",
@@ -357,12 +357,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "p",
-                "variable" : 2
+                "variable" : 11
               }
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 15,
+              "go-type" : 102,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -402,13 +402,13 @@
       "line-end" : 256,
       "code" : "n := C.uint64_t(len(p))",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 11 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 3, 1, 2, 9 ],
+      "in-vars" : [ 12, 10, 18, 11 ],
       "exit" : false,
-      "out-vars" : [ 1, 9 ],
+      "out-vars" : [ 10, 18 ],
       "decl-vars" : [ ],
       "line-start" : 257,
       "ast" : {
@@ -421,19 +421,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "dpiLob",
-                "variable" : 7
+                "variable" : 16
               },
-              "go-type" : 79,
+              "go-type" : 92,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 13,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "dl",
-                  "variable" : 1
+                  "variable" : 10
                 }
               },
               "type" : "selector"
@@ -449,7 +449,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "offset",
-                    "variable" : 3
+                    "variable" : 12
                   }
                 } ],
                 "ellipsis" : false,
@@ -475,7 +475,7 @@
               },
               "operator" : "+",
               "right" : {
-                "go-type" : 17,
+                "go-type" : 104,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -509,7 +509,7 @@
               "kind" : "expression",
               "target" : {
                 "coerced-to" : {
-                  "go-type" : 18,
+                  "go-type" : 105,
                   "kind" : "type",
                   "qualifier" : {
                     "ident-kind" : "PkgName",
@@ -519,16 +519,16 @@
                   },
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 18,
+                    "go-type" : 105,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "Pointer"
                   }
                 },
-                "go-type" : 18,
+                "go-type" : 105,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 19,
+                  "go-type" : 106,
                   "kind" : "expression",
                   "operator" : "&",
                   "target" : {
@@ -550,7 +550,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "p",
-                        "variable" : 2
+                        "variable" : 11
                       }
                     },
                     "type" : "index"
@@ -568,7 +568,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "n",
-                "variable" : 9
+                "variable" : 18
               }
             } ],
             "ellipsis" : false,
@@ -618,11 +618,11 @@
       "line-end" : 259,
       "code" : "if C.dpiLob_writeBytes(dl.dpiLob, C.uint64_t(offset)+1, (*C.char)(unsafe.Pointer(&p[0])), n) == C.DPI_FAILURE {\n\treturn int(n), errors.Errorf(\"writeBytes: %w\", dl.conn.getError())\n}",
       "entry" : false,
-      "use-vars" : [ 2, 3, 9, 1 ]
+      "use-vars" : [ 11, 10, 12, 18 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 9 ],
+      "in-vars" : [ 10, 18 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -652,7 +652,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "n",
-              "variable" : 9
+              "variable" : 18
             }
           },
           "type" : "cast"
@@ -673,26 +673,26 @@
                 "kind" : "ident",
                 "value" : "getError"
               },
-              "go-type" : 21,
+              "go-type" : 34,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "conn",
-                  "variable" : 8
+                  "variable" : 17
                 },
-                "go-type" : 3,
+                "go-type" : 16,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 0,
+                  "go-type" : 13,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "dl",
-                    "variable" : 1
+                    "variable" : 10
                   }
                 },
                 "type" : "selector"
@@ -705,7 +705,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 13,
+            "go-type" : 100,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -729,11 +729,11 @@
       "line-end" : 258,
       "code" : "return int(n), errors.Errorf(\"writeBytes: %w\", dl.conn.getError())",
       "entry" : false,
-      "use-vars" : [ 9, 1 ]
+      "use-vars" : [ 10, 18 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 18 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -763,12 +763,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "n",
-              "variable" : 9
+              "variable" : 18
             }
           },
           "type" : "cast"
         }, {
-          "go-type" : 20,
+          "go-type" : 107,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -782,7 +782,7 @@
       "line-end" : 260,
       "code" : "return int(n), nil",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 18 ]
     } ],
     "code" : "// WriteAt writes p starting at offset.\nfunc (dl *DirectLob) WriteAt(p []byte, offset int64) (int, error) {\n\tif !dl.opened {\n\n\t\tif C.dpiLob_openResource(dl.dpiLob) == C.DPI_FAILURE {\n\t\t\treturn 0, errors.Errorf(\"openResources(%p): %w\", dl.dpiLob, dl.conn.getError())\n\t\t}\n\t\tdl.opened = true\n\t}\n\n\tn := C.uint64_t(len(p))\n\tif C.dpiLob_writeBytes(dl.dpiLob, C.uint64_t(offset)+1, (*C.char)(unsafe.Pointer(&p[0])), n) == C.DPI_FAILURE {\n\t\treturn int(n), errors.Errorf(\"writeBytes: %w\", dl.conn.getError())\n\t}\n\treturn int(n), nil\n}",
     "defines" : [ 0 ],
@@ -794,12 +794,12 @@
     }, {
       "name" : "Errorf",
       "package" : 5,
-      "type" : 13,
+      "type" : 100,
       "exported" : true
     }, {
       "name" : "getError",
       "package" : 0,
-      "type" : 21,
+      "type" : 34,
       "exported" : false
     } ],
     "line-end" : 261,
@@ -828,14 +828,14 @@
       "name" : "unsafe",
       "path" : "unsafe"
     } ],
-    "params" : [ 2, 3 ],
-    "receivers" : [ 1 ],
-    "results" : [ 4, 5 ],
+    "params" : [ 11, 12 ],
+    "receivers" : [ 10 ],
+    "results" : [ 13, 14 ],
     "type" : "function",
     "types" : [ {
       "name" : "func(p []byte, offset int64) (int, error)",
       "params" : 1,
-      "recv" : 1,
+      "recv" : 10,
       "results" : 5,
       "type" : "Signature",
       "underlying" : 0,
@@ -919,12 +919,854 @@
       "type" : "Basic",
       "underlying" : 12
     }, {
-      "name" : "func(format string, a ...interface{}) error",
-      "params" : 14,
+      "elem" : 14,
+      "name" : "*github.com/godror/godror.DirectLob",
+      "type" : "Pointer",
+      "underlying" : 13
+    }, {
+      "local-name" : "DirectLob",
+      "name" : "github.com/godror/godror.DirectLob",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 15
+    }, {
+      "fields" : [ {
+        "name" : "conn",
+        "type" : 16
+      }, {
+        "name" : "dpiLob",
+        "type" : 92
+      }, {
+        "name" : "opened",
+        "type" : 25
+      } ],
+      "name" : "struct{conn *github.com/godror/godror.conn; dpiLob *invalid type; opened bool}",
+      "type" : "Struct",
+      "underlying" : 15
+    }, {
+      "elem" : 17,
+      "name" : "*github.com/godror/godror.conn",
+      "type" : "Pointer",
+      "underlying" : 16
+    }, {
+      "local-name" : "conn",
+      "name" : "github.com/godror/godror.conn",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "fields" : [ {
+        "name" : "currentTT",
+        "type" : 19
+      }, {
+        "name" : "params",
+        "type" : 21
+      }, {
+        "name" : "Client",
+        "type" : 79
+      }, {
+        "name" : "Server",
+        "type" : 79
+      }, {
+        "name" : "tranParams",
+        "type" : 81
+      }, {
+        "name" : "mu",
+        "type" : 83
+      }, {
+        "name" : "poolKey",
+        "type" : 12
+      }, {
+        "name" : "drv",
+        "type" : 89
+      }, {
+        "name" : "dpiConn",
+        "type" : 92
+      }, {
+        "name" : "tzOffSecs",
+        "type" : 6
+      }, {
+        "name" : "inTransaction",
+        "type" : 25
+      }, {
+        "name" : "newSession",
+        "type" : 25
+      }, {
+        "name" : "released",
+        "type" : 25
+      } ],
+      "name" : "struct{currentTT github.com/godror/godror.TraceTag; params github.com/godror/godror.ConnectionParams; Client github.com/godror/godror.VersionInfo; Server github.com/godror/godror.VersionInfo; tranParams github.com/godror/godror.tranParams; mu sync.RWMutex; poolKey string; drv *github.com/godror/godror.drv; dpiConn *invalid type; tzOffSecs int; inTransaction bool; newSession bool; released bool}",
+      "type" : "Struct",
+      "underlying" : 18
+    }, {
+      "local-name" : "TraceTag",
+      "name" : "github.com/godror/godror.TraceTag",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 20
+    }, {
+      "fields" : [ {
+        "name" : "ClientIdentifier",
+        "type" : 12
+      }, {
+        "name" : "ClientInfo",
+        "type" : 12
+      }, {
+        "name" : "DbOp",
+        "type" : 12
+      }, {
+        "name" : "Module",
+        "type" : 12
+      }, {
+        "name" : "Action",
+        "type" : 12
+      } ],
+      "name" : "struct{ClientIdentifier string; ClientInfo string; DbOp string; Module string; Action string}",
+      "type" : "Struct",
+      "underlying" : 20
+    }, {
+      "local-name" : "ConnectionParams",
+      "name" : "github.com/godror/godror.ConnectionParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "fields" : [ {
+        "name" : "CommonParams",
+        "type" : 23
+      }, {
+        "name" : "ConnParams",
+        "type" : 73
+      }, {
+        "name" : "PoolParams",
+        "type" : 76
+      }, {
+        "name" : "NewPassword",
+        "type" : 12
+      }, {
+        "name" : "onInitStmts",
+        "type" : 59
+      }, {
+        "name" : "StandaloneConnection",
+        "type" : 25
+      } ],
+      "name" : "struct{github.com/godror/godror.CommonParams; github.com/godror/godror.ConnParams; github.com/godror/godror.PoolParams; NewPassword string; onInitStmts []string; StandaloneConnection bool}",
+      "type" : "Struct",
+      "underlying" : 22
+    }, {
+      "local-name" : "CommonParams",
+      "name" : "github.com/godror/godror.CommonParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "Username",
+        "type" : 12
+      }, {
+        "name" : "Password",
+        "type" : 12
+      }, {
+        "name" : "DSN",
+        "type" : 12
+      }, {
+        "name" : "EnableEvents",
+        "type" : 25
+      }, {
+        "name" : "OnInit",
+        "type" : 26
+      }, {
+        "name" : "Timezone",
+        "type" : 62
+      } ],
+      "name" : "struct{Username string; Password string; DSN string; EnableEvents bool; OnInit func(database/sql/driver.Conn) error; Timezone *time.Location}",
+      "type" : "Struct",
+      "underlying" : 24
+    }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 25
+    }, {
+      "name" : "func(database/sql/driver.Conn) error",
+      "params" : 27,
       "recv" : -1,
-      "results" : 22,
+      "results" : 35,
       "type" : "Signature",
-      "underlying" : 13,
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 28
+      } ],
+      "name" : "(database/sql/driver.Conn)",
+      "type" : "Tuple",
+      "underlying" : 27
+    }, {
+      "local-name" : "Conn",
+      "name" : "database/sql/driver.Conn",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 29
+    }, {
+      "methods" : [ {
+        "name" : "Begin",
+        "type" : 30
+      }, {
+        "name" : "Close",
+        "type" : 34
+      }, {
+        "name" : "Prepare",
+        "type" : 36
+      } ],
+      "name" : "interface{Begin() (database/sql/driver.Tx, error); Close() error; Prepare(query string) (database/sql/driver.Stmt, error)}",
+      "type" : "Interface",
+      "underlying" : 29
+    }, {
+      "name" : "func() (database/sql/driver.Tx, error)",
+      "params" : 10,
+      "recv" : 2,
+      "results" : 31,
+      "type" : "Signature",
+      "underlying" : 30,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 32
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(database/sql/driver.Tx, error)",
+      "type" : "Tuple",
+      "underlying" : 31
+    }, {
+      "local-name" : "Tx",
+      "name" : "database/sql/driver.Tx",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 33
+    }, {
+      "methods" : [ {
+        "name" : "Commit",
+        "type" : 34
+      }, {
+        "name" : "Rollback",
+        "type" : 34
+      } ],
+      "name" : "interface{Commit() error; Rollback() error}",
+      "type" : "Interface",
+      "underlying" : 33
+    }, {
+      "name" : "func() error",
+      "params" : 10,
+      "recv" : 1,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 34,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 35
+    }, {
+      "name" : "func(query string) (database/sql/driver.Stmt, error)",
+      "params" : 37,
+      "recv" : 9,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 36,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "query",
+        "type" : 12
+      } ],
+      "name" : "(query string)",
+      "type" : "Tuple",
+      "underlying" : 37
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 39
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(database/sql/driver.Stmt, error)",
+      "type" : "Tuple",
+      "underlying" : 38
+    }, {
+      "local-name" : "Stmt",
+      "name" : "database/sql/driver.Stmt",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 40
+    }, {
+      "methods" : [ {
+        "name" : "Close",
+        "type" : 34
+      }, {
+        "name" : "Exec",
+        "type" : 41
+      }, {
+        "name" : "NumInput",
+        "type" : 51
+      }, {
+        "name" : "Query",
+        "type" : 53
+      } ],
+      "name" : "interface{Close() error; Exec(args []database/sql/driver.Value) (database/sql/driver.Result, error); NumInput() int; Query(args []database/sql/driver.Value) (database/sql/driver.Rows, error)}",
+      "type" : "Interface",
+      "underlying" : 40
+    }, {
+      "name" : "func(args []database/sql/driver.Value) (database/sql/driver.Result, error)",
+      "params" : 42,
+      "recv" : 4,
+      "results" : 46,
+      "type" : "Signature",
+      "underlying" : 41,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "args",
+        "type" : 43
+      } ],
+      "name" : "(args []database/sql/driver.Value)",
+      "type" : "Tuple",
+      "underlying" : 42
+    }, {
+      "elem" : 44,
+      "name" : "[]database/sql/driver.Value",
+      "type" : "Slice",
+      "underlying" : 43
+    }, {
+      "local-name" : "Value",
+      "name" : "database/sql/driver.Value",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 45
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 45
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 47
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(database/sql/driver.Result, error)",
+      "type" : "Tuple",
+      "underlying" : 46
+    }, {
+      "local-name" : "Result",
+      "name" : "database/sql/driver.Result",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 48
+    }, {
+      "methods" : [ {
+        "name" : "LastInsertId",
+        "type" : 49
+      }, {
+        "name" : "RowsAffected",
+        "type" : 49
+      } ],
+      "name" : "interface{LastInsertId() (int64, error); RowsAffected() (int64, error)}",
+      "type" : "Interface",
+      "underlying" : 48
+    }, {
+      "name" : "func() (int64, error)",
+      "params" : 10,
+      "recv" : 3,
+      "results" : 50,
+      "type" : "Signature",
+      "underlying" : 49,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 4
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(int64, error)",
+      "type" : "Tuple",
+      "underlying" : 50
+    }, {
+      "name" : "func() int",
+      "params" : 10,
+      "recv" : 5,
+      "results" : 52,
+      "type" : "Signature",
+      "underlying" : 51,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 6
+      } ],
+      "name" : "(int)",
+      "type" : "Tuple",
+      "underlying" : 52
+    }, {
+      "name" : "func(args []database/sql/driver.Value) (database/sql/driver.Rows, error)",
+      "params" : 42,
+      "recv" : 8,
+      "results" : 54,
+      "type" : "Signature",
+      "underlying" : 53,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 55
+      }, {
+        "name" : "",
+        "type" : 7
+      } ],
+      "name" : "(database/sql/driver.Rows, error)",
+      "type" : "Tuple",
+      "underlying" : 54
+    }, {
+      "local-name" : "Rows",
+      "name" : "database/sql/driver.Rows",
+      "package" : 1,
+      "type" : "Named",
+      "underlying" : 56
+    }, {
+      "methods" : [ {
+        "name" : "Close",
+        "type" : 34
+      }, {
+        "name" : "Columns",
+        "type" : 57
+      }, {
+        "name" : "Next",
+        "type" : 60
+      } ],
+      "name" : "interface{Close() error; Columns() []string; Next(dest []database/sql/driver.Value) error}",
+      "type" : "Interface",
+      "underlying" : 56
+    }, {
+      "name" : "func() []string",
+      "params" : 10,
+      "recv" : 6,
+      "results" : 58,
+      "type" : "Signature",
+      "underlying" : 57,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 59
+      } ],
+      "name" : "([]string)",
+      "type" : "Tuple",
+      "underlying" : 58
+    }, {
+      "elem" : 12,
+      "name" : "[]string",
+      "type" : "Slice",
+      "underlying" : 59
+    }, {
+      "name" : "func(dest []database/sql/driver.Value) error",
+      "params" : 61,
+      "recv" : 7,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 60,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "dest",
+        "type" : 43
+      } ],
+      "name" : "(dest []database/sql/driver.Value)",
+      "type" : "Tuple",
+      "underlying" : 61
+    }, {
+      "elem" : 63,
+      "name" : "*time.Location",
+      "type" : "Pointer",
+      "underlying" : 62
+    }, {
+      "local-name" : "Location",
+      "name" : "time.Location",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 64
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 12
+      }, {
+        "name" : "zone",
+        "type" : 65
+      }, {
+        "name" : "tx",
+        "type" : 68
+      }, {
+        "name" : "cacheStart",
+        "type" : 4
+      }, {
+        "name" : "cacheEnd",
+        "type" : 4
+      }, {
+        "name" : "cacheZone",
+        "type" : 72
+      } ],
+      "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
+      "type" : "Struct",
+      "underlying" : 64
+    }, {
+      "elem" : 66,
+      "name" : "[]time.zone",
+      "type" : "Slice",
+      "underlying" : 65
+    }, {
+      "local-name" : "zone",
+      "name" : "time.zone",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 67
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 12
+      }, {
+        "name" : "offset",
+        "type" : 6
+      }, {
+        "name" : "isDST",
+        "type" : 25
+      } ],
+      "name" : "struct{name string; offset int; isDST bool}",
+      "type" : "Struct",
+      "underlying" : 67
+    }, {
+      "elem" : 69,
+      "name" : "[]time.zoneTrans",
+      "type" : "Slice",
+      "underlying" : 68
+    }, {
+      "local-name" : "zoneTrans",
+      "name" : "time.zoneTrans",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 70
+    }, {
+      "fields" : [ {
+        "name" : "when",
+        "type" : 4
+      }, {
+        "name" : "index",
+        "type" : 71
+      }, {
+        "name" : "isstd",
+        "type" : 25
+      }, {
+        "name" : "isutc",
+        "type" : 25
+      } ],
+      "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
+      "type" : "Struct",
+      "underlying" : 70
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 71
+    }, {
+      "elem" : 66,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 72
+    }, {
+      "local-name" : "ConnParams",
+      "name" : "github.com/godror/godror.ConnParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 74
+    }, {
+      "fields" : [ {
+        "name" : "NewPassword",
+        "type" : 12
+      }, {
+        "name" : "ConnClass",
+        "type" : 12
+      }, {
+        "name" : "IsSysDBA",
+        "type" : 25
+      }, {
+        "name" : "IsSysOper",
+        "type" : 25
+      }, {
+        "name" : "IsSysASM",
+        "type" : 25
+      }, {
+        "name" : "IsPrelim",
+        "type" : 25
+      }, {
+        "name" : "ShardingKey",
+        "type" : 75
+      }, {
+        "name" : "SuperShardingKey",
+        "type" : 75
+      } ],
+      "name" : "struct{NewPassword string; ConnClass string; IsSysDBA bool; IsSysOper bool; IsSysASM bool; IsPrelim bool; ShardingKey []interface{}; SuperShardingKey []interface{}}",
+      "type" : "Struct",
+      "underlying" : 74
+    }, {
+      "elem" : 45,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 75
+    }, {
+      "local-name" : "PoolParams",
+      "name" : "github.com/godror/godror.PoolParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 77
+    }, {
+      "fields" : [ {
+        "name" : "MinSessions",
+        "type" : 6
+      }, {
+        "name" : "MaxSessions",
+        "type" : 6
+      }, {
+        "name" : "SessionIncrement",
+        "type" : 6
+      }, {
+        "name" : "WaitTimeout",
+        "type" : 78
+      }, {
+        "name" : "MaxLifeTime",
+        "type" : 78
+      }, {
+        "name" : "SessionTimeout",
+        "type" : 78
+      }, {
+        "name" : "Heterogeneous",
+        "type" : 25
+      }, {
+        "name" : "ExternalAuth",
+        "type" : 25
+      } ],
+      "name" : "struct{MinSessions int; MaxSessions int; SessionIncrement int; WaitTimeout time.Duration; MaxLifeTime time.Duration; SessionTimeout time.Duration; Heterogeneous bool; ExternalAuth bool}",
+      "type" : "Struct",
+      "underlying" : 77
+    }, {
+      "local-name" : "Duration",
+      "name" : "time.Duration",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 4
+    }, {
+      "local-name" : "VersionInfo",
+      "name" : "github.com/godror/godror.VersionInfo",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "fields" : [ {
+        "name" : "ServerRelease",
+        "type" : 12
+      }, {
+        "name" : "Version",
+        "type" : 71
+      }, {
+        "name" : "Release",
+        "type" : 71
+      }, {
+        "name" : "Update",
+        "type" : 71
+      }, {
+        "name" : "PortRelease",
+        "type" : 71
+      }, {
+        "name" : "PortUpdate",
+        "type" : 71
+      }, {
+        "name" : "Full",
+        "type" : 71
+      } ],
+      "name" : "struct{ServerRelease string; Version uint8; Release uint8; Update uint8; PortRelease uint8; PortUpdate uint8; Full uint8}",
+      "type" : "Struct",
+      "underlying" : 80
+    }, {
+      "local-name" : "tranParams",
+      "name" : "github.com/godror/godror.tranParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 82
+    }, {
+      "fields" : [ {
+        "name" : "RW",
+        "type" : 12
+      }, {
+        "name" : "Level",
+        "type" : 12
+      } ],
+      "name" : "struct{RW string; Level string}",
+      "type" : "Struct",
+      "underlying" : 82
+    }, {
+      "local-name" : "RWMutex",
+      "name" : "sync.RWMutex",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 84
+    }, {
+      "fields" : [ {
+        "name" : "w",
+        "type" : 85
+      }, {
+        "name" : "writerSem",
+        "type" : 88
+      }, {
+        "name" : "readerSem",
+        "type" : 88
+      }, {
+        "name" : "readerCount",
+        "type" : 87
+      }, {
+        "name" : "readerWait",
+        "type" : 87
+      } ],
+      "name" : "struct{w sync.Mutex; writerSem uint32; readerSem uint32; readerCount int32; readerWait int32}",
+      "type" : "Struct",
+      "underlying" : 84
+    }, {
+      "local-name" : "Mutex",
+      "name" : "sync.Mutex",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 86
+    }, {
+      "fields" : [ {
+        "name" : "state",
+        "type" : 87
+      }, {
+        "name" : "sema",
+        "type" : 88
+      } ],
+      "name" : "struct{state int32; sema uint32}",
+      "type" : "Struct",
+      "underlying" : 86
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 87
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 88
+    }, {
+      "elem" : 90,
+      "name" : "*github.com/godror/godror.drv",
+      "type" : "Pointer",
+      "underlying" : 89
+    }, {
+      "local-name" : "drv",
+      "name" : "github.com/godror/godror.drv",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 91
+    }, {
+      "fields" : [ {
+        "name" : "mu",
+        "type" : 85
+      }, {
+        "name" : "dpiContext",
+        "type" : 92
+      }, {
+        "name" : "pools",
+        "type" : 94
+      }, {
+        "name" : "clientVersion",
+        "type" : 79
+      } ],
+      "name" : "struct{mu sync.Mutex; dpiContext *invalid type; pools map[string]*github.com/godror/godror.connPool; clientVersion github.com/godror/godror.VersionInfo}",
+      "type" : "Struct",
+      "underlying" : 91
+    }, {
+      "elem" : 93,
+      "name" : "*invalid type",
+      "type" : "Pointer",
+      "underlying" : 92
+    }, {
+      "name" : "invalid type",
+      "type" : "Basic",
+      "underlying" : 93
+    }, {
+      "elem" : 95,
+      "key" : 12,
+      "name" : "map[string]*github.com/godror/godror.connPool",
+      "type" : "Map",
+      "underlying" : 94
+    }, {
+      "elem" : 96,
+      "name" : "*github.com/godror/godror.connPool",
+      "type" : "Pointer",
+      "underlying" : 95
+    }, {
+      "local-name" : "connPool",
+      "name" : "github.com/godror/godror.connPool",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 97
+    }, {
+      "fields" : [ {
+        "name" : "dpiPool",
+        "type" : 92
+      }, {
+        "name" : "params",
+        "type" : 98
+      }, {
+        "name" : "timeZone",
+        "type" : 62
+      }, {
+        "name" : "key",
+        "type" : 12
+      } ],
+      "name" : "struct{dpiPool *invalid type; params github.com/godror/godror.commonAndPoolParams; timeZone *time.Location; key string}",
+      "type" : "Struct",
+      "underlying" : 97
+    }, {
+      "local-name" : "commonAndPoolParams",
+      "name" : "github.com/godror/godror.commonAndPoolParams",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 99
+    }, {
+      "fields" : [ {
+        "name" : "CommonParams",
+        "type" : 23
+      }, {
+        "name" : "PoolParams",
+        "type" : 76
+      } ],
+      "name" : "struct{github.com/godror/godror.CommonParams; github.com/godror/godror.PoolParams}",
+      "type" : "Struct",
+      "underlying" : 99
+    }, {
+      "name" : "func(format string, a ...interface{}) error",
+      "params" : 101,
+      "recv" : -1,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 100,
       "variadic" : true
     }, {
       "fields" : [ {
@@ -932,18 +1774,18 @@
         "type" : 12
       }, {
         "name" : "a",
-        "type" : 62
+        "type" : 75
       } ],
       "name" : "(format string, a []interface{})",
       "type" : "Tuple",
-      "underlying" : 14
+      "underlying" : 101
     }, {
       "name" : "func([]byte) int",
-      "params" : 16,
+      "params" : 103,
       "recv" : -1,
-      "results" : 39,
+      "results" : 52,
       "type" : "Signature",
-      "underlying" : 15,
+      "underlying" : 102,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -952,77 +1794,160 @@
       } ],
       "name" : "([]byte)",
       "type" : "Tuple",
-      "underlying" : 16
+      "underlying" : 103
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 17
+      "underlying" : 104
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 6,
       "type" : "Basic",
-      "underlying" : 18
+      "underlying" : 105
     }, {
       "elem" : 3,
       "name" : "*byte",
       "type" : "Pointer",
-      "underlying" : 19
+      "underlying" : 106
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 20
+      "underlying" : 107
     } ],
     "variables" : [ {
       "name" : "",
       "package" : -1,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 32,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 28,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 47,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 39,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 39,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 55,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 55,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 39,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 1,
+      "type" : 28,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "dl",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 13,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "p",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "offset",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res1]",
       "package" : 0,
       "type" : 7,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "opened",
       "package" : 0,
-      "type" : 12,
-      "exported" : false
+      "type" : 25,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "dpiLob",
       "package" : 0,
-      "type" : 79,
-      "exported" : false
+      "type" : 92,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "conn",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "n",
       "package" : 0,
-      "type" : 80,
-      "exported" : false
+      "type" : 93,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

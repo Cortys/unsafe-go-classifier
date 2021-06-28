@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 1, 2, 0, 4, 5 ],
+      "in-vars" : [ 3, 4, 0, 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 2, 0, 4, 5 ],
+      "out-vars" : [ 0, 1, 2, 5, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 3, 1, 2, 0, 4, 5 ],
+      "in-vars" : [ 1, 2, 5, 3, 4, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0, 4, 5, 3 ],
+      "out-vars" : [ 3, 4, 0, 1, 2, 5 ],
       "decl-vars" : [ ],
       "line-start" : 27,
       "ast" : {
@@ -100,9 +100,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 4, 5, 3, 1, 2, 0 ],
+      "in-vars" : [ 5, 3, 4, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 2, 0, 4, 5 ],
+      "out-vars" : [ 3, 4, 0, 1, 2, 5 ],
       "decl-vars" : [ ],
       "line-start" : 28,
       "ast" : {
@@ -173,9 +173,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 4, 5, 3, 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2, 5, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 2, 0 ],
+      "out-vars" : [ 0, 1, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 31,
       "ast" : {
@@ -193,7 +193,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "_cgo_sigaction",
-                "variable" : 4
+                "variable" : 5
               }
             },
             "operator" : "==",
@@ -218,7 +218,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "inForkedChild",
-              "variable" : 5
+              "variable" : 3
             }
           },
           "type" : "binary"
@@ -230,11 +230,11 @@
       "line-end" : 77,
       "code" : "if _cgo_sigaction == nil || inForkedChild {\n\tsysSigaction(sig, new, old)\n} else {\n\n\tvar ret int32\n\n\tvar g *g\n\tif mainStarted {\n\t\tg = getg()\n\t}\n\tsp := uintptr(unsafe.Pointer(&sig))\n\tswitch {\n\tcase g == nil:\n\n\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\tcase sp < g.stack.lo || sp >= g.stack.hi:\n\n\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\tdefault:\n\n\t\tsystemstack(func() {\n\t\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\t\t})\n\t}\n\n\tconst EINVAL = 22\n\tif ret == EINVAL {\n\n\t\tsysSigaction(sig, new, old)\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 5, 4 ]
+      "use-vars" : [ 5, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 2, 0, 1 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 2 ],
       "decl-vars" : [ ],
@@ -298,9 +298,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 3, 1, 2, 0 ],
+      "in-vars" : [ 4, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 2, 0, 3 ],
+      "out-vars" : [ 1, 2, 7, 4, 0 ],
       "decl-vars" : [ 7 ],
       "line-start" : 40,
       "ast" : {
@@ -341,9 +341,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 3, 7, 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 3, 7, 1, 2, 0 ],
+      "out-vars" : [ 2, 7, 6, 4, 0, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 42,
       "ast" : {
@@ -389,9 +389,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 0, 6, 3, 7, 1, 2 ],
+      "in-vars" : [ 0, 1, 2, 7, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 6, 7, 1, 2 ],
+      "out-vars" : [ 1, 2, 7, 6, 0 ],
       "decl-vars" : [ ],
       "line-start" : 43,
       "ast" : {
@@ -403,7 +403,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "mainStarted",
-            "variable" : 3
+            "variable" : 4
           }
         },
         "kind" : "statement",
@@ -413,13 +413,13 @@
       "line-end" : 45,
       "code" : "if mainStarted {\n\tg = getg()\n}",
       "entry" : false,
-      "use-vars" : [ 3 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 0, 7, 1 ],
+      "in-vars" : [ 0, 1, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 1, 2, 0 ],
+      "out-vars" : [ 1, 2, 7, 6, 0 ],
       "decl-vars" : [ ],
       "line-start" : 44,
       "ast" : {
@@ -462,9 +462,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 0, 6, 7, 1, 2 ],
+      "in-vars" : [ 2, 7, 6, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 1, 2, 0, 8 ],
+      "out-vars" : [ 1, 2, 7, 8, 6, 0 ],
       "decl-vars" : [ 8 ],
       "line-start" : 46,
       "ast" : {
@@ -544,9 +544,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 14, 16 ],
-      "in-vars" : [ 2, 0, 8, 6, 7, 1 ],
+      "in-vars" : [ 0, 1, 2, 7, 8, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 1, 2, 0, 8 ],
+      "out-vars" : [ 6, 0, 1, 2, 7, 8 ],
       "decl-vars" : [ ],
       "line-start" : 47,
       "ast" : {
@@ -562,9 +562,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 0, 6, 1, 2 ],
+      "in-vars" : [ 6, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 0, 1 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 48,
       "ast" : {
@@ -608,7 +608,7 @@
       "successors" : [ 18 ],
       "in-vars" : [ 1, 2, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 0, 7, 1 ],
+      "out-vars" : [ 0, 1, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 50,
       "ast" : {
@@ -693,11 +693,11 @@
       "line-end" : 50,
       "code" : "ret = callCgoSigaction(uintptr(sig), new, old)",
       "entry" : false,
-      "use-vars" : [ 0, 1, 2 ]
+      "use-vars" : [ 1, 2, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 0, 8, 6, 1, 2 ],
+      "in-vars" : [ 2, 8, 6, 0, 1 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
@@ -820,9 +820,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 2, 0 ],
+      "out-vars" : [ 1, 2, 7, 0 ],
       "decl-vars" : [ ],
       "line-start" : 55,
       "ast" : {
@@ -911,9 +911,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 0, 7, 1, 2 ],
+      "in-vars" : [ 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 2, 0 ],
+      "out-vars" : [ 1, 2, 7, 0 ],
       "decl-vars" : [ ],
       "line-start" : 56,
       "ast" : {
@@ -929,9 +929,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 7, 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 2, 0, 7, 1 ],
+      "out-vars" : [ 7, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 65,
       "ast" : {
@@ -1044,13 +1044,13 @@
       "line-end" : 67,
       "code" : "systemstack(func() {\n\tret = callCgoSigaction(uintptr(sig), new, old)\n})",
       "entry" : false,
-      "use-vars" : [ 7, 0, 1, 2 ]
+      "use-vars" : [ 1, 2, 7, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 7, 1, 2, 0 ],
+      "in-vars" : [ 1, 2, 7, 0 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 2, 0 ],
+      "out-vars" : [ 7, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 70,
       "ast" : {
@@ -1088,9 +1088,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20, 21 ],
-      "in-vars" : [ 7, 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 71,
       "ast" : {
@@ -1130,7 +1130,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 2 ],
       "decl-vars" : [ ],
@@ -1190,7 +1190,7 @@
       "line-end" : 75,
       "code" : "sysSigaction(sig, new, old)",
       "entry" : false,
-      "use-vars" : [ 0, 1, 2 ]
+      "use-vars" : [ 1, 2, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 22 ],
@@ -2866,62 +2866,86 @@
       "name" : "sig",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "new",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "old",
       "package" : 0,
       "type" : 3,
-      "exported" : false
-    }, {
-      "name" : "mainStarted",
-      "package" : 0,
-      "type" : 9,
-      "exported" : false
-    }, {
-      "name" : "_cgo_sigaction",
-      "package" : 0,
-      "type" : 10,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "inForkedChild",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "mainStarted",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "_cgo_sigaction",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "g",
       "package" : 0,
       "type" : 16,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ret",
       "package" : 0,
       "type" : 15,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "sp",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "stack",
       "package" : 0,
       "type" : 19,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "lo",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "hi",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     } ]
   },
   "go-version" : "1.14.3"

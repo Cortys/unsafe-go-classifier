@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1 ],
+      "in-vars" : [ 26, 27 ],
       "exit" : false,
-      "out-vars" : [ 0, 1 ],
+      "out-vars" : [ 26, 27 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 26, 27 ],
       "exit" : false,
-      "out-vars" : [ 4 ],
-      "decl-vars" : [ 4 ],
+      "out-vars" : [ 30 ],
+      "decl-vars" : [ 30 ],
       "line-start" : 301,
       "ast" : {
         "kind" : "statement",
@@ -68,7 +68,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "ptr",
-              "variable" : 1
+              "variable" : 27
             }
           } ],
           "ellipsis" : false,
@@ -78,33 +78,33 @@
               "kind" : "ident",
               "value" : "UnsafeIndirect"
             },
-            "go-type" : 21,
+            "go-type" : 26,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "valType",
-                "variable" : 3
+                "variable" : 29
               },
-              "go-type" : 3,
+              "go-type" : 8,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 5,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "codec",
-                  "variable" : 0
+                  "variable" : 26
                 }
               },
               "type" : "selector"
             },
             "type" : "selector"
           },
-          "go-type" : 11,
+          "go-type" : 16,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -114,14 +114,14 @@
       "line-end" : 301,
       "code" : "obj := codec.valType.UnsafeIndirect(ptr)",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 27, 26 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 4 ],
+      "in-vars" : [ 30 ],
       "exit" : false,
-      "out-vars" : [ 33 ],
-      "decl-vars" : [ 33 ],
+      "out-vars" : [ 59 ],
+      "decl-vars" : [ 59 ],
       "line-start" : 302,
       "ast" : {
         "kind" : "statement",
@@ -137,27 +137,27 @@
         } ],
         "right" : [ {
           "asserted" : {
-            "go-type" : 5,
+            "go-type" : 97,
             "kind" : "type",
             "type" : "identifier",
             "value" : {
-              "go-type" : 5,
+              "go-type" : 97,
               "ident-kind" : "TypeName",
               "kind" : "ident",
               "value" : "Any"
             }
           },
-          "go-type" : 5,
+          "go-type" : 97,
           "kind" : "expression",
           "target" : {
-            "go-type" : 11,
+            "go-type" : 16,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "obj",
-              "variable" : 4
+              "variable" : 30
             }
           },
           "type" : "type-assert"
@@ -168,11 +168,11 @@
       "line-end" : 302,
       "code" : "any := obj.(Any)",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 30 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 33 ],
+      "in-vars" : [ 59 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -192,28 +192,28 @@
                 "kind" : "ident",
                 "value" : "Size"
               },
-              "go-type" : 34,
+              "go-type" : 39,
               "kind" : "expression",
               "target" : {
-                "go-type" : 5,
+                "go-type" : 97,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "any",
-                  "variable" : 33
+                  "variable" : 59
                 }
               },
               "type" : "selector"
             },
-            "go-type" : 36,
+            "go-type" : 41,
             "kind" : "expression",
             "type" : "call"
           },
           "operator" : "==",
           "right" : {
-            "go-type" : 36,
+            "go-type" : 41,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -227,7 +227,7 @@
       "line-end" : 303,
       "code" : "return any.Size() == 0",
       "entry" : false,
-      "use-vars" : [ 33 ]
+      "use-vars" : [ 59 ]
     } ],
     "code" : "func (codec *anyCodec) IsEmpty(ptr unsafe.Pointer) bool {\n\tobj := codec.valType.UnsafeIndirect(ptr)\n\tany := obj.(Any)\n\treturn any.Size() == 0\n}",
     "defines" : [ 0 ],
@@ -239,12 +239,12 @@
     }, {
       "name" : "UnsafeIndirect",
       "package" : 2,
-      "type" : 21,
+      "type" : 26,
       "exported" : true
     }, {
       "name" : "Size",
       "package" : 0,
-      "type" : 34,
+      "type" : 39,
       "exported" : true
     } ],
     "line-end" : 304,
@@ -276,14 +276,14 @@
       "name" : "io",
       "path" : "io"
     } ],
-    "params" : [ 1 ],
-    "receivers" : [ 0 ],
-    "results" : [ 2 ],
+    "params" : [ 27 ],
+    "receivers" : [ 26 ],
+    "results" : [ 28 ],
     "type" : "function",
     "types" : [ {
       "name" : "func(ptr unsafe.Pointer) bool",
       "params" : 1,
-      "recv" : 0,
+      "recv" : 26,
       "results" : 3,
       "type" : "Signature",
       "underlying" : 0,
@@ -315,221 +315,214 @@
       "type" : "Basic",
       "underlying" : 4
     }, {
-      "local-name" : "Any",
-      "name" : "github.com/json-iterator/go.Any",
+      "elem" : 6,
+      "name" : "*github.com/json-iterator/go.anyCodec",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "local-name" : "anyCodec",
+      "name" : "github.com/json-iterator/go.anyCodec",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 6
-    }, {
-      "methods" : [ {
-        "name" : "Get",
-        "type" : 7
-      }, {
-        "name" : "GetInterface",
-        "type" : 20
-      }, {
-        "name" : "Keys",
-        "type" : 11
-      }, {
-        "name" : "LastError",
-        "type" : 14
-      }, {
-        "name" : "MustBeValid",
-        "type" : 18
-      }, {
-        "name" : "Size",
-        "type" : 34
-      }, {
-        "name" : "ToBool",
-        "type" : 14
-      }, {
-        "name" : "ToFloat32",
-        "type" : 19
-      }, {
-        "name" : "ToFloat64",
-        "type" : 22
-      }, {
-        "name" : "ToInt",
-        "type" : 34
-      }, {
-        "name" : "ToInt32",
-        "type" : 25
-      }, {
-        "name" : "ToInt64",
-        "type" : 27
-      }, {
-        "name" : "ToString",
-        "type" : 27
-      }, {
-        "name" : "ToUint",
-        "type" : 30
-      }, {
-        "name" : "ToUint32",
-        "type" : 32
-      }, {
-        "name" : "ToUint64",
-        "type" : 34
-      }, {
-        "name" : "ToVal",
-        "type" : 37
-      }, {
-        "name" : "ValueType",
-        "type" : 39
-      }, {
-        "name" : "WriteTo",
-        "type" : 42
-      } ],
-      "name" : "interface{Get(path ...interface{}) github.com/json-iterator/go.Any; GetInterface() interface{}; Keys() []string; LastError() error; MustBeValid() github.com/json-iterator/go.Any; Size() int; ToBool() bool; ToFloat32() float32; ToFloat64() float64; ToInt() int; ToInt32() int32; ToInt64() int64; ToString() string; ToUint() uint; ToUint32() uint32; ToUint64() uint64; ToVal(val interface{}); ValueType() github.com/json-iterator/go.ValueType; WriteTo(stream *github.com/json-iterator/go.Stream)}",
-      "type" : "Interface",
-      "underlying" : 6
-    }, {
-      "name" : "func(path ...interface{}) github.com/json-iterator/go.Any",
-      "params" : 8,
-      "recv" : 5,
-      "results" : 10,
-      "type" : "Signature",
-      "underlying" : 7,
-      "variadic" : true
+      "underlying" : 7
     }, {
       "fields" : [ {
-        "name" : "path",
-        "type" : 9
+        "name" : "valType",
+        "type" : 8
       } ],
-      "name" : "(path []interface{})",
-      "type" : "Tuple",
-      "underlying" : 8
+      "name" : "struct{valType github.com/modern-go/reflect2.Type}",
+      "type" : "Struct",
+      "underlying" : 7
     }, {
-      "elem" : 11,
-      "name" : "[]interface{}",
-      "type" : "Slice",
+      "local-name" : "Type",
+      "name" : "github.com/modern-go/reflect2.Type",
+      "package" : 2,
+      "type" : "Named",
       "underlying" : 9
     }, {
-      "fields" : [ {
-        "name" : "",
-        "type" : 5
+      "methods" : [ {
+        "name" : "AssignableTo",
+        "type" : 10
+      }, {
+        "name" : "Implements",
+        "type" : 12
+      }, {
+        "name" : "Indirect",
+        "type" : 14
+      }, {
+        "name" : "IsNil",
+        "type" : 18
+      }, {
+        "name" : "IsNullable",
+        "type" : 19
+      }, {
+        "name" : "Kind",
+        "type" : 21
+      }, {
+        "name" : "LikePtr",
+        "type" : 19
+      }, {
+        "name" : "New",
+        "type" : 25
+      }, {
+        "name" : "PackEFace",
+        "type" : 26
+      }, {
+        "name" : "RType",
+        "type" : 27
+      }, {
+        "name" : "Set",
+        "type" : 30
+      }, {
+        "name" : "String",
+        "type" : 32
+      }, {
+        "name" : "Type1",
+        "type" : 35
+      }, {
+        "name" : "UnsafeIndirect",
+        "type" : 26
+      }, {
+        "name" : "UnsafeIsNil",
+        "type" : 0
+      }, {
+        "name" : "UnsafeNew",
+        "type" : 93
+      }, {
+        "name" : "UnsafeSet",
+        "type" : 95
       } ],
-      "name" : "(github.com/json-iterator/go.Any)",
-      "type" : "Tuple",
-      "underlying" : 10
+      "name" : "interface{AssignableTo(anotherType github.com/modern-go/reflect2.Type) bool; Implements(thatType github.com/modern-go/reflect2.Type) bool; Indirect(obj interface{}) interface{}; IsNil(obj interface{}) bool; IsNullable() bool; Kind() reflect.Kind; LikePtr() bool; New() interface{}; PackEFace(ptr unsafe.Pointer) interface{}; RType() uintptr; Set(obj interface{}, val interface{}); String() string; Type1() reflect.Type; UnsafeIndirect(ptr unsafe.Pointer) interface{}; UnsafeIsNil(ptr unsafe.Pointer) bool; UnsafeNew() unsafe.Pointer; UnsafeSet(ptr unsafe.Pointer, val unsafe.Pointer)}",
+      "type" : "Interface",
+      "underlying" : 9
     }, {
-      "name" : "func() []string",
-      "params" : 15,
-      "recv" : 6,
-      "results" : 12,
+      "name" : "func(anotherType github.com/modern-go/reflect2.Type) bool",
+      "params" : 11,
+      "recv" : 0,
+      "results" : 3,
       "type" : "Signature",
-      "underlying" : 11,
+      "underlying" : 10,
       "variadic" : false
     }, {
       "fields" : [ {
-        "name" : "",
-        "type" : 13
+        "name" : "anotherType",
+        "type" : 8
       } ],
-      "name" : "([]string)",
+      "name" : "(anotherType github.com/modern-go/reflect2.Type)",
       "type" : "Tuple",
-      "underlying" : 12
+      "underlying" : 11
     }, {
-      "elem" : 29,
-      "name" : "[]string",
-      "type" : "Slice",
+      "name" : "func(thatType github.com/modern-go/reflect2.Type) bool",
+      "params" : 13,
+      "recv" : 1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 12,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "thatType",
+        "type" : 8
+      } ],
+      "name" : "(thatType github.com/modern-go/reflect2.Type)",
+      "type" : "Tuple",
       "underlying" : 13
     }, {
-      "name" : "func() error",
+      "name" : "func(obj interface{}) interface{}",
       "params" : 15,
-      "recv" : 7,
-      "results" : 15,
+      "recv" : 2,
+      "results" : 17,
       "type" : "Signature",
       "underlying" : 14,
       "variadic" : false
     }, {
       "fields" : [ {
-        "name" : "",
+        "name" : "obj",
         "type" : 16
       } ],
-      "name" : "(error)",
+      "name" : "(obj interface{})",
       "type" : "Tuple",
       "underlying" : 15
     }, {
-      "local-name" : "error",
-      "name" : "error",
-      "package" : -1,
-      "type" : "Named",
-      "underlying" : 17
-    }, {
-      "methods" : [ {
-        "name" : "Error",
-        "type" : 27
-      } ],
-      "name" : "interface{Error() string}",
+      "methods" : [ ],
+      "name" : "interface{}",
       "type" : "Interface",
+      "underlying" : 16
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 16
+      } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
       "underlying" : 17
     }, {
-      "name" : "func() github.com/json-iterator/go.Any",
+      "name" : "func(obj interface{}) bool",
       "params" : 15,
-      "recv" : 8,
-      "results" : 10,
+      "recv" : 3,
+      "results" : 3,
       "type" : "Signature",
       "underlying" : 18,
       "variadic" : false
     }, {
-      "name" : "func() float32",
-      "params" : 15,
-      "recv" : 9,
-      "results" : 20,
+      "name" : "func() bool",
+      "params" : 20,
+      "recv" : 4,
+      "results" : 3,
       "type" : "Signature",
       "underlying" : 19,
       "variadic" : false
     }, {
-      "fields" : [ {
-        "name" : "",
-        "type" : 21
-      } ],
-      "name" : "(float32)",
+      "fields" : [ ],
+      "name" : "()",
       "type" : "Tuple",
       "underlying" : 20
     }, {
-      "name" : "float32",
-      "type" : "Basic",
-      "underlying" : 21
-    }, {
-      "name" : "func() float64",
-      "params" : 15,
-      "recv" : 10,
-      "results" : 23,
+      "name" : "func() reflect.Kind",
+      "params" : 20,
+      "recv" : 5,
+      "results" : 22,
       "type" : "Signature",
-      "underlying" : 22,
+      "underlying" : 21,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 24
+        "type" : 23
       } ],
-      "name" : "(float64)",
+      "name" : "(reflect.Kind)",
       "type" : "Tuple",
-      "underlying" : 23
+      "underlying" : 22
     }, {
-      "name" : "float64",
+      "local-name" : "Kind",
+      "name" : "reflect.Kind",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "name" : "uint",
       "type" : "Basic",
       "underlying" : 24
     }, {
-      "name" : "func() int32",
-      "params" : 15,
-      "recv" : 11,
-      "results" : 26,
+      "name" : "func() interface{}",
+      "params" : 20,
+      "recv" : 6,
+      "results" : 17,
       "type" : "Signature",
       "underlying" : 25,
       "variadic" : false
     }, {
-      "fields" : [ {
-        "name" : "",
-        "type" : 75
-      } ],
-      "name" : "(int32)",
-      "type" : "Tuple",
-      "underlying" : 26
+      "name" : "func(ptr unsafe.Pointer) interface{}",
+      "params" : 1,
+      "recv" : 7,
+      "results" : 17,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
     }, {
-      "name" : "func() int64",
-      "params" : 15,
-      "recv" : 12,
+      "name" : "func() uintptr",
+      "params" : 20,
+      "recv" : 8,
       "results" : 28,
       "type" : "Signature",
       "underlying" : 27,
@@ -539,33 +532,36 @@
         "name" : "",
         "type" : 29
       } ],
-      "name" : "(int64)",
+      "name" : "(uintptr)",
       "type" : "Tuple",
       "underlying" : 28
     }, {
-      "name" : "int64",
+      "name" : "uintptr",
       "type" : "Basic",
       "underlying" : 29
     }, {
-      "name" : "func() uint",
-      "params" : 15,
-      "recv" : 13,
-      "results" : 31,
+      "name" : "func(obj interface{}, val interface{})",
+      "params" : 31,
+      "recv" : 9,
+      "results" : 20,
       "type" : "Signature",
       "underlying" : 30,
       "variadic" : false
     }, {
       "fields" : [ {
-        "name" : "",
-        "type" : 19
+        "name" : "obj",
+        "type" : 16
+      }, {
+        "name" : "val",
+        "type" : 16
       } ],
-      "name" : "(uint)",
+      "name" : "(obj interface{}, val interface{})",
       "type" : "Tuple",
       "underlying" : 31
     }, {
-      "name" : "func() uint32",
-      "params" : 15,
-      "recv" : 14,
+      "name" : "func() string",
+      "params" : 20,
+      "recv" : 10,
       "results" : 33,
       "type" : "Signature",
       "underlying" : 32,
@@ -573,51 +569,139 @@
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 67
+        "type" : 34
       } ],
-      "name" : "(uint32)",
+      "name" : "(string)",
       "type" : "Tuple",
       "underlying" : 33
     }, {
-      "name" : "func() uint64",
-      "params" : 15,
-      "recv" : 15,
-      "results" : 35,
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 34
+    }, {
+      "name" : "func() reflect.Type",
+      "params" : 20,
+      "recv" : 23,
+      "results" : 36,
       "type" : "Signature",
-      "underlying" : 34,
+      "underlying" : 35,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 36
+        "type" : 37
       } ],
-      "name" : "(uint64)",
+      "name" : "(reflect.Type)",
       "type" : "Tuple",
-      "underlying" : 35
-    }, {
-      "name" : "uint64",
-      "type" : "Basic",
       "underlying" : 36
     }, {
-      "name" : "func(val interface{})",
-      "params" : 38,
-      "recv" : 16,
-      "results" : 15,
-      "type" : "Signature",
-      "underlying" : 37,
-      "variadic" : false
-    }, {
-      "fields" : [ {
-        "name" : "val",
-        "type" : 11
-      } ],
-      "name" : "(val interface{})",
-      "type" : "Tuple",
+      "local-name" : "Type",
+      "name" : "reflect.Type",
+      "package" : 3,
+      "type" : "Named",
       "underlying" : 38
     }, {
-      "name" : "func() github.com/json-iterator/go.ValueType",
-      "params" : 15,
-      "recv" : 17,
+      "methods" : [ {
+        "name" : "Align",
+        "type" : 39
+      }, {
+        "name" : "AssignableTo",
+        "type" : 42
+      }, {
+        "name" : "Bits",
+        "type" : 39
+      }, {
+        "name" : "ChanDir",
+        "type" : 44
+      }, {
+        "name" : "Comparable",
+        "type" : 19
+      }, {
+        "name" : "ConvertibleTo",
+        "type" : 42
+      }, {
+        "name" : "Elem",
+        "type" : 35
+      }, {
+        "name" : "Field",
+        "type" : 47
+      }, {
+        "name" : "FieldAlign",
+        "type" : 39
+      }, {
+        "name" : "FieldByIndex",
+        "type" : 54
+      }, {
+        "name" : "FieldByName",
+        "type" : 56
+      }, {
+        "name" : "FieldByNameFunc",
+        "type" : 59
+      }, {
+        "name" : "Implements",
+        "type" : 42
+      }, {
+        "name" : "In",
+        "type" : 62
+      }, {
+        "name" : "IsVariadic",
+        "type" : 19
+      }, {
+        "name" : "Key",
+        "type" : 35
+      }, {
+        "name" : "Kind",
+        "type" : 21
+      }, {
+        "name" : "Len",
+        "type" : 39
+      }, {
+        "name" : "Method",
+        "type" : 63
+      }, {
+        "name" : "MethodByName",
+        "type" : 83
+      }, {
+        "name" : "Name",
+        "type" : 32
+      }, {
+        "name" : "NumField",
+        "type" : 39
+      }, {
+        "name" : "NumIn",
+        "type" : 39
+      }, {
+        "name" : "NumMethod",
+        "type" : 39
+      }, {
+        "name" : "NumOut",
+        "type" : 39
+      }, {
+        "name" : "Out",
+        "type" : 62
+      }, {
+        "name" : "PkgPath",
+        "type" : 32
+      }, {
+        "name" : "Size",
+        "type" : 27
+      }, {
+        "name" : "String",
+        "type" : 32
+      }, {
+        "name" : "common",
+        "type" : 85
+      }, {
+        "name" : "uncommon",
+        "type" : 87
+      } ],
+      "name" : "interface{Align() int; AssignableTo(u reflect.Type) bool; Bits() int; ChanDir() reflect.ChanDir; Comparable() bool; ConvertibleTo(u reflect.Type) bool; Elem() reflect.Type; Field(i int) reflect.StructField; FieldAlign() int; FieldByIndex(index []int) reflect.StructField; FieldByName(name string) (reflect.StructField, bool); FieldByNameFunc(match func(string) bool) (reflect.StructField, bool); Implements(u reflect.Type) bool; In(i int) reflect.Type; IsVariadic() bool; Key() reflect.Type; Kind() reflect.Kind; Len() int; Method(int) reflect.Method; MethodByName(string) (reflect.Method, bool); Name() string; NumField() int; NumIn() int; NumMethod() int; NumOut() int; Out(i int) reflect.Type; PkgPath() string; Size() uintptr; String() string; common() *reflect.rtype; uncommon() *reflect.uncommonType}",
+      "type" : "Interface",
+      "underlying" : 38
+    }, {
+      "name" : "func() int",
+      "params" : 20,
+      "recv" : 11,
       "results" : 40,
       "type" : "Signature",
       "underlying" : 39,
@@ -627,86 +711,882 @@
         "name" : "",
         "type" : 41
       } ],
-      "name" : "(github.com/json-iterator/go.ValueType)",
+      "name" : "(int)",
       "type" : "Tuple",
       "underlying" : 40
     }, {
-      "local-name" : "ValueType",
-      "name" : "github.com/json-iterator/go.ValueType",
-      "package" : 0,
-      "type" : "Named",
-      "underlying" : 36
+      "name" : "int",
+      "type" : "Basic",
+      "underlying" : 41
     }, {
-      "name" : "func(stream *github.com/json-iterator/go.Stream)",
+      "name" : "func(u reflect.Type) bool",
       "params" : 43,
-      "recv" : 32,
-      "results" : 15,
+      "recv" : 12,
+      "results" : 3,
       "type" : "Signature",
       "underlying" : 42,
       "variadic" : false
     }, {
       "fields" : [ {
-        "name" : "stream",
-        "type" : 44
+        "name" : "u",
+        "type" : 37
       } ],
-      "name" : "(stream *github.com/json-iterator/go.Stream)",
+      "name" : "(u reflect.Type)",
       "type" : "Tuple",
       "underlying" : 43
     }, {
-      "elem" : 45,
+      "name" : "func() reflect.ChanDir",
+      "params" : 20,
+      "recv" : 13,
+      "results" : 45,
+      "type" : "Signature",
+      "underlying" : 44,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 46
+      } ],
+      "name" : "(reflect.ChanDir)",
+      "type" : "Tuple",
+      "underlying" : 45
+    }, {
+      "local-name" : "ChanDir",
+      "name" : "reflect.ChanDir",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 41
+    }, {
+      "name" : "func(i int) reflect.StructField",
+      "params" : 48,
+      "recv" : 14,
+      "results" : 49,
+      "type" : "Signature",
+      "underlying" : 47,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 41
+      } ],
+      "name" : "(i int)",
+      "type" : "Tuple",
+      "underlying" : 48
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 50
+      } ],
+      "name" : "(reflect.StructField)",
+      "type" : "Tuple",
+      "underlying" : 49
+    }, {
+      "local-name" : "StructField",
+      "name" : "reflect.StructField",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 51
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 34
+      }, {
+        "name" : "PkgPath",
+        "type" : 34
+      }, {
+        "name" : "Type",
+        "type" : 37
+      }, {
+        "name" : "Tag",
+        "type" : 52
+      }, {
+        "name" : "Offset",
+        "type" : 29
+      }, {
+        "name" : "Index",
+        "type" : 53
+      }, {
+        "name" : "Anonymous",
+        "type" : 4
+      } ],
+      "name" : "struct{Name string; PkgPath string; Type reflect.Type; Tag reflect.StructTag; Offset uintptr; Index []int; Anonymous bool}",
+      "type" : "Struct",
+      "underlying" : 51
+    }, {
+      "local-name" : "StructTag",
+      "name" : "reflect.StructTag",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 34
+    }, {
+      "elem" : 41,
+      "name" : "[]int",
+      "type" : "Slice",
+      "underlying" : 53
+    }, {
+      "name" : "func(index []int) reflect.StructField",
+      "params" : 55,
+      "recv" : 15,
+      "results" : 49,
+      "type" : "Signature",
+      "underlying" : 54,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "index",
+        "type" : 53
+      } ],
+      "name" : "(index []int)",
+      "type" : "Tuple",
+      "underlying" : 55
+    }, {
+      "name" : "func(name string) (reflect.StructField, bool)",
+      "params" : 57,
+      "recv" : 16,
+      "results" : 58,
+      "type" : "Signature",
+      "underlying" : 56,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "name",
+        "type" : 34
+      } ],
+      "name" : "(name string)",
+      "type" : "Tuple",
+      "underlying" : 57
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 50
+      }, {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(reflect.StructField, bool)",
+      "type" : "Tuple",
+      "underlying" : 58
+    }, {
+      "name" : "func(match func(string) bool) (reflect.StructField, bool)",
+      "params" : 60,
+      "recv" : 17,
+      "results" : 58,
+      "type" : "Signature",
+      "underlying" : 59,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "match",
+        "type" : 61
+      } ],
+      "name" : "(match func(string) bool)",
+      "type" : "Tuple",
+      "underlying" : 60
+    }, {
+      "name" : "func(string) bool",
+      "params" : 33,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 61,
+      "variadic" : false
+    }, {
+      "name" : "func(i int) reflect.Type",
+      "params" : 48,
+      "recv" : 18,
+      "results" : 36,
+      "type" : "Signature",
+      "underlying" : 62,
+      "variadic" : false
+    }, {
+      "name" : "func(int) reflect.Method",
+      "params" : 40,
+      "recv" : 19,
+      "results" : 64,
+      "type" : "Signature",
+      "underlying" : 63,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 65
+      } ],
+      "name" : "(reflect.Method)",
+      "type" : "Tuple",
+      "underlying" : 64
+    }, {
+      "local-name" : "Method",
+      "name" : "reflect.Method",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 66
+    }, {
+      "fields" : [ {
+        "name" : "Name",
+        "type" : 34
+      }, {
+        "name" : "PkgPath",
+        "type" : 34
+      }, {
+        "name" : "Type",
+        "type" : 37
+      }, {
+        "name" : "Func",
+        "type" : 67
+      }, {
+        "name" : "Index",
+        "type" : 41
+      } ],
+      "name" : "struct{Name string; PkgPath string; Type reflect.Type; Func reflect.Value; Index int}",
+      "type" : "Struct",
+      "underlying" : 66
+    }, {
+      "local-name" : "Value",
+      "name" : "reflect.Value",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 68
+    }, {
+      "fields" : [ {
+        "name" : "typ",
+        "type" : 69
+      }, {
+        "name" : "ptr",
+        "type" : 2
+      }, {
+        "name" : "flag",
+        "type" : 82
+      } ],
+      "name" : "struct{typ *reflect.rtype; ptr unsafe.Pointer; reflect.flag}",
+      "type" : "Struct",
+      "underlying" : 68
+    }, {
+      "elem" : 70,
+      "name" : "*reflect.rtype",
+      "type" : "Pointer",
+      "underlying" : 69
+    }, {
+      "local-name" : "rtype",
+      "name" : "reflect.rtype",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 71
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 29
+      }, {
+        "name" : "ptrdata",
+        "type" : 29
+      }, {
+        "name" : "hash",
+        "type" : 72
+      }, {
+        "name" : "tflag",
+        "type" : 73
+      }, {
+        "name" : "align",
+        "type" : 74
+      }, {
+        "name" : "fieldAlign",
+        "type" : 74
+      }, {
+        "name" : "kind",
+        "type" : 74
+      }, {
+        "name" : "equal",
+        "type" : 75
+      }, {
+        "name" : "gcdata",
+        "type" : 77
+      }, {
+        "name" : "str",
+        "type" : 79
+      }, {
+        "name" : "ptrToThis",
+        "type" : 81
+      } ],
+      "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag reflect.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str reflect.nameOff; ptrToThis reflect.typeOff}",
+      "type" : "Struct",
+      "underlying" : 71
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 72
+    }, {
+      "local-name" : "tflag",
+      "name" : "reflect.tflag",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 74
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 74
+    }, {
+      "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
+      "params" : 76,
+      "recv" : -1,
+      "results" : 3,
+      "type" : "Signature",
+      "underlying" : 75,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      }, {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer, unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 76
+    }, {
+      "elem" : 78,
+      "name" : "*byte",
+      "type" : "Pointer",
+      "underlying" : 77
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 78
+    }, {
+      "local-name" : "nameOff",
+      "name" : "reflect.nameOff",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 80
+    }, {
+      "local-name" : "typeOff",
+      "name" : "reflect.typeOff",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 80
+    }, {
+      "local-name" : "flag",
+      "name" : "reflect.flag",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 29
+    }, {
+      "name" : "func(string) (reflect.Method, bool)",
+      "params" : 33,
+      "recv" : 20,
+      "results" : 84,
+      "type" : "Signature",
+      "underlying" : 83,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 65
+      }, {
+        "name" : "",
+        "type" : 4
+      } ],
+      "name" : "(reflect.Method, bool)",
+      "type" : "Tuple",
+      "underlying" : 84
+    }, {
+      "name" : "func() *reflect.rtype",
+      "params" : 20,
+      "recv" : 21,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 85,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 69
+      } ],
+      "name" : "(*reflect.rtype)",
+      "type" : "Tuple",
+      "underlying" : 86
+    }, {
+      "name" : "func() *reflect.uncommonType",
+      "params" : 20,
+      "recv" : 22,
+      "results" : 88,
+      "type" : "Signature",
+      "underlying" : 87,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 89
+      } ],
+      "name" : "(*reflect.uncommonType)",
+      "type" : "Tuple",
+      "underlying" : 88
+    }, {
+      "elem" : 90,
+      "name" : "*reflect.uncommonType",
+      "type" : "Pointer",
+      "underlying" : 89
+    }, {
+      "local-name" : "uncommonType",
+      "name" : "reflect.uncommonType",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 91
+    }, {
+      "fields" : [ {
+        "name" : "pkgPath",
+        "type" : 79
+      }, {
+        "name" : "mcount",
+        "type" : 92
+      }, {
+        "name" : "xcount",
+        "type" : 92
+      }, {
+        "name" : "moff",
+        "type" : 72
+      }, {
+        "name" : "_",
+        "type" : 72
+      } ],
+      "name" : "struct{pkgPath reflect.nameOff; mcount uint16; xcount uint16; moff uint32; _ uint32}",
+      "type" : "Struct",
+      "underlying" : 91
+    }, {
+      "name" : "uint16",
+      "type" : "Basic",
+      "underlying" : 92
+    }, {
+      "name" : "func() unsafe.Pointer",
+      "params" : 20,
+      "recv" : 24,
+      "results" : 94,
+      "type" : "Signature",
+      "underlying" : 93,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 2
+      } ],
+      "name" : "(unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 94
+    }, {
+      "name" : "func(ptr unsafe.Pointer, val unsafe.Pointer)",
+      "params" : 96,
+      "recv" : 25,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 95,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "ptr",
+        "type" : 2
+      }, {
+        "name" : "val",
+        "type" : 2
+      } ],
+      "name" : "(ptr unsafe.Pointer, val unsafe.Pointer)",
+      "type" : "Tuple",
+      "underlying" : 96
+    }, {
+      "local-name" : "Any",
+      "name" : "github.com/json-iterator/go.Any",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 98
+    }, {
+      "methods" : [ {
+        "name" : "Get",
+        "type" : 99
+      }, {
+        "name" : "GetInterface",
+        "type" : 25
+      }, {
+        "name" : "Keys",
+        "type" : 103
+      }, {
+        "name" : "LastError",
+        "type" : 106
+      }, {
+        "name" : "MustBeValid",
+        "type" : 110
+      }, {
+        "name" : "Size",
+        "type" : 39
+      }, {
+        "name" : "ToBool",
+        "type" : 19
+      }, {
+        "name" : "ToFloat32",
+        "type" : 111
+      }, {
+        "name" : "ToFloat64",
+        "type" : 114
+      }, {
+        "name" : "ToInt",
+        "type" : 39
+      }, {
+        "name" : "ToInt32",
+        "type" : 117
+      }, {
+        "name" : "ToInt64",
+        "type" : 119
+      }, {
+        "name" : "ToString",
+        "type" : 32
+      }, {
+        "name" : "ToUint",
+        "type" : 122
+      }, {
+        "name" : "ToUint32",
+        "type" : 124
+      }, {
+        "name" : "ToUint64",
+        "type" : 126
+      }, {
+        "name" : "ToVal",
+        "type" : 129
+      }, {
+        "name" : "ValueType",
+        "type" : 131
+      }, {
+        "name" : "WriteTo",
+        "type" : 134
+      } ],
+      "name" : "interface{Get(path ...interface{}) github.com/json-iterator/go.Any; GetInterface() interface{}; Keys() []string; LastError() error; MustBeValid() github.com/json-iterator/go.Any; Size() int; ToBool() bool; ToFloat32() float32; ToFloat64() float64; ToInt() int; ToInt32() int32; ToInt64() int64; ToString() string; ToUint() uint; ToUint32() uint32; ToUint64() uint64; ToVal(val interface{}); ValueType() github.com/json-iterator/go.ValueType; WriteTo(stream *github.com/json-iterator/go.Stream)}",
+      "type" : "Interface",
+      "underlying" : 98
+    }, {
+      "name" : "func(path ...interface{}) github.com/json-iterator/go.Any",
+      "params" : 100,
+      "recv" : 31,
+      "results" : 102,
+      "type" : "Signature",
+      "underlying" : 99,
+      "variadic" : true
+    }, {
+      "fields" : [ {
+        "name" : "path",
+        "type" : 101
+      } ],
+      "name" : "(path []interface{})",
+      "type" : "Tuple",
+      "underlying" : 100
+    }, {
+      "elem" : 16,
+      "name" : "[]interface{}",
+      "type" : "Slice",
+      "underlying" : 101
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 97
+      } ],
+      "name" : "(github.com/json-iterator/go.Any)",
+      "type" : "Tuple",
+      "underlying" : 102
+    }, {
+      "name" : "func() []string",
+      "params" : 20,
+      "recv" : 32,
+      "results" : 104,
+      "type" : "Signature",
+      "underlying" : 103,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 105
+      } ],
+      "name" : "([]string)",
+      "type" : "Tuple",
+      "underlying" : 104
+    }, {
+      "elem" : 34,
+      "name" : "[]string",
+      "type" : "Slice",
+      "underlying" : 105
+    }, {
+      "name" : "func() error",
+      "params" : 20,
+      "recv" : 33,
+      "results" : 107,
+      "type" : "Signature",
+      "underlying" : 106,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 108
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 107
+    }, {
+      "local-name" : "error",
+      "name" : "error",
+      "package" : -1,
+      "type" : "Named",
+      "underlying" : 109
+    }, {
+      "methods" : [ {
+        "name" : "Error",
+        "type" : 32
+      } ],
+      "name" : "interface{Error() string}",
+      "type" : "Interface",
+      "underlying" : 109
+    }, {
+      "name" : "func() github.com/json-iterator/go.Any",
+      "params" : 20,
+      "recv" : 34,
+      "results" : 102,
+      "type" : "Signature",
+      "underlying" : 110,
+      "variadic" : false
+    }, {
+      "name" : "func() float32",
+      "params" : 20,
+      "recv" : 35,
+      "results" : 112,
+      "type" : "Signature",
+      "underlying" : 111,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 113
+      } ],
+      "name" : "(float32)",
+      "type" : "Tuple",
+      "underlying" : 112
+    }, {
+      "name" : "float32",
+      "type" : "Basic",
+      "underlying" : 113
+    }, {
+      "name" : "func() float64",
+      "params" : 20,
+      "recv" : 36,
+      "results" : 115,
+      "type" : "Signature",
+      "underlying" : 114,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 116
+      } ],
+      "name" : "(float64)",
+      "type" : "Tuple",
+      "underlying" : 115
+    }, {
+      "name" : "float64",
+      "type" : "Basic",
+      "underlying" : 116
+    }, {
+      "name" : "func() int32",
+      "params" : 20,
+      "recv" : 37,
+      "results" : 118,
+      "type" : "Signature",
+      "underlying" : 117,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 80
+      } ],
+      "name" : "(int32)",
+      "type" : "Tuple",
+      "underlying" : 118
+    }, {
+      "name" : "func() int64",
+      "params" : 20,
+      "recv" : 38,
+      "results" : 120,
+      "type" : "Signature",
+      "underlying" : 119,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 121
+      } ],
+      "name" : "(int64)",
+      "type" : "Tuple",
+      "underlying" : 120
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 121
+    }, {
+      "name" : "func() uint",
+      "params" : 20,
+      "recv" : 39,
+      "results" : 123,
+      "type" : "Signature",
+      "underlying" : 122,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 24
+      } ],
+      "name" : "(uint)",
+      "type" : "Tuple",
+      "underlying" : 123
+    }, {
+      "name" : "func() uint32",
+      "params" : 20,
+      "recv" : 40,
+      "results" : 125,
+      "type" : "Signature",
+      "underlying" : 124,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 72
+      } ],
+      "name" : "(uint32)",
+      "type" : "Tuple",
+      "underlying" : 125
+    }, {
+      "name" : "func() uint64",
+      "params" : 20,
+      "recv" : 41,
+      "results" : 127,
+      "type" : "Signature",
+      "underlying" : 126,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 128
+      } ],
+      "name" : "(uint64)",
+      "type" : "Tuple",
+      "underlying" : 127
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 128
+    }, {
+      "name" : "func(val interface{})",
+      "params" : 130,
+      "recv" : 42,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 129,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "val",
+        "type" : 16
+      } ],
+      "name" : "(val interface{})",
+      "type" : "Tuple",
+      "underlying" : 130
+    }, {
+      "name" : "func() github.com/json-iterator/go.ValueType",
+      "params" : 20,
+      "recv" : 43,
+      "results" : 132,
+      "type" : "Signature",
+      "underlying" : 131,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 133
+      } ],
+      "name" : "(github.com/json-iterator/go.ValueType)",
+      "type" : "Tuple",
+      "underlying" : 132
+    }, {
+      "local-name" : "ValueType",
+      "name" : "github.com/json-iterator/go.ValueType",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 41
+    }, {
+      "name" : "func(stream *github.com/json-iterator/go.Stream)",
+      "params" : 135,
+      "recv" : 58,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 134,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "stream",
+        "type" : 136
+      } ],
+      "name" : "(stream *github.com/json-iterator/go.Stream)",
+      "type" : "Tuple",
+      "underlying" : 135
+    }, {
+      "elem" : 137,
       "name" : "*github.com/json-iterator/go.Stream",
       "type" : "Pointer",
-      "underlying" : 44
+      "underlying" : 136
     }, {
       "local-name" : "Stream",
       "name" : "github.com/json-iterator/go.Stream",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 46
+      "underlying" : 138
     }, {
       "fields" : [ {
         "name" : "cfg",
-        "type" : 47
+        "type" : 139
       }, {
         "name" : "out",
-        "type" : 122
+        "type" : 214
       }, {
         "name" : "buf",
-        "type" : 81
+        "type" : 173
       }, {
         "name" : "Error",
-        "type" : 16
+        "type" : 108
       }, {
         "name" : "indention",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "Attachment",
-        "type" : 11
+        "type" : 16
       } ],
       "name" : "struct{cfg *github.com/json-iterator/go.frozenConfig; out io.Writer; buf []byte; Error error; indention int; Attachment interface{}}",
       "type" : "Struct",
-      "underlying" : 46
+      "underlying" : 138
     }, {
-      "elem" : 48,
+      "elem" : 140,
       "name" : "*github.com/json-iterator/go.frozenConfig",
       "type" : "Pointer",
-      "underlying" : 47
+      "underlying" : 139
     }, {
       "local-name" : "frozenConfig",
       "name" : "github.com/json-iterator/go.frozenConfig",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 49
+      "underlying" : 141
     }, {
       "fields" : [ {
         "name" : "configBeforeFrozen",
-        "type" : 50
+        "type" : 142
       }, {
         "name" : "sortMapKeys",
         "type" : 4
       }, {
         "name" : "indentionStep",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "objectFieldMustBeSimpleString",
         "type" : 4
@@ -718,42 +1598,42 @@
         "type" : 4
       }, {
         "name" : "decoderCache",
-        "type" : 52
+        "type" : 144
       }, {
         "name" : "encoderCache",
-        "type" : 52
+        "type" : 144
       }, {
         "name" : "encoderExtension",
-        "type" : 65
+        "type" : 157
       }, {
         "name" : "decoderExtension",
-        "type" : 65
+        "type" : 157
       }, {
         "name" : "extraExtensions",
-        "type" : 116
+        "type" : 208
       }, {
         "name" : "streamPool",
-        "type" : 117
+        "type" : 209
       }, {
         "name" : "iteratorPool",
-        "type" : 117
+        "type" : 209
       }, {
         "name" : "caseSensitive",
         "type" : 4
       } ],
       "name" : "struct{configBeforeFrozen github.com/json-iterator/go.Config; sortMapKeys bool; indentionStep int; objectFieldMustBeSimpleString bool; onlyTaggedField bool; disallowUnknownFields bool; decoderCache *github.com/modern-go/concurrent.Map; encoderCache *github.com/modern-go/concurrent.Map; encoderExtension github.com/json-iterator/go.Extension; decoderExtension github.com/json-iterator/go.Extension; extraExtensions []github.com/json-iterator/go.Extension; streamPool *sync.Pool; iteratorPool *sync.Pool; caseSensitive bool}",
       "type" : "Struct",
-      "underlying" : 49
+      "underlying" : 141
     }, {
       "local-name" : "Config",
       "name" : "github.com/json-iterator/go.Config",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 51
+      "underlying" : 143
     }, {
       "fields" : [ {
         "name" : "IndentionStep",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "MarshalFloatWith6Digits",
         "type" : 4
@@ -771,7 +1651,7 @@
         "type" : 4
       }, {
         "name" : "TagKey",
-        "type" : 29
+        "type" : 34
       }, {
         "name" : "OnlyTaggedField",
         "type" : 4
@@ -787,97 +1667,97 @@
       } ],
       "name" : "struct{IndentionStep int; MarshalFloatWith6Digits bool; EscapeHTML bool; SortMapKeys bool; UseNumber bool; DisallowUnknownFields bool; TagKey string; OnlyTaggedField bool; ValidateJsonRawMessage bool; ObjectFieldMustBeSimpleString bool; CaseSensitive bool}",
       "type" : "Struct",
-      "underlying" : 51
+      "underlying" : 143
     }, {
-      "elem" : 53,
+      "elem" : 145,
       "name" : "*github.com/modern-go/concurrent.Map",
       "type" : "Pointer",
-      "underlying" : 52
+      "underlying" : 144
     }, {
       "local-name" : "Map",
       "name" : "github.com/modern-go/concurrent.Map",
       "package" : 4,
       "type" : "Named",
-      "underlying" : 54
+      "underlying" : 146
     }, {
       "fields" : [ {
         "name" : "Map",
-        "type" : 55
+        "type" : 147
       } ],
       "name" : "struct{sync.Map}",
       "type" : "Struct",
-      "underlying" : 54
+      "underlying" : 146
     }, {
       "local-name" : "Map",
       "name" : "sync.Map",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 56
+      "underlying" : 148
     }, {
       "fields" : [ {
         "name" : "mu",
-        "type" : 57
+        "type" : 149
       }, {
         "name" : "read",
-        "type" : 59
+        "type" : 151
       }, {
         "name" : "dirty",
-        "type" : 61
+        "type" : 153
       }, {
         "name" : "misses",
-        "type" : 36
+        "type" : 41
       } ],
       "name" : "struct{mu sync.Mutex; read sync/atomic.Value; dirty map[interface{}]*sync.entry; misses int}",
       "type" : "Struct",
-      "underlying" : 56
+      "underlying" : 148
     }, {
       "local-name" : "Mutex",
       "name" : "sync.Mutex",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 58
+      "underlying" : 150
     }, {
       "fields" : [ {
         "name" : "state",
-        "type" : 75
+        "type" : 80
       }, {
         "name" : "sema",
-        "type" : 67
+        "type" : 72
       } ],
       "name" : "struct{state int32; sema uint32}",
       "type" : "Struct",
-      "underlying" : 58
+      "underlying" : 150
     }, {
       "local-name" : "Value",
       "name" : "sync/atomic.Value",
       "package" : 6,
       "type" : "Named",
-      "underlying" : 60
+      "underlying" : 152
     }, {
       "fields" : [ {
         "name" : "v",
-        "type" : 11
+        "type" : 16
       } ],
       "name" : "struct{v interface{}}",
       "type" : "Struct",
-      "underlying" : 60
+      "underlying" : 152
     }, {
-      "elem" : 62,
-      "key" : 11,
+      "elem" : 154,
+      "key" : 16,
       "name" : "map[interface{}]*sync.entry",
       "type" : "Map",
-      "underlying" : 61
+      "underlying" : 153
     }, {
-      "elem" : 63,
+      "elem" : 155,
       "name" : "*sync.entry",
       "type" : "Pointer",
-      "underlying" : 62
+      "underlying" : 154
     }, {
       "local-name" : "entry",
       "name" : "sync.entry",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 64
+      "underlying" : 156
     }, {
       "fields" : [ {
         "name" : "p",
@@ -885,84 +1765,84 @@
       } ],
       "name" : "struct{p unsafe.Pointer}",
       "type" : "Struct",
-      "underlying" : 64
+      "underlying" : 156
     }, {
       "local-name" : "Extension",
       "name" : "github.com/json-iterator/go.Extension",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 66
+      "underlying" : 158
     }, {
       "methods" : [ {
         "name" : "CreateDecoder",
-        "type" : 67
+        "type" : 159
       }, {
         "name" : "CreateEncoder",
-        "type" : 83
+        "type" : 175
       }, {
         "name" : "CreateMapKeyDecoder",
-        "type" : 67
+        "type" : 159
       }, {
         "name" : "CreateMapKeyEncoder",
-        "type" : 83
+        "type" : 175
       }, {
         "name" : "DecorateDecoder",
-        "type" : 89
+        "type" : 181
       }, {
         "name" : "DecorateEncoder",
-        "type" : 91
+        "type" : 183
       }, {
         "name" : "UpdateStructDescriptor",
-        "type" : 93
+        "type" : 185
       } ],
       "name" : "interface{CreateDecoder(typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValDecoder; CreateEncoder(typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValEncoder; CreateMapKeyDecoder(typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValDecoder; CreateMapKeyEncoder(typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValEncoder; DecorateDecoder(typ github.com/modern-go/reflect2.Type, decoder github.com/json-iterator/go.ValDecoder) github.com/json-iterator/go.ValDecoder; DecorateEncoder(typ github.com/modern-go/reflect2.Type, encoder github.com/json-iterator/go.ValEncoder) github.com/json-iterator/go.ValEncoder; UpdateStructDescriptor(structDescriptor *github.com/json-iterator/go.StructDescriptor)}",
       "type" : "Interface",
-      "underlying" : 66
+      "underlying" : 158
     }, {
       "name" : "func(typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValDecoder",
-      "params" : 68,
-      "recv" : 20,
-      "results" : 69,
+      "params" : 160,
+      "recv" : 46,
+      "results" : 161,
       "type" : "Signature",
-      "underlying" : 67,
+      "underlying" : 159,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "typ",
-        "type" : 3
+        "type" : 8
       } ],
       "name" : "(typ github.com/modern-go/reflect2.Type)",
       "type" : "Tuple",
-      "underlying" : 68
+      "underlying" : 160
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 70
+        "type" : 162
       } ],
       "name" : "(github.com/json-iterator/go.ValDecoder)",
       "type" : "Tuple",
-      "underlying" : 69
+      "underlying" : 161
     }, {
       "local-name" : "ValDecoder",
       "name" : "github.com/json-iterator/go.ValDecoder",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 71
+      "underlying" : 163
     }, {
       "methods" : [ {
         "name" : "Decode",
-        "type" : 72
+        "type" : 164
       } ],
       "name" : "interface{Decode(ptr unsafe.Pointer, iter *github.com/json-iterator/go.Iterator)}",
       "type" : "Interface",
-      "underlying" : 71
+      "underlying" : 163
     }, {
       "name" : "func(ptr unsafe.Pointer, iter *github.com/json-iterator/go.Iterator)",
-      "params" : 73,
-      "recv" : 19,
-      "results" : 15,
+      "params" : 165,
+      "recv" : 45,
+      "results" : 20,
       "type" : "Signature",
-      "underlying" : 72,
+      "underlying" : 164,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -970,143 +1850,143 @@
         "type" : 2
       }, {
         "name" : "iter",
-        "type" : 74
+        "type" : 166
       } ],
       "name" : "(ptr unsafe.Pointer, iter *github.com/json-iterator/go.Iterator)",
       "type" : "Tuple",
-      "underlying" : 73
+      "underlying" : 165
     }, {
-      "elem" : 75,
+      "elem" : 167,
       "name" : "*github.com/json-iterator/go.Iterator",
       "type" : "Pointer",
-      "underlying" : 74
+      "underlying" : 166
     }, {
       "local-name" : "Iterator",
       "name" : "github.com/json-iterator/go.Iterator",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 76
+      "underlying" : 168
     }, {
       "fields" : [ {
         "name" : "cfg",
-        "type" : 47
+        "type" : 139
       }, {
         "name" : "reader",
-        "type" : 77
+        "type" : 169
       }, {
         "name" : "buf",
-        "type" : 81
+        "type" : 173
       }, {
         "name" : "head",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "tail",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "depth",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "captureStartedAt",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "captured",
-        "type" : 81
+        "type" : 173
       }, {
         "name" : "Error",
-        "type" : 16
+        "type" : 108
       }, {
         "name" : "Attachment",
-        "type" : 11
+        "type" : 16
       } ],
       "name" : "struct{cfg *github.com/json-iterator/go.frozenConfig; reader io.Reader; buf []byte; head int; tail int; depth int; captureStartedAt int; captured []byte; Error error; Attachment interface{}}",
       "type" : "Struct",
-      "underlying" : 76
+      "underlying" : 168
     }, {
       "local-name" : "Reader",
       "name" : "io.Reader",
       "package" : 7,
       "type" : "Named",
-      "underlying" : 78
+      "underlying" : 170
     }, {
       "methods" : [ {
         "name" : "Read",
-        "type" : 79
+        "type" : 171
       } ],
       "name" : "interface{Read(p []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 78
+      "underlying" : 170
     }, {
       "name" : "func(p []byte) (n int, err error)",
-      "params" : 80,
-      "recv" : 18,
-      "results" : 82,
+      "params" : 172,
+      "recv" : 44,
+      "results" : 174,
       "type" : "Signature",
-      "underlying" : 79,
+      "underlying" : 171,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "p",
-        "type" : 81
+        "type" : 173
       } ],
       "name" : "(p []byte)",
       "type" : "Tuple",
-      "underlying" : 80
+      "underlying" : 172
     }, {
-      "elem" : 73,
+      "elem" : 78,
       "name" : "[]byte",
       "type" : "Slice",
-      "underlying" : 81
+      "underlying" : 173
     }, {
       "fields" : [ {
         "name" : "n",
-        "type" : 36
+        "type" : 41
       }, {
         "name" : "err",
-        "type" : 16
+        "type" : 108
       } ],
       "name" : "(n int, err error)",
       "type" : "Tuple",
-      "underlying" : 82
+      "underlying" : 174
     }, {
       "name" : "func(typ github.com/modern-go/reflect2.Type) github.com/json-iterator/go.ValEncoder",
-      "params" : 68,
-      "recv" : 22,
-      "results" : 84,
+      "params" : 160,
+      "recv" : 48,
+      "results" : 176,
       "type" : "Signature",
-      "underlying" : 83,
+      "underlying" : 175,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 85
+        "type" : 177
       } ],
       "name" : "(github.com/json-iterator/go.ValEncoder)",
       "type" : "Tuple",
-      "underlying" : 84
+      "underlying" : 176
     }, {
       "local-name" : "ValEncoder",
       "name" : "github.com/json-iterator/go.ValEncoder",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 86
+      "underlying" : 178
     }, {
       "methods" : [ {
         "name" : "Encode",
-        "type" : 87
+        "type" : 179
       }, {
         "name" : "IsEmpty",
         "type" : 0
       } ],
       "name" : "interface{Encode(ptr unsafe.Pointer, stream *github.com/json-iterator/go.Stream); IsEmpty(ptr unsafe.Pointer) bool}",
       "type" : "Interface",
-      "underlying" : 86
+      "underlying" : 178
     }, {
       "name" : "func(ptr unsafe.Pointer, stream *github.com/json-iterator/go.Stream)",
-      "params" : 88,
-      "recv" : 21,
-      "results" : 15,
+      "params" : 180,
+      "recv" : 47,
+      "results" : 20,
       "type" : "Signature",
-      "underlying" : 87,
+      "underlying" : 179,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1114,244 +1994,244 @@
         "type" : 2
       }, {
         "name" : "stream",
-        "type" : 44
+        "type" : 136
       } ],
       "name" : "(ptr unsafe.Pointer, stream *github.com/json-iterator/go.Stream)",
       "type" : "Tuple",
-      "underlying" : 88
+      "underlying" : 180
     }, {
       "name" : "func(typ github.com/modern-go/reflect2.Type, decoder github.com/json-iterator/go.ValDecoder) github.com/json-iterator/go.ValDecoder",
-      "params" : 90,
-      "recv" : 23,
-      "results" : 69,
+      "params" : 182,
+      "recv" : 49,
+      "results" : 161,
       "type" : "Signature",
-      "underlying" : 89,
+      "underlying" : 181,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "typ",
-        "type" : 3
+        "type" : 8
       }, {
         "name" : "decoder",
-        "type" : 70
+        "type" : 162
       } ],
       "name" : "(typ github.com/modern-go/reflect2.Type, decoder github.com/json-iterator/go.ValDecoder)",
       "type" : "Tuple",
-      "underlying" : 90
+      "underlying" : 182
     }, {
       "name" : "func(typ github.com/modern-go/reflect2.Type, encoder github.com/json-iterator/go.ValEncoder) github.com/json-iterator/go.ValEncoder",
-      "params" : 92,
-      "recv" : 24,
-      "results" : 84,
+      "params" : 184,
+      "recv" : 50,
+      "results" : 176,
       "type" : "Signature",
-      "underlying" : 91,
+      "underlying" : 183,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "typ",
-        "type" : 3
+        "type" : 8
       }, {
         "name" : "encoder",
-        "type" : 85
+        "type" : 177
       } ],
       "name" : "(typ github.com/modern-go/reflect2.Type, encoder github.com/json-iterator/go.ValEncoder)",
       "type" : "Tuple",
-      "underlying" : 92
+      "underlying" : 184
     }, {
       "name" : "func(structDescriptor *github.com/json-iterator/go.StructDescriptor)",
-      "params" : 94,
-      "recv" : 31,
-      "results" : 15,
+      "params" : 186,
+      "recv" : 57,
+      "results" : 20,
       "type" : "Signature",
-      "underlying" : 93,
+      "underlying" : 185,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "structDescriptor",
-        "type" : 95
+        "type" : 187
       } ],
       "name" : "(structDescriptor *github.com/json-iterator/go.StructDescriptor)",
       "type" : "Tuple",
-      "underlying" : 94
+      "underlying" : 186
     }, {
-      "elem" : 96,
+      "elem" : 188,
       "name" : "*github.com/json-iterator/go.StructDescriptor",
       "type" : "Pointer",
-      "underlying" : 95
+      "underlying" : 187
     }, {
       "local-name" : "StructDescriptor",
       "name" : "github.com/json-iterator/go.StructDescriptor",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 97
+      "underlying" : 189
     }, {
       "fields" : [ {
         "name" : "Type",
-        "type" : 3
+        "type" : 8
       }, {
         "name" : "Fields",
-        "type" : 98
+        "type" : 190
       } ],
       "name" : "struct{Type github.com/modern-go/reflect2.Type; Fields []*github.com/json-iterator/go.Binding}",
       "type" : "Struct",
-      "underlying" : 97
+      "underlying" : 189
     }, {
-      "elem" : 99,
+      "elem" : 191,
       "name" : "[]*github.com/json-iterator/go.Binding",
       "type" : "Slice",
-      "underlying" : 98
+      "underlying" : 190
     }, {
-      "elem" : 100,
+      "elem" : 192,
       "name" : "*github.com/json-iterator/go.Binding",
       "type" : "Pointer",
-      "underlying" : 99
+      "underlying" : 191
     }, {
       "local-name" : "Binding",
       "name" : "github.com/json-iterator/go.Binding",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 101
+      "underlying" : 193
     }, {
       "fields" : [ {
         "name" : "levels",
-        "type" : 48
+        "type" : 53
       }, {
         "name" : "Field",
-        "type" : 102
+        "type" : 194
       }, {
         "name" : "FromNames",
-        "type" : 13
+        "type" : 105
       }, {
         "name" : "ToNames",
-        "type" : 13
+        "type" : 105
       }, {
         "name" : "Encoder",
-        "type" : 85
+        "type" : 177
       }, {
         "name" : "Decoder",
-        "type" : 70
+        "type" : 162
       } ],
       "name" : "struct{levels []int; Field github.com/modern-go/reflect2.StructField; FromNames []string; ToNames []string; Encoder github.com/json-iterator/go.ValEncoder; Decoder github.com/json-iterator/go.ValDecoder}",
       "type" : "Struct",
-      "underlying" : 101
+      "underlying" : 193
     }, {
       "local-name" : "StructField",
       "name" : "github.com/modern-go/reflect2.StructField",
       "package" : 2,
       "type" : "Named",
-      "underlying" : 103
+      "underlying" : 195
     }, {
       "methods" : [ {
         "name" : "Anonymous",
-        "type" : 14
+        "type" : 19
       }, {
         "name" : "Get",
-        "type" : 9
+        "type" : 14
       }, {
         "name" : "Index",
-        "type" : 104
+        "type" : 196
       }, {
         "name" : "Name",
-        "type" : 27
+        "type" : 32
       }, {
         "name" : "Offset",
-        "type" : 22
-      }, {
-        "name" : "PkgPath",
         "type" : 27
       }, {
+        "name" : "PkgPath",
+        "type" : 32
+      }, {
         "name" : "Set",
-        "type" : 106
+        "type" : 198
       }, {
         "name" : "Tag",
-        "type" : 108
+        "type" : 200
       }, {
         "name" : "Type",
-        "type" : 110
+        "type" : 202
       }, {
         "name" : "UnsafeGet",
-        "type" : 112
+        "type" : 204
       }, {
         "name" : "UnsafeSet",
-        "type" : 114
+        "type" : 206
       } ],
       "name" : "interface{Anonymous() bool; Get(obj interface{}) interface{}; Index() []int; Name() string; Offset() uintptr; PkgPath() string; Set(obj interface{}, value interface{}); Tag() reflect.StructTag; Type() github.com/modern-go/reflect2.Type; UnsafeGet(obj unsafe.Pointer) unsafe.Pointer; UnsafeSet(obj unsafe.Pointer, value unsafe.Pointer)}",
       "type" : "Interface",
-      "underlying" : 103
+      "underlying" : 195
     }, {
       "name" : "func() []int",
-      "params" : 15,
-      "recv" : 25,
-      "results" : 105,
+      "params" : 20,
+      "recv" : 51,
+      "results" : 197,
       "type" : "Signature",
-      "underlying" : 104,
+      "underlying" : 196,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 48
+        "type" : 53
       } ],
       "name" : "([]int)",
       "type" : "Tuple",
-      "underlying" : 105
+      "underlying" : 197
     }, {
       "name" : "func(obj interface{}, value interface{})",
-      "params" : 107,
-      "recv" : 26,
-      "results" : 15,
+      "params" : 199,
+      "recv" : 52,
+      "results" : 20,
       "type" : "Signature",
-      "underlying" : 106,
+      "underlying" : 198,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "obj",
-        "type" : 11
+        "type" : 16
       }, {
         "name" : "value",
-        "type" : 11
+        "type" : 16
       } ],
       "name" : "(obj interface{}, value interface{})",
       "type" : "Tuple",
-      "underlying" : 107
+      "underlying" : 199
     }, {
       "name" : "func() reflect.StructTag",
-      "params" : 15,
-      "recv" : 27,
-      "results" : 109,
+      "params" : 20,
+      "recv" : 53,
+      "results" : 201,
       "type" : "Signature",
-      "underlying" : 108,
+      "underlying" : 200,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 47
+        "type" : 52
       } ],
       "name" : "(reflect.StructTag)",
       "type" : "Tuple",
-      "underlying" : 109
+      "underlying" : 201
     }, {
       "name" : "func() github.com/modern-go/reflect2.Type",
-      "params" : 15,
-      "recv" : 28,
-      "results" : 111,
+      "params" : 20,
+      "recv" : 54,
+      "results" : 203,
       "type" : "Signature",
-      "underlying" : 110,
+      "underlying" : 202,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 3
+        "type" : 8
       } ],
       "name" : "(github.com/modern-go/reflect2.Type)",
       "type" : "Tuple",
-      "underlying" : 111
+      "underlying" : 203
     }, {
       "name" : "func(obj unsafe.Pointer) unsafe.Pointer",
-      "params" : 113,
-      "recv" : 29,
-      "results" : 89,
+      "params" : 205,
+      "recv" : 55,
+      "results" : 94,
       "type" : "Signature",
-      "underlying" : 112,
+      "underlying" : 204,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1360,14 +2240,14 @@
       } ],
       "name" : "(obj unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 113
+      "underlying" : 205
     }, {
       "name" : "func(obj unsafe.Pointer, value unsafe.Pointer)",
-      "params" : 115,
-      "recv" : 30,
-      "results" : 15,
+      "params" : 207,
+      "recv" : 56,
+      "results" : 20,
       "type" : "Signature",
-      "underlying" : 114,
+      "underlying" : 206,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1379,242 +2259,492 @@
       } ],
       "name" : "(obj unsafe.Pointer, value unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 115
+      "underlying" : 207
     }, {
-      "elem" : 65,
+      "elem" : 157,
       "name" : "[]github.com/json-iterator/go.Extension",
       "type" : "Slice",
-      "underlying" : 116
+      "underlying" : 208
     }, {
-      "elem" : 118,
+      "elem" : 210,
       "name" : "*sync.Pool",
       "type" : "Pointer",
-      "underlying" : 117
+      "underlying" : 209
     }, {
       "local-name" : "Pool",
       "name" : "sync.Pool",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 119
+      "underlying" : 211
     }, {
       "fields" : [ {
         "name" : "noCopy",
-        "type" : 120
+        "type" : 212
       }, {
         "name" : "local",
         "type" : 2
       }, {
         "name" : "localSize",
-        "type" : 24
+        "type" : 29
       }, {
         "name" : "victim",
         "type" : 2
       }, {
         "name" : "victimSize",
-        "type" : 24
+        "type" : 29
       }, {
         "name" : "New",
-        "type" : 20
+        "type" : 25
       } ],
       "name" : "struct{noCopy sync.noCopy; local unsafe.Pointer; localSize uintptr; victim unsafe.Pointer; victimSize uintptr; New func() interface{}}",
       "type" : "Struct",
-      "underlying" : 119
+      "underlying" : 211
     }, {
       "local-name" : "noCopy",
       "name" : "sync.noCopy",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 121
+      "underlying" : 213
     }, {
       "fields" : [ ],
       "name" : "struct{}",
       "type" : "Struct",
-      "underlying" : 121
+      "underlying" : 213
     }, {
       "local-name" : "Writer",
       "name" : "io.Writer",
       "package" : 7,
       "type" : "Named",
-      "underlying" : 123
+      "underlying" : 215
     }, {
       "methods" : [ {
         "name" : "Write",
-        "type" : 79
+        "type" : 171
       } ],
       "name" : "interface{Write(p []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 123
+      "underlying" : 215
     } ],
     "variables" : [ {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 3,
+      "type" : 37,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 2,
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "codec",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 5,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "ptr",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "valType",
       "package" : 0,
-      "type" : 3,
-      "exported" : false
+      "type" : 8,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "obj",
       "package" : 0,
-      "type" : 11,
-      "exported" : false
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 7,
-      "type" : 77,
-      "exported" : false
+      "type" : 169,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 70,
-      "exported" : false
+      "type" : 162,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 65,
-      "exported" : false
+      "type" : 157,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 85,
-      "exported" : false
+      "type" : 177,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 65,
-      "exported" : false
+      "type" : 157,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 65,
-      "exported" : false
+      "type" : 157,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 65,
-      "exported" : false
+      "type" : 157,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 2,
-      "type" : 102,
-      "exported" : false
+      "type" : 194,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 2,
-      "type" : 102,
-      "exported" : false
+      "type" : 194,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 2,
-      "type" : 102,
-      "exported" : false
+      "type" : 194,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 2,
-      "type" : 102,
-      "exported" : false
+      "type" : 194,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 2,
-      "type" : 102,
-      "exported" : false
+      "type" : 194,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 2,
-      "type" : 102,
-      "exported" : false
+      "type" : 194,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 65,
-      "exported" : false
+      "type" : 157,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "any",
       "package" : 0,
-      "type" : 5,
-      "exported" : false
+      "type" : 97,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

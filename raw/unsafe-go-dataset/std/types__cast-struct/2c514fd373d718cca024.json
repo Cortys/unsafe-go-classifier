@@ -109,7 +109,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 2 ],
+      "out-vars" : [ 2, 4 ],
       "decl-vars" : [ 4 ],
       "line-start" : 2010,
       "ast" : {
@@ -207,7 +207,7 @@
       "successors" : [ 6, 27 ],
       "in-vars" : [ 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 6, 4 ],
+      "out-vars" : [ 4, 6, 7 ],
       "decl-vars" : [ 7, 25 ],
       "line-start" : 2013,
       "ast" : {
@@ -260,9 +260,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 16 ],
-      "in-vars" : [ 6, 4, 7 ],
+      "in-vars" : [ 6, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 7, 6 ],
+      "out-vars" : [ 6, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2015,
       "ast" : {
@@ -389,13 +389,13 @@
       "line-end" : 2024,
       "code" : "if datap.data <= uintptr(p) && uintptr(p) < datap.edata {\n\tbitmap := datap.gcdatamask.bytedata\n\tn := (*ptrtype)(unsafe.Pointer(t)).elem.size\n\tmask = make([]byte, n/sys.PtrSize)\n\tfor i := uintptr(0); i < n; i += sys.PtrSize {\n\t\toff := (uintptr(p) + i - datap.data) / sys.PtrSize\n\t\tmask[i/sys.PtrSize] = (*addb(bitmap, off/8) >> (off % 8)) & 1\n\t}\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 4, 7 ]
+      "use-vars" : [ 7, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 6, 4, 7 ],
+      "in-vars" : [ 6, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 6, 4, 16 ],
+      "out-vars" : [ 6, 7, 4, 16 ],
       "decl-vars" : [ 16 ],
       "line-start" : 2016,
       "ast" : {
@@ -453,9 +453,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 7, 6, 4, 16 ],
+      "in-vars" : [ 6, 7, 4, 16 ],
       "exit" : false,
-      "out-vars" : [ 14, 4, 16, 7 ],
+      "out-vars" : [ 7, 4, 14, 16 ],
       "decl-vars" : [ 14 ],
       "line-start" : 2017,
       "ast" : {
@@ -556,9 +556,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 7, 14, 4, 16 ],
+      "in-vars" : [ 14, 16, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 14, 4, 16, 7 ],
+      "out-vars" : [ 7, 4, 14, 1, 16 ],
       "decl-vars" : [ ],
       "line-start" : 2018,
       "ast" : {
@@ -630,9 +630,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 15 ],
-      "in-vars" : [ 1, 14, 15, 4, 16, 7 ],
+      "in-vars" : [ 15, 7, 4, 14, 1, 16 ],
       "exit" : false,
-      "out-vars" : [ 15, 4, 16, 7, 1, 14 ],
+      "out-vars" : [ 7, 4, 14, 1, 16, 15 ],
       "decl-vars" : [ ],
       "line-start" : 2019,
       "ast" : {
@@ -671,13 +671,13 @@
       "line-end" : 2022,
       "code" : "for i := uintptr(0); i < n; i += sys.PtrSize {\n\toff := (uintptr(p) + i - datap.data) / sys.PtrSize\n\tmask[i/sys.PtrSize] = (*addb(bitmap, off/8) >> (off % 8)) & 1\n}",
       "entry" : false,
-      "use-vars" : [ 15, 14 ]
+      "use-vars" : [ 14, 15 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 14, 4, 16, 7, 1 ],
+      "in-vars" : [ 7, 4, 14, 1, 16 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 14, 15, 4, 16 ],
+      "out-vars" : [ 4, 14, 1, 16, 15, 7 ],
       "decl-vars" : [ 15 ],
       "line-start" : 2019,
       "ast" : {
@@ -710,9 +710,9 @@
     }, {
       "update-vars" : [ 15 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 1, 14, 15, 4, 16 ],
+      "in-vars" : [ 15, 7, 4, 14, 1, 16 ],
       "exit" : false,
-      "out-vars" : [ 15, 4, 16, 7, 1, 14 ],
+      "out-vars" : [ 1, 16, 15, 7, 4, 14 ],
       "decl-vars" : [ ],
       "line-start" : 2019,
       "ast" : {
@@ -747,9 +747,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 16, 7, 1, 14, 15, 4 ],
+      "in-vars" : [ 7, 4, 14, 1, 16, 15 ],
       "exit" : false,
-      "out-vars" : [ 14, 15, 17, 4, 16, 7, 1 ],
+      "out-vars" : [ 1, 16, 17, 15, 7, 4, 14 ],
       "decl-vars" : [ 17 ],
       "line-start" : 2020,
       "ast" : {
@@ -865,9 +865,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 7, 1, 14, 15, 17, 4, 16 ],
+      "in-vars" : [ 1, 16, 17, 15, 7, 4, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 15, 4, 16, 7, 1 ],
+      "out-vars" : [ 14, 1, 16, 15, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2021,
       "ast" : {
@@ -1052,9 +1052,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 17 ],
-      "in-vars" : [ 7, 6, 4 ],
+      "in-vars" : [ 7, 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 7, 6, 4 ],
+      "out-vars" : [ 6, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2027,
       "ast" : {
@@ -1185,9 +1185,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 7, 6, 4 ],
+      "in-vars" : [ 6, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 23, 7, 6, 4 ],
+      "out-vars" : [ 6, 7, 4, 23 ],
       "decl-vars" : [ 23 ],
       "line-start" : 2028,
       "ast" : {
@@ -1245,9 +1245,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 6, 4, 23, 7 ],
+      "in-vars" : [ 7, 4, 23, 6 ],
       "exit" : false,
-      "out-vars" : [ 4, 21, 23, 7 ],
+      "out-vars" : [ 21, 7, 4, 23 ],
       "decl-vars" : [ 21 ],
       "line-start" : 2029,
       "ast" : {
@@ -1348,9 +1348,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 21 ],
-      "in-vars" : [ 7, 4, 21, 23 ],
+      "in-vars" : [ 21, 7, 4, 23 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 21, 23, 7 ],
+      "out-vars" : [ 1, 23, 21, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2030,
       "ast" : {
@@ -1422,9 +1422,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23, 25 ],
-      "in-vars" : [ 7, 1, 4, 22, 21, 23 ],
+      "in-vars" : [ 21, 7, 4, 22, 1, 23 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 4, 22, 21, 23 ],
+      "out-vars" : [ 4, 22, 1, 23, 21, 7 ],
       "decl-vars" : [ ],
       "line-start" : 2031,
       "ast" : {
@@ -1467,9 +1467,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 21, 23, 7, 1, 4 ],
+      "in-vars" : [ 21, 7, 4, 1, 23 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 4, 22, 21, 23 ],
+      "out-vars" : [ 23, 21, 7, 4, 22, 1 ],
       "decl-vars" : [ 22 ],
       "line-start" : 2031,
       "ast" : {
@@ -1502,9 +1502,9 @@
     }, {
       "update-vars" : [ 22 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 1, 4, 22, 21, 23, 7 ],
+      "in-vars" : [ 4, 22, 1, 23, 21, 7 ],
       "exit" : false,
-      "out-vars" : [ 4, 22, 21, 23, 7, 1 ],
+      "out-vars" : [ 21, 7, 4, 22, 1, 23 ],
       "decl-vars" : [ ],
       "line-start" : 2031,
       "ast" : {
@@ -1539,9 +1539,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24 ],
-      "in-vars" : [ 7, 1, 4, 22, 21, 23 ],
+      "in-vars" : [ 4, 22, 1, 23, 21, 7 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 4, 22, 21, 23, 24 ],
+      "out-vars" : [ 7, 4, 24, 22, 1, 23, 21 ],
       "decl-vars" : [ 24 ],
       "line-start" : 2032,
       "ast" : {
@@ -1653,13 +1653,13 @@
       "line-end" : 2032,
       "code" : "off := (uintptr(p) + i - datap.bss) / sys.PtrSize",
       "entry" : false,
-      "use-vars" : [ 22, 7, 4 ]
+      "use-vars" : [ 7, 4, 22 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 22 ],
-      "in-vars" : [ 4, 22, 21, 23, 24, 7, 1 ],
+      "in-vars" : [ 24, 22, 1, 23, 21, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 1, 4, 22, 21, 23 ],
+      "out-vars" : [ 4, 22, 1, 23, 21, 7 ],
       "decl-vars" : [ ],
       "line-start" : 2033,
       "ast" : {
@@ -1844,9 +1844,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 28, 42 ],
-      "in-vars" : [ 26, 27, 4, 6 ],
+      "in-vars" : [ 6, 4, 27, 26 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 26, 27 ],
+      "out-vars" : [ 6, 4, 27, 26 ],
       "decl-vars" : [ ],
       "line-start" : 2040,
       "ast" : {
@@ -1888,8 +1888,8 @@
       "successors" : [ 26 ],
       "in-vars" : [ 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 26, 27, 4 ],
-      "decl-vars" : [ 26, 32, 27 ],
+      "out-vars" : [ 6, 4, 27, 26 ],
+      "decl-vars" : [ 27, 32, 26 ],
       "line-start" : 2040,
       "ast" : {
         "kind" : "statement",
@@ -1988,7 +1988,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 29 ],
-      "in-vars" : [ 26, 27 ],
+      "in-vars" : [ 27, 26 ],
       "exit" : false,
       "out-vars" : [ 27, 31 ],
       "decl-vars" : [ 31 ],
@@ -2093,7 +2093,7 @@
       "successors" : [ 32 ],
       "in-vars" : [ 29, 31 ],
       "exit" : false,
-      "out-vars" : [ 29, 31, 1 ],
+      "out-vars" : [ 29, 1, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2043,
       "ast" : {
@@ -2165,9 +2165,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34, 40 ],
-      "in-vars" : [ 1, 29, 30, 31 ],
+      "in-vars" : [ 31, 29, 1, 30 ],
       "exit" : false,
-      "out-vars" : [ 1, 29, 30, 31 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2044,
       "ast" : {
@@ -2210,9 +2210,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 29, 31, 1 ],
+      "in-vars" : [ 29, 1, 31 ],
       "exit" : false,
-      "out-vars" : [ 1, 29, 30, 31 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ 30 ],
       "line-start" : 2044,
       "ast" : {
@@ -2245,9 +2245,9 @@
     }, {
       "update-vars" : [ 30 ],
       "successors" : [ 31 ],
-      "in-vars" : [ 1, 29, 30, 31 ],
+      "in-vars" : [ 29, 1, 30, 31 ],
       "exit" : false,
-      "out-vars" : [ 31, 1, 29, 30 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2044,
       "ast" : {
@@ -2282,9 +2282,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 35, 36 ],
-      "in-vars" : [ 1, 29, 30, 31 ],
+      "in-vars" : [ 29, 1, 30, 31 ],
       "exit" : false,
-      "out-vars" : [ 30, 31, 1, 29 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2045,
       "ast" : {
@@ -2327,9 +2327,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 36 ],
-      "in-vars" : [ 29, 30, 31, 1 ],
+      "in-vars" : [ 29, 1, 30, 31 ],
       "exit" : false,
-      "out-vars" : [ 1, 29, 30, 31 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2046,
       "ast" : {
@@ -2393,9 +2393,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37, 39 ],
-      "in-vars" : [ 1, 29, 30, 31 ],
+      "in-vars" : [ 31, 29, 1, 30 ],
       "exit" : false,
-      "out-vars" : [ 1, 29, 30, 31 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2048,
       "ast" : {
@@ -2471,7 +2471,7 @@
       "line-end" : 2051,
       "code" : "if i != 1*sys.PtrSize && !hbits.morePointers() {\n\tmask = mask[:i/sys.PtrSize]\n\tbreak\n}",
       "entry" : false,
-      "use-vars" : [ 31, 30 ]
+      "use-vars" : [ 30, 31 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 38 ],
@@ -2543,7 +2543,7 @@
       "line-end" : 2049,
       "code" : "mask = mask[:i/sys.PtrSize]",
       "entry" : false,
-      "use-vars" : [ 30, 1 ]
+      "use-vars" : [ 1, 30 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 40 ],
@@ -2565,9 +2565,9 @@
     }, {
       "update-vars" : [ 31 ],
       "successors" : [ 33 ],
-      "in-vars" : [ 1, 29, 30, 31 ],
+      "in-vars" : [ 31, 29, 1, 30 ],
       "exit" : false,
-      "out-vars" : [ 1, 29, 30, 31 ],
+      "out-vars" : [ 29, 1, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2052,
       "ast" : {
@@ -2639,9 +2639,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 60 ],
-      "in-vars" : [ 6, 4, 33 ],
+      "in-vars" : [ 33, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 6 ],
+      "out-vars" : [ 6, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2058,
       "ast" : {
@@ -2840,7 +2840,7 @@
       "successors" : [ 41 ],
       "in-vars" : [ 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 33 ],
+      "out-vars" : [ 4, 33, 6 ],
       "decl-vars" : [ 33 ],
       "line-start" : 2058,
       "ast" : {
@@ -2884,7 +2884,7 @@
       "successors" : [ 44 ],
       "in-vars" : [ 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 39 ],
+      "out-vars" : [ 6, 4, 39 ],
       "decl-vars" : [ 39 ],
       "line-start" : 2059,
       "ast" : {
@@ -2925,9 +2925,9 @@
     }, {
       "update-vars" : [ 39 ],
       "successors" : [ 45 ],
-      "in-vars" : [ 6, 39, 4 ],
+      "in-vars" : [ 6, 4, 39 ],
       "exit" : false,
-      "out-vars" : [ 6, 39, 4 ],
+      "out-vars" : [ 4, 39, 6 ],
       "decl-vars" : [ ],
       "line-start" : 2060,
       "ast" : {
@@ -2987,13 +2987,13 @@
       "line-end" : 2060,
       "code" : "frame.sp = uintptr(p)",
       "entry" : false,
-      "use-vars" : [ 4, 39 ]
+      "use-vars" : [ 39, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 46 ],
-      "in-vars" : [ 6, 39, 4 ],
+      "in-vars" : [ 6, 4, 39 ],
       "exit" : false,
-      "out-vars" : [ 6, 39, 4, 41 ],
+      "out-vars" : [ 6, 4, 39, 41 ],
       "decl-vars" : [ 41 ],
       "line-start" : 2061,
       "ast" : {
@@ -3035,9 +3035,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 47 ],
-      "in-vars" : [ 39, 4, 41, 6 ],
+      "in-vars" : [ 39, 41, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 39, 4 ],
+      "out-vars" : [ 6, 4, 39 ],
       "decl-vars" : [ ],
       "line-start" : 2062,
       "ast" : {
@@ -3309,9 +3309,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 48, 59 ],
-      "in-vars" : [ 6, 39, 4 ],
+      "in-vars" : [ 6, 4, 39 ],
       "exit" : false,
-      "out-vars" : [ 6, 39, 4 ],
+      "out-vars" : [ 6, 4, 39 ],
       "decl-vars" : [ ],
       "line-start" : 2063,
       "ast" : {
@@ -3365,10 +3365,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 49 ],
-      "in-vars" : [ 6, 39, 4 ],
+      "in-vars" : [ 39, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 46, 39, 4 ],
-      "decl-vars" : [ 53, 54, 46 ],
+      "out-vars" : [ 4, 46, 39, 6 ],
+      "decl-vars" : [ 53, 46, 54 ],
       "line-start" : 2064,
       "ast" : {
         "kind" : "statement",
@@ -3459,9 +3459,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 50, 51 ],
-      "in-vars" : [ 6, 46, 39, 4 ],
+      "in-vars" : [ 6, 4, 46, 39 ],
       "exit" : false,
-      "out-vars" : [ 46, 39, 4, 6 ],
+      "out-vars" : [ 39, 6, 4, 46 ],
       "decl-vars" : [ ],
       "line-start" : 2065,
       "ast" : {
@@ -3530,9 +3530,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 52 ],
-      "in-vars" : [ 6, 46, 39, 4 ],
+      "in-vars" : [ 46, 39, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 46, 39, 4, 51 ],
+      "out-vars" : [ 6, 4, 51, 46, 39 ],
       "decl-vars" : [ 51 ],
       "line-start" : 2068,
       "ast" : {
@@ -3609,9 +3609,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 53 ],
-      "in-vars" : [ 4, 51, 6, 46, 39 ],
+      "in-vars" : [ 4, 51, 46, 39, 6 ],
       "exit" : false,
-      "out-vars" : [ 48, 4, 51, 46, 39 ],
+      "out-vars" : [ 46, 39, 48, 4, 51 ],
       "decl-vars" : [ 48 ],
       "line-start" : 2069,
       "ast" : {
@@ -3712,9 +3712,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 55 ],
-      "in-vars" : [ 4, 51, 46, 39, 48 ],
+      "in-vars" : [ 51, 46, 39, 48, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 46, 39, 48, 4, 51 ],
+      "out-vars" : [ 4, 51, 46, 39, 48, 1 ],
       "decl-vars" : [ ],
       "line-start" : 2070,
       "ast" : {
@@ -3786,9 +3786,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 57, 59 ],
-      "in-vars" : [ 39, 48, 4, 51, 1, 49, 46 ],
+      "in-vars" : [ 46, 49, 39, 48, 1, 4, 51 ],
       "exit" : false,
-      "out-vars" : [ 51, 1, 49, 46, 39, 48, 4 ],
+      "out-vars" : [ 51, 46, 49, 39, 48, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2071,
       "ast" : {
@@ -3827,13 +3827,13 @@
       "line-end" : 2074,
       "code" : "for i := uintptr(0); i < n; i += sys.PtrSize {\n\toff := (uintptr(p) + i - frame.varp + size) / sys.PtrSize\n\tmask[i/sys.PtrSize] = locals.ptrbit(off)\n}",
       "entry" : false,
-      "use-vars" : [ 49, 48 ]
+      "use-vars" : [ 48, 49 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 54 ],
-      "in-vars" : [ 51, 1, 46, 39, 48, 4 ],
+      "in-vars" : [ 46, 39, 48, 1, 4, 51 ],
       "exit" : false,
-      "out-vars" : [ 48, 4, 51, 1, 49, 46, 39 ],
+      "out-vars" : [ 46, 49, 39, 48, 1, 4, 51 ],
       "decl-vars" : [ 49 ],
       "line-start" : 2071,
       "ast" : {
@@ -3866,9 +3866,9 @@
     }, {
       "update-vars" : [ 49 ],
       "successors" : [ 54 ],
-      "in-vars" : [ 51, 1, 49, 46, 39, 48, 4 ],
+      "in-vars" : [ 39, 48, 1, 4, 51, 46, 49 ],
       "exit" : false,
-      "out-vars" : [ 4, 51, 1, 49, 46, 39, 48 ],
+      "out-vars" : [ 48, 1, 4, 51, 46, 49, 39 ],
       "decl-vars" : [ ],
       "line-start" : 2071,
       "ast" : {
@@ -3903,9 +3903,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 58 ],
-      "in-vars" : [ 39, 48, 4, 51, 1, 49, 46 ],
+      "in-vars" : [ 1, 4, 51, 46, 49, 39, 48 ],
       "exit" : false,
-      "out-vars" : [ 52, 4, 51, 1, 49, 46, 39, 48 ],
+      "out-vars" : [ 4, 51, 46, 52, 49, 39, 48, 1 ],
       "decl-vars" : [ 52 ],
       "line-start" : 2072,
       "ast" : {
@@ -4034,13 +4034,13 @@
       "line-end" : 2072,
       "code" : "off := (uintptr(p) + i - frame.varp + size) / sys.PtrSize",
       "entry" : false,
-      "use-vars" : [ 39, 51, 4, 49 ]
+      "use-vars" : [ 4, 49, 39, 51 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 56 ],
-      "in-vars" : [ 48, 52, 4, 51, 1, 49, 46, 39 ],
+      "in-vars" : [ 52, 49, 39, 48, 1, 4, 51, 46 ],
       "exit" : false,
-      "out-vars" : [ 39, 48, 4, 51, 1, 49, 46 ],
+      "out-vars" : [ 1, 4, 51, 46, 49, 39, 48 ],
       "decl-vars" : [ ],
       "line-start" : 2073,
       "ast" : {
@@ -4130,7 +4130,7 @@
       "line-end" : 2073,
       "code" : "mask[i/sys.PtrSize] = locals.ptrbit(off)",
       "entry" : false,
-      "use-vars" : [ 49, 46, 52, 1 ]
+      "use-vars" : [ 49, 1, 46, 52 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -6626,277 +6626,387 @@
       "name" : "ep",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "mask",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "e",
       "package" : 0,
       "type" : 6,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "data",
       "package" : 0,
       "type" : 17,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "p",
       "package" : 0,
       "type" : 17,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_type",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "t",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "datap",
       "package" : 0,
       "type" : 30,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "data",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "edata",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "gcdatamask",
       "package" : 0,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "bytedata",
       "package" : 0,
       "type" : 65,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "elem",
       "package" : 0,
       "type" : 8,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "size",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "i",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "bitmap",
       "package" : 0,
       "type" : 65,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "off",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "bss",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "ebss",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "gcbssmask",
       "package" : 0,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "i",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "bitmap",
       "package" : 0,
       "type" : 65,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "off",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 77,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "base",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "s",
       "package" : 0,
       "type" : 79,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "elemsize",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "i",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "hbits",
       "package" : 0,
       "type" : 101,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_g_",
       "package" : 0,
       "type" : 109,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "m",
       "package" : 0,
       "type" : 123,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "curg",
       "package" : 0,
       "type" : 109,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "stack",
       "package" : 0,
       "type" : 112,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "lo",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "hi",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "frame",
       "package" : 0,
       "type" : 181,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "sp",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "_g_",
       "package" : 0,
       "type" : 109,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "sched",
       "package" : 0,
       "type" : 126,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "pc",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "sp",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "fn",
       "package" : 0,
       "type" : 183,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "locals",
       "package" : 0,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 22,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "n",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "i",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "varp",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "size",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "off",
       "package" : 0,
       "type" : 11,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 205,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
       "type" : 63,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

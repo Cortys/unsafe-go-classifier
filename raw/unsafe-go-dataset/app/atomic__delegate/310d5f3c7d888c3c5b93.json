@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 0, 2 ],
+      "in-vars" : [ 2, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 2 ],
+      "out-vars" : [ 2, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 2, 0, 1 ],
       "exit" : false,
       "out-vars" : [ 4, 2 ],
       "decl-vars" : [ 4 ],
@@ -61,7 +61,7 @@
         } ],
         "right" : [ {
           "coerced-to" : {
-            "go-type" : 16,
+            "go-type" : 29,
             "kind" : "type",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -71,16 +71,16 @@
             },
             "type" : "identifier",
             "value" : {
-              "go-type" : 16,
+              "go-type" : 29,
               "ident-kind" : "TypeName",
               "kind" : "ident",
               "value" : "Pointer"
             }
           },
-          "go-type" : 16,
+          "go-type" : 29,
           "kind" : "expression",
           "target" : {
-            "go-type" : 17,
+            "go-type" : 30,
             "kind" : "expression",
             "operator" : "&",
             "target" : {
@@ -104,10 +104,10 @@
                   "value" : "data",
                   "variable" : 3
                 },
-                "go-type" : 4,
+                "go-type" : 20,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 0,
+                  "go-type" : 16,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -135,7 +135,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2, 4 ],
+      "in-vars" : [ 4, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -147,7 +147,7 @@
           "arguments" : [ {
             "coerced-to" : {
               "contained" : {
-                "go-type" : 16,
+                "go-type" : 29,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -157,20 +157,20 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 16,
+                  "go-type" : 29,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 20,
+              "go-type" : 33,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 20,
+            "go-type" : 33,
             "kind" : "expression",
             "target" : {
-              "go-type" : 16,
+              "go-type" : 29,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -183,7 +183,7 @@
             "type" : "cast"
           }, {
             "coerced-to" : {
-              "go-type" : 16,
+              "go-type" : 29,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -193,13 +193,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 16,
+                "go-type" : 29,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 16,
+            "go-type" : 29,
             "kind" : "expression",
             "target" : {
               "go-type" : 3,
@@ -216,7 +216,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 18,
+            "go-type" : 31,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -252,7 +252,7 @@
     }, {
       "name" : "StorePointer",
       "package" : 6,
-      "type" : 18,
+      "type" : 31,
       "exported" : true
     } ],
     "line-end" : 109,
@@ -394,66 +394,183 @@
       "type" : "Tuple",
       "underlying" : 15
     }, {
+      "elem" : 17,
+      "name" : "*github.com/cilium/cilium/pkg/hubble/container.Ring",
+      "type" : "Pointer",
+      "underlying" : 16
+    }, {
+      "local-name" : "Ring",
+      "name" : "github.com/cilium/cilium/pkg/hubble/container.Ring",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "fields" : [ {
+        "name" : "mask",
+        "type" : 2
+      }, {
+        "name" : "write",
+        "type" : 2
+      }, {
+        "name" : "cycleExp",
+        "type" : 19
+      }, {
+        "name" : "cycleMask",
+        "type" : 2
+      }, {
+        "name" : "halfCycle",
+        "type" : 2
+      }, {
+        "name" : "dataLen",
+        "type" : 2
+      }, {
+        "name" : "data",
+        "type" : 20
+      }, {
+        "name" : "notifyMu",
+        "type" : 21
+      }, {
+        "name" : "notifyCh",
+        "type" : 28
+      } ],
+      "name" : "struct{mask uint64; write uint64; cycleExp uint8; cycleMask uint64; halfCycle uint64; dataLen uint64; data []*github.com/cilium/cilium/pkg/hubble/api/v1.Event; notifyMu github.com/cilium/cilium/pkg/lock.Mutex; notifyCh chan struct{}}",
+      "type" : "Struct",
+      "underlying" : 18
+    }, {
+      "name" : "uint8",
+      "type" : "Basic",
+      "underlying" : 19
+    }, {
+      "elem" : 3,
+      "name" : "[]*github.com/cilium/cilium/pkg/hubble/api/v1.Event",
+      "type" : "Slice",
+      "underlying" : 20
+    }, {
+      "local-name" : "Mutex",
+      "name" : "github.com/cilium/cilium/pkg/lock.Mutex",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 22
+    }, {
+      "fields" : [ {
+        "name" : "internalMutex",
+        "type" : 23
+      } ],
+      "name" : "struct{github.com/cilium/cilium/pkg/lock.internalMutex}",
+      "type" : "Struct",
+      "underlying" : 22
+    }, {
+      "local-name" : "internalMutex",
+      "name" : "github.com/cilium/cilium/pkg/lock.internalMutex",
+      "package" : 3,
+      "type" : "Named",
+      "underlying" : 24
+    }, {
+      "fields" : [ {
+        "name" : "Mutex",
+        "type" : 25
+      } ],
+      "name" : "struct{sync.Mutex}",
+      "type" : "Struct",
+      "underlying" : 24
+    }, {
+      "local-name" : "Mutex",
+      "name" : "sync.Mutex",
+      "package" : 4,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "state",
+        "type" : 10
+      }, {
+        "name" : "sema",
+        "type" : 27
+      } ],
+      "name" : "struct{state int32; sema uint32}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "name" : "uint32",
+      "type" : "Basic",
+      "underlying" : 27
+    }, {
+      "dir" : "both",
+      "elem" : 11,
+      "name" : "chan struct{}",
+      "type" : "Chan",
+      "underlying" : 28
+    }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 5,
       "type" : "Basic",
-      "underlying" : 16
+      "underlying" : 29
     }, {
       "elem" : 3,
       "name" : "**github.com/cilium/cilium/pkg/hubble/api/v1.Event",
       "type" : "Pointer",
-      "underlying" : 17
+      "underlying" : 30
     }, {
       "name" : "func(addr *unsafe.Pointer, val unsafe.Pointer)",
-      "params" : 19,
+      "params" : 32,
       "recv" : -1,
       "results" : 15,
       "type" : "Signature",
-      "underlying" : 18,
+      "underlying" : 31,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "addr",
-        "type" : 20
+        "type" : 33
       }, {
         "name" : "val",
-        "type" : 16
+        "type" : 29
       } ],
       "name" : "(addr *unsafe.Pointer, val unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 19
+      "underlying" : 32
     }, {
-      "elem" : 16,
+      "elem" : 29,
       "name" : "*unsafe.Pointer",
       "type" : "Pointer",
-      "underlying" : 20
+      "underlying" : 33
     } ],
     "variables" : [ {
       "name" : "r",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "dataIdx",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "e",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "data",
       "package" : 0,
-      "type" : 4,
-      "exported" : false
+      "type" : 20,
+      "exported" : false,
+      "embedded" : false,
+      "field" : true
     }, {
       "name" : "slot",
       "package" : 0,
-      "type" : 16,
-      "exported" : false
+      "type" : 29,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

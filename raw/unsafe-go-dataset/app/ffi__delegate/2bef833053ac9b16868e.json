@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 4 ],
+      "out-vars" : [ 4, 1 ],
       "decl-vars" : [ 4 ],
       "line-start" : 487,
       "ast" : {
@@ -94,7 +94,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 4, 1 ],
+      "out-vars" : [ 1, 4, 5 ],
       "decl-vars" : [ 5 ],
       "line-start" : 488,
       "ast" : {
@@ -110,7 +110,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 14,
+          "go-type" : 23,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -127,7 +127,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 4, 1, 5 ],
+      "in-vars" : [ 4, 5, 1 ],
       "exit" : false,
       "out-vars" : [ 4, 6 ],
       "decl-vars" : [ 7, 8, 6 ],
@@ -172,10 +172,10 @@
                 "kind" : "ident",
                 "value" : "fd"
               },
-              "go-type" : 19,
+              "go-type" : 28,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 14,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -187,11 +187,11 @@
               },
               "type" : "selector"
             },
-            "go-type" : 18,
+            "go-type" : 27,
             "kind" : "expression",
             "type" : "call"
           }, {
-            "go-type" : 14,
+            "go-type" : 23,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -199,21 +199,21 @@
             }
           }, {
             "coerced-to" : {
-              "go-type" : 14,
+              "go-type" : 23,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 14,
+                "go-type" : 23,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "uintptr"
               }
             },
-            "go-type" : 14,
+            "go-type" : 23,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 21,
+                "go-type" : 30,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -223,13 +223,13 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 21,
+                  "go-type" : 30,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 21,
+              "go-type" : 30,
               "kind" : "expression",
               "target" : {
                 "go-type" : 3,
@@ -247,21 +247,21 @@
             "type" : "cast"
           }, {
             "coerced-to" : {
-              "go-type" : 14,
+              "go-type" : 23,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 14,
+                "go-type" : 23,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "uintptr"
               }
             },
-            "go-type" : 14,
+            "go-type" : 23,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 21,
+                "go-type" : 30,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -271,20 +271,20 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 21,
+                  "go-type" : 30,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 21,
+              "go-type" : 30,
               "kind" : "expression",
               "target" : {
-                "go-type" : 22,
+                "go-type" : 31,
                 "kind" : "expression",
                 "operator" : "&",
                 "target" : {
-                  "go-type" : 14,
+                  "go-type" : 23,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -302,7 +302,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 16,
+            "go-type" : 25,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -311,7 +311,7 @@
               "value" : "getsockopt"
             }
           },
-          "go-type" : 15,
+          "go-type" : 24,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -325,7 +325,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 6, 4 ],
+      "in-vars" : [ 4, 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -359,7 +359,7 @@
       "line-end" : 490,
       "code" : "return info, err",
       "entry" : false,
-      "use-vars" : [ 4, 6 ]
+      "use-vars" : [ 6, 4 ]
     } ],
     "code" : "func (c *SCTPConn) GetDefaultSentParam() (*SndRcvInfo, error) {\n\tinfo := &SndRcvInfo{}\n\toptlen := unsafe.Sizeof(*info)\n\t_, _, err := getsockopt(c.fd(), SCTP_DEFAULT_SENT_PARAM, uintptr(unsafe.Pointer(info)), uintptr(unsafe.Pointer(&optlen)))\n\treturn info, err\n}",
     "defines" : [ 0 ],
@@ -371,12 +371,12 @@
     }, {
       "name" : "getsockopt",
       "package" : 0,
-      "type" : 16,
+      "type" : 25,
       "exported" : false
     }, {
       "name" : "fd",
       "package" : 0,
-      "type" : 19,
+      "type" : 28,
       "exported" : false
     } ],
     "line-end" : 491,
@@ -511,125 +511,204 @@
       "type" : "Basic",
       "underlying" : 13
     }, {
-      "name" : "uintptr",
-      "type" : "Basic",
+      "elem" : 15,
+      "name" : "*github.com/ishidawataru/sctp.SCTPConn",
+      "type" : "Pointer",
       "underlying" : 14
+    }, {
+      "local-name" : "SCTPConn",
+      "name" : "github.com/ishidawataru/sctp.SCTPConn",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 16
+    }, {
+      "fields" : [ {
+        "name" : "_fd",
+        "type" : 8
+      }, {
+        "name" : "notificationHandler",
+        "type" : 17
+      } ],
+      "name" : "struct{_fd int32; notificationHandler github.com/ishidawataru/sctp.NotificationHandler}",
+      "type" : "Struct",
+      "underlying" : 16
+    }, {
+      "local-name" : "NotificationHandler",
+      "name" : "github.com/ishidawataru/sctp.NotificationHandler",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 18
+    }, {
+      "name" : "func([]byte) error",
+      "params" : 19,
+      "recv" : -1,
+      "results" : 22,
+      "type" : "Signature",
+      "underlying" : 18,
+      "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 14
+        "type" : 20
+      } ],
+      "name" : "([]byte)",
+      "type" : "Tuple",
+      "underlying" : 19
+    }, {
+      "elem" : 21,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 20
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
+      "underlying" : 21
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 9
+      } ],
+      "name" : "(error)",
+      "type" : "Tuple",
+      "underlying" : 22
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
+      "underlying" : 23
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 23
       }, {
         "name" : "",
-        "type" : 14
+        "type" : 23
       }, {
         "name" : "",
         "type" : 9
       } ],
       "name" : "(uintptr, uintptr, error)",
       "type" : "Tuple",
-      "underlying" : 15
+      "underlying" : 24
     }, {
       "name" : "func(fd int, optname uintptr, optval uintptr, optlen uintptr) (uintptr, uintptr, error)",
-      "params" : 17,
+      "params" : 26,
       "recv" : -1,
-      "results" : 15,
+      "results" : 24,
       "type" : "Signature",
-      "underlying" : 16,
+      "underlying" : 25,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "fd",
-        "type" : 18
+        "type" : 27
       }, {
         "name" : "optname",
-        "type" : 14
+        "type" : 23
       }, {
         "name" : "optval",
-        "type" : 14
+        "type" : 23
       }, {
         "name" : "optlen",
-        "type" : 14
+        "type" : 23
       } ],
       "name" : "(fd int, optname uintptr, optval uintptr, optlen uintptr)",
       "type" : "Tuple",
-      "underlying" : 17
+      "underlying" : 26
     }, {
       "name" : "int",
       "type" : "Basic",
-      "underlying" : 18
+      "underlying" : 27
     }, {
       "name" : "func() int",
       "params" : 1,
       "recv" : -1,
-      "results" : 20,
+      "results" : 29,
       "type" : "Signature",
-      "underlying" : 19,
+      "underlying" : 28,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 18
+        "type" : 27
       } ],
       "name" : "(int)",
       "type" : "Tuple",
-      "underlying" : 20
+      "underlying" : 29
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 21
+      "underlying" : 30
     }, {
-      "elem" : 14,
+      "elem" : 23,
       "name" : "*uintptr",
       "type" : "Pointer",
-      "underlying" : 22
+      "underlying" : 31
     } ],
     "variables" : [ {
       "name" : "",
       "package" : -1,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "c",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 14,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res1]",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "info",
       "package" : 0,
       "type" : 3,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "optlen",
       "package" : 0,
-      "type" : 14,
-      "exported" : false
+      "type" : 23,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "err",
       "package" : 0,
       "type" : 9,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
-      "type" : 14,
-      "exported" : false
+      "type" : 23,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "_",
       "package" : 0,
-      "type" : 14,
-      "exported" : false
+      "type" : 23,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

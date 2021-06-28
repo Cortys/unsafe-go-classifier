@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1 ],
+      "in-vars" : [ 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 1 ],
+      "out-vars" : [ 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 0, 1 ],
+      "in-vars" : [ 1, 0 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -73,10 +73,10 @@
                 "kind" : "ident",
                 "value" : "UnsafePointers"
               },
-              "go-type" : 6,
+              "go-type" : 9,
               "kind" : "expression",
               "target" : {
-                "go-type" : 0,
+                "go-type" : 5,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -88,7 +88,7 @@
               },
               "type" : "selector"
             },
-            "go-type" : 5,
+            "go-type" : 8,
             "kind" : "expression",
             "type" : "call"
           },
@@ -99,7 +99,7 @@
       "line-end" : 113,
       "code" : "return h.UnsafePointers()[i]",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     } ],
     "code" : "func (h *Header) GetUnsafePointer(i int) unsafe.Pointer { return h.UnsafePointers()[i] }",
     "defines" : [ 0 ],
@@ -111,7 +111,7 @@
     }, {
       "name" : "UnsafePointers",
       "package" : 0,
-      "type" : 6,
+      "type" : 9,
       "exported" : true
     } ],
     "line-end" : 113,
@@ -164,47 +164,78 @@
       "type" : "Basic",
       "underlying" : 4
     }, {
+      "elem" : 6,
+      "name" : "*gorgonia.org/tensor/internal/storage.Header",
+      "type" : "Pointer",
+      "underlying" : 5
+    }, {
+      "local-name" : "Header",
+      "name" : "gorgonia.org/tensor/internal/storage.Header",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 7
+    }, {
+      "fields" : [ {
+        "name" : "Ptr",
+        "type" : 4
+      }, {
+        "name" : "L",
+        "type" : 2
+      }, {
+        "name" : "C",
+        "type" : 2
+      } ],
+      "name" : "struct{Ptr unsafe.Pointer; L int; C int}",
+      "type" : "Struct",
+      "underlying" : 7
+    }, {
       "elem" : 4,
       "name" : "[]unsafe.Pointer",
       "type" : "Slice",
-      "underlying" : 5
+      "underlying" : 8
     }, {
       "name" : "func() []unsafe.Pointer",
-      "params" : 7,
+      "params" : 10,
       "recv" : -1,
-      "results" : 8,
+      "results" : 11,
       "type" : "Signature",
-      "underlying" : 6,
+      "underlying" : 9,
       "variadic" : false
     }, {
       "fields" : [ ],
       "name" : "()",
       "type" : "Tuple",
-      "underlying" : 7
+      "underlying" : 10
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 5
+        "type" : 8
       } ],
       "name" : "([]unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 8
+      "underlying" : 11
     } ],
     "variables" : [ {
       "name" : "h",
       "package" : 0,
-      "type" : 0,
-      "exported" : false
+      "type" : 5,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "i",
       "package" : 0,
       "type" : 2,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "[res0]",
       "package" : 0,
       "type" : 4,
-      "exported" : false
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"
