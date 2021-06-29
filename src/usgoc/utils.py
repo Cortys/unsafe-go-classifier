@@ -4,6 +4,7 @@ import pickle
 import inspect
 import numbers
 import contextlib
+from collections.abc import Iterable
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -325,3 +326,19 @@ class memoize:
     res = self.f(*args)
     self.lut[key] = res
     return res
+
+def walk_nested(f, state, s):
+  "Walks nested structure recursively. Must not contain ref loops."
+  state, filter = f(state, s)
+  if filter is not False:
+    if isinstance(filter, Iterable):
+      for i in filter:
+        if i in s:
+          state = walk_nested(f, state, s[i])
+    elif isinstance(s, dict):
+      for v in s.values():
+        state = walk_nested(f, state, v)
+    elif isinstance(s, Iterable):
+      for v in s:
+        state = walk_nested(f, state, v)
+  return state
