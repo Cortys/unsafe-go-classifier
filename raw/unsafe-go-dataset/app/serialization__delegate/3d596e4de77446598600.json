@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 40, 41 ],
+      "out-vars" : [ 41, 42, 40 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
       "out-vars" : [ 40, 42 ],
       "decl-vars" : [ ],
@@ -75,6 +75,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "doDecode"
@@ -103,13 +104,13 @@
       "line-end" : 60,
       "code" : "decoder.doDecode(ptr, iter)",
       "entry" : false,
-      "use-vars" : [ 42, 40, 41 ]
+      "use-vars" : [ 40, 41, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 4 ],
-      "in-vars" : [ 42, 40 ],
+      "in-vars" : [ 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 40 ],
+      "out-vars" : [ 40, 42 ],
       "decl-vars" : [ ],
       "line-start" : 61,
       "ast" : {
@@ -213,7 +214,7 @@
     }, {
       "update-vars" : [ 42 ],
       "successors" : [ 1 ],
-      "in-vars" : [ 42, 40 ],
+      "in-vars" : [ 40, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -276,6 +277,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 3,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "Error"
@@ -322,6 +324,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Errorf"
@@ -337,7 +340,7 @@
       "line-end" : 62,
       "code" : "iter.Error = fmt.Errorf(\"%v: %s\", decoder.sliceType, iter.Error.Error())",
       "entry" : false,
-      "use-vars" : [ 42, 40 ]
+      "use-vars" : [ 40, 42 ]
     } ],
     "code" : "func (decoder *sliceDecoder) Decode(ptr unsafe.Pointer, iter *Iterator) {\n\tdecoder.doDecode(ptr, iter)\n\tif iter.Error != nil && iter.Error != io.EOF {\n\t\titer.Error = fmt.Errorf(\"%v: %s\", decoder.sliceType, iter.Error.Error())\n\t}\n}",
     "defines" : [ 0 ],

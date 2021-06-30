@@ -86,6 +86,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 1,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "efaceOf"
@@ -109,7 +110,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 4 ],
+      "out-vars" : [ 4, 2 ],
       "decl-vars" : [ 4 ],
       "line-start" : 2010,
       "ast" : {
@@ -156,9 +157,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 4 ],
+      "in-vars" : [ 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 4 ],
+      "out-vars" : [ 4, 6 ],
       "decl-vars" : [ 6 ],
       "line-start" : 2011,
       "ast" : {
@@ -205,9 +206,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 27 ],
-      "in-vars" : [ 6, 4 ],
+      "in-vars" : [ 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 7 ],
+      "out-vars" : [ 4, 7, 6 ],
       "decl-vars" : [ 7, 25 ],
       "line-start" : 2013,
       "ast" : {
@@ -231,6 +232,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "activeModules"
@@ -260,9 +262,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 16 ],
-      "in-vars" : [ 6, 7, 4 ],
+      "in-vars" : [ 4, 7, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 4 ],
+      "out-vars" : [ 4, 7, 6 ],
       "decl-vars" : [ ],
       "line-start" : 2015,
       "ast" : {
@@ -389,13 +391,13 @@
       "line-end" : 2024,
       "code" : "if datap.data <= uintptr(p) && uintptr(p) < datap.edata {\n\tbitmap := datap.gcdatamask.bytedata\n\tn := (*ptrtype)(unsafe.Pointer(t)).elem.size\n\tmask = make([]byte, n/sys.PtrSize)\n\tfor i := uintptr(0); i < n; i += sys.PtrSize {\n\t\toff := (uintptr(p) + i - datap.data) / sys.PtrSize\n\t\tmask[i/sys.PtrSize] = (*addb(bitmap, off/8) >> (off % 8)) & 1\n\t}\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 7, 4 ]
+      "use-vars" : [ 4, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 6, 7, 4 ],
+      "in-vars" : [ 4, 7, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 4, 16 ],
+      "out-vars" : [ 7, 6, 16, 4 ],
       "decl-vars" : [ 16 ],
       "line-start" : 2016,
       "ast" : {
@@ -453,9 +455,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 6, 7, 4, 16 ],
+      "in-vars" : [ 4, 7, 6, 16 ],
       "exit" : false,
-      "out-vars" : [ 7, 4, 14, 16 ],
+      "out-vars" : [ 4, 7, 14, 16 ],
       "decl-vars" : [ 14 ],
       "line-start" : 2017,
       "ast" : {
@@ -556,9 +558,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 14, 16, 7, 4 ],
+      "in-vars" : [ 14, 16, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 7, 4, 14, 1, 16 ],
+      "out-vars" : [ 16, 4, 7, 1, 14 ],
       "decl-vars" : [ ],
       "line-start" : 2018,
       "ast" : {
@@ -630,9 +632,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 15 ],
-      "in-vars" : [ 15, 7, 4, 14, 1, 16 ],
+      "in-vars" : [ 7, 15, 1, 14, 16, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 4, 14, 1, 16, 15 ],
+      "out-vars" : [ 16, 4, 7, 15, 1, 14 ],
       "decl-vars" : [ ],
       "line-start" : 2019,
       "ast" : {
@@ -671,13 +673,13 @@
       "line-end" : 2022,
       "code" : "for i := uintptr(0); i < n; i += sys.PtrSize {\n\toff := (uintptr(p) + i - datap.data) / sys.PtrSize\n\tmask[i/sys.PtrSize] = (*addb(bitmap, off/8) >> (off % 8)) & 1\n}",
       "entry" : false,
-      "use-vars" : [ 14, 15 ]
+      "use-vars" : [ 15, 14 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 4, 14, 1, 16 ],
+      "in-vars" : [ 14, 16, 4, 7, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 14, 1, 16, 15, 7 ],
+      "out-vars" : [ 4, 7, 15, 1, 14, 16 ],
       "decl-vars" : [ 15 ],
       "line-start" : 2019,
       "ast" : {
@@ -710,9 +712,9 @@
     }, {
       "update-vars" : [ 15 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 15, 7, 4, 14, 1, 16 ],
+      "in-vars" : [ 15, 1, 14, 16, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 16, 15, 7, 4, 14 ],
+      "out-vars" : [ 4, 7, 15, 1, 14, 16 ],
       "decl-vars" : [ ],
       "line-start" : 2019,
       "ast" : {
@@ -747,9 +749,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 7, 4, 14, 1, 16, 15 ],
+      "in-vars" : [ 4, 7, 15, 1, 14, 16 ],
       "exit" : false,
-      "out-vars" : [ 1, 16, 17, 15, 7, 4, 14 ],
+      "out-vars" : [ 1, 14, 16, 4, 7, 17, 15 ],
       "decl-vars" : [ 17 ],
       "line-start" : 2020,
       "ast" : {
@@ -861,13 +863,13 @@
       "line-end" : 2020,
       "code" : "off := (uintptr(p) + i - datap.data) / sys.PtrSize",
       "entry" : false,
-      "use-vars" : [ 4, 15, 7 ]
+      "use-vars" : [ 7, 4, 15 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 1, 16, 17, 15, 7, 4, 14 ],
+      "in-vars" : [ 15, 1, 14, 16, 4, 7, 17 ],
       "exit" : false,
-      "out-vars" : [ 14, 1, 16, 15, 7, 4 ],
+      "out-vars" : [ 4, 7, 15, 1, 14, 16 ],
       "decl-vars" : [ ],
       "line-start" : 2021,
       "ast" : {
@@ -967,6 +969,7 @@
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
+                      "function" : 3,
                       "ident-kind" : "Func",
                       "kind" : "ident",
                       "value" : "addb"
@@ -1052,9 +1055,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 17 ],
-      "in-vars" : [ 7, 4, 6 ],
+      "in-vars" : [ 4, 7, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 4 ],
+      "out-vars" : [ 6, 4, 7 ],
       "decl-vars" : [ ],
       "line-start" : 2027,
       "ast" : {
@@ -1181,13 +1184,13 @@
       "line-end" : 2036,
       "code" : "if datap.bss <= uintptr(p) && uintptr(p) < datap.ebss {\n\tbitmap := datap.gcbssmask.bytedata\n\tn := (*ptrtype)(unsafe.Pointer(t)).elem.size\n\tmask = make([]byte, n/sys.PtrSize)\n\tfor i := uintptr(0); i < n; i += sys.PtrSize {\n\t\toff := (uintptr(p) + i - datap.bss) / sys.PtrSize\n\t\tmask[i/sys.PtrSize] = (*addb(bitmap, off/8) >> (off % 8)) & 1\n\t}\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 7, 4 ]
+      "use-vars" : [ 4, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 6, 7, 4 ],
+      "in-vars" : [ 4, 7, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 4, 23 ],
+      "out-vars" : [ 7, 23, 6, 4 ],
       "decl-vars" : [ 23 ],
       "line-start" : 2028,
       "ast" : {
@@ -1245,9 +1248,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 7, 4, 23, 6 ],
+      "in-vars" : [ 23, 6, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 21, 7, 4, 23 ],
+      "out-vars" : [ 7, 23, 21, 4 ],
       "decl-vars" : [ 21 ],
       "line-start" : 2029,
       "ast" : {
@@ -1348,9 +1351,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 21 ],
-      "in-vars" : [ 21, 7, 4, 23 ],
+      "in-vars" : [ 4, 7, 23, 21 ],
       "exit" : false,
-      "out-vars" : [ 1, 23, 21, 7, 4 ],
+      "out-vars" : [ 7, 1, 23, 21, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2030,
       "ast" : {
@@ -1422,9 +1425,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23, 25 ],
-      "in-vars" : [ 21, 7, 4, 22, 1, 23 ],
+      "in-vars" : [ 4, 7, 1, 23, 21, 22 ],
       "exit" : false,
-      "out-vars" : [ 4, 22, 1, 23, 21, 7 ],
+      "out-vars" : [ 23, 21, 22, 4, 7, 1 ],
       "decl-vars" : [ ],
       "line-start" : 2031,
       "ast" : {
@@ -1467,9 +1470,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 21, 7, 4, 1, 23 ],
+      "in-vars" : [ 23, 21, 4, 7, 1 ],
       "exit" : false,
-      "out-vars" : [ 23, 21, 7, 4, 22, 1 ],
+      "out-vars" : [ 7, 1, 23, 21, 22, 4 ],
       "decl-vars" : [ 22 ],
       "line-start" : 2031,
       "ast" : {
@@ -1502,9 +1505,9 @@
     }, {
       "update-vars" : [ 22 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 4, 22, 1, 23, 21, 7 ],
+      "in-vars" : [ 21, 22, 4, 7, 1, 23 ],
       "exit" : false,
-      "out-vars" : [ 21, 7, 4, 22, 1, 23 ],
+      "out-vars" : [ 7, 1, 23, 21, 22, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2031,
       "ast" : {
@@ -1539,9 +1542,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24 ],
-      "in-vars" : [ 4, 22, 1, 23, 21, 7 ],
+      "in-vars" : [ 21, 22, 4, 7, 1, 23 ],
       "exit" : false,
-      "out-vars" : [ 7, 4, 24, 22, 1, 23, 21 ],
+      "out-vars" : [ 24, 4, 7, 1, 23, 21, 22 ],
       "decl-vars" : [ 24 ],
       "line-start" : 2032,
       "ast" : {
@@ -1657,9 +1660,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 22 ],
-      "in-vars" : [ 24, 22, 1, 23, 21, 7, 4 ],
+      "in-vars" : [ 21, 22, 24, 4, 7, 1, 23 ],
       "exit" : false,
-      "out-vars" : [ 4, 22, 1, 23, 21, 7 ],
+      "out-vars" : [ 4, 7, 1, 23, 21, 22 ],
       "decl-vars" : [ ],
       "line-start" : 2033,
       "ast" : {
@@ -1759,6 +1762,7 @@
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
+                      "function" : 3,
                       "ident-kind" : "Func",
                       "kind" : "ident",
                       "value" : "addb"
@@ -1822,7 +1826,7 @@
       "line-end" : 2033,
       "code" : "mask[i/sys.PtrSize] = (*addb(bitmap, off/8) >> (off % 8)) & 1",
       "entry" : false,
-      "use-vars" : [ 24, 1, 22, 23 ]
+      "use-vars" : [ 23, 24, 1, 22 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1844,9 +1848,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 28, 42 ],
-      "in-vars" : [ 6, 4, 27, 26 ],
+      "in-vars" : [ 4, 26, 6, 27 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 27, 26 ],
+      "out-vars" : [ 4, 26, 6, 27 ],
       "decl-vars" : [ ],
       "line-start" : 2040,
       "ast" : {
@@ -1886,10 +1890,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26 ],
-      "in-vars" : [ 6, 4 ],
+      "in-vars" : [ 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 27, 26 ],
-      "decl-vars" : [ 27, 32, 26 ],
+      "out-vars" : [ 26, 6, 27, 4 ],
+      "decl-vars" : [ 32, 27, 26 ],
       "line-start" : 2040,
       "ast" : {
         "kind" : "statement",
@@ -1969,6 +1973,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "findObject"
@@ -1988,9 +1993,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 29 ],
-      "in-vars" : [ 27, 26 ],
+      "in-vars" : [ 26, 27 ],
       "exit" : false,
-      "out-vars" : [ 27, 31 ],
+      "out-vars" : [ 31, 27 ],
       "decl-vars" : [ 31 ],
       "line-start" : 2041,
       "ast" : {
@@ -2023,6 +2028,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "heapBitsForAddr"
@@ -2042,9 +2048,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 30 ],
-      "in-vars" : [ 27, 31 ],
+      "in-vars" : [ 31, 27 ],
       "exit" : false,
-      "out-vars" : [ 29, 31 ],
+      "out-vars" : [ 31, 29 ],
       "decl-vars" : [ 29 ],
       "line-start" : 2042,
       "ast" : {
@@ -2091,9 +2097,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 32 ],
-      "in-vars" : [ 29, 31 ],
+      "in-vars" : [ 31, 29 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 31 ],
+      "out-vars" : [ 1, 29, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2043,
       "ast" : {
@@ -2165,9 +2171,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34, 40 ],
-      "in-vars" : [ 31, 29, 1, 30 ],
+      "in-vars" : [ 31, 1, 29, 30 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 31, 1, 29, 30 ],
       "decl-vars" : [ ],
       "line-start" : 2044,
       "ast" : {
@@ -2206,13 +2212,13 @@
       "line-end" : 2053,
       "code" : "for i := uintptr(0); i < n; i += sys.PtrSize {\n\tif hbits.isPointer() {\n\t\tmask[i/sys.PtrSize] = 1\n\t}\n\tif i != 1*sys.PtrSize && !hbits.morePointers() {\n\t\tmask = mask[:i/sys.PtrSize]\n\t\tbreak\n\t}\n\thbits = hbits.next()\n}",
       "entry" : false,
-      "use-vars" : [ 30, 29 ]
+      "use-vars" : [ 29, 30 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 29, 1, 31 ],
+      "in-vars" : [ 29, 31, 1 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 1, 29, 30, 31 ],
       "decl-vars" : [ 30 ],
       "line-start" : 2044,
       "ast" : {
@@ -2245,9 +2251,9 @@
     }, {
       "update-vars" : [ 30 ],
       "successors" : [ 31 ],
-      "in-vars" : [ 29, 1, 30, 31 ],
+      "in-vars" : [ 1, 29, 30, 31 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 31, 1, 29, 30 ],
       "decl-vars" : [ ],
       "line-start" : 2044,
       "ast" : {
@@ -2282,9 +2288,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 35, 36 ],
-      "in-vars" : [ 29, 1, 30, 31 ],
+      "in-vars" : [ 31, 1, 29, 30 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 29, 30, 31, 1 ],
       "decl-vars" : [ ],
       "line-start" : 2045,
       "ast" : {
@@ -2293,6 +2299,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "isPointer"
@@ -2327,9 +2334,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 36 ],
-      "in-vars" : [ 29, 1, 30, 31 ],
+      "in-vars" : [ 31, 1, 29, 30 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 1, 29, 30, 31 ],
       "decl-vars" : [ ],
       "line-start" : 2046,
       "ast" : {
@@ -2393,9 +2400,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37, 39 ],
-      "in-vars" : [ 31, 29, 1, 30 ],
+      "in-vars" : [ 31, 1, 29, 30 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 31, 1, 29, 30 ],
       "decl-vars" : [ ],
       "line-start" : 2048,
       "ast" : {
@@ -2437,6 +2444,7 @@
               "ellipsis" : false,
               "function" : {
                 "field" : {
+                  "function" : 7,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "morePointers"
@@ -2471,7 +2479,7 @@
       "line-end" : 2051,
       "code" : "if i != 1*sys.PtrSize && !hbits.morePointers() {\n\tmask = mask[:i/sys.PtrSize]\n\tbreak\n}",
       "entry" : false,
-      "use-vars" : [ 30, 31 ]
+      "use-vars" : [ 31, 30 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 38 ],
@@ -2543,7 +2551,7 @@
       "line-end" : 2049,
       "code" : "mask = mask[:i/sys.PtrSize]",
       "entry" : false,
-      "use-vars" : [ 1, 30 ]
+      "use-vars" : [ 30, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 40 ],
@@ -2565,9 +2573,9 @@
     }, {
       "update-vars" : [ 31 ],
       "successors" : [ 33 ],
-      "in-vars" : [ 31, 29, 1, 30 ],
+      "in-vars" : [ 31, 1, 29, 30 ],
       "exit" : false,
-      "out-vars" : [ 29, 1, 30, 31 ],
+      "out-vars" : [ 30, 31, 1, 29 ],
       "decl-vars" : [ ],
       "line-start" : 2052,
       "ast" : {
@@ -2588,6 +2596,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 8,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "next"
@@ -2639,9 +2648,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 60 ],
-      "in-vars" : [ 33, 6, 4 ],
+      "in-vars" : [ 4, 33, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 4 ],
+      "out-vars" : [ 4, 6 ],
       "decl-vars" : [ ],
       "line-start" : 2058,
       "ast" : {
@@ -2838,7 +2847,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 6, 4 ],
+      "in-vars" : [ 4, 6 ],
       "exit" : false,
       "out-vars" : [ 4, 33, 6 ],
       "decl-vars" : [ 33 ],
@@ -2863,6 +2872,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 9,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "getg"
@@ -2884,7 +2894,7 @@
       "successors" : [ 44 ],
       "in-vars" : [ 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 39 ],
+      "out-vars" : [ 4, 39, 6 ],
       "decl-vars" : [ 39 ],
       "line-start" : 2059,
       "ast" : {
@@ -2925,7 +2935,7 @@
     }, {
       "update-vars" : [ 39 ],
       "successors" : [ 45 ],
-      "in-vars" : [ 6, 4, 39 ],
+      "in-vars" : [ 4, 39, 6 ],
       "exit" : false,
       "out-vars" : [ 4, 39, 6 ],
       "decl-vars" : [ ],
@@ -2987,13 +2997,13 @@
       "line-end" : 2060,
       "code" : "frame.sp = uintptr(p)",
       "entry" : false,
-      "use-vars" : [ 39, 4 ]
+      "use-vars" : [ 4, 39 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 46 ],
       "in-vars" : [ 6, 4, 39 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 39, 41 ],
+      "out-vars" : [ 39, 6, 4, 41 ],
       "decl-vars" : [ 41 ],
       "line-start" : 2061,
       "ast" : {
@@ -3016,6 +3026,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 9,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "getg"
@@ -3035,9 +3046,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 47 ],
-      "in-vars" : [ 39, 41, 6, 4 ],
+      "in-vars" : [ 41, 39, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 39 ],
+      "out-vars" : [ 39, 6, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2062,
       "ast" : {
@@ -3219,6 +3230,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 11,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "getgcmaskcb"
@@ -3269,6 +3281,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 12,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "noescape"
@@ -3291,6 +3304,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 10,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "gentraceback"
@@ -3309,9 +3323,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 48, 59 ],
-      "in-vars" : [ 6, 4, 39 ],
+      "in-vars" : [ 39, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 39 ],
+      "out-vars" : [ 4, 39, 6 ],
       "decl-vars" : [ ],
       "line-start" : 2063,
       "ast" : {
@@ -3320,6 +3334,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 13,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "valid"
@@ -3367,8 +3382,8 @@
       "successors" : [ 49 ],
       "in-vars" : [ 39, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 46, 39, 6 ],
-      "decl-vars" : [ 53, 46, 54 ],
+      "out-vars" : [ 39, 46, 6, 4 ],
+      "decl-vars" : [ 53, 54, 46 ],
       "line-start" : 2064,
       "ast" : {
         "kind" : "statement",
@@ -3440,6 +3455,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 14,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "getStackMap"
@@ -3459,9 +3475,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 50, 51 ],
-      "in-vars" : [ 6, 4, 46, 39 ],
+      "in-vars" : [ 4, 39, 46, 6 ],
       "exit" : false,
-      "out-vars" : [ 39, 6, 4, 46 ],
+      "out-vars" : [ 4, 39, 46, 6 ],
       "decl-vars" : [ ],
       "line-start" : 2065,
       "ast" : {
@@ -3530,9 +3546,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 52 ],
-      "in-vars" : [ 46, 39, 6, 4 ],
+      "in-vars" : [ 39, 46, 6, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 51, 46, 39 ],
+      "out-vars" : [ 4, 39, 46, 51, 6 ],
       "decl-vars" : [ 51 ],
       "line-start" : 2068,
       "ast" : {
@@ -3609,9 +3625,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 53 ],
-      "in-vars" : [ 4, 51, 46, 39, 6 ],
+      "in-vars" : [ 4, 39, 46, 51, 6 ],
       "exit" : false,
-      "out-vars" : [ 46, 39, 48, 4, 51 ],
+      "out-vars" : [ 48, 46, 51, 4, 39 ],
       "decl-vars" : [ 48 ],
       "line-start" : 2069,
       "ast" : {
@@ -3712,9 +3728,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 55 ],
-      "in-vars" : [ 51, 46, 39, 48, 4 ],
+      "in-vars" : [ 4, 39, 48, 46, 51 ],
       "exit" : false,
-      "out-vars" : [ 4, 51, 46, 39, 48, 1 ],
+      "out-vars" : [ 51, 4, 39, 48, 1, 46 ],
       "decl-vars" : [ ],
       "line-start" : 2070,
       "ast" : {
@@ -3786,9 +3802,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 57, 59 ],
-      "in-vars" : [ 46, 49, 39, 48, 1, 4, 51 ],
+      "in-vars" : [ 48, 1, 46, 51, 4, 39, 49 ],
       "exit" : false,
-      "out-vars" : [ 51, 46, 49, 39, 48, 1, 4 ],
+      "out-vars" : [ 4, 39, 49, 48, 1, 46, 51 ],
       "decl-vars" : [ ],
       "line-start" : 2071,
       "ast" : {
@@ -3827,13 +3843,13 @@
       "line-end" : 2074,
       "code" : "for i := uintptr(0); i < n; i += sys.PtrSize {\n\toff := (uintptr(p) + i - frame.varp + size) / sys.PtrSize\n\tmask[i/sys.PtrSize] = locals.ptrbit(off)\n}",
       "entry" : false,
-      "use-vars" : [ 48, 49 ]
+      "use-vars" : [ 49, 48 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 54 ],
-      "in-vars" : [ 46, 39, 48, 1, 4, 51 ],
+      "in-vars" : [ 4, 39, 48, 1, 46, 51 ],
       "exit" : false,
-      "out-vars" : [ 46, 49, 39, 48, 1, 4, 51 ],
+      "out-vars" : [ 46, 51, 4, 39, 49, 48, 1 ],
       "decl-vars" : [ 49 ],
       "line-start" : 2071,
       "ast" : {
@@ -3866,9 +3882,9 @@
     }, {
       "update-vars" : [ 49 ],
       "successors" : [ 54 ],
-      "in-vars" : [ 39, 48, 1, 4, 51, 46, 49 ],
+      "in-vars" : [ 4, 39, 49, 48, 1, 46, 51 ],
       "exit" : false,
-      "out-vars" : [ 48, 1, 4, 51, 46, 49, 39 ],
+      "out-vars" : [ 4, 39, 49, 48, 1, 46, 51 ],
       "decl-vars" : [ ],
       "line-start" : 2071,
       "ast" : {
@@ -3903,9 +3919,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 58 ],
-      "in-vars" : [ 1, 4, 51, 46, 49, 39, 48 ],
+      "in-vars" : [ 49, 48, 1, 46, 51, 4, 39 ],
       "exit" : false,
-      "out-vars" : [ 4, 51, 46, 52, 49, 39, 48, 1 ],
+      "out-vars" : [ 1, 52, 46, 51, 4, 39, 49, 48 ],
       "decl-vars" : [ 52 ],
       "line-start" : 2072,
       "ast" : {
@@ -4038,9 +4054,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 56 ],
-      "in-vars" : [ 52, 49, 39, 48, 1, 4, 51, 46 ],
+      "in-vars" : [ 49, 48, 1, 52, 46, 51, 4, 39 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 51, 46, 49, 39, 48 ],
+      "out-vars" : [ 4, 39, 49, 48, 1, 46, 51 ],
       "decl-vars" : [ ],
       "line-start" : 2073,
       "ast" : {
@@ -4101,6 +4117,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 15,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "ptrbit"
@@ -4130,7 +4147,7 @@
       "line-end" : 2073,
       "code" : "mask[i/sys.PtrSize] = locals.ptrbit(off)",
       "entry" : false,
-      "use-vars" : [ 49, 1, 46, 52 ]
+      "use-vars" : [ 46, 52, 49, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],

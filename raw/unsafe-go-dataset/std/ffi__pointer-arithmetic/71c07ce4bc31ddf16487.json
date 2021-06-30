@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 4, 0, 1, 2, 5 ],
+      "in-vars" : [ 2, 3, 4, 5, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2, 5, 3, 4 ],
+      "out-vars" : [ 0, 1, 2, 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 1, 2, 5, 3, 4, 0 ],
+      "in-vars" : [ 1, 2, 3, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 0, 1, 2, 5 ],
+      "out-vars" : [ 5, 0, 1, 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : 27,
       "ast" : {
@@ -100,9 +100,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 5, 3, 4, 0, 1, 2 ],
+      "in-vars" : [ 1, 2, 3, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 0, 1, 2, 5 ],
+      "out-vars" : [ 4, 5, 0, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 28,
       "ast" : {
@@ -155,6 +155,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "msanwrite"
@@ -173,9 +174,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 0, 1, 2, 5, 3, 4 ],
+      "in-vars" : [ 4, 5, 0, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2, 4 ],
+      "out-vars" : [ 0, 1, 2, 5 ],
       "decl-vars" : [ ],
       "line-start" : 31,
       "ast" : {
@@ -193,7 +194,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "_cgo_sigaction",
-                "variable" : 5
+                "variable" : 4
               }
             },
             "operator" : "==",
@@ -230,7 +231,7 @@
       "line-end" : 77,
       "code" : "if _cgo_sigaction == nil || inForkedChild {\n\tsysSigaction(sig, new, old)\n} else {\n\n\tvar ret int32\n\n\tvar g *g\n\tif mainStarted {\n\t\tg = getg()\n\t}\n\tsp := uintptr(unsafe.Pointer(&sig))\n\tswitch {\n\tcase g == nil:\n\n\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\tcase sp < g.stack.lo || sp >= g.stack.hi:\n\n\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\tdefault:\n\n\t\tsystemstack(func() {\n\t\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\t\t})\n\t}\n\n\tconst EINVAL = 22\n\tif ret == EINVAL {\n\n\t\tsysSigaction(sig, new, old)\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 5, 3 ]
+      "use-vars" : [ 4, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
@@ -280,6 +281,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "sysSigaction"
@@ -298,9 +300,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 4, 0, 1, 2 ],
+      "in-vars" : [ 0, 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 7, 4, 0 ],
+      "out-vars" : [ 5, 7, 0, 1, 2 ],
       "decl-vars" : [ 7 ],
       "line-start" : 40,
       "ast" : {
@@ -341,9 +343,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 0, 1, 2, 7, 4 ],
+      "in-vars" : [ 7, 0, 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 7, 6, 4, 0, 1 ],
+      "out-vars" : [ 6, 7, 0, 1, 2, 5 ],
       "decl-vars" : [ 6 ],
       "line-start" : 42,
       "ast" : {
@@ -389,9 +391,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 0, 1, 2, 7, 6, 4 ],
+      "in-vars" : [ 2, 5, 6, 7, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 7, 6, 0 ],
+      "out-vars" : [ 6, 7, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 43,
       "ast" : {
@@ -403,7 +405,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "mainStarted",
-            "variable" : 4
+            "variable" : 5
           }
         },
         "kind" : "statement",
@@ -413,13 +415,13 @@
       "line-end" : 45,
       "code" : "if mainStarted {\n\tg = getg()\n}",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 0, 1, 2, 7 ],
+      "in-vars" : [ 1, 2, 7, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 7, 6, 0 ],
+      "out-vars" : [ 7, 0, 1, 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : 44,
       "ast" : {
@@ -443,6 +445,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "getg"
@@ -462,9 +465,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 2, 7, 6, 0, 1 ],
+      "in-vars" : [ 6, 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 7, 8, 6, 0 ],
+      "out-vars" : [ 0, 1, 2, 8, 6, 7 ],
       "decl-vars" : [ 8 ],
       "line-start" : 46,
       "ast" : {
@@ -544,9 +547,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 14, 16 ],
-      "in-vars" : [ 0, 1, 2, 7, 8, 6 ],
+      "in-vars" : [ 8, 6, 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 1, 2, 7, 8 ],
+      "out-vars" : [ 2, 8, 6, 7, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 47,
       "ast" : {
@@ -562,7 +565,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 6, 0, 1, 2 ],
+      "in-vars" : [ 2, 6, 0, 1 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
@@ -606,7 +609,7 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 2, 7 ],
       "decl-vars" : [ ],
@@ -678,6 +681,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "callCgoSigaction"
@@ -693,11 +697,11 @@
       "line-end" : 50,
       "code" : "ret = callCgoSigaction(uintptr(sig), new, old)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 0 ]
+      "use-vars" : [ 2, 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 2, 8, 6, 0, 1 ],
+      "in-vars" : [ 6, 0, 1, 2, 8 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
@@ -892,6 +896,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "callCgoSigaction"
@@ -913,7 +918,7 @@
       "successors" : [ 17 ],
       "in-vars" : [ 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 7, 0 ],
+      "out-vars" : [ 7, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 56,
       "ast" : {
@@ -929,7 +934,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 0, 1, 2, 7 ],
+      "in-vars" : [ 7, 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 7, 0, 1, 2 ],
       "decl-vars" : [ ],
@@ -1006,6 +1011,7 @@
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
+                    "function" : 4,
                     "ident-kind" : "Func",
                     "kind" : "ident",
                     "value" : "callCgoSigaction"
@@ -1030,6 +1036,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "systemstack"
@@ -1044,11 +1051,11 @@
       "line-end" : 67,
       "code" : "systemstack(func() {\n\tret = callCgoSigaction(uintptr(sig), new, old)\n})",
       "entry" : false,
-      "use-vars" : [ 1, 2, 7, 0 ]
+      "use-vars" : [ 0, 1, 2, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 1, 2, 7, 0 ],
+      "in-vars" : [ 7, 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 7, 0, 1, 2 ],
       "decl-vars" : [ ],
@@ -1176,6 +1183,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "sysSigaction"
@@ -1190,7 +1198,7 @@
       "line-end" : 75,
       "code" : "sysSigaction(sig, new, old)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 0 ]
+      "use-vars" : [ 0, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 22 ],
@@ -1307,6 +1315,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "msanread"
@@ -2891,16 +2900,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "mainStarted",
+      "name" : "_cgo_sigaction",
       "package" : 0,
-      "type" : 9,
+      "type" : 10,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "_cgo_sigaction",
+      "name" : "mainStarted",
       "package" : 0,
-      "type" : 10,
+      "type" : 9,
       "exported" : false,
       "embedded" : false,
       "field" : false

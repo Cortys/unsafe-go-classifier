@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ 2 ],
       "line-start" : 1059,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1060,
       "ast" : {
@@ -135,9 +135,9 @@
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 0, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1061,
       "ast" : {
@@ -209,7 +209,7 @@
       "successors" : [ 6 ],
       "in-vars" : [ 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 0, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1063,
       "ast" : {
@@ -251,6 +251,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 2,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "nilfunc"
@@ -262,6 +263,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 1,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "funcPC"
@@ -351,6 +353,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "gostartcall"
@@ -365,7 +368,7 @@
       "line-end" : 1065,
       "code" : "gostartcall(gobuf, fn, unsafe.Pointer(fv))",
       "entry" : false,
-      "use-vars" : [ 1, 0, 2 ]
+      "use-vars" : [ 0, 2, 1 ]
     } ],
     "code" : "// adjust Gobuf as if it executed a call to fn\n// and then did an immediate gosave.\nfunc gostartcallfn(gobuf *gobuf, fv *funcval) {\n\tvar fn unsafe.Pointer\n\tif fv != nil {\n\t\tfn = unsafe.Pointer(fv.fn)\n\t} else {\n\t\tfn = unsafe.Pointer(funcPC(nilfunc))\n\t}\n\tgostartcall(gobuf, fn, unsafe.Pointer(fv))\n}",
     "defines" : [ 0 ],

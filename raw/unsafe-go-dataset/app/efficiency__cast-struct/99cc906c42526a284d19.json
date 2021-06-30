@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 6 ],
+      "out-vars" : [ 6, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 150,
       "ast" : {
@@ -67,6 +67,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "controlHeaderLen"
@@ -86,9 +87,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 1, 6 ],
+      "in-vars" : [ 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 6 ],
+      "out-vars" : [ 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 151,
       "ast" : {
@@ -143,7 +144,7 @@
       "line-end" : 153,
       "code" : "if len(m) < l {\n\treturn 0, 0, 0, errors.New(\"short message\")\n}",
       "entry" : false,
-      "use-vars" : [ 6, 1 ]
+      "use-vars" : [ 1, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -197,6 +198,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "New"
@@ -215,9 +217,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 6 ],
+      "in-vars" : [ 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 7, 6 ],
+      "out-vars" : [ 6, 7 ],
       "decl-vars" : [ 7 ],
       "line-start" : 154,
       "ast" : {
@@ -315,7 +317,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 7, 6 ],
+      "in-vars" : [ 6, 7 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -328,6 +330,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "lvl"
@@ -355,6 +358,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "typ"
@@ -413,6 +417,7 @@
                 "ellipsis" : false,
                 "function" : {
                   "field" : {
+                    "function" : 5,
                     "ident-kind" : "Func",
                     "kind" : "ident",
                     "value" : "len"
@@ -484,7 +489,7 @@
       "line-end" : 155,
       "code" : "return h.lvl(), h.typ(), int(uint64(h.len()) - uint64(l)), nil",
       "entry" : false,
-      "use-vars" : [ 7, 6 ]
+      "use-vars" : [ 6, 7 ]
     } ],
     "code" : "// ParseHeader parses and returns the header fields of the control\n// message at the head on m.\nfunc (m ControlMessage) ParseHeader() (lvl, typ, dataLen int, err error) {\n\tl := controlHeaderLen()\n\tif len(m) < l {\n\t\treturn 0, 0, 0, errors.New(\"short message\")\n\t}\n\th := (*cmsghdr)(unsafe.Pointer(&m[0]))\n\treturn h.lvl(), h.typ(), int(uint64(h.len()) - uint64(l)), nil\n}",
     "defines" : [ 0 ],

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 3, 1, 0, 4 ],
+      "in-vars" : [ 2, 3, 1, 4, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 4, 2, 3 ],
+      "out-vars" : [ 3, 1, 4, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 3, 1, 0, 4 ],
+      "in-vars" : [ 1, 4, 0, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 2, 3, 1 ],
+      "out-vars" : [ 6, 0, 3, 1, 4 ],
       "decl-vars" : [ 6 ],
       "line-start" : 168,
       "ast" : {
@@ -81,17 +81,17 @@
                 "value" : "stacks_sys",
                 "variable" : 5
               },
-              "go-type" : 9,
+              "go-type" : 7,
               "kind" : "expression",
               "target" : {
-                "go-type" : 7,
+                "go-type" : 5,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "memstats",
-                  "variable" : 4
+                  "variable" : 2
                 }
               },
               "type" : "selector"
@@ -104,6 +104,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "sysAlloc"
@@ -119,13 +120,13 @@
       "line-end" : 168,
       "code" : "stack := sysAlloc(stacksize, &memstats.stacks_sys)",
       "entry" : false,
-      "use-vars" : [ 0, 4 ]
+      "use-vars" : [ 0, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 6 ],
-      "in-vars" : [ 3, 1, 6, 0, 2 ],
+      "in-vars" : [ 6, 0, 3, 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 2, 3, 1 ],
+      "out-vars" : [ 6, 0, 3, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 169,
       "ast" : {
@@ -167,9 +168,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 0, 2, 3, 1, 6 ],
+      "in-vars" : [ 6, 0, 3, 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 2, 1 ],
+      "out-vars" : [ 1, 4, 6, 0 ],
       "decl-vars" : [ ],
       "line-start" : 170,
       "ast" : {
@@ -208,7 +209,7 @@
               "kind" : "expression",
               "operator" : "&",
               "target" : {
-                "go-type" : 6,
+                "go-type" : 15,
                 "index" : {
                   "go-type" : 26,
                   "kind" : "constant",
@@ -219,7 +220,7 @@
                 },
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 5,
+                  "go-type" : 14,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -250,7 +251,7 @@
             "kind" : "expression",
             "target" : {
               "arguments" : [ {
-                "go-type" : 5,
+                "go-type" : 14,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -283,6 +284,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "write"
@@ -301,9 +303,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 0, 2, 1 ],
+      "in-vars" : [ 4, 6, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 2, 1, 6 ],
+      "out-vars" : [ 6, 0, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 171,
       "ast" : {
@@ -324,6 +326,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "exit"
@@ -342,9 +345,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 6, 0, 2, 1 ],
+      "in-vars" : [ 0, 1, 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 7 ],
+      "out-vars" : [ 4, 7 ],
       "decl-vars" : [ 7 ],
       "line-start" : 173,
       "ast" : {
@@ -467,6 +470,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "clone"
@@ -482,13 +486,13 @@
       "line-end" : 173,
       "code" : "ret := clone(cloneFlags, unsafe.Pointer(uintptr(stack)+stacksize), nil, nil, fn)",
       "entry" : false,
-      "use-vars" : [ 0, 6, 1 ]
+      "use-vars" : [ 0, 1, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 8 ],
-      "in-vars" : [ 2, 7 ],
+      "in-vars" : [ 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 2 ],
+      "out-vars" : [ 4 ],
       "decl-vars" : [ ],
       "line-start" : 174,
       "ast" : {
@@ -528,7 +532,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 2 ],
+      "in-vars" : [ 4 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -569,7 +573,7 @@
               "kind" : "expression",
               "operator" : "&",
               "target" : {
-                "go-type" : 6,
+                "go-type" : 15,
                 "index" : {
                   "go-type" : 26,
                   "kind" : "constant",
@@ -580,14 +584,14 @@
                 },
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 5,
+                  "go-type" : 14,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "failthreadcreate",
-                    "variable" : 2
+                    "variable" : 4
                   }
                 },
                 "type" : "index"
@@ -611,14 +615,14 @@
             "kind" : "expression",
             "target" : {
               "arguments" : [ {
-                "go-type" : 5,
+                "go-type" : 14,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "failthreadcreate",
-                  "variable" : 2
+                  "variable" : 4
                 }
               } ],
               "ellipsis" : false,
@@ -644,6 +648,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "write"
@@ -658,7 +663,7 @@
       "line-end" : 175,
       "code" : "write(2, unsafe.Pointer(&failthreadcreate[0]), int32(len(failthreadcreate)))",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -685,6 +690,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "exit"
@@ -779,187 +785,187 @@
       "type" : "Tuple",
       "underlying" : 4
     }, {
-      "elem" : 6,
-      "name" : "[]byte",
-      "type" : "Slice",
-      "underlying" : 5
-    }, {
-      "name" : "byte",
-      "type" : "Basic",
-      "underlying" : 6
-    }, {
       "local-name" : "mstats",
       "name" : "runtime.mstats",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 8
+      "underlying" : 6
     }, {
       "fields" : [ {
         "name" : "alloc",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "total_alloc",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "nlookup",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "nmalloc",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "nfree",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_alloc",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_idle",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_inuse",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_released",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_objects",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "stacks_inuse",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "stacks_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "mspan_inuse",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "mspan_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "mcache_inuse",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "mcache_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "buckhash_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "gc_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "other_sys",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "next_gc",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "last_gc_unix",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "pause_total_ns",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "pause_ns",
-        "type" : 10
+        "type" : 8
       }, {
         "name" : "pause_end",
-        "type" : 10
+        "type" : 8
       }, {
         "name" : "numgc",
-        "type" : 11
+        "type" : 9
       }, {
         "name" : "numforcedgc",
-        "type" : 11
+        "type" : 9
       }, {
         "name" : "gc_cpu_fraction",
-        "type" : 12
+        "type" : 10
       }, {
         "name" : "enablegc",
-        "type" : 13
+        "type" : 11
       }, {
         "name" : "debuggc",
-        "type" : 13
+        "type" : 11
       }, {
         "name" : "by_size",
-        "type" : 14
-      }, {
-        "name" : "last_gc_nanotime",
-        "type" : 9
-      }, {
-        "name" : "tinyallocs",
-        "type" : 9
-      }, {
-        "name" : "last_next_gc",
-        "type" : 9
-      }, {
-        "name" : "last_heap_inuse",
-        "type" : 9
-      }, {
-        "name" : "triggerRatio",
         "type" : 12
       }, {
+        "name" : "last_gc_nanotime",
+        "type" : 7
+      }, {
+        "name" : "tinyallocs",
+        "type" : 7
+      }, {
+        "name" : "last_next_gc",
+        "type" : 7
+      }, {
+        "name" : "last_heap_inuse",
+        "type" : 7
+      }, {
+        "name" : "triggerRatio",
+        "type" : 10
+      }, {
         "name" : "gc_trigger",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_live",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_scan",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "heap_marked",
-        "type" : 9
+        "type" : 7
       } ],
       "name" : "struct{alloc uint64; total_alloc uint64; sys uint64; nlookup uint64; nmalloc uint64; nfree uint64; heap_alloc uint64; heap_sys uint64; heap_idle uint64; heap_inuse uint64; heap_released uint64; heap_objects uint64; stacks_inuse uint64; stacks_sys uint64; mspan_inuse uint64; mspan_sys uint64; mcache_inuse uint64; mcache_sys uint64; buckhash_sys uint64; gc_sys uint64; other_sys uint64; next_gc uint64; last_gc_unix uint64; pause_total_ns uint64; pause_ns [256]uint64; pause_end [256]uint64; numgc uint32; numforcedgc uint32; gc_cpu_fraction float64; enablegc bool; debuggc bool; by_size [67]struct{size uint32; nmalloc uint64; nfree uint64}; last_gc_nanotime uint64; tinyallocs uint64; last_next_gc uint64; last_heap_inuse uint64; triggerRatio float64; gc_trigger uint64; heap_live uint64; heap_scan uint64; heap_marked uint64}",
       "type" : "Struct",
-      "underlying" : 8
+      "underlying" : 6
     }, {
       "name" : "uint64",
       "type" : "Basic",
-      "underlying" : 9
+      "underlying" : 7
     }, {
-      "elem" : 9,
+      "elem" : 7,
       "name" : "[256]uint64",
       "type" : "Array",
-      "underlying" : 10
+      "underlying" : 8
     }, {
       "name" : "uint32",
       "type" : "Basic",
-      "underlying" : 11
+      "underlying" : 9
     }, {
       "name" : "float64",
       "type" : "Basic",
-      "underlying" : 12
+      "underlying" : 10
     }, {
       "name" : "bool",
       "type" : "Basic",
-      "underlying" : 13
+      "underlying" : 11
     }, {
-      "elem" : 15,
+      "elem" : 13,
       "name" : "[67]struct{size uint32; nmalloc uint64; nfree uint64}",
       "type" : "Array",
-      "underlying" : 14
+      "underlying" : 12
     }, {
       "fields" : [ {
         "name" : "size",
-        "type" : 11
+        "type" : 9
       }, {
         "name" : "nmalloc",
-        "type" : 9
+        "type" : 7
       }, {
         "name" : "nfree",
-        "type" : 9
+        "type" : 7
       } ],
       "name" : "struct{size uint32; nmalloc uint64; nfree uint64}",
       "type" : "Struct",
+      "underlying" : 13
+    }, {
+      "elem" : 15,
+      "name" : "[]byte",
+      "type" : "Slice",
+      "underlying" : 14
+    }, {
+      "name" : "byte",
+      "type" : "Basic",
       "underlying" : 15
     }, {
       "name" : "func(n uintptr, sysStat *uint64) unsafe.Pointer",
@@ -981,7 +987,7 @@
       "type" : "Tuple",
       "underlying" : 17
     }, {
-      "elem" : 9,
+      "elem" : 7,
       "name" : "*uint64",
       "type" : "Pointer",
       "underlying" : 18
@@ -1032,7 +1038,7 @@
       "type" : "Tuple",
       "underlying" : 24
     }, {
-      "elem" : 6,
+      "elem" : 15,
       "name" : "*byte",
       "type" : "Pointer",
       "underlying" : 25
@@ -1051,7 +1057,7 @@
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 5
+        "type" : 14
       } ],
       "name" : "([]byte)",
       "type" : "Tuple",
@@ -1124,7 +1130,7 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "failthreadcreate",
+      "name" : "memstats",
       "package" : 0,
       "type" : 5,
       "exported" : false,
@@ -1133,21 +1139,21 @@
     }, {
       "name" : "failallocatestack",
       "package" : 0,
-      "type" : 5,
+      "type" : 14,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "memstats",
+      "name" : "failthreadcreate",
       "package" : 0,
-      "type" : 7,
+      "type" : 14,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "stacks_sys",
       "package" : 0,
-      "type" : 9,
+      "type" : 7,
       "exported" : false,
       "embedded" : false,
       "field" : true

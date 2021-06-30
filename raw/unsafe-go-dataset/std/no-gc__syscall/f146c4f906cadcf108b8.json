@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 3, 6, 1 ],
+      "in-vars" : [ 3, 1, 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 6, 1 ],
+      "out-vars" : [ 1, 2, 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 6, 1, 2, 3 ],
+      "in-vars" : [ 2, 6, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 6, 1 ],
+      "out-vars" : [ 1, 2, 6, 3 ],
       "decl-vars" : [ 7 ],
       "line-start" : 79,
       "ast" : {
@@ -90,9 +90,9 @@
     }, {
       "update-vars" : [ 7, 5 ],
       "successors" : [ 4 ],
-      "in-vars" : [ 2, 3, 6, 1 ],
+      "in-vars" : [ 2, 6, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 7, 3, 6, 1 ],
+      "out-vars" : [ 1, 5, 7, 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : 80,
       "ast" : {
@@ -136,6 +136,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "BytePtrFromString"
@@ -147,7 +148,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 7, 5 ],
+      "assign-vars" : [ 5, 7 ],
       "line-end" : 80,
       "code" : "_p0, err = BytePtrFromString(path)",
       "entry" : false,
@@ -155,9 +156,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 1, 5, 7, 3, 6 ],
+      "in-vars" : [ 6, 3, 1, 5, 7 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 1, 7 ],
+      "out-vars" : [ 1, 7, 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : 81,
       "ast" : {
@@ -217,9 +218,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 3, 6, 1, 7 ],
+      "in-vars" : [ 3, 1, 7, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 1, 7 ],
+      "out-vars" : [ 1, 7, 6, 3 ],
       "decl-vars" : [ 8 ],
       "line-start" : 84,
       "ast" : {
@@ -266,9 +267,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 7, 3, 6, 1 ],
+      "in-vars" : [ 7, 6, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 7, 3, 6, 1 ],
+      "out-vars" : [ 7, 6, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 85,
       "ast" : {
@@ -324,9 +325,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 3, 1 ],
+      "in-vars" : [ 3, 1, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 8, 7, 3 ],
+      "out-vars" : [ 7, 3, 1, 8 ],
       "decl-vars" : [ ],
       "line-start" : 86,
       "ast" : {
@@ -404,9 +405,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 3, 6, 1 ],
+      "in-vars" : [ 7, 6, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 8, 7, 3 ],
+      "out-vars" : [ 8, 7, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 88,
       "ast" : {
@@ -474,7 +475,7 @@
       "in-vars" : [ 8, 7, 3, 1 ],
       "exit" : false,
       "out-vars" : [ 9, 10 ],
-      "decl-vars" : [ 9, 11, 10 ],
+      "decl-vars" : [ 11, 9, 10 ],
       "line-start" : 90,
       "ast" : {
         "kind" : "statement",
@@ -677,6 +678,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Syscall6"
@@ -698,7 +700,7 @@
       "successors" : [ 12 ],
       "in-vars" : [ 9, 10 ],
       "exit" : false,
-      "out-vars" : [ 9 ],
+      "out-vars" : [ 10 ],
       "decl-vars" : [ ],
       "line-start" : 91,
       "ast" : {
@@ -736,7 +738,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 10
+              "variable" : 9
             }
           },
           "type" : "cast"
@@ -747,13 +749,13 @@
       "line-end" : 91,
       "code" : "n = int(r0)",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 14 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 10 ],
       "exit" : false,
-      "out-vars" : [ 9 ],
+      "out-vars" : [ 10 ],
       "decl-vars" : [ ],
       "line-start" : 92,
       "ast" : {
@@ -768,7 +770,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "operator" : "!=",
@@ -789,11 +791,11 @@
       "line-end" : 94,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 14 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -820,7 +822,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 9
+              "variable" : 10
             }
           } ],
           "ellipsis" : false,
@@ -829,6 +831,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "errnoErr"
@@ -844,7 +847,7 @@
       "line-end" : 93,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1209,16 +1212,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "e1",
+      "name" : "r0",
       "package" : 0,
-      "type" : 25,
+      "type" : 12,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "r0",
+      "name" : "e1",
       "package" : 0,
-      "type" : 12,
+      "type" : 25,
       "exported" : false,
       "embedded" : false,
       "field" : false

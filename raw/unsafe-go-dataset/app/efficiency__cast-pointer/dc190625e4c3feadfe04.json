@@ -303,7 +303,7 @@
       "line-end" : 108,
       "code" : "return Label{\n\tkey:     k,\n\tpacked:  uint64(hdr.Len),\n\tuntyped: unsafe.Pointer(hdr.Data),\n}",
       "entry" : false,
-      "use-vars" : [ 3, 6 ]
+      "use-vars" : [ 6, 3 ]
     } ],
     "code" : "// OfString creates a new label from a key and a string.\n// This method is for implementing new key types, label creation should\n// normally be done with the Of method of the key.\nfunc OfString(k Key, v string) Label {\n\thdr := (*reflect.StringHeader)(unsafe.Pointer(&v))\n\treturn Label{\n\t\tkey:     k,\n\t\tpacked:  uint64(hdr.Len),\n\t\tuntyped: unsafe.Pointer(hdr.Data),\n\t}\n}",
     "defines" : [ 0 ],

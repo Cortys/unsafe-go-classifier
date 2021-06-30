@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 5, 1, 2 ],
+      "in-vars" : [ 1, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 5 ],
+      "out-vars" : [ 6, 5, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1841,
       "ast" : {
@@ -77,6 +77,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "bytes2iovec"
@@ -96,9 +97,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 6, 5, 1 ],
+      "in-vars" : [ 1, 6, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 6 ],
+      "out-vars" : [ 1, 6, 5 ],
       "decl-vars" : [ ],
       "line-start" : 1842,
       "ast" : {
@@ -121,9 +122,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 6, 5, 1 ],
+      "in-vars" : [ 1, 6, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 1 ],
+      "out-vars" : [ 1, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1843,
       "ast" : {
@@ -175,6 +176,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "raceReleaseMerge"
@@ -193,9 +195,9 @@
     }, {
       "update-vars" : [ 4, 3 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 1 ],
+      "in-vars" : [ 1, 6 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 3 ],
+      "out-vars" : [ 4, 3, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1845,
       "ast" : {
@@ -249,6 +251,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "writev"
@@ -264,11 +267,11 @@
       "line-end" : 1845,
       "code" : "n, err = writev(fd, iovecs)",
       "entry" : false,
-      "use-vars" : [ 6, 1 ]
+      "use-vars" : [ 1, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 3, 4, 6 ],
+      "in-vars" : [ 4, 3, 6 ],
       "exit" : false,
       "out-vars" : [ 4, 3 ],
       "decl-vars" : [ ],
@@ -304,6 +307,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "writevRacedetect"
@@ -318,11 +322,11 @@
       "line-end" : 1846,
       "code" : "writevRacedetect(iovecs, n)",
       "entry" : false,
-      "use-vars" : [ 6, 3 ]
+      "use-vars" : [ 3, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 3, 4 ],
+      "in-vars" : [ 4, 3 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -356,7 +360,7 @@
       "line-end" : 1847,
       "code" : "return n, err",
       "entry" : false,
-      "use-vars" : [ 4, 3 ]
+      "use-vars" : [ 3, 4 ]
     } ],
     "code" : "func Writev(fd int, iovs [][]byte) (n int, err error) {\n\tiovecs := bytes2iovec(iovs)\n\tif raceenabled {\n\t\traceReleaseMerge(unsafe.Pointer(&ioSync))\n\t}\n\tn, err = writev(fd, iovecs)\n\twritevRacedetect(iovecs, n)\n\treturn n, err\n}",
     "defines" : [ 0 ],

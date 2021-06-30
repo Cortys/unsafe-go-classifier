@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2 ],
+      "out-vars" : [ 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2 ],
+      "out-vars" : [ 2, 1 ],
       "decl-vars" : [ 5 ],
       "line-start" : 239,
       "ast" : {
@@ -88,11 +88,11 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 5, 4 ],
+      "update-vars" : [ 4, 5 ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 5, 4 ],
+      "out-vars" : [ 4, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 240,
       "ast" : {
@@ -136,6 +136,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "BytePtrFromString"
@@ -155,9 +156,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 4, 1, 5 ],
+      "in-vars" : [ 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 5 ],
+      "out-vars" : [ 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 241,
       "ast" : {
@@ -217,10 +218,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 5 ],
+      "in-vars" : [ 5, 1 ],
       "exit" : false,
       "out-vars" : [ 6, 7 ],
-      "decl-vars" : [ 7, 6, 8 ],
+      "decl-vars" : [ 7, 8, 6 ],
       "line-start" : 244,
       "ast" : {
         "kind" : "statement",
@@ -348,6 +349,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Syscall"
@@ -363,13 +365,13 @@
       "line-end" : 244,
       "code" : "r0, _, e1 := Syscall(SYS_KEYCTL, uintptr(cmd), uintptr(unsafe.Pointer(_p0)), 0)",
       "entry" : false,
-      "use-vars" : [ 1, 5 ]
+      "use-vars" : [ 5, 1 ]
     }, {
       "update-vars" : [ 3 ],
       "successors" : [ 8 ],
       "in-vars" : [ 6, 7 ],
       "exit" : false,
-      "out-vars" : [ 6 ],
+      "out-vars" : [ 7 ],
       "decl-vars" : [ ],
       "line-start" : 245,
       "ast" : {
@@ -407,7 +409,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 7
+              "variable" : 6
             }
           },
           "type" : "cast"
@@ -418,13 +420,13 @@
       "line-end" : 245,
       "code" : "ret = int(r0)",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 6 ],
+      "in-vars" : [ 7 ],
       "exit" : false,
-      "out-vars" : [ 6 ],
+      "out-vars" : [ 7 ],
       "decl-vars" : [ ],
       "line-start" : 246,
       "ast" : {
@@ -439,7 +441,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 6
+              "variable" : 7
             }
           },
           "operator" : "!=",
@@ -460,11 +462,11 @@
       "line-end" : 248,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 6 ],
+      "in-vars" : [ 7 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -491,7 +493,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 6
+              "variable" : 7
             }
           } ],
           "ellipsis" : false,
@@ -500,6 +502,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "errnoErr"
@@ -515,7 +518,7 @@
       "line-end" : 247,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -816,16 +819,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "e1",
+      "name" : "r0",
       "package" : 0,
-      "type" : 19,
+      "type" : 18,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "r0",
+      "name" : "e1",
       "package" : 0,
-      "type" : 18,
+      "type" : 19,
       "exported" : false,
       "embedded" : false,
       "field" : false

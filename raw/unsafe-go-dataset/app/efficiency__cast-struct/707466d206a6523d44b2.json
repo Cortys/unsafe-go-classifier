@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 4 ],
+      "out-vars" : [ 4, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,8 +44,8 @@
       "successors" : [ 3 ],
       "in-vars" : [ 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 4 ],
-      "decl-vars" : [ 1, 6 ],
+      "out-vars" : [ 1, 6, 2, 4 ],
+      "decl-vars" : [ 6, 1 ],
       "line-start" : 124,
       "ast" : {
         "kind" : "statement",
@@ -90,6 +90,7 @@
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
+                  "function" : 1,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "newBucket"
@@ -112,9 +113,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 2, 6, 1, 4 ],
+      "in-vars" : [ 1, 6, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 6, 1 ],
+      "out-vars" : [ 1, 7, 6, 2 ],
       "decl-vars" : [ 7 ],
       "line-start" : 128,
       "ast" : {
@@ -248,13 +249,13 @@
       "line-end" : 128,
       "code" : "unaligned := brokenUnaligned && uintptr(unsafe.Pointer(&value[0]))&3 != 0",
       "entry" : false,
-      "use-vars" : [ 4, 2 ]
+      "use-vars" : [ 2, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 2, 6, 1, 7 ],
+      "in-vars" : [ 7, 6, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 7 ],
+      "out-vars" : [ 1, 7, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 130,
       "ast" : {
@@ -280,9 +281,9 @@
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 7, 2, 6, 1 ],
+      "in-vars" : [ 2, 1, 7, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 7 ],
+      "out-vars" : [ 6, 2, 1, 7 ],
       "decl-vars" : [ ],
       "line-start" : 131,
       "ast" : {
@@ -316,6 +317,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "cloneBytes"
@@ -335,9 +337,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 9 ],
-      "in-vars" : [ 1, 7, 2, 6 ],
+      "in-vars" : [ 7, 6, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 2 ],
+      "out-vars" : [ 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : 136,
       "ast" : {
@@ -404,13 +406,13 @@
       "line-end" : 141,
       "code" : "if b.tx.writable && !unaligned {\n\tchild.bucket = &bucket{}\n\t*child.bucket = *(*bucket)(unsafe.Pointer(&value[0]))\n} else {\n\tchild.bucket = (*bucket)(unsafe.Pointer(&value[0]))\n}",
       "entry" : false,
-      "use-vars" : [ 7, 1 ]
+      "use-vars" : [ 1, 7 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 8 ],
       "in-vars" : [ 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 6 ],
+      "out-vars" : [ 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 137,
       "ast" : {
@@ -470,7 +472,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 6 ],
+      "in-vars" : [ 6, 2 ],
       "exit" : false,
       "out-vars" : [ 2, 6 ],
       "decl-vars" : [ ],
@@ -592,7 +594,7 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 6 ],
+      "in-vars" : [ 6, 2 ],
       "exit" : false,
       "out-vars" : [ 2, 6 ],
       "decl-vars" : [ ],
@@ -700,11 +702,11 @@
       "line-end" : 140,
       "code" : "child.bucket = (*bucket)(unsafe.Pointer(&value[0]))",
       "entry" : false,
-      "use-vars" : [ 6, 2 ]
+      "use-vars" : [ 2, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11, 12 ],
-      "in-vars" : [ 2, 6 ],
+      "in-vars" : [ 6, 2 ],
       "exit" : false,
       "out-vars" : [ 2, 6 ],
       "decl-vars" : [ ],
@@ -757,7 +759,7 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 2, 6 ],
+      "in-vars" : [ 6, 2 ],
       "exit" : false,
       "out-vars" : [ 6 ],
       "decl-vars" : [ ],

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 2, 1 ],
+      "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 2 ],
+      "out-vars" : [ 2, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3, 4 ],
       "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 2 ],
+      "out-vars" : [ 3, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 25,
       "ast" : {
@@ -125,6 +125,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Errorf"
@@ -145,7 +146,7 @@
       "successors" : [ 5 ],
       "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 3 ],
+      "out-vars" : [ 3, 6, 2, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 31,
       "ast" : {
@@ -174,6 +175,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Getpagesize"
@@ -193,9 +195,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 1, 3, 2 ],
+      "in-vars" : [ 6, 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 7, 6 ],
+      "out-vars" : [ 6, 7, 1, 3 ],
       "decl-vars" : [ 7 ],
       "line-start" : 32,
       "ast" : {
@@ -284,9 +286,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 7, 6, 1, 3 ],
+      "in-vars" : [ 6, 7, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 3 ],
+      "out-vars" : [ 3, 8, 1 ],
       "decl-vars" : [ 8 ],
       "line-start" : 33,
       "ast" : {
@@ -360,8 +362,8 @@
       "successors" : [ 8 ],
       "in-vars" : [ 8, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 10 ],
-      "decl-vars" : [ 10, 9 ],
+      "out-vars" : [ 9, 10, 8, 1 ],
+      "decl-vars" : [ 9, 10 ],
       "line-start" : 35,
       "ast" : {
         "kind" : "statement",
@@ -412,6 +414,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "createPerfEvent"
@@ -431,9 +434,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 11 ],
-      "in-vars" : [ 10, 9, 8, 1 ],
+      "in-vars" : [ 10, 8, 1, 9 ],
       "exit" : false,
-      "out-vars" : [ 10, 9, 8, 1 ],
+      "out-vars" : [ 8, 1, 9, 10 ],
       "decl-vars" : [ ],
       "line-start" : 36,
       "ast" : {
@@ -448,7 +451,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 10
+              "variable" : 9
             }
           },
           "operator" : "!=",
@@ -471,11 +474,11 @@
       "line-end" : 38,
       "code" : "if err != nil {\n\treturn nil, errors.Wrap(err, \"can't create perf event\")\n}",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 10 ],
+      "in-vars" : [ 9 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -501,7 +504,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 10
+              "variable" : 9
             }
           }, {
             "go-type" : 26,
@@ -523,6 +526,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Wrap"
@@ -537,13 +541,13 @@
       "line-end" : 37,
       "code" : "return nil, errors.Wrap(err, \"can't create perf event\")",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 14 ],
-      "in-vars" : [ 8, 1, 11, 9 ],
+      "in-vars" : [ 8, 1, 10, 11 ],
       "exit" : false,
-      "out-vars" : [ 11, 9, 8, 1 ],
+      "out-vars" : [ 10, 11, 8, 1 ],
       "decl-vars" : [ ],
       "line-start" : 40,
       "ast" : {
@@ -585,9 +589,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 9, 8, 1 ],
+      "in-vars" : [ 10, 8, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 11, 9, 8 ],
+      "out-vars" : [ 10, 11, 8, 1 ],
       "decl-vars" : [ 11 ],
       "line-start" : 40,
       "ast" : {
@@ -611,7 +615,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 9
+              "variable" : 10
             }
           }, {
             "go-type" : 43,
@@ -633,6 +637,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "SetNonblock"
@@ -648,11 +653,11 @@
       "line-end" : 40,
       "code" : "err := unix.SetNonblock(fd, true)",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 11, 9 ],
+      "in-vars" : [ 10, 11 ],
       "exit" : false,
       "out-vars" : [ 11 ],
       "decl-vars" : [ ],
@@ -669,7 +674,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 9
+              "variable" : 10
             }
           } ],
           "ellipsis" : false,
@@ -684,6 +689,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Close"
@@ -698,7 +704,7 @@
       "line-end" : 41,
       "code" : "unix.Close(fd)",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -739,10 +745,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 9, 8, 1 ],
+      "in-vars" : [ 10, 8, 1 ],
       "exit" : false,
-      "out-vars" : [ 10, 9, 12, 1 ],
-      "decl-vars" : [ 10, 12 ],
+      "out-vars" : [ 12, 1, 9, 10 ],
+      "decl-vars" : [ 9, 12 ],
       "line-start" : 45,
       "ast" : {
         "kind" : "statement",
@@ -763,7 +769,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 10
+            "variable" : 9
           }
         } ],
         "right" : [ {
@@ -775,7 +781,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 9
+              "variable" : 10
             }
           }, {
             "go-type" : 16,
@@ -821,6 +827,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 7,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Mmap"
@@ -836,13 +843,13 @@
       "line-end" : 45,
       "code" : "mmap, err := unix.Mmap(fd, 0, size, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED)",
       "entry" : false,
-      "use-vars" : [ 9, 8 ]
+      "use-vars" : [ 10, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 16, 18 ],
-      "in-vars" : [ 10, 9, 12, 1 ],
+      "in-vars" : [ 12, 1, 9, 10 ],
       "exit" : false,
-      "out-vars" : [ 10, 9, 12, 1 ],
+      "out-vars" : [ 9, 10, 12, 1 ],
       "decl-vars" : [ ],
       "line-start" : 46,
       "ast" : {
@@ -857,7 +864,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 10
+              "variable" : 9
             }
           },
           "operator" : "!=",
@@ -880,13 +887,13 @@
       "line-end" : 49,
       "code" : "if err != nil {\n\tunix.Close(fd)\n\treturn nil, err\n}",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 10, 9 ],
+      "in-vars" : [ 9, 10 ],
       "exit" : false,
-      "out-vars" : [ 10 ],
+      "out-vars" : [ 9 ],
       "decl-vars" : [ ],
       "line-start" : 47,
       "ast" : {
@@ -901,7 +908,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "fd",
-              "variable" : 9
+              "variable" : 10
             }
           } ],
           "ellipsis" : false,
@@ -916,6 +923,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Close"
@@ -930,11 +938,11 @@
       "line-end" : 47,
       "code" : "unix.Close(fd)",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 10 ],
+      "in-vars" : [ 9 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -959,7 +967,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 10
+            "variable" : 9
           }
         } ]
       },
@@ -967,13 +975,13 @@
       "line-end" : 48,
       "code" : "return nil, err",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 12, 1, 9 ],
+      "in-vars" : [ 10, 12, 1 ],
       "exit" : false,
-      "out-vars" : [ 9, 13, 12, 1 ],
+      "out-vars" : [ 13, 12, 1, 10 ],
       "decl-vars" : [ 13 ],
       "line-start" : 55,
       "ast" : {
@@ -1077,7 +1085,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 9, 13, 12, 1 ],
+      "in-vars" : [ 10, 13, 12, 1 ],
       "exit" : false,
       "out-vars" : [ 20 ],
       "decl-vars" : [ 20 ],
@@ -1136,7 +1144,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "fd",
-                  "variable" : 9
+                  "variable" : 10
                 }
               }
             }, {
@@ -1313,6 +1321,7 @@
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
+                    "function" : 8,
                     "ident-kind" : "Func",
                     "kind" : "ident",
                     "value" : "newRingReader"
@@ -1332,7 +1341,7 @@
       "line-end" : 62,
       "code" : "ring := &perfEventRing{\n\tfd:         fd,\n\tcpu:        cpu,\n\tmmap:       mmap,\n\tringReader: newRingReader(meta, mmap[meta.Data_offset:meta.Data_offset+meta.Data_size]),\n}",
       "entry" : false,
-      "use-vars" : [ 13, 12, 1, 9 ]
+      "use-vars" : [ 1, 13, 12, 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
@@ -1357,6 +1366,7 @@
             }
           }, {
             "field" : {
+              "function" : 10,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Close"
@@ -1398,6 +1408,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 9,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "SetFinalizer"
@@ -2135,16 +2146,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "fd",
+      "name" : "err",
       "package" : 0,
-      "type" : 2,
+      "type" : 21,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "err",
+      "name" : "fd",
       "package" : 0,
-      "type" : 21,
+      "type" : 2,
       "exported" : false,
       "embedded" : false,
       "field" : false

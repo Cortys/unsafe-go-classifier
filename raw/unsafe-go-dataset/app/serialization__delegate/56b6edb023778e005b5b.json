@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 41, 42, 40 ],
+      "in-vars" : [ 42, 40, 41 ],
       "exit" : false,
       "out-vars" : [ 42, 40, 41 ],
       "decl-vars" : [ ],
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
       "out-vars" : [ 42, 44, 40 ],
       "decl-vars" : [ 44 ],
@@ -74,6 +74,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "UnsafeIndirect"
@@ -120,7 +121,7 @@
       "successors" : [ 4, 6 ],
       "in-vars" : [ 42, 44, 40 ],
       "exit" : false,
-      "out-vars" : [ 42, 44 ],
+      "out-vars" : [ 44, 42 ],
       "decl-vars" : [ ],
       "line-start" : 93,
       "ast" : {
@@ -132,6 +133,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 2,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "IsNullable"
@@ -191,6 +193,7 @@
               },
               "type" : "identifier",
               "value" : {
+                "function" : 3,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "IsNil"
@@ -226,6 +229,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "WriteNil"
@@ -278,7 +282,7 @@
       "successors" : [ 7 ],
       "in-vars" : [ 42, 44 ],
       "exit" : false,
-      "out-vars" : [ 46, 42 ],
+      "out-vars" : [ 42, 46 ],
       "decl-vars" : [ 46 ],
       "line-start" : 97,
       "ast" : {
@@ -339,7 +343,7 @@
       "in-vars" : [ 42, 46 ],
       "exit" : false,
       "out-vars" : [ 42, 47, 48 ],
-      "decl-vars" : [ 47, 48 ],
+      "decl-vars" : [ 48, 47 ],
       "line-start" : 98,
       "ast" : {
         "kind" : "statement",
@@ -367,6 +371,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "MarshalJSON"
@@ -402,7 +407,7 @@
       "successors" : [ 9, 10 ],
       "in-vars" : [ 48, 42, 47 ],
       "exit" : false,
-      "out-vars" : [ 47, 48, 42 ],
+      "out-vars" : [ 42, 47, 48 ],
       "decl-vars" : [ ],
       "line-start" : 99,
       "ast" : {
@@ -417,7 +422,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 47
+              "variable" : 48
             }
           },
           "operator" : "!=",
@@ -440,11 +445,11 @@
       "line-end" : 109,
       "code" : "if err != nil {\n\tstream.Error = err\n} else {\n\n\tl := len(bytes)\n\tif l > 0 && bytes[l-1] == '\\n' {\n\t\tbytes = bytes[:l-1]\n\t}\n\tstream.Write(bytes)\n}",
       "entry" : false,
-      "use-vars" : [ 47 ]
+      "use-vars" : [ 48 ]
     }, {
       "update-vars" : [ 42 ],
       "successors" : [ 1 ],
-      "in-vars" : [ 47, 42 ],
+      "in-vars" : [ 42, 48 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -481,7 +486,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 47
+            "variable" : 48
           }
         } ],
         "type" : "assign"
@@ -490,13 +495,13 @@
       "line-end" : 100,
       "code" : "stream.Error = err",
       "entry" : false,
-      "use-vars" : [ 47, 42 ]
+      "use-vars" : [ 48, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 48, 42 ],
+      "in-vars" : [ 47, 42 ],
       "exit" : false,
-      "out-vars" : [ 48, 42, 50 ],
+      "out-vars" : [ 42, 47, 50 ],
       "decl-vars" : [ 50 ],
       "line-start" : 104,
       "ast" : {
@@ -520,7 +525,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 48
+              "variable" : 47
             }
           } ],
           "ellipsis" : false,
@@ -544,13 +549,13 @@
       "line-end" : 104,
       "code" : "l := len(bytes)",
       "entry" : false,
-      "use-vars" : [ 48 ]
+      "use-vars" : [ 47 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 13 ],
-      "in-vars" : [ 50, 48, 42 ],
+      "in-vars" : [ 42, 47, 50 ],
       "exit" : false,
-      "out-vars" : [ 42, 50, 48 ],
+      "out-vars" : [ 50, 42, 47 ],
       "decl-vars" : [ ],
       "line-start" : 105,
       "ast" : {
@@ -622,7 +627,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "bytes",
-                  "variable" : 48
+                  "variable" : 47
                 }
               },
               "type" : "index"
@@ -647,13 +652,13 @@
       "line-end" : 107,
       "code" : "if l > 0 && bytes[l-1] == '\\n' {\n\tbytes = bytes[:l-1]\n}",
       "entry" : false,
-      "use-vars" : [ 50, 48 ]
+      "use-vars" : [ 50, 47 ]
     }, {
-      "update-vars" : [ 48 ],
+      "update-vars" : [ 47 ],
       "successors" : [ 13 ],
-      "in-vars" : [ 50, 48, 42 ],
+      "in-vars" : [ 42, 47, 50 ],
       "exit" : false,
-      "out-vars" : [ 48, 42 ],
+      "out-vars" : [ 42, 47 ],
       "decl-vars" : [ ],
       "line-start" : 106,
       "ast" : {
@@ -666,7 +671,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "bytes",
-            "variable" : 48
+            "variable" : 47
           }
         } ],
         "right" : [ {
@@ -709,21 +714,21 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 48
+              "variable" : 47
             }
           }
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 48 ],
+      "assign-vars" : [ 47 ],
       "line-end" : 106,
       "code" : "bytes = bytes[:l-1]",
       "entry" : false,
-      "use-vars" : [ 50, 48 ]
+      "use-vars" : [ 47, 50 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 48, 42 ],
+      "in-vars" : [ 42, 47 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -740,12 +745,13 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 48
+              "variable" : 47
             }
           } ],
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Write"
@@ -774,7 +780,7 @@
       "line-end" : 108,
       "code" : "stream.Write(bytes)",
       "entry" : false,
-      "use-vars" : [ 42, 48 ]
+      "use-vars" : [ 42, 47 ]
     } ],
     "code" : "func (encoder *marshalerEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\tobj := encoder.valType.UnsafeIndirect(ptr)\n\tif encoder.valType.IsNullable() && reflect2.IsNil(obj) {\n\t\tstream.WriteNil()\n\t\treturn\n\t}\n\tmarshaler := obj.(json.Marshaler)\n\tbytes, err := marshaler.MarshalJSON()\n\tif err != nil {\n\t\tstream.Error = err\n\t} else {\n\n\t\tl := len(bytes)\n\t\tif l > 0 && bytes[l-1] == '\\n' {\n\t\t\tbytes = bytes[:l-1]\n\t\t}\n\t\tstream.Write(bytes)\n\t}\n}",
     "defines" : [ 0 ],
@@ -3007,16 +3013,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "err",
+      "name" : "bytes",
       "package" : 0,
-      "type" : 135,
+      "type" : 133,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "bytes",
+      "name" : "err",
       "package" : 0,
-      "type" : 133,
+      "type" : 135,
       "exported" : false,
       "embedded" : false,
       "field" : false

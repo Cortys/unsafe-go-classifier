@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 1 ],
+      "in-vars" : [ 1, 2 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 4 ],
       "decl-vars" : [ 4 ],
@@ -83,6 +83,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Dir"
@@ -102,9 +103,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 4, 1, 2 ],
+      "in-vars" : [ 1, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 4, 1 ],
+      "out-vars" : [ 4, 1, 5, 2 ],
       "decl-vars" : [ 5 ],
       "line-start" : 293,
       "ast" : {
@@ -151,9 +152,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 1, 6, 5, 2 ],
+      "in-vars" : [ 1, 5, 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 5, 2 ],
+      "out-vars" : [ 1, 5, 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : 294,
       "ast" : {
@@ -195,9 +196,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 4, 1, 5, 2 ],
+      "in-vars" : [ 5, 2, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 5, 2 ],
+      "out-vars" : [ 1, 5, 2, 6 ],
       "decl-vars" : [ 6 ],
       "line-start" : 294,
       "ast" : {
@@ -252,6 +253,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Statfs"
@@ -407,6 +409,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Errorf"
@@ -456,6 +459,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "value"
@@ -491,7 +495,7 @@
       "successors" : [ 11, 12 ],
       "in-vars" : [ 8, 1, 9 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1 ],
+      "out-vars" : [ 8, 1, 9 ],
       "decl-vars" : [ ],
       "line-start" : 302,
       "ast" : {
@@ -730,6 +734,7 @@
                       "kind" : "expression",
                       "type" : "identifier",
                       "value" : {
+                        "function" : 6,
                         "ident-kind" : "Func",
                         "kind" : "ident",
                         "value" : "newPtr"
@@ -784,6 +789,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "bpfCall"
@@ -852,6 +858,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 7,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Wrapf"
@@ -866,7 +873,7 @@
       "line-end" : 310,
       "code" : "return errors.Wrapf(err, \"pin object %s\", fileName)",
       "entry" : false,
-      "use-vars" : [ 8, 1 ]
+      "use-vars" : [ 1, 8 ]
     } ],
     "code" : "func bpfPinObject(fileName string, fd *bpfFD) error {\n\tdirName := filepath.Dir(fileName)\n\tvar statfs unix.Statfs_t\n\tif err := unix.Statfs(dirName, &statfs); err != nil {\n\t\treturn err\n\t}\n\tif uint64(statfs.Type) != bpfFSType {\n\t\treturn errors.Errorf(\"%s is not on a bpf filesystem\", fileName)\n\t}\n\n\tvalue, err := fd.value()\n\tif err != nil {\n\t\treturn err\n\t}\n\n\t_, err = bpfCall(_ObjPin, unsafe.Pointer(&bpfPinObjAttr{\n\t\tfileName: newPtr(unsafe.Pointer(&[]byte(fileName)[0])),\n\t\tfd:       value,\n\t}), 16)\n\treturn errors.Wrapf(err, \"pin object %s\", fileName)\n}",
     "defines" : [ 0 ],

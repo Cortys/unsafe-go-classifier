@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 6, 9, 5, 7 ],
+      "in-vars" : [ 7, 9, 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7 ],
+      "out-vars" : [ 9, 5, 6, 7 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 6, 10, 9, 5, 7 ],
+      "in-vars" : [ 5, 6, 10, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 9, 5, 7, 6, 10 ],
+      "out-vars" : [ 7, 9, 5, 6, 10 ],
       "decl-vars" : [ ],
       "line-start" : 73,
       "ast" : {
@@ -86,9 +86,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 6, 9, 5, 7 ],
+      "in-vars" : [ 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 9, 5, 7 ],
+      "out-vars" : [ 6, 10, 7, 9, 5 ],
       "decl-vars" : [ 10 ],
       "line-start" : 73,
       "ast" : {
@@ -108,6 +108,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "ok"
@@ -169,9 +170,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 6, 9, 5, 7 ],
+      "in-vars" : [ 6, 7, 9, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7 ],
+      "out-vars" : [ 5, 6, 7, 9 ],
       "decl-vars" : [ ],
       "line-start" : 76,
       "ast" : {
@@ -253,6 +254,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "New"
@@ -271,9 +273,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 6, 9, 5, 7 ],
+      "in-vars" : [ 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7 ],
+      "out-vars" : [ 6, 7, 9, 5 ],
       "decl-vars" : [ ],
       "line-start" : 82,
       "ast" : {
@@ -292,6 +294,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "readRawRecordNonblock"
@@ -353,9 +356,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 6, 9, 5 ],
+      "in-vars" : [ 6, 7, 9, 5 ],
       "exit" : false,
-      "out-vars" : [ 7, 12, 6, 9, 5 ],
+      "out-vars" : [ 5, 6, 7, 9, 12 ],
       "decl-vars" : [ 12 ],
       "line-start" : 90,
       "ast" : {
@@ -402,9 +405,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 7, 12, 6, 9, 5 ],
+      "in-vars" : [ 6, 7, 9, 12, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 7, 12, 13, 14, 6, 9 ],
+      "out-vars" : [ 6, 13, 14, 7, 9, 12, 5 ],
       "decl-vars" : [ 13, 14 ],
       "line-start" : 91,
       "ast" : {
@@ -433,6 +436,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 4,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Deadline"
@@ -466,9 +470,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 16 ],
-      "in-vars" : [ 5, 7, 12, 13, 14, 6, 9 ],
+      "in-vars" : [ 5, 6, 13, 14, 7, 9, 12 ],
       "exit" : false,
-      "out-vars" : [ 7, 12, 13, 6, 9, 5 ],
+      "out-vars" : [ 6, 14, 7, 9, 12, 5 ],
       "decl-vars" : [ ],
       "line-start" : 92,
       "ast" : {
@@ -480,7 +484,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "ok",
-            "variable" : 14
+            "variable" : 13
           }
         },
         "kind" : "statement",
@@ -490,13 +494,13 @@
       "line-end" : 98,
       "code" : "if ok {\n\ttimeout = time.Until(deadline)\n\tif timeout <= 0 {\n\t\t<-ctx.Done()\n\t\treturn ctx.Err()\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 14 ]
+      "use-vars" : [ 13 ]
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 13 ],
-      "in-vars" : [ 13, 6, 9, 5, 7 ],
+      "in-vars" : [ 14, 7, 9, 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7, 12 ],
+      "out-vars" : [ 5, 6, 7, 9, 12 ],
       "decl-vars" : [ ],
       "line-start" : 93,
       "ast" : {
@@ -521,7 +525,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "deadline",
-              "variable" : 13
+              "variable" : 14
             }
           } ],
           "ellipsis" : false,
@@ -536,6 +540,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Until"
@@ -551,13 +556,13 @@
       "line-end" : 93,
       "code" : "timeout = time.Until(deadline)",
       "entry" : false,
-      "use-vars" : [ 13 ]
+      "use-vars" : [ 14 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14, 16 ],
-      "in-vars" : [ 9, 5, 7, 12, 6 ],
+      "in-vars" : [ 12, 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7, 12 ],
+      "out-vars" : [ 12, 5, 6, 7, 9 ],
       "decl-vars" : [ ],
       "line-start" : 94,
       "ast" : {
@@ -614,6 +619,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 6,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "Done"
@@ -661,6 +667,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 7,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Err"
@@ -693,9 +700,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 6, 9, 5, 7, 12 ],
+      "in-vars" : [ 12, 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7, 12 ],
+      "out-vars" : [ 12, 5, 6, 7, 9 ],
       "decl-vars" : [ ],
       "line-start" : 103,
       "ast" : {
@@ -775,9 +782,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 5, 7, 12, 6, 9 ],
+      "in-vars" : [ 6, 7, 9, 12, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 7, 12, 6, 9 ],
+      "out-vars" : [ 9, 12, 5, 6, 7 ],
       "decl-vars" : [ ],
       "line-start" : 104,
       "ast" : {
@@ -857,9 +864,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1, 19, 33 ],
-      "in-vars" : [ 6, 9, 5, 7, 12 ],
+      "in-vars" : [ 6, 7, 9, 12, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7, 12 ],
+      "out-vars" : [ 6, 7, 9, 12, 5 ],
       "decl-vars" : [ ],
       "line-start" : 105,
       "ast" : {
@@ -874,7 +881,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 6, 5 ],
+      "in-vars" : [ 5, 6 ],
       "exit" : false,
       "out-vars" : [ 6, 5 ],
       "decl-vars" : [ ],
@@ -918,6 +925,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 7,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "Err"
@@ -1107,6 +1115,7 @@
                 },
                 "type" : "identifier",
                 "value" : {
+                  "function" : 8,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "Write"
@@ -1308,6 +1317,7 @@
                 },
                 "type" : "identifier",
                 "value" : {
+                  "function" : 9,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "Read"
@@ -1361,6 +1371,7 @@
               "ellipsis" : false,
               "function" : {
                 "field" : {
+                  "function" : 6,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "Done"
@@ -1397,9 +1408,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 6, 5 ],
+      "in-vars" : [ 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 5 ],
+      "out-vars" : [ 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 106,
       "ast" : {
@@ -1414,6 +1425,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 6,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "Done"
@@ -1448,9 +1460,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 6, 5 ],
+      "in-vars" : [ 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 22, 5 ],
+      "out-vars" : [ 5, 6, 22 ],
       "decl-vars" : [ 22 ],
       "line-start" : 107,
       "ast" : {
@@ -1485,7 +1497,7 @@
       "successors" : [ 23 ],
       "in-vars" : [ 5, 6, 22 ],
       "exit" : false,
-      "out-vars" : [ 22, 17, 5 ],
+      "out-vars" : [ 5, 17, 22 ],
       "decl-vars" : [ 17 ],
       "line-start" : 108,
       "ast" : {
@@ -1505,6 +1517,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 7,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Err"
@@ -1538,9 +1551,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24, 28 ],
-      "in-vars" : [ 22, 17, 5 ],
+      "in-vars" : [ 5, 17, 22 ],
       "exit" : false,
-      "out-vars" : [ 22, 17, 5 ],
+      "out-vars" : [ 5, 17, 22 ],
       "decl-vars" : [ ],
       "line-start" : 109,
       "ast" : {
@@ -1589,9 +1602,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 25 ],
-      "in-vars" : [ 17, 5 ],
+      "in-vars" : [ 5, 17 ],
       "exit" : false,
-      "out-vars" : [ 19, 17, 5 ],
+      "out-vars" : [ 5, 17, 19 ],
       "decl-vars" : [ 19 ],
       "line-start" : 113,
       "ast" : {
@@ -1624,9 +1637,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26 ],
-      "in-vars" : [ 19, 17, 5 ],
+      "in-vars" : [ 5, 17, 19 ],
       "exit" : false,
-      "out-vars" : [ 17, 5, 21 ],
+      "out-vars" : [ 5, 17, 21 ],
       "decl-vars" : [ 21 ],
       "line-start" : 114,
       "ast" : {
@@ -1733,9 +1746,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27 ],
-      "in-vars" : [ 5, 21, 17 ],
+      "in-vars" : [ 5, 17, 21 ],
       "exit" : false,
-      "out-vars" : [ 17, 5 ],
+      "out-vars" : [ 5, 17 ],
       "decl-vars" : [ ],
       "line-start" : 115,
       "ast" : {
@@ -1786,6 +1799,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 8,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Write"
@@ -1804,9 +1818,9 @@
     }, {
       "update-vars" : [ 22 ],
       "successors" : [ 28 ],
-      "in-vars" : [ 17, 5 ],
+      "in-vars" : [ 5, 17 ],
       "exit" : false,
-      "out-vars" : [ 22, 17, 5 ],
+      "out-vars" : [ 5, 17, 22 ],
       "decl-vars" : [ ],
       "line-start" : 116,
       "ast" : {
@@ -1840,9 +1854,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 29 ],
-      "in-vars" : [ 5, 22, 17 ],
+      "in-vars" : [ 5, 17, 22 ],
       "exit" : false,
-      "out-vars" : [ 22, 17, 5 ],
+      "out-vars" : [ 5, 17, 22 ],
       "decl-vars" : [ ],
       "line-start" : 118,
       "ast" : {
@@ -1885,9 +1899,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 30, 32 ],
-      "in-vars" : [ 22, 17, 5 ],
+      "in-vars" : [ 5, 17, 22 ],
       "exit" : false,
-      "out-vars" : [ 17, 5 ],
+      "out-vars" : [ 5, 17 ],
       "decl-vars" : [ ],
       "line-start" : 127,
       "ast" : {
@@ -1913,9 +1927,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 17, 5 ],
+      "in-vars" : [ 5, 17 ],
       "exit" : false,
-      "out-vars" : [ 17, 5, 24 ],
+      "out-vars" : [ 5, 17, 24 ],
       "decl-vars" : [ 24 ],
       "line-start" : 128,
       "ast" : {
@@ -1969,7 +1983,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 32 ],
-      "in-vars" : [ 17, 5, 24 ],
+      "in-vars" : [ 5, 17, 24 ],
       "exit" : false,
       "out-vars" : [ 17 ],
       "decl-vars" : [ ],
@@ -2031,6 +2045,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 9,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Read"
@@ -2077,9 +2092,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34 ],
-      "in-vars" : [ 6, 9, 5, 7, 12 ],
+      "in-vars" : [ 12, 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 12, 6, 9, 5, 7 ],
+      "out-vars" : [ 7, 9, 12, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 132,
       "ast" : {
@@ -2207,6 +2222,7 @@
                 "ellipsis" : false,
                 "function" : {
                   "field" : {
+                    "function" : 6,
                     "ident-kind" : "Func",
                     "kind" : "ident",
                     "value" : "Done"
@@ -2240,6 +2256,7 @@
               "ellipsis" : false,
               "function" : {
                 "field" : {
+                  "function" : 7,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "Err"
@@ -2325,6 +2342,7 @@
               "ellipsis" : false,
               "function" : {
                 "field" : {
+                  "function" : 3,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "readRawRecordNonblock"
@@ -2421,9 +2439,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 35 ],
-      "in-vars" : [ 6, 9, 5, 7, 12 ],
+      "in-vars" : [ 12, 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 7, 12, 6, 9, 5, 25 ],
+      "out-vars" : [ 7, 9, 12, 5, 6, 25 ],
       "decl-vars" : [ 25 ],
       "line-start" : 132,
       "ast" : {
@@ -2476,9 +2494,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 36, 37 ],
-      "in-vars" : [ 12, 6, 9, 5, 25, 7 ],
+      "in-vars" : [ 6, 25, 7, 9, 12, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 25, 7, 12 ],
+      "out-vars" : [ 25, 7, 9, 12, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 133,
       "ast" : {
@@ -2570,9 +2588,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 38, 39 ],
-      "in-vars" : [ 6, 9, 5, 25, 7, 12 ],
+      "in-vars" : [ 7, 9, 12, 5, 6, 25 ],
       "exit" : false,
-      "out-vars" : [ 12, 6, 9, 5, 25, 7 ],
+      "out-vars" : [ 12, 5, 6, 25, 7, 9 ],
       "decl-vars" : [ ],
       "line-start" : 137,
       "ast" : {
@@ -2637,9 +2655,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 40, 42 ],
-      "in-vars" : [ 7, 12, 6, 9, 5, 25 ],
+      "in-vars" : [ 9, 12, 5, 6, 25, 7 ],
       "exit" : false,
-      "out-vars" : [ 9, 5, 7, 12, 6 ],
+      "out-vars" : [ 12, 5, 6, 7, 9 ],
       "decl-vars" : [ ],
       "line-start" : 142,
       "ast" : {
@@ -2699,6 +2717,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 6,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "Done"
@@ -2746,6 +2765,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 7,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Err"
@@ -2778,9 +2798,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 44 ],
-      "in-vars" : [ 6, 9, 5, 7, 12 ],
+      "in-vars" : [ 12, 5, 6, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 7, 12, 6, 9, 5 ],
+      "out-vars" : [ 7, 9, 12, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 155,
       "ast" : {
@@ -2803,6 +2823,7 @@
             "ellipsis" : false,
             "function" : {
               "field" : {
+                "function" : 3,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "readRawRecordNonblock"
@@ -2835,13 +2856,13 @@
       "line-end" : 176,
       "code" : "if !ev.readRawRecordNonblock(raw) {\n\n\tgoto again\n}",
       "entry" : false,
-      "use-vars" : [ 7, 5 ]
+      "use-vars" : [ 5, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 6, 9, 5, 7, 12 ],
+      "in-vars" : [ 5, 6, 7, 9, 12 ],
       "exit" : false,
-      "out-vars" : [ 6, 9, 5, 7, 12 ],
+      "out-vars" : [ 5, 6, 7, 9, 12 ],
       "decl-vars" : [ ],
       "line-start" : 175,
       "ast" : {
@@ -4073,16 +4094,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "deadline",
+      "name" : "ok",
       "package" : 0,
-      "type" : 7,
+      "type" : 19,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "ok",
+      "name" : "deadline",
       "package" : 0,
-      "type" : 19,
+      "type" : 7,
       "exported" : false,
       "embedded" : false,
       "field" : false

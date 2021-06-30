@@ -284,7 +284,7 @@
       "line-end" : 58,
       "code" : "if h.Len < SizeofCmsghdr || uint64(h.Len) > uint64(len(b)) {\n\treturn nil, nil, EINVAL\n}",
       "entry" : false,
-      "use-vars" : [ 5, 1 ]
+      "use-vars" : [ 1, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -392,6 +392,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 1,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "cmsgAlignOf"
@@ -427,7 +428,7 @@
       "line-end" : 59,
       "code" : "return h, b[cmsgAlignOf(SizeofCmsghdr):h.Len], nil",
       "entry" : false,
-      "use-vars" : [ 1, 5 ]
+      "use-vars" : [ 5, 1 ]
     } ],
     "code" : "func socketControlMessageHeaderAndData(b []byte) (*Cmsghdr, []byte, error) {\n\th := (*Cmsghdr)(unsafe.Pointer(&b[0]))\n\tif h.Len < SizeofCmsghdr || uint64(h.Len) > uint64(len(b)) {\n\t\treturn nil, nil, EINVAL\n\t}\n\treturn h, b[cmsgAlignOf(SizeofCmsghdr):h.Len], nil\n}",
     "defines" : [ 0 ],

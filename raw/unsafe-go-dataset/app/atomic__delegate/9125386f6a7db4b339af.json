@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
       "out-vars" : [ 2, 1 ],
       "decl-vars" : [ ],
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 5 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ 5 ],
       "line-start" : 57,
       "ast" : {
@@ -151,9 +151,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 5, 2 ],
+      "in-vars" : [ 2, 1, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 8, 5 ],
+      "out-vars" : [ 8, 1, 5 ],
       "decl-vars" : [ 8 ],
       "line-start" : 59,
       "ast" : {
@@ -260,13 +260,13 @@
       "line-end" : 62,
       "code" : "newBucket := &bucket{\n\tdata: data,\n\tseq:  d.writeIndex,\n}",
       "entry" : false,
-      "use-vars" : [ 2, 1 ]
+      "use-vars" : [ 1, 2 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 1, 8, 5 ],
+      "in-vars" : [ 5, 8, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 8, 5 ],
+      "out-vars" : [ 5, 8, 1 ],
       "decl-vars" : [ ],
       "line-start" : 63,
       "ast" : {
@@ -304,7 +304,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 8, 5 ],
+      "in-vars" : [ 8, 1, 5 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -401,6 +401,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "StorePointer"
@@ -415,7 +416,7 @@
       "line-end" : 65,
       "code" : "atomic.StorePointer(&d.buffer[idx], unsafe.Pointer(newBucket))",
       "entry" : false,
-      "use-vars" : [ 5, 8, 1 ]
+      "use-vars" : [ 1, 5, 8 ]
     } ],
     "code" : "// Set sets the data in the next slot of the ring buffer.\nfunc (d *OneToOne) Set(data GenericDataType) {\n\tidx := d.writeIndex % uint64(len(d.buffer))\n\n\tnewBucket := &bucket{\n\t\tdata: data,\n\t\tseq:  d.writeIndex,\n\t}\n\td.writeIndex++\n\n\tatomic.StorePointer(&d.buffer[idx], unsafe.Pointer(newBucket))\n}",
     "defines" : [ 0 ],

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 6, 2, 3 ],
+      "in-vars" : [ 1, 2, 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 6 ],
+      "out-vars" : [ 2, 6, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 1, 6, 2 ],
+      "in-vars" : [ 3, 1, 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 6 ],
+      "out-vars" : [ 6, 3, 1, 2 ],
       "decl-vars" : [ 7 ],
       "line-start" : 1784,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 2, 3, 1, 6 ],
+      "in-vars" : [ 2, 6, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 6 ],
+      "out-vars" : [ 3, 1, 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1785,
       "ast" : {
@@ -149,9 +149,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 7 ],
+      "out-vars" : [ 7, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1786,
       "ast" : {
@@ -229,9 +229,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 6, 2, 3 ],
+      "in-vars" : [ 1, 2, 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 3, 1 ],
+      "out-vars" : [ 3, 1, 7, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1788,
       "ast" : {
@@ -296,10 +296,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 7, 2, 3 ],
+      "in-vars" : [ 7, 2, 3, 1 ],
       "exit" : false,
       "out-vars" : [ 8, 9 ],
-      "decl-vars" : [ 9, 8, 10 ],
+      "decl-vars" : [ 10, 8, 9 ],
       "line-start" : 1790,
       "ast" : {
         "kind" : "statement",
@@ -480,6 +480,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Syscall6"
@@ -499,9 +500,9 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 9, 8 ],
+      "in-vars" : [ 8, 9 ],
       "exit" : false,
-      "out-vars" : [ 8 ],
+      "out-vars" : [ 9 ],
       "decl-vars" : [ ],
       "line-start" : 1791,
       "ast" : {
@@ -539,7 +540,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 9
+              "variable" : 8
             }
           },
           "type" : "cast"
@@ -550,13 +551,13 @@
       "line-end" : 1791,
       "code" : "n = int(r0)",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 8 ],
+      "in-vars" : [ 9 ],
       "exit" : false,
-      "out-vars" : [ 8 ],
+      "out-vars" : [ 9 ],
       "decl-vars" : [ ],
       "line-start" : 1792,
       "ast" : {
@@ -571,7 +572,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 8
+              "variable" : 9
             }
           },
           "operator" : "!=",
@@ -592,11 +593,11 @@
       "line-end" : 1794,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 8 ],
+      "in-vars" : [ 9 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -623,7 +624,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 8
+              "variable" : 9
             }
           } ],
           "ellipsis" : false,
@@ -632,6 +633,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "errnoErr"
@@ -647,7 +649,7 @@
       "line-end" : 1793,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -996,16 +998,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "e1",
+      "name" : "r0",
       "package" : 0,
-      "type" : 24,
+      "type" : 15,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "r0",
+      "name" : "e1",
       "package" : 0,
-      "type" : 15,
+      "type" : 24,
       "exported" : false,
       "embedded" : false,
       "field" : false

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 4, 1, 2, 6 ],
+      "in-vars" : [ 4, 2, 3, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 3, 4, 1, 2 ],
+      "out-vars" : [ 6, 1, 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 6, 3, 4, 1, 2 ],
+      "in-vars" : [ 4, 2, 3, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 3, 4, 1, 2 ],
+      "out-vars" : [ 6, 1, 4, 2, 3 ],
       "decl-vars" : [ 7 ],
       "line-start" : 752,
       "ast" : {
@@ -90,9 +90,9 @@
     }, {
       "update-vars" : [ 5, 7 ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 2, 6, 3, 4 ],
+      "in-vars" : [ 1, 4, 2, 3, 6 ],
       "exit" : false,
-      "out-vars" : [ 1, 7, 5, 6, 3, 4 ],
+      "out-vars" : [ 3, 5, 6, 1, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 753,
       "ast" : {
@@ -136,6 +136,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "BytePtrFromString"
@@ -147,7 +148,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 7, 5 ],
+      "assign-vars" : [ 5, 7 ],
       "line-end" : 753,
       "code" : "_p0, err = BytePtrFromString(attr)",
       "entry" : false,
@@ -155,9 +156,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 7, 5, 6, 3, 4, 1 ],
+      "in-vars" : [ 3, 5, 6, 1, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 7, 6, 3, 4 ],
+      "out-vars" : [ 3, 6, 1, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 754,
       "ast" : {
@@ -217,9 +218,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 3, 4, 1, 7, 6 ],
+      "in-vars" : [ 3, 6, 1, 7, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 7, 6, 3 ],
+      "out-vars" : [ 3, 6, 1, 7, 4 ],
       "decl-vars" : [ 8 ],
       "line-start" : 757,
       "ast" : {
@@ -266,9 +267,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 7, 6, 3, 4, 1 ],
+      "in-vars" : [ 1, 7, 4, 3, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 1, 7, 6 ],
+      "out-vars" : [ 7, 4, 3, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 758,
       "ast" : {
@@ -324,9 +325,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 3, 4, 1 ],
+      "in-vars" : [ 7, 4, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 7, 8, 3, 4, 1 ],
+      "out-vars" : [ 8, 3, 1, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 759,
       "ast" : {
@@ -404,9 +405,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 6, 3, 4, 1 ],
+      "in-vars" : [ 1, 7, 4, 3, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 1, 7, 8 ],
+      "out-vars" : [ 8, 3, 1, 7, 4 ],
       "decl-vars" : [ ],
       "line-start" : 761,
       "ast" : {
@@ -471,10 +472,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 7, 8, 3, 4, 1 ],
+      "in-vars" : [ 4, 8, 3, 1, 7 ],
       "exit" : false,
       "out-vars" : [ 9 ],
-      "decl-vars" : [ 10, 9, 11 ],
+      "decl-vars" : [ 9, 10, 11 ],
       "line-start" : 763,
       "ast" : {
         "kind" : "statement",
@@ -696,6 +697,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Syscall6"
@@ -711,7 +713,7 @@
       "line-end" : 763,
       "code" : "_, _, e1 := Syscall6(SYS_FSETXATTR, uintptr(fd), uintptr(unsafe.Pointer(_p0)), uintptr(_p1), uintptr(len(dest)), uintptr(flags), 0)",
       "entry" : false,
-      "use-vars" : [ 8, 7, 3, 4, 1 ]
+      "use-vars" : [ 3, 1, 4, 8, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 13 ],
@@ -793,6 +795,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "errnoErr"

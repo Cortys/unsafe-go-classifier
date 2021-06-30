@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
       "out-vars" : [ 41, 42, 40 ],
       "decl-vars" : [ ],
@@ -28,7 +28,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ ],
-      "in-vars" : [ 40, 43 ],
+      "in-vars" : [ 43, 40 ],
       "exit" : true,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
-      "out-vars" : [ 40, 41, 43, 42 ],
+      "out-vars" : [ 43, 40, 41, 42 ],
       "decl-vars" : [ 43 ],
       "line-start" : 202,
       "ast" : {
@@ -73,6 +73,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "BorrowStream"
@@ -117,9 +118,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 41, 43, 42, 40 ],
+      "in-vars" : [ 43, 40, 41, 42 ],
       "exit" : false,
-      "out-vars" : [ 40, 43, 42 ],
+      "out-vars" : [ 42, 43, 40 ],
       "decl-vars" : [ ],
       "line-start" : 204,
       "ast" : {
@@ -150,6 +151,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Encode"
@@ -189,13 +191,13 @@
       "line-end" : 204,
       "code" : "encoder.elemEncoder.Encode(ptr, tempStream)",
       "entry" : false,
-      "use-vars" : [ 41, 43, 40 ]
+      "use-vars" : [ 40, 41, 43 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 40, 43, 42 ],
+      "in-vars" : [ 43, 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 40, 43 ],
+      "out-vars" : [ 43, 40 ],
       "decl-vars" : [ ],
       "line-start" : 205,
       "ast" : {
@@ -221,6 +223,7 @@
               "ellipsis" : false,
               "function" : {
                 "field" : {
+                  "function" : 4,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "Buffer"
@@ -249,6 +252,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "WriteString"
@@ -277,7 +281,7 @@
       "line-end" : 205,
       "code" : "stream.WriteString(string(tempStream.Buffer()))",
       "entry" : false,
-      "use-vars" : [ 42, 43 ]
+      "use-vars" : [ 43, 42 ]
     } ],
     "code" : "func (encoder *stringModeStringEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\ttempStream := encoder.cfg.BorrowStream(nil)\n\tdefer encoder.cfg.ReturnStream(tempStream)\n\tencoder.elemEncoder.Encode(ptr, tempStream)\n\tstream.WriteString(string(tempStream.Buffer()))\n}",
     "defines" : [ 0 ],

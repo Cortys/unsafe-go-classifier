@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 1 ],
+      "out-vars" : [ 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 265,
       "ast" : {
@@ -116,7 +116,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 266,
       "ast" : {
@@ -157,6 +157,7 @@
               "ellipsis" : false,
               "function" : {
                 "field" : {
+                  "function" : 2,
                   "ident-kind" : "Func",
                   "kind" : "ident",
                   "value" : "typ"
@@ -192,6 +193,7 @@
               },
               "type" : "identifier",
               "value" : {
+                "function" : 1,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "Sprintf"
@@ -225,10 +227,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 5, 6 ],
-      "decl-vars" : [ 6, 5 ],
+      "out-vars" : [ 5, 6, 0, 1 ],
+      "decl-vars" : [ 5, 6 ],
       "line-start" : 270,
       "ast" : {
         "kind" : "statement",
@@ -306,7 +308,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 8 ],
-      "in-vars" : [ 5, 6, 0, 1 ],
+      "in-vars" : [ 0, 1, 5, 6 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 5, 6 ],
       "decl-vars" : [ ],
@@ -323,7 +325,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "count",
-              "variable" : 6
+              "variable" : 5
             }
           },
           "operator" : "==",
@@ -344,13 +346,13 @@
       "line-end" : 274,
       "code" : "if count == 0xFFFF {\n\tidx = 1\n\tcount = int(((*[maxAllocSize]pgid)(unsafe.Pointer(&p.ptr)))[0])\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 5 ]
     }, {
-      "update-vars" : [ 5 ],
+      "update-vars" : [ 6 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 1 ],
+      "out-vars" : [ 1, 6, 0 ],
       "decl-vars" : [ ],
       "line-start" : 272,
       "ast" : {
@@ -363,7 +365,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "idx",
-            "variable" : 5
+            "variable" : 6
           }
         } ],
         "right" : [ {
@@ -376,17 +378,17 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 5 ],
+      "assign-vars" : [ 6 ],
       "line-end" : 272,
       "code" : "idx = 1",
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 6 ],
+      "update-vars" : [ 5 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 1, 5, 0 ],
+      "in-vars" : [ 0, 1, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 1, 5 ],
+      "out-vars" : [ 5, 6, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 273,
       "ast" : {
@@ -399,7 +401,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "count",
-            "variable" : 6
+            "variable" : 5
           }
         } ],
         "right" : [ {
@@ -522,7 +524,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 6 ],
+      "assign-vars" : [ 5 ],
       "line-end" : 273,
       "code" : "count = int(((*[maxAllocSize]pgid)(unsafe.Pointer(&p.ptr)))[0])",
       "entry" : false,
@@ -532,7 +534,7 @@
       "successors" : [ 9, 10 ],
       "in-vars" : [ 1, 5, 6, 0 ],
       "exit" : false,
-      "out-vars" : [ 5, 6, 0, 1 ],
+      "out-vars" : [ 0, 1, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 277,
       "ast" : {
@@ -547,7 +549,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "count",
-              "variable" : 6
+              "variable" : 5
             }
           },
           "operator" : "==",
@@ -568,7 +570,7 @@
       "line-end" : 289,
       "code" : "if count == 0 {\n\tf.ids = nil\n} else {\n\tids := ((*[maxAllocSize]pgid)(unsafe.Pointer(&p.ptr)))[idx : idx+count]\n\n\tidsCopy := make([]pgid, count)\n\tcopy(idsCopy, ids)\n\n\tsort.Sort(pgids(idsCopy))\n\n\tf.readIDs(idsCopy)\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 1 ],
@@ -623,7 +625,7 @@
       "successors" : [ 11 ],
       "in-vars" : [ 1, 5, 6, 0 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 10 ],
+      "out-vars" : [ 0, 5, 10 ],
       "decl-vars" : [ 10 ],
       "line-start" : 280,
       "ast" : {
@@ -653,7 +655,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "idx",
-                "variable" : 5
+                "variable" : 6
               }
             },
             "operator" : "+",
@@ -665,7 +667,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "count",
-                "variable" : 6
+                "variable" : 5
               }
             },
             "type" : "binary"
@@ -680,7 +682,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "idx",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "target" : {
@@ -779,13 +781,13 @@
       "line-end" : 280,
       "code" : "ids := ((*[maxAllocSize]pgid)(unsafe.Pointer(&p.ptr)))[idx : idx+count]",
       "entry" : false,
-      "use-vars" : [ 6, 1, 5 ]
+      "use-vars" : [ 1, 6, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 0, 10, 6 ],
+      "in-vars" : [ 0, 5, 10 ],
       "exit" : false,
-      "out-vars" : [ 10, 9, 0 ],
+      "out-vars" : [ 9, 10, 0 ],
       "decl-vars" : [ 9 ],
       "line-start" : 283,
       "ast" : {
@@ -827,7 +829,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "count",
-              "variable" : 6
+              "variable" : 5
             }
           } ],
           "type" : "make"
@@ -838,11 +840,11 @@
       "line-end" : 283,
       "code" : "idsCopy := make([]pgid, count)",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 0, 10, 9 ],
+      "in-vars" : [ 0, 9, 10 ],
       "exit" : false,
       "out-vars" : [ 9, 0 ],
       "decl-vars" : [ ],
@@ -892,7 +894,7 @@
       "line-end" : 284,
       "code" : "copy(idsCopy, ids)",
       "entry" : false,
-      "use-vars" : [ 10, 9 ]
+      "use-vars" : [ 9, 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
@@ -944,6 +946,7 @@
             },
             "type" : "identifier",
             "value" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Sort"
@@ -962,7 +965,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 9, 0 ],
+      "in-vars" : [ 0, 9 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -1014,7 +1017,7 @@
       "line-end" : 288,
       "code" : "f.readIDs(idsCopy)",
       "entry" : false,
-      "use-vars" : [ 9, 0 ]
+      "use-vars" : [ 0, 9 ]
     } ],
     "code" : "// read initializes the freelist from a freelist page.\nfunc (f *freelist) read(p *page) {\n\tif (p.flags & freelistPageFlag) == 0 {\n\t\tpanic(fmt.Sprintf(\"invalid freelist page: %d, page type is %s\", p.id, p.typ()))\n\t}\n\n\tidx, count := 0, int(p.count)\n\tif count == 0xFFFF {\n\t\tidx = 1\n\t\tcount = int(((*[maxAllocSize]pgid)(unsafe.Pointer(&p.ptr)))[0])\n\t}\n\n\tif count == 0 {\n\t\tf.ids = nil\n\t} else {\n\t\tids := ((*[maxAllocSize]pgid)(unsafe.Pointer(&p.ptr)))[idx : idx+count]\n\n\t\tidsCopy := make([]pgid, count)\n\t\tcopy(idsCopy, ids)\n\n\t\tsort.Sort(pgids(idsCopy))\n\n\t\tf.readIDs(idsCopy)\n\t}\n}",
     "defines" : [ 0 ],
@@ -1613,14 +1616,14 @@
       "embedded" : false,
       "field" : true
     }, {
-      "name" : "idx",
+      "name" : "count",
       "package" : 0,
       "type" : 33,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "count",
+      "name" : "idx",
       "package" : 0,
       "type" : 33,
       "exported" : false,

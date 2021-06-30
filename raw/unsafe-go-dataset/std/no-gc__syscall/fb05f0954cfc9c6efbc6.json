@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2 ],
+      "out-vars" : [ 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
       "out-vars" : [ 5, 6 ],
-      "decl-vars" : [ 5, 7, 6 ],
+      "decl-vars" : [ 6, 7, 5 ],
       "line-start" : 521,
       "ast" : {
         "kind" : "statement",
@@ -173,6 +173,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "RawSyscall"
@@ -188,13 +189,13 @@
       "line-end" : 521,
       "code" : "r0, _, e1 := RawSyscall(SYS_GETGROUPS, uintptr(n), uintptr(unsafe.Pointer(list)), 0)",
       "entry" : false,
-      "use-vars" : [ 1, 2 ]
+      "use-vars" : [ 2, 1 ]
     }, {
       "update-vars" : [ 3 ],
       "successors" : [ 4 ],
       "in-vars" : [ 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 5 ],
+      "out-vars" : [ 6 ],
       "decl-vars" : [ ],
       "line-start" : 522,
       "ast" : {
@@ -232,7 +233,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 6
+              "variable" : 5
             }
           },
           "type" : "cast"
@@ -243,13 +244,13 @@
       "line-end" : 522,
       "code" : "nn = int(r0)",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 5 ],
+      "in-vars" : [ 6 ],
       "exit" : false,
-      "out-vars" : [ 5 ],
+      "out-vars" : [ 6 ],
       "decl-vars" : [ ],
       "line-start" : 523,
       "ast" : {
@@ -264,7 +265,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "operator" : "!=",
@@ -285,11 +286,11 @@
       "line-end" : 525,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 5 ],
+      "in-vars" : [ 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -316,7 +317,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 5
+              "variable" : 6
             }
           } ],
           "ellipsis" : false,
@@ -325,6 +326,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "errnoErr"
@@ -340,7 +342,7 @@
       "line-end" : 524,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -604,16 +606,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "e1",
+      "name" : "r0",
       "package" : 0,
-      "type" : 15,
+      "type" : 14,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "r0",
+      "name" : "e1",
       "package" : 0,
-      "type" : 14,
+      "type" : 15,
       "exported" : false,
       "embedded" : false,
       "field" : false

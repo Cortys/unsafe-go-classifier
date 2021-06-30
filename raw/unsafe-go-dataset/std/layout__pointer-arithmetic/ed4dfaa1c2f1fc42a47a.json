@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 1, 2, 3 ],
+      "in-vars" : [ 2, 3, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 1, 2 ],
+      "out-vars" : [ 1, 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 4, 1, 2 ],
+      "in-vars" : [ 1, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 1, 2, 7 ],
+      "out-vars" : [ 2, 3, 4, 7, 1 ],
       "decl-vars" : [ 7 ],
       "line-start" : 1359,
       "ast" : {
@@ -98,9 +98,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 7, 3, 4, 1, 2 ],
+      "in-vars" : [ 7, 1, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 8, 7, 3, 4, 1 ],
+      "out-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "decl-vars" : [ 8 ],
       "line-start" : 1366,
       "ast" : {
@@ -133,9 +133,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 10 ],
-      "in-vars" : [ 7, 3, 4, 1, 2, 8 ],
+      "in-vars" : [ 1, 2, 3, 8, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 8, 7, 3, 4, 1, 2 ],
+      "out-vars" : [ 8, 4, 7, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1367,
       "ast" : {
@@ -189,9 +189,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 7, 3, 4, 1, 2, 8 ],
+      "in-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 3, 4, 1, 2, 6, 8 ],
+      "out-vars" : [ 6, 7, 1, 2, 3, 8, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1368,
       "ast" : {
@@ -343,6 +343,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "ptrace"
@@ -358,13 +359,13 @@
       "line-end" : 1368,
       "code" : "err = ptrace(req, pid, addr-addr%SizeofPtr, uintptr(unsafe.Pointer(&buf[0])))",
       "entry" : false,
-      "use-vars" : [ 3, 1, 2, 7 ]
+      "use-vars" : [ 7, 1, 2, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 8 ],
-      "in-vars" : [ 7, 3, 4, 1, 2, 6, 8 ],
+      "in-vars" : [ 6, 7, 1, 2, 3, 8, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 6, 8, 7, 3 ],
+      "out-vars" : [ 6, 7, 1, 2, 3, 8, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1369,
       "ast" : {
@@ -441,9 +442,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 9 ],
-      "in-vars" : [ 4, 1, 2, 8, 7, 3 ],
+      "in-vars" : [ 1, 2, 3, 8, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 8, 7, 3, 4, 1, 2 ],
+      "out-vars" : [ 8, 4, 7, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1372,
       "ast" : {
@@ -536,13 +537,13 @@
       "line-end" : 1372,
       "code" : "n += copy(out, buf[addr%SizeofPtr:])",
       "entry" : false,
-      "use-vars" : [ 8, 4, 7, 3 ]
+      "use-vars" : [ 4, 7, 3, 8 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 8, 7, 3, 4, 1, 2 ],
+      "in-vars" : [ 1, 2, 3, 8, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 8, 7, 3, 4 ],
+      "out-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1373,
       "ast" : {
@@ -598,9 +599,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11, 17 ],
-      "in-vars" : [ 1, 2, 8, 7, 3, 4 ],
+      "in-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "exit" : false,
-      "out-vars" : [ 8, 7, 3, 4, 1, 2 ],
+      "out-vars" : [ 2, 3, 8, 4, 7, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1377,
       "ast" : {
@@ -656,9 +657,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 4, 1, 2, 8, 7, 3 ],
+      "in-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 8, 7, 3, 4, 1, 2 ],
+      "out-vars" : [ 6, 7, 1, 2, 3, 8, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1380,
       "ast" : {
@@ -812,6 +813,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "ptrace"
@@ -827,13 +829,13 @@
       "line-end" : 1380,
       "code" : "err = ptrace(req, pid, addr+uintptr(n), uintptr(unsafe.Pointer(&buf[0])))",
       "entry" : false,
-      "use-vars" : [ 3, 7, 1, 2, 8 ]
+      "use-vars" : [ 3, 1, 2, 8, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 14 ],
-      "in-vars" : [ 6, 8, 7, 3, 4, 1, 2 ],
+      "in-vars" : [ 1, 2, 3, 8, 4, 6, 7 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 6, 8, 7, 3 ],
+      "out-vars" : [ 2, 3, 8, 4, 6, 7, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1381,
       "ast" : {
@@ -913,9 +915,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 8, 7, 3, 4, 1, 2 ],
+      "in-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 3, 4, 9, 1, 2, 8 ],
+      "out-vars" : [ 3, 8, 4, 9, 7, 1, 2 ],
       "decl-vars" : [ 9 ],
       "line-start" : 1384,
       "ast" : {
@@ -993,9 +995,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 7, 3, 4, 9, 1, 2, 8 ],
+      "in-vars" : [ 9, 7, 1, 2, 3, 8, 4 ],
       "exit" : false,
-      "out-vars" : [ 9, 1, 2, 8, 7, 3, 4 ],
+      "out-vars" : [ 3, 8, 4, 9, 7, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1385,
       "ast" : {
@@ -1029,13 +1031,13 @@
       "line-end" : 1385,
       "code" : "n += copied",
       "entry" : false,
-      "use-vars" : [ 9, 8 ]
+      "use-vars" : [ 8, 9 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 8, 7, 3, 4, 9, 1 ],
+      "in-vars" : [ 7, 1, 2, 3, 8, 4, 9 ],
       "exit" : false,
-      "out-vars" : [ 8, 7, 3, 4, 1, 2 ],
+      "out-vars" : [ 7, 1, 2, 3, 8, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1386,
       "ast" : {

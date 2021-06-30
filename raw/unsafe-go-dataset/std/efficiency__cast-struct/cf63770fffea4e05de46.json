@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 1, 2 ],
+      "in-vars" : [ 1, 2, 3 ],
       "exit" : false,
       "out-vars" : [ 3, 1, 2 ],
       "decl-vars" : [ ],
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 3, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 3, 1, 2 ],
       "decl-vars" : [ ],
@@ -125,7 +125,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 3, 1, 2 ],
+      "in-vars" : [ 1, 2, 3 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -246,6 +246,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "futimesat"
@@ -260,7 +261,7 @@
       "line-end" : 208,
       "code" : "return futimesat(dirfd, path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))",
       "entry" : false,
-      "use-vars" : [ 1, 2, 3 ]
+      "use-vars" : [ 2, 3, 1 ]
     } ],
     "code" : "func Futimesat(dirfd int, path string, tv []Timeval) (err error) {\n\tif len(tv) != 2 {\n\t\treturn EINVAL\n\t}\n\treturn futimesat(dirfd, path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))\n}",
     "defines" : [ 0 ],

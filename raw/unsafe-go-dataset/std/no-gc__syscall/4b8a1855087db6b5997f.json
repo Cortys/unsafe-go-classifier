@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 2 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1518,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 2, 1, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1519,
       "ast" : {
@@ -149,7 +149,7 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
       "out-vars" : [ 6, 2, 1 ],
       "decl-vars" : [ ],
@@ -229,7 +229,7 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
       "out-vars" : [ 6, 2, 1 ],
       "decl-vars" : [ ],
@@ -440,6 +440,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Syscall"
@@ -455,13 +456,13 @@
       "line-end" : 1524,
       "code" : "r0, _, e1 := Syscall(SYS_WRITE, uintptr(fd), uintptr(_p0), uintptr(len(p)))",
       "entry" : false,
-      "use-vars" : [ 6, 1, 2 ]
+      "use-vars" : [ 2, 1, 6 ]
     }, {
       "update-vars" : [ 3 ],
       "successors" : [ 8 ],
       "in-vars" : [ 8, 7 ],
       "exit" : false,
-      "out-vars" : [ 7 ],
+      "out-vars" : [ 8 ],
       "decl-vars" : [ ],
       "line-start" : 1525,
       "ast" : {
@@ -499,7 +500,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 8
+              "variable" : 7
             }
           },
           "type" : "cast"
@@ -510,13 +511,13 @@
       "line-end" : 1525,
       "code" : "n = int(r0)",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 7 ],
+      "in-vars" : [ 8 ],
       "exit" : false,
-      "out-vars" : [ 7 ],
+      "out-vars" : [ 8 ],
       "decl-vars" : [ ],
       "line-start" : 1526,
       "ast" : {
@@ -531,7 +532,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 7
+              "variable" : 8
             }
           },
           "operator" : "!=",
@@ -552,11 +553,11 @@
       "line-end" : 1528,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7 ],
+      "in-vars" : [ 8 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -583,7 +584,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 7
+              "variable" : 8
             }
           } ],
           "ellipsis" : false,
@@ -592,6 +593,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "errnoErr"
@@ -607,7 +609,7 @@
       "line-end" : 1527,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -913,16 +915,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "e1",
+      "name" : "r0",
       "package" : 0,
-      "type" : 21,
+      "type" : 12,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "r0",
+      "name" : "e1",
       "package" : 0,
-      "type" : 12,
+      "type" : 21,
       "exported" : false,
       "embedded" : false,
       "field" : false

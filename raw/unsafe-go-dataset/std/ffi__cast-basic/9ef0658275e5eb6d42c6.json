@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1, 2, 3 ],
+      "in-vars" : [ 1, 0, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 0, 1 ],
+      "out-vars" : [ 0, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 15 ],
-      "in-vars" : [ 3, 0, 1, 2 ],
+      "in-vars" : [ 3, 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 2 ],
+      "out-vars" : [ 1, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1736,
       "ast" : {
@@ -56,7 +56,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "iscgo",
-            "variable" : 1
+            "variable" : 3
           }
         },
         "kind" : "statement",
@@ -66,13 +66,13 @@
       "line-end" : 1751,
       "code" : "if iscgo {\n\tvar ts cgothreadstart\n\tif _cgo_thread_start == nil {\n\t\tthrow(\"_cgo_thread_start missing\")\n\t}\n\tts.g.set(mp.g0)\n\tts.tls = (*uint64)(unsafe.Pointer(&mp.tls[0]))\n\tts.fn = unsafe.Pointer(funcPC(mstart))\n\tif msanenabled {\n\t\tmsanwrite(unsafe.Pointer(&ts), unsafe.Sizeof(ts))\n\t}\n\texecLock.rlock()\n\tasmcgocall(_cgo_thread_start, unsafe.Pointer(&ts))\n\texecLock.runlock()\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 1 ]
+      "use-vars" : [ 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 2, 3, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4, 0 ],
+      "out-vars" : [ 1, 4, 0, 2 ],
       "decl-vars" : [ 4 ],
       "line-start" : 1737,
       "ast" : {
@@ -113,9 +113,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 2, 3, 4, 0 ],
+      "in-vars" : [ 4, 0, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4, 0 ],
+      "out-vars" : [ 0, 2, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1738,
       "ast" : {
@@ -130,7 +130,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "_cgo_thread_start",
-              "variable" : 2
+              "variable" : 1
             }
           },
           "operator" : "==",
@@ -153,13 +153,13 @@
       "line-end" : 1740,
       "code" : "if _cgo_thread_start == nil {\n\tthrow(\"_cgo_thread_start missing\")\n}",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 3, 4, 0 ],
+      "in-vars" : [ 1, 4, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 0, 2 ],
+      "out-vars" : [ 1, 4, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1739,
       "ast" : {
@@ -180,6 +180,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "throw"
@@ -198,9 +199,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 3, 4, 0 ],
+      "in-vars" : [ 1, 4, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 0, 2 ],
+      "out-vars" : [ 1, 4, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1741,
       "ast" : {
@@ -232,6 +233,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "set"
@@ -275,9 +277,9 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 2, 3, 4, 0 ],
+      "in-vars" : [ 2, 1, 4, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4 ],
+      "out-vars" : [ 2, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1742,
       "ast" : {
@@ -398,9 +400,9 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 9 ],
-      "in-vars" : [ 2, 3, 4 ],
+      "in-vars" : [ 4, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4 ],
+      "out-vars" : [ 1, 4, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1743,
       "ast" : {
@@ -453,6 +455,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 4,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "mstart"
@@ -464,6 +467,7 @@
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
+                "function" : 3,
                 "ident-kind" : "Func",
                 "kind" : "ident",
                 "value" : "funcPC"
@@ -485,9 +489,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 11 ],
-      "in-vars" : [ 2, 3, 4 ],
+      "in-vars" : [ 1, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 2, 3 ],
+      "out-vars" : [ 1, 4, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1744,
       "ast" : {
@@ -510,9 +514,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 2, 3, 4 ],
+      "in-vars" : [ 1, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4 ],
+      "out-vars" : [ 1, 4, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1745,
       "ast" : {
@@ -571,6 +575,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 5,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "msanwrite"
@@ -589,9 +594,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 4, 2, 3 ],
+      "in-vars" : [ 1, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 2 ],
+      "out-vars" : [ 1, 4, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1747,
       "ast" : {
@@ -602,6 +607,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "rlock"
@@ -616,7 +622,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "execLock",
-                "variable" : 3
+                "variable" : 2
               }
             },
             "type" : "selector"
@@ -630,13 +636,13 @@
       "line-end" : 1747,
       "code" : "execLock.rlock()",
       "entry" : false,
-      "use-vars" : [ 3 ]
+      "use-vars" : [ 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 2, 3, 4 ],
+      "in-vars" : [ 1, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 3 ],
+      "out-vars" : [ 2 ],
       "decl-vars" : [ ],
       "line-start" : 1748,
       "ast" : {
@@ -651,7 +657,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "_cgo_thread_start",
-              "variable" : 2
+              "variable" : 1
             }
           }, {
             "coerced-to" : {
@@ -698,6 +704,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 7,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "asmcgocall"
@@ -712,11 +719,11 @@
       "line-end" : 1748,
       "code" : "asmcgocall(_cgo_thread_start, unsafe.Pointer(&ts))",
       "entry" : false,
-      "use-vars" : [ 2, 4 ]
+      "use-vars" : [ 4, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 3 ],
+      "in-vars" : [ 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -729,6 +736,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 8,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "runlock"
@@ -743,7 +751,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "execLock",
-                "variable" : 3
+                "variable" : 2
               }
             },
             "type" : "selector"
@@ -757,7 +765,7 @@
       "line-end" : 1749,
       "code" : "execLock.runlock()",
       "entry" : false,
-      "use-vars" : [ 3 ]
+      "use-vars" : [ 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -779,9 +787,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 3, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 0 ],
+      "out-vars" : [ 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1752,
       "ast" : {
@@ -792,6 +800,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 6,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "rlock"
@@ -806,7 +815,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "execLock",
-                "variable" : 3
+                "variable" : 2
               }
             },
             "type" : "selector"
@@ -820,13 +829,13 @@
       "line-end" : 1752,
       "code" : "execLock.rlock()",
       "entry" : false,
-      "use-vars" : [ 3 ]
+      "use-vars" : [ 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 3, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 3 ],
+      "out-vars" : [ 2 ],
       "decl-vars" : [ ],
       "line-start" : 1753,
       "ast" : {
@@ -850,6 +859,7 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 9,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "newosproc"
@@ -868,7 +878,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 3 ],
+      "in-vars" : [ 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -881,6 +891,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 8,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "runlock"
@@ -895,7 +906,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "execLock",
-                "variable" : 3
+                "variable" : 2
               }
             },
             "type" : "selector"
@@ -909,7 +920,7 @@
       "line-end" : 1754,
       "code" : "execLock.runlock()",
       "entry" : false,
-      "use-vars" : [ 3 ]
+      "use-vars" : [ 2 ]
     } ],
     "code" : "func newm1(mp *m) {\n\tif iscgo {\n\t\tvar ts cgothreadstart\n\t\tif _cgo_thread_start == nil {\n\t\t\tthrow(\"_cgo_thread_start missing\")\n\t\t}\n\t\tts.g.set(mp.g0)\n\t\tts.tls = (*uint64)(unsafe.Pointer(&mp.tls[0]))\n\t\tts.fn = unsafe.Pointer(funcPC(mstart))\n\t\tif msanenabled {\n\t\t\tmsanwrite(unsafe.Pointer(&ts), unsafe.Sizeof(ts))\n\t\t}\n\t\texecLock.rlock()\n\t\tasmcgocall(_cgo_thread_start, unsafe.Pointer(&ts))\n\t\texecLock.runlock()\n\t\treturn\n\t}\n\texecLock.rlock()\n\tnewosproc(mp)\n\texecLock.runlock()\n}",
     "defines" : [ 0 ],
@@ -2514,13 +2525,6 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "iscgo",
-      "package" : 0,
-      "type" : 16,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
       "name" : "_cgo_thread_start",
       "package" : 0,
       "type" : 14,
@@ -2531,6 +2535,13 @@
       "name" : "execLock",
       "package" : 0,
       "type" : 114,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "iscgo",
+      "package" : 0,
+      "type" : 16,
       "exported" : false,
       "embedded" : false,
       "field" : false

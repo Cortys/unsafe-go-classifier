@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 41, 42, 40 ],
+      "in-vars" : [ 40, 41, 42 ],
       "exit" : false,
-      "out-vars" : [ 40, 41, 42 ],
+      "out-vars" : [ 41, 42, 40 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -112,9 +112,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 6 ],
-      "in-vars" : [ 44, 42, 40 ],
+      "in-vars" : [ 42, 40, 44 ],
       "exit" : false,
-      "out-vars" : [ 42, 40, 44 ],
+      "out-vars" : [ 44, 42, 40 ],
       "decl-vars" : [ ],
       "line-start" : 171,
       "ast" : {
@@ -169,6 +169,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 1,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "WriteNil"
@@ -221,8 +222,8 @@
       "successors" : [ 7 ],
       "in-vars" : [ 44, 42, 40 ],
       "exit" : false,
-      "out-vars" : [ 45, 42, 40, 46 ],
-      "decl-vars" : [ 46, 45 ],
+      "out-vars" : [ 42, 40, 45, 46 ],
+      "decl-vars" : [ 45, 46 ],
       "line-start" : 175,
       "ast" : {
         "kind" : "statement",
@@ -250,6 +251,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 2,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "MarshalText"
@@ -283,9 +285,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 45, 42, 40, 46 ],
+      "in-vars" : [ 45, 46, 42, 40 ],
       "exit" : false,
-      "out-vars" : [ 45, 42, 40, 46 ],
+      "out-vars" : [ 42, 40, 45, 46 ],
       "decl-vars" : [ ],
       "line-start" : 176,
       "ast" : {
@@ -300,7 +302,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 46
+              "variable" : 45
             }
           },
           "operator" : "!=",
@@ -323,11 +325,11 @@
       "line-end" : 181,
       "code" : "if err != nil {\n\tstream.Error = err\n} else {\n\tstr := string(bytes)\n\tencoder.stringEncoder.Encode(unsafe.Pointer(&str), stream)\n}",
       "entry" : false,
-      "use-vars" : [ 46 ]
+      "use-vars" : [ 45 ]
     }, {
       "update-vars" : [ 42 ],
       "successors" : [ 1 ],
-      "in-vars" : [ 42, 46 ],
+      "in-vars" : [ 42, 45 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -364,7 +366,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 46
+            "variable" : 45
           }
         } ],
         "type" : "assign"
@@ -373,13 +375,13 @@
       "line-end" : 177,
       "code" : "stream.Error = err",
       "entry" : false,
-      "use-vars" : [ 46, 42 ]
+      "use-vars" : [ 45, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 45, 42, 40 ],
+      "in-vars" : [ 42, 40, 46 ],
       "exit" : false,
-      "out-vars" : [ 49, 42, 40 ],
+      "out-vars" : [ 42, 49, 40 ],
       "decl-vars" : [ 49 ],
       "line-start" : 179,
       "ast" : {
@@ -416,7 +418,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bytes",
-              "variable" : 45
+              "variable" : 46
             }
           },
           "type" : "cast"
@@ -427,11 +429,11 @@
       "line-end" : 179,
       "code" : "str := string(bytes)",
       "entry" : false,
-      "use-vars" : [ 45 ]
+      "use-vars" : [ 46 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 49, 42, 40 ],
+      "in-vars" : [ 42, 49, 40 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -492,6 +494,7 @@
           "ellipsis" : false,
           "function" : {
             "field" : {
+              "function" : 3,
               "ident-kind" : "Func",
               "kind" : "ident",
               "value" : "Encode"
@@ -531,7 +534,7 @@
       "line-end" : 180,
       "code" : "encoder.stringEncoder.Encode(unsafe.Pointer(&str), stream)",
       "entry" : false,
-      "use-vars" : [ 49, 42, 40 ]
+      "use-vars" : [ 42, 40, 49 ]
     } ],
     "code" : "func (encoder *directTextMarshalerEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\tmarshaler := *(*encoding.TextMarshaler)(ptr)\n\tif marshaler == nil {\n\t\tstream.WriteNil()\n\t\treturn\n\t}\n\tbytes, err := marshaler.MarshalText()\n\tif err != nil {\n\t\tstream.Error = err\n\t} else {\n\t\tstr := string(bytes)\n\t\tencoder.stringEncoder.Encode(unsafe.Pointer(&str), stream)\n\t}\n}",
     "defines" : [ 0 ],
@@ -2710,16 +2713,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "bytes",
+      "name" : "err",
       "package" : 0,
-      "type" : 133,
+      "type" : 135,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "err",
+      "name" : "bytes",
       "package" : 0,
-      "type" : 135,
+      "type" : 133,
       "exported" : false,
       "embedded" : false,
       "field" : false
