@@ -333,12 +333,14 @@ def walk_nested(f, state, s):
   if filter is not False:
     if isinstance(filter, Iterable):
       for i in filter:
-        if i in s:
+        if not isinstance(i, str) and isinstance(i, (Iterable, dict)):
+          state = walk_nested(f, state, i)
+        elif i in s:
           state = walk_nested(f, state, s[i])
     elif isinstance(s, dict):
       for v in s.values():
         state = walk_nested(f, state, v)
-    elif isinstance(s, Iterable):
+    elif not isinstance(s, str) and isinstance(s, Iterable):
       for v in s:
         state = walk_nested(f, state, v)
   return state

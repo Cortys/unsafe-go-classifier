@@ -41,6 +41,11 @@ def usage_to_target(usage, labels):
 def get_label(labels):
   return "\n".join(labels)
 
+def ast_type(ast):
+  if ast is None:
+    return None
+  return ast["type"]
+
 def type_to_labels(types, tid):
   if tid == -1:
     return set()
@@ -52,83 +57,181 @@ def type_to_labels(types, tid):
 
   res = set()
 
+  # Flatten pointer/array/slice types and add corresponding flags instead:
   while ct["type"] in {"Pointer", "Slice", "Array"}:
     res.add(ct["type"])
     ctid = ct["elem"]
     ct = types[ctid]
 
-  res.add("t=" + ct["name"])
+  # Reduce tuple types to set of contained types:
+  if ct["type"] == "Tuple":
+    for field in ct["fields"]:
+      res |= type_to_labels(types, field["type"])
+  else:
+    res.add("t=" + ct["name"])
   return res
 
-def ast_type(ast):
-  if ast is None:
-    return None
-  return ast["type"]
-
-def ast_to_labels(ast):
-  if ast is None:
+def func_to_labels(funcs, pkgs, fid):
+  if fid == -1:
     return set()
 
-  res = {ast["type"]}
+  func = funcs[fid]
+  pid = func["package"]
+  pname = pkgs[pid]["path"] + "." if pid >= 0 else ""
+  fname = pname + func["name"]
 
-  return res
+  return {"f=" + fname}
 
-def _find_var_target(state, s):
+def _walk_var_selector_chain(state, s):
   if not isinstance(s, dict):
     return state, False
 
   at_root = state["at_root"]
   state["at_root"] = False
+  k = s.get("kind", None)
+  t = s.get("type", None)
+  si = {"selector", "identifier"}
 
-  if s["kind"] == "expression" and s["type"] == "selector":
-    v = s["field"].get("variable", -1)
+  if k == "expression" and t in si:
+    if t == "selector":
+      v = s["field"].get("variable", -1)
+    else:
+      v = s["value"].get("variable", -1)
     if v is not None and v >= 0:
       if at_root:
-        state["var_target"] = v
+        state["var_root"] = v
       if state["edge_target"] is not None:
         state["contains"].add((v, state["edge_target"]))
       state["edge_target"] = v
-      state["var_updated"].add(v)
+      state["var_used"].add(v)
       return state, ["target"]
-  elif s["kind"] == "expression" and s["type"] == "index":
+  elif k == "expression" and t == "index":
+    state["missing_exprs"].append(s["index"])
     return state, ["target"]
-  elif s["kind"] == "expression" and s["type"] == "identifier":
-    v = s["value"].get("variable", -1)
-    if v is not None and v >= 0:
-      if at_root:
-        state["var_target"] = v
-      if state["edge_target"] is not None:
-        state["contains"].add((v, state["edge_target"]))
-      state["edge_target"] = v
-      state["var_updated"].add(v)
-      return state, ["target"]
 
   return state, False
 
-def find_var_targets(exprs):
-  var_targets = set()
-  var_updated = set()
+def find_vars_in_selectors(exprs):
+  var_roots = set()
+  var_used = set()
   contains = set()
+  missing_exprs = []
 
   for expr in exprs:
-    state = utils.walk_nested(_find_var_target, dict(
+    state = utils.walk_nested(_walk_var_selector_chain, dict(
       at_root=True,
-      var_target=None,
+      var_root=None,
       edge_target=None,
-      var_updated=var_updated,
-      contains=contains), expr)
-    var_updated = state["var_updated"]
+      var_used=var_used,
+      contains=contains,
+      missing_exprs=missing_exprs), expr)
+    var_used = state["var_used"]
     contains = state["contains"]
-    if state["var_target"] is not None:
-      var_targets.add(state["var_target"])
+    missing_exprs = state["missing_exprs"]
+    if state["var_root"] is not None:
+      var_roots.add(state["var_root"])
 
-  return var_targets, var_updated, contains
+  return dict(
+    var_roots=var_roots,
+    var_used=var_used,
+    contains=contains,
+    missing_exprs=missing_exprs)
+
+def _walk_expr_for_vars(state, s):
+  if not isinstance(s, dict):
+    return state, True
+
+  k = s.get("kind", None)
+  t = s.get("type", None)
+  si = {"selector", "identifier"}
+
+  if k == "expression" and t in si:
+    vars = find_vars_in_selectors([s])
+    state["vars"] |= vars["var_used"]
+    state["contains"] |= vars["contains"]
+    return state, vars["missing_exprs"]
+  elif k == "expression" and t == "call":
+    func = s["function"]
+    if func["kind"] == "expression" and func["type"] in si:
+      if func["type"] == "selector":
+        v = func["field"].get("variable", -1)
+      else:
+        v = func["value"].get("variable", -1)
+      if v is not None and v >= 0:
+        state["called_vars"].add(v)
+        return state, ["function", "arguments"]
+
+  return state, True
+
+def find_vars_in_expr(expr):
+  state = utils.walk_nested(
+    _walk_expr_for_vars, dict(
+      vars=set(),
+      called_vars=set(),
+      contains=set(),
+    ), expr)
+
+  return state
+
+def _walk_ast_for_ops(t2l, f2l, ops, s):
+  if not isinstance(s, dict):
+    return ops, True
+
+  k = s.get("kind", None)
+  t = s.get("type", None)
+  if k == "expression" and t in {"unary", "binary"}:
+    op = s["operator"]
+    if t == "binary":
+      p = "b"
+      succ = ["left", "right"]
+      # simplify op pairs, since operands are not preserved:
+      if op == ">":
+        op = "<"
+      elif op == ">=":
+        op = "<="
+    else:
+      p = "u"
+      succ = ["target"]
+    ops.add(p + "=" + op)
+    return ops, succ
+  elif k == "statement" and t == "crement":
+    ops.add("u" + "=" + s["operation"])
+    return ops, ["target"]
+  elif k == "expression" and t == "cast":
+    ops |= t2l(s["coerced-to"].get("go-type", -1))
+    return ops, ["target"]
+  elif k == "expression" and t == "call":
+    ops |= t2l(s.get("go-type", -1))
+    func = s["function"]
+    if func["kind"] == "expression" and func["type"] == "identifier":
+      fid = func["value"].get("function", -1)
+    elif func["kind"] == "expression" and func["type"] == "selector":
+      fid = func["field"].get("function", -1)
+    ops |= f2l(fid)
+    return ops, ["arguments", "function"]
+
+  return ops, True
+
+def find_operations_in_ast(t2l, f2l, ast):
+  return utils.walk_nested(
+    fy.partial(_walk_ast_for_ops, t2l, f2l), set(), ast)
+
+def ast_to_labels(t2l, f2l, ast):
+  if ast is None:
+    return set()
+
+  res = find_operations_in_ast(t2l, f2l, ast)
+  res.add(ast["type"])
+
+  return res
 
 def cfg_to_graph(cfg):
   g = nx.MultiDiGraph()
   blocks = cfg["blocks"]
   vars = cfg["variables"]
   types = cfg["types"]
+  pkgs = cfg["packages"]
+  funcs = cfg["functions"]
   params = set(cfg["params"])
   receivers = set(cfg["receivers"])
   results = set(cfg["results"])
@@ -136,6 +239,7 @@ def cfg_to_graph(cfg):
   block_ids = dict()
   var_ids = dict()
   t2l = utils.memoize(fy.partial(type_to_labels, types))
+  f2l = utils.memoize(fy.partial(func_to_labels, funcs, pkgs))
 
   # Add block nodes:
   for i, block in enumerate(blocks):
@@ -144,7 +248,7 @@ def cfg_to_graph(cfg):
       labels.add("entry")
     elif block["exit"]:
       labels.add("exit")
-    labels |= ast_to_labels(block["ast"])
+    labels |= ast_to_labels(t2l, f2l, block["ast"])
     g.add_node(n, label=get_label(labels), labels=labels)
     block_ids[i] = n
     n += 1
@@ -169,21 +273,13 @@ def cfg_to_graph(cfg):
     ast = block["ast"]
     btype = ast_type(ast)
     succs = block["successors"]
-    assign_vars = block["assign-vars"]
-    decl_vars = block["decl-vars"]
-    up_vars = block["update-vars"]
-    use_vars = block["use-vars"]
-    for v in assign_vars:
-      g.add_edge(b, var_ids[v], key="assign", label="assign")
-    for v in decl_vars:
-      g.add_edge(b, var_ids[v], key="decl", label="decl")
-    for v in up_vars:
-      g.add_edge(b, var_ids[v], key="update", label="update")
-    for v in use_vars:
-      g.add_edge(b, var_ids[v], key="use", label="use")
-    for i, s in enumerate(succs):
-      key = "flow" if i == 0 else "alt-flow"
-      g.add_edge(b, block_ids[s], key=key, label=key)
+    assign_vars = set(block["assign-vars"])
+    decl_vars = set(block["decl-vars"])
+    up_vars = set(block["update-vars"])
+    use_vars = set(block["use-vars"])
+    call_vars = set()
+    var_contains = set()
+    nested_vars = None
 
     if block["entry"]:
       for param in params:
@@ -195,21 +291,46 @@ def cfg_to_graph(cfg):
 
     if btype == "return":
       for res in results:
-        g.add_edge(b, var_ids[res], key="assign", label="assign")
-        g.add_edge(b, var_ids[res], key="update", label="update")
-    else:
-      if btype in {"assign", "define"}:
-        # Find nested assign targets:
-        if btype == "assign" and len(assign_vars) == 0:
-          var_targets, var_updated, contains = find_var_targets(
-            ast["left"])
-          for v in var_targets:
-            g.add_edge(b, var_ids[v], key="assign", label="assign")
-          for v in var_updated:
-            g.add_edge(b, var_ids[v], key="update", label="update")
-          for (v1, v2) in contains:
-            g.add_edge(
-              var_ids[v1], var_ids[v2], key="contains", label="contains")
+        if res not in use_vars:
+          g.add_edge(b, var_ids[res], key="assign", label="assign")
+          g.add_edge(b, var_ids[res], key="update", label="update")
+    elif btype in {"assign", "define"}:
+      # Find nested assign targets:
+      if btype == "assign" and len(assign_vars) == 0:
+        left_vars = find_vars_in_selectors(ast["left"])
+        assign_vars |= left_vars["var_roots"]
+        up_vars |= left_vars["var_used"]
+        var_contains |= left_vars["contains"]
+        leftover_vars = find_vars_in_expr(left_vars["missing_exprs"])
+        use_vars |= leftover_vars["vars"]
+        var_contains |= leftover_vars["contains"]
+
+      # Find variables on right side of assignment/definition:
+      nested_vars = find_vars_in_expr(ast["right"])
+
+    if nested_vars is None:
+      # Find variable usages anywhere in AST:
+      nested_vars = find_vars_in_expr(ast)
+    use_vars |= nested_vars["vars"]
+    call_vars |= nested_vars["called_vars"]
+    var_contains |= nested_vars["contains"]
+
+    for v1, v2 in var_contains:
+      g.add_edge(
+        var_ids[v1], var_ids[v2], key="contains", label="contains")
+    for v in assign_vars:
+      g.add_edge(b, var_ids[v], key="assign", label="assign")
+    for v in decl_vars:
+      g.add_edge(b, var_ids[v], key="decl", label="decl")
+    for v in up_vars:
+      g.add_edge(b, var_ids[v], key="update", label="update")
+    for v in use_vars:
+      g.add_edge(b, var_ids[v], key="use", label="use")
+    for v in call_vars:
+      g.add_edge(b, var_ids[v], key="use", label="call")
+    for i, s in enumerate(succs):
+      key = "flow" if i == 0 else "alt-flow"
+      g.add_edge(b, block_ids[s], key=key, label=key)
 
   # Prune unused/unreferenced variable nodes:
   for i in range(len(vars)):
