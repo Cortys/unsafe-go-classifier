@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2 ],
+      "out-vars" : [ 1, 2, 0 ],
       "decl-vars" : [ 2 ],
       "line-start" : 1136,
       "ast" : {
@@ -131,9 +131,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 0, 1 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2 ],
+      "out-vars" : [ 1, 2, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1138,
       "ast" : {
@@ -214,7 +214,7 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 0, 1, 2 ],
+      "in-vars" : [ 1, 2, 0 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 0 ],
       "decl-vars" : [ ],
@@ -380,9 +380,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 2 ],
+      "out-vars" : [ 2, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1141,
       "ast" : {
@@ -459,13 +459,13 @@
       "line-end" : 1141,
       "code" : "old.stktopsp = g.m.gsignal.stktopsp",
       "entry" : false,
-      "use-vars" : [ 1, 2 ]
+      "use-vars" : [ 2, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
       "in-vars" : [ 2, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 14, 0 ],
+      "out-vars" : [ 14, 0, 2 ],
       "decl-vars" : [ 14 ],
       "line-start" : 1143,
       "ast" : {
@@ -744,9 +744,9 @@
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 14, 2 ],
+      "in-vars" : [ 2, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 2 ],
+      "out-vars" : [ 2, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1146,
       "ast" : {
@@ -912,7 +912,7 @@
       "line-end" : 1147,
       "code" : "g.m.gsignal.stackguard1 = stsp + _StackGuard",
       "entry" : false,
-      "use-vars" : [ 2, 14 ]
+      "use-vars" : [ 14, 2 ]
     } ],
     "code" : "// setGsignalStack sets the gsignal stack of the current m to an\n// alternate signal stack returned from the sigaltstack system call.\n// It saves the old values in *old for use by restoreGsignalStack.\n// This is used when handling a signal if non-Go code has set the\n// alternate signal stack.\n//go:nosplit\n//go:nowritebarrierrec\nfunc setGsignalStack(st *stackt, old *gsignalStack) {\n\tg := getg()\n\tif old != nil {\n\t\told.stack = g.m.gsignal.stack\n\t\told.stackguard0 = g.m.gsignal.stackguard0\n\t\told.stackguard1 = g.m.gsignal.stackguard1\n\t\told.stktopsp = g.m.gsignal.stktopsp\n\t}\n\tstsp := uintptr(unsafe.Pointer(st.ss_sp))\n\tg.m.gsignal.stack.lo = stsp\n\tg.m.gsignal.stack.hi = stsp + st.ss_size\n\tg.m.gsignal.stackguard0 = stsp + _StackGuard\n\tg.m.gsignal.stackguard1 = stsp + _StackGuard\n}",
     "defines" : [ 0 ],

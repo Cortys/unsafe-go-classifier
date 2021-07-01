@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2 ],
+      "out-vars" : [ 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 4 ],
+      "out-vars" : [ 4, 1, 2 ],
       "decl-vars" : [ 4 ],
       "line-start" : 292,
       "ast" : {
@@ -103,9 +103,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 1, 2, 4 ],
+      "in-vars" : [ 4, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 5, 2 ],
+      "out-vars" : [ 5, 4, 1, 2 ],
       "decl-vars" : [ 5 ],
       "line-start" : 293,
       "ast" : {
@@ -152,9 +152,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 1, 5, 2, 6 ],
+      "in-vars" : [ 5, 6, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 5, 2, 6 ],
+      "out-vars" : [ 2, 5, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 294,
       "ast" : {
@@ -196,9 +196,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 5, 2, 4, 1 ],
+      "in-vars" : [ 5, 4, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 5, 2, 6 ],
+      "out-vars" : [ 6, 1, 2, 5 ],
       "decl-vars" : [ 6 ],
       "line-start" : 294,
       "ast" : {
@@ -269,7 +269,7 @@
       "line-end" : 294,
       "code" : "err := unix.Statfs(dirName, &statfs)",
       "entry" : false,
-      "use-vars" : [ 5, 4 ]
+      "use-vars" : [ 4, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -301,7 +301,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 1, 5, 2 ],
+      "in-vars" : [ 2, 5, 1 ],
       "exit" : false,
       "out-vars" : [ 1, 2 ],
       "decl-vars" : [ ],
@@ -430,8 +430,8 @@
       "successors" : [ 10 ],
       "in-vars" : [ 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 9 ],
-      "decl-vars" : [ 8, 9 ],
+      "out-vars" : [ 1, 8, 9 ],
+      "decl-vars" : [ 9, 8 ],
       "line-start" : 301,
       "ast" : {
         "kind" : "statement",
@@ -493,9 +493,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11, 12 ],
-      "in-vars" : [ 8, 1, 9 ],
+      "in-vars" : [ 9, 1, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 9 ],
+      "out-vars" : [ 9, 1, 8 ],
       "decl-vars" : [ ],
       "line-start" : 302,
       "ast" : {
@@ -510,7 +510,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 8
+              "variable" : 9
             }
           },
           "operator" : "!=",
@@ -533,11 +533,11 @@
       "line-end" : 304,
       "code" : "if err != nil {\n\treturn err\n}",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 8 ],
+      "in-vars" : [ 9 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -553,7 +553,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 8
+            "variable" : 9
           }
         } ]
       },
@@ -561,13 +561,13 @@
       "line-end" : 303,
       "code" : "return err",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 9 ]
     }, {
-      "update-vars" : [ 8 ],
+      "update-vars" : [ 9 ],
       "successors" : [ 13 ],
-      "in-vars" : [ 1, 9 ],
+      "in-vars" : [ 1, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 1 ],
+      "out-vars" : [ 9, 1 ],
       "decl-vars" : [ ],
       "line-start" : 306,
       "ast" : {
@@ -589,7 +589,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 8
+            "variable" : 9
           }
         } ],
         "right" : [ {
@@ -767,7 +767,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "value",
-                      "variable" : 9
+                      "variable" : 8
                     }
                   }
                 } ]
@@ -801,15 +801,15 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 8 ],
+      "assign-vars" : [ 9 ],
       "line-end" : 309,
       "code" : "_, err = bpfCall(_ObjPin, unsafe.Pointer(&bpfPinObjAttr{\n\tfileName: newPtr(unsafe.Pointer(&[]byte(fileName)[0])),\n\tfd:       value,\n}), 16)",
       "entry" : false,
-      "use-vars" : [ 1, 9 ]
+      "use-vars" : [ 1, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 8 ],
+      "in-vars" : [ 9, 1 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -826,7 +826,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 8
+              "variable" : 9
             }
           }, {
             "go-type" : 2,
@@ -873,7 +873,7 @@
       "line-end" : 310,
       "code" : "return errors.Wrapf(err, \"pin object %s\", fileName)",
       "entry" : false,
-      "use-vars" : [ 1, 8 ]
+      "use-vars" : [ 9, 1 ]
     } ],
     "code" : "func bpfPinObject(fileName string, fd *bpfFD) error {\n\tdirName := filepath.Dir(fileName)\n\tvar statfs unix.Statfs_t\n\tif err := unix.Statfs(dirName, &statfs); err != nil {\n\t\treturn err\n\t}\n\tif uint64(statfs.Type) != bpfFSType {\n\t\treturn errors.Errorf(\"%s is not on a bpf filesystem\", fileName)\n\t}\n\n\tvalue, err := fd.value()\n\tif err != nil {\n\t\treturn err\n\t}\n\n\t_, err = bpfCall(_ObjPin, unsafe.Pointer(&bpfPinObjAttr{\n\t\tfileName: newPtr(unsafe.Pointer(&[]byte(fileName)[0])),\n\t\tfd:       value,\n\t}), 16)\n\treturn errors.Wrapf(err, \"pin object %s\", fileName)\n}",
     "defines" : [ 0 ],
@@ -1425,16 +1425,16 @@
       "embedded" : false,
       "field" : true
     }, {
-      "name" : "err",
+      "name" : "value",
       "package" : 0,
-      "type" : 8,
+      "type" : 34,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "value",
+      "name" : "err",
       "package" : 0,
-      "type" : 34,
+      "type" : 8,
       "exported" : false,
       "embedded" : false,
       "field" : false

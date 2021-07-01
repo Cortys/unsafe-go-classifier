@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 12, 13, 4, 2 ],
+      "in-vars" : [ 2, 4, 12, 13, 3 ],
       "exit" : false,
-      "out-vars" : [ 13, 4, 2, 3, 12 ],
+      "out-vars" : [ 3, 2, 4, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 13, 4, 2, 3, 12 ],
+      "in-vars" : [ 12, 13, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 2, 3, 12, 14, 13 ],
+      "out-vars" : [ 4, 12, 13, 14, 3, 2 ],
       "decl-vars" : [ 14 ],
       "line-start" : 1017,
       "ast" : {
@@ -98,9 +98,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 14, 13, 4, 2, 3, 12 ],
+      "in-vars" : [ 12, 13, 14, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 15, 16, 14, 13, 4, 2 ],
+      "out-vars" : [ 15, 16, 14, 3, 2, 4, 12, 13 ],
       "decl-vars" : [ 16, 15 ],
       "line-start" : 1020,
       "ast" : {
@@ -166,9 +166,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 14, 13, 4, 2, 3, 12, 15, 16 ],
+      "in-vars" : [ 12, 13, 15, 16, 14, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 15, 16, 14, 13, 4, 2 ],
+      "out-vars" : [ 16, 14, 3, 2, 4, 12, 13, 15 ],
       "decl-vars" : [ ],
       "line-start" : 1022,
       "ast" : {
@@ -224,7 +224,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "isTuntap",
-                "variable" : 16
+                "variable" : 15
               }
             },
             "type" : "unary"
@@ -238,7 +238,7 @@
       "line-end" : 1024,
       "code" : "if base.Name == \"\" && !isTuntap {\n\treturn fmt.Errorf(\"LinkAttrs.Name cannot be empty\")\n}",
       "entry" : false,
-      "use-vars" : [ 16, 14 ]
+      "use-vars" : [ 14, 15 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -290,9 +290,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 53 ],
-      "in-vars" : [ 16, 14, 13, 4, 2, 3, 12, 15 ],
+      "in-vars" : [ 4, 12, 13, 15, 16, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 15, 14, 13, 4, 2 ],
+      "out-vars" : [ 16, 14, 3, 2, 4, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1026,
       "ast" : {
@@ -304,7 +304,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "isTuntap",
-            "variable" : 16
+            "variable" : 15
           }
         },
         "kind" : "statement",
@@ -314,13 +314,13 @@
       "line-end" : 1116,
       "code" : "if isTuntap {\n\n\tif tuntap.Mode < unix.IFF_TUN || tuntap.Mode > unix.IFF_TAP {\n\t\treturn fmt.Errorf(\"Tuntap.Mode %v unknown\", tuntap.Mode)\n\t}\n\n\tqueues := tuntap.Queues\n\n\tvar fds []*os.File\n\tvar req ifReq\n\tcopy(req.Name[:15], base.Name)\n\n\treq.Flags = uint16(tuntap.Flags)\n\n\tif queues == 0 {\n\t\tqueues = 1\n\t\tif tuntap.Flags == 0 {\n\t\t\treq.Flags = uint16(TUNTAP_DEFAULTS)\n\t\t}\n\t} else {\n\n\t\tif tuntap.Flags == 0 {\n\t\t\treq.Flags = uint16(TUNTAP_MULTI_QUEUE_DEFAULTS)\n\t\t}\n\t}\n\n\treq.Flags |= uint16(tuntap.Mode)\n\n\tfor i := 0; i < queues; i++ {\n\t\tlocalReq := req\n\t\tfile, err := os.OpenFile(\"/dev/net/tun\", os.O_RDWR, 0)\n\t\tif err != nil {\n\t\t\tcleanupFds(fds)\n\t\t\treturn err\n\t\t}\n\n\t\tfds = append(fds, file)\n\t\t_, _, errno := unix.Syscall(unix.SYS_IOCTL, file.Fd(), uintptr(unix.TUNSETIFF), uintptr(unsafe.Pointer(&localReq)))\n\t\tif errno != 0 {\n\t\t\tcleanupFds(fds)\n\t\t\treturn fmt.Errorf(\"Tuntap IOCTL TUNSETIFF failed [%d], errno %v\", i, errno)\n\t\t}\n\n\t\tif i == 0 {\n\t\t\tlink.Attrs().Name = strings.Trim(string(localReq.Name[:]), \"\\x00\")\n\t\t}\n\t}\n\n\tif !tuntap.NonPersist {\n\t\t_, _, errno := unix.Syscall(unix.SYS_IOCTL, fds[0].Fd(), uintptr(unix.TUNSETPERSIST), 1)\n\t\tif errno != 0 {\n\t\t\tcleanupFds(fds)\n\t\t\treturn fmt.Errorf(\"Tuntap IOCTL TUNSETPERSIST failed, errno %v\", errno)\n\t\t}\n\t}\n\n\th.ensureIndex(base)\n\n\tif base.MasterIndex != 0 {\n\n\t\terr := h.LinkSetMasterByIndex(link, base.MasterIndex)\n\t\tif err != nil {\n\n\t\t\tif !tuntap.NonPersist {\n\t\t\t\t_, _, _ = unix.Syscall(unix.SYS_IOCTL, fds[0].Fd(), uintptr(unix.TUNSETPERSIST), 0)\n\t\t\t}\n\t\t\tcleanupFds(fds)\n\t\t\treturn err\n\t\t}\n\t}\n\n\tif tuntap.Queues == 0 {\n\t\tcleanupFds(fds)\n\t} else {\n\t\ttuntap.Fds = fds\n\t}\n\n\treturn nil\n}",
       "entry" : false,
-      "use-vars" : [ 16 ]
+      "use-vars" : [ 15 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 15, 14, 2, 3 ],
+      "in-vars" : [ 14, 3, 2, 16 ],
       "exit" : false,
-      "out-vars" : [ 14, 2, 3, 15 ],
+      "out-vars" : [ 16, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1029,
       "ast" : {
@@ -347,7 +347,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "tuntap",
-                  "variable" : 15
+                  "variable" : 16
                 }
               },
               "type" : "selector"
@@ -384,7 +384,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "tuntap",
-                  "variable" : 15
+                  "variable" : 16
                 }
               },
               "type" : "selector"
@@ -409,11 +409,11 @@
       "line-end" : 1031,
       "code" : "if tuntap.Mode < unix.IFF_TUN || tuntap.Mode > unix.IFF_TAP {\n\treturn fmt.Errorf(\"Tuntap.Mode %v unknown\", tuntap.Mode)\n}",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 15 ],
+      "in-vars" : [ 16 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -446,7 +446,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -478,13 +478,13 @@
       "line-end" : 1030,
       "code" : "return fmt.Errorf(\"Tuntap.Mode %v unknown\", tuntap.Mode)",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 14, 2, 3, 15 ],
+      "in-vars" : [ 14, 3, 2, 16 ],
       "exit" : false,
-      "out-vars" : [ 14, 24, 2, 3, 15 ],
+      "out-vars" : [ 2, 16, 24, 14, 3 ],
       "decl-vars" : [ 24 ],
       "line-start" : 1033,
       "ast" : {
@@ -516,7 +516,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "tuntap",
-              "variable" : 15
+              "variable" : 16
             }
           },
           "type" : "selector"
@@ -527,13 +527,13 @@
       "line-end" : 1033,
       "code" : "queues := tuntap.Queues",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 15, 14, 24, 2, 3 ],
+      "in-vars" : [ 24, 14, 3, 2, 16 ],
       "exit" : false,
-      "out-vars" : [ 24, 2, 3, 15, 14, 27 ],
+      "out-vars" : [ 27, 16, 24, 14, 3, 2 ],
       "decl-vars" : [ 27 ],
       "line-start" : 1035,
       "ast" : {
@@ -590,9 +590,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 24, 2, 3, 15, 14, 27 ],
+      "in-vars" : [ 2, 27, 16, 24, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 20, 15, 14, 27, 24, 2 ],
+      "out-vars" : [ 14, 3, 2, 27, 20, 16, 24 ],
       "decl-vars" : [ 20 ],
       "line-start" : 1036,
       "ast" : {
@@ -633,9 +633,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 3, 20, 15, 14, 27, 24, 2 ],
+      "in-vars" : [ 16, 24, 14, 3, 2, 27, 20 ],
       "exit" : false,
-      "out-vars" : [ 20, 15, 14, 27, 24, 2, 3 ],
+      "out-vars" : [ 20, 16, 24, 14, 3, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1037,
       "ast" : {
@@ -721,13 +721,13 @@
       "line-end" : 1037,
       "code" : "copy(req.Name[:15], base.Name)",
       "entry" : false,
-      "use-vars" : [ 14, 20 ]
+      "use-vars" : [ 20, 14 ]
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 14 ],
-      "in-vars" : [ 2, 3, 20, 15, 14, 27, 24 ],
+      "in-vars" : [ 14, 3, 2, 27, 20, 16, 24 ],
       "exit" : false,
-      "out-vars" : [ 15, 14, 27, 24, 2, 3, 20 ],
+      "out-vars" : [ 24, 14, 3, 2, 27, 20, 16 ],
       "decl-vars" : [ ],
       "line-start" : 1039,
       "ast" : {
@@ -785,7 +785,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -798,13 +798,13 @@
       "line-end" : 1039,
       "code" : "req.Flags = uint16(tuntap.Flags)",
       "entry" : false,
-      "use-vars" : [ 20, 15 ]
+      "use-vars" : [ 20, 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15, 18 ],
-      "in-vars" : [ 20, 15, 14, 27, 24, 2, 3 ],
+      "in-vars" : [ 20, 16, 24, 14, 3, 2, 27 ],
       "exit" : false,
-      "out-vars" : [ 20, 15, 14, 27, 24, 2, 3 ],
+      "out-vars" : [ 14, 3, 2, 27, 20, 16, 24 ],
       "decl-vars" : [ ],
       "line-start" : 1041,
       "ast" : {
@@ -844,9 +844,9 @@
     }, {
       "update-vars" : [ 24 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 14, 27, 2, 3, 20, 15 ],
+      "in-vars" : [ 3, 2, 27, 20, 16, 14 ],
       "exit" : false,
-      "out-vars" : [ 24, 2, 3, 20, 15, 14, 27 ],
+      "out-vars" : [ 2, 27, 20, 16, 24, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1042,
       "ast" : {
@@ -880,9 +880,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17, 20 ],
-      "in-vars" : [ 14, 27, 24, 2, 3, 20, 15 ],
+      "in-vars" : [ 27, 20, 16, 24, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 20, 15, 14, 27, 24, 2, 3 ],
+      "out-vars" : [ 3, 2, 27, 20, 16, 24, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1043,
       "ast" : {
@@ -906,7 +906,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -929,13 +929,13 @@
       "line-end" : 1045,
       "code" : "if tuntap.Flags == 0 {\n\treq.Flags = uint16(TUNTAP_DEFAULTS)\n}",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 2, 3, 20, 15, 14, 27, 24 ],
+      "in-vars" : [ 2, 27, 20, 16, 24, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 20, 15, 14, 27, 24, 2 ],
+      "out-vars" : [ 2, 27, 20, 16, 24, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1044,
       "ast" : {
@@ -980,9 +980,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19, 20 ],
-      "in-vars" : [ 27, 24, 2, 3, 20, 15, 14 ],
+      "in-vars" : [ 2, 27, 20, 16, 24, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 20, 15, 14, 27, 24, 2, 3 ],
+      "out-vars" : [ 2, 27, 20, 16, 24, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1050,
       "ast" : {
@@ -1006,7 +1006,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -1029,13 +1029,13 @@
       "line-end" : 1052,
       "code" : "if tuntap.Flags == 0 {\n\treq.Flags = uint16(TUNTAP_MULTI_QUEUE_DEFAULTS)\n}",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 14, 27, 24, 2, 3, 20, 15 ],
+      "in-vars" : [ 27, 20, 16, 24, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 27, 24, 2, 3, 20, 15, 14 ],
+      "out-vars" : [ 24, 14, 3, 2, 27, 20, 16 ],
       "decl-vars" : [ ],
       "line-start" : 1051,
       "ast" : {
@@ -1080,9 +1080,9 @@
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 22 ],
-      "in-vars" : [ 27, 24, 2, 3, 20, 15, 14 ],
+      "in-vars" : [ 3, 2, 27, 20, 16, 24, 14 ],
       "exit" : false,
-      "out-vars" : [ 27, 24, 2, 3, 20, 15, 14 ],
+      "out-vars" : [ 20, 16, 24, 14, 3, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1055,
       "ast" : {
@@ -1141,7 +1141,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -1154,13 +1154,13 @@
       "line-end" : 1055,
       "code" : "req.Flags |= uint16(tuntap.Mode)",
       "entry" : false,
-      "use-vars" : [ 15, 20 ]
+      "use-vars" : [ 20, 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 24, 36 ],
-      "in-vars" : [ 25, 14, 27, 24, 2, 3, 20, 15 ],
+      "in-vars" : [ 25, 2, 27, 20, 16, 24, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 25, 14, 27, 24, 2, 3, 20, 15 ],
+      "out-vars" : [ 25, 2, 27, 20, 16, 24, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1057,
       "ast" : {
@@ -1199,13 +1199,13 @@
       "line-end" : 1081,
       "code" : "for i := 0; i < queues; i++ {\n\tlocalReq := req\n\tfile, err := os.OpenFile(\"/dev/net/tun\", os.O_RDWR, 0)\n\tif err != nil {\n\t\tcleanupFds(fds)\n\t\treturn err\n\t}\n\n\tfds = append(fds, file)\n\t_, _, errno := unix.Syscall(unix.SYS_IOCTL, file.Fd(), uintptr(unix.TUNSETIFF), uintptr(unsafe.Pointer(&localReq)))\n\tif errno != 0 {\n\t\tcleanupFds(fds)\n\t\treturn fmt.Errorf(\"Tuntap IOCTL TUNSETIFF failed [%d], errno %v\", i, errno)\n\t}\n\n\tif i == 0 {\n\t\tlink.Attrs().Name = strings.Trim(string(localReq.Name[:]), \"\\x00\")\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 24, 25 ]
+      "use-vars" : [ 25, 24 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 14, 27, 24, 2, 3, 20, 15 ],
+      "in-vars" : [ 27, 20, 16, 24, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 15, 25, 14, 27, 24, 2, 3, 20 ],
+      "out-vars" : [ 24, 14, 3, 25, 2, 27, 20, 16 ],
       "decl-vars" : [ 25 ],
       "line-start" : 1057,
       "ast" : {
@@ -1238,9 +1238,9 @@
     }, {
       "update-vars" : [ 25 ],
       "successors" : [ 21 ],
-      "in-vars" : [ 14, 27, 24, 2, 3, 20, 15, 25 ],
+      "in-vars" : [ 24, 14, 3, 25, 2, 27, 20, 16 ],
       "exit" : false,
-      "out-vars" : [ 25, 14, 27, 24, 2, 3, 20, 15 ],
+      "out-vars" : [ 20, 16, 24, 14, 3, 25, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1057,
       "ast" : {
@@ -1267,9 +1267,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 25 ],
-      "in-vars" : [ 27, 24, 2, 3, 20, 15, 25, 14 ],
+      "in-vars" : [ 27, 20, 16, 24, 14, 3, 25, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 27, 29, 2, 3, 20, 24, 15, 25 ],
+      "out-vars" : [ 20, 16, 14, 25, 2, 24, 29, 3, 27 ],
       "decl-vars" : [ 29 ],
       "line-start" : 1058,
       "ast" : {
@@ -1305,10 +1305,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26 ],
-      "in-vars" : [ 15, 25, 14, 27, 3, 20, 29, 24, 2 ],
+      "in-vars" : [ 3, 25, 2, 16, 24, 14, 27, 20, 29 ],
       "exit" : false,
-      "out-vars" : [ 14, 28, 2, 20, 15, 27, 29, 24, 3, 26, 25 ],
-      "decl-vars" : [ 26, 28 ],
+      "out-vars" : [ 14, 3, 26, 27, 25, 2, 20, 16, 24, 29, 28 ],
+      "decl-vars" : [ 28, 26 ],
       "line-start" : 1059,
       "ast" : {
         "kind" : "statement",
@@ -1386,9 +1386,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27, 29 ],
-      "in-vars" : [ 28, 2, 20, 26, 25, 14, 27, 29, 24, 3, 15 ],
+      "in-vars" : [ 27, 24, 29, 26, 2, 3, 25, 20, 16, 28, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 27, 26, 20, 15, 25, 28, 29, 24, 2, 3 ],
+      "out-vars" : [ 3, 26, 25, 2, 28, 14, 27, 20, 16, 24, 29 ],
       "decl-vars" : [ ],
       "line-start" : 1060,
       "ast" : {
@@ -1430,7 +1430,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 28 ],
-      "in-vars" : [ 27, 26 ],
+      "in-vars" : [ 26, 27 ],
       "exit" : false,
       "out-vars" : [ 26 ],
       "decl-vars" : [ ],
@@ -1503,9 +1503,9 @@
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 30 ],
-      "in-vars" : [ 14, 29, 20, 15, 25, 27, 28, 24, 2, 3 ],
+      "in-vars" : [ 20, 29, 25, 2, 27, 16, 24, 28, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 28, 24, 3, 20, 25, 14, 27, 29, 2, 15 ],
+      "out-vars" : [ 29, 20, 16, 14, 3, 25, 2, 27, 24, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1065,
       "ast" : {
@@ -1568,10 +1568,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 15, 25, 14, 27, 28, 3, 20, 29, 24, 2 ],
+      "in-vars" : [ 20, 24, 28, 3, 27, 16, 29, 14, 25, 2 ],
       "exit" : false,
-      "out-vars" : [ 30, 24, 20, 15, 14, 27, 29, 2, 3, 25 ],
-      "decl-vars" : [ 36, 30, 37 ],
+      "out-vars" : [ 3, 25, 20, 16, 24, 30, 29, 14, 2, 27 ],
+      "decl-vars" : [ 36, 37, 30 ],
       "line-start" : 1066,
       "ast" : {
         "kind" : "statement",
@@ -1729,13 +1729,13 @@
       "line-end" : 1066,
       "code" : "_, _, errno := unix.Syscall(unix.SYS_IOCTL, file.Fd(), uintptr(unix.TUNSETIFF), uintptr(unsafe.Pointer(&localReq)))",
       "entry" : false,
-      "use-vars" : [ 28, 29 ]
+      "use-vars" : [ 29, 28 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 32, 34 ],
-      "in-vars" : [ 29, 2, 3, 20, 15, 14, 30, 24, 25, 27 ],
+      "in-vars" : [ 24, 29, 14, 2, 20, 16, 30, 3, 25, 27 ],
       "exit" : false,
-      "out-vars" : [ 14, 30, 24, 2, 15, 25, 27, 29, 3, 20 ],
+      "out-vars" : [ 30, 14, 29, 3, 25, 2, 27, 20, 16, 24 ],
       "decl-vars" : [ ],
       "line-start" : 1067,
       "ast" : {
@@ -1775,7 +1775,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 33 ],
-      "in-vars" : [ 27, 30, 25 ],
+      "in-vars" : [ 30, 25, 27 ],
       "exit" : false,
       "out-vars" : [ 30, 25 ],
       "decl-vars" : [ ],
@@ -1887,10 +1887,10 @@
       "use-vars" : [ 25, 30 ]
     }, {
       "update-vars" : [ ],
-      "successors" : [ 23, 35 ],
-      "in-vars" : [ 14, 29, 24, 2, 20, 25, 27, 3, 15 ],
+      "successors" : [ 35, 23 ],
+      "in-vars" : [ 14, 27, 20, 16, 24, 29, 3, 25, 2 ],
       "exit" : false,
-      "out-vars" : [ 24, 2, 3, 15, 25, 14, 29, 20, 27 ],
+      "out-vars" : [ 25, 20, 16, 29, 2, 27, 24, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1078,
       "ast" : {
@@ -1930,9 +1930,9 @@
     }, {
       "update-vars" : [ 3 ],
       "successors" : [ 23 ],
-      "in-vars" : [ 3, 25, 14, 29, 24, 2, 27, 20, 15 ],
+      "in-vars" : [ 25, 2, 27, 20, 29, 14, 16, 24, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 20, 15, 25, 14, 27, 24, 2 ],
+      "out-vars" : [ 3, 25, 2, 27, 20, 16, 24, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1079,
       "ast" : {
@@ -2064,9 +2064,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37, 41 ],
-      "in-vars" : [ 27, 2, 3, 15, 14 ],
+      "in-vars" : [ 3, 2, 27, 16, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 27, 2, 3, 15 ],
+      "out-vars" : [ 16, 14, 3, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1084,
       "ast" : {
@@ -2091,7 +2091,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -2105,14 +2105,14 @@
       "line-end" : 1090,
       "code" : "if !tuntap.NonPersist {\n\t_, _, errno := unix.Syscall(unix.SYS_IOCTL, fds[0].Fd(), uintptr(unix.TUNSETPERSIST), 1)\n\tif errno != 0 {\n\t\tcleanupFds(fds)\n\t\treturn fmt.Errorf(\"Tuntap IOCTL TUNSETPERSIST failed, errno %v\", errno)\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 38 ],
-      "in-vars" : [ 14, 27, 2, 3, 15 ],
+      "in-vars" : [ 27, 16, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 27, 2, 3, 32, 15 ],
-      "decl-vars" : [ 38, 39, 32 ],
+      "out-vars" : [ 27, 16, 32, 14, 3, 2 ],
+      "decl-vars" : [ 38, 32, 39 ],
       "line-start" : 1085,
       "ast" : {
         "kind" : "statement",
@@ -2240,9 +2240,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 39, 41 ],
-      "in-vars" : [ 15, 14, 27, 2, 3, 32 ],
+      "in-vars" : [ 3, 2, 27, 16, 32, 14 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 32, 15, 14, 27 ],
+      "out-vars" : [ 16, 32, 14, 3, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1086,
       "ast" : {
@@ -2385,9 +2385,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 42 ],
-      "in-vars" : [ 15, 14, 27, 2, 3 ],
+      "in-vars" : [ 16, 14, 3, 2, 27 ],
       "exit" : false,
-      "out-vars" : [ 3, 15, 14, 27, 2 ],
+      "out-vars" : [ 16, 14, 3, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1092,
       "ast" : {
@@ -2441,9 +2441,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 49 ],
-      "in-vars" : [ 14, 27, 2, 3, 15 ],
+      "in-vars" : [ 16, 14, 3, 2, 27 ],
       "exit" : false,
-      "out-vars" : [ 14, 27, 2, 3, 15 ],
+      "out-vars" : [ 16, 14, 3, 2, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1095,
       "ast" : {
@@ -2494,9 +2494,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 44 ],
-      "in-vars" : [ 3, 15, 14, 27, 2 ],
+      "in-vars" : [ 16, 14, 3, 2, 27 ],
       "exit" : false,
-      "out-vars" : [ 27, 34, 15 ],
+      "out-vars" : [ 16, 34, 27 ],
       "decl-vars" : [ 34 ],
       "line-start" : 1097,
       "ast" : {
@@ -2577,13 +2577,13 @@
       "line-end" : 1097,
       "code" : "err := h.LinkSetMasterByIndex(link, base.MasterIndex)",
       "entry" : false,
-      "use-vars" : [ 2, 3, 14 ]
+      "use-vars" : [ 3, 14, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 45, 49 ],
-      "in-vars" : [ 27, 34, 15 ],
+      "in-vars" : [ 16, 34, 27 ],
       "exit" : false,
-      "out-vars" : [ 27, 34, 15 ],
+      "out-vars" : [ 27, 16, 34 ],
       "decl-vars" : [ ],
       "line-start" : 1098,
       "ast" : {
@@ -2625,7 +2625,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 46, 47 ],
-      "in-vars" : [ 27, 34, 15 ],
+      "in-vars" : [ 16, 34, 27 ],
       "exit" : false,
       "out-vars" : [ 34, 27 ],
       "decl-vars" : [ ],
@@ -2652,7 +2652,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -2666,13 +2666,13 @@
       "line-end" : 1103,
       "code" : "if !tuntap.NonPersist {\n\t_, _, _ = unix.Syscall(unix.SYS_IOCTL, fds[0].Fd(), uintptr(unix.TUNSETPERSIST), 0)\n}",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 47 ],
       "in-vars" : [ 27, 34 ],
       "exit" : false,
-      "out-vars" : [ 27, 34 ],
+      "out-vars" : [ 34, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1102,
       "ast" : {
@@ -2874,9 +2874,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 50, 51 ],
-      "in-vars" : [ 27, 15 ],
+      "in-vars" : [ 16, 27 ],
       "exit" : false,
-      "out-vars" : [ 27, 15 ],
+      "out-vars" : [ 16, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1109,
       "ast" : {
@@ -2900,7 +2900,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tuntap",
-                "variable" : 15
+                "variable" : 16
               }
             },
             "type" : "selector"
@@ -2923,7 +2923,7 @@
       "line-end" : 1113,
       "code" : "if tuntap.Queues == 0 {\n\tcleanupFds(fds)\n} else {\n\ttuntap.Fds = fds\n}",
       "entry" : false,
-      "use-vars" : [ 15 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 52 ],
@@ -2970,9 +2970,9 @@
       "entry" : false,
       "use-vars" : [ 27 ]
     }, {
-      "update-vars" : [ 15 ],
+      "update-vars" : [ 16 ],
       "successors" : [ 52 ],
-      "in-vars" : [ 27, 15 ],
+      "in-vars" : [ 16, 27 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -2996,7 +2996,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "tuntap",
-              "variable" : 15
+              "variable" : 16
             }
           },
           "type" : "selector"
@@ -3018,7 +3018,7 @@
       "line-end" : 1112,
       "code" : "tuntap.Fds = fds",
       "entry" : false,
-      "use-vars" : [ 27, 15 ]
+      "use-vars" : [ 27, 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -3049,9 +3049,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 54 ],
-      "in-vars" : [ 13, 4, 2, 3, 12, 14 ],
+      "in-vars" : [ 4, 12, 13, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "decl-vars" : [ 42 ],
       "line-start" : 1118,
       "ast" : {
@@ -3118,13 +3118,13 @@
       "line-end" : 1118,
       "code" : "req := h.newNetlinkRequest(unix.RTM_NEWLINK, flags)",
       "entry" : false,
-      "use-vars" : [ 4, 2 ]
+      "use-vars" : [ 2, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 55 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 43, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 43, 42 ],
       "decl-vars" : [ 43 ],
       "line-start" : 1120,
       "ast" : {
@@ -3180,9 +3180,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 56, 58 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12, 43 ],
+      "in-vars" : [ 3, 2, 12, 13, 43, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1122,
       "ast" : {
@@ -3247,9 +3247,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 57 ],
-      "in-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 43, 14, 42, 13, 2 ],
+      "out-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1123,
       "ast" : {
@@ -3294,9 +3294,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 58 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 43, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 12, 13, 43, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1124,
       "ast" : {
@@ -3341,9 +3341,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 59, 61 ],
-      "in-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 43, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1126,
       "ast" : {
@@ -3408,9 +3408,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 60 ],
-      "in-vars" : [ 13, 2, 3, 12, 43, 14, 42 ],
+      "in-vars" : [ 3, 2, 12, 13, 43, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 12, 43, 14, 42, 13 ],
+      "out-vars" : [ 2, 12, 13, 43, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1127,
       "ast" : {
@@ -3456,9 +3456,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 61 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "in-vars" : [ 3, 2, 12, 13, 43, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "out-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1128,
       "ast" : {
@@ -3504,9 +3504,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 62, 64 ],
-      "in-vars" : [ 3, 12, 43, 14, 42, 13, 2 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 43, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1130,
       "ast" : {
@@ -3571,9 +3571,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 63 ],
-      "in-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 12, 13, 43, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 12, 43, 14, 42, 13 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1131,
       "ast" : {
@@ -3619,9 +3619,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 64 ],
-      "in-vars" : [ 2, 3, 12, 43, 14, 42, 13 ],
+      "in-vars" : [ 13, 43, 42, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1132,
       "ast" : {
@@ -3667,9 +3667,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 65, 67 ],
-      "in-vars" : [ 3, 12, 43, 14, 42, 13, 2 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1134,
       "ast" : {
@@ -3734,9 +3734,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 66 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 43, 42 ],
       "exit" : false,
-      "out-vars" : [ 13, 2, 3, 12, 43, 14, 42 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1135,
       "ast" : {
@@ -3782,9 +3782,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 67 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12, 43 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12, 43 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 43, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1136,
       "ast" : {
@@ -3830,9 +3830,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 68, 70 ],
-      "in-vars" : [ 2, 3, 12, 43, 14, 42, 13 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12, 43 ],
+      "out-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1138,
       "ast" : {
@@ -3897,9 +3897,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 69 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "in-vars" : [ 13, 43, 42, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 12, 43, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1139,
       "ast" : {
@@ -3945,9 +3945,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 70 ],
-      "in-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 43, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 43, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1140,
       "ast" : {
@@ -3993,9 +3993,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 71, 72 ],
-      "in-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 13, 43, 42, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 43, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1142,
       "ast" : {
@@ -4046,9 +4046,9 @@
     }, {
       "update-vars" : [ 43 ],
       "successors" : [ 72 ],
-      "in-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 3, 2, 12, 13, 43, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 43, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 2, 12, 13, 43, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1143,
       "ast" : {
@@ -4119,13 +4119,13 @@
       "line-end" : 1143,
       "code" : "msg.Index = int32(base.Index)",
       "entry" : false,
-      "use-vars" : [ 43, 14 ]
+      "use-vars" : [ 14, 43 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 73 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 43, 14 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13, 43 ],
       "exit" : false,
-      "out-vars" : [ 13, 2, 3, 12, 14, 42 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1146,
       "ast" : {
@@ -4179,9 +4179,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 74, 78 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 14 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 14 ],
+      "out-vars" : [ 13, 42, 14, 3, 2, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1148,
       "ast" : {
@@ -4232,9 +4232,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 75 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 14, 42, 50, 13, 2 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 50, 42 ],
       "decl-vars" : [ 50 ],
       "line-start" : 1149,
       "ast" : {
@@ -4288,9 +4288,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 76 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 50, 13 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 50, 42 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 12, 14, 42, 50, 13 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 50, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1150,
       "ast" : {
@@ -4381,9 +4381,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 77 ],
-      "in-vars" : [ 13, 2, 3, 12, 14, 42, 50 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13, 50 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 51, 13, 2, 3, 12 ],
+      "out-vars" : [ 13, 42, 14, 3, 2, 51, 12 ],
       "decl-vars" : [ 51 ],
       "line-start" : 1151,
       "ast" : {
@@ -4449,9 +4449,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 80 ],
-      "in-vars" : [ 14, 42, 51, 13, 2, 3, 12 ],
+      "in-vars" : [ 14, 3, 2, 51, 12, 13, 42 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1152,
       "ast" : {
@@ -4505,9 +4505,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 79, 80 ],
-      "in-vars" : [ 13, 2, 3, 12, 14, 42 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 14, 42, 13, 2 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1153,
       "ast" : {
@@ -4690,9 +4690,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 81 ],
-      "in-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 42, 52, 13, 2, 3, 12, 14 ],
+      "out-vars" : [ 13, 52, 42, 14, 3, 2, 12 ],
       "decl-vars" : [ 52 ],
       "line-start" : 1157,
       "ast" : {
@@ -4792,9 +4792,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 82 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 52, 13 ],
+      "in-vars" : [ 13, 52, 42, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1158,
       "ast" : {
@@ -4848,9 +4848,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 83, 85 ],
-      "in-vars" : [ 3, 12, 14, 42, 13, 2 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 42 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1160,
       "ast" : {
@@ -4901,9 +4901,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 84 ],
-      "in-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 54, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 42, 54, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ 54 ],
       "line-start" : 1161,
       "ast" : {
@@ -5019,9 +5019,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 85 ],
-      "in-vars" : [ 3, 12, 54, 14, 42, 13, 2 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 42, 54 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 12, 13, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1162,
       "ast" : {
@@ -5071,13 +5071,13 @@
       "line-end" : 1162,
       "code" : "req.AddData(mtu)",
       "entry" : false,
-      "use-vars" : [ 54, 42 ]
+      "use-vars" : [ 42, 54 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 86, 88 ],
-      "in-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 14 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1165,
       "ast" : {
@@ -5128,9 +5128,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 87 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "in-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 12, 56, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 13, 42, 14, 3, 2, 56, 12 ],
       "decl-vars" : [ 56 ],
       "line-start" : 1166,
       "ast" : {
@@ -5246,9 +5246,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 88 ],
-      "in-vars" : [ 2, 3, 12, 56, 14, 42, 13 ],
+      "in-vars" : [ 12, 13, 42, 14, 3, 2, 56 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1167,
       "ast" : {
@@ -5298,13 +5298,13 @@
       "line-end" : 1167,
       "code" : "req.AddData(qlen)",
       "entry" : false,
-      "use-vars" : [ 42, 56 ]
+      "use-vars" : [ 56, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 89, 91 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 12, 13, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 13, 2, 3, 12, 14, 42 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1170,
       "ast" : {
@@ -5357,9 +5357,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 90 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 13, 2, 3, 12, 58, 14, 42 ],
+      "out-vars" : [ 3, 2, 12, 13, 58, 42, 14 ],
       "decl-vars" : [ 58 ],
       "line-start" : 1171,
       "ast" : {
@@ -5457,9 +5457,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 91 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 58, 14 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 58, 42 ],
       "exit" : false,
-      "out-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1172,
       "ast" : {
@@ -5513,9 +5513,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 92, 94 ],
-      "in-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1175,
       "ast" : {
@@ -5566,9 +5566,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 93 ],
-      "in-vars" : [ 13, 2, 3, 12, 14, 42 ],
+      "in-vars" : [ 12, 13, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 13, 2, 3, 60, 12, 14, 42 ],
+      "out-vars" : [ 60, 13, 42, 14, 3, 2, 12 ],
       "decl-vars" : [ 60 ],
       "line-start" : 1176,
       "ast" : {
@@ -5684,9 +5684,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 94 ],
-      "in-vars" : [ 42, 13, 2, 3, 60, 12, 14 ],
+      "in-vars" : [ 2, 12, 60, 13, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 13, 42, 14, 3, 2, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1177,
       "ast" : {
@@ -5740,9 +5740,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 95, 97 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "in-vars" : [ 13, 42, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "out-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1180,
       "ast" : {
@@ -5793,9 +5793,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 96 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12, 62 ],
+      "out-vars" : [ 14, 3, 2, 12, 13, 62, 42 ],
       "decl-vars" : [ 62 ],
       "line-start" : 1181,
       "ast" : {
@@ -5911,9 +5911,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 97 ],
-      "in-vars" : [ 3, 12, 62, 14, 42, 13, 2 ],
+      "in-vars" : [ 3, 2, 12, 13, 62, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 14, 42, 13, 2 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1182,
       "ast" : {
@@ -5963,13 +5963,13 @@
       "line-end" : 1182,
       "code" : "req.AddData(rxqueues)",
       "entry" : false,
-      "use-vars" : [ 42, 62 ]
+      "use-vars" : [ 62, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 98, 100 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "in-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 14 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1185,
       "ast" : {
@@ -6020,9 +6020,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 99 ],
-      "in-vars" : [ 3, 12, 14, 42, 13, 2 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 64, 3, 12, 14, 42, 13, 2 ],
+      "out-vars" : [ 64, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ 64 ],
       "line-start" : 1186,
       "ast" : {
@@ -6122,9 +6122,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 100 ],
-      "in-vars" : [ 12, 14, 42, 13, 2, 64, 3 ],
+      "in-vars" : [ 2, 12, 13, 64, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 2, 12, 13, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1187,
       "ast" : {
@@ -6174,13 +6174,13 @@
       "line-end" : 1187,
       "code" : "req.AddData(gsoAttr)",
       "entry" : false,
-      "use-vars" : [ 64, 42 ]
+      "use-vars" : [ 42, 64 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 101, 103 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1190,
       "ast" : {
@@ -6231,9 +6231,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 102 ],
-      "in-vars" : [ 13, 2, 3, 12, 14, 42 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 66, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 13, 66, 42, 14, 3, 2, 12 ],
       "decl-vars" : [ 66 ],
       "line-start" : 1191,
       "ast" : {
@@ -6333,9 +6333,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 103 ],
-      "in-vars" : [ 66, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13, 66 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 14, 42, 13, 2 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1192,
       "ast" : {
@@ -6389,9 +6389,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 104, 106 ],
-      "in-vars" : [ 13, 2, 3, 12, 14, 42 ],
+      "in-vars" : [ 2, 12, 13, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1195,
       "ast" : {
@@ -6442,9 +6442,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 105 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 68, 14 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13, 68 ],
       "decl-vars" : [ 68 ],
       "line-start" : 1196,
       "ast" : {
@@ -6544,9 +6544,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 106 ],
-      "in-vars" : [ 3, 12, 68, 14, 42, 13, 2 ],
+      "in-vars" : [ 3, 2, 12, 13, 68, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1197,
       "ast" : {
@@ -6596,13 +6596,13 @@
       "line-end" : 1197,
       "code" : "req.AddData(groupAttr)",
       "entry" : false,
-      "use-vars" : [ 68, 42 ]
+      "use-vars" : [ 42, 68 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 107, 117 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 42, 13, 2, 3, 12, 14 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1200,
       "ast" : {
@@ -6655,9 +6655,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 108 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 14, 3, 2, 12, 13, 42 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12, 71 ],
+      "out-vars" : [ 2, 12, 13, 42, 71, 14, 3 ],
       "decl-vars" : [ 71 ],
       "line-start" : 1201,
       "ast" : {
@@ -6709,9 +6709,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 109 ],
-      "in-vars" : [ 12, 71, 14, 42, 13, 2, 3 ],
+      "in-vars" : [ 71, 14, 3, 2, 12, 13, 42 ],
       "exit" : false,
-      "out-vars" : [ 3, 14, 42, 12, 71, 70, 73, 13, 2 ],
+      "out-vars" : [ 14, 3, 2, 12, 73, 13, 42, 70, 71 ],
       "decl-vars" : [ 70, 73 ],
       "line-start" : 1202,
       "ast" : {
@@ -6726,9 +6726,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 110, 113, 116 ],
-      "in-vars" : [ 3, 70, 73, 14, 42, 13, 2, 12, 71 ],
+      "in-vars" : [ 70, 73, 13, 42, 12, 3, 2, 71, 14 ],
       "exit" : false,
-      "out-vars" : [ 42, 3, 12, 70, 14, 13, 2, 71, 73 ],
+      "out-vars" : [ 70, 73, 42, 71, 2, 12, 13, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1202,
       "ast" : {
@@ -6781,9 +6781,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 111 ],
-      "in-vars" : [ 70, 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 13, 42, 14, 3, 2, 12, 70 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 70, 14, 42, 13, 2 ],
+      "out-vars" : [ 42, 14, 3, 2, 12, 70, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1203,
       "ast" : {
@@ -6809,9 +6809,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 112 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12, 70 ],
+      "in-vars" : [ 14, 3, 2, 12, 70, 13, 42 ],
       "exit" : false,
-      "out-vars" : [ 72, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 3, 2, 72, 12, 13, 42, 14 ],
       "decl-vars" : [ 72 ],
       "line-start" : 1204,
       "ast" : {
@@ -6886,9 +6886,9 @@
     }, {
       "update-vars" : [ 71 ],
       "successors" : [ 116 ],
-      "in-vars" : [ 12, 72, 14, 42, 13, 2, 3 ],
+      "in-vars" : [ 13, 42, 14, 3, 2, 72, 12 ],
       "exit" : false,
-      "out-vars" : [ 71, 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 42, 71, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1205,
       "ast" : {
@@ -6955,9 +6955,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 114 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 73, 14 ],
+      "in-vars" : [ 2, 12, 73, 13, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12, 73 ],
+      "out-vars" : [ 14, 3, 2, 12, 73, 13, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1206,
       "ast" : {
@@ -6983,9 +6983,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 115 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 73, 14 ],
+      "in-vars" : [ 3, 2, 12, 73, 13, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12, 74 ],
+      "out-vars" : [ 12, 13, 42, 74, 14, 3, 2 ],
       "decl-vars" : [ 74 ],
       "line-start" : 1207,
       "ast" : {
@@ -7060,9 +7060,9 @@
     }, {
       "update-vars" : [ 71 ],
       "successors" : [ 116 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12, 74 ],
+      "in-vars" : [ 2, 12, 13, 42, 74, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 13, 2, 3, 12, 71, 14, 42 ],
+      "out-vars" : [ 42, 71, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1208,
       "ast" : {
@@ -7129,9 +7129,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 117 ],
-      "in-vars" : [ 42, 13, 2, 3, 12, 71, 14 ],
+      "in-vars" : [ 13, 42, 71, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 14, 42, 13, 2 ],
+      "out-vars" : [ 2, 12, 13, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1211,
       "ast" : {
@@ -7181,13 +7181,13 @@
       "line-end" : 1211,
       "code" : "req.AddData(attr)",
       "entry" : false,
-      "use-vars" : [ 42, 71 ]
+      "use-vars" : [ 71, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 118, 119 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 13, 42, 14, 3, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 12, 14, 42, 13, 2, 3 ],
+      "out-vars" : [ 13, 42, 14, 3, 2, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1214,
       "ast" : {
@@ -7240,9 +7240,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 119 ],
-      "in-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "in-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 13, 2, 3, 12 ],
+      "out-vars" : [ 3, 2, 12, 13, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1215,
       "ast" : {
@@ -7306,9 +7306,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 120 ],
-      "in-vars" : [ 2, 3, 12, 14, 42, 13 ],
+      "in-vars" : [ 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 42, 76, 13, 2, 3, 12, 14 ],
+      "out-vars" : [ 3, 2, 12, 13, 76, 42, 14 ],
       "decl-vars" : [ 76 ],
       "line-start" : 1218,
       "ast" : {
@@ -7373,9 +7373,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 121 ],
-      "in-vars" : [ 42, 76, 13, 2, 3, 12, 14 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 13, 2, 3, 12 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1219,
       "ast" : {
@@ -7473,14 +7473,14 @@
       "line-end" : 1219,
       "code" : "linkInfo.AddRtAttr(nl.IFLA_INFO_KIND, nl.NonZeroTerminated(link.Type()))",
       "entry" : false,
-      "use-vars" : [ 3, 76 ]
+      "use-vars" : [ 76, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 122 ],
-      "in-vars" : [ 14, 42, 76, 13, 2, 3, 12 ],
+      "in-vars" : [ 12, 13, 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 99, 90, 102, 93, 2, 12, 78, 88, 13, 84, 106, 98, 107, 100, 104, 103, 42, 76, 96, 3, 87, 101, 105 ],
-      "decl-vars" : [ 84, 96, 100, 104, 107, 78, 88, 98, 99, 103, 105, 106, 87, 90, 93, 101, 102 ],
+      "out-vars" : [ 76, 93, 14, 2, 12, 90, 13, 107, 106, 99, 105, 87, 98, 84, 101, 42, 88, 96, 100, 103, 102, 3, 78, 104 ],
+      "decl-vars" : [ 100, 103, 84, 98, 99, 88, 101, 104, 90, 96, 102, 105, 106, 107, 78, 87, 93 ],
       "line-start" : 1221,
       "ast" : {
         "kind" : "statement",
@@ -7494,9 +7494,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 123, 130, 141, 143, 145, 149, 153, 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177 ],
-      "in-vars" : [ 88, 106, 104, 103, 93, 13, 2, 78, 98, 107, 105, 3, 12, 84, 87, 99, 76, 96, 90, 100, 102, 101, 14, 42 ],
+      "in-vars" : [ 42, 12, 104, 87, 88, 102, 84, 96, 78, 13, 99, 76, 93, 14, 3, 2, 101, 103, 98, 90, 107, 106, 105, 100 ],
       "exit" : false,
-      "out-vars" : [ 103, 101, 96, 99, 12, 100, 87, 88, 104, 93, 14, 42, 76, 2, 105, 3, 78, 90, 106, 107, 13, 84, 98, 102 ],
+      "out-vars" : [ 98, 42, 88, 90, 104, 100, 107, 101, 103, 2, 78, 12, 84, 13, 102, 14, 3, 96, 87, 76, 93, 106, 99, 105 ],
       "decl-vars" : [ ],
       "line-start" : 1221,
       "ast" : {
@@ -7538,9 +7538,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 124 ],
-      "in-vars" : [ 12, 78, 14, 42, 76, 2, 3 ],
+      "in-vars" : [ 42, 14, 3, 2, 78, 12, 76 ],
       "exit" : false,
-      "out-vars" : [ 12, 78, 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 42, 14, 3, 2, 78, 12, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1222,
       "ast" : {
@@ -7571,9 +7571,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 125 ],
-      "in-vars" : [ 2, 3, 12, 78, 14, 42, 76 ],
+      "in-vars" : [ 3, 2, 78, 12, 76, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 12, 77, 78, 14, 42, 76 ],
+      "out-vars" : [ 42, 14, 3, 2, 77, 78, 12, 76 ],
       "decl-vars" : [ 77 ],
       "line-start" : 1223,
       "ast" : {
@@ -7627,9 +7627,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 126 ],
-      "in-vars" : [ 3, 12, 77, 78, 14, 42, 76, 2 ],
+      "in-vars" : [ 2, 77, 78, 12, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 77, 78, 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 2, 77, 78, 76, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1224,
       "ast" : {
@@ -7716,13 +7716,13 @@
       "line-end" : 1224,
       "code" : "native.PutUint16(b, uint16(link.VlanId))",
       "entry" : false,
-      "use-vars" : [ 78, 12, 77 ]
+      "use-vars" : [ 77, 78, 12 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 127 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 77, 78 ],
+      "in-vars" : [ 78, 76, 42, 14, 3, 2, 77 ],
       "exit" : false,
-      "out-vars" : [ 76, 2, 3, 77, 78, 80, 14, 42 ],
+      "out-vars" : [ 42, 14, 3, 2, 77, 78, 80, 76 ],
       "decl-vars" : [ 80 ],
       "line-start" : 1225,
       "ast" : {
@@ -7792,9 +7792,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 128 ],
-      "in-vars" : [ 77, 78, 80, 14, 42, 76, 2, 3 ],
+      "in-vars" : [ 2, 77, 78, 80, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 80, 14, 42, 76, 2, 3, 78 ],
+      "out-vars" : [ 2, 78, 80, 76, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1226,
       "ast" : {
@@ -7851,13 +7851,13 @@
       "line-end" : 1226,
       "code" : "data.AddRtAttr(nl.IFLA_VLAN_ID, b)",
       "entry" : false,
-      "use-vars" : [ 77, 80 ]
+      "use-vars" : [ 80, 77 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 129, 177 ],
-      "in-vars" : [ 76, 2, 3, 78, 80, 14, 42 ],
+      "in-vars" : [ 80, 76, 42, 14, 3, 2, 78 ],
       "exit" : false,
-      "out-vars" : [ 3, 78, 80, 14, 42, 76, 2 ],
+      "out-vars" : [ 2, 78, 80, 76, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1228,
       "ast" : {
@@ -7908,9 +7908,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 3, 78, 80, 14, 42, 76, 2 ],
+      "in-vars" : [ 78, 80, 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 76, 2, 3, 14, 42 ],
+      "out-vars" : [ 14, 3, 2, 76, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1229,
       "ast" : {
@@ -8015,9 +8015,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 131 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 84 ],
+      "in-vars" : [ 84, 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3, 84 ],
+      "out-vars" : [ 14, 3, 2, 84, 76, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1231,
       "ast" : {
@@ -8048,9 +8048,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 132 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 84 ],
+      "in-vars" : [ 84, 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 84, 14, 42, 76, 82, 2 ],
+      "out-vars" : [ 82, 76, 42, 14, 3, 2, 84 ],
       "decl-vars" : [ 82 ],
       "line-start" : 1232,
       "ast" : {
@@ -8120,9 +8120,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 133 ],
-      "in-vars" : [ 84, 14, 42, 76, 82, 2, 3 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 84, 82 ],
       "exit" : false,
-      "out-vars" : [ 76, 83, 2, 3, 84, 14, 42 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 83, 84 ],
       "decl-vars" : [ 83 ],
       "line-start" : 1233,
       "ast" : {
@@ -8192,9 +8192,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 134 ],
-      "in-vars" : [ 42, 76, 83, 2, 3, 84, 14 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 83, 84 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 84, 14, 42, 76, 83 ],
+      "out-vars" : [ 3, 2, 83, 84, 76, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1234,
       "ast" : {
@@ -8250,9 +8250,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 135 ],
-      "in-vars" : [ 76, 83, 2, 3, 84, 14, 42 ],
+      "in-vars" : [ 3, 2, 83, 84, 76, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 83, 2, 3, 84, 14, 42, 76 ],
+      "out-vars" : [ 83, 84, 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1235,
       "ast" : {
@@ -8343,13 +8343,13 @@
       "line-end" : 1235,
       "code" : "peer.AddRtAttr(unix.IFLA_IFNAME, nl.ZeroTerminated(link.PeerName))",
       "entry" : false,
-      "use-vars" : [ 83, 84 ]
+      "use-vars" : [ 84, 83 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 136, 137 ],
-      "in-vars" : [ 83, 2, 3, 84, 14, 42, 76 ],
+      "in-vars" : [ 42, 14, 3, 2, 83, 84, 76 ],
       "exit" : false,
-      "out-vars" : [ 3, 84, 14, 42, 76, 83, 2 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 83, 84 ],
       "decl-vars" : [ ],
       "line-start" : 1236,
       "ast" : {
@@ -8400,9 +8400,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 137 ],
-      "in-vars" : [ 14, 42, 76, 83, 2, 3, 84 ],
+      "in-vars" : [ 2, 83, 84, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 84, 14, 42, 76, 83 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 83, 84 ],
       "decl-vars" : [ ],
       "line-start" : 1237,
       "ast" : {
@@ -8513,9 +8513,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 138, 139 ],
-      "in-vars" : [ 84, 14, 42, 76, 83, 2, 3 ],
+      "in-vars" : [ 14, 3, 2, 83, 84, 76, 42 ],
       "exit" : false,
-      "out-vars" : [ 83, 2, 3, 84, 14, 42, 76 ],
+      "out-vars" : [ 84, 76, 42, 14, 3, 2, 83 ],
       "decl-vars" : [ ],
       "line-start" : 1239,
       "ast" : {
@@ -8566,9 +8566,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 139 ],
-      "in-vars" : [ 84, 14, 42, 76, 83, 2, 3 ],
+      "in-vars" : [ 84, 76, 42, 14, 3, 2, 83 ],
       "exit" : false,
-      "out-vars" : [ 84, 14, 42, 76, 83, 2, 3 ],
+      "out-vars" : [ 84, 76, 42, 14, 3, 2, 83 ],
       "decl-vars" : [ ],
       "line-start" : 1240,
       "ast" : {
@@ -8679,9 +8679,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 140, 177 ],
-      "in-vars" : [ 84, 14, 42, 76, 83, 2, 3 ],
+      "in-vars" : [ 83, 84, 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 83, 2, 3, 84 ],
+      "out-vars" : [ 3, 2, 83, 84, 76, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1242,
       "ast" : {
@@ -8734,9 +8734,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 42, 76, 83, 2, 3, 84, 14 ],
+      "in-vars" : [ 84, 76, 42, 14, 3, 2, 83 ],
       "exit" : false,
-      "out-vars" : [ 42, 76, 2, 3, 14 ],
+      "out-vars" : [ 3, 2, 76, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1243,
       "ast" : {
@@ -8829,9 +8829,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 142 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 87 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 87 ],
       "exit" : false,
-      "out-vars" : [ 3, 87, 14, 42, 76, 2 ],
+      "out-vars" : [ 14, 3, 2, 87, 76, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1245,
       "ast" : {
@@ -8862,9 +8862,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 87 ],
+      "in-vars" : [ 3, 2, 87, 76, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1246,
       "ast" : {
@@ -8913,13 +8913,13 @@
       "line-end" : 1246,
       "code" : "addVxlanAttrs(link, linkInfo)",
       "entry" : false,
-      "use-vars" : [ 76, 87 ]
+      "use-vars" : [ 87, 76 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 144 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 88 ],
+      "in-vars" : [ 14, 3, 2, 76, 42, 88 ],
       "exit" : false,
-      "out-vars" : [ 76, 2, 3, 88, 14, 42 ],
+      "out-vars" : [ 76, 42, 88, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1247,
       "ast" : {
@@ -8950,9 +8950,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 3, 88, 14, 42, 76, 2 ],
+      "in-vars" : [ 88, 14, 3, 2, 76, 42 ],
       "exit" : false,
-      "out-vars" : [ 76, 2, 3, 14, 42 ],
+      "out-vars" : [ 3, 2, 76, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1248,
       "ast" : {
@@ -9005,9 +9005,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 146 ],
-      "in-vars" : [ 90, 14, 42, 76, 2, 3 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 90 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3, 90 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 90 ],
       "decl-vars" : [ ],
       "line-start" : 1249,
       "ast" : {
@@ -9038,9 +9038,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 147 ],
-      "in-vars" : [ 3, 90, 14, 42, 76, 2 ],
+      "in-vars" : [ 42, 14, 3, 2, 90, 76 ],
       "exit" : false,
-      "out-vars" : [ 3, 90, 89, 14, 42, 76, 2 ],
+      "out-vars" : [ 2, 89, 90, 76, 42, 14, 3 ],
       "decl-vars" : [ 89 ],
       "line-start" : 1250,
       "ast" : {
@@ -9110,9 +9110,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 148 ],
-      "in-vars" : [ 76, 2, 3, 90, 89, 14, 42 ],
+      "in-vars" : [ 42, 14, 3, 2, 89, 90, 76 ],
       "exit" : false,
-      "out-vars" : [ 42, 76, 2, 3, 90, 89, 14 ],
+      "out-vars" : [ 42, 14, 3, 2, 89, 90, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1251,
       "ast" : {
@@ -9223,9 +9223,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 89, 14, 42, 76, 2, 3, 90 ],
+      "in-vars" : [ 42, 14, 3, 2, 89, 90, 76 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1252,
       "ast" : {
@@ -9336,9 +9336,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 150 ],
-      "in-vars" : [ 76, 13, 2, 3, 93, 14, 42 ],
+      "in-vars" : [ 2, 13, 76, 42, 93, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 76, 13, 2, 3, 93, 14, 42 ],
+      "out-vars" : [ 76, 42, 93, 14, 3, 2, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1253,
       "ast" : {
@@ -9369,9 +9369,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 151, 177 ],
-      "in-vars" : [ 76, 13, 2, 3, 93, 14, 42 ],
+      "in-vars" : [ 2, 13, 76, 42, 93, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 13, 2, 3, 93 ],
+      "out-vars" : [ 76, 42, 93, 14, 3, 2, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1254,
       "ast" : {
@@ -9422,9 +9422,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 152 ],
-      "in-vars" : [ 14, 42, 76, 13, 2, 3, 93 ],
+      "in-vars" : [ 14, 3, 2, 13, 76, 42, 93 ],
       "exit" : false,
-      "out-vars" : [ 93, 14, 42, 76, 13, 2, 3, 95 ],
+      "out-vars" : [ 76, 42, 93, 14, 3, 2, 13, 95 ],
       "decl-vars" : [ 95 ],
       "line-start" : 1255,
       "ast" : {
@@ -9494,9 +9494,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 93, 14, 42, 76, 13, 2, 3, 95 ],
+      "in-vars" : [ 93, 14, 3, 2, 13, 95, 76, 42 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 3, 2, 76, 42, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1256,
       "ast" : {
@@ -9603,13 +9603,13 @@
       "line-end" : 1256,
       "code" : "data.AddRtAttr(nl.IFLA_MACVLAN_MODE, nl.Uint32Attr(macvlanModes[link.Mode]))",
       "entry" : false,
-      "use-vars" : [ 95, 13, 93 ]
+      "use-vars" : [ 93, 95, 13 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 154 ],
-      "in-vars" : [ 14, 42, 76, 13, 96, 2, 3 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 13, 96 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 14, 42, 76, 13, 96 ],
+      "out-vars" : [ 42, 14, 3, 2, 13, 96, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1258,
       "ast" : {
@@ -9640,9 +9640,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 155, 177 ],
-      "in-vars" : [ 2, 3, 14, 42, 76, 13, 96 ],
+      "in-vars" : [ 42, 14, 3, 2, 13, 96, 76 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 13, 96, 2, 3 ],
+      "out-vars" : [ 2, 13, 96, 76, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1259,
       "ast" : {
@@ -9693,9 +9693,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 156 ],
-      "in-vars" : [ 14, 42, 76, 13, 96, 2, 3 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 13, 96 ],
       "exit" : false,
-      "out-vars" : [ 96, 2, 3, 14, 42, 97, 76, 13 ],
+      "out-vars" : [ 2, 13, 96, 97, 76, 42, 14, 3 ],
       "decl-vars" : [ 97 ],
       "line-start" : 1260,
       "ast" : {
@@ -9765,9 +9765,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 2, 3, 14, 42, 97, 76, 13, 96 ],
+      "in-vars" : [ 96, 97, 76, 42, 14, 3, 2, 13 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 42, 14, 3, 2, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1261,
       "ast" : {
@@ -9874,13 +9874,13 @@
       "line-end" : 1261,
       "code" : "data.AddRtAttr(nl.IFLA_MACVLAN_MODE, nl.Uint32Attr(macvlanModes[link.Mode]))",
       "entry" : false,
-      "use-vars" : [ 96, 97, 13 ]
+      "use-vars" : [ 97, 96, 13 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 158 ],
-      "in-vars" : [ 42, 76, 2, 3, 98, 14 ],
+      "in-vars" : [ 14, 3, 2, 98, 76, 42 ],
       "exit" : false,
-      "out-vars" : [ 3, 98, 14, 42, 76, 2 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 98 ],
       "decl-vars" : [ ],
       "line-start" : 1263,
       "ast" : {
@@ -9911,9 +9911,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 98, 14, 42, 76, 2, 3 ],
+      "in-vars" : [ 3, 2, 98, 76, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 2, 76, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1264,
       "ast" : {
@@ -9966,9 +9966,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 160 ],
-      "in-vars" : [ 2, 3, 99, 14, 42, 76 ],
+      "in-vars" : [ 2, 99, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 42, 76, 2, 3, 99, 14 ],
+      "out-vars" : [ 99, 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1265,
       "ast" : {
@@ -9999,9 +9999,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 3, 99, 14, 42, 76, 2 ],
+      "in-vars" : [ 2, 99, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1266,
       "ast" : {
@@ -10050,13 +10050,13 @@
       "line-end" : 1266,
       "code" : "addIptunAttrs(link, linkInfo)",
       "entry" : false,
-      "use-vars" : [ 76, 99 ]
+      "use-vars" : [ 99, 76 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 162 ],
-      "in-vars" : [ 42, 76, 2, 3, 100, 14 ],
+      "in-vars" : [ 2, 100, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 100, 14, 42, 76, 2 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 100 ],
       "decl-vars" : [ ],
       "line-start" : 1267,
       "ast" : {
@@ -10087,9 +10087,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 42, 76, 2, 3, 100, 14 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 100 ],
       "exit" : false,
-      "out-vars" : [ 76, 2, 3, 14, 42 ],
+      "out-vars" : [ 42, 14, 3, 2, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1268,
       "ast" : {
@@ -10142,9 +10142,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 164 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 101 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 101 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3, 101 ],
+      "out-vars" : [ 42, 14, 3, 2, 101, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1269,
       "ast" : {
@@ -10175,9 +10175,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 101, 14, 42, 76, 2, 3 ],
+      "in-vars" : [ 101, 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1270,
       "ast" : {
@@ -10230,9 +10230,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 166 ],
-      "in-vars" : [ 76, 2, 3, 102, 14, 42 ],
+      "in-vars" : [ 42, 102, 14, 3, 2, 76 ],
       "exit" : false,
-      "out-vars" : [ 76, 2, 3, 102, 14, 42 ],
+      "out-vars" : [ 76, 42, 102, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1271,
       "ast" : {
@@ -10263,9 +10263,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 102 ],
+      "in-vars" : [ 42, 102, 14, 3, 2, 76 ],
       "exit" : false,
-      "out-vars" : [ 3, 14, 42, 76, 2 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1272,
       "ast" : {
@@ -10318,9 +10318,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 168 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 103 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 103 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3, 103 ],
+      "out-vars" : [ 103, 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1273,
       "ast" : {
@@ -10351,9 +10351,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 76, 2, 3, 103, 14, 42 ],
+      "in-vars" : [ 2, 103, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1274,
       "ast" : {
@@ -10402,13 +10402,13 @@
       "line-end" : 1274,
       "code" : "addVrfAttrs(link, linkInfo)",
       "entry" : false,
-      "use-vars" : [ 76, 103 ]
+      "use-vars" : [ 103, 76 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 170 ],
-      "in-vars" : [ 3, 104, 14, 42, 76, 2 ],
+      "in-vars" : [ 2, 104, 76, 42, 14, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 104, 14, 42, 76, 2 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 104 ],
       "decl-vars" : [ ],
       "line-start" : 1275,
       "ast" : {
@@ -10439,9 +10439,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 104 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 104 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1276,
       "ast" : {
@@ -10494,9 +10494,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 172 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 105 ],
+      "in-vars" : [ 42, 14, 3, 2, 105, 76 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 105, 14, 42, 76 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 105 ],
       "decl-vars" : [ ],
       "line-start" : 1277,
       "ast" : {
@@ -10527,9 +10527,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 42, 76, 2, 3, 105, 14 ],
+      "in-vars" : [ 14, 3, 2, 105, 76, 42 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 14, 42, 76 ],
+      "out-vars" : [ 14, 3, 2, 76, 42 ],
       "decl-vars" : [ ],
       "line-start" : 1278,
       "ast" : {
@@ -10582,9 +10582,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 174 ],
-      "in-vars" : [ 14, 42, 76, 2, 3, 106 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 106 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3, 106 ],
+      "out-vars" : [ 76, 42, 14, 3, 2, 106 ],
       "decl-vars" : [ ],
       "line-start" : 1279,
       "ast" : {
@@ -10615,9 +10615,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 3, 106, 14, 42, 76, 2 ],
+      "in-vars" : [ 42, 14, 3, 2, 106, 76 ],
       "exit" : false,
-      "out-vars" : [ 42, 76, 2, 3, 14 ],
+      "out-vars" : [ 76, 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1280,
       "ast" : {
@@ -10670,9 +10670,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 176 ],
-      "in-vars" : [ 76, 2, 3, 107, 14, 42 ],
+      "in-vars" : [ 3, 2, 107, 76, 42, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3, 107 ],
+      "out-vars" : [ 42, 14, 3, 2, 107, 76 ],
       "decl-vars" : [ ],
       "line-start" : 1281,
       "ast" : {
@@ -10703,9 +10703,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 177 ],
-      "in-vars" : [ 76, 2, 3, 107, 14, 42 ],
+      "in-vars" : [ 76, 42, 14, 3, 2, 107 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 76, 2, 3 ],
+      "out-vars" : [ 2, 76, 42, 14, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1282,
       "ast" : {
@@ -10754,13 +10754,13 @@
       "line-end" : 1282,
       "code" : "addIPoIBAttrs(link, linkInfo)",
       "entry" : false,
-      "use-vars" : [ 107, 76 ]
+      "use-vars" : [ 76, 107 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 178 ],
-      "in-vars" : [ 14, 42, 76, 2, 3 ],
+      "in-vars" : [ 76, 42, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 42, 2, 3 ],
+      "out-vars" : [ 42, 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1285,
       "ast" : {
@@ -10814,10 +10814,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 179 ],
-      "in-vars" : [ 2, 3, 14, 42 ],
+      "in-vars" : [ 14, 3, 2, 42 ],
       "exit" : false,
-      "out-vars" : [ 14, 2, 3, 108 ],
-      "decl-vars" : [ 109, 108 ],
+      "out-vars" : [ 14, 3, 2, 108 ],
+      "decl-vars" : [ 108, 109 ],
       "line-start" : 1287,
       "ast" : {
         "kind" : "statement",
@@ -10893,9 +10893,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 180, 181 ],
-      "in-vars" : [ 14, 2, 3, 108 ],
+      "in-vars" : [ 108, 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 2, 3, 108 ],
+      "out-vars" : [ 3, 2, 108, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1288,
       "ast" : {
@@ -10965,9 +10965,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 182 ],
-      "in-vars" : [ 3, 14, 2 ],
+      "in-vars" : [ 3, 2, 14 ],
       "exit" : false,
-      "out-vars" : [ 14, 2, 3 ],
+      "out-vars" : [ 3, 2, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1292,
       "ast" : {
@@ -11017,13 +11017,13 @@
       "line-end" : 1292,
       "code" : "h.ensureIndex(base)",
       "entry" : false,
-      "use-vars" : [ 2, 14 ]
+      "use-vars" : [ 14, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 183, 184 ],
-      "in-vars" : [ 3, 14, 2 ],
+      "in-vars" : [ 14, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 2, 3 ],
+      "out-vars" : [ 14, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1295,
       "ast" : {
@@ -11074,7 +11074,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 3, 14, 2 ],
+      "in-vars" : [ 14, 3, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -11147,7 +11147,7 @@
       "line-end" : 1297,
       "code" : "return h.LinkSetMasterByIndex(link, base.MasterIndex)",
       "entry" : false,
-      "use-vars" : [ 3, 14, 2 ]
+      "use-vars" : [ 2, 3, 14 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -14293,16 +14293,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "tuntap",
+      "name" : "isTuntap",
       "package" : 0,
-      "type" : 75,
+      "type" : 26,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "isTuntap",
+      "name" : "tuntap",
       "package" : 0,
-      "type" : 26,
+      "type" : 75,
       "exported" : false,
       "embedded" : false,
       "field" : false

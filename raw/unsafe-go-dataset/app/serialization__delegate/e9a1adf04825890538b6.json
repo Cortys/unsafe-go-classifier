@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 41, 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 41, 42, 40 ],
+      "out-vars" : [ 41, 40, 42 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 5 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 41, 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 42, 40, 41 ],
+      "out-vars" : [ 42, 41, 40 ],
       "decl-vars" : [ ],
       "line-start" : 60,
       "ast" : {
@@ -88,7 +88,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 40, 41 ],
+      "in-vars" : [ 41, 40 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -190,7 +190,7 @@
       "line-end" : 61,
       "code" : "decoder.valType.UnsafeSet(ptr, decoder.valType.UnsafeNew())",
       "entry" : false,
-      "use-vars" : [ 41, 40 ]
+      "use-vars" : [ 40, 41 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -212,9 +212,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 42, 40, 41 ],
+      "in-vars" : [ 42, 41, 40 ],
       "exit" : false,
-      "out-vars" : [ 42, 44 ],
+      "out-vars" : [ 44, 42 ],
       "decl-vars" : [ 44 ],
       "line-start" : 64,
       "ast" : {
@@ -289,7 +289,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 9 ],
-      "in-vars" : [ 42, 44 ],
+      "in-vars" : [ 44, 42 ],
       "exit" : false,
       "out-vars" : [ 44, 42 ],
       "decl-vars" : [ ],
@@ -418,7 +418,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 42, 44 ],
+      "in-vars" : [ 44, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -470,7 +470,7 @@
       "line-end" : 69,
       "code" : "iter.ReadVal(obj)",
       "entry" : false,
-      "use-vars" : [ 42, 44 ]
+      "use-vars" : [ 44, 42 ]
     } ],
     "code" : "func (decoder *ifaceDecoder) Decode(ptr unsafe.Pointer, iter *Iterator) {\n\tif iter.ReadNil() {\n\t\tdecoder.valType.UnsafeSet(ptr, decoder.valType.UnsafeNew())\n\t\treturn\n\t}\n\tobj := decoder.valType.UnsafeIndirect(ptr)\n\tif reflect2.IsNil(obj) {\n\t\titer.ReportError(\"decode non empty interface\", \"can not unmarshal into nil\")\n\t\treturn\n\t}\n\titer.ReadVal(obj)\n}",
     "defines" : [ 0 ],

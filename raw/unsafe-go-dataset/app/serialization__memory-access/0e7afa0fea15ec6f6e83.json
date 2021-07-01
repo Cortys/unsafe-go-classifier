@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 40, 41 ],
       "exit" : false,
-      "out-vars" : [ 40, 41 ],
+      "out-vars" : [ 41, 40 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 40, 41 ],
       "exit" : false,
-      "out-vars" : [ 43, 40 ],
+      "out-vars" : [ 40, 43 ],
       "decl-vars" : [ 43 ],
       "line-start" : 103,
       "ast" : {
@@ -119,7 +119,7 @@
       "successors" : [ 4, 5 ],
       "in-vars" : [ 40, 43 ],
       "exit" : false,
-      "out-vars" : [ 43, 40 ],
+      "out-vars" : [ 40, 43 ],
       "decl-vars" : [ ],
       "line-start" : 104,
       "ast" : {
@@ -186,9 +186,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 43, 40 ],
+      "in-vars" : [ 40, 43 ],
       "exit" : false,
-      "out-vars" : [ 43, 45, 46 ],
+      "out-vars" : [ 45, 43, 46 ],
       "decl-vars" : [ 46, 45 ],
       "line-start" : 107,
       "ast" : {
@@ -260,9 +260,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 8 ],
-      "in-vars" : [ 43, 45, 46 ],
+      "in-vars" : [ 46, 45, 43 ],
       "exit" : false,
-      "out-vars" : [ 43, 46 ],
+      "out-vars" : [ 43, 45 ],
       "decl-vars" : [ ],
       "line-start" : 108,
       "ast" : {
@@ -278,7 +278,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "converted",
-              "variable" : 45
+              "variable" : 46
             }
           },
           "type" : "unary"
@@ -290,7 +290,7 @@
       "line-end" : 110,
       "code" : "if !converted {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 45 ]
+      "use-vars" : [ 46 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -319,9 +319,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 43, 46 ],
+      "in-vars" : [ 45, 43 ],
       "exit" : false,
-      "out-vars" : [ 47, 46 ],
+      "out-vars" : [ 45, 47 ],
       "decl-vars" : [ 47 ],
       "line-start" : 111,
       "ast" : {
@@ -379,7 +379,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 47, 46 ],
+      "in-vars" : [ 47, 45 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -417,7 +417,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "isEmbeddedPtrNil",
-                "variable" : 46
+                "variable" : 45
               }
             },
             "type" : "selector"
@@ -431,7 +431,7 @@
       "line-end" : 112,
       "code" : "return isEmbeddedPtrNil.IsEmbeddedPtrNil(fieldPtr)",
       "entry" : false,
-      "use-vars" : [ 46, 47 ]
+      "use-vars" : [ 45, 47 ]
     } ],
     "code" : "func (encoder *dereferenceEncoder) IsEmbeddedPtrNil(ptr unsafe.Pointer) bool {\n\tdeReferenced := *((*unsafe.Pointer)(ptr))\n\tif deReferenced == nil {\n\t\treturn true\n\t}\n\tisEmbeddedPtrNil, converted := encoder.ValueEncoder.(IsEmbeddedPtrNil)\n\tif !converted {\n\t\treturn false\n\t}\n\tfieldPtr := unsafe.Pointer(deReferenced)\n\treturn isEmbeddedPtrNil.IsEmbeddedPtrNil(fieldPtr)\n}",
     "defines" : [ 0 ],
@@ -2552,16 +2552,16 @@
       "embedded" : false,
       "field" : true
     }, {
-      "name" : "converted",
+      "name" : "isEmbeddedPtrNil",
       "package" : 0,
-      "type" : 4,
+      "type" : 183,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "isEmbeddedPtrNil",
+      "name" : "converted",
       "package" : 0,
-      "type" : 183,
+      "type" : 4,
       "exported" : false,
       "embedded" : false,
       "field" : false

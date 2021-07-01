@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 1, 2, 3 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 3 ],
       "decl-vars" : [ ],
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 1, 2 ],
+      "in-vars" : [ 2, 3, 1 ],
       "exit" : false,
       "out-vars" : [ 6, 7 ],
-      "decl-vars" : [ 6, 8, 7 ],
+      "decl-vars" : [ 7, 6, 8 ],
       "line-start" : 31,
       "ast" : {
         "kind" : "statement",
@@ -198,11 +198,11 @@
       "line-end" : 31,
       "code" : "n, _, errno := syscall.Syscall(syscall.SYS_SENDMSG, s, uintptr(unsafe.Pointer(h)), uintptr(flags))",
       "entry" : false,
-      "use-vars" : [ 1, 3, 2 ]
+      "use-vars" : [ 1, 2, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 7, 6 ],
+      "in-vars" : [ 6, 7 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -269,7 +269,7 @@
       "line-end" : 32,
       "code" : "return int(n), errnoErr(errno)",
       "entry" : false,
-      "use-vars" : [ 7, 6 ]
+      "use-vars" : [ 6, 7 ]
     } ],
     "code" : "func sendmsg(s uintptr, h *msghdr, flags int) (int, error) {\n\tn, _, errno := syscall.Syscall(syscall.SYS_SENDMSG, s, uintptr(unsafe.Pointer(h)), uintptr(flags))\n\treturn int(n), errnoErr(errno)\n}",
     "defines" : [ 0 ],

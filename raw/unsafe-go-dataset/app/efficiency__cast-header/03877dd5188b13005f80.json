@@ -16,7 +16,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 66, 67 ],
       "exit" : false,
-      "out-vars" : [ 67, 66 ],
+      "out-vars" : [ 66, 67 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 71, 66, 67 ],
+      "in-vars" : [ 66, 67, 71 ],
       "exit" : false,
-      "out-vars" : [ 66, 67, 71 ],
+      "out-vars" : [ 71, 66, 67 ],
       "decl-vars" : [ ],
       "line-start" : 109,
       "ast" : {
@@ -428,7 +428,7 @@
       "successors" : [ 10 ],
       "in-vars" : [ 66, 67 ],
       "exit" : false,
-      "out-vars" : [ 66, 67 ],
+      "out-vars" : [ 67, 66 ],
       "decl-vars" : [ ],
       "line-start" : 117,
       "ast" : {
@@ -573,9 +573,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 66, 67 ],
+      "in-vars" : [ 67, 66 ],
       "exit" : false,
-      "out-vars" : [ 77, 66, 67 ],
+      "out-vars" : [ 67, 77, 66 ],
       "decl-vars" : [ 77 ],
       "line-start" : 124,
       "ast" : {
@@ -629,9 +629,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 77, 66, 67 ],
+      "in-vars" : [ 66, 67, 77 ],
       "exit" : false,
-      "out-vars" : [ 75, 77, 66, 67 ],
+      "out-vars" : [ 66, 67, 77, 75 ],
       "decl-vars" : [ 75 ],
       "line-start" : 125,
       "ast" : {
@@ -697,13 +697,13 @@
       "line-end" : 125,
       "code" : "stride := t.Strides()[axis]",
       "entry" : false,
-      "use-vars" : [ 67, 66 ]
+      "use-vars" : [ 66, 67 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 75, 77, 66, 67 ],
+      "in-vars" : [ 75, 66, 67, 77 ],
       "exit" : false,
-      "out-vars" : [ 72, 75, 77 ],
+      "out-vars" : [ 72, 77, 75 ],
       "decl-vars" : [ 72 ],
       "line-start" : 126,
       "ast" : {
@@ -803,13 +803,13 @@
       "line-end" : 126,
       "code" : "upper := ProdInts(t.Shape()[:axis+1])",
       "entry" : false,
-      "use-vars" : [ 67, 66 ]
+      "use-vars" : [ 66, 67 ]
     }, {
       "update-vars" : [ 68 ],
       "successors" : [ 19 ],
-      "in-vars" : [ 75, 77, 72 ],
+      "in-vars" : [ 75, 72, 77 ],
       "exit" : false,
-      "out-vars" : [ 75, 77, 68, 72 ],
+      "out-vars" : [ 75, 68, 72, 77 ],
       "decl-vars" : [ ],
       "line-start" : 127,
       "ast" : {
@@ -879,9 +879,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 24 ],
-      "in-vars" : [ 74, 68, 72, 73, 75, 77 ],
+      "in-vars" : [ 72, 77, 74, 75, 68, 73 ],
       "exit" : false,
-      "out-vars" : [ 68, 72, 73, 75, 77, 74 ],
+      "out-vars" : [ 77, 74, 75, 68, 73, 72 ],
       "decl-vars" : [ ],
       "line-start" : 128,
       "ast" : {
@@ -920,13 +920,13 @@
       "line-end" : 136,
       "code" : "for i, r := 0, 0; r < upper; i += stride {\n\thdr := &reflect.SliceHeader{\n\t\tData: uintptr(unsafe.Pointer(&data[i])),\n\t\tLen:  stride,\n\t\tCap:  stride,\n\t}\n\tretVal = append(retVal, *(*[]int8)(unsafe.Pointer(hdr)))\n\tr++\n}",
       "entry" : false,
-      "use-vars" : [ 73, 72 ]
+      "use-vars" : [ 72, 73 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 72, 75, 77, 68 ],
+      "in-vars" : [ 72, 77, 75, 68 ],
       "exit" : false,
-      "out-vars" : [ 74, 68, 72, 73, 75, 77 ],
+      "out-vars" : [ 72, 77, 74, 75, 68, 73 ],
       "decl-vars" : [ 73, 74 ],
       "line-start" : 128,
       "ast" : {
@@ -975,9 +975,9 @@
     }, {
       "update-vars" : [ 74 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 74, 68, 72, 73, 75, 77 ],
+      "in-vars" : [ 68, 73, 72, 77, 74, 75 ],
       "exit" : false,
-      "out-vars" : [ 73, 75, 77, 74, 68, 72 ],
+      "out-vars" : [ 74, 75, 68, 73, 72, 77 ],
       "decl-vars" : [ ],
       "line-start" : 128,
       "ast" : {
@@ -1015,9 +1015,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 77, 74, 68, 72, 73, 75 ],
+      "in-vars" : [ 74, 75, 68, 73, 72, 77 ],
       "exit" : false,
-      "out-vars" : [ 73, 80, 75, 77, 74, 68, 72 ],
+      "out-vars" : [ 77, 74, 75, 68, 80, 73, 72 ],
       "decl-vars" : [ 80 ],
       "line-start" : 129,
       "ast" : {
@@ -1205,13 +1205,13 @@
       "line-end" : 133,
       "code" : "hdr := &reflect.SliceHeader{\n\tData: uintptr(unsafe.Pointer(&data[i])),\n\tLen:  stride,\n\tCap:  stride,\n}",
       "entry" : false,
-      "use-vars" : [ 77, 74, 75 ]
+      "use-vars" : [ 74, 75, 77 ]
     }, {
       "update-vars" : [ 68 ],
       "successors" : [ 23 ],
-      "in-vars" : [ 74, 68, 72, 73, 80, 75, 77 ],
+      "in-vars" : [ 80, 73, 72, 77, 74, 75, 68 ],
       "exit" : false,
-      "out-vars" : [ 72, 73, 75, 77, 74, 68 ],
+      "out-vars" : [ 72, 77, 74, 75, 68, 73 ],
       "decl-vars" : [ ],
       "line-start" : 134,
       "ast" : {
@@ -1323,13 +1323,13 @@
       "line-end" : 134,
       "code" : "retVal = append(retVal, *(*[]int8)(unsafe.Pointer(hdr)))",
       "entry" : false,
-      "use-vars" : [ 80, 68 ]
+      "use-vars" : [ 68, 80 ]
     }, {
       "update-vars" : [ 73 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 73, 75, 77, 74, 68, 72 ],
+      "in-vars" : [ 77, 74, 75, 68, 73, 72 ],
       "exit" : false,
-      "out-vars" : [ 68, 72, 73, 75, 77, 74 ],
+      "out-vars" : [ 77, 74, 75, 68, 73, 72 ],
       "decl-vars" : [ ],
       "line-start" : 135,
       "ast" : {

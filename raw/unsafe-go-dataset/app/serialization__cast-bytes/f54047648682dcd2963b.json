@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2, 3 ],
+      "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3 ],
+      "out-vars" : [ 3, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2, 3 ],
+      "in-vars" : [ 1, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3 ],
-      "decl-vars" : [ 6, 4, 7, 5 ],
+      "out-vars" : [ 2, 4, 5, 1, 3 ],
+      "decl-vars" : [ 6, 5, 4, 7 ],
       "line-start" : 173,
       "ast" : {
         "kind" : "statement",
@@ -160,10 +160,10 @@
       "use-vars" : [ ]
     }, {
       "update-vars" : [ ],
-      "successors" : [ 1, 4 ],
-      "in-vars" : [ 5, 2, 3, 1, 4 ],
+      "successors" : [ 4, 1 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3 ],
+      "out-vars" : [ 1, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 186,
       "ast" : {
@@ -179,9 +179,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 2, 3, 1, 4, 5 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 3, 1, 4 ],
+      "out-vars" : [ 1, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 188,
       "ast" : {
@@ -243,9 +243,9 @@
     }, {
       "update-vars" : [ 7, 6 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 4, 5, 2, 3 ],
+      "in-vars" : [ 5, 1, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 3, 1, 6, 4, 5 ],
+      "out-vars" : [ 3, 2, 4, 5, 6, 1, 7 ],
       "decl-vars" : [ ],
       "line-start" : 192,
       "ast" : {
@@ -258,7 +258,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "ok",
-            "variable" : 7
+            "variable" : 6
           }
         }, {
           "go-type" : 12,
@@ -268,7 +268,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "errno",
-            "variable" : 6
+            "variable" : 7
           }
         } ],
         "right" : [ {
@@ -321,9 +321,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 15 ],
-      "in-vars" : [ 3, 1, 6, 4, 5, 7, 2 ],
+      "in-vars" : [ 4, 5, 6, 1, 7, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 7, 2, 3, 1, 6 ],
+      "out-vars" : [ 7, 3, 2, 4, 5, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 193,
       "ast" : {
@@ -338,7 +338,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "errno",
-              "variable" : 6
+              "variable" : 7
             }
           },
           "operator" : "!=",
@@ -361,13 +361,13 @@
       "line-end" : 200,
       "code" : "if errno != nil {\n\tselect {\n\tcase w.Errors <- errno:\n\tcase <-w.done:\n\t\treturn\n\t}\n\tcontinue\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 11, 14 ],
-      "in-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "in-vars" : [ 5, 1, 7, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "out-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 194,
       "ast" : {
@@ -382,9 +382,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 3, 1, 6, 4, 5 ],
+      "in-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 6, 4, 5, 2 ],
+      "out-vars" : [ 4, 5, 1, 7, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 195,
       "ast" : {
@@ -423,7 +423,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "errno",
-              "variable" : 6
+              "variable" : 7
             }
           }
         },
@@ -437,9 +437,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "in-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 3, 1, 4 ],
+      "out-vars" : [ 1, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 195,
       "ast" : {
@@ -475,7 +475,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "errno",
-            "variable" : 6
+            "variable" : 7
           }
         }
       },
@@ -483,7 +483,7 @@
       "line-end" : 195,
       "code" : "w.Errors <- errno",
       "entry" : false,
-      "use-vars" : [ 1, 6 ]
+      "use-vars" : [ 1, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
@@ -604,9 +604,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 3, 1, 4, 5, 2 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3 ],
+      "out-vars" : [ 2, 4, 5, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 199,
       "ast" : {
@@ -622,9 +622,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16, 17 ],
-      "in-vars" : [ 1, 4, 5, 7, 2, 3 ],
+      "in-vars" : [ 3, 2, 4, 5, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 4, 5 ],
+      "out-vars" : [ 5, 1, 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 202,
       "ast" : {
@@ -640,7 +640,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "ok",
-              "variable" : 7
+              "variable" : 6
             }
           },
           "type" : "unary"
@@ -652,13 +652,13 @@
       "line-end" : 204,
       "code" : "if !ok {\n\tcontinue\n}",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 1, 4, 5, 2, 3 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3 ],
+      "out-vars" : [ 5, 1, 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 203,
       "ast" : {
@@ -672,11 +672,11 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 6, 5 ],
+      "update-vars" : [ 7, 4 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 1, 4, 2, 3 ],
+      "in-vars" : [ 1, 3, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 5, 2, 3, 1 ],
+      "out-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 206,
       "ast" : {
@@ -689,7 +689,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "n",
-            "variable" : 5
+            "variable" : 4
           }
         }, {
           "go-type" : 12,
@@ -699,7 +699,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "errno",
-            "variable" : 6
+            "variable" : 7
           }
         } ],
         "right" : [ {
@@ -740,7 +740,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "buf",
-                "variable" : 4
+                "variable" : 5
               }
             }
           } ],
@@ -768,17 +768,17 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 6, 5 ],
+      "assign-vars" : [ 7, 4 ],
       "line-end" : 206,
       "code" : "n, errno = unix.Read(w.fd, buf[:])",
       "entry" : false,
-      "use-vars" : [ 1, 4 ]
+      "use-vars" : [ 1, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19, 20 ],
-      "in-vars" : [ 6, 4, 5, 2, 3, 1 ],
+      "in-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "out-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 210,
       "ast" : {
@@ -793,7 +793,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "errno",
-              "variable" : 6
+              "variable" : 7
             }
           },
           "operator" : "==",
@@ -814,13 +814,13 @@
       "line-end" : 212,
       "code" : "if errno == unix.EINTR {\n\tcontinue\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 1, 4, 5, 2, 3 ],
+      "in-vars" : [ 3, 2, 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3 ],
+      "out-vars" : [ 1, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 211,
       "ast" : {
@@ -836,9 +836,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 22 ],
-      "in-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "in-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 6, 4, 5 ],
+      "out-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 215,
       "ast" : {
@@ -900,9 +900,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23, 36 ],
-      "in-vars" : [ 5, 2, 3, 1, 6, 4 ],
+      "in-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "out-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 219,
       "ast" : {
@@ -917,7 +917,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "n",
-              "variable" : 5
+              "variable" : 4
             }
           },
           "operator" : "<",
@@ -938,13 +938,13 @@
       "line-end" : 237,
       "code" : "if n < unix.SizeofInotifyEvent {\n\tvar err error\n\tif n == 0 {\n\n\t\terr = io.EOF\n\t} else if n < 0 {\n\n\t\terr = errno\n\t} else {\n\n\t\terr = errors.New(\"notify: short read in readEvents()\")\n\t}\n\tselect {\n\tcase w.Errors <- err:\n\tcase <-w.done:\n\t\treturn\n\t}\n\tcontinue\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 24 ],
-      "in-vars" : [ 6, 4, 5, 2, 3, 1 ],
+      "in-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 5, 2, 3, 1 ],
+      "out-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "decl-vars" : [ 12 ],
       "line-start" : 220,
       "ast" : {
@@ -985,9 +985,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 25, 26 ],
-      "in-vars" : [ 4, 5, 2, 3, 1, 6 ],
+      "in-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 2, 3, 1, 6 ],
+      "out-vars" : [ 5, 1, 7, 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 221,
       "ast" : {
@@ -1002,7 +1002,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "n",
-              "variable" : 5
+              "variable" : 4
             }
           },
           "operator" : "==",
@@ -1023,13 +1023,13 @@
       "line-end" : 230,
       "code" : "if n == 0 {\n\n\terr = io.EOF\n} else if n < 0 {\n\n\terr = errno\n} else {\n\n\terr = errors.New(\"notify: short read in readEvents()\")\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 29 ],
-      "in-vars" : [ 1, 4, 5, 2, 3 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 4, 5, 12, 2 ],
+      "out-vars" : [ 1, 12, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 223,
       "ast" : {
@@ -1072,9 +1072,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27, 28 ],
-      "in-vars" : [ 4, 5, 2, 3, 1, 6 ],
+      "in-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 5, 2, 3, 1 ],
+      "out-vars" : [ 7, 3, 2, 4, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 224,
       "ast" : {
@@ -1089,7 +1089,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "n",
-              "variable" : 5
+              "variable" : 4
             }
           },
           "operator" : "<",
@@ -1110,13 +1110,13 @@
       "line-end" : 230,
       "code" : "if n < 0 {\n\n\terr = errno\n} else {\n\n\terr = errors.New(\"notify: short read in readEvents()\")\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 29 ],
-      "in-vars" : [ 1, 6, 4, 5, 2, 3 ],
+      "in-vars" : [ 1, 7, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 12, 2, 3, 1, 4 ],
+      "out-vars" : [ 3, 2, 4, 5, 1, 12 ],
       "decl-vars" : [ ],
       "line-start" : 226,
       "ast" : {
@@ -1140,7 +1140,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "errno",
-            "variable" : 6
+            "variable" : 7
           }
         } ],
         "type" : "assign"
@@ -1149,13 +1149,13 @@
       "line-end" : 226,
       "code" : "err = errno",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 29 ],
-      "in-vars" : [ 1, 4, 5, 2, 3 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 12, 2, 3 ],
+      "out-vars" : [ 1, 12, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 229,
       "ast" : {
@@ -1212,9 +1212,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 30, 32, 35 ],
-      "in-vars" : [ 1, 4, 5, 12, 2, 3 ],
+      "in-vars" : [ 12, 3, 2, 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 12, 2, 3, 1, 4 ],
+      "out-vars" : [ 12, 3, 2, 4, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 231,
       "ast" : {
@@ -1229,9 +1229,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 1, 4, 5, 12, 2, 3 ],
+      "in-vars" : [ 1, 12, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 4, 5, 12, 2 ],
+      "out-vars" : [ 3, 2, 4, 5, 1, 12 ],
       "decl-vars" : [ ],
       "line-start" : 232,
       "ast" : {
@@ -1284,9 +1284,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 35 ],
-      "in-vars" : [ 3, 1, 4, 5, 12, 2 ],
+      "in-vars" : [ 12, 3, 2, 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3 ],
+      "out-vars" : [ 3, 2, 4, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 232,
       "ast" : {
@@ -1330,7 +1330,7 @@
       "line-end" : 232,
       "code" : "w.Errors <- err",
       "entry" : false,
-      "use-vars" : [ 1, 12 ]
+      "use-vars" : [ 12, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 33 ],
@@ -1451,9 +1451,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 4, 5, 2, 3, 1 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1, 4, 5 ],
+      "out-vars" : [ 1, 3, 2, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 236,
       "ast" : {
@@ -1469,9 +1469,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 4, 5, 3, 1 ],
+      "in-vars" : [ 1, 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 2, 3, 1 ],
+      "out-vars" : [ 4, 5, 1, 3, 2 ],
       "decl-vars" : [ 2 ],
       "line-start" : 239,
       "ast" : {
@@ -1511,10 +1511,10 @@
       "use-vars" : [ ]
     }, {
       "update-vars" : [ ],
-      "successors" : [ 3, 38 ],
-      "in-vars" : [ 4, 5, 2, 3, 1 ],
+      "successors" : [ 38, 3 ],
+      "in-vars" : [ 1, 3, 2, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 4, 5, 2 ],
+      "out-vars" : [ 2, 4, 5, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 242,
       "ast" : {
@@ -1558,7 +1558,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "n",
-                  "variable" : 5
+                  "variable" : 4
                 }
               },
               "operator" : "-",
@@ -1583,13 +1583,13 @@
       "line-end" : 293,
       "code" : "for offset <= uint32(n-unix.SizeofInotifyEvent) {\n\n\traw := (*unix.InotifyEvent)(unsafe.Pointer(&buf[offset]))\n\n\tmask := uint32(raw.Mask)\n\tnameLen := uint32(raw.Len)\n\n\tif mask&unix.IN_Q_OVERFLOW != 0 {\n\t\tselect {\n\t\tcase w.Errors <- ErrEventOverflow:\n\t\tcase <-w.done:\n\t\t\treturn\n\t\t}\n\t}\n\n\tw.mu.Lock()\n\tname, ok := w.paths[int(raw.Wd)]\n\n\tif ok && mask&unix.IN_DELETE_SELF == unix.IN_DELETE_SELF {\n\t\tdelete(w.paths, int(raw.Wd))\n\t\tdelete(w.watches, name)\n\t}\n\tw.mu.Unlock()\n\n\tif nameLen > 0 {\n\n\t\tbytes := (*[unix.PathMax]byte)(unsafe.Pointer(&buf[offset+unix.SizeofInotifyEvent]))\n\n\t\tname += \"/\" + strings.TrimRight(string(bytes[0:nameLen]), \"\\000\")\n\t}\n\n\tevent := newEvent(name, mask)\n\n\tif !event.ignoreLinux(mask) {\n\t\tselect {\n\t\tcase w.Events <- event:\n\t\tcase <-w.done:\n\t\t\treturn\n\t\t}\n\t}\n\n\toffset += unix.SizeofInotifyEvent + nameLen\n}",
       "entry" : false,
-      "use-vars" : [ 2, 5 ]
+      "use-vars" : [ 2, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 5, 2, 3, 1, 4 ],
+      "in-vars" : [ 2, 4, 5, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3, 14 ],
+      "out-vars" : [ 4, 14, 5, 1, 3, 2 ],
       "decl-vars" : [ 14 ],
       "line-start" : 244,
       "ast" : {
@@ -1675,7 +1675,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "buf",
-                    "variable" : 4
+                    "variable" : 5
                   }
                 },
                 "type" : "index"
@@ -1692,13 +1692,13 @@
       "line-end" : 244,
       "code" : "raw := (*unix.InotifyEvent)(unsafe.Pointer(&buf[offset]))",
       "entry" : false,
-      "use-vars" : [ 4, 2 ]
+      "use-vars" : [ 5, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 40 ],
-      "in-vars" : [ 2, 3, 14, 1, 4, 5 ],
+      "in-vars" : [ 2, 4, 14, 5, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 14, 1, 4, 5, 2, 17 ],
+      "out-vars" : [ 14, 5, 17, 1, 3, 2, 4 ],
       "decl-vars" : [ 17 ],
       "line-start" : 246,
       "ast" : {
@@ -1761,9 +1761,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 2, 17, 3, 14, 1, 4, 5 ],
+      "in-vars" : [ 3, 2, 4, 14, 5, 17, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 24, 14, 1, 4, 5, 2, 17 ],
+      "out-vars" : [ 2, 4, 14, 5, 24, 17, 1, 3 ],
       "decl-vars" : [ 24 ],
       "line-start" : 247,
       "ast" : {
@@ -1826,9 +1826,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 42, 48 ],
-      "in-vars" : [ 2, 17, 3, 24, 14, 1, 4, 5 ],
+      "in-vars" : [ 4, 14, 5, 24, 17, 1, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 2, 17, 3, 24, 14, 1 ],
+      "out-vars" : [ 17, 1, 3, 2, 4, 14, 5, 24 ],
       "decl-vars" : [ ],
       "line-start" : 249,
       "ast" : {
@@ -1882,9 +1882,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 45, 48 ],
-      "in-vars" : [ 4, 5, 2, 17, 3, 24, 14, 1 ],
+      "in-vars" : [ 3, 2, 4, 14, 5, 24, 17, 1 ],
       "exit" : false,
-      "out-vars" : [ 24, 14, 1, 4, 5, 2, 17, 3 ],
+      "out-vars" : [ 3, 2, 4, 14, 5, 24, 17, 1 ],
       "decl-vars" : [ ],
       "line-start" : 250,
       "ast" : {
@@ -1899,9 +1899,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 44 ],
-      "in-vars" : [ 17, 3, 24, 14, 1, 4, 5, 2 ],
+      "in-vars" : [ 14, 5, 24, 17, 1, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 17, 3, 24, 14, 1, 4, 5, 2 ],
+      "out-vars" : [ 14, 5, 24, 17, 1, 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 251,
       "ast" : {
@@ -1954,9 +1954,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 48 ],
-      "in-vars" : [ 2, 17, 3, 24, 14, 1, 4, 5 ],
+      "in-vars" : [ 2, 4, 14, 5, 24, 17, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 2, 17, 3, 24, 14, 1 ],
+      "out-vars" : [ 24, 17, 1, 3, 2, 4, 14, 5 ],
       "decl-vars" : [ ],
       "line-start" : 251,
       "ast" : {
@@ -2000,7 +2000,7 @@
       "line-end" : 251,
       "code" : "w.Errors <- ErrEventOverflow",
       "entry" : false,
-      "use-vars" : [ 3, 1 ]
+      "use-vars" : [ 1, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 46 ],
@@ -2121,9 +2121,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 49 ],
-      "in-vars" : [ 5, 2, 17, 3, 24, 14, 1, 4 ],
+      "in-vars" : [ 1, 3, 2, 4, 14, 5, 24, 17 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 2, 17, 3, 24, 14, 1 ],
+      "out-vars" : [ 14, 5, 24, 17, 1, 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 261,
       "ast" : {
@@ -2178,9 +2178,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 50 ],
-      "in-vars" : [ 4, 5, 2, 17, 3, 24, 14, 1 ],
+      "in-vars" : [ 17, 1, 3, 2, 4, 14, 5, 24 ],
       "exit" : false,
-      "out-vars" : [ 23, 1, 4, 5, 17, 3, 24, 14, 2, 21 ],
+      "out-vars" : [ 17, 3, 2, 24, 14, 5, 21, 1, 4, 23 ],
       "decl-vars" : [ 23, 21 ],
       "line-start" : 262,
       "ast" : {
@@ -2275,13 +2275,13 @@
       "line-end" : 262,
       "code" : "name, ok := w.paths[int(raw.Wd)]",
       "entry" : false,
-      "use-vars" : [ 14, 1 ]
+      "use-vars" : [ 1, 14 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 51, 53 ],
-      "in-vars" : [ 2, 24, 14, 1, 4, 5, 23, 17, 21, 3 ],
+      "in-vars" : [ 3, 4, 24, 21, 1, 2, 23, 14, 5, 17 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 3, 24, 14, 4, 23, 1, 17 ],
+      "out-vars" : [ 3, 2, 4, 5, 24, 17, 1, 23, 14 ],
       "decl-vars" : [ ],
       "line-start" : 267,
       "ast" : {
@@ -2352,9 +2352,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 52 ],
-      "in-vars" : [ 24, 14, 23, 1, 4, 5, 2, 17, 3 ],
+      "in-vars" : [ 2, 4, 23, 14, 17, 1, 3, 5, 24 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 17, 3, 24, 23, 1, 4 ],
+      "out-vars" : [ 17, 1, 3, 2, 4, 23, 5, 24 ],
       "decl-vars" : [ ],
       "line-start" : 268,
       "ast" : {
@@ -2440,13 +2440,13 @@
       "line-end" : 268,
       "code" : "delete(w.paths, int(raw.Wd))",
       "entry" : false,
-      "use-vars" : [ 1, 14 ]
+      "use-vars" : [ 14, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 53 ],
-      "in-vars" : [ 23, 1, 4, 5, 2, 17, 3, 24 ],
+      "in-vars" : [ 24, 17, 1, 3, 2, 4, 23, 5 ],
       "exit" : false,
-      "out-vars" : [ 24, 23, 1, 4, 5, 2, 17, 3 ],
+      "out-vars" : [ 2, 4, 23, 5, 24, 17, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 269,
       "ast" : {
@@ -2509,9 +2509,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 54 ],
-      "in-vars" : [ 23, 1, 4, 5, 2, 17, 3, 24 ],
+      "in-vars" : [ 4, 23, 5, 24, 17, 1, 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 17, 3, 24, 23, 1, 4 ],
+      "out-vars" : [ 24, 17, 1, 3, 2, 4, 23, 5 ],
       "decl-vars" : [ ],
       "line-start" : 271,
       "ast" : {
@@ -2566,9 +2566,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 55, 57 ],
-      "in-vars" : [ 2, 17, 3, 24, 23, 1, 4, 5 ],
+      "in-vars" : [ 23, 5, 24, 17, 1, 3, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 23, 1, 4, 5, 2, 17, 3, 24 ],
+      "out-vars" : [ 1, 3, 2, 4, 23, 5, 24, 17 ],
       "decl-vars" : [ ],
       "line-start" : 273,
       "ast" : {
@@ -2608,9 +2608,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 56 ],
-      "in-vars" : [ 23, 1, 4, 5, 2, 17, 3, 24 ],
+      "in-vars" : [ 3, 2, 4, 23, 5, 24, 17, 1 ],
       "exit" : false,
-      "out-vars" : [ 24, 25, 4, 23, 1, 5, 2, 17, 3 ],
+      "out-vars" : [ 1, 23, 25, 17, 2, 4, 5, 24, 3 ],
       "decl-vars" : [ 25 ],
       "line-start" : 275,
       "ast" : {
@@ -2717,7 +2717,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "buf",
-                    "variable" : 4
+                    "variable" : 5
                   }
                 },
                 "type" : "index"
@@ -2734,13 +2734,13 @@
       "line-end" : 275,
       "code" : "bytes := (*[unix.PathMax]byte)(unsafe.Pointer(&buf[offset+unix.SizeofInotifyEvent]))",
       "entry" : false,
-      "use-vars" : [ 2, 4 ]
+      "use-vars" : [ 5, 2 ]
     }, {
       "update-vars" : [ 23 ],
       "successors" : [ 57 ],
-      "in-vars" : [ 1, 25, 4, 2, 24, 23, 3, 5, 17 ],
+      "in-vars" : [ 2, 4, 23, 24, 17, 3, 5, 25, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 24, 23, 1, 4, 5, 2, 17 ],
+      "out-vars" : [ 4, 23, 5, 24, 17, 1, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 277,
       "ast" : {
@@ -2864,9 +2864,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 58 ],
-      "in-vars" : [ 4, 5, 2, 17, 3, 24, 23, 1 ],
+      "in-vars" : [ 2, 4, 23, 5, 24, 17, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 24, 1, 4, 5, 2, 17, 26, 3 ],
+      "out-vars" : [ 26, 5, 24, 17, 1, 3, 2, 4 ],
       "decl-vars" : [ 26 ],
       "line-start" : 280,
       "ast" : {
@@ -2925,13 +2925,13 @@
       "line-end" : 280,
       "code" : "event := newEvent(name, mask)",
       "entry" : false,
-      "use-vars" : [ 17, 23 ]
+      "use-vars" : [ 23, 17 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 59, 65 ],
-      "in-vars" : [ 24, 1, 4, 5, 2, 17, 26, 3 ],
+      "in-vars" : [ 1, 3, 2, 4, 26, 5, 24, 17 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 26, 3, 24 ],
+      "out-vars" : [ 24, 1, 3, 2, 4, 26, 5 ],
       "decl-vars" : [ ],
       "line-start" : 283,
       "ast" : {
@@ -2991,9 +2991,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 60, 62, 65 ],
-      "in-vars" : [ 1, 4, 5, 2, 26, 3, 24 ],
+      "in-vars" : [ 2, 4, 26, 5, 24, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 24, 1, 4, 5, 2, 26 ],
+      "out-vars" : [ 4, 26, 5, 24, 1, 3, 2 ],
       "decl-vars" : [ ],
       "line-start" : 284,
       "ast" : {
@@ -3008,9 +3008,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 61 ],
-      "in-vars" : [ 26, 3, 24, 1, 4, 5, 2 ],
+      "in-vars" : [ 1, 3, 2, 4, 26, 5, 24 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 26, 3, 24 ],
+      "out-vars" : [ 3, 2, 4, 26, 5, 24, 1 ],
       "decl-vars" : [ ],
       "line-start" : 285,
       "ast" : {
@@ -3063,9 +3063,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 65 ],
-      "in-vars" : [ 1, 4, 5, 2, 26, 3, 24 ],
+      "in-vars" : [ 1, 3, 2, 4, 26, 5, 24 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5, 2, 3, 24 ],
+      "out-vars" : [ 3, 2, 4, 5, 24, 1 ],
       "decl-vars" : [ ],
       "line-start" : 285,
       "ast" : {
@@ -3230,9 +3230,9 @@
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 37 ],
-      "in-vars" : [ 24, 1, 4, 5, 2, 3 ],
+      "in-vars" : [ 3, 2, 4, 5, 24, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 3, 1, 4 ],
+      "out-vars" : [ 5, 1, 3, 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 292,
       "ast" : {
@@ -3280,7 +3280,7 @@
       "line-end" : 292,
       "code" : "offset += unix.SizeofInotifyEvent + nameLen",
       "entry" : false,
-      "use-vars" : [ 2, 24 ]
+      "use-vars" : [ 24, 2 ]
     } ],
     "code" : "// readEvents reads from the inotify file descriptor, converts the\n// received events into Event objects and sends them via the Events channel\nfunc (w *Watcher) readEvents() {\n\tvar (\n\t\tbuf   [unix.SizeofInotifyEvent * 4096]byte // Buffer for a maximum of 4096 raw events\n\t\tn     int                                  // Number of bytes read with read()\n\t\terrno error                                // Syscall errno\n\t\tok    bool                                 // For poller.wait\n\t)\n\n\tdefer close(w.doneResp)\n\tdefer close(w.Errors)\n\tdefer close(w.Events)\n\tdefer unix.Close(w.fd)\n\tdefer w.poller.close()\n\n\tfor {\n\n\t\tif w.isClosed() {\n\t\t\treturn\n\t\t}\n\n\t\tok, errno = w.poller.wait()\n\t\tif errno != nil {\n\t\t\tselect {\n\t\t\tcase w.Errors <- errno:\n\t\t\tcase <-w.done:\n\t\t\t\treturn\n\t\t\t}\n\t\t\tcontinue\n\t\t}\n\n\t\tif !ok {\n\t\t\tcontinue\n\t\t}\n\n\t\tn, errno = unix.Read(w.fd, buf[:])\n\n\t\tif errno == unix.EINTR {\n\t\t\tcontinue\n\t\t}\n\n\t\tif w.isClosed() {\n\t\t\treturn\n\t\t}\n\n\t\tif n < unix.SizeofInotifyEvent {\n\t\t\tvar err error\n\t\t\tif n == 0 {\n\n\t\t\t\terr = io.EOF\n\t\t\t} else if n < 0 {\n\n\t\t\t\terr = errno\n\t\t\t} else {\n\n\t\t\t\terr = errors.New(\"notify: short read in readEvents()\")\n\t\t\t}\n\t\t\tselect {\n\t\t\tcase w.Errors <- err:\n\t\t\tcase <-w.done:\n\t\t\t\treturn\n\t\t\t}\n\t\t\tcontinue\n\t\t}\n\n\t\tvar offset uint32\n\n\t\tfor offset <= uint32(n-unix.SizeofInotifyEvent) {\n\n\t\t\traw := (*unix.InotifyEvent)(unsafe.Pointer(&buf[offset]))\n\n\t\t\tmask := uint32(raw.Mask)\n\t\t\tnameLen := uint32(raw.Len)\n\n\t\t\tif mask&unix.IN_Q_OVERFLOW != 0 {\n\t\t\t\tselect {\n\t\t\t\tcase w.Errors <- ErrEventOverflow:\n\t\t\t\tcase <-w.done:\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tw.mu.Lock()\n\t\t\tname, ok := w.paths[int(raw.Wd)]\n\n\t\t\tif ok && mask&unix.IN_DELETE_SELF == unix.IN_DELETE_SELF {\n\t\t\t\tdelete(w.paths, int(raw.Wd))\n\t\t\t\tdelete(w.watches, name)\n\t\t\t}\n\t\t\tw.mu.Unlock()\n\n\t\t\tif nameLen > 0 {\n\n\t\t\t\tbytes := (*[unix.PathMax]byte)(unsafe.Pointer(&buf[offset+unix.SizeofInotifyEvent]))\n\n\t\t\t\tname += \"/\" + strings.TrimRight(string(bytes[0:nameLen]), \"\\000\")\n\t\t\t}\n\n\t\t\tevent := newEvent(name, mask)\n\n\t\t\tif !event.ignoreLinux(mask) {\n\t\t\t\tselect {\n\t\t\t\tcase w.Events <- event:\n\t\t\t\tcase <-w.done:\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t}\n\n\t\t\toffset += unix.SizeofInotifyEvent + nameLen\n\t\t}\n\t}\n}",
     "defines" : [ 0 ],
@@ -3916,13 +3916,6 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "buf",
-      "package" : 0,
-      "type" : 31,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
       "name" : "n",
       "package" : 0,
       "type" : 19,
@@ -3930,9 +3923,9 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "errno",
+      "name" : "buf",
       "package" : 0,
-      "type" : 12,
+      "type" : 31,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3940,6 +3933,13 @@
       "name" : "ok",
       "package" : 0,
       "type" : 34,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "errno",
+      "package" : 0,
+      "type" : 12,
       "exported" : false,
       "embedded" : false,
       "field" : false

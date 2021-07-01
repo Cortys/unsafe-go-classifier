@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 1 ],
+      "out-vars" : [ 1, 6 ],
       "decl-vars" : [ 6 ],
       "line-start" : 150,
       "ast" : {
@@ -87,9 +87,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 6, 1 ],
+      "in-vars" : [ 1, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 1 ],
+      "out-vars" : [ 1, 6 ],
       "decl-vars" : [ ],
       "line-start" : 151,
       "ast" : {
@@ -217,7 +217,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 1 ],
+      "in-vars" : [ 1, 6 ],
       "exit" : false,
       "out-vars" : [ 6, 7 ],
       "decl-vars" : [ 7 ],
@@ -489,7 +489,7 @@
       "line-end" : 155,
       "code" : "return h.lvl(), h.typ(), int(uint64(h.len()) - uint64(l)), nil",
       "entry" : false,
-      "use-vars" : [ 6, 7 ]
+      "use-vars" : [ 7, 6 ]
     } ],
     "code" : "// ParseHeader parses and returns the header fields of the control\n// message at the head on m.\nfunc (m ControlMessage) ParseHeader() (lvl, typ, dataLen int, err error) {\n\tl := controlHeaderLen()\n\tif len(m) < l {\n\t\treturn 0, 0, 0, errors.New(\"short message\")\n\t}\n\th := (*cmsghdr)(unsafe.Pointer(&m[0]))\n\treturn h.lvl(), h.typ(), int(uint64(h.len()) - uint64(l)), nil\n}",
     "defines" : [ 0 ],

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 5, 3, 4 ],
+      "in-vars" : [ 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 3, 4 ],
+      "out-vars" : [ 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 5, 3, 4 ],
+      "in-vars" : [ 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 4, 9, 3 ],
+      "out-vars" : [ 3, 4, 9 ],
       "decl-vars" : [ 9 ],
       "line-start" : 18,
       "ast" : {
@@ -244,9 +244,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 3, 4, 9 ],
+      "in-vars" : [ 4, 9, 3 ],
       "exit" : false,
-      "out-vars" : [ 10, 3, 4 ],
+      "out-vars" : [ 3, 4, 10 ],
       "decl-vars" : [ 10 ],
       "line-start" : 22,
       "ast" : {
@@ -360,7 +360,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 10, 3, 4 ],
+      "in-vars" : [ 4, 10, 3 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -422,7 +422,7 @@
       "line-end" : 23,
       "code" : "return so.Set(c, b)",
       "entry" : false,
-      "use-vars" : [ 3, 4, 10 ]
+      "use-vars" : [ 4, 10, 3 ]
     } ],
     "code" : "func (so *sockOpt) setAttachFilter(c *socket.Conn, f []bpf.RawInstruction) error {\n\tprog := unix.SockFprog{\n\t\tLen:    uint16(len(f)),\n\t\tFilter: (*unix.SockFilter)(unsafe.Pointer(&f[0])),\n\t}\n\tb := (*[unix.SizeofSockFprog]byte)(unsafe.Pointer(&prog))[:unix.SizeofSockFprog]\n\treturn so.Set(c, b)\n}",
     "defines" : [ 0 ],

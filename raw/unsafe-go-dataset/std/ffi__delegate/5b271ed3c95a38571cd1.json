@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 1, 2, 3 ],
+      "in-vars" : [ 3, 1, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 3 ],
+      "out-vars" : [ 4, 3, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2, 3, 4 ],
+      "in-vars" : [ 4, 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 1, 2, 3 ],
+      "out-vars" : [ 6, 4, 3, 1, 2 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1036,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 3, 4, 6, 1, 2 ],
+      "in-vars" : [ 4, 3, 1, 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 6, 1, 2 ],
+      "out-vars" : [ 6, 4, 3, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1037,
       "ast" : {
@@ -149,9 +149,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 3, 4, 1 ],
+      "in-vars" : [ 3, 1, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 1, 2, 3 ],
+      "out-vars" : [ 2, 6, 4, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1038,
       "ast" : {
@@ -229,7 +229,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4, 6, 1, 2, 3 ],
+      "in-vars" : [ 6, 4, 3, 1, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -356,7 +356,7 @@
       "line-end" : 1040,
       "code" : "return setsockopt(fd, level, opt, p, uintptr(len(filter)*SizeofCanFilter))",
       "entry" : false,
-      "use-vars" : [ 6, 1, 4, 2, 3 ]
+      "use-vars" : [ 3, 1, 2, 6, 4 ]
     } ],
     "code" : "func SetsockoptCanRawFilter(fd, level, opt int, filter []CanFilter) error {\n\tvar p unsafe.Pointer\n\tif len(filter) > 0 {\n\t\tp = unsafe.Pointer(&filter[0])\n\t}\n\treturn setsockopt(fd, level, opt, p, uintptr(len(filter)*SizeofCanFilter))\n}",
     "defines" : [ 0 ],

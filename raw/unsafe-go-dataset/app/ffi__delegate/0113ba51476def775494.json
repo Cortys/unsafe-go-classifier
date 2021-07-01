@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 1 ],
+      "out-vars" : [ 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 6, 3 ],
-      "decl-vars" : [ 5, 6 ],
+      "out-vars" : [ 5, 6, 2, 3 ],
+      "decl-vars" : [ 6, 5 ],
       "line-start" : 324,
       "ast" : {
         "kind" : "statement",
@@ -107,9 +107,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 5, 2, 6, 3 ],
+      "in-vars" : [ 5, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 3, 5 ],
+      "out-vars" : [ 5, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 325,
       "ast" : {
@@ -124,7 +124,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "operator" : "!=",
@@ -147,11 +147,11 @@
       "line-end" : 327,
       "code" : "if err != nil {\n\treturn err\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 5 ],
+      "in-vars" : [ 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -167,7 +167,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 5
+            "variable" : 6
           }
         } ]
       },
@@ -175,13 +175,13 @@
       "line-end" : 326,
       "code" : "return err",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 6, 3 ],
+      "in-vars" : [ 5, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 10, 6 ],
+      "out-vars" : [ 5, 10 ],
       "decl-vars" : [ 10 ],
       "line-start" : 330,
       "ast" : {
@@ -234,7 +234,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "value",
-                "variable" : 6
+                "variable" : 5
               }
             }
           }, {
@@ -330,11 +330,11 @@
       "line-end" : 334,
       "code" : "attr := bpfObjGetInfoByFDAttr{\n\tfd:      value,\n\tinfoLen: uint32(size),\n\tinfo:    newPtr(info),\n}",
       "entry" : false,
-      "use-vars" : [ 6, 3, 2 ]
+      "use-vars" : [ 5, 3, 2 ]
     }, {
-      "update-vars" : [ 5 ],
+      "update-vars" : [ 6 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 10, 6 ],
+      "in-vars" : [ 5, 10 ],
       "exit" : false,
       "out-vars" : [ 5, 6 ],
       "decl-vars" : [ ],
@@ -358,7 +358,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 5
+            "variable" : 6
           }
         } ],
         "right" : [ {
@@ -433,7 +433,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 5 ],
+      "assign-vars" : [ 6 ],
       "line-end" : 335,
       "code" : "_, err = bpfCall(_ObjGetInfoByFD, unsafe.Pointer(&attr), unsafe.Sizeof(attr))",
       "entry" : false,
@@ -458,7 +458,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 5
+              "variable" : 6
             }
           }, {
             "go-type" : 14,
@@ -475,7 +475,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "value",
-              "variable" : 6
+              "variable" : 5
             }
           } ],
           "ellipsis" : false,
@@ -505,7 +505,7 @@
       "line-end" : 336,
       "code" : "return errors.Wrapf(err, \"fd %d\", value)",
       "entry" : false,
-      "use-vars" : [ 5, 6 ]
+      "use-vars" : [ 6, 5 ]
     } ],
     "code" : "func bpfGetObjectInfoByFD(fd *bpfFD, info unsafe.Pointer, size uintptr) error {\n\tvalue, err := fd.value()\n\tif err != nil {\n\t\treturn err\n\t}\n\n\tattr := bpfObjGetInfoByFDAttr{\n\t\tfd:      value,\n\t\tinfoLen: uint32(size),\n\t\tinfo:    newPtr(info),\n\t}\n\t_, err = bpfCall(_ObjGetInfoByFD, unsafe.Pointer(&attr), unsafe.Sizeof(attr))\n\treturn errors.Wrapf(err, \"fd %d\", value)\n}",
     "defines" : [ 0 ],
@@ -855,16 +855,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "err",
+      "name" : "value",
       "package" : 0,
-      "type" : 9,
+      "type" : 16,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "value",
+      "name" : "err",
       "package" : 0,
-      "type" : 16,
+      "type" : 9,
       "exported" : false,
       "embedded" : false,
       "field" : false

@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2, 3, 4 ],
+      "in-vars" : [ 4, 1, 2, 3 ],
       "exit" : false,
       "out-vars" : [ 4, 1, 2, 3 ],
       "decl-vars" : [ ],
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 4, 1, 2 ],
+      "in-vars" : [ 1, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 3, 6 ],
+      "out-vars" : [ 6, 4, 1, 2, 3 ],
       "decl-vars" : [ 6 ],
       "line-start" : 333,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 4, 1, 2, 3, 6 ],
+      "in-vars" : [ 3, 6, 4, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 3, 6 ],
+      "out-vars" : [ 6, 4, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 334,
       "ast" : {
@@ -149,9 +149,9 @@
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 1, 2, 3, 4 ],
+      "in-vars" : [ 4, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 3, 6 ],
+      "out-vars" : [ 6, 4, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 335,
       "ast" : {
@@ -363,7 +363,7 @@
       "line-end" : 337,
       "code" : "return setsockopt(fd, level, opt, p, uintptr(len(s)))",
       "entry" : false,
-      "use-vars" : [ 3, 6, 4, 1, 2 ]
+      "use-vars" : [ 2, 3, 6, 4, 1 ]
     } ],
     "code" : "func SetsockoptString(fd, level, opt int, s string) (err error) {\n\tvar p unsafe.Pointer\n\tif len(s) > 0 {\n\t\tp = unsafe.Pointer(&[]byte(s)[0])\n\t}\n\treturn setsockopt(fd, level, opt, p, uintptr(len(s)))\n}",
     "defines" : [ 0 ],

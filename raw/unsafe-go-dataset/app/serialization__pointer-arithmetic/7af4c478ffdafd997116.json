@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 0 ],
+      "out-vars" : [ 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
       "out-vars" : [ 3, 2 ],
       "decl-vars" : [ 3 ],
@@ -606,7 +606,7 @@
       "line-end" : 93,
       "code" : "return *(*interface{})(unsafe.Pointer(&unsafeIntf{typ: urv.typ, word: ptr}))",
       "entry" : false,
-      "use-vars" : [ 4, 3 ]
+      "use-vars" : [ 3, 4 ]
     } ],
     "code" : "func rv2i(rv reflect.Value) interface{} {\n\n\turv := (*unsafeReflectValue)(unsafe.Pointer(&rv))\n\t// true references (map, func, chan, ptr - NOT slice) may be double-referenced as flagIndir\n\tvar ptr unsafe.Pointer\n\tif refBitset.isset(byte(urv.flag&(1<<5-1))) && urv.flag&unsafeFlagIndir != 0 {\n\t\tptr = *(*unsafe.Pointer)(urv.ptr)\n\t} else {\n\t\tptr = urv.ptr\n\t}\n\treturn *(*interface{})(unsafe.Pointer(&unsafeIntf{typ: urv.typ, word: ptr}))\n}",
     "defines" : [ 0 ],

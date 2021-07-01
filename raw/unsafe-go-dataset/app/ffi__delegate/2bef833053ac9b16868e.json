@@ -94,7 +94,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 1 ],
+      "out-vars" : [ 1, 4, 5 ],
       "decl-vars" : [ 5 ],
       "line-start" : 488,
       "ast" : {
@@ -323,11 +323,11 @@
       "line-end" : 489,
       "code" : "_, _, err := getsockopt(c.fd(), SCTP_DEFAULT_SENT_PARAM, uintptr(unsafe.Pointer(info)), uintptr(unsafe.Pointer(&optlen)))",
       "entry" : false,
-      "use-vars" : [ 1, 5, 4 ]
+      "use-vars" : [ 4, 5, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4, 6 ],
+      "in-vars" : [ 6, 4 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -361,7 +361,7 @@
       "line-end" : 490,
       "code" : "return info, err",
       "entry" : false,
-      "use-vars" : [ 4, 6 ]
+      "use-vars" : [ 6, 4 ]
     } ],
     "code" : "func (c *SCTPConn) GetDefaultSentParam() (*SndRcvInfo, error) {\n\tinfo := &SndRcvInfo{}\n\toptlen := unsafe.Sizeof(*info)\n\t_, _, err := getsockopt(c.fd(), SCTP_DEFAULT_SENT_PARAM, uintptr(unsafe.Pointer(info)), uintptr(unsafe.Pointer(&optlen)))\n\treturn info, err\n}",
     "defines" : [ 0 ],

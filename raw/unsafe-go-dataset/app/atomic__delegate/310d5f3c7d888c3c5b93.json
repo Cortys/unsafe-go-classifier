@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 0, 1 ],
+      "in-vars" : [ 2, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 0, 1 ],
+      "out-vars" : [ 2, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 0, 1 ],
+      "in-vars" : [ 0, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 4 ],
+      "out-vars" : [ 4, 2 ],
       "decl-vars" : [ 4 ],
       "line-start" : 107,
       "ast" : {
@@ -131,7 +131,7 @@
       "line-end" : 107,
       "code" : "slot := unsafe.Pointer(&r.data[dataIdx])",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -241,7 +241,7 @@
       "line-end" : 108,
       "code" : "atomic.StorePointer((*unsafe.Pointer)(slot), unsafe.Pointer(e))",
       "entry" : false,
-      "use-vars" : [ 4, 2 ]
+      "use-vars" : [ 2, 4 ]
     } ],
     "code" : "// dataLoadAtomic performs an atomic store as `r.data[dataIdx] = e`.\n// `dataIdx` is the array index with the cycle counter already masked out.\n// This ensures that the point load/store itself is a data race.\nfunc (r *Ring) dataStoreAtomic(dataIdx uint64, e *v1.Event) {\n\tslot := unsafe.Pointer(&r.data[dataIdx])\n\tatomic.StorePointer((*unsafe.Pointer)(slot), unsafe.Pointer(e))\n}",
     "defines" : [ 0 ],

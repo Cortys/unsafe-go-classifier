@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 0, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2, 3 ],
+      "out-vars" : [ 3, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 3, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 5, 1, 2 ],
+      "out-vars" : [ 5, 0, 1, 2, 3 ],
       "decl-vars" : [ 5 ],
       "line-start" : 87,
       "ast" : {
@@ -148,9 +148,9 @@
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 4 ],
-      "in-vars" : [ 5, 1, 2, 3, 0 ],
+      "in-vars" : [ 1, 2, 3, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 5, 0, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 88,
       "ast" : {
@@ -194,13 +194,13 @@
       "line-end" : 88,
       "code" : "b.next = start",
       "entry" : false,
-      "use-vars" : [ 5, 0 ]
+      "use-vars" : [ 0, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 3, 0, 5, 1, 2 ],
+      "in-vars" : [ 2, 3, 5, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 5 ],
+      "out-vars" : [ 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 89,
       "ast" : {
@@ -224,7 +224,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "writeBarrier",
-                "variable" : 2
+                "variable" : 1
               }
             },
             "type" : "selector"
@@ -302,7 +302,7 @@
                             "ident-kind" : "Var",
                             "kind" : "ident",
                             "value" : "gcWorkPauseGen",
-                            "variable" : 1
+                            "variable" : 2
                           }
                         },
                         "type" : "unary"
@@ -348,7 +348,7 @@
       "line-end" : 101,
       "code" : "if writeBarrier.cgo || (debugCachedWork && (throwOnGCWork || b.debugGen == atomic.Load(&gcWorkPauseGen))) {\n\n\tb.end = uintptr(unsafe.Pointer(&b.buf[wbBufEntryPointers]))\n} else if testSmallBuf {\n\n\tb.end = uintptr(unsafe.Pointer(&b.buf[2*wbBufEntryPointers]))\n} else {\n\tb.end = start + uintptr(len(b.buf))*unsafe.Sizeof(b.buf[0])\n}",
       "entry" : false,
-      "use-vars" : [ 2, 3, 0, 1 ]
+      "use-vars" : [ 3, 0, 2, 1 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 9 ],
@@ -470,9 +470,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 8 ],
-      "in-vars" : [ 0, 5 ],
+      "in-vars" : [ 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 5 ],
+      "out-vars" : [ 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 93,
       "ast" : {
@@ -673,10 +673,10 @@
       "line-end" : 100,
       "code" : "b.end = start + uintptr(len(b.buf))*unsafe.Sizeof(b.buf[0])",
       "entry" : false,
-      "use-vars" : [ 0, 5 ]
+      "use-vars" : [ 5, 0 ]
     }, {
       "update-vars" : [ ],
-      "successors" : [ 1, 10 ],
+      "successors" : [ 10, 1 ],
       "in-vars" : [ 0 ],
       "exit" : false,
       "out-vars" : [ ],
@@ -1021,16 +1021,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "gcWorkPauseGen",
+      "name" : "writeBarrier",
       "package" : 0,
-      "type" : 7,
+      "type" : 8,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "writeBarrier",
+      "name" : "gcWorkPauseGen",
       "package" : 0,
-      "type" : 8,
+      "type" : 7,
       "exported" : false,
       "embedded" : false,
       "field" : false

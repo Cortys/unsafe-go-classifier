@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 733,
       "ast" : {
@@ -136,9 +136,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 12 ],
-      "in-vars" : [ 3, 0, 1 ],
+      "in-vars" : [ 1, 3, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 0 ],
+      "out-vars" : [ 3, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 734,
       "ast" : {
@@ -231,7 +231,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 3 ],
+      "out-vars" : [ 3, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 734,
       "ast" : {
@@ -281,7 +281,7 @@
       "successors" : [ 7 ],
       "in-vars" : [ 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 0 ],
+      "out-vars" : [ 3, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 735,
       "ast" : {
@@ -373,7 +373,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 3, 0, 1 ],
+      "in-vars" : [ 1, 3, 0 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 3 ],
       "decl-vars" : [ ],
@@ -463,13 +463,13 @@
       "line-end" : 736,
       "code" : "adjustpointer(adjinfo, unsafe.Pointer(&d.sp))",
       "entry" : false,
-      "use-vars" : [ 1, 3 ]
+      "use-vars" : [ 3, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
       "in-vars" : [ 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 1 ],
+      "out-vars" : [ 0, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 737,
       "ast" : {
@@ -561,7 +561,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 0, 1, 3 ],
+      "in-vars" : [ 1, 3, 0 ],
       "exit" : false,
       "out-vars" : [ 1, 3, 0 ],
       "decl-vars" : [ ],
@@ -651,13 +651,13 @@
       "line-end" : 738,
       "code" : "adjustpointer(adjinfo, unsafe.Pointer(&d.link))",
       "entry" : false,
-      "use-vars" : [ 1, 3 ]
+      "use-vars" : [ 3, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
       "in-vars" : [ 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 1 ],
+      "out-vars" : [ 0, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 739,
       "ast" : {
@@ -943,7 +943,7 @@
       "line-end" : 746,
       "code" : "tracebackdefers(gp, adjustframe, noescape(unsafe.Pointer(adjinfo)))",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     } ],
     "code" : "func adjustdefers(gp *g, adjinfo *adjustinfo) {\n\n\tadjustpointer(adjinfo, unsafe.Pointer(&gp._defer))\n\tfor d := gp._defer; d != nil; d = d.link {\n\t\tadjustpointer(adjinfo, unsafe.Pointer(&d.fn))\n\t\tadjustpointer(adjinfo, unsafe.Pointer(&d.sp))\n\t\tadjustpointer(adjinfo, unsafe.Pointer(&d._panic))\n\t\tadjustpointer(adjinfo, unsafe.Pointer(&d.link))\n\t\tadjustpointer(adjinfo, unsafe.Pointer(&d.varp))\n\t\tadjustpointer(adjinfo, unsafe.Pointer(&d.fd))\n\t}\n\n\ttracebackdefers(gp, adjustframe, noescape(unsafe.Pointer(adjinfo)))\n}",
     "defines" : [ 0 ],

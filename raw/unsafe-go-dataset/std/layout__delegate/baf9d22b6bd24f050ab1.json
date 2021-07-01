@@ -129,7 +129,7 @@
       "successors" : [ 4, 7 ],
       "in-vars" : [ 4, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 0 ],
+      "out-vars" : [ 1, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1048,
       "ast" : {
@@ -319,7 +319,7 @@
       "line-end" : 1049,
       "code" : "pp.mspancache.buf[pp.mspancache.len] = s",
       "entry" : false,
-      "use-vars" : [ 4, 1 ]
+      "use-vars" : [ 1, 4 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 6 ],
@@ -477,7 +477,7 @@
       "line-end" : 1055,
       "code" : "h.spanalloc.free(unsafe.Pointer(s))",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     } ],
     "code" : "// freeMSpanLocked free an mspan object.\n//\n// h must be locked.\n//\n// freeMSpanLocked must be called on the system stack because\n// its caller holds the heap lock. See mheap for details.\n// Running on the system stack also ensures that we won't\n// switch Ps during this function. See tryAllocMSpan for details.\n//\n//go:systemstack\nfunc (h *mheap) freeMSpanLocked(s *mspan) {\n\tpp := getg().m.p.ptr()\n\n\tif pp != nil && pp.mspancache.len < len(pp.mspancache.buf) {\n\t\tpp.mspancache.buf[pp.mspancache.len] = s\n\t\tpp.mspancache.len++\n\t\treturn\n\t}\n\n\th.spanalloc.free(unsafe.Pointer(s))\n}",
     "defines" : [ 0 ],

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 40, 41, 42 ],
+      "in-vars" : [ 40, 42, 41 ],
       "exit" : false,
-      "out-vars" : [ 41, 42, 40 ],
+      "out-vars" : [ 40, 42, 41 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 41, 42, 40 ],
+      "in-vars" : [ 40, 42, 41 ],
       "exit" : false,
-      "out-vars" : [ 44, 42, 40 ],
+      "out-vars" : [ 44, 40, 42 ],
       "decl-vars" : [ 44 ],
       "line-start" : 170,
       "ast" : {
@@ -112,9 +112,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 6 ],
-      "in-vars" : [ 42, 40, 44 ],
+      "in-vars" : [ 44, 40, 42 ],
       "exit" : false,
-      "out-vars" : [ 44, 42, 40 ],
+      "out-vars" : [ 44, 40, 42 ],
       "decl-vars" : [ ],
       "line-start" : 171,
       "ast" : {
@@ -220,9 +220,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 44, 42, 40 ],
+      "in-vars" : [ 42, 44, 40 ],
       "exit" : false,
-      "out-vars" : [ 42, 40, 45, 46 ],
+      "out-vars" : [ 45, 46, 40, 42 ],
       "decl-vars" : [ 45, 46 ],
       "line-start" : 175,
       "ast" : {
@@ -285,9 +285,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 45, 46, 42, 40 ],
+      "in-vars" : [ 40, 42, 45, 46 ],
       "exit" : false,
-      "out-vars" : [ 42, 40, 45, 46 ],
+      "out-vars" : [ 46, 40, 42, 45 ],
       "decl-vars" : [ ],
       "line-start" : 176,
       "ast" : {
@@ -329,7 +329,7 @@
     }, {
       "update-vars" : [ 42 ],
       "successors" : [ 1 ],
-      "in-vars" : [ 42, 45 ],
+      "in-vars" : [ 45, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -379,7 +379,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 42, 40, 46 ],
+      "in-vars" : [ 42, 46, 40 ],
       "exit" : false,
       "out-vars" : [ 42, 49, 40 ],
       "decl-vars" : [ 49 ],
@@ -433,7 +433,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 42, 49, 40 ],
+      "in-vars" : [ 49, 40, 42 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -534,7 +534,7 @@
       "line-end" : 180,
       "code" : "encoder.stringEncoder.Encode(unsafe.Pointer(&str), stream)",
       "entry" : false,
-      "use-vars" : [ 42, 40, 49 ]
+      "use-vars" : [ 49, 42, 40 ]
     } ],
     "code" : "func (encoder *directTextMarshalerEncoder) Encode(ptr unsafe.Pointer, stream *Stream) {\n\tmarshaler := *(*encoding.TextMarshaler)(ptr)\n\tif marshaler == nil {\n\t\tstream.WriteNil()\n\t\treturn\n\t}\n\tbytes, err := marshaler.MarshalText()\n\tif err != nil {\n\t\tstream.Error = err\n\t} else {\n\t\tstr := string(bytes)\n\t\tencoder.stringEncoder.Encode(unsafe.Pointer(&str), stream)\n\t}\n}",
     "defines" : [ 0 ],

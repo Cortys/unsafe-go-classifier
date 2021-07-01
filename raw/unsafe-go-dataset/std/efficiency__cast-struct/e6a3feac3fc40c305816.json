@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 7 ],
-      "in-vars" : [ 2, 1 ],
+      "in-vars" : [ 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1 ],
+      "out-vars" : [ 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 172,
       "ast" : {
@@ -88,7 +88,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 1 ],
+      "out-vars" : [ 1, 4 ],
       "decl-vars" : [ 4 ],
       "line-start" : 173,
       "ast" : {
@@ -164,7 +164,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 4, 1 ],
+      "in-vars" : [ 1, 4 ],
       "exit" : false,
       "out-vars" : [ 4, 1 ],
       "decl-vars" : [ ],
@@ -373,7 +373,7 @@
       "successors" : [ 10 ],
       "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ 5 ],
       "line-start" : 182,
       "ast" : {
@@ -427,9 +427,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 183,
       "ast" : {
@@ -526,9 +526,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 2, 1, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 2 ],
+      "out-vars" : [ 5, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 184,
       "ast" : {
@@ -621,13 +621,13 @@
       "line-end" : 184,
       "code" : "ts[1] = NsecToTimespec(TimevalToNsec(tv[1]))",
       "entry" : false,
-      "use-vars" : [ 5, 2 ]
+      "use-vars" : [ 2, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1 ],
+      "out-vars" : [ 1, 6, 2 ],
       "decl-vars" : [ 6 ],
       "line-start" : 185,
       "ast" : {
@@ -779,9 +779,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14, 15 ],
-      "in-vars" : [ 6, 1, 2 ],
+      "in-vars" : [ 6, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 6 ],
+      "out-vars" : [ 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 186,
       "ast" : {
@@ -975,7 +975,7 @@
       "line-end" : 189,
       "code" : "return utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))",
       "entry" : false,
-      "use-vars" : [ 1, 2 ]
+      "use-vars" : [ 2, 1 ]
     } ],
     "code" : "func Utimes(path string, tv []Timeval) error {\n\tif tv == nil {\n\t\terr := utimensat(AT_FDCWD, path, nil, 0)\n\t\tif err != ENOSYS {\n\t\t\treturn err\n\t\t}\n\t\treturn utimes(path, nil)\n\t}\n\tif len(tv) != 2 {\n\t\treturn EINVAL\n\t}\n\tvar ts [2]Timespec\n\tts[0] = NsecToTimespec(TimevalToNsec(tv[0]))\n\tts[1] = NsecToTimespec(TimevalToNsec(tv[1]))\n\terr := utimensat(AT_FDCWD, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), 0)\n\tif err != ENOSYS {\n\t\treturn err\n\t}\n\treturn utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))\n}",
     "defines" : [ 0 ],

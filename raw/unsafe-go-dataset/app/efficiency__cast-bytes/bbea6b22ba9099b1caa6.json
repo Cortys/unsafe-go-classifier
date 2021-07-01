@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 0, 3, 1, 2 ],
+      "in-vars" : [ 3, 1, 2, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 1, 2, 5 ],
+      "out-vars" : [ 0, 3, 1, 5, 2 ],
       "decl-vars" : [ 5 ],
       "line-start" : 266,
       "ast" : {
@@ -120,13 +120,13 @@
       "line-end" : 266,
       "code" : "slotOff := int32(slotId) * seg.slotCap",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 0, 3, 1, 2, 5 ],
+      "in-vars" : [ 0, 3, 1, 5, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 8, 2, 0, 3 ],
+      "out-vars" : [ 0, 3, 1, 8, 2 ],
       "decl-vars" : [ 8 ],
       "line-start" : 267,
       "ast" : {
@@ -280,13 +280,13 @@
       "line-end" : 267,
       "code" : "slot := seg.slotsData[slotOff : slotOff+seg.slotLens[slotId] : slotOff+seg.slotCap]",
       "entry" : false,
-      "use-vars" : [ 0, 5, 1 ]
+      "use-vars" : [ 1, 5, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 8, 2, 0, 3, 1 ],
+      "in-vars" : [ 2, 0, 3, 1, 8 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 0, 3, 1, 10 ],
+      "out-vars" : [ 9, 0, 3, 1, 8, 10 ],
       "decl-vars" : [ 10, 9 ],
       "line-start" : 268,
       "ast" : {
@@ -375,13 +375,13 @@
       "line-end" : 268,
       "code" : "idx, match := seg.lookupByOff(slot, hash16, offset)",
       "entry" : false,
-      "use-vars" : [ 3, 0, 8, 2 ]
+      "use-vars" : [ 0, 8, 2, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 1, 10, 9, 8, 0, 3 ],
+      "in-vars" : [ 9, 0, 3, 1, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 0, 3, 1 ],
+      "out-vars" : [ 0, 3, 1, 8, 10 ],
       "decl-vars" : [ ],
       "line-start" : 269,
       "ast" : {
@@ -397,7 +397,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "match",
-              "variable" : 10
+              "variable" : 9
             }
           },
           "type" : "unary"
@@ -409,7 +409,7 @@
       "line-end" : 271,
       "code" : "if !match {\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 10 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -431,9 +431,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 0, 3, 1, 9, 8 ],
+      "in-vars" : [ 0, 3, 1, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 1, 9, 8, 11, 0, 3 ],
+      "out-vars" : [ 8, 10, 0, 11, 3, 1 ],
       "decl-vars" : [ 11 ],
       "line-start" : 272,
       "ast" : {
@@ -487,9 +487,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 9, 8, 11, 0, 3, 1 ],
+      "in-vars" : [ 0, 11, 3, 1, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 11, 0, 3, 1, 9, 8 ],
+      "out-vars" : [ 11, 3, 1, 8, 10, 0 ],
       "decl-vars" : [ ],
       "line-start" : 273,
       "ast" : {
@@ -569,13 +569,13 @@
       "line-end" : 273,
       "code" : "seg.rb.ReadAt(entryHdrBuf[:], offset)",
       "entry" : false,
-      "use-vars" : [ 11, 3, 0 ]
+      "use-vars" : [ 0, 11, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 3, 1, 9, 8, 11, 0 ],
+      "in-vars" : [ 3, 1, 8, 10, 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 11, 0, 3, 1, 9, 8, 14 ],
+      "out-vars" : [ 14, 1, 8, 10, 0, 11, 3 ],
       "decl-vars" : [ 14 ],
       "line-start" : 274,
       "ast" : {
@@ -673,9 +673,9 @@
     }, {
       "update-vars" : [ 14 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 11, 0, 3, 1, 9, 8, 14 ],
+      "in-vars" : [ 10, 0, 11, 3, 14, 1, 8 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 1, 9, 8, 11 ],
+      "out-vars" : [ 10, 0, 11, 3, 1, 8 ],
       "decl-vars" : [ ],
       "line-start" : 275,
       "ast" : {
@@ -720,9 +720,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 0, 3, 1, 9, 8, 11 ],
+      "in-vars" : [ 11, 3, 1, 8, 10, 0 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 0, 1 ],
+      "out-vars" : [ 0, 1, 8, 10 ],
       "decl-vars" : [ ],
       "line-start" : 276,
       "ast" : {
@@ -802,11 +802,11 @@
       "line-end" : 276,
       "code" : "seg.rb.WriteAt(entryHdrBuf[:], offset)",
       "entry" : false,
-      "use-vars" : [ 11, 3, 0 ]
+      "use-vars" : [ 3, 0, 11 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 0, 1, 9, 8 ],
+      "in-vars" : [ 0, 1, 8, 10 ],
       "exit" : false,
       "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
@@ -830,7 +830,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "idx",
-                "variable" : 9
+                "variable" : 10
               }
             },
             "target" : {
@@ -862,7 +862,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "idx",
-                  "variable" : 9
+                  "variable" : 10
                 }
               },
               "operator" : "+",
@@ -908,7 +908,7 @@
       "line-end" : 277,
       "code" : "copy(slot[idx:], slot[idx+1:])",
       "entry" : false,
-      "use-vars" : [ 8, 9 ]
+      "use-vars" : [ 8, 10 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 14 ],
@@ -1465,16 +1465,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "idx",
+      "name" : "match",
       "package" : 0,
-      "type" : 13,
+      "type" : 21,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "match",
+      "name" : "idx",
       "package" : 0,
-      "type" : 21,
+      "type" : 13,
       "exported" : false,
       "embedded" : false,
       "field" : false

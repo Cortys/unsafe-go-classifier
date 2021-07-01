@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 0, 3, 2, 1 ],
+      "in-vars" : [ 3, 1, 0, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 2, 1, 4, 0 ],
+      "out-vars" : [ 0, 4, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 4, 0, 3, 2, 1 ],
+      "in-vars" : [ 3, 1, 0, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 0, 3, 2 ],
+      "out-vars" : [ 0, 4, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 305,
       "ast" : {
@@ -104,9 +104,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 7 ],
-      "in-vars" : [ 1, 4, 0, 3, 2 ],
+      "in-vars" : [ 0, 4, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 0, 3, 2 ],
+      "out-vars" : [ 0, 4, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 308,
       "ast" : {
@@ -192,9 +192,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 4, 0, 3, 2, 1 ],
+      "in-vars" : [ 1, 0, 4, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 2, 1 ],
+      "out-vars" : [ 1, 0, 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 309,
       "ast" : {
@@ -234,9 +234,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 13 ],
-      "in-vars" : [ 4, 0, 3, 6, 2, 1 ],
+      "in-vars" : [ 0, 4, 6, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 6, 2, 1 ],
+      "out-vars" : [ 6, 2, 3, 1, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 312,
       "ast" : {
@@ -326,13 +326,13 @@
       "line-end" : 328,
       "code" : "if hasOverflow := b.hasOverflow(); hasOverflow && b.canWriteTwoRecords(1, len(stk)) {\n\n\tcount, time := b.takeOverflow()\n\tif count > 0 {\n\t\tvar stk [1]uintptr\n\t\tstk[0] = uintptr(count)\n\t\tb.write(nil, int64(time), nil, stk[:])\n\t}\n} else if hasOverflow || !b.canWriteRecord(len(stk)) {\n\n\tb.incrementOverflow(now)\n\tb.wakeupExtra()\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 0, 4, 6 ]
+      "use-vars" : [ 6, 0, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 4, 0, 3, 2, 1 ],
+      "in-vars" : [ 2, 3, 1, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 6, 2, 1, 4 ],
+      "out-vars" : [ 4, 6, 2, 3, 1, 0 ],
       "decl-vars" : [ 6 ],
       "line-start" : 312,
       "ast" : {
@@ -386,9 +386,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 3, 2, 1, 4, 0 ],
+      "in-vars" : [ 0, 4, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 7, 2, 1, 9, 4, 0 ],
+      "out-vars" : [ 7, 2, 3, 9, 1, 0, 4 ],
       "decl-vars" : [ 9, 7 ],
       "line-start" : 316,
       "ast" : {
@@ -451,9 +451,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 17 ],
-      "in-vars" : [ 7, 2, 1, 9, 4, 0, 3 ],
+      "in-vars" : [ 0, 4, 7, 2, 3, 9, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 7, 2, 1, 9 ],
+      "out-vars" : [ 0, 4, 7, 2, 3, 9, 1 ],
       "decl-vars" : [ ],
       "line-start" : 317,
       "ast" : {
@@ -493,9 +493,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 1, 9, 4, 0, 3, 7, 2 ],
+      "in-vars" : [ 2, 3, 9, 1, 0, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 9, 4, 0, 3, 8 ],
+      "out-vars" : [ 2, 3, 9, 1, 0, 4, 8, 7 ],
       "decl-vars" : [ 8 ],
       "line-start" : 318,
       "ast" : {
@@ -549,9 +549,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 1, 9, 4, 0, 3, 8, 7, 2 ],
+      "in-vars" : [ 4, 8, 7, 2, 3, 9, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 9, 4, 0, 3, 8 ],
+      "out-vars" : [ 0, 4, 8, 2, 3, 9, 1 ],
       "decl-vars" : [ ],
       "line-start" : 319,
       "ast" : {
@@ -613,13 +613,13 @@
       "line-end" : 319,
       "code" : "stk[0] = uintptr(count)",
       "entry" : false,
-      "use-vars" : [ 8, 7 ]
+      "use-vars" : [ 7, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 4, 0, 3, 8, 2, 1, 9 ],
+      "in-vars" : [ 0, 4, 8, 2, 3, 9, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 2, 1 ],
+      "out-vars" : [ 0, 4, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 320,
       "ast" : {
@@ -722,13 +722,13 @@
       "line-end" : 320,
       "code" : "b.write(nil, int64(time), nil, stk[:])",
       "entry" : false,
-      "use-vars" : [ 0, 9, 8 ]
+      "use-vars" : [ 8, 0, 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14, 17 ],
-      "in-vars" : [ 0, 3, 6, 2, 1, 4 ],
+      "in-vars" : [ 0, 4, 6, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 2, 1 ],
+      "out-vars" : [ 0, 4, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 322,
       "ast" : {
@@ -941,9 +941,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 0, 3, 2, 1, 4 ],
+      "in-vars" : [ 4, 2, 3, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 11, 2, 1, 4, 0, 3 ],
+      "out-vars" : [ 3, 1, 0, 4, 11, 2 ],
       "decl-vars" : [ 11 ],
       "line-start" : 331,
       "ast" : {
@@ -1008,9 +1008,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 11, 2, 1, 4, 0, 3 ],
+      "in-vars" : [ 11, 2, 3, 1, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 13, 4, 0, 3, 11 ],
+      "out-vars" : [ 4, 11, 13, 2, 3, 1, 0 ],
       "decl-vars" : [ 13 ],
       "line-start" : 332,
       "ast" : {
@@ -1075,9 +1075,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 11, 2, 1, 13, 4, 0, 3 ],
+      "in-vars" : [ 2, 3, 1, 0, 4, 11, 13 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 11, 2, 1, 13, 4 ],
+      "out-vars" : [ 0, 4, 11, 13, 2, 3, 1 ],
       "decl-vars" : [ 15 ],
       "line-start" : 350,
       "ast" : {
@@ -1203,13 +1203,13 @@
       "line-end" : 350,
       "code" : "wt := int(bw.tagCount() % uint32(len(b.tags)))",
       "entry" : false,
-      "use-vars" : [ 13, 0 ]
+      "use-vars" : [ 0, 13 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 22 ],
-      "in-vars" : [ 3, 11, 2, 1, 13, 4, 0 ],
+      "in-vars" : [ 1, 0, 4, 11, 13, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 13, 4, 0, 3, 11, 2, 1 ],
+      "out-vars" : [ 1, 0, 4, 11, 13, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 351,
       "ast" : {
@@ -1251,9 +1251,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 2, 1, 13, 4, 0, 3, 11 ],
+      "in-vars" : [ 3, 1, 0, 4, 11, 13, 2 ],
       "exit" : false,
-      "out-vars" : [ 13, 4, 0, 3, 11, 2 ],
+      "out-vars" : [ 0, 4, 11, 13, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 352,
       "ast" : {
@@ -1414,9 +1414,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23 ],
-      "in-vars" : [ 4, 0, 3, 11, 2, 13 ],
+      "in-vars" : [ 11, 13, 2, 3, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 11, 17, 2, 13 ],
+      "out-vars" : [ 3, 0, 4, 17, 11, 13, 2 ],
       "decl-vars" : [ 17 ],
       "line-start" : 358,
       "ast" : {
@@ -1546,9 +1546,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24 ],
-      "in-vars" : [ 4, 0, 3, 11, 17, 2, 13 ],
+      "in-vars" : [ 11, 13, 2, 3, 0, 4, 17 ],
       "exit" : false,
-      "out-vars" : [ 17, 2, 18, 4, 0, 3 ],
+      "out-vars" : [ 3, 18, 0, 4, 17, 2 ],
       "decl-vars" : [ 18 ],
       "line-start" : 359,
       "ast" : {
@@ -1687,13 +1687,13 @@
       "line-end" : 359,
       "code" : "nd := countSub(br.dataCount(), bw.dataCount()) + len(b.data)",
       "entry" : false,
-      "use-vars" : [ 13, 0, 11 ]
+      "use-vars" : [ 0, 11, 13 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 25 ],
-      "in-vars" : [ 17, 2, 18, 4, 0, 3 ],
+      "in-vars" : [ 0, 4, 17, 2, 3, 18 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 19, 17, 2, 18, 4 ],
+      "out-vars" : [ 0, 4, 19, 17, 2, 3, 18 ],
       "decl-vars" : [ 19 ],
       "line-start" : 360,
       "ast" : {
@@ -1726,9 +1726,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26, 30 ],
-      "in-vars" : [ 2, 18, 4, 0, 3, 19, 17 ],
+      "in-vars" : [ 17, 2, 3, 18, 0, 4, 19 ],
       "exit" : false,
-      "out-vars" : [ 17, 2, 18, 4, 0, 3, 19 ],
+      "out-vars" : [ 4, 19, 17, 2, 3, 18, 0 ],
       "decl-vars" : [ ],
       "line-start" : 361,
       "ast" : {
@@ -1889,9 +1889,9 @@
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 27 ],
-      "in-vars" : [ 3, 17, 2, 18, 4, 0 ],
+      "in-vars" : [ 18, 0, 4, 17, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 17, 2, 18 ],
+      "out-vars" : [ 0, 4, 17, 2, 3, 18 ],
       "decl-vars" : [ ],
       "line-start" : 362,
       "ast" : {
@@ -1948,13 +1948,13 @@
       "line-end" : 362,
       "code" : "b.data[wd] = 0",
       "entry" : false,
-      "use-vars" : [ 17, 0 ]
+      "use-vars" : [ 0, 17 ]
     }, {
       "update-vars" : [ 19 ],
       "successors" : [ 28 ],
-      "in-vars" : [ 4, 0, 3, 17, 2, 18 ],
+      "in-vars" : [ 3, 18, 0, 4, 17, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 18, 4, 0, 3, 19 ],
+      "out-vars" : [ 3, 18, 0, 4, 19, 2 ],
       "decl-vars" : [ ],
       "line-start" : 363,
       "ast" : {
@@ -2035,9 +2035,9 @@
     }, {
       "update-vars" : [ 18 ],
       "successors" : [ 29 ],
-      "in-vars" : [ 4, 0, 3, 19, 2, 18 ],
+      "in-vars" : [ 3, 18, 0, 4, 19, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 19, 2 ],
+      "out-vars" : [ 4, 19, 2, 3, 0 ],
       "decl-vars" : [ ],
       "line-start" : 364,
       "ast" : {
@@ -2075,9 +2075,9 @@
     }, {
       "update-vars" : [ 17 ],
       "successors" : [ 30 ],
-      "in-vars" : [ 4, 0, 3, 19, 2 ],
+      "in-vars" : [ 3, 0, 4, 19, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 3, 19, 17, 2 ],
+      "out-vars" : [ 2, 3, 0, 4, 19, 17 ],
       "decl-vars" : [ ],
       "line-start" : 365,
       "ast" : {
@@ -2111,9 +2111,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 3, 19, 17, 2, 4, 0 ],
+      "in-vars" : [ 17, 2, 3, 0, 4, 19 ],
       "exit" : false,
-      "out-vars" : [ 20, 4, 0, 3, 19, 2 ],
+      "out-vars" : [ 19, 20, 2, 3, 0, 4 ],
       "decl-vars" : [ 20 ],
       "line-start" : 367,
       "ast" : {
@@ -2179,9 +2179,9 @@
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 32 ],
-      "in-vars" : [ 20, 4, 0, 3, 19, 2 ],
+      "in-vars" : [ 0, 4, 19, 20, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 19, 2, 20, 4 ],
+      "out-vars" : [ 2, 3, 0, 4, 19, 20 ],
       "decl-vars" : [ ],
       "line-start" : 368,
       "ast" : {
@@ -2317,13 +2317,13 @@
       "line-end" : 368,
       "code" : "data[0] = uint64(2 + b.hdrsize + uintptr(len(stk)))",
       "entry" : false,
-      "use-vars" : [ 4, 20, 0 ]
+      "use-vars" : [ 0, 4, 20 ]
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 33 ],
-      "in-vars" : [ 4, 0, 3, 19, 2, 20 ],
+      "in-vars" : [ 4, 19, 20, 2, 3, 0 ],
       "exit" : false,
-      "out-vars" : [ 20, 4, 0, 3, 19 ],
+      "out-vars" : [ 4, 19, 20, 3, 0 ],
       "decl-vars" : [ ],
       "line-start" : 369,
       "ast" : {
@@ -2389,9 +2389,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34 ],
-      "in-vars" : [ 0, 3, 19, 20, 4 ],
+      "in-vars" : [ 0, 4, 19, 20, 3 ],
       "exit" : false,
-      "out-vars" : [ 20, 4, 0, 21, 19 ],
+      "out-vars" : [ 0, 4, 19, 20, 21 ],
       "decl-vars" : [ 21 ],
       "line-start" : 371,
       "ast" : {
@@ -2516,13 +2516,13 @@
       "line-end" : 371,
       "code" : "i := uintptr(copy(data[2:2+b.hdrsize], hdr))",
       "entry" : false,
-      "use-vars" : [ 3, 20, 0 ]
+      "use-vars" : [ 20, 0, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 36, 37 ],
-      "in-vars" : [ 19, 20, 4, 0, 21 ],
+      "in-vars" : [ 4, 19, 20, 21, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 21, 19, 20, 4 ],
+      "out-vars" : [ 21, 0, 4, 19, 20 ],
       "decl-vars" : [ ],
       "line-start" : 372,
       "ast" : {
@@ -2572,13 +2572,13 @@
       "line-end" : 374,
       "code" : "for ; i < b.hdrsize; i++ {\n\tdata[2+i] = 0\n}",
       "entry" : false,
-      "use-vars" : [ 0, 21 ]
+      "use-vars" : [ 21, 0 ]
     }, {
       "update-vars" : [ 21 ],
       "successors" : [ 34 ],
-      "in-vars" : [ 20, 4, 0, 21, 19 ],
+      "in-vars" : [ 21, 0, 4, 19, 20 ],
       "exit" : false,
-      "out-vars" : [ 20, 4, 0, 21, 19 ],
+      "out-vars" : [ 21, 0, 4, 19, 20 ],
       "decl-vars" : [ ],
       "line-start" : 372,
       "ast" : {
@@ -2605,9 +2605,9 @@
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 35 ],
-      "in-vars" : [ 21, 19, 20, 4, 0 ],
+      "in-vars" : [ 19, 20, 21, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 19, 20, 4, 0, 21 ],
+      "out-vars" : [ 21, 0, 4, 19, 20 ],
       "decl-vars" : [ ],
       "line-start" : 373,
       "ast" : {
@@ -2671,9 +2671,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 38, 39 ],
-      "in-vars" : [ 20, 4, 0, 19 ],
+      "in-vars" : [ 4, 19, 20, 0 ],
       "exit" : false,
-      "out-vars" : [ 23, 20, 4, 0, 19, 22 ],
+      "out-vars" : [ 20, 0, 23, 22, 4, 19 ],
       "decl-vars" : [ 23, 22 ],
       "line-start" : 375,
       "ast" : {
@@ -2720,9 +2720,9 @@
     }, {
       "update-vars" : [ 20 ],
       "successors" : [ 37 ],
-      "in-vars" : [ 23, 20, 4, 0, 19, 22 ],
+      "in-vars" : [ 0, 23, 22, 4, 19, 20 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 19, 20 ],
+      "out-vars" : [ 19, 20, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 376,
       "ast" : {
@@ -2845,13 +2845,13 @@
       "line-end" : 376,
       "code" : "data[2+b.hdrsize+uintptr(i)] = uint64(pc)",
       "entry" : false,
-      "use-vars" : [ 23, 22, 20, 0 ]
+      "use-vars" : [ 23, 20, 0, 22 ]
     }, {
       "update-vars" : [ ],
-      "successors" : [ 1, 40 ],
-      "in-vars" : [ 4, 0, 19 ],
+      "successors" : [ 40, 1 ],
+      "in-vars" : [ 0, 4, 19 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 19 ],
+      "out-vars" : [ 0, 4, 19 ],
       "decl-vars" : [ ],
       "line-start" : 379,
       "ast" : {
@@ -2867,9 +2867,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 4, 0, 19 ],
+      "in-vars" : [ 0, 4, 19 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 19, 24 ],
+      "out-vars" : [ 0, 4, 24, 19 ],
       "decl-vars" : [ 24 ],
       "line-start" : 382,
       "ast" : {
@@ -2934,9 +2934,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 42 ],
-      "in-vars" : [ 4, 0, 19, 24 ],
+      "in-vars" : [ 0, 4, 24, 19 ],
       "exit" : false,
-      "out-vars" : [ 0, 25, 19, 24, 4 ],
+      "out-vars" : [ 0, 4, 24, 25, 19 ],
       "decl-vars" : [ 25 ],
       "line-start" : 383,
       "ast" : {
@@ -3098,9 +3098,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 44 ],
-      "in-vars" : [ 4, 0, 25, 19, 24 ],
+      "in-vars" : [ 25, 19, 0, 4, 24 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 19, 24 ],
+      "out-vars" : [ 0, 4, 24, 19 ],
       "decl-vars" : [ ],
       "line-start" : 384,
       "ast" : {
@@ -3177,13 +3177,13 @@
       "line-end" : 386,
       "code" : "if !b.w.cas(old, new) {\n\tcontinue\n}",
       "entry" : false,
-      "use-vars" : [ 0, 24, 25 ]
+      "use-vars" : [ 25, 0, 24 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 4, 0, 19 ],
+      "in-vars" : [ 0, 4, 19 ],
       "exit" : false,
-      "out-vars" : [ 0, 19, 4 ],
+      "out-vars" : [ 0, 4, 19 ],
       "decl-vars" : [ ],
       "line-start" : 385,
       "ast" : {

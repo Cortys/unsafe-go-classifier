@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 1 ],
+      "out-vars" : [ 5, 1, 4 ],
       "decl-vars" : [ 4, 5 ],
       "line-start" : 2730,
       "ast" : {
@@ -96,9 +96,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 1, 4, 5 ],
+      "in-vars" : [ 5, 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 4, 5 ],
+      "out-vars" : [ 5, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2731,
       "ast" : {
@@ -140,7 +140,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4, 5 ],
+      "in-vars" : [ 5, 4 ],
       "exit" : false,
       "out-vars" : [ 4 ],
       "decl-vars" : [ ],
@@ -177,8 +177,8 @@
       "successors" : [ 6 ],
       "in-vars" : [ 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 8, 1, 4 ],
-      "decl-vars" : [ 7, 8 ],
+      "out-vars" : [ 1, 4, 7, 8 ],
+      "decl-vars" : [ 8, 7 ],
       "line-start" : 2736,
       "ast" : {
         "kind" : "statement",
@@ -252,8 +252,8 @@
       "successors" : [ 7 ],
       "in-vars" : [ 1, 4, 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 7, 8, 1, 9, 4 ],
-      "decl-vars" : [ 9, 10, 11 ],
+      "out-vars" : [ 7, 8, 9, 1, 4 ],
+      "decl-vars" : [ 10, 9, 11 ],
       "line-start" : 2737,
       "ast" : {
         "kind" : "statement",
@@ -368,7 +368,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "ifreq",
-                  "variable" : 8
+                  "variable" : 7
                 }
               },
               "type" : "cast"
@@ -403,13 +403,13 @@
       "line-end" : 2737,
       "code" : "_, _, errno := syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), SIOCETHTOOL, uintptr(unsafe.Pointer(ifreq)))",
       "entry" : false,
-      "use-vars" : [ 4, 8 ]
+      "use-vars" : [ 7, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 9, 4, 7, 8, 1 ],
+      "in-vars" : [ 9, 1, 4, 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 4, 7, 8, 1, 9 ],
+      "out-vars" : [ 7, 8, 9, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2738,
       "ast" : {
@@ -449,7 +449,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 9, 4 ],
+      "in-vars" : [ 9, 1, 4 ],
       "exit" : false,
       "out-vars" : [ 4 ],
       "decl-vars" : [ ],
@@ -549,13 +549,13 @@
       "line-end" : 2739,
       "code" : "return -1, fmt.Errorf(\"SIOCETHTOOL request for %q failed, errno=%v\", link.Attrs().Name, errno)",
       "entry" : false,
-      "use-vars" : [ 1, 9 ]
+      "use-vars" : [ 9, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 1, 4, 7, 8 ],
+      "in-vars" : [ 8, 1, 4, 7 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 16, 4 ],
+      "out-vars" : [ 4, 7, 16, 1 ],
       "decl-vars" : [ 16 ],
       "line-start" : 2742,
       "ast" : {
@@ -678,7 +678,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "sSet",
-                      "variable" : 7
+                      "variable" : 8
                     }
                   },
                   "type" : "selector"
@@ -695,13 +695,13 @@
       "line-end" : 2746,
       "code" : "gstrings := &ethtoolGstrings{\n\tcmd:       ETHTOOL_GSTRINGS,\n\tstringSet: ETH_SS_STATS,\n\tlength:    sSet.data[0],\n}",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 8 ]
     }, {
-      "update-vars" : [ 8 ],
+      "update-vars" : [ 7 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 8, 1, 16, 4 ],
+      "in-vars" : [ 1, 4, 7, 16 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 16, 4 ],
+      "out-vars" : [ 7, 16, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 2747,
       "ast" : {
@@ -723,7 +723,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "ifreq",
-              "variable" : 8
+              "variable" : 7
             }
           },
           "type" : "selector"
@@ -783,13 +783,13 @@
       "line-end" : 2747,
       "code" : "ifreq.Data = uintptr(unsafe.Pointer(gstrings))",
       "entry" : false,
-      "use-vars" : [ 16, 8 ]
+      "use-vars" : [ 16, 7 ]
     }, {
       "update-vars" : [ 9 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 1, 16, 4, 8 ],
+      "in-vars" : [ 1, 4, 7, 16 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 9, 16, 4 ],
+      "out-vars" : [ 9, 1, 4, 7, 16 ],
       "decl-vars" : [ ],
       "line-start" : 2748,
       "ast" : {
@@ -906,7 +906,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "ifreq",
-                  "variable" : 8
+                  "variable" : 7
                 }
               },
               "type" : "cast"
@@ -941,13 +941,13 @@
       "line-end" : 2748,
       "code" : "_, _, errno = syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), SIOCETHTOOL, uintptr(unsafe.Pointer(ifreq)))",
       "entry" : false,
-      "use-vars" : [ 8, 4 ]
+      "use-vars" : [ 7, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 14 ],
-      "in-vars" : [ 4, 8, 1, 9, 16 ],
+      "in-vars" : [ 9, 1, 4, 7, 16 ],
       "exit" : false,
-      "out-vars" : [ 1, 9, 16, 4, 8 ],
+      "out-vars" : [ 9, 1, 4, 7, 16 ],
       "decl-vars" : [ ],
       "line-start" : 2749,
       "ast" : {
@@ -987,7 +987,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 9, 4 ],
+      "in-vars" : [ 9, 1, 4 ],
       "exit" : false,
       "out-vars" : [ 4 ],
       "decl-vars" : [ ],
@@ -1091,9 +1091,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 8, 1, 16, 4 ],
+      "in-vars" : [ 4, 7, 16, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 20, 4, 8 ],
+      "out-vars" : [ 1, 4, 7, 20 ],
       "decl-vars" : [ 20 ],
       "line-start" : 2753,
       "ast" : {
@@ -1199,11 +1199,11 @@
       "entry" : false,
       "use-vars" : [ 16 ]
     }, {
-      "update-vars" : [ 8 ],
+      "update-vars" : [ 7 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 8, 1, 20, 4 ],
+      "in-vars" : [ 1, 4, 7, 20 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 20, 4 ],
+      "out-vars" : [ 1, 4, 7, 20 ],
       "decl-vars" : [ ],
       "line-start" : 2757,
       "ast" : {
@@ -1225,7 +1225,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "ifreq",
-              "variable" : 8
+              "variable" : 7
             }
           },
           "type" : "selector"
@@ -1285,13 +1285,13 @@
       "line-end" : 2757,
       "code" : "ifreq.Data = uintptr(unsafe.Pointer(stats))",
       "entry" : false,
-      "use-vars" : [ 20, 8 ]
+      "use-vars" : [ 20, 7 ]
     }, {
       "update-vars" : [ 9 ],
       "successors" : [ 17 ],
-      "in-vars" : [ 8, 1, 20, 4 ],
+      "in-vars" : [ 1, 4, 7, 20 ],
       "exit" : false,
-      "out-vars" : [ 1, 9, 20, 4 ],
+      "out-vars" : [ 9, 1, 4, 20 ],
       "decl-vars" : [ ],
       "line-start" : 2758,
       "ast" : {
@@ -1408,7 +1408,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "ifreq",
-                  "variable" : 8
+                  "variable" : 7
                 }
               },
               "type" : "cast"
@@ -1443,13 +1443,13 @@
       "line-end" : 2758,
       "code" : "_, _, errno = syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), SIOCETHTOOL, uintptr(unsafe.Pointer(ifreq)))",
       "entry" : false,
-      "use-vars" : [ 4, 8 ]
+      "use-vars" : [ 4, 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 18, 19 ],
-      "in-vars" : [ 1, 9, 20, 4 ],
+      "in-vars" : [ 9, 1, 4, 20 ],
       "exit" : false,
-      "out-vars" : [ 1, 9, 20, 4 ],
+      "out-vars" : [ 9, 1, 4, 20 ],
       "decl-vars" : [ ],
       "line-start" : 2759,
       "ast" : {
@@ -1489,7 +1489,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 9, 4 ],
+      "in-vars" : [ 9, 1, 4 ],
       "exit" : false,
       "out-vars" : [ 4 ],
       "decl-vars" : [ ],
@@ -1593,7 +1593,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 20, 4 ],
+      "in-vars" : [ 4, 20 ],
       "exit" : false,
       "out-vars" : [ 4 ],
       "decl-vars" : [ ],
@@ -2476,16 +2476,16 @@
       "embedded" : false,
       "field" : true
     }, {
-      "name" : "sSet",
+      "name" : "ifreq",
       "package" : 0,
-      "type" : 47,
+      "type" : 42,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "ifreq",
+      "name" : "sSet",
       "package" : 0,
-      "type" : 42,
+      "type" : 47,
       "exported" : false,
       "embedded" : false,
       "field" : false
