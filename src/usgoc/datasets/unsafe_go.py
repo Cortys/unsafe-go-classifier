@@ -3,6 +3,7 @@ import json
 import funcy as fy
 import networkx as nx
 from pathlib import Path
+from collections import defaultdict
 
 import usgoc.utils as utils
 
@@ -29,11 +30,14 @@ node_label_types = dict(
   datatype="t",
   datatype_flag="tf",
   function="f",
-  binary_op="bo",
-  unary_op="uo",
+  builtin_function="fb",
+  binary_op="ob",
+  unary_op="ou",
 )
 no_ellipsis_types = {
-  "type", "blocktype", "vartype", "binary_op", "unary_op", "datatype_flag"}
+  "type", "blocktype", "vartype", "builtin_function",
+  "binary_op", "unary_op", "datatype_flag"
+}
 
 def get_node_label(labels):
   def l2s(label):
@@ -82,6 +86,9 @@ def type_to_labels(types, tid):
 def func_to_labels(funcs, pkgs, fid):
   if fid == -1:
     return set()
+
+  if isinstance(fid, str):
+    return {("builtin_function", fid)}
 
   func = funcs[fid]
   pid = func["package"]
@@ -215,11 +222,18 @@ def _walk_ast_for_ops(t2l, f2l, ops, s):
     ops |= t2l(s.get("go-type", -1))
     func = s["function"]
     if func["kind"] == "expression" and func["type"] == "identifier":
-      fid = func["value"].get("function", -1)
+      if func["value"]["ident-kind"] == "Builtin":
+        fid = func["value"]["value"]
+      else:
+        fid = func["value"].get("function", -1)
     elif func["kind"] == "expression" and func["type"] == "selector":
       fid = func["field"].get("function", -1)
     ops |= f2l(fid)
     return ops, ["arguments", "function"]
+  elif k == "expression" and t == "new":
+    ops |= t2l(s.get("go-type", -1))
+    ops |= f2l("new")
+    return ops, ["argument"]
 
   return ops, True
 
@@ -355,7 +369,7 @@ def cfg_to_graph(cfg):
   # Prune unused/unreferenced variable nodes:
   for i in range(len(vars)):
     v = var_ids[i]
-    if "var" in g.nodes[v]["labels"] and g.degree(v) == 0:
+    if ("type", "var") in g.nodes[v]["labels"] and g.degree(v) == 0:
       g.remove_node(v)
 
   g.source_code = cfg["code"]
@@ -388,6 +402,22 @@ def usage_to_target(usage, labels):
 def raw_to_usages(raw_dataset):
   labels = collect_target_labels(raw_dataset)
   return [usage_to_target(inst["usage"], labels) for inst in raw_dataset]
+
+@utils.cached(
+  DATA_DIR,
+  lambda _, split_id=None: (
+    f"node_labels{'' if split_id is None else '_' + split_id}"),
+  "pretty_json")
+def collect_node_labels(graphs, split_id=None):
+  labels = {type: defaultdict(lambda: 0) for type in node_label_types.keys()}
+
+  for g in graphs:
+    for v, data in g.nodes(data=True):
+      v_labels = data["labels"]
+      for lt, ls in v_labels:
+        labels[lt][ls] += 1
+
+  return labels
 
 def load_dataset():
   raw_dataset = load_raw()
