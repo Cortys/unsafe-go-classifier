@@ -20,26 +20,34 @@ def load_raw():
       res.append(json.load(fp))
   return res
 
-@utils.cached(DATA_DIR, "labels", "pretty_json")
-def collect_labels(raw_dataset):
-  label1s = set()
-  label2s = set()
-  for inst in raw_dataset:
-    usage = inst["usage"]
-    label1s.add(usage["label1"])
-    label2s.add(usage["label2"])
-  label1s = sorted(label1s)
-  label2s = sorted(label2s)
-  label1s = dict(zip(label1s, range(len(label1s))))
-  label2s = dict(zip(label2s, range(len(label2s))))
-  return label1s, label2s
 
-def usage_to_target(usage, labels):
-  label1s, label2s = labels
-  return label1s[usage["label1"]], label2s[usage["label2"]]
+node_label_types = dict(
+  type="",
+  blocktype="b",
+  vartype="v",
+  varname="n",
+  datatype="t",
+  datatype_flag="tf",
+  function="f",
+  binary_op="bo",
+  unary_op="uo",
+)
+no_ellipsis_types = {
+  "type", "blocktype", "vartype", "binary_op", "unary_op", "datatype_flag"}
 
-def get_label(labels):
-  return "\n".join(labels)
+def get_node_label(labels):
+  def l2s(label):
+    lt, ls = label
+    if lt == "type":
+      return ls
+
+    if lt not in no_ellipsis_types and len(ls) > 12:
+      ls = ls[:4] + "…" + ls[-7:]
+
+    return f"{node_label_types[lt]}[{ls}]"
+
+  labels = sorted(labels, key=lambda l: node_label_types[l[0]])
+  return "\n".join(fy.map(l2s, labels))
 
 def ast_type(ast):
   if ast is None:
@@ -59,7 +67,7 @@ def type_to_labels(types, tid):
 
   # Flatten pointer/array/slice types and add corresponding flags instead:
   while ct["type"] in {"Pointer", "Slice", "Array"}:
-    res.add(ct["type"])
+    res.add(("datatype_flag", ct["type"]))
     ctid = ct["elem"]
     ct = types[ctid]
 
@@ -68,7 +76,7 @@ def type_to_labels(types, tid):
     for field in ct["fields"]:
       res |= type_to_labels(types, field["type"])
   else:
-    res.add("t=" + ct["name"])
+    res.add(("datatype", ct["name"]))
   return res
 
 def func_to_labels(funcs, pkgs, fid):
@@ -80,7 +88,7 @@ def func_to_labels(funcs, pkgs, fid):
   pname = pkgs[pid]["path"] + "." if pid >= 0 else ""
   fname = pname + func["name"]
 
-  return {"f=" + fname}
+  return {("function", fname)}
 
 def _walk_var_selector_chain(state, s):
   if not isinstance(s, dict):
@@ -182,21 +190,24 @@ def _walk_ast_for_ops(t2l, f2l, ops, s):
   if k == "expression" and t in {"unary", "binary"}:
     op = s["operator"]
     if t == "binary":
-      p = "b"
+      p = "binary_op"
       succ = ["left", "right"]
-      # simplify op pairs, since operands are not preserved:
+      # simplify op pairs, since operand order is not preserved anyway:
       if op == ">":
         op = "<"
       elif op == ">=":
         op = "<="
     else:
-      p = "u"
+      p = "unary_op"
       succ = ["target"]
-    ops.add(p + "=" + op)
+    ops.add((p, op))
     return ops, succ
   elif k == "statement" and t == "crement":
-    ops.add("u" + "=" + s["operation"])
+    ops.add(("unary_op", s["operation"]))
     return ops, ["target"]
+  elif k == "statement" and t == "assign-operator":
+    ops.add(("binary_op", s["operator"]))
+    return ops, ["left", "right"]
   elif k == "expression" and t == "cast":
     ops |= t2l(s["coerced-to"].get("go-type", -1))
     return ops, ["target"]
@@ -221,7 +232,7 @@ def ast_to_labels(t2l, f2l, ast):
     return set()
 
   res = find_operations_in_ast(t2l, f2l, ast)
-  res.add(ast["type"])
+  res.add(("blocktype", ast["type"]))
 
   return res
 
@@ -243,27 +254,29 @@ def cfg_to_graph(cfg):
 
   # Add block nodes:
   for i, block in enumerate(blocks):
-    labels = {"block"}
+    labels = {("type", "block")}
     if block["entry"]:
-      labels.add("entry")
+      labels.add(("blocktype", "entry"))
     elif block["exit"]:
-      labels.add("exit")
+      labels.add(("blocktype", "exit"))
     labels |= ast_to_labels(t2l, f2l, block["ast"])
-    g.add_node(n, label=get_label(labels), labels=labels)
+    g.add_node(n, label=get_node_label(labels), labels=labels)
     block_ids[i] = n
     n += 1
 
   # Add variable nodes:
   for i, v in enumerate(vars):
-    labels = {"var"}
+    labels = {("type", "var")}
+    if v["name"] != "":
+      labels.add(("varname", v["name"]))
     if i in params:
-      labels.add("param")
+      labels.add(("vartype", "param"))
     elif i in receivers:
-      labels.add("receiver")
+      labels.add(("vartype", "receiver"))
     elif i in results:
-      labels.add("result")
+      labels.add(("vartype", "result"))
     labels |= t2l(v["type"])
-    g.add_node(n, label=get_label(labels), labels=labels)
+    g.add_node(n, label=get_node_label(labels), labels=labels)
     var_ids[i] = n
     n += 1
 
@@ -294,10 +307,12 @@ def cfg_to_graph(cfg):
         if res not in use_vars:
           g.add_edge(b, var_ids[res], key="assign", label="assign")
           g.add_edge(b, var_ids[res], key="update", label="update")
-    elif btype in {"assign", "define"}:
-      # Find nested assign targets:
-      if btype == "assign" and len(assign_vars) == 0:
-        left_vars = find_vars_in_selectors(ast["left"])
+    elif btype in {"assign", "assign-operator", "define"}:
+      ls = ast["left"]
+      rs = ast["right"]
+      # Find nested assign targets (non-nested ones would be in assign_vars):
+      if btype in {"assign", "assign-operator"} and len(assign_vars) < len(ls):
+        left_vars = find_vars_in_selectors(ls)
         assign_vars |= left_vars["var_roots"]
         up_vars |= left_vars["var_used"]
         var_contains |= left_vars["contains"]
@@ -306,7 +321,7 @@ def cfg_to_graph(cfg):
         var_contains |= leftover_vars["contains"]
 
       # Find variables on right side of assignment/definition:
-      nested_vars = find_vars_in_expr(ast["right"])
+      nested_vars = find_vars_in_expr(rs)
 
     if nested_vars is None:
       # Find variable usages anywhere in AST:
@@ -329,7 +344,12 @@ def cfg_to_graph(cfg):
     for v in call_vars:
       g.add_edge(b, var_ids[v], key="use", label="call")
     for i, s in enumerate(succs):
-      key = "flow" if i == 0 else "alt-flow"
+      if btype == "switch":
+        a = blocks[s]["ast"]
+        is_default = a["type"] == "case-clause" and len(a["expressions"]) == 0
+        key = "alt-flow" if is_default else "flow"
+      else:
+        key = "flow" if i == 0 else "alt-flow"
       g.add_edge(b, block_ids[s], key=key, label=key)
 
   # Prune unused/unreferenced variable nodes:
@@ -346,9 +366,27 @@ def cfg_to_graph(cfg):
 def raw_to_graphs(raw_dataset):
   return [cfg_to_graph(inst["cfg"]) for inst in raw_dataset]
 
+@utils.cached(DATA_DIR, "target_labels", "pretty_json")
+def collect_target_labels(raw_dataset):
+  label1s = set()
+  label2s = set()
+  for inst in raw_dataset:
+    usage = inst["usage"]
+    label1s.add(usage["label1"])
+    label2s.add(usage["label2"])
+  label1s = sorted(label1s)
+  label2s = sorted(label2s)
+  label1s = dict(zip(label1s, range(len(label1s))))
+  label2s = dict(zip(label2s, range(len(label2s))))
+  return label1s, label2s
+
+def usage_to_target(usage, labels):
+  label1s, label2s = labels
+  return label1s[usage["label1"]], label2s[usage["label2"]]
+
 @utils.cached(DATA_DIR, "out_ids")
 def raw_to_usages(raw_dataset):
-  labels = collect_labels(raw_dataset)
+  labels = collect_target_labels(raw_dataset)
   return [usage_to_target(inst["usage"], labels) for inst in raw_dataset]
 
 def load_dataset():
