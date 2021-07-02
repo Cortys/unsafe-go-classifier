@@ -1,26 +1,15 @@
 import glob
 import json
-import funcy as fy
-import networkx as nx
 from pathlib import Path
 from collections import defaultdict
+import funcy as fy
+import networkx as nx
+import numpy as np
 
 import usgoc.utils as utils
 
 RAW_DATASET_PATTERN = "/app/raw/unsafe-go-dataset/**/*.json"
 DATA_DIR = Path("/app/data/unsafe-go-dataset")
-
-def load_filenames():
-  return glob.glob(RAW_DATASET_PATTERN, recursive=True)
-
-def load_raw():
-  files = load_filenames()
-  res = []
-  for f in files:
-    with open(f, "r") as fp:
-      res.append(json.load(fp))
-  return res
-
 
 node_label_types = dict(
   type="",
@@ -38,6 +27,32 @@ no_ellipsis_types = {
   "type", "blocktype", "vartype", "builtin_function",
   "binary_op", "unary_op", "datatype_flag"
 }
+node_label_type_dim_count = dict(
+  varname=15,
+  datatype=63,
+  function=63
+)
+edge_labels = [
+  "flow",
+  "alt-flow",
+  "decl",
+  "assign",
+  "update",
+  "use",
+  "call",
+  "contains"
+]
+
+def load_filenames():
+  return glob.glob(RAW_DATASET_PATTERN, recursive=True)
+
+def load_raw():
+  files = load_filenames()
+  res = []
+  for f in files:
+    with open(f, "r") as fp:
+      res.append(json.load(fp))
+  return res
 
 def get_node_label(labels):
   def l2s(label):
@@ -81,6 +96,7 @@ def type_to_labels(types, tid):
       res |= type_to_labels(types, field["type"])
   else:
     res.add(("datatype", ct["name"]))
+    res.add(("datatype_flag", ct["type"]))
   return res
 
 def func_to_labels(funcs, pkgs, fid):
@@ -403,6 +419,10 @@ def raw_to_usages(raw_dataset):
   labels = collect_target_labels(raw_dataset)
   return [usage_to_target(inst["usage"], labels) for inst in raw_dataset]
 
+def load_dataset():
+  raw_dataset = load_raw()
+  return raw_to_graphs(raw_dataset), raw_to_usages(raw_dataset)
+
 @utils.cached(
   DATA_DIR,
   lambda _, split_id=None: (
@@ -417,8 +437,56 @@ def collect_node_labels(graphs, split_id=None):
       for lt, ls in v_labels:
         labels[lt][ls] += 1
 
+  for lt, ls in labels.items():
+    ls = sorted(ls.items(), key=lambda e: e[1], reverse=True)
+    labels[lt] = ls
+
   return labels
 
-def load_dataset():
-  raw_dataset = load_raw()
-  return raw_to_graphs(raw_dataset), raw_to_usages(raw_dataset)
+@utils.cached(
+  DATA_DIR,
+  lambda _, split_id=None: (
+    f"dims{'' if split_id is None else '_' + split_id}"),
+  "pretty_json")
+def create_dims(graphs, split_id=None):
+  labels = collect_node_labels(graphs, split_id)
+  node_dim_count = 0
+  node_dims = dict()
+  edge_dims = dict()
+
+  for lt in node_label_types.keys():
+    ls = labels[lt]
+    d = dict()
+    node_dims[lt] = d
+    limit = node_label_type_dim_count.get(lt, None)
+    if limit is not None:
+      ls = ls[:limit]
+      d[""] = node_dim_count
+      node_dim_count += 1
+    for lb, c in ls:
+      d[lb] = node_dim_count
+      node_dim_count += 1
+
+  for i, ls in enumerate(edge_labels):
+    edge_dims[ls] = i
+
+  return dict(
+    node_labels=node_dims,
+    node_label_count=node_dim_count,
+    edge_labels=edge_dims,
+    edge_label_count=len(edge_labels))
+
+def get_node_label_dims(node_dims, node_data):
+  labels = node_data["labels"]
+
+  def lookup(lt, ls):
+    d = node_dims[lt]
+    if ls in d:
+      return d[ls]
+    return d[""]
+
+  return fy.lmap(lookup, labels)
+
+def get_edge_label_dim(edge_dims, edge_data):
+  return edge_dims[edge_data["label"]]
+
