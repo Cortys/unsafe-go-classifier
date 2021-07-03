@@ -7,6 +7,10 @@ import networkx as nx
 import numpy as np
 
 import usgoc.utils as utils
+import usgoc.preprocessing.graph.wl1 as wl1
+import usgoc.preprocessing.transformer as trans
+import usgoc.preprocessing.classification as classify
+import usgoc.preprocessing.tf as tf
 
 RAW_DATASET_PATTERN = "/app/raw/unsafe-go-dataset/**/*.json"
 DATA_DIR = Path("/app/data/unsafe-go-dataset")
@@ -479,7 +483,8 @@ def create_dims(graphs, split_id=None):
 def get_node_label_dims(node_dims, node_data):
   labels = node_data["labels"]
 
-  def lookup(lt, ls):
+  def lookup(label):
+    lt, ls = label
     d = node_dims[lt]
     if ls in d:
       return d[ls]
@@ -490,3 +495,47 @@ def get_node_label_dims(node_dims, node_data):
 def get_edge_label_dim(edge_dims, edge_data):
   return edge_dims[edge_data["label"]]
 
+@utils.cached(
+  DATA_DIR,
+  lambda graphs, dims, multirefs=True, split_id=None: (
+    ("m" if multirefs else "")
+    + "wl1"
+    + ("" if split_id is None else "_" + split_id)))
+def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
+  enc_graphs = np.empty(len(graphs), dtype="O")
+  node_label_fn = fy.partial(get_node_label_dims, dims["node_labels"])
+  edge_label_fn = fy.partial(get_edge_label_dim, dims["edge_labels"])
+  node_label_count = dims["node_label_count"]
+  edge_label_count = dims["edge_label_count"]
+
+  for i, g in enumerate(graphs):
+    enc_graphs[i] = wl1.encode_graph(
+      g,
+      node_label_count=node_label_count,
+      edge_label_count=edge_label_count,
+      node_label_fn=node_label_fn,
+      edge_label_fn=edge_label_fn,
+      multirefs=multirefs)
+
+  return enc_graphs
+
+def wl1_tf_dataset(
+  dataset, dims, multirefs=True, split_id=None,
+  batch_size_limit=None, batch_space_limit=None):
+  graphs, targets = dataset
+  encoded_graphs = wl1_encode_graphs(graphs, dims, multirefs, split_id)
+  targets = classify.one_hot(fy.lmap(lambda t: t[0], targets), 11)
+
+  node_label_count = dims["node_label_count"]
+  edge_label_count = dims["edge_label_count"]
+  batcher = trans.tuple(wl1.WL1Batcher(
+    batch_size_limit=batch_size_limit,
+    batch_space_limit=batch_space_limit))
+  gen = batcher.batch_generator((encoded_graphs, targets))
+
+  in_meta = dict(
+    node_label_count=node_label_count,
+    edge_label_count=edge_label_count,
+    multirefs=multirefs)
+  out_meta = dict(class_count=11)
+  return tf.make_dataset(gen, "wl1", in_meta, "multiclass", out_meta)
