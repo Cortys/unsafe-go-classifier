@@ -9,7 +9,7 @@ import numpy as np
 import usgoc.utils as utils
 import usgoc.preprocessing.graph.wl1 as wl1
 import usgoc.preprocessing.transformer as trans
-import usgoc.preprocessing.classification as classify
+import usgoc.preprocessing.batcher as batcher
 import usgoc.preprocessing.tf as tf
 
 RAW_DATASET_PATTERN = "/app/raw/unsafe-go-dataset/**/*.json"
@@ -414,14 +414,16 @@ def collect_target_labels(raw_dataset):
   label2s = dict(zip(label2s, range(len(label2s))))
   return label1s, label2s
 
-def usage_to_target(usage, labels):
-  label1s, label2s = labels
-  return label1s[usage["label1"]], label2s[usage["label2"]]
-
 @utils.cached(DATA_DIR, "out_ids")
 def raw_to_usages(raw_dataset):
-  labels = collect_target_labels(raw_dataset)
-  return [usage_to_target(inst["usage"], labels) for inst in raw_dataset]
+  label1s, label2s = collect_target_labels(raw_dataset)
+  usage1s = np.empty(len(raw_dataset), dtype=np.int32)
+  usage2s = np.empty(len(raw_dataset), dtype=np.int32)
+  for i, inst in enumerate(raw_dataset):
+    usage = inst["usage"]
+    usage1s[i] = label1s[usage["label1"]]
+    usage2s[i] = label2s[usage["label2"]]
+  return usage1s, usage2s
 
 def load_dataset():
   raw_dataset = load_raw()
@@ -519,23 +521,36 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
 
   return enc_graphs
 
+def slice(dataset, indices=None):
+  if indices is None:
+    return dataset
+
+  graphs, labels = dataset
+  label1s, label2s = labels
+  graphs = graphs[indices]
+  label1s = label1s[indices]
+  label2s = label2s[indices]
+
+  return graphs, (label1s, label2s)
+
 def wl1_tf_dataset(
   dataset, dims, multirefs=True, split_id=None,
   batch_size_limit=None, batch_space_limit=None):
   graphs, targets = dataset
   encoded_graphs = wl1_encode_graphs(graphs, dims, multirefs, split_id)
-  targets = classify.one_hot(fy.lmap(lambda t: t[0], targets), 11)
 
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
-  batcher = trans.tuple(wl1.WL1Batcher(
-    batch_size_limit=batch_size_limit,
-    batch_space_limit=batch_space_limit))
-  gen = batcher.batch_generator((encoded_graphs, targets))
+  ds_batcher = trans.tuple(
+    wl1.WL1Batcher(
+      batch_size_limit=batch_size_limit,
+      batch_space_limit=batch_space_limit),
+    trans.pair(batcher.Batcher.identity))
+  gen = ds_batcher.batch_generator((encoded_graphs, targets))
 
   in_meta = dict(
     node_label_count=node_label_count,
     edge_label_count=edge_label_count,
     multirefs=multirefs)
-  out_meta = dict(class_count=11)
-  return tf.make_dataset(gen, "wl1", in_meta, "multiclass", out_meta)
+  out_meta = dict()
+  return tf.make_dataset(gen, "wl1", in_meta, "int32_pair", out_meta)

@@ -13,11 +13,11 @@ with utils.cache_env(use_cache=True):
   dims = dataset.create_dims(graphs)
 
 dims
+labels[:10]
 
 with utils.cache_env(use_cache=False):
-  e = dataset.wl1_tf_dataset((graphs, labels), dims, batch_size_limit=10)
-
-list(e)[0]
+  e = dataset.wl1_tf_dataset((graphs, labels), dims, batch_size_limit=20)
+len(list(e))
 
 # files[50]
 # interesting i's: 40, 70

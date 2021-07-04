@@ -1,5 +1,4 @@
 import numpy as np
-import funcy as fy
 
 from usgoc.utils import tolerant
 import usgoc.preprocessing.utils as enc_utils

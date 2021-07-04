@@ -1,10 +1,7 @@
 import tensorflow as tf
 import tensorflow.keras as keras
-import funcy as fy
 
-import usgoc.utils as utils
 import usgoc.preprocessing.graph.wl1 as wl1_enc
-import usgoc.preprocessing.classification as cls_enc
 
 def wl1(meta):
   node_dim, edge_dim = wl1_enc.feature_dims(**meta)
@@ -32,6 +29,9 @@ def vec32(meta):
 
   return tf.TensorSpec(shape=shape, dtype=tf.float32)
 
+def int32(meta):
+  return tf.TensorSpec(shape=[None], dtype=tf.int32)
+
 def multiclass(meta):
   if "class_count" in meta:
     class_count = meta["class_count"]
@@ -50,6 +50,8 @@ def tup(enc, n=2):
 
 encodings = dict(
   null=lambda meta: tf.TensorSpec(shape=[1], dtype=tf.int32),
+  int32=int32,
+  int32_pair=tup(int32),
   wl1=wl1,
   float=vec32,
   vector=vec32,
