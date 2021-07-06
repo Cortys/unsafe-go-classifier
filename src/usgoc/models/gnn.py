@@ -5,6 +5,7 @@ import funcy as fy
 import usgoc.preprocessing.tf as tf_pre
 import usgoc.layers.wl1 as wl1
 import usgoc.layers.pooling as pl
+import usgoc.metrics.multi as mm
 
 import warnings
 warnings.filterwarnings(
@@ -70,8 +71,6 @@ def cfg_classifier(
     labels = tf.squeeze(labels, -1)
     return tf.nn.sparse_softmax_cross_entropy_with_logits(labels, logits)
 
-  acc = "sparse_categorical_accuracy"
-
   def instanciate(
     node_label_count=None,
     conv_layer_units=[], conv_layer_args=None,
@@ -116,9 +115,11 @@ def cfg_classifier(
     m = keras.Model(inputs=inputs, outputs=outputs, name=name)
     optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
     loss = dict(label1=loss_fn, label2=loss_fn)
-    metrics = dict(label1=acc, label2=acc)
+    acc_group = mm.SparseMultiAccuracy.create_group()
+    metrics = dict(
+      label1=mm.SparseMultiAccuracy("label1", group=acc_group),
+      label2=mm.SparseMultiAccuracy("label2", group=acc_group))
     m.compile(optimizer=optimizer, loss=loss, metrics=metrics)
-
     return m
   return instanciate
 

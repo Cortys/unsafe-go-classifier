@@ -1,7 +1,7 @@
 # import tensorflow as tf
-import numpy as np
+# import numpy as np
 
-import usgoc.preprocessing.graph.wl1 as wl1
+# import usgoc.preprocessing.graph.wl1 as wl1
 import usgoc.datasets.unsafe_go as dataset
 import usgoc.models.gnn as gnn
 import usgoc.utils as utils
@@ -29,7 +29,6 @@ m = gnn.RGCN(
   pooling="sum", learning_rate=0.001)
 
 m.fit(ds, verbose=2, epochs=500)
-
 # files[50]
 # interesting i's: 40, 70
 # i = 110; print(graphs[i].source_code, files[i], labels[i]); utils.draw_graph(graphs[i], edge_colors=True, layout="dot")
