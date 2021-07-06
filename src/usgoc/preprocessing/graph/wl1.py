@@ -70,6 +70,8 @@ def encode_graph(
   x_init = np.zeros if node_feature_dim > 0 or node_label_count > 0 \
       else np.ones
 
+  print("enc graph", n_count, node_dim)
+
   X = x_init((n_count, node_dim), dtype=np.float32)
   if refs_count > 1:
     ref_a = tuple([] for _ in range(refs_count))

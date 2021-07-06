@@ -11,6 +11,7 @@ import usgoc.preprocessing.graph.wl1 as wl1
 import usgoc.preprocessing.transformer as trans
 import usgoc.preprocessing.batcher as batcher
 import usgoc.preprocessing.tf as tf
+import usgoc.preprocessing.split as ps
 
 RAW_DATASET_PATTERN = "/app/raw/unsafe-go-dataset/**/*.json"
 DATA_DIR = Path("/app/data/unsafe-go-dataset")
@@ -30,6 +31,9 @@ node_label_types = dict(
 no_ellipsis_types = {
   "type", "blocktype", "vartype", "builtin_function",
   "binary_op", "unary_op", "datatype_flag"
+}
+no_default_label_subtype = {
+  "type", "blocktype", "vartype"
 }
 node_label_type_dim_count = dict(
   varname=15,
@@ -396,12 +400,16 @@ def cfg_to_graph(cfg):
 
   return g
 
-@utils.cached(DATA_DIR, "in_nx")
+@utils.cached(DATA_DIR, "cfgs")
 def raw_to_graphs(raw_dataset):
-  return [cfg_to_graph(inst["cfg"]) for inst in raw_dataset]
+  graphs = np.empty(len(raw_dataset), dtype="O")
+  for i, inst in enumerate(raw_dataset):
+    graphs[i] = cfg_to_graph(inst["cfg"])
 
-@utils.cached(DATA_DIR, "target_labels", "pretty_json")
-def collect_target_labels(raw_dataset):
+  return graphs
+
+@utils.cached(DATA_DIR, "target_label_dims", "pretty_json")
+def create_target_label_dims(raw_dataset):
   label1s = set()
   label2s = set()
   for inst in raw_dataset:
@@ -414,9 +422,9 @@ def collect_target_labels(raw_dataset):
   label2s = dict(zip(label2s, range(len(label2s))))
   return label1s, label2s
 
-@utils.cached(DATA_DIR, "out_ids")
+@utils.cached(DATA_DIR, "target_labels")
 def raw_to_usages(raw_dataset):
-  label1s, label2s = collect_target_labels(raw_dataset)
+  label1s, label2s = create_target_label_dims(raw_dataset)
   usage1s = np.empty(len(raw_dataset), dtype=np.int32)
   usage2s = np.empty(len(raw_dataset), dtype=np.int32)
   for i, inst in enumerate(raw_dataset):
@@ -430,11 +438,11 @@ def load_dataset():
   return raw_to_graphs(raw_dataset), raw_to_usages(raw_dataset)
 
 @utils.cached(
-  DATA_DIR,
+  DATA_DIR / "node_label_histogram",
   lambda _, split_id=None: (
     f"node_labels{'' if split_id is None else '_' + split_id}"),
   "pretty_json")
-def collect_node_labels(graphs, split_id=None):
+def collect_node_label_histogram(graphs, split_id=None):
   labels = {type: defaultdict(lambda: 0) for type in node_label_types.keys()}
 
   for g in graphs:
@@ -450,12 +458,12 @@ def collect_node_labels(graphs, split_id=None):
   return labels
 
 @utils.cached(
-  DATA_DIR,
+  DATA_DIR / "cfg_dims",
   lambda _, split_id=None: (
     f"dims{'' if split_id is None else '_' + split_id}"),
   "pretty_json")
-def create_dims(graphs, split_id=None):
-  labels = collect_node_labels(graphs, split_id)
+def create_graph_dims(graphs, split_id=None):
+  labels = collect_node_label_histogram(graphs, split_id)
   node_dim_count = 0
   node_dims = dict()
   edge_dims = dict()
@@ -464,11 +472,13 @@ def create_dims(graphs, split_id=None):
     ls = labels[lt]
     d = dict()
     node_dims[lt] = d
+    if lt not in no_default_label_subtype:
+      d[""] = node_dim_count
+      node_dim_count += 1
+
     limit = node_label_type_dim_count.get(lt, None)
     if limit is not None:
       ls = ls[:limit]
-      d[""] = node_dim_count
-      node_dim_count += 1
     for lb, c in ls:
       d[lb] = node_dim_count
       node_dim_count += 1
@@ -498,7 +508,7 @@ def get_edge_label_dim(edge_dims, edge_data):
   return edge_dims[edge_data["label"]]
 
 @utils.cached(
-  DATA_DIR,
+  DATA_DIR / "wl1",
   lambda graphs, dims, multirefs=True, split_id=None: (
     ("m" if multirefs else "")
     + "wl1"
@@ -509,6 +519,7 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
   edge_label_fn = fy.partial(get_edge_label_dim, dims["edge_labels"])
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
+  print("usgoc enc wl1", len(graphs), split_id, node_label_count, edge_label_count)
 
   for i, g in enumerate(graphs):
     enc_graphs[i] = wl1.encode_graph(
@@ -520,18 +531,6 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
       multirefs=multirefs)
 
   return enc_graphs
-
-def slice(dataset, indices=None):
-  if indices is None:
-    return dataset
-
-  graphs, labels = dataset
-  label1s, label2s = labels
-  graphs = graphs[indices]
-  label1s = label1s[indices]
-  label2s = label2s[indices]
-
-  return graphs, (label1s, label2s)
 
 def wl1_tf_dataset(
   dataset, dims, multirefs=True, split_id=None,
@@ -554,3 +553,51 @@ def wl1_tf_dataset(
     multirefs=multirefs)
   out_meta = dict()
   return tf.make_dataset(gen, "wl1", in_meta, "int32_pair", out_meta)
+
+def slice(dataset, indices=None):
+  if indices is None:
+    return dataset
+
+  graphs, labels = dataset
+  label1s, label2s = labels
+  graphs = graphs[indices]
+  label1s = label1s[indices]
+  label2s = label2s[indices]
+
+  return graphs, (label1s, label2s)
+
+@utils.cached(DATA_DIR, "splits", "json")
+def get_splits(dataset):
+  graphs, labels = dataset
+  n = len(graphs)
+  # Assign unique class to each label combination:
+  # strat_labels = labels[0]
+  strat_labels = labels[0] * 12 + labels[1] + 1
+  # Stratify rare combinations by their first label only:
+  bins = np.bincount(strat_labels)
+  unique_combinations = np.nonzero((0 < bins) & (bins < 10))[0]
+  rare_idxs = np.isin(strat_labels, unique_combinations)
+  strat_labels[rare_idxs] = 12 * (strat_labels[rare_idxs] // 12)
+
+  return ps.make_splits(n, strat_labels=strat_labels)
+
+def wl1_tf_datasets(
+  dataset, splits, outer_i=0, inner_i=0, **kwargs):
+  split_id = f"{outer_i}_{inner_i}"
+  split = splits[outer_i]
+  ms = split["model_selection"][inner_i]
+  train_idxs = ms["train"]
+  val_idxs = ms["validation"]
+  test_idxs = split["test"]
+  train_slice = slice(dataset, train_idxs)
+  val_slice = slice(dataset, val_idxs)
+  test_slice = slice(dataset, test_idxs)
+  train_dims = create_graph_dims(train_slice[0], f"{split_id}_train")
+
+  train_ds = wl1_tf_dataset(
+    train_slice, train_dims, split_id=f"{split_id}_train", **kwargs)
+  val_ds = wl1_tf_dataset(
+    val_slice, train_dims, split_id=f"{split_id}_val", **kwargs)
+  test_ds = wl1_tf_dataset(
+    test_slice, train_dims, split_id=f"{split_id}_test", **kwargs)
+  return train_dims, train_ds, val_ds, test_ds

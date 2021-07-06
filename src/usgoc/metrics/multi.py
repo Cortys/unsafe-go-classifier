@@ -3,7 +3,6 @@ from tensorflow import keras
 
 class SparseMultiAccuracy(keras.metrics.Metric):
   def __init__(self, name="label", dtype=None, group=None):
-    print("init", name, dtype, group)
     assert group is not None, "Missing accuracy group."
     super().__init__(name, dtype)
     assert name not in group["labels"]
