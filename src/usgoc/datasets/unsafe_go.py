@@ -519,7 +519,6 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
   edge_label_fn = fy.partial(get_edge_label_dim, dims["edge_labels"])
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
-  print("usgoc enc wl1", len(graphs), split_id, node_label_count, edge_label_count)
 
   for i, g in enumerate(graphs):
     enc_graphs[i] = wl1.encode_graph(
@@ -567,7 +566,7 @@ def slice(dataset, indices=None):
   return graphs, (label1s, label2s)
 
 @utils.cached(DATA_DIR, "splits", "json")
-def get_splits(dataset):
+def get_split_idxs(dataset):
   graphs, labels = dataset
   n = len(graphs)
   # Assign unique class to each label combination:
@@ -581,10 +580,8 @@ def get_splits(dataset):
 
   return ps.make_splits(n, strat_labels=strat_labels)
 
-def wl1_tf_datasets(
-  dataset, splits, outer_i=0, inner_i=0, **kwargs):
-  split_id = f"{outer_i}_{inner_i}"
-  split = splits[outer_i]
+def get_dataset_slices(dataset, split_idxs, outer_i=0, inner_i=0):
+  split = split_idxs[outer_i]
   ms = split["model_selection"][inner_i]
   train_idxs = ms["train"]
   val_idxs = ms["validation"]
@@ -592,6 +589,13 @@ def wl1_tf_datasets(
   train_slice = slice(dataset, train_idxs)
   val_slice = slice(dataset, val_idxs)
   test_slice = slice(dataset, test_idxs)
+  return train_slice, val_slice, test_slice
+
+def wl1_tf_datasets(
+  dataset, split_idxs, outer_i=0, inner_i=0, **kwargs):
+  split_id = f"{outer_i}_{inner_i}"
+  train_slice, val_slice, test_slice = get_dataset_slices(
+    dataset, split_idxs, outer_i, inner_i)
   train_dims = create_graph_dims(train_slice[0], f"{split_id}_train")
 
   train_ds = wl1_tf_dataset(

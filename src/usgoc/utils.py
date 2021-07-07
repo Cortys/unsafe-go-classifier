@@ -148,6 +148,23 @@ def draw_graph(
 
   plt.show()
 
+def draw_confusion_matrix(m, labels):
+  fig, ax = plt.subplots()
+  ax.imshow(m)
+  ax.set_xticks(np.arange(len(labels)))
+  ax.set_yticks(np.arange(len(labels)))
+  ax.set_xticklabels(labels)
+  ax.set_yticklabels(labels)
+  plt.setp(
+    ax.get_xticklabels(), rotation=45, ha="right",
+    rotation_mode="anchor")
+
+  for i in range(len(labels)):
+    for j in range(len(labels)):
+      ax.text(j, i, m[i, j], ha="center", va="center", color="w")
+  fig.tight_layout()
+  plt.show()
+
 def graph_feature_dims(g):
   dim_node_features = 0
   dim_edge_features = 0

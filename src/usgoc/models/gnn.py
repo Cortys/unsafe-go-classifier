@@ -71,6 +71,9 @@ def cfg_classifier(
     labels = tf.squeeze(labels, -1)
     return tf.nn.sparse_softmax_cross_entropy_with_logits(labels, logits)
 
+  label1_count = 11
+  label2_count = 11
+
   def instanciate(
     node_label_count=None,
     conv_layer_units=[], conv_layer_args=None,
@@ -85,8 +88,6 @@ def cfg_classifier(
       node_label_count=node_label_count,
       edge_label_count=8,
       multirefs=True)
-    label1_count = 11
-    label2_count = 11
 
     inputs = tf_pre.make_inputs(in_enc, in_meta)
 
@@ -117,8 +118,10 @@ def cfg_classifier(
     loss = dict(label1=loss_fn, label2=loss_fn)
     acc_group = mm.SparseMultiAccuracy.create_group()
     metrics = dict(
-      label1=mm.SparseMultiAccuracy("label1", group=acc_group),
-      label2=mm.SparseMultiAccuracy("label2", group=acc_group))
+      label1=[
+        mm.SparseMultiAccuracy("label1", group=acc_group)],
+      label2=[
+        mm.SparseMultiAccuracy("label2", group=acc_group)])
     m.compile(optimizer=optimizer, loss=loss, metrics=metrics)
     return m
   return instanciate
