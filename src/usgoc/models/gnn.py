@@ -6,6 +6,7 @@ import usgoc.preprocessing.tf as tf_pre
 import usgoc.layers.wl1 as wl1
 import usgoc.layers.pooling as pl
 import usgoc.metrics.multi as mm
+import usgoc.utils as utils
 
 import warnings
 warnings.filterwarnings(
@@ -41,6 +42,7 @@ def pool(input, pooling="mean", preserve_full_embedding=False):
 
 def layer_stack(layer, layer_units=[], layer_args=None, **kwargs):
   layer_count = len(layer_units)
+  tlayer = utils.tolerant(layer)
 
   def create_stack(input):
     h = input
@@ -56,7 +58,7 @@ def layer_stack(layer, layer_units=[], layer_args=None, **kwargs):
         args = kwargs
 
       units = layer_units[i]
-      h = layer(units=units, **args)(h)
+      h = tlayer(units=units, **args)(h)
     return h
 
   return create_stack
@@ -64,8 +66,7 @@ def layer_stack(layer, layer_units=[], layer_args=None, **kwargs):
 def cfg_classifier(
   name, conv_layer, preproc_layer=None,
   conv_args={}, preproc_args={},
-  in_enc="wl1"):
-  # loss_fn = tf.nn.sparse_softmax_cross_entropy_with_logits
+  in_enc="mwl1"):
 
   def loss_fn(labels, logits):
     labels = tf.squeeze(labels, -1)
@@ -77,7 +78,8 @@ def cfg_classifier(
   def instanciate(
     node_label_count=None,
     conv_layer_units=[], conv_layer_args=None,
-    conv_activation="sigmoid",
+    conv_activation="sigmoid", conv_inner_activation="sigmoid",
+    conv_directed=True,
     fc_layer_units=[], fc_layer_args=None,
     fc_activation="sigmoid",
     out_activation=None,
@@ -86,8 +88,7 @@ def cfg_classifier(
     assert node_label_count is not None, "Missing label count."
     in_meta = dict(
       node_label_count=node_label_count,
-      edge_label_count=8,
-      multirefs=True)
+      edge_label_count=8)
 
     inputs = tf_pre.make_inputs(in_enc, in_meta)
 
@@ -98,7 +99,8 @@ def cfg_classifier(
 
     h = layer_stack(
       conv_layer, conv_layer_units, conv_layer_args,
-      activation=conv_activation, **conv_args)(pre)
+      activation=conv_activation, inner_activation=conv_inner_activation,
+      directed=conv_directed, **conv_args)(pre)
     pooled = pool(h, pooling)
     emb = layer_stack(
       keras.layers.Dense, fc_layer_units, fc_layer_args,
@@ -124,10 +126,29 @@ def cfg_classifier(
         mm.SparseMultiAccuracy("label2", group=acc_group)])
     m.compile(optimizer=optimizer, loss=loss, metrics=metrics)
     return m
+
+  instanciate.in_enc = in_enc
   return instanciate
 
 
+# Set models:
+DeepSets = cfg_classifier(
+  "DeepSets", wl1.DeepSetsLayer,
+  in_enc="node_set")
+
+# Unirelational models:
+GCN = cfg_classifier(
+  "GCN", wl1.GCNLayer, wl1.GCNPreprocessLayer,
+  in_enc="wl1")
+GIN = cfg_classifier("GIN", wl1.GINLayer, in_enc="wl1")
+GGNN = cfg_classifier("GGNN", wl1.GGNNLayer, in_enc="wl1")
+
+# Multirelational models:
 RGCN = cfg_classifier(
-  "RGCN", wl1.RGCNLayer, wl1.RGCNPreprocessLayer,
-  conv_args=dict(directed=True, reverse=True),
-  preproc_args=dict(directed=True, reverse=True))
+  "RGCN", wl1.RGNNLayer, wl1.RGCNPreprocessLayer,
+  conv_args=dict(reverse=True),
+  preproc_args=dict(reverse=True))
+RGIN = cfg_classifier(
+  "RGIN", wl1.RGNNLayer,
+  conv_args=dict(
+    reverse=True, with_final_dense=True))

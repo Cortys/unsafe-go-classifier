@@ -69,6 +69,43 @@ class RGCNPreprocessLayer(keras.layers.Layer):
 
     return {**input, "norms": norms}
 
+class DeepSetsLayer(keras.layers.Layer):
+  def __init__(self, units, use_bias=True, activation=None):
+    super().__init__()
+    self.units = units
+    self.use_bias = use_bias
+    self.activation = keras.activations.get(activation)
+
+  def get_config(self):
+    return dict(
+      **super().get_config(),
+      units=self.units,
+      use_bias=self.use_bias,
+      activation=keras.activations.serialize(self.activation))
+
+  def build(self, input_shape):
+    super().build(input_shape)
+    X_shape = input_shape["X"]
+    vert_dim = X_shape[-1]
+
+    self.W = self.add_weight(
+      "W", shape=(vert_dim, self.units),
+      trainable=True, initializer=tf.initializers.GlorotUniform)
+
+    if self.use_bias:
+      self.b = self.add_weight(
+        "b", shape=(self.units,),
+        trainable=True, initializer=tf.initializers.Zeros)
+
+  def call(self, input):
+    X = input["X"]
+    X_out = X @ self.W
+    if self.use_bias:
+      X_out = tf.nn.bias_add(X_out, self.b)
+    X_out = self.activation(X_out)
+
+    return {**input, "X": X_out}
+
 class GCNLayer(keras.layers.Layer):
   def __init__(self, units, use_bias=True, activation=None):
     super().__init__()
@@ -113,17 +150,21 @@ class GCNLayer(keras.layers.Layer):
 
     return {**input, "X": X_out}
 
-class RGCNLayer(keras.layers.Layer):
+class RGNNLayer(keras.layers.Layer):
   def __init__(
-    self, units, use_bias=True, activation=None,
-    directed=False, selfloops=True, reverse=False):
+    self, units, use_bias=True,
+    activation=None, inner_activation=None,
+    directed=False, selfloops=True, reverse=False,
+    with_final_dense=False):
     super().__init__()
     self.units = units
     self.use_bias = use_bias
     self.activation = keras.activations.get(activation)
+    self.inner_activation = keras.activations.get(inner_activation)
     self.directed = directed
     self.selfloops = selfloops
-    self.reverse = reverse
+    self.reverse = directed and reverse
+    self.with_final_dense = with_final_dense
 
   def get_config(self):
     return dict(
@@ -131,9 +172,11 @@ class RGCNLayer(keras.layers.Layer):
       units=self.units,
       use_bias=self.use_bias,
       activation=keras.activations.serialize(self.activation),
+      inner_activation=keras.activations.serialize(self.inner_activation),
       directed=self.directed,
       selfloops=self.selfloops,
-      reverse=self.reverse,)
+      reverse=self.reverse,
+      with_final_dense=self.with_final_dense)
 
   def build(self, input_shape):
     super().build(input_shape)
@@ -149,6 +192,11 @@ class RGCNLayer(keras.layers.Layer):
       "W", shape=(ref_count, vert_dim, self.units),
       trainable=True, initializer=tf.initializers.GlorotUniform)
 
+    if self.with_final_dense:
+      self.W_fin = self.add_weight(
+        "W_fin", shape=(self.units, self.units),
+        trainable=True, initializer=tf.initializers.GlorotUniform)
+
     if self.reverse:
       self.W_rev = self.add_weight(
         "W_rev", shape=(ref_count, vert_dim, self.units),
@@ -158,6 +206,10 @@ class RGCNLayer(keras.layers.Layer):
       self.b = self.add_weight(
         "b", shape=(self.units,),
         trainable=True, initializer=tf.initializers.Zeros)
+      if self.with_final_dense:
+        self.b_fin = self.add_weight(
+          "b_fin", shape=(self.units,),
+          trainable=True, initializer=tf.initializers.Zeros)
 
   def _convolve(self, X, ref_a, ref_b, W, norms):
     ref_count = len(ref_a)
@@ -199,6 +251,13 @@ class RGCNLayer(keras.layers.Layer):
     X_out = tf.math.accumulate_n(X_aggs)
     if self.use_bias:
       X_out = tf.nn.bias_add(X_out, self.b)
+
+    if self.with_final_dense:
+      X_out = self.inner_activation(X_out)
+      X_out = X_out @ self.W_fin
+      if self.use_bias:
+        X_out = tf.nn.bias_add(X_out, self.b_fin)
+
     X_out = self.activation(X_out)
 
     return {**input, "X": X_out}

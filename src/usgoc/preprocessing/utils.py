@@ -8,54 +8,68 @@ def make_graph_batch(
   X_offset = 0
   batch_size = len(encoded_graphs)
 
-  ref_a_key = ref_keys[0]
   e0 = encoded_graphs[0]
-  ra0 = e0[ref_a_key]
-  multirefs = isinstance(ra0, tuple)
   # Append block_size nodes to each graph (useful for block-wise graph gen):
   X_append_eye = e0.get("block_size", 0)
   grouped = e0.get("group_idx", None) is not None
 
-  if multirefs:
+  if ref_keys is not None and len(ref_keys) > 0:  # With refs:
+    ref_a_key = ref_keys[0]
+    ra0 = e0[ref_a_key]
+    multirefs = isinstance(ra0, tuple)
+
+    if multirefs:
+      edge_features = False
+      refs_count = len(ra0)
+      ref_len = (lambda e: e["ref_sizes"][-1]) if refs_count > 1 \
+          else (lambda e: len(e[ref_a_key][0]))
+      ref_batch_size = np.zeros(refs_count, dtype=np.int32)
+      ref_offset = np.zeros(refs_count, dtype=np.int32)
+      for e in encoded_graphs:
+        X_size, X_dim = e["X"].shape
+        X_batch_size += X_size
+        ref_batch_size += ref_len(e)
+        if discard_empty and X_size == 0:
+          batch_size -= 1
+
+      refs_batch = {
+        ref_key: tuple(
+          np.empty(ref_batch_size[i], dtype=np.int32)
+          for i in range(refs_count))
+        for ref_key in ref_keys}
+    else:
+      ref_len = lambda e: len(e[ref_a_key])
+      refs_count = 1
+      ref_batch_size = 0
+      ref_offset = 0
+      for e in encoded_graphs:
+        X_size, X_dim = e["X"].shape
+        X_batch_size += X_size + X_append_eye
+        ref_batch_size += len(e[ref_a_key])
+        if discard_empty and X_size == 0:
+          batch_size -= 1
+
+      refs_batch = {
+        ref_key: np.empty(ref_batch_size, dtype=np.int32)
+        for ref_key in ref_keys}
+
+      edge_features = "R" in e0 and e0["R"] is not None
+
+      if edge_features:
+        R_dim = e0["R"].shape[1]
+        R_batch = np.empty((ref_batch_size, R_dim), dtype=np.float32)
+  else:  # No refs:
+    multirefs = False
     edge_features = False
-    refs_count = len(ra0)
-    ref_len = (lambda e: e["ref_sizes"][-1]) if refs_count > 1 \
-        else (lambda e: len(e[ref_a_key][0]))
-    ref_batch_size = np.zeros(refs_count, dtype=np.int32)
-    ref_offset = np.zeros(refs_count, dtype=np.int32)
+    ref_keys = []
+    ref_offset = 0
+    ref_len = lambda e: 0
+    refs_batch = {}
     for e in encoded_graphs:
       X_size, X_dim = e["X"].shape
       X_batch_size += X_size
-      ref_batch_size += ref_len(e)
       if discard_empty and X_size == 0:
         batch_size -= 1
-
-    refs_batch = {
-      ref_key: tuple(
-        np.empty(ref_batch_size[i], dtype=np.int32)
-        for i in range(refs_count))
-      for ref_key in ref_keys}
-  else:
-    ref_len = lambda e: len(e[ref_a_key])
-    refs_count = 1
-    ref_batch_size = 0
-    ref_offset = 0
-    for e in encoded_graphs:
-      X_size, X_dim = e["X"].shape
-      X_batch_size += X_size + X_append_eye
-      ref_batch_size += len(e[ref_a_key])
-      if discard_empty and X_size == 0:
-        batch_size -= 1
-
-    refs_batch = {
-      ref_key: np.empty(ref_batch_size, dtype=np.int32)
-      for ref_key in ref_keys}
-
-    edge_features = "R" in e0 and e0["R"] is not None
-
-    if edge_features:
-      R_dim = e0["R"].shape[1]
-      R_batch = np.empty((ref_batch_size, R_dim), dtype=np.float32)
 
   if X_append_eye > 0:
     X_batch = np.zeros((X_batch_size, X_dim + X_append_eye), dtype=np.float32)

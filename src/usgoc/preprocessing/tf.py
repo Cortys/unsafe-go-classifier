@@ -5,7 +5,6 @@ import usgoc.preprocessing.graph.wl1 as wl1_enc
 
 def wl1(meta):
   node_dim, edge_dim = wl1_enc.feature_dims(**meta)
-  node_dim += meta.get("block_size", 0)
 
   res = {
     "X": tf.TensorSpec(shape=[None, node_dim], dtype=tf.float32),
@@ -21,6 +20,25 @@ def wl1(meta):
     res["ref_b"] = res["ref_a"]
   if edge_dim > 0:
     res["R"] = tf.TensorSpec(shape=[None, edge_dim], dtype=tf.float32)
+
+  return res
+
+def rwl1(meta):
+  meta["with_ref_features"] = True
+  return wl1(meta)
+
+def mwl1(meta):
+  meta["multirefs"] = True
+  return wl1(meta)
+
+def node_set(meta):
+  node_dim, _ = wl1_enc.feature_dims(**meta)
+
+  res = {
+    "X": tf.TensorSpec(shape=[None, node_dim], dtype=tf.float32),
+    "graph_idx": tf.TensorSpec(shape=[None], dtype=tf.int32),
+    "n": tf.TensorSpec(shape=[None], dtype=tf.int32)
+  }
 
   return res
 
@@ -53,13 +71,16 @@ encodings = dict(
   int32=int32,
   int32_pair=tup(int32),
   wl1=wl1,
+  rwl1=rwl1,
+  mwl1=mwl1,
+  node_set=node_set,
   float=vec32,
   vector=vec32,
   binary=vec32,
   multiclass=multiclass
 )
 encodings_with_tuples = dict(
-  wl1=["ref_a", "ref_b"],
+  mwl1=["ref_a", "ref_b"]
 )
 
 

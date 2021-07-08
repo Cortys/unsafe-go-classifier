@@ -149,6 +149,14 @@ def make_wl1_batch(
     flatten_multirefs=flatten_multirefs,
     discard_empty=discard_empty)
 
+def make_set_batch(
+  encoded_graphs,
+  discard_empty=True):
+  return enc_utils.make_graph_batch(
+    encoded_graphs,
+    ref_keys=None,
+    discard_empty=discard_empty)
+
 def vertex_count(e):
   return e["n"]
 
@@ -186,3 +194,12 @@ class WL1Batcher(batcher.Batcher):
 
   def compute_space(self, graph, batch):
     return space_metrics[self.space_metric](graph)
+
+class SetBatcher(batcher.Batcher):
+  name = "set"
+
+  def finalize(self, graphs):
+    return make_set_batch(graphs)
+
+  def compute_space(self, graph, batch):
+    return vertex_count(graph)
