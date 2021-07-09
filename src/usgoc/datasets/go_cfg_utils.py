@@ -3,6 +3,7 @@ import networkx as nx
 
 import usgoc.utils as utils
 
+cfg_types = ["function", "external", "type", "variable"]
 node_label_types = dict(
   type="",
   blocktype="b",
@@ -242,7 +243,7 @@ def ast_to_labels(t2l, f2l, ast):
 
   return res
 
-def cfg_to_graph(cfg):
+def cfg_to_graph(cfg, mark_line=None):
   g = nx.MultiDiGraph()
   blocks = cfg["blocks"]
   vars = cfg["variables"]
@@ -257,18 +258,35 @@ def cfg_to_graph(cfg):
   var_ids = dict()
   t2l = utils.memoize(fy.partial(type_to_labels, types))
   f2l = utils.memoize(fy.partial(func_to_labels, funcs, pkgs))
+  mark_block = None
+  mark_block_lines = None
 
   # Add block nodes:
   for i, block in enumerate(blocks):
     labels = {("type", "block")}
     if block["entry"]:
+      if mark_block is None:
+        mark_block = n
       labels.add(("blocktype", "entry"))
     elif block["exit"]:
       labels.add(("blocktype", "exit"))
     labels |= ast_to_labels(t2l, f2l, block["ast"])
-    g.add_node(n, label=get_node_label(labels), labels=labels)
+    g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
     block_ids[i] = n
+    if mark_line is not None:
+      line_start = block["line-start"]
+      line_end = block["line-end"]
+      block_lines = line_end - line_start
+      if line_start <= mark_line <= line_end \
+          and (mark_block_lines is None or block_lines < mark_block_lines):
+        mark_block = n
+        mark_block_lines = block_lines
     n += 1
+
+  if mark_line is not None and mark_block is not None:
+    b = g.nodes[mark_block]
+    b["marked"] = True
+    b["color"] = "red"
 
   # Add variable nodes:
   for i, v in enumerate(vars):
@@ -282,7 +300,7 @@ def cfg_to_graph(cfg):
     elif i in results:
       labels.add(("vartype", "result"))
     labels |= t2l(v["type"])
-    g.add_node(n, label=get_node_label(labels), labels=labels)
+    g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
     var_ids[i] = n
     n += 1
 
@@ -365,5 +383,6 @@ def cfg_to_graph(cfg):
       g.remove_node(v)
 
   g.source_code = cfg["code"]
+  g.cfg_type = cfg["type"]
 
   return g

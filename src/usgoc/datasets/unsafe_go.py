@@ -52,6 +52,10 @@ node_label_type_dim_count = {
   )
 }
 default_limit_id = "v15_d63_f63"
+graph_features = dict()
+graph_feature_eye = np.eye(len(cfg_utils.cfg_types), dtype=np.float32)
+for i, t in enumerate(cfg_utils.cfg_types):
+  graph_features[t] = graph_feature_eye[i]
 
 def load_filenames():
   return glob.glob(RAW_DATASET_PATTERN, recursive=True)
@@ -68,7 +72,8 @@ def load_raw():
 def raw_to_graphs(raw_dataset):
   graphs = np.empty(len(raw_dataset), dtype="O")
   for i, inst in enumerate(raw_dataset):
-    graphs[i] = cfg_utils.cfg_to_graph(inst["cfg"])
+    graphs[i] = cfg_utils.cfg_to_graph(
+      inst["cfg"], int(inst["usage"]["line"]))
 
   return graphs
 
@@ -188,13 +193,16 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
   edge_label_count = dims["edge_label_count"]
 
   for i, g in enumerate(graphs):
-    enc_graphs[i] = wl1.encode_graph(
+    enc_g = wl1.encode_graph(
       g,
       node_label_count=node_label_count,
       edge_label_count=edge_label_count,
       node_label_fn=node_label_fn,
       edge_label_fn=edge_label_fn,
-      multirefs=multirefs)
+      multirefs=multirefs,
+      with_marked_node=True)
+    enc_g["graph_X"] = graph_features[g.cfg_type]
+    enc_graphs[i] = enc_g
 
   return enc_graphs
 
@@ -216,7 +224,9 @@ def wl1_tf_dataset(
   in_enc = "mwl1" if multirefs else "wl1"
   in_meta = dict(
     node_label_count=node_label_count,
-    edge_label_count=edge_label_count)
+    edge_label_count=edge_label_count,
+    graph_feature_dim=len(graph_features),
+    with_marked_node=True)
   out_meta = dict()
   return tf.make_dataset(gen, in_enc, in_meta, "int32_pair", out_meta)
 
@@ -234,7 +244,10 @@ def node_set_tf_dataset(
     trans.pair(batcher.Batcher.identity))
   gen = ds_batcher.batch_generator((encoded_graphs, targets))
 
-  in_meta = dict(node_label_count=node_label_count)
+  in_meta = dict(
+    node_label_count=node_label_count,
+    graph_feature_dim=len(graph_features),
+    with_marked_node=True)
   out_meta = dict()
   return tf.make_dataset(gen, "node_set", in_meta, "int32_pair", out_meta)
 

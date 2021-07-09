@@ -9,9 +9,12 @@ def make_graph_batch(
   batch_size = len(encoded_graphs)
 
   e0 = encoded_graphs[0]
-  # Append block_size nodes to each graph (useful for block-wise graph gen):
-  X_append_eye = e0.get("block_size", 0)
   grouped = e0.get("group_idx", None) is not None
+  with_marked_node = e0.get("marked_idx", None) is not None
+  e0gf = e0.get("graph_X", None)
+  with_graph_features = e0gf is not None
+  if with_graph_features:
+    graph_X_dim = len(e0gf)
 
   if ref_keys is not None and len(ref_keys) > 0:  # With refs:
     ref_a_key = ref_keys[0]
@@ -44,7 +47,7 @@ def make_graph_batch(
       ref_offset = 0
       for e in encoded_graphs:
         X_size, X_dim = e["X"].shape
-        X_batch_size += X_size + X_append_eye
+        X_batch_size += X_size
         ref_batch_size += len(e[ref_a_key])
         if discard_empty and X_size == 0:
           batch_size -= 1
@@ -71,16 +74,15 @@ def make_graph_batch(
       if discard_empty and X_size == 0:
         batch_size -= 1
 
-  if X_append_eye > 0:
-    X_batch = np.zeros((X_batch_size, X_dim + X_append_eye), dtype=np.float32)
-    X_eye_mat = np.eye(X_append_eye)
-    discard_empty = False
-  else:
-    X_batch = np.empty((X_batch_size, X_dim), dtype=np.float32)
+  X_batch = np.empty((X_batch_size, X_dim), dtype=np.float32)
   n_batch = np.empty(batch_size, dtype=np.int32)
   graph_idx = np.empty(X_batch_size, dtype=np.int32)
   if grouped:
     group_idx_batch = np.empty(batch_size, dtype=np.int32)
+  if with_marked_node:
+    marked_idx_batch = np.empty(batch_size, dtype=np.int32)
+  if with_graph_features:
+    graph_X_batch = np.empty((batch_size, graph_X_dim), dtype=np.float32)
 
   i = 0
 
@@ -95,15 +97,20 @@ def make_graph_batch(
     next_ref_offset = ref_offset + ref_len(e)
 
     X_batch[X_offset:next_X_offset, :X_dim] = X
-    if X_append_eye > 0:
-      app_X_offset = next_X_offset + X_append_eye
-      X_batch[next_X_offset:app_X_offset, X_dim:] = X_eye_mat
-      next_X_offset = app_X_offset
     graph_idx[X_offset:next_X_offset] = i
-    n_batch[i] = e["n"] + X_append_eye
+    n_batch[i] = e["n"]
 
     if grouped:
       group_idx_batch[i] = e["group_idx"]
+
+    if with_marked_node:
+      marked_idx = e["marked_idx"]
+      if marked_idx != -1:
+        marked_idx += X_offset
+      marked_idx_batch[i] = marked_idx
+
+    if with_graph_features:
+      graph_X_batch[i] = e["graph_X"]
 
     if multirefs:
       for ref_key in ref_keys:
@@ -132,9 +139,12 @@ def make_graph_batch(
 
   if edge_features:
     refs_batch["R"] = R_batch
-
   if grouped:
     refs_batch["group_idx"] = group_idx_batch
+  if with_marked_node:
+    refs_batch["marked_idx"] = marked_idx_batch
+  if with_graph_features:
+    refs_batch["graph_X"] = graph_X_batch
 
   return {
     "X": X_batch,

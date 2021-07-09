@@ -5,6 +5,7 @@ import usgoc.preprocessing.graph.wl1 as wl1_enc
 
 def wl1(meta):
   node_dim, edge_dim = wl1_enc.feature_dims(**meta)
+  graph_dim = meta.get("graph_feature_dim", 0)
 
   res = {
     "X": tf.TensorSpec(shape=[None, node_dim], dtype=tf.float32),
@@ -20,6 +21,10 @@ def wl1(meta):
     res["ref_b"] = res["ref_a"]
   if edge_dim > 0:
     res["R"] = tf.TensorSpec(shape=[None, edge_dim], dtype=tf.float32)
+  if meta.get("with_marked_node", False):
+    res["marked_idx"] = tf.TensorSpec(shape=[None], dtype=tf.int32)
+  if graph_dim > 0:
+    res["graph_X"] = tf.TensorSpec(shape=[None, graph_dim], dtype=tf.float32)
 
   return res
 
@@ -33,12 +38,18 @@ def mwl1(meta):
 
 def node_set(meta):
   node_dim, _ = wl1_enc.feature_dims(**meta)
+  graph_dim = meta.get("graph_feature_dim", 0)
 
   res = {
     "X": tf.TensorSpec(shape=[None, node_dim], dtype=tf.float32),
     "graph_idx": tf.TensorSpec(shape=[None], dtype=tf.int32),
     "n": tf.TensorSpec(shape=[None], dtype=tf.int32)
   }
+
+  if meta.get("with_marked_node", False):
+    res["marked_idx"] = tf.TensorSpec(shape=[None], dtype=tf.int32)
+  if graph_dim > 0:
+    res["graph_X"] = tf.TensorSpec(shape=[None, graph_dim], dtype=tf.float32)
 
   return res
 

@@ -34,11 +34,12 @@ def encode_graph(
   g, node_ordering=None, edge_ordering=None,
   node_feature_dim=0, node_label_count=0,
   edge_feature_dim=0, edge_label_count=0,
+  graph_feature_dim=0,
   ignore_node_features=False, ignore_node_labels=False,
   ignore_edge_features=False, ignore_edge_labels=False,
   node_label_fn=None,
   edge_label_fn=None,
-  with_ref_features=False, multirefs=False):
+  with_ref_features=False, multirefs=False, with_marked_node=False):
 
   if node_feature_dim is None or ignore_node_features:
     node_feature_dim = 0
@@ -91,13 +92,15 @@ def encode_graph(
 
   n_ids = {}
   i = 0
+  marked = -1 if with_marked_node else None
   for node in node_ordering:
     data = g.nodes[node]
     if node_label_count > 0:
       X[i, node_label_fn(data)] = 1
     if node_feature_dim > 0:
       X[i, node_label_count:node_dim] = data["features"]
-
+    if with_marked_node and data.get("marked", False):
+      marked = i
     n_ids[node] = i
     i += 1
 
@@ -137,7 +140,8 @@ def encode_graph(
     ref_a=ref_a,
     ref_b=ref_b,
     ref_sizes=ref_sizes,
-    ref_labels=ref_labels)
+    ref_labels=ref_labels,
+    marked_idx=marked)
 
 def make_wl1_batch(
   encoded_graphs,

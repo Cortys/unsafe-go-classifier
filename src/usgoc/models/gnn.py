@@ -64,12 +64,12 @@ def layer_stack(layer, layer_units=[], layer_args=None, **kwargs):
   return create_stack
 
 def cfg_classifier(
-  name, conv_layer, preproc_layer=None,
+  name, conv_layer=None, preproc_layer=None,
   conv_args={}, preproc_args={},
   in_enc="mwl1"):
 
   def loss_fn(labels, logits):
-    labels = tf.squeeze(labels, -1)
+    labels = tf.reshape(labels, [-1])
     return tf.nn.sparse_softmax_cross_entropy_with_logits(labels, logits)
 
   label1_count = 11
@@ -88,23 +88,40 @@ def cfg_classifier(
     assert node_label_count is not None, "Missing label count."
     in_meta = dict(
       node_label_count=node_label_count,
-      edge_label_count=8)
+      graph_feature_dim=4,
+      edge_label_count=8,
+      with_marked_node=True)
 
     inputs = tf_pre.make_inputs(in_enc, in_meta)
+    marked_idx = tf.reshape(inputs["marked_idx"], [-1])
+    graph_X = inputs["graph_X"]
 
-    if preproc_layer is not None:
-      pre = preproc_layer(**preproc_args)(inputs)
+    if conv_layer is None:
+      marked_X = tf.gather(inputs["X"], marked_idx, axis=0)
+      combined_X = tf.concat([graph_X, marked_X], 1)
     else:
-      pre = inputs
+      batch_size = tf.shape(marked_idx)[0]
+      padded_X = tf.pad(inputs["X"], tf.constant([[0, 0], [1, 0]]))
+      padded_X = tf.tensor_scatter_nd_update(
+        padded_X,
+        tf.stack([marked_idx, tf.zeros(batch_size, dtype=tf.int32)], axis=1),
+        tf.ones(batch_size))
+      padded_input = {**inputs, "X": padded_X}
 
-    h = layer_stack(
-      conv_layer, conv_layer_units, conv_layer_args,
-      activation=conv_activation, inner_activation=conv_inner_activation,
-      directed=conv_directed, **conv_args)(pre)
-    pooled = pool(h, pooling)
+      if preproc_layer is not None:
+        padded_input = preproc_layer(**preproc_args)(padded_input)
+
+      h = layer_stack(
+        conv_layer, conv_layer_units, conv_layer_args,
+        activation=conv_activation, inner_activation=conv_inner_activation,
+        directed=conv_directed, **conv_args)(padded_input)
+      X, pooled_X = pool(h, pooling, preserve_full_embedding=True)
+      marked_X = tf.gather(X, marked_idx, axis=0)
+      combined_X = tf.concat([graph_X, marked_X, pooled_X], 1)
+
     emb = layer_stack(
       keras.layers.Dense, fc_layer_units, fc_layer_args,
-      activation=fc_activation)(pooled)
+      activation=fc_activation)(combined_X)
 
     out1 = keras.layers.Dense(
       units=label1_count, activation=out_activation,
@@ -132,6 +149,7 @@ def cfg_classifier(
 
 
 # Set models:
+MLP = cfg_classifier("MLP", in_enc="node_set")
 DeepSets = cfg_classifier(
   "DeepSets", wl1.DeepSetsLayer,
   in_enc="node_set")
@@ -141,7 +159,10 @@ GCN = cfg_classifier(
   "GCN", wl1.GCNLayer, wl1.GCNPreprocessLayer,
   in_enc="wl1")
 GIN = cfg_classifier("GIN", wl1.GINLayer, in_enc="wl1")
-GGNN = cfg_classifier("GGNN", wl1.GGNNLayer, in_enc="wl1")
+GGNN = cfg_classifier(
+  "GGNN", wl1.GGNNLayer,
+  conv_args=dict(use_attention=True),
+  in_enc="wl1")
 
 # Multirelational models:
 RGCN = cfg_classifier(
