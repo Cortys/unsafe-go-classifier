@@ -36,7 +36,7 @@ fold = 0
 
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
-    ds, model.in_enc, splits, fold, limit_id="v127_d127_f127",
+    ds, model.in_enc, splits, fold, limit_id="v127_d127_f127_p127",
     batch_size_limit=200)
   train_ds = train_ds.cache()
   val_ds = val_ds.cache()
@@ -96,6 +96,9 @@ def draw_confusion(pred_labels, target_labels, normalize=True):
   m2 = mm.sparse_multi_confusion_matrix(
     tf.constant(target_labels[1], dtype=tf.int32),
     tf.constant(pred_labels[1], dtype=tf.int32)).numpy()
+  a1 = np.sum(np.diag(m1)) / np.sum(m1)
+  a2 = np.sum(np.diag(m2)) / np.sum(m2)
+  print("L1-Acc:", a1, "L2-Acc:", a2)
   if normalize:
     m1 = np.around(m1 / np.sum(m1, axis=1, keepdims=True), 2) * 100
     m2 = np.around(m2 / np.sum(m2, axis=1, keepdims=True), 2) * 100
@@ -190,13 +193,12 @@ pred_matches2 = (s_pred_labels2 == target_labels).numpy()
 problem_js = np.where(~(pred_matches[:, 0] | pred_matches[:, 1]))[0]
 problem_js2 = np.where(~(pred_matches2[:, 0] | pred_matches2[:, 1]))[0]
 set(problem_js) & set(problem_js2)
-len(set(problem_js2).difference(problem_js))
+set(problem_js2) - set(problem_js)
 len(problem_js2)
 
 # j = problem_js[4]
-j = 138
-i = None
-i = 84
+j = 32; i = None
+# i = 84
 i = debug_graph(i=i, test_j=j, draw=True)
 i
 preds_to_dicts(s_pred, j)

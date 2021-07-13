@@ -15,6 +15,7 @@ node_label_types = dict(
   builtin_function="fb",
   binary_op="ob",
   unary_op="ou",
+  package="p"
 )
 no_ellipsis_types = {
   "type", "blocktype", "vartype", "builtin_function",
@@ -76,6 +77,11 @@ def type_to_labels(types, tid):
     res.add(("datatype_flag", ct["type"]))
   return res
 
+def pkg_to_labels(pkgs, pid):
+  if pid == -1:
+    return set()
+  return {("package", pkgs[pid]["path"])}
+
 def func_to_labels(funcs, pkgs, fid):
   if fid == -1:
     return set()
@@ -85,9 +91,12 @@ def func_to_labels(funcs, pkgs, fid):
 
   func = funcs[fid]
   pid = func["package"]
-  pname = pkgs[pid]["path"] + "." if pid >= 0 else ""
-  fname = pname + func["name"]
+  if pid >= 0:
+    pkg_path = pkgs[pid]["path"]
+    fname = pkg_path + "." + func["name"]
+    return {("function", fname), ("package", pkg_path)}
 
+  fname = func["name"]
   return {("function", fname)}
 
 def _walk_var_selector_chain(state, s):
@@ -258,6 +267,7 @@ def cfg_to_graph(cfg, mark_line=None):
   var_ids = dict()
   t2l = utils.memoize(fy.partial(type_to_labels, types))
   f2l = utils.memoize(fy.partial(func_to_labels, funcs, pkgs))
+  p2l = utils.memoize(fy.partial(pkg_to_labels, pkgs))
   mark_block = None
   mark_block_lines = None
 
@@ -299,6 +309,7 @@ def cfg_to_graph(cfg, mark_line=None):
       labels.add(("vartype", "receiver"))
     elif i in results:
       labels.add(("vartype", "result"))
+    labels |= p2l(v["package"])
     labels |= t2l(v["type"])
     g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
     var_ids[i] = n

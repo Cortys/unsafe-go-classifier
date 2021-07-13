@@ -20,38 +20,44 @@ no_default_label_subtype = {
   "type", "blocktype", "vartype"
 }
 node_label_type_dim_count = {
-  "v0_d0_f0": dict(
+  "v0_d0_f0_p0": dict(
     varname=0,
     datatype=0,
-    function=0
+    function=0,
+    package=0
   ),
-  "v0_d63_f63": dict(
+  "v0_d63_f63_p63": dict(
     varname=0,
     datatype=63,
-    function=63
+    function=63,
+    package=63
   ),
-  "v15_d63_f63": dict(
+  "v15_d63_f63_p63": dict(
     varname=15,
     datatype=63,
-    function=63
+    function=63,
+    package=63
   ),
-  "v63_d63_f63": dict(
+  "v63_d63_f63_p63": dict(
     varname=63,
     datatype=63,
-    function=63
+    function=63,
+    package=63
   ),
-  "v127_d127_f127": dict(
+  "v127_d127_f127_p127": dict(
     varname=127,
     datatype=127,
-    function=127
+    function=127,
+    package=127
   ),
-  "v255_d255_f255": dict(
+  "v255_d255_f255_p255": dict(
     varname=255,
     datatype=255,
-    function=255
+    function=255,
+    package=255
   )
 }
-default_limit_id = "v15_d63_f63"
+default_limit_id = "v15_d63_f63_p63"
 graph_features = dict()
 graph_feature_eye = np.eye(len(cfg_utils.cfg_types), dtype=np.float32)
 for i, t in enumerate(cfg_utils.cfg_types):
