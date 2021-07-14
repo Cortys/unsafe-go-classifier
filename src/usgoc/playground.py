@@ -1,4 +1,5 @@
 import tensorflow as tf
+import keras_tuner as kt
 import numpy as np
 import funcy as fy
 import matplotlib
@@ -7,6 +8,7 @@ import matplotlib.pyplot as plt
 # import usgoc.preprocessing.graph.wl1 as wl1
 import usgoc.datasets.unsafe_go as dataset
 import usgoc.models.gnn as gnn
+import usgoc.evaluation.models as em
 import usgoc.utils as utils
 import usgoc.metrics.multi as mm
 
@@ -25,12 +27,15 @@ with utils.cache_env(use_cache=True):
   labels2_inv = fy.flip(labels2)
 
 # model = gnn.MLP
-model1 = gnn.DeepSets
+# model1 = gnn.DeepSets
 # model = gnn.GCN
 # model = gnn.GIN
-model = gnn.GGNN
+# model = gnn.GGNN
 # model = gnn.RGCN
 # model = gnn.RGIN
+
+model1 = em.DeepSetsBuilder
+model = em.GGNNBuilder
 
 fold = 0
 
@@ -43,21 +48,47 @@ with utils.cache_env(use_cache=True):
   train_slice, val_slice, test_slice = dataset.get_dataset_slices(
     ds, splits, fold)
 
-def experiment(model):
-  m = model(
-    node_label_count=dims["node_label_count"],
-    conv_directed=True,
-    conv_layer_units=[64] * 5, fc_layer_units=[64] * 5,
-    conv_activation="relu",
-    conv_inner_activation="relu",
-    fc_activation="relu",
-    out_activation=None,
-    pooling="sum", learning_rate=0.001)
+model1 = model1(**dims)
+model = model(**dims)
 
-  m.fit(train_ds, validation_data=val_ds, verbose=2, epochs=500)
-  res = m.evaluate(test_ds, return_dict=True)
-  print(res)
-  return m
+def experiment(model):
+  if isinstance(model, kt.HyperModel):
+    tuner = kt.Hyperband(
+      model,
+      objective="val_accuracy",
+      max_epochs=100, factor=3,
+      hyperband_iterations=3,
+      directory="/app/evaluations",
+      project_name=f"usgoc_{model.name}")
+    stop_early = tf.keras.callbacks.EarlyStopping(
+      monitor="val_loss", patience=30)
+    tuner.search(
+      train_ds, validation_data=val_ds, verbose=2, epochs=500,
+      callbacks=[stop_early])
+    best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
+    print("Best HPs:", best_hps)
+    m = tuner.hypermodel.build(best_hps)
+    patient_stop_early = tf.keras.callbacks.EarlyStopping(
+      monitor="val_loss", patience=100, restore_best_weights=True)
+    m.fit(
+      train_ds, validation_data=val_ds, verbose=2, epochs=500,
+      callbacks=[patient_stop_early])
+    return m
+  else:
+    m = model(
+      node_label_count=dims["node_label_count"],
+      conv_directed=True,
+      conv_layer_units=[64] * 5, fc_layer_units=[64] * 5,
+      conv_activation="relu",
+      conv_inner_activation="relu",
+      fc_activation="relu",
+      out_activation=None,
+      pooling="sum", learning_rate=0.001)
+
+    m.fit(train_ds, validation_data=val_ds, verbose=2, epochs=500)
+    res = m.evaluate(test_ds, return_dict=True)
+    print(res)
+    return m
 
 
 m = experiment(model1)

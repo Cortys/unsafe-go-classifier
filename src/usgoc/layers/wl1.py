@@ -335,7 +335,9 @@ class GGNNLayer(keras.layers.Layer):
     self.inner_activation = keras.activations.get(inner_activation)
 
     self.gru = keras.layers.GRUCell(
-      units=units, use_bias=use_bias, activation=self.activation)
+      units=units, use_bias=use_bias,
+      activation=self.activation,
+      recurrent_activation=self.recurrent_activation)
     self.msg_net = keras.Sequential([
       keras.layers.Dense(
         units=units, use_bias=use_bias, activation=self.inner_activation)

@@ -46,6 +46,18 @@ def unwrap_method(f):
 def tolerant_method(f):
   return tolerant(unwrap_method(f))
 
+def select_prefixed_keys(map, prefix, include_others=False, target=None):
+  if target is None:
+    target = dict()
+
+  for k, v in map.items():
+    if k.startswith(prefix):
+      target[k[len(prefix):]] = v
+    elif include_others:
+      target[k] = v
+
+  return target
+
 class NumpyEncoder(json.JSONEncoder):
   def default(self, obj):
     if isinstance(obj, np.ndarray):

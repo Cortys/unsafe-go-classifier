@@ -65,7 +65,7 @@ def layer_stack(layer, layer_units=[], layer_args=None, **kwargs):
 
 def cfg_classifier(
   name, conv_layer=None, preproc_layer=None,
-  conv_args={}, preproc_args={},
+  conv_args={},
   in_enc="mwl1"):
 
   def loss_fn(labels, logits):
@@ -77,15 +77,17 @@ def cfg_classifier(
 
   def instanciate(
     node_label_count=None,
-    conv_layer_units=[], conv_layer_args=None,
-    conv_activation="sigmoid", conv_inner_activation="sigmoid",
-    conv_directed=True,
     fc_layer_units=[], fc_layer_args=None,
     fc_activation="sigmoid",
     out_activation=None,
     pooling="mean",
-    learning_rate=0.001):
+    learning_rate=0.001,
+    **kwargs):
     assert node_label_count is not None, "Missing label count."
+
+    conv_args_ext = utils.select_prefixed_keys(
+      kwargs, "conv_", True, conv_args.copy())
+
     in_meta = dict(
       node_label_count=node_label_count,
       graph_feature_dim=4,
@@ -109,12 +111,11 @@ def cfg_classifier(
       padded_input = {**inputs, "X": padded_X}
 
       if preproc_layer is not None:
-        padded_input = preproc_layer(**preproc_args)(padded_input)
+        padded_input = utils.tolerant(preproc_layer)(
+          **conv_args_ext)(padded_input)
 
       h = layer_stack(
-        conv_layer, conv_layer_units, conv_layer_args,
-        activation=conv_activation, inner_activation=conv_inner_activation,
-        directed=conv_directed, **conv_args)(padded_input)
+        conv_layer, **conv_args_ext)(padded_input)
       X, pooled_X = pool(h, pooling, preserve_full_embedding=True)
       marked_X = tf.gather(X, marked_idx, axis=0)
       combined_X = tf.concat([graph_X, marked_X, pooled_X], 1)
@@ -145,6 +146,7 @@ def cfg_classifier(
     return m
 
   instanciate.in_enc = in_enc
+  instanciate.name = name
   return instanciate
 
 
@@ -167,8 +169,7 @@ GGNN = cfg_classifier(
 # Multirelational models:
 RGCN = cfg_classifier(
   "RGCN", wl1.RGNNLayer, wl1.RGCNPreprocessLayer,
-  conv_args=dict(reverse=True),
-  preproc_args=dict(reverse=True))
+  conv_args=dict(reverse=True))
 RGIN = cfg_classifier(
   "RGIN", wl1.RGNNLayer,
   conv_args=dict(
