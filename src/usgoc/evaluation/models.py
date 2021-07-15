@@ -1,4 +1,6 @@
+import tensorflow as tf
 import keras_tuner as kt
+
 import usgoc.models.gnn as gnn
 
 def create_model_builder(
@@ -12,10 +14,10 @@ def create_model_builder(
 
     def build(self, hp: kt.HyperParameters):
       conv_activation = hp.Choice(
-        "conv_activation", ["relu", "sigmoid", "tanh"])
+        "conv_activation", ["relu", "sigmoid", "tanh", "elu"])
       if with_inner_activation:
         conv_inner_activation = hp.Choice(
-          "conv_inner_activation", ["relu", "sigmoid", "tanh"])
+          "conv_inner_activation", ["relu", "sigmoid", "tanh", "elu"])
       else:
         conv_inner_activation = conv_activation
 
@@ -34,14 +36,40 @@ def create_model_builder(
         conv_activation=conv_activation,
         conv_inner_activation=conv_inner_activation,
         fc_activation=hp.Choice(
-          "fc_activation", ["relu", "sigmoid", "tanh"]),
+          "fc_activation", ["relu", "sigmoid", "tanh", "elu"]),
         out_activation=None,
         pooling=hp.Choice(
-          "pooling", ["sum", "mean", "softmax", "max"]),
-        learning_rate=hp.Choice("learning_rate", [1e-2, 1e-3, 1e-4]),
+          "pooling", ["sum", "mean", "softmax", "max", "min"]),
+        learning_rate=hp.Choice("learning_rate", [1e-3, 1e-4]),
         **hp_args)
 
   return HyperModel
+
+def tune_hyperparams(
+  hypermodel: kt.HyperModel,
+  train_ds, val_ds=None,
+  max_epochs=200, patience=30,
+  hyperband_iterations=3,
+  overwrite=False, ds_id="") -> kt.Hyperband:
+  project_name = f"{hypermodel.name}_usgo_{ds_id}"
+  tuner = kt.Hyperband(
+    hypermodel,
+    objective="val_accuracy",
+    max_epochs=max_epochs, factor=3,
+    hyperband_iterations=hyperband_iterations,
+    directory="/app/evaluations",
+    project_name=project_name,
+    overwrite=overwrite)
+  stop_early = tf.keras.callbacks.EarlyStopping(
+    monitor="val_loss", patience=patience)
+  tuner.search(
+    train_ds, validation_data=val_ds, verbose=2,
+    callbacks=[stop_early])
+  return tuner
+
+def get_best_model(tuner: kt.Tuner):
+    best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
+    return tuner.hypermodel.build(best_hps), best_hps.get_config()
 
 
 MLPBuilder = create_model_builder(gnn.MLP)

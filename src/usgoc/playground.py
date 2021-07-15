@@ -11,6 +11,7 @@ import usgoc.models.gnn as gnn
 import usgoc.evaluation.models as em
 import usgoc.utils as utils
 import usgoc.metrics.multi as mm
+import usgoc.evaluation.evaluate as ee
 
 with utils.cache_env(use_cache=True):
   files = dataset.load_filenames()
@@ -38,10 +39,11 @@ model1 = em.DeepSetsBuilder
 model = em.GGNNBuilder
 
 fold = 0
+limit_id = "v127_d127_f127_p127"
 
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
-    ds, model.in_enc, splits, fold, limit_id="v127_d127_f127_p127",
+    ds, model.in_enc, splits, fold, limit_id=limit_id,
     batch_size_limit=200)
   train_ds = train_ds.cache()
   val_ds = val_ds.cache()
@@ -56,7 +58,7 @@ def experiment(model):
     tuner = kt.Hyperband(
       model,
       objective="val_accuracy",
-      max_epochs=100, factor=3,
+      max_epochs=200, factor=3,
       hyperband_iterations=3,
       directory="/app/evaluations",
       project_name=f"usgoc_{model.name}")
@@ -71,8 +73,10 @@ def experiment(model):
     patient_stop_early = tf.keras.callbacks.EarlyStopping(
       monitor="val_loss", patience=100, restore_best_weights=True)
     m.fit(
-      train_ds, validation_data=val_ds, verbose=2, epochs=500,
+      train_ds, validation_data=val_ds, verbose=2, epochs=1000,
       callbacks=[patient_stop_early])
+    res = m.evaluate(test_ds, return_dict=True)
+    print(res)
     return m
   else:
     m = model(
@@ -91,8 +95,10 @@ def experiment(model):
     return m
 
 
-m = experiment(model1)
-m2 = experiment(model)
+ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id)
+
+# m = experiment(model1)
+# m2 = experiment(model)
 
 def debug_graph(i=None, file=None, test_j=None, val_j=None, draw=True):
   if i is None:
@@ -206,32 +212,32 @@ def draw_confusion(pred_labels, target_labels, normalize=True):
 
 # NOTE: On first, third and last two examples serialization was wrongly predicted by GNN (instead of generics/efficiency). Why? DeepSet correctly detects generic, but not efficiency
 
-train_pred = m.predict(train_ds)
-train_pred2 = m2.predict(train_ds)
-s_pred = m.predict(test_ds)
-s_pred2 = m2.predict(test_ds)
-s_pred_labels = tf.cast(tf.stack([tf.argmax(s_pred[0], -1), tf.argmax(s_pred[1], -1)], 1), tf.int32)
-s_pred_labels2 = tf.cast(tf.stack([tf.argmax(s_pred2[0], -1), tf.argmax(s_pred2[1], -1)], 1), tf.int32)
-target_labels = tf.stack(list(test_ds)[0][1], 1)
-s_pred
-draw_confusion(train_pred, train_slice[1], True)
-draw_confusion(train_pred2, train_slice[1], True)
-draw_confusion(s_pred, test_slice[1], True)
-draw_confusion(s_pred2, test_slice[1], True)
-
-pred_matches = (s_pred_labels == target_labels).numpy()
-pred_matches2 = (s_pred_labels2 == target_labels).numpy()
-problem_js = np.where(~(pred_matches[:, 0] | pred_matches[:, 1]))[0]
-problem_js2 = np.where(~(pred_matches2[:, 0] | pred_matches2[:, 1]))[0]
-set(problem_js) & set(problem_js2)
-set(problem_js2) - set(problem_js)
-len(problem_js2)
-
-# j = problem_js[4]
-j = 32; i = None
-# i = 84
-i = debug_graph(i=i, test_j=j, draw=True)
-i
-preds_to_dicts(s_pred, j)
-preds_to_dicts(s_pred2, j)
-s_pred_labels2[j]
+# train_pred = m.predict(train_ds)
+# train_pred2 = m2.predict(train_ds)
+# s_pred = m.predict(test_ds)
+# s_pred2 = m2.predict(test_ds)
+# s_pred_labels = tf.cast(tf.stack([tf.argmax(s_pred[0], -1), tf.argmax(s_pred[1], -1)], 1), tf.int32)
+# s_pred_labels2 = tf.cast(tf.stack([tf.argmax(s_pred2[0], -1), tf.argmax(s_pred2[1], -1)], 1), tf.int32)
+# target_labels = tf.stack(list(test_ds)[0][1], 1)
+# s_pred
+# draw_confusion(train_pred, train_slice[1], True)
+# draw_confusion(train_pred2, train_slice[1], True)
+# draw_confusion(s_pred, test_slice[1], True)
+# draw_confusion(s_pred2, test_slice[1], True)
+#
+# pred_matches = (s_pred_labels == target_labels).numpy()
+# pred_matches2 = (s_pred_labels2 == target_labels).numpy()
+# problem_js = np.where(~(pred_matches[:, 0] | pred_matches[:, 1]))[0]
+# problem_js2 = np.where(~(pred_matches2[:, 0] | pred_matches2[:, 1]))[0]
+# set(problem_js) & set(problem_js2)
+# set(problem_js2) - set(problem_js)
+# len(problem_js2)
+#
+# # j = problem_js[4]
+# j = 32; i = None
+# # i = 84
+# i = debug_graph(i=i, test_j=j, draw=True)
+# i
+# preds_to_dicts(s_pred, j)
+# preds_to_dicts(s_pred2, j)
+# s_pred_labels2[j]

@@ -57,7 +57,7 @@ node_label_type_dim_count = {
     package=255
   )
 }
-default_limit_id = "v15_d63_f63_p63"
+default_limit_id = "v127_d127_f127_p127"
 graph_features = dict()
 graph_feature_eye = np.eye(len(cfg_utils.cfg_types), dtype=np.float32)
 for i, t in enumerate(cfg_utils.cfg_types):
