@@ -60,4 +60,5 @@ docker run --gpus all --name $CONTAINER_NAME \
 	-e "JUPYTER_TOKEN=$JUPYTER_TOKEN" \
 	-e TF_FORCE_GPU_ALLOW_GROWTH=$TF_FORCE_GPU_ALLOW_GROWTH \
 	-e HOST_PWD=$(pwd) \
+	-e "USER=$USER" \
 	usgoc/usgoc

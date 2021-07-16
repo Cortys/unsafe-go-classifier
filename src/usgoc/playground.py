@@ -4,6 +4,7 @@ import numpy as np
 import funcy as fy
 import matplotlib
 import matplotlib.pyplot as plt
+import mlflow
 
 # import usgoc.preprocessing.graph.wl1 as wl1
 import usgoc.datasets.unsafe_go as dataset
@@ -95,7 +96,8 @@ def experiment(model):
     return m
 
 
-ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id)
+ms = ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id, start_repeat=1)
+ms[0].evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
 # m2 = experiment(model)
