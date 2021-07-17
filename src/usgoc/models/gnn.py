@@ -68,10 +68,6 @@ def cfg_classifier(
   conv_args={},
   in_enc="mwl1"):
 
-  def loss_fn(labels, logits):
-    labels = tf.reshape(labels, [-1])
-    return tf.nn.sparse_softmax_cross_entropy_with_logits(labels, logits)
-
   label1_count = 11
   label2_count = 11
 
@@ -135,7 +131,7 @@ def cfg_classifier(
     inputs = tf.nest.flatten(inputs)
     m = keras.Model(inputs=inputs, outputs=outputs, name=name)
     optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
-    loss = dict(label1=loss_fn, label2=loss_fn)
+    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
     acc_group = mm.SparseMultiAccuracy.create_group()
     metrics = dict(
       label1=[

@@ -49,9 +49,9 @@ def tune_hyperparams(
   hypermodel: kt.HyperModel,
   train_ds, val_ds=None,
   max_epochs=200, patience=30,
-  hyperband_iterations=3,
+  hyperband_iterations=1,
   overwrite=False, ds_id="") -> kt.Hyperband:
-  project_name = f"{hypermodel.name}_usgo_{ds_id}"
+  project_name = f"{ds_id}/{hypermodel.name}"
   tuner = kt.Hyperband(
     hypermodel,
     objective="val_accuracy",

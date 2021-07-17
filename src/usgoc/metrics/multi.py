@@ -1,21 +1,44 @@
+import uuid
 import tensorflow as tf
 from tensorflow import keras
 import tensorflow_addons as tfa
 
+_groups = dict()
+
 class SparseMultiAccuracy(keras.metrics.Metric):
-  def __init__(self, name="label", dtype=None, group=None):
+  def __init__(self, name="label", label=None, dtype=None, group=None):
     assert group is not None, "Missing accuracy group."
+
+    if label is not None:
+      name = label
+
     super().__init__(name, dtype)
-    assert name not in group["labels"]
+    group = SparseMultiAccuracy.create_group(*group)
+    self._group = group
+    group = self.get_group()
     group["labels"].add(name)
     group["head"] = name
-    self._group = group
     self._label = name
     self._metric = keras.metrics.Mean(name=f"{name}_accuracy")
 
+  def get_config(self):
+    return dict(
+      **super().get_config(),
+      group=self._group,
+      label=self._label)
+
   @staticmethod
-  def create_group(name="accuracy"):
+  def create_group(name="accuracy", id=None):
+    if id is None:
+      id = uuid.uuid4().hex
+    group_key = (name, id)
+
+    if group_key in _groups:
+      return group_key
+
     group = dict(
+      id=id,
+      name=name,
       head=None,
       labels=set(),
       marked=set(),
@@ -23,10 +46,14 @@ class SparseMultiAccuracy(keras.metrics.Metric):
       comb_acc=None,
       metric=keras.metrics.Mean(name=name)
     )
-    return group
+    _groups[group_key] = group
+    return group_key
+
+  def get_group(self):
+    return _groups[self._group]
 
   def reset_state(self):
-    group = self._group
+    group = self.get_group()
     group["reset"].add(self.name)
     self._metric.reset_state()
 
@@ -37,7 +64,7 @@ class SparseMultiAccuracy(keras.metrics.Metric):
       group["metric"].reset_state()
 
   def update_state(self, y_true, y_pred, sample_weight=None):
-    group = self._group
+    group = self.get_group()
     assert self.name not in group["marked"], "Illegal double mark."
     assert len(group["reset"]) == 0, "Forbidden partial reset."
 
@@ -57,7 +84,7 @@ class SparseMultiAccuracy(keras.metrics.Metric):
       group["comb_acc"] = None
 
   def result(self):
-    group = self._group
+    group = self.get_group()
     assert len(group["marked"]) == 0, "Forbidden partial mark."
     assert len(group["reset"]) == 0, "Forbidden partial reset."
 

@@ -29,14 +29,14 @@ with utils.cache_env(use_cache=True):
   labels2_inv = fy.flip(labels2)
 
 # model = gnn.MLP
-# model1 = gnn.DeepSets
+model1 = gnn.DeepSets
 # model = gnn.GCN
 # model = gnn.GIN
 # model = gnn.GGNN
 # model = gnn.RGCN
 # model = gnn.RGIN
 
-model1 = em.DeepSetsBuilder
+# model1 = em.DeepSetsBuilder
 model = em.GGNNBuilder
 
 fold = 0
@@ -51,8 +51,8 @@ with utils.cache_env(use_cache=True):
   train_slice, val_slice, test_slice = dataset.get_dataset_slices(
     ds, splits, fold)
 
-model1 = model1(**dims)
-model = model(**dims)
+# model1 = model1(**dims)
+# model = model(**dims)
 
 def experiment(model):
   if isinstance(model, kt.HyperModel):
@@ -60,9 +60,9 @@ def experiment(model):
       model,
       objective="val_accuracy",
       max_epochs=200, factor=3,
-      hyperband_iterations=3,
+      hyperband_iterations=1,
       directory="/app/evaluations",
-      project_name=f"usgoc_{model.name}")
+      project_name=f"playground_{model.name}")
     stop_early = tf.keras.callbacks.EarlyStopping(
       monitor="val_loss", patience=30)
     tuner.search(
@@ -90,14 +90,18 @@ def experiment(model):
       out_activation=None,
       pooling="sum", learning_rate=0.001)
 
-    m.fit(train_ds, validation_data=val_ds, verbose=2, epochs=500)
+    m.fit(train_ds, validation_data=val_ds, verbose=2, epochs=3)
     res = m.evaluate(test_ds, return_dict=True)
     print(res)
     return m
 
+# mm._groups = dict()
+# m = experiment(model1)
+# m.save("/app/logs/test")
+# m2 = tf.keras.models.load_model("/app/logs/test", custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
 
-ms = ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id, start_repeat=1)
-ms[0].evaluate(test_ds, return_dict=True)
+m = ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id, repeat=0)
+m.evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
 # m2 = experiment(model)
