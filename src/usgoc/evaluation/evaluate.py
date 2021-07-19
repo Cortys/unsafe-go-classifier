@@ -1,11 +1,18 @@
+from typing import List
+import shutil
 import tensorflow as tf
 import mlflow
 
+import usgoc.utils as utils
 import usgoc.evaluation.models as em
 import usgoc.evaluation.datasets as ed
 import usgoc.metrics.multi as mm
 
-mlflow.set_tracking_uri("file:/app/mlruns")
+# mlflow.set_tracking_uri("http://127.0.0.1:1234")
+mlflow.set_tracking_uri(f"file:{utils.PROJECT_ROOT}/mlruns")
+
+FOLDS_MAX = 10
+REPEATS_MAX = 3
 
 def find_outer_run(limit_id, model_name):
   eid = mlflow.tracking.fluent._get_experiment_id()
@@ -18,41 +25,57 @@ def find_outer_run(limit_id, model_name):
 
   return runs[0]
 
-def find_inner_run(fold, repeat):
+def find_inner_runs(fold=None, repeat=None) -> List[mlflow.entities.Run]:
   eid = mlflow.tracking.fluent._get_experiment_id()
   parent_id = mlflow.active_run().info.run_id
-  query = " and ".join([
-    f"tags.mlflow.parentRunId = '{parent_id}'",
-    f"tags.fold = '{fold}'",
-    f"tags.repeat = '{repeat}'"])
+  max_results = 1
+  conditions = [
+    f"tags.mlflow.parentRunId = '{parent_id}'"]
+  if fold is not None:
+    conditions.append(f"tags.fold = '{fold}'")
+  else:
+    max_results = FOLDS_MAX
+  if repeat is not None:
+    conditions.append(f"tags.repeat = '{repeat}'")
+  else:
+    max_results *= REPEATS_MAX
+  query = " and ".join(conditions)
   runs = mlflow.search_runs(
-    [eid], query, max_results=1, output_format="list")
+    [eid], query, max_results=max_results, output_format="list")
+
+  return runs
+
+def find_inner_run(fold, repeat):
+  runs = find_inner_runs(fold, repeat)
   if len(runs) == 0:
     return None
-
   return runs[0]
 
 def evaluate_single(
   tuner, train_ds, val_ds, test_ds,
   model_name, repeat=0,
   fold=0, epochs=1000, patience=100, limit_id=None,
-  ds_id=""):
-    log_dir_base = f"/app/logs/{ds_id}/{model_name}"
+  ds_id="", override=False, tensorboard_embeddings=False):
+    if repeat < 0 or fold < 0:
+      return None
+
+    log_dir_base = f"{utils.PROJECT_ROOT}/logs/{ds_id}/{model_name}"
     mlflow.tensorflow.autolog(log_models=False)
     run = find_inner_run(fold, repeat)
     if run is not None:
-      if run.info.status == "FINISHED":
-        run_id = run.info.run_id
+      run_id = run.info.run_id
+      if run.info.status == "FINISHED" and not override:
         print(
           f"Skipping {ds_id}_repeat{repeat}, {model_name}.",
           f"Existing run: {run_id}.")
         return mlflow.keras.load_model(
           f"runs:/{run_id}/models",
           custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
-    else:
-      run_id = None
+      else:
+        mlflow.delete_run(run_id)
+        shutil.rmtree(f"{log_dir_base}/{run_id}", ignore_errors=True)
+
     with mlflow.start_run(
-      run_id=run_id,
       run_name=f"fold{fold}_repeat{repeat}",
       nested=True) as run:
       model, hp_dict = em.get_best_model(tuner)
@@ -62,19 +85,24 @@ def evaluate_single(
       run_id = run.info.run_id
       log_dir = f"{log_dir_base}/{run_id}"
 
-      tb = tf.keras.callbacks.TensorBoard(
-        log_dir=log_dir,
-        histogram_freq=10,
-        embeddings_freq=10,
-        write_graph=True,
-        update_freq="batch")
       stop_early = tf.keras.callbacks.EarlyStopping(
         monitor="val_loss", patience=patience,
         restore_best_weights=True)
+      callbacks = [stop_early]
+
+      if tensorboard_embeddings:
+        tb = tf.keras.callbacks.TensorBoard(
+          log_dir=log_dir,
+          histogram_freq=10,
+          embeddings_freq=10,
+          write_graph=True,
+          update_freq="batch")
+        callbacks.append(tb)
+
       model.fit(
         train_ds,
         validation_data=val_ds,
-        callbacks=[tb, stop_early],
+        callbacks=callbacks,
         verbose=2, epochs=epochs)
       mlflow.keras.log_model(model, "models")
 
@@ -84,8 +112,8 @@ def evaluate_single(
       return model
 
 def evaluate_fold(
-  hypermodel_builder, fold=0, repeats=3, start_repeat=0,
-  limit_id=None, ds_name="", **kwargs):
+  hypermodel_builder, fold=0, repeats=REPEATS_MAX,
+  start_repeat=0, limit_id=None, ds_name="", **kwargs):
 
   ds_id = f"{ds_name}/{limit_id}_fold{fold}"
   dims, train_ds, val_ds, test_ds = ed.get_encoded(
@@ -109,9 +137,15 @@ def evaluate_fold(
       fold=fold, limit_id=limit_id, ds_id=ds_id, **kwargs)
     for i in range(start_repeat, repeats)]
 
+def summarize_inner_runs():
+  inner_runs = find_inner_runs()
+
+  for run in inner_runs:
+    print(run)
+
 def evaluate_limit_id(
-  hypermodel_builder, limit_id=None,
-  folds=10, start_fold=0, ds_name=None, **kwargs):
+  hypermodel_builder, limit_id=None, folds=FOLDS_MAX,
+  start_fold=0, ds_name=None, **kwargs):
   run = find_outer_run(limit_id, hypermodel_builder.name)
   if run is not None:
     run_id = run.info.run_id
@@ -126,15 +160,19 @@ def evaluate_limit_id(
     mlflow.set_tag("limit_id", limit_id)
 
     if "fold" in kwargs:
-      return evaluate_fold(
+      res = evaluate_fold(
         hypermodel_builder, limit_id=limit_id, ds_name=ds_name,
         **kwargs)
+    else:
+      res = [
+        evaluate_fold(
+          hypermodel_builder, fold=i, limit_id=limit_id,
+          ds_name=ds_name, **kwargs)
+        for i in range(start_fold, folds)]
 
-    return [
-      evaluate_fold(
-        hypermodel_builder, fold=i, limit_id=limit_id,
-        ds_name=ds_name, **kwargs)
-      for i in range(start_fold, folds)]
+    summarize_inner_runs()
+
+    return res
 
 def evaluate(
   hypermodel_builder,

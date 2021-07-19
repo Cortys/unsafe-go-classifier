@@ -61,7 +61,7 @@ def experiment(model):
       objective="val_accuracy",
       max_epochs=200, factor=3,
       hyperband_iterations=1,
-      directory="/app/evaluations",
+      directory=f"{utils.PROJECT_ROOT}/evaluations",
       project_name=f"playground_{model.name}")
     stop_early = tf.keras.callbacks.EarlyStopping(
       monitor="val_loss", patience=30)
@@ -97,10 +97,10 @@ def experiment(model):
 
 # mm._groups = dict()
 # m = experiment(model1)
-# m.save("/app/logs/test")
-# m2 = tf.keras.models.load_model("/app/logs/test", custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
+# m.save(f"{utils.PROJECT_ROOT}/logs/test")
+# m2 = tf.keras.models.load_model(f"{utils.PROJECT_ROOT}/logs/test", custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
 
-m = ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id, repeat=0)
+m = ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id, repeat=0, override=True)
 m.evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)

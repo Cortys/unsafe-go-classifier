@@ -57,8 +57,10 @@ docker run --gpus all --name $CONTAINER_NAME \
 	-v $(pwd):/app \
  	$ARGS \
 	-u $(id -u):$(id -g) \
+	--add-host=host.docker.internal:host-gateway \
 	-e "JUPYTER_TOKEN=$JUPYTER_TOKEN" \
 	-e TF_FORCE_GPU_ALLOW_GROWTH=$TF_FORCE_GPU_ALLOW_GROWTH \
 	-e HOST_PWD=$(pwd) \
 	-e "USER=$USER" \
+	-e "PROJECT_ROOT=/app" \
 	usgoc/usgoc

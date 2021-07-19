@@ -10,6 +10,8 @@ import networkx as nx
 import numpy as np
 import funcy as fy
 
+PROJECT_ROOT = os.getenv("PROJECT_ROOT", ".")
+
 def tolerant(f=None, only_named=True, ignore_varkwargs=False):
   if f is None:
     return lambda f: tolerant(f, only_named, ignore_varkwargs)
@@ -115,9 +117,9 @@ def draw_graph(
   edge_colors=False, label_colors=True, layout="spring"):
   if layout in {"dot", "neato"}:
     A = nx.nx_agraph.to_agraph(g)
-    A.write("/app/plots/graph.dot")
+    A.write(f"{PROJECT_ROOT}/plots/graph.dot")
     A.layout(layout)
-    A.draw("/app/plots/graph.png")
+    A.draw(f"{PROJECT_ROOT}/plots/graph.png")
     return
 
   plt.figure()

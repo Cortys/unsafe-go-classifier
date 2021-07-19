@@ -13,8 +13,8 @@ import usgoc.preprocessing.tf as tf
 import usgoc.preprocessing.split as ps
 import usgoc.datasets.go_cfg_utils as cfg_utils
 
-RAW_DATASET_PATTERN = "/app/raw/unsafe-go-dataset/**/*.json"
-DATA_DIR = Path("/app/data/unsafe-go-dataset")
+RAW_DATASET_PATTERN = f"{utils.PROJECT_ROOT}/raw/unsafe-go-dataset/**/*.json"
+DATA_DIR = Path(f"{utils.PROJECT_ROOT}/data/unsafe-go-dataset")
 
 no_default_label_subtype = {
   "type", "blocktype", "vartype"

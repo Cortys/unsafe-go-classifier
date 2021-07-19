@@ -1,6 +1,7 @@
 import tensorflow as tf
 import keras_tuner as kt
 
+import usgoc.utils as utils
 import usgoc.models.gnn as gnn
 
 def create_model_builder(
@@ -57,7 +58,7 @@ def tune_hyperparams(
     objective="val_accuracy",
     max_epochs=max_epochs, factor=3,
     hyperband_iterations=hyperband_iterations,
-    directory="/app/evaluations",
+    directory=f"{utils.PROJECT_ROOT}/evaluations",
     project_name=project_name,
     overwrite=overwrite)
   stop_early = tf.keras.callbacks.EarlyStopping(
