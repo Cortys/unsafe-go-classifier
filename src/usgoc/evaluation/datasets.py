@@ -1,6 +1,7 @@
 import usgoc.datasets.unsafe_go as dataset
 
 dataset_names = ["usgo_v1"]
+limit_ids = dataset.node_label_type_dim_count.keys()
 evaluate_limit_ids = [
   "v127_d127_f127_p127"
 ]

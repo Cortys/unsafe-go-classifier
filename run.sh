@@ -53,7 +53,7 @@ mkdir -p plots
 
 docker run --gpus all --name $CONTAINER_NAME \
 	-p $JUPYTER_PORT:8888 \
-	-p 6006:6006 -p 10666:10666 \
+	-p 6006:6006 -p 10666:10666 -p 1234:1234 \
 	-v $(pwd):/app \
  	$ARGS \
 	-u $(id -u):$(id -g) \

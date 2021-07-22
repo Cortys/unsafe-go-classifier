@@ -100,8 +100,8 @@ def experiment(model):
 # m.save(f"{utils.PROJECT_ROOT}/logs/test")
 # m2 = tf.keras.models.load_model(f"{utils.PROJECT_ROOT}/logs/test", custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
 
-m = ee.evaluate(em.DeepSetsBuilder, fold=fold, limit_id=limit_id, repeat=0, override=True)
-m.evaluate(test_ds, return_dict=True)
+m = ee.evaluate(em.DeepSetsBuilder, limit_id=limit_id)
+m[0][2].evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
 # m2 = experiment(model)

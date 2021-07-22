@@ -82,3 +82,15 @@ GGNNBuilder = create_model_builder(gnn.GGNN, True)
 
 RGCNBuilder = create_model_builder(gnn.RGCN)
 RGINBuilder = create_model_builder(gnn.RGIN)
+
+
+models = dict(
+  MLP=MLPBuilder,
+  DeepSets=DeepSetsBuilder,
+  GCN=GCNBuilder,
+  GIN=GINBuilder,
+  GGNN=GGNNBuilder,
+  RGCN=RGCNBuilder,
+  RGIN=RGINBuilder
+)
+evaluate_models = ["DeepSets", "GCN"]
