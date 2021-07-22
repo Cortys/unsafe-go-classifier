@@ -18,9 +18,9 @@ with utils.cache_env(use_cache=True):
   files = dataset.load_filenames()
   ds = dataset.load_dataset()
   graphs, targets = ds
+  # full_dims = dataset.create_graph_dims(graphs)
 
 with utils.cache_env(use_cache=True):
-  # dims = dataset.create_graph_dims(graphs)
   splits = dataset.get_split_idxs(ds)
   labels1, labels2 = dataset.create_target_label_dims(ds)
   labels1_keys = labels1.keys()
@@ -41,15 +41,18 @@ model = em.GGNNBuilder
 
 fold = 0
 limit_id = "v127_d127_f127_p127"
+batch_size_limit = 1
 
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
     ds, model.in_enc, splits, fold, limit_id=limit_id,
-    batch_size_limit=200)
+    batch_size_limit=batch_size_limit)
   train_ds = train_ds.cache()
   val_ds = val_ds.cache()
   train_slice, val_slice, test_slice = dataset.get_dataset_slices(
     ds, splits, fold)
+
+# list(train_ds)[0]
 
 # model1 = model1(**dims)
 # model = model(**dims)
@@ -100,8 +103,8 @@ def experiment(model):
 # m.save(f"{utils.PROJECT_ROOT}/logs/test")
 # m2 = tf.keras.models.load_model(f"{utils.PROJECT_ROOT}/logs/test", custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
 
-m = ee.evaluate(em.DeepSetsBuilder, limit_id=limit_id)
-m[0][2].evaluate(test_ds, return_dict=True)
+# m = ee.evaluate(em.DeepSetsBuilder, limit_id=limit_id)
+# m[0][2].evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
 # m2 = experiment(model)
@@ -110,7 +113,7 @@ def debug_graph(i=None, file=None, test_j=None, val_j=None, draw=True):
   if i is None:
     if file is not None:
       i = fy.first(fy.filter(
-        lambda e: "e6a3feac3fc40c305816" in e[1], enumerate(files)))[0]
+        lambda e: file in e[1], enumerate(files)))[0]
     elif test_j is not None:
       i = splits[fold]["test"][test_j]
     elif val_j is not None:
@@ -148,6 +151,8 @@ def draw_confusion(pred_labels, target_labels, normalize=True):
   utils.draw_confusion_matrix(m1.astype(int), labels1_keys)
   utils.draw_confusion_matrix(m2.astype(int), labels2_keys)
 
+
+debug_graph(file="5179906774f18e1f8520", draw=False)
 
 # interesting i's: 40, 70, 874 (44b41ab329d2624a449e),
 # Instances on which both DeepSets and GGNN fail (both labels):

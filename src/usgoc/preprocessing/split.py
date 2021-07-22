@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn.model_selection import train_test_split, StratifiedKFold, KFold
 
+import usgoc.utils as utils
+
 def make_holdout_split(holdout, objects, strat_labels=None):
   if holdout == 0:
     return objects, [], strat_labels
@@ -47,19 +49,19 @@ def make_splits(
   size,
   outer_k=10, inner_k=None,
   outer_holdout=None, inner_holdout=0.1,
-  strat_labels=None):
-  all_idxs = np.arange(size)
-
-  if outer_k is None:
-    train_o, test_o, strat_o = make_holdout_split(
-      outer_holdout, all_idxs, strat_labels)
-    return [dict(
-      test=test_o,
-      model_selection=make_model_selection_splits(train_o, strat_o))]
-  else:
-    return [
-      dict(
+  strat_labels=None, seed=1337):
+  with utils.local_seed(seed):
+    all_idxs = np.arange(size)
+    if outer_k is None:
+      train_o, test_o, strat_o = make_holdout_split(
+        outer_holdout, all_idxs, strat_labels)
+      return [dict(
         test=test_o,
-        model_selection=make_model_selection_splits(train_o, strat_o))
-      for train_o, test_o, strat_o in make_kfold_splits(
-        outer_k, all_idxs, strat_labels)]
+        model_selection=make_model_selection_splits(train_o, strat_o))]
+    else:
+      return [
+        dict(
+          test=test_o,
+          model_selection=make_model_selection_splits(train_o, strat_o))
+        for train_o, test_o, strat_o in make_kfold_splits(
+          outer_k, all_idxs, strat_labels)]

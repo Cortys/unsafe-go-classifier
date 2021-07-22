@@ -93,4 +93,6 @@ models = dict(
   RGCN=RGCNBuilder,
   RGIN=RGINBuilder
 )
-evaluate_models = ["DeepSets", "GCN"]
+evaluate_models = [
+  "DeepSets",
+  "GCN", "RGCN"]

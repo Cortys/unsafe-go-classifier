@@ -7,6 +7,7 @@ cfg_types = ["function", "external", "type", "variable"]
 node_label_types = dict(
   type="",
   blocktype="b",
+  selfref="s",
   vartype="v",
   varname="n",
   datatype="t",
@@ -18,7 +19,8 @@ node_label_types = dict(
   package="p"
 )
 no_ellipsis_types = {
-  "type", "blocktype", "vartype", "builtin_function",
+  "type", "blocktype", "selfref",
+  "vartype", "builtin_function",
   "binary_op", "unary_op", "datatype_flag"
 }
 edge_labels = [
@@ -51,16 +53,20 @@ def ast_type(ast):
     return None
   return ast["type"]
 
-def type_to_labels(types, tid):
+def type_to_labels(types, selfrefs, tid):
   if tid == -1:
     return set()
+
   ctid = tid
   ct = types[ctid]
+  res = set()
+
+  if tid in selfrefs:
+    res.add(("selfref", "type"))
+
   while ct["underlying"] != ctid:
     ctid = ct["underlying"]
     ct = types[ctid]
-
-  res = set()
 
   # Flatten pointer/array/slice types and add corresponding flags instead:
   while ct["type"] in {"Pointer", "Slice", "Array"}:
@@ -71,18 +77,24 @@ def type_to_labels(types, tid):
   # Reduce tuple types to set of contained types:
   if ct["type"] == "Tuple":
     for field in ct["fields"]:
-      res |= type_to_labels(types, field["type"])
+      res |= type_to_labels(types, selfrefs, field["type"])
   else:
     res.add(("datatype", ct["name"]))
     res.add(("datatype_flag", ct["type"]))
   return res
 
-def pkg_to_labels(pkgs, pid):
+def pkg_to_labels(pkgs, cfg_pkg, pid):
   if pid == -1:
     return set()
-  return {("package", pkgs[pid]["path"])}
+  res = {("package", pkgs[pid]["path"])}
 
-def func_to_labels(funcs, pkgs, fid):
+  if pid == cfg_pkg:
+    res.add(("selfref", "package"))
+
+  return res
+
+def func_to_labels(
+  funcs, pkgs, selfrefs, cfg_pkg, fid, with_pkg=True):
   if fid == -1:
     return set()
 
@@ -91,13 +103,23 @@ def func_to_labels(funcs, pkgs, fid):
 
   func = funcs[fid]
   pid = func["package"]
+  res = set()
   if pid >= 0:
     pkg_path = pkgs[pid]["path"]
     fname = pkg_path + "." + func["name"]
-    return {("function", fname), ("package", pkg_path)}
+    if with_pkg:
+      res.add(("package", pkg_path))
+      if pid == cfg_pkg:
+        res.add(("selfref", "package"))
+  else:
+    fname = func["name"]
 
-  fname = func["name"]
-  return {("function", fname)}
+  res.add(("function", fname))
+
+  if fid in selfrefs:
+    res.add(("selfref", "function"))
+
+  return res
 
 def _walk_var_selector_chain(state, s):
   if not isinstance(s, dict):
@@ -217,6 +239,14 @@ def _walk_ast_for_ops(t2l, f2l, ops, s):
   elif k == "statement" and t == "assign-operator":
     ops.add(("binary_op", s["operator"]))
     return ops, ["left", "right"]
+  elif k == "decl" and t == "type-alias":
+    for b_outer in s["binds"]:
+      b = b_outer["value"]
+      ops |= t2l(b.get("go-type", -1))
+      if b["kind"] == "type" and b["type"] == "struct":
+        for field in b["fields"]:
+          ops |= t2l(field["declared-type"].get("go-type", -1))
+    return ops, False
   elif k == "expression" and t == "cast":
     ops |= t2l(s["coerced-to"].get("go-type", -1))
     return ops, ["target"]
@@ -254,6 +284,9 @@ def ast_to_labels(t2l, f2l, ast):
 
 def cfg_to_graph(cfg, mark_line=None):
   g = nx.MultiDiGraph()
+  cfg_type = cfg["type"]
+  cfg_package = cfg["package"]
+  defined = set(cfg["defines"])
   blocks = cfg["blocks"]
   vars = cfg["variables"]
   types = cfg["types"]
@@ -265,9 +298,21 @@ def cfg_to_graph(cfg, mark_line=None):
   n = 0
   block_ids = dict()
   var_ids = dict()
-  t2l = utils.memoize(fy.partial(type_to_labels, types))
-  f2l = utils.memoize(fy.partial(func_to_labels, funcs, pkgs))
-  p2l = utils.memoize(fy.partial(pkg_to_labels, pkgs))
+  func_defined = set()
+  var_defined = set()
+  type_defined = set()
+
+  if cfg_type in {"function", "external"}:
+    func_defined = defined
+  elif cfg_type == "variable":
+    var_defined = defined
+  elif cfg_type == "type":
+    type_defined = defined
+
+  t2l = utils.memoize(fy.partial(type_to_labels, types, type_defined))
+  f2l = utils.memoize(fy.partial(
+    func_to_labels, funcs, pkgs, func_defined, cfg_package))
+  p2l = utils.memoize(fy.partial(pkg_to_labels, pkgs, cfg_package))
   mark_block = None
   mark_block_lines = None
 
@@ -309,6 +354,10 @@ def cfg_to_graph(cfg, mark_line=None):
       labels.add(("vartype", "receiver"))
     elif i in results:
       labels.add(("vartype", "result"))
+
+    if i in var_defined:
+      labels.add(("selfref", "variable"))
+
     labels |= p2l(v["package"])
     labels |= t2l(v["type"])
     g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
@@ -394,6 +443,7 @@ def cfg_to_graph(cfg, mark_line=None):
       g.remove_node(v)
 
   g.source_code = cfg["code"]
-  g.cfg_type = cfg["type"]
+  g.cfg_type = cfg_type
+  g.package = pkgs[cfg_package]["path"]
 
   return g

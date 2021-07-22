@@ -19,5 +19,8 @@ echo "Starting evaluation script..."
 docker exec -it $USER $CUDA_ENV --workdir /app/src $CONTAINER_ID python3 ./usgoc/run_evaluation.py $@ #\
 	# | grep --line-buffered -vE \
 	# "BaseCollectiveExecutor::StartAbort|IteratorGetNext|Shape/|Shape_[0-9]+/"
+
 echo "Pruning MLFLow db..."
 docker exec -it $USER $CUDA_ENV --workdir /app $CONTAINER_ID mlflow gc --backend-store-uri file:./mlruns
+
+mlflow_migrate/sqlite_migrate.sh
