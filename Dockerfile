@@ -4,7 +4,7 @@ FROM tensorflow/tensorflow:2.5.0-gpu-jupyter
 RUN pip3 install jupyter-kernel-gateway jupyterlab tensorboard-plugin-profile==2.4.0
 
 RUN apt-get update &&\
-	apt-get install -y graphviz graphviz-dev &&\
+	apt-get install -y graphviz graphviz-dev sqlite3 &&\
 	apt-get clean
 
 ADD requirements.txt requirements.txt
