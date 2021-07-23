@@ -30,6 +30,8 @@ def create_model_builder(
       return instanciate(
         node_label_count=self.config["node_label_count"],
         conv_directed=True,
+        fc_dropout_rate=hp.Choice("fc_dropout", [.0, .5], default=.0),
+        conv_batch_norm=hp.Choice("conv_batch_norm", [True, False], default=False),
         conv_layer_units=[hp.Int(
           "conv_units", 32, 512, 32)] * hp.Int("conv_depth", 2, 6),
         fc_layer_units=[hp.Int(
@@ -41,7 +43,7 @@ def create_model_builder(
         out_activation=None,
         pooling=hp.Choice(
           "pooling", ["sum", "mean", "softmax", "max", "min"]),
-        learning_rate=hp.Choice("learning_rate", [1e-3, 1e-4]),
+        learning_rate=hp.Choice("learning_rate", [1e-3]),
         **hp_args)
 
   return HyperModel
@@ -95,4 +97,5 @@ models = dict(
 )
 evaluate_models = [
   "DeepSets",
-  "GCN", "RGCN"]
+  "GIN",
+  "RGIN"]

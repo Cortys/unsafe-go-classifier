@@ -320,7 +320,7 @@ class GINLayer(keras.layers.Layer):
 class GGNNLayer(keras.layers.Layer):
   def __init__(
     self, units, use_bias=True, use_attention=False, use_diff=False,
-    depth=2, directed=False,
+    depth=2, directed=False, reverse=False,
     activation="tanh", recurrent_activation="sigmoid",
     inner_activation=None):
     super().__init__()
@@ -330,6 +330,7 @@ class GGNNLayer(keras.layers.Layer):
     self.use_diff = use_diff
     self.depth = depth
     self.directed = directed
+    self.reverse = directed and reverse
     self.activation = keras.activations.get(activation)
     self.recurrent_activation = keras.activations.get(recurrent_activation)
     self.inner_activation = keras.activations.get(inner_activation)
@@ -342,6 +343,13 @@ class GGNNLayer(keras.layers.Layer):
       keras.layers.Dense(
         units=units, use_bias=use_bias, activation=self.inner_activation)
       for _ in range(depth)], "msg_net")
+
+    if self.reverse:
+      self.rev_msg_net = keras.Sequential([
+        keras.layers.Dense(
+          units=units, use_bias=use_bias, activation=self.inner_activation)
+        for _ in range(depth)], "rev_msg_net")
+
     if use_attention:
       self.att_net = keras.Sequential([
         keras.layers.Dense(
@@ -358,6 +366,7 @@ class GGNNLayer(keras.layers.Layer):
       use_diff=self.use_diff,
       depth=self.depth,
       directed=self.directed,
+      reverse=self.reverse,
       activation=keras.activations.serialize(self.activation),
       recurrent_activation=keras.activations.serialize(
         self.recurrent_activation),
@@ -384,13 +393,19 @@ class GGNNLayer(keras.layers.Layer):
       X = X @ self.W_adapt
 
     if self.use_diff or self.use_attention:
-      rev_ref = None if self.directed else ref_a
-      X_agg = wl2_convolution(X, ref_a, ref_b, ref_b, rev_ref, self.combine)
+      rev_ref = None if self.directed and not self.reverse else ref_a
+      X_agg = wl2_convolution(
+        X, ref_a, ref_b, ref_b, rev_ref,
+        self.combine, self.combine_rev)
     else:
       X_msg = self.msg_net(X)
       X_zero = tf.zeros_like(X_msg)
       X_agg = wl1_convolution(
         X_zero, X_msg, ref_a, ref_b, directed=self.directed)
+      if self.reverse:
+        X_msg_rev = self.rev_msg_net(X)
+        X_agg = wl1_convolution(
+          X_agg, X_msg_rev, ref_b, ref_a, directed=True)
     X_out = self.gru(X_agg, X)[0]
 
     return {**input, "X": X_out}
@@ -398,6 +413,18 @@ class GGNNLayer(keras.layers.Layer):
   def combine(self, X_a, X_b):
     X_diff = X_a - X_b
     X_msg = self.msg_net(X_diff) if self.use_diff else self.msg_net(X_a)
+    if self.use_attention:
+      X_msg *= self.att_net(X_diff)
+    return X_msg
+
+  def combine_rev(self, X_b, X_a):
+    if not self.reverse:
+      return self.combine(X_b, X_a)
+    X_diff = X_b - X_a
+    if self.use_diff:
+      X_msg = self.rev_msg_net(X_diff)
+    else:
+      X_msg = self.rev_msg_net(X_b)
     if self.use_attention:
       X_msg *= self.att_net(X_diff)
     return X_msg

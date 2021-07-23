@@ -2,6 +2,7 @@ import tensorflow as tf
 import keras_tuner as kt
 import numpy as np
 import funcy as fy
+from datetime import datetime
 import matplotlib
 import matplotlib.pyplot as plt
 import mlflow
@@ -34,14 +35,14 @@ model1 = gnn.DeepSets
 # model = gnn.GIN
 # model = gnn.GGNN
 # model = gnn.RGCN
-# model = gnn.RGIN
+model = gnn.RGIN
 
 # model1 = em.DeepSetsBuilder
-model = em.GGNNBuilder
+# model = em.GGNNBuilder
 
 fold = 0
 limit_id = "v127_d127_f127_p127"
-batch_size_limit = 1
+batch_size_limit = 200
 
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
@@ -57,7 +58,10 @@ with utils.cache_env(use_cache=True):
 # model1 = model1(**dims)
 # model = model(**dims)
 
-def experiment(model):
+def time_str():
+  return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+def experiment(model, epochs=100, log=True):
   if isinstance(model, kt.HyperModel):
     tuner = kt.Hyperband(
       model,
@@ -86,14 +90,27 @@ def experiment(model):
     m = model(
       node_label_count=dims["node_label_count"],
       conv_directed=True,
-      conv_layer_units=[64] * 5, fc_layer_units=[64] * 5,
-      conv_activation="relu",
-      conv_inner_activation="relu",
-      fc_activation="relu",
+      # conv_reverse=False,
+      conv_layer_units=[400] * 4, fc_layer_units=[200] * 2,
+      conv_activation="tanh",
+      conv_inner_activation="elu",
+      # conv_dropout_rate=0.1,
+      # fc_dropout_rate=0.2,
+      conv_batch_norm=True,
+      fc_batch_norm=True,
+      fc_activation="tanh",
       out_activation=None,
-      pooling="sum", learning_rate=0.001)
+      pooling="min", learning_rate=0.001)
 
-    m.fit(train_ds, validation_data=val_ds, verbose=2, epochs=3)
+    tb = tf.keras.callbacks.TensorBoard(
+      log_dir=f"/app/logs/{time_str()}_{model.name}_{limit_id}_fold{fold}",
+      histogram_freq=10,
+      embeddings_freq=10,
+      write_graph=True,
+      update_freq="batch")
+    m.fit(
+      train_ds, validation_data=val_ds, verbose=2, epochs=epochs,
+      callbacks=[tb] if log else [])
     res = m.evaluate(test_ds, return_dict=True)
     print(res)
     return m
@@ -107,13 +124,13 @@ def experiment(model):
 # m[0][2].evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
-# m2 = experiment(model)
+m2 = experiment(model)
 
 def debug_graph(i=None, file=None, test_j=None, val_j=None, draw=True):
   if i is None:
     if file is not None:
       i = fy.first(fy.filter(
-        lambda e: file in e[1], enumerate(files)))[0]
+        lambda e: file in e[1], enumerate(files)[0]))
     elif test_j is not None:
       i = splits[fold]["test"][test_j]
     elif val_j is not None:
@@ -152,7 +169,7 @@ def draw_confusion(pred_labels, target_labels, normalize=True):
   utils.draw_confusion_matrix(m2.astype(int), labels2_keys)
 
 
-debug_graph(file="5179906774f18e1f8520", draw=False)
+# debug_graph(file="5179906774f18e1f8520", draw=False)
 
 # interesting i's: 40, 70, 874 (44b41ab329d2624a449e),
 # Instances on which both DeepSets and GGNN fail (both labels):

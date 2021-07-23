@@ -5,6 +5,7 @@ import funcy as fy
 import usgoc.preprocessing.tf as tf_pre
 import usgoc.layers.wl1 as wl1
 import usgoc.layers.pooling as pl
+from usgoc.layers.utils import with_reg, conv_with_reg
 import usgoc.metrics.multi as mm
 import usgoc.utils as utils
 
@@ -19,7 +20,7 @@ def X_normalization(input):
   X_norm = keras.layers.BatchNormalization()(X)
   return {**input, "X": X_norm}
 
-def pool(input, pooling="mean", preserve_full_embedding=False):
+def pool(input, pooling="mean", preserve_unpooled=False):
   if pooling is None:
     return input["X"]
   elif pooling == "mean":
@@ -35,7 +36,7 @@ def pool(input, pooling="mean", preserve_full_embedding=False):
   else:
     raise AssertionError(f"Unknown pooling type '{pooling}'.")
 
-  if preserve_full_embedding:
+  if preserve_unpooled:
     return input["X"], pool(input)
   else:
     return pool(input)
@@ -74,7 +75,6 @@ def cfg_classifier(
   def instanciate(
     node_label_count=None,
     fc_layer_units=[], fc_layer_args=None,
-    fc_activation="sigmoid",
     out_activation=None,
     pooling="mean",
     learning_rate=0.001,
@@ -83,6 +83,8 @@ def cfg_classifier(
 
     conv_args_ext = utils.select_prefixed_keys(
       kwargs, "conv_", True, conv_args.copy())
+    fc_args_ext = utils.select_prefixed_keys(
+      kwargs, "fc_", True)
 
     in_meta = dict(
       node_label_count=node_label_count,
@@ -111,14 +113,16 @@ def cfg_classifier(
           **conv_args_ext)(padded_input)
 
       h = layer_stack(
-        conv_layer, **conv_args_ext)(padded_input)
-      X, pooled_X = pool(h, pooling, preserve_full_embedding=True)
+        conv_with_reg(conv_layer),
+        **conv_args_ext)(padded_input)
+      X, pooled_X = pool(h, pooling, preserve_unpooled=True)
       marked_X = tf.gather(X, marked_idx, axis=0)
       combined_X = tf.concat([graph_X, marked_X, pooled_X], 1)
 
     emb = layer_stack(
-      keras.layers.Dense, fc_layer_units, fc_layer_args,
-      activation=fc_activation)(combined_X)
+      with_reg(keras.layers.Dense),
+      fc_layer_units, fc_layer_args,
+      **fc_args_ext)(combined_X)
 
     out1 = keras.layers.Dense(
       units=label1_count, activation=out_activation,
@@ -159,7 +163,7 @@ GCN = cfg_classifier(
 GIN = cfg_classifier("GIN", wl1.GINLayer, in_enc="wl1")
 GGNN = cfg_classifier(
   "GGNN", wl1.GGNNLayer,
-  conv_args=dict(use_attention=True),
+  conv_args=dict(use_diff=True, reverse=True),
   in_enc="wl1")
 
 # Multirelational models:
