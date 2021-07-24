@@ -33,7 +33,8 @@ def create_model_builder(
         node_label_count=self.config["node_label_count"],
         conv_directed=True,
         fc_dropout_rate=hp.Choice("fc_dropout", [.0, .5], default=.0),
-        conv_batch_norm=hp.Choice("conv_batch_norm", [True, False], default=False),
+        conv_batch_norm=hp.Choice(
+          "conv_batch_norm", [True, False], default=False),
         conv_layer_units=[hp.Int(
           "conv_units", 32, 512, 32)] * hp.Int("conv_depth", 2, 6),
         fc_layer_units=[hp.Int(

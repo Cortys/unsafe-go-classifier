@@ -67,7 +67,8 @@ def evaluate_single(
       run = find_inner_run(fold, repeat)
       if run is not None:
         run_id = run.info.run_id
-        if run.info.status == "FINISHED" and not override:
+        run_status = run.info.status
+        if run_status == "FINISHED" and not override:
           print(
             f"Skipping {ds_id}_repeat{repeat}, {model_name}.",
             f"Existing run: {run_id}.")
@@ -80,7 +81,7 @@ def evaluate_single(
           mlflow.delete_run(run_id)
           shutil.rmtree(f"{log_dir_base}/{run_id}", ignore_errors=True)
           print(
-            f"Deleting {run.info.status} {ds_id}_repeat{repeat}, {model_name}.",
+            f"Deleting {run_status} {ds_id}_repeat{repeat}, {model_name}.",
             f"Existing run: {run_id}.")
         else:
           raise DryRunException(
@@ -107,7 +108,7 @@ def evaluate_single(
         log_dir = f"{log_dir_base}/{run_id}"
 
         stop_early = tf.keras.callbacks.EarlyStopping(
-          monitor="val_loss", patience=patience,
+          monitor="val_accuracy", patience=patience,
           restore_best_weights=True)
         callbacks = [stop_early]
 
