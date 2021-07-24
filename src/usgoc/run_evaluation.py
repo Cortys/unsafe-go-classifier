@@ -56,7 +56,8 @@ def evaluate(
       fold=fold,
       repeat=repeat,
       override=override, dry=dry,
-      experiment_suffix=suffix)
+      experiment_suffix=suffix,
+      return_models=False)
     print("\n----------------------------------------------------------\n")
 
   print("Evaluation completed.")

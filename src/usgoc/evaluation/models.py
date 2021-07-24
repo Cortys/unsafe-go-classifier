@@ -1,3 +1,5 @@
+import glob
+import shutil
 import tensorflow as tf
 import keras_tuner as kt
 
@@ -55,12 +57,13 @@ def tune_hyperparams(
   hyperband_iterations=1,
   overwrite=False, ds_id="") -> kt.Hyperband:
   project_name = f"{ds_id}/{hypermodel.name}"
+  tuner_dir = f"{utils.PROJECT_ROOT}/evaluations"
   tuner = kt.Hyperband(
     hypermodel,
     objective="val_accuracy",
     max_epochs=max_epochs, factor=3,
     hyperband_iterations=hyperband_iterations,
-    directory=f"{utils.PROJECT_ROOT}/evaluations",
+    directory=tuner_dir,
     project_name=project_name,
     overwrite=overwrite)
   stop_early = tf.keras.callbacks.EarlyStopping(
@@ -68,11 +71,16 @@ def tune_hyperparams(
   tuner.search(
     train_ds, validation_data=val_ds, verbose=2,
     callbacks=[stop_early])
+  # Remove checkpoints after tuning to reduce storage overhead:
+  checkpoint_dirs = glob.glob(
+    f"{tuner_dir}/{project_name}/trial_*/checkpoints")
+  for ck_dir in checkpoint_dirs:
+    shutil.rmtree(ck_dir)
   return tuner
 
 def get_best_model(tuner: kt.Tuner):
-    best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
-    return tuner.hypermodel.build(best_hps), best_hps.get_config()
+  best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
+  return tuner.hypermodel.build(best_hps), best_hps.get_config()
 
 
 MLPBuilder = create_model_builder(gnn.MLP)

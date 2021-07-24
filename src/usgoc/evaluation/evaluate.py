@@ -57,32 +57,38 @@ def evaluate_single(
   get_tuner, get_ds,
   model_name, repeat=0,
   fold=0, epochs=1000, patience=100, limit_id=None,
-  ds_id="", override=False, dry=False, tensorboard_embeddings=False):
+  ds_id="", override=False, dry=False, tensorboard_embeddings=False,
+  return_models=True):
     if repeat < 0 or fold < 0:
       return None
 
-    log_dir_base = f"{utils.PROJECT_ROOT}/logs/{ds_id}/{model_name}"
-    run = find_inner_run(fold, repeat)
-    if run is not None:
-      run_id = run.info.run_id
-      if run.info.status == "FINISHED" and not override:
-        print(
-          f"Skipping {ds_id}_repeat{repeat}, {model_name}.",
-          f"Existing run: {run_id}.")
-        return mlflow.keras.load_model(
-          f"runs:/{run_id}/models",
-          custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
-      else:
-        mlflow.delete_run(run_id)
-        shutil.rmtree(f"{log_dir_base}/{run_id}", ignore_errors=True)
-        print(
-          f"Deleting {run.info.status} {ds_id}_repeat{repeat}, {model_name}.",
-          f"Existing run: {run_id}.")
-
-    tuner = get_tuner()
-    mlflow.tensorflow.autolog(log_models=False)
-
     try:
+      log_dir_base = f"{utils.PROJECT_ROOT}/logs/{ds_id}/{model_name}"
+      run = find_inner_run(fold, repeat)
+      if run is not None:
+        run_id = run.info.run_id
+        if run.info.status == "FINISHED" and not override:
+          print(
+            f"Skipping {ds_id}_repeat{repeat}, {model_name}.",
+            f"Existing run: {run_id}.")
+          if dry or not return_models:
+            return None
+          return mlflow.keras.load_model(
+            f"runs:/{run_id}/models",
+            custom_objects=dict(SparseMultiAccuracy=mm.SparseMultiAccuracy))
+        elif not dry:
+          mlflow.delete_run(run_id)
+          shutil.rmtree(f"{log_dir_base}/{run_id}", ignore_errors=True)
+          print(
+            f"Deleting {run.info.status} {ds_id}_repeat{repeat}, {model_name}.",
+            f"Existing run: {run_id}.")
+        else:
+          raise DryRunException(
+            f"Run {run_id} would be overidden. Doing nothing due to dry.")
+
+      tuner = get_tuner()
+      mlflow.tensorflow.autolog(log_models=False)
+
       with mlflow.start_run(
         run_name=f"fold{fold}_repeat{repeat}",
         nested=True) as run:
@@ -127,6 +133,8 @@ def evaluate_single(
 
         print(f"Finished {ds_id}_repeat{repeat}, {model_name} ({run_id}).")
 
+        if not return_models:
+          return None
         return model
     except DryRunException as e:
       print(str(e))
