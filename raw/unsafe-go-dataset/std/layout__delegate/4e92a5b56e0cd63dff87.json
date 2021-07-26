@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 2, 5, 6, 7, 0, 8, 9, 10, 11, 12, 1, 13 ],
+      "in-vars" : [ 1, 4, 5, 2, 6, 7, 8, 0, 9, 10, 11, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 13, 12, 0, 9, 2, 5, 6, 10, 7, 11, 4 ],
+      "out-vars" : [ 0, 10, 4, 12, 7, 8, 13, 9, 1, 11, 5, 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 0, 8, 2, 5, 11, 4, 1, 13, 9, 6, 10, 7, 12 ],
+      "in-vars" : [ 9, 11, 5, 2, 13, 6, 7, 8, 0, 1, 10, 4, 12 ],
       "exit" : false,
-      "out-vars" : [ 5, 6, 7, 8, 13, 9, 2, 10, 11, 12, 0, 4, 1 ],
+      "out-vars" : [ 5, 2, 12, 8, 1, 10, 11, 4, 6, 7, 13, 0, 9 ],
       "decl-vars" : [ ],
       "line-start" : 892,
       "ast" : {
@@ -59,7 +59,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "gcphase",
-              "variable" : 6
+              "variable" : 4
             }
           },
           "operator" : "==",
@@ -80,13 +80,13 @@
       "line-end" : 894,
       "code" : "if gcphase == _GCmarktermination {\n\tthrow(\"mallocgc called with gcphase == _GCmarktermination\")\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 5, 10, 7, 11, 8, 4, 9, 2, 6, 12, 0, 13 ],
+      "in-vars" : [ 0, 9, 10, 5, 2, 12, 6, 7, 8, 1, 11, 4, 13 ],
       "exit" : false,
-      "out-vars" : [ 1, 13, 2, 10, 7, 11, 12, 4, 8, 9, 5, 6, 0 ],
+      "out-vars" : [ 12, 6, 8, 0, 9, 1, 5, 2, 10, 11, 4, 7, 13 ],
       "decl-vars" : [ ],
       "line-start" : 893,
       "ast" : {
@@ -126,9 +126,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 1, 2, 5, 7, 11, 0, 8, 9, 6, 10, 12, 4, 13 ],
+      "in-vars" : [ 1, 10, 11, 12, 6, 7, 13, 0, 4, 5, 2, 8, 9 ],
       "exit" : false,
-      "out-vars" : [ 0, 8, 4, 1, 13, 9, 2, 5, 6, 10, 7, 11, 12 ],
+      "out-vars" : [ 12, 6, 7, 10, 5, 1, 11, 4, 2, 8, 13, 0, 9 ],
       "decl-vars" : [ ],
       "line-start" : 896,
       "ast" : {
@@ -168,7 +168,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4 ],
+      "in-vars" : [ 5 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -208,7 +208,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "zerobase",
-                "variable" : 4
+                "variable" : 5
               }
             },
             "type" : "unary"
@@ -220,13 +220,13 @@
       "line-end" : 897,
       "code" : "return unsafe.Pointer(&zerobase)",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 17 ],
-      "in-vars" : [ 13, 9, 10, 11, 12, 8, 1, 2, 5, 6, 7, 0 ],
+      "in-vars" : [ 9, 1, 10, 11, 4, 6, 0, 2, 12, 7, 8, 13 ],
       "exit" : false,
-      "out-vars" : [ 10, 11, 12, 8, 1, 13, 9, 6, 0, 2, 5, 7 ],
+      "out-vars" : [ 10, 2, 7, 4, 12, 6, 8, 0, 9, 1, 11, 13 ],
       "decl-vars" : [ ],
       "line-start" : 900,
       "ast" : {
@@ -243,14 +243,14 @@
             "go-type" : 17,
             "kind" : "expression",
             "target" : {
-              "go-type" : 32,
+              "go-type" : 22,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "debug",
-                "variable" : 13
+                "variable" : 7
               }
             },
             "type" : "selector"
@@ -273,13 +273,13 @@
       "line-end" : 921,
       "code" : "if debug.sbrk != 0 {\n\talign := uintptr(16)\n\tif typ != nil {\n\n\t\tif size&7 == 0 {\n\t\t\talign = 8\n\t\t} else if size&3 == 0 {\n\t\t\talign = 4\n\t\t} else if size&1 == 0 {\n\t\t\talign = 2\n\t\t} else {\n\t\t\talign = 1\n\t\t}\n\t}\n\treturn persistentalloc(size, align, &memstats.other_sys)\n}",
       "entry" : false,
-      "use-vars" : [ 13 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 0, 1, 10 ],
+      "in-vars" : [ 0, 1, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 15, 10 ],
+      "out-vars" : [ 15, 11, 0, 1 ],
       "decl-vars" : [ 15 ],
       "line-start" : 901,
       "ast" : {
@@ -312,9 +312,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 16 ],
-      "in-vars" : [ 0, 1, 15, 10 ],
+      "in-vars" : [ 11, 0, 1, 15 ],
       "exit" : false,
-      "out-vars" : [ 0, 15, 10 ],
+      "out-vars" : [ 11, 0, 15 ],
       "decl-vars" : [ ],
       "line-start" : 902,
       "ast" : {
@@ -356,9 +356,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 11 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 10 ],
+      "out-vars" : [ 0, 11 ],
       "decl-vars" : [ ],
       "line-start" : 910,
       "ast" : {
@@ -412,9 +412,9 @@
     }, {
       "update-vars" : [ 15 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 15, 10 ],
+      "out-vars" : [ 0, 15, 11 ],
       "decl-vars" : [ ],
       "line-start" : 911,
       "ast" : {
@@ -448,9 +448,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 13 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 11, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 10 ],
+      "out-vars" : [ 0, 11 ],
       "decl-vars" : [ ],
       "line-start" : 912,
       "ast" : {
@@ -504,9 +504,9 @@
     }, {
       "update-vars" : [ 15 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 15, 10 ],
+      "out-vars" : [ 15, 11, 0 ],
       "decl-vars" : [ ],
       "line-start" : 913,
       "ast" : {
@@ -540,9 +540,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14, 15 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 10, 0 ],
+      "out-vars" : [ 0, 11 ],
       "decl-vars" : [ ],
       "line-start" : 914,
       "ast" : {
@@ -596,9 +596,9 @@
     }, {
       "update-vars" : [ 15 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 15, 10 ],
+      "out-vars" : [ 0, 15, 11 ],
       "decl-vars" : [ ],
       "line-start" : 915,
       "ast" : {
@@ -632,9 +632,9 @@
     }, {
       "update-vars" : [ 15 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 0, 10 ],
+      "in-vars" : [ 0, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 15, 10 ],
+      "out-vars" : [ 0, 15, 11 ],
       "decl-vars" : [ ],
       "line-start" : 917,
       "ast" : {
@@ -668,7 +668,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 0, 15, 10 ],
+      "in-vars" : [ 0, 15, 11 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -708,17 +708,17 @@
                 "value" : "other_sys",
                 "variable" : 16
               },
-              "go-type" : 26,
+              "go-type" : 27,
               "kind" : "expression",
               "target" : {
-                "go-type" : 24,
+                "go-type" : 25,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "memstats",
-                  "variable" : 10
+                  "variable" : 11
                 }
               },
               "type" : "selector"
@@ -746,13 +746,13 @@
       "line-end" : 920,
       "code" : "return persistentalloc(size, align, &memstats.other_sys)",
       "entry" : false,
-      "use-vars" : [ 15, 10, 0 ]
+      "use-vars" : [ 11, 0, 15 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 5, 6, 0, 8, 13, 9, 12, 1, 2, 7, 11 ],
+      "in-vars" : [ 0, 9, 1, 2, 6, 7, 8, 10, 4, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 11, 12, 8, 1, 13, 9, 0, 17, 2, 5 ],
+      "out-vars" : [ 9, 4, 12, 6, 8, 13, 17, 0, 1, 10, 2, 7 ],
       "decl-vars" : [ 17 ],
       "line-start" : 925,
       "ast" : {
@@ -798,9 +798,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19, 25 ],
-      "in-vars" : [ 12, 7, 8, 1, 17, 13, 9, 2, 5, 0, 11, 6 ],
+      "in-vars" : [ 17, 0, 9, 4, 7, 8, 13, 1, 10, 2, 12, 6 ],
       "exit" : false,
-      "out-vars" : [ 13, 9, 7, 11, 0, 8, 1, 17, 2, 6, 12 ],
+      "out-vars" : [ 9, 1, 10, 12, 7, 17, 4, 2, 6, 13, 0 ],
       "decl-vars" : [ ],
       "line-start" : 926,
       "ast" : {
@@ -815,7 +815,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "gcBlackenEnabled",
-              "variable" : 5
+              "variable" : 8
             }
           },
           "operator" : "!=",
@@ -836,13 +836,13 @@
       "line-end" : 942,
       "code" : "if gcBlackenEnabled != 0 {\n\n\tassistG = getg()\n\tif assistG.m.curg != nil {\n\t\tassistG = assistG.m.curg\n\t}\n\n\tassistG.gcAssistBytes -= int64(size)\n\n\tif assistG.gcAssistBytes < 0 {\n\n\t\tgcAssistAlloc(assistG)\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ 17 ],
       "successors" : [ 20 ],
-      "in-vars" : [ 9, 2, 6, 7, 11, 0, 8, 13, 12, 1 ],
+      "in-vars" : [ 1, 2, 12, 6, 7, 13, 0, 9, 10, 4 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 13, 9, 2, 7, 12, 0, 17, 6, 11 ],
+      "out-vars" : [ 9, 10, 2, 12, 13, 7, 17, 0, 1, 4, 6 ],
       "decl-vars" : [ ],
       "line-start" : 928,
       "ast" : {
@@ -886,9 +886,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 22 ],
-      "in-vars" : [ 9, 2, 6, 12, 0, 13, 17, 7, 11, 8, 1 ],
+      "in-vars" : [ 6, 7, 13, 17, 1, 10, 4, 12, 0, 9, 2 ],
       "exit" : false,
-      "out-vars" : [ 8, 13, 9, 2, 6, 7, 11, 0, 17, 12, 1 ],
+      "out-vars" : [ 17, 0, 1, 4, 12, 6, 9, 10, 2, 7, 13 ],
       "decl-vars" : [ ],
       "line-start" : 929,
       "ast" : {
@@ -952,9 +952,9 @@
     }, {
       "update-vars" : [ 17 ],
       "successors" : [ 22 ],
-      "in-vars" : [ 8, 6, 7, 11, 0, 1, 17, 13, 9, 2, 12 ],
+      "in-vars" : [ 0, 1, 10, 12, 6, 17, 9, 4, 2, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 12, 0, 8, 17, 13, 2, 6, 7, 1, 9, 11 ],
+      "out-vars" : [ 1, 10, 2, 12, 13, 17, 0, 9, 4, 6, 7 ],
       "decl-vars" : [ ],
       "line-start" : 930,
       "ast" : {
@@ -1013,9 +1013,9 @@
     }, {
       "update-vars" : [ 17 ],
       "successors" : [ 23 ],
-      "in-vars" : [ 0, 8, 1, 17, 6, 7, 11, 12, 13, 9, 2 ],
+      "in-vars" : [ 0, 1, 10, 4, 2, 12, 6, 7, 17, 9, 13 ],
       "exit" : false,
-      "out-vars" : [ 0, 17, 2, 12, 7, 11, 8, 1, 13, 9, 6 ],
+      "out-vars" : [ 12, 6, 13, 9, 10, 1, 4, 2, 7, 17, 0 ],
       "decl-vars" : [ ],
       "line-start" : 934,
       "ast" : {
@@ -1080,9 +1080,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24, 25 ],
-      "in-vars" : [ 8, 13, 9, 2, 6, 0, 1, 17, 7, 11, 12 ],
+      "in-vars" : [ 2, 6, 17, 0, 9, 1, 10, 4, 12, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 6, 7, 11, 12, 0, 8, 17, 13, 9 ],
+      "out-vars" : [ 1, 6, 7, 17, 9, 4, 2, 12, 13, 0, 10 ],
       "decl-vars" : [ ],
       "line-start" : 936,
       "ast" : {
@@ -1133,9 +1133,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 25 ],
-      "in-vars" : [ 8, 17, 7, 12, 0, 13, 9, 2, 6, 11, 1 ],
+      "in-vars" : [ 13, 0, 9, 10, 4, 6, 7, 17, 1, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 0, 13, 9, 2, 7, 12, 8, 1, 17, 6, 11 ],
+      "out-vars" : [ 17, 1, 10, 4, 2, 6, 7, 0, 9, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 940,
       "ast" : {
@@ -1178,9 +1178,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26 ],
-      "in-vars" : [ 17, 2, 6, 11, 12, 8, 1, 9, 7, 0, 13 ],
+      "in-vars" : [ 13, 17, 0, 9, 1, 4, 12, 7, 10, 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 13, 9, 7, 11, 0, 8, 1, 17, 12, 21, 2, 6 ],
+      "out-vars" : [ 9, 10, 21, 2, 6, 0, 1, 4, 12, 7, 13, 17 ],
       "decl-vars" : [ 21 ],
       "line-start" : 945,
       "ast" : {
@@ -1223,9 +1223,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27, 28 ],
-      "in-vars" : [ 12, 1, 17, 13, 9, 21, 2, 0, 8, 11, 6, 7 ],
+      "in-vars" : [ 12, 7, 17, 0, 9, 1, 21, 2, 13, 10, 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 17, 9, 2, 6, 11, 0, 8, 1, 13, 21, 7, 12 ],
+      "out-vars" : [ 0, 1, 10, 4, 2, 7, 17, 21, 12, 6, 13, 9 ],
       "decl-vars" : [ ],
       "line-start" : 946,
       "ast" : {
@@ -1276,9 +1276,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 28 ],
-      "in-vars" : [ 1, 13, 21, 12, 0, 17, 9, 2, 6, 7, 11, 8 ],
+      "in-vars" : [ 9, 1, 4, 12, 7, 17, 10, 21, 2, 6, 13, 0 ],
       "exit" : false,
-      "out-vars" : [ 12, 0, 8, 9, 21, 6, 7, 11, 1, 17, 13, 2 ],
+      "out-vars" : [ 13, 0, 10, 21, 7, 2, 12, 6, 17, 9, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 947,
       "ast" : {
@@ -1318,9 +1318,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 29, 30 ],
-      "in-vars" : [ 6, 11, 12, 0, 8, 13, 9, 7, 1, 17, 21, 2 ],
+      "in-vars" : [ 0, 9, 1, 4, 21, 12, 7, 17, 10, 2, 6, 13 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 17, 9, 7, 11, 12, 0, 21, 2, 6, 13 ],
+      "out-vars" : [ 17, 9, 4, 2, 13, 6, 7, 0, 1, 10, 21, 12 ],
       "decl-vars" : [ ],
       "line-start" : 949,
       "ast" : {
@@ -1381,9 +1381,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 30 ],
-      "in-vars" : [ 8, 13, 21, 2, 6, 7, 0, 1, 17, 9, 11, 12 ],
+      "in-vars" : [ 17, 0, 9, 1, 2, 6, 7, 10, 4, 21, 12, 13 ],
       "exit" : false,
-      "out-vars" : [ 17, 2, 11, 0, 8, 1, 13, 9, 21, 6, 7, 12 ],
+      "out-vars" : [ 21, 12, 6, 7, 13, 9, 1, 10, 2, 17, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 950,
       "ast" : {
@@ -1423,9 +1423,9 @@
     }, {
       "update-vars" : [ 21 ],
       "successors" : [ 31 ],
-      "in-vars" : [ 7, 12, 8, 13, 9, 21, 6, 0, 1, 17, 2, 11 ],
+      "in-vars" : [ 4, 10, 21, 2, 12, 17, 0, 9, 1, 6, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 13, 9, 11, 0, 8, 21, 2, 6, 7, 12, 1, 17 ],
+      "out-vars" : [ 17, 0, 9, 1, 10, 21, 6, 4, 2, 12, 7, 13 ],
       "decl-vars" : [ ],
       "line-start" : 952,
       "ast" : {
@@ -1470,9 +1470,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 32 ],
-      "in-vars" : [ 21, 6, 11, 9, 2, 7, 0, 8, 1, 17, 13, 12 ],
+      "in-vars" : [ 10, 4, 2, 12, 6, 7, 13, 0, 9, 1, 21, 17 ],
       "exit" : false,
-      "out-vars" : [ 8, 21, 2, 24, 7, 11, 12, 0, 1, 17, 13, 9, 6 ],
+      "out-vars" : [ 0, 1, 10, 24, 21, 12, 7, 17, 9, 4, 2, 6, 13 ],
       "decl-vars" : [ 24 ],
       "line-start" : 954,
       "ast" : {
@@ -1505,9 +1505,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 33 ],
-      "in-vars" : [ 11, 0, 1, 24, 9, 21, 2, 6, 7, 8, 17, 13, 12 ],
+      "in-vars" : [ 0, 9, 10, 24, 21, 7, 13, 17, 1, 4, 2, 12, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 25, 0, 11, 17, 7, 6, 12, 8, 13, 21, 24, 1, 9 ],
+      "out-vars" : [ 4, 12, 7, 13, 17, 10, 21, 24, 6, 0, 9, 1, 25, 2 ],
       "decl-vars" : [ 25 ],
       "line-start" : 955,
       "ast" : {
@@ -1543,9 +1543,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34 ],
-      "in-vars" : [ 0, 1, 6, 25, 17, 7, 11, 8, 13, 9, 21, 24, 2, 12 ],
+      "in-vars" : [ 17, 25, 0, 10, 1, 12, 6, 13, 21, 2, 7, 9, 4, 24 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 25, 26, 13, 9, 2, 7, 11, 8, 17, 21, 24, 0, 12 ],
+      "out-vars" : [ 9, 1, 24, 4, 21, 12, 25, 2, 7, 13, 17, 0, 26, 10, 6 ],
       "decl-vars" : [ 26 ],
       "line-start" : 956,
       "ast" : {
@@ -1588,9 +1588,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 35 ],
-      "in-vars" : [ 9, 24, 11, 12, 25, 0, 8, 17, 21, 6, 26, 1, 13, 7, 2 ],
+      "in-vars" : [ 0, 9, 25, 1, 21, 17, 12, 7, 26, 4, 24, 2, 6, 13, 10 ],
       "exit" : false,
-      "out-vars" : [ 13, 6, 11, 25, 0, 17, 26, 8, 1, 21, 24, 12, 9, 2, 7 ],
+      "out-vars" : [ 25, 10, 6, 13, 21, 17, 24, 4, 2, 12, 7, 0, 9, 26, 1 ],
       "decl-vars" : [ 27 ],
       "line-start" : 957,
       "ast" : {
@@ -1637,9 +1637,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 36 ],
-      "in-vars" : [ 12, 0, 26, 7, 11, 25, 9, 24, 6, 13, 1, 17, 21, 2, 8 ],
+      "in-vars" : [ 17, 25, 26, 7, 13, 1, 24, 12, 0, 10, 21, 6, 9, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 25, 0, 17, 13, 9, 2, 24, 6, 12, 11, 26, 8, 1, 21, 7, 29 ],
+      "out-vars" : [ 12, 6, 0, 26, 29, 21, 10, 2, 13, 17, 1, 4, 25, 9, 24, 7 ],
       "decl-vars" : [ 29 ],
       "line-start" : 958,
       "ast" : {
@@ -1733,9 +1733,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37, 76 ],
-      "in-vars" : [ 26, 9, 29, 7, 21, 0, 8, 1, 17, 12, 11, 25, 13, 2, 24, 6 ],
+      "in-vars" : [ 26, 24, 6, 21, 1, 4, 29, 10, 12, 7, 17, 25, 0, 9, 2, 13 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 7, 26, 17, 2, 6, 11, 0, 9, 21, 29, 25, 13, 24, 12 ],
+      "out-vars" : [ 29, 13, 17, 9, 26, 6, 25, 0, 4, 24, 2, 12, 7, 1, 10, 21 ],
       "decl-vars" : [ ],
       "line-start" : 959,
       "ast" : {
@@ -1775,9 +1775,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 38, 63 ],
-      "in-vars" : [ 17, 13, 9, 2, 29, 7, 25, 1, 26, 21, 6, 12, 0, 8, 24, 11 ],
+      "in-vars" : [ 7, 13, 1, 29, 12, 21, 9, 26, 4, 25, 0, 2, 6, 17, 10, 24 ],
       "exit" : false,
-      "out-vars" : [ 29, 13, 7, 21, 25, 0, 1, 9, 24, 6, 11, 12, 26, 8, 17, 2 ],
+      "out-vars" : [ 26, 7, 1, 21, 2, 6, 12, 13, 25, 10, 4, 24, 17, 0, 9, 29 ],
       "decl-vars" : [ ],
       "line-start" : 960,
       "ast" : {
@@ -1834,9 +1834,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 0, 17, 24, 11, 7, 25, 26, 1, 13, 21, 6, 29 ],
+      "in-vars" : [ 26, 1, 4, 21, 12, 17, 25, 0, 13, 24, 29, 7 ],
       "exit" : false,
-      "out-vars" : [ 26, 1, 21, 24, 7, 11, 31, 0, 17, 13, 6, 29, 25 ],
+      "out-vars" : [ 17, 26, 29, 21, 12, 7, 13, 25, 0, 1, 4, 24, 31 ],
       "decl-vars" : [ 31 ],
       "line-start" : 990,
       "ast" : {
@@ -1883,9 +1883,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 40, 41 ],
-      "in-vars" : [ 29, 7, 11, 1, 17, 13, 6, 21, 24, 25, 0, 31, 26 ],
+      "in-vars" : [ 0, 4, 24, 29, 12, 13, 17, 25, 26, 1, 31, 21, 7 ],
       "exit" : false,
-      "out-vars" : [ 24, 6, 29, 7, 0, 31, 17, 21, 11, 25, 26, 1, 13 ],
+      "out-vars" : [ 4, 24, 29, 17, 0, 26, 1, 7, 13, 25, 31, 21, 12 ],
       "decl-vars" : [ ],
       "line-start" : 992,
       "ast" : {
@@ -1939,9 +1939,9 @@
     }, {
       "update-vars" : [ 31 ],
       "successors" : [ 45 ],
-      "in-vars" : [ 26, 13, 21, 6, 7, 11, 25, 0, 17, 24, 29, 31, 1 ],
+      "in-vars" : [ 17, 0, 26, 31, 12, 13, 7, 25, 1, 4, 24, 29, 21 ],
       "exit" : false,
-      "out-vars" : [ 29, 11, 25, 0, 26, 1, 13, 21, 31, 17, 24, 6, 7 ],
+      "out-vars" : [ 29, 21, 7, 13, 17, 25, 26, 1, 12, 0, 4, 24, 31 ],
       "decl-vars" : [ ],
       "line-start" : 993,
       "ast" : {
@@ -2002,9 +2002,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 42, 43 ],
-      "in-vars" : [ 25, 0, 31, 1, 13, 29, 11, 26, 17, 21, 24, 6, 7 ],
+      "in-vars" : [ 29, 17, 25, 0, 1, 4, 24, 31, 26, 21, 12, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 31, 1, 17, 21, 25, 0, 26, 13, 24, 6, 29, 7, 11 ],
+      "out-vars" : [ 25, 0, 26, 4, 31, 13, 17, 1, 24, 29, 21, 12, 7 ],
       "decl-vars" : [ ],
       "line-start" : 994,
       "ast" : {
@@ -2058,9 +2058,9 @@
     }, {
       "update-vars" : [ 31 ],
       "successors" : [ 45 ],
-      "in-vars" : [ 0, 21, 24, 29, 7, 25, 31, 26, 1, 17, 13, 6, 11 ],
+      "in-vars" : [ 29, 21, 17, 25, 26, 4, 24, 31, 12, 0, 1, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 31, 26, 17, 24, 6, 29, 25, 0, 7, 11, 21, 1, 13 ],
+      "out-vars" : [ 12, 7, 13, 0, 26, 31, 21, 24, 29, 17, 25, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 995,
       "ast" : {
@@ -2121,9 +2121,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 44, 45 ],
-      "in-vars" : [ 31, 26, 13, 21, 11, 25, 1, 17, 24, 6, 29, 7, 0 ],
+      "in-vars" : [ 1, 4, 24, 31, 21, 25, 0, 26, 13, 7, 17, 29, 12 ],
       "exit" : false,
-      "out-vars" : [ 21, 24, 6, 29, 7, 25, 0, 13, 11, 17, 31, 26, 1 ],
+      "out-vars" : [ 17, 0, 29, 21, 7, 12, 13, 25, 26, 1, 4, 24, 31 ],
       "decl-vars" : [ ],
       "line-start" : 996,
       "ast" : {
@@ -2177,9 +2177,9 @@
     }, {
       "update-vars" : [ 31 ],
       "successors" : [ 45 ],
-      "in-vars" : [ 1, 13, 6, 11, 29, 25, 0, 31, 26, 17, 21, 24, 7 ],
+      "in-vars" : [ 31, 29, 21, 7, 0, 26, 1, 4, 13, 17, 25, 24, 12 ],
       "exit" : false,
-      "out-vars" : [ 31, 24, 29, 11, 21, 6, 25, 0, 26, 1, 17, 13, 7 ],
+      "out-vars" : [ 17, 25, 0, 29, 21, 12, 13, 26, 1, 4, 24, 31, 7 ],
       "decl-vars" : [ ],
       "line-start" : 997,
       "ast" : {
@@ -2240,9 +2240,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 46, 52 ],
-      "in-vars" : [ 26, 13, 6, 11, 21, 24, 29, 25, 0, 31, 1, 17, 7 ],
+      "in-vars" : [ 0, 26, 1, 31, 29, 21, 12, 17, 7, 4, 24, 13, 25 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 7, 31, 0, 26, 17, 13, 21, 24, 29, 25, 11 ],
+      "out-vars" : [ 13, 25, 4, 29, 7, 24, 31, 21, 12, 17, 0, 26, 1 ],
       "decl-vars" : [ ],
       "line-start" : 999,
       "ast" : {
@@ -2337,13 +2337,13 @@
       "line-end" : 1007,
       "code" : "if off+size <= maxTinySize && c.tiny != 0 {\n\n\tx = unsafe.Pointer(c.tiny + off)\n\tc.tinyoffset = off + size\n\tc.local_tinyallocs++\n\tmp.mallocing = 0\n\treleasem(mp)\n\treturn x\n}",
       "entry" : false,
-      "use-vars" : [ 31, 0, 26 ]
+      "use-vars" : [ 0, 26, 31 ]
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 47 ],
-      "in-vars" : [ 21, 0, 31, 26 ],
+      "in-vars" : [ 0, 26, 31, 21 ],
       "exit" : false,
-      "out-vars" : [ 0, 31, 26, 27, 21 ],
+      "out-vars" : [ 21, 0, 26, 27, 31 ],
       "decl-vars" : [ ],
       "line-start" : 1001,
       "ast" : {
@@ -2430,7 +2430,7 @@
     }, {
       "update-vars" : [ 26 ],
       "successors" : [ 48 ],
-      "in-vars" : [ 0, 31, 26, 27, 21 ],
+      "in-vars" : [ 0, 26, 27, 31, 21 ],
       "exit" : false,
       "out-vars" : [ 21, 26, 27 ],
       "decl-vars" : [ ],
@@ -2657,9 +2657,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 53 ],
-      "in-vars" : [ 26, 17, 21, 24, 6, 29, 7, 25, 11, 1, 13, 0 ],
+      "in-vars" : [ 0, 26, 1, 4, 21, 12, 7, 17, 24, 29, 13, 25 ],
       "exit" : false,
-      "out-vars" : [ 35, 1, 21, 24, 7, 11, 26, 0, 17, 13, 6, 29, 25 ],
+      "out-vars" : [ 26, 1, 21, 12, 7, 17, 25, 0, 4, 24, 29, 35, 13 ],
       "decl-vars" : [ 35 ],
       "line-start" : 1009,
       "ast" : {
@@ -2719,9 +2719,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 54 ],
-      "in-vars" : [ 26, 21, 6, 29, 25, 0, 35, 1, 17, 13, 24, 7, 11 ],
+      "in-vars" : [ 26, 12, 35, 13, 25, 0, 1, 4, 24, 29, 21, 7, 17 ],
       "exit" : false,
-      "out-vars" : [ 26, 13, 6, 29, 7, 25, 0, 17, 21, 24, 11, 36, 1 ],
+      "out-vars" : [ 25, 0, 4, 29, 21, 12, 17, 26, 1, 36, 24, 7, 13 ],
       "decl-vars" : [ 36 ],
       "line-start" : 1010,
       "ast" : {
@@ -2774,9 +2774,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 55, 56 ],
-      "in-vars" : [ 26, 13, 24, 29, 7, 21, 6, 11, 25, 0, 36, 1, 17 ],
+      "in-vars" : [ 4, 24, 29, 21, 25, 26, 1, 12, 7, 13, 17, 0, 36 ],
       "exit" : false,
-      "out-vars" : [ 0, 36, 1, 21, 29, 11, 7, 25, 26, 17, 13, 24, 6 ],
+      "out-vars" : [ 21, 7, 26, 1, 0, 36, 4, 24, 29, 12, 17, 25, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1011,
       "ast" : {
@@ -2814,11 +2814,11 @@
       "entry" : false,
       "use-vars" : [ 36 ]
     }, {
-      "update-vars" : [ 36, 24 ],
+      "update-vars" : [ 24, 36 ],
       "successors" : [ 56 ],
-      "in-vars" : [ 13, 21, 6, 11, 25, 0, 17, 29, 7, 26, 1 ],
+      "in-vars" : [ 26, 21, 12, 25, 0, 1, 4, 29, 7, 13, 17 ],
       "exit" : false,
-      "out-vars" : [ 21, 24, 6, 11, 25, 17, 13, 1, 29, 7, 0, 26, 36 ],
+      "out-vars" : [ 29, 36, 4, 24, 26, 1, 21, 12, 7, 17, 25, 0, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1012,
       "ast" : {
@@ -2899,9 +2899,9 @@
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 57 ],
-      "in-vars" : [ 1, 17, 13, 24, 11, 0, 26, 36, 21, 6, 29, 7, 25 ],
+      "in-vars" : [ 0, 1, 36, 4, 24, 29, 21, 25, 7, 13, 12, 26, 17 ],
       "exit" : false,
-      "out-vars" : [ 21, 24, 6, 29, 25, 26, 17, 27, 11, 0, 1, 13, 7 ],
+      "out-vars" : [ 25, 0, 4, 21, 12, 29, 7, 13, 17, 26, 1, 27, 24 ],
       "decl-vars" : [ ],
       "line-start" : 1014,
       "ast" : {
@@ -2960,17 +2960,17 @@
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 58 ],
-      "in-vars" : [ 24, 25, 26, 17, 27, 21, 7, 11, 0, 1, 13, 6, 29 ],
+      "in-vars" : [ 29, 21, 7, 13, 26, 1, 0, 4, 27, 24, 12, 17, 25 ],
       "exit" : false,
-      "out-vars" : [ 27, 24, 11, 25, 0, 1, 17, 13, 26, 21, 6, 29, 7 ],
+      "out-vars" : [ 25, 0, 1, 27, 29, 21, 13, 17, 4, 24, 12, 7, 26 ],
       "decl-vars" : [ ],
       "line-start" : 1015,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 26,
+          "go-type" : 27,
           "index" : {
-            "go-type" : 20,
+            "go-type" : 32,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -2982,20 +2982,20 @@
             "coerced-to" : {
               "contained" : {
                 "element" : {
-                  "go-type" : 26,
+                  "go-type" : 27,
                   "kind" : "type",
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 26,
+                    "go-type" : 27,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "uint64"
                   }
                 },
-                "go-type" : 153,
+                "go-type" : 154,
                 "kind" : "type",
                 "length" : {
-                  "go-type" : 154,
+                  "go-type" : 155,
                   "kind" : "constant",
                   "value" : {
                     "type" : "INT",
@@ -3004,11 +3004,11 @@
                 },
                 "type" : "array"
               },
-              "go-type" : 152,
+              "go-type" : 153,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 152,
+            "go-type" : 153,
             "kind" : "expression",
             "target" : {
               "go-type" : 11,
@@ -3026,7 +3026,7 @@
           "type" : "index"
         } ],
         "right" : [ {
-          "go-type" : 26,
+          "go-type" : 27,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -3043,17 +3043,17 @@
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 59 ],
-      "in-vars" : [ 1, 13, 27, 24, 6, 11, 0, 26, 17, 21, 29, 7, 25 ],
+      "in-vars" : [ 25, 29, 4, 27, 24, 21, 17, 0, 26, 1, 12, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 7, 11, 25, 0, 17, 21, 24, 29, 26, 1, 13, 27, 6 ],
+      "out-vars" : [ 17, 25, 26, 24, 29, 21, 0, 1, 4, 27, 12, 7, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1016,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 26,
+          "go-type" : 27,
           "index" : {
-            "go-type" : 20,
+            "go-type" : 32,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -3065,20 +3065,20 @@
             "coerced-to" : {
               "contained" : {
                 "element" : {
-                  "go-type" : 26,
+                  "go-type" : 27,
                   "kind" : "type",
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 26,
+                    "go-type" : 27,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "uint64"
                   }
                 },
-                "go-type" : 153,
+                "go-type" : 154,
                 "kind" : "type",
                 "length" : {
-                  "go-type" : 154,
+                  "go-type" : 155,
                   "kind" : "constant",
                   "value" : {
                     "type" : "INT",
@@ -3087,11 +3087,11 @@
                 },
                 "type" : "array"
               },
-              "go-type" : 152,
+              "go-type" : 153,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 152,
+            "go-type" : 153,
             "kind" : "expression",
             "target" : {
               "go-type" : 11,
@@ -3109,7 +3109,7 @@
           "type" : "index"
         } ],
         "right" : [ {
-          "go-type" : 26,
+          "go-type" : 27,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -3126,9 +3126,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 60, 62 ],
-      "in-vars" : [ 0, 17, 27, 21, 29, 7, 11, 25, 1, 13, 24, 6, 26 ],
+      "in-vars" : [ 0, 26, 1, 4, 24, 12, 17, 25, 21, 7, 13, 27, 29 ],
       "exit" : false,
-      "out-vars" : [ 17, 13, 27, 24, 25, 0, 26, 1, 21, 6, 29, 7, 11 ],
+      "out-vars" : [ 27, 12, 13, 17, 25, 0, 1, 21, 7, 26, 4, 24, 29 ],
       "decl-vars" : [ ],
       "line-start" : 1019,
       "ast" : {
@@ -3224,9 +3224,9 @@
     }, {
       "update-vars" : [ 26 ],
       "successors" : [ 61 ],
-      "in-vars" : [ 21, 24, 6, 11, 25, 1, 17, 27, 7, 0, 26, 13, 29 ],
+      "in-vars" : [ 17, 26, 27, 29, 21, 12, 25, 0, 1, 4, 24, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 29, 7, 25, 0, 26, 1, 17, 24, 13, 27, 21, 6, 11 ],
+      "out-vars" : [ 12, 7, 13, 17, 25, 4, 24, 21, 0, 26, 1, 27, 29 ],
       "decl-vars" : [ ],
       "line-start" : 1020,
       "ast" : {
@@ -3290,9 +3290,9 @@
     }, {
       "update-vars" : [ 26 ],
       "successors" : [ 62 ],
-      "in-vars" : [ 25, 26, 1, 24, 7, 0, 17, 13, 27, 21, 6, 29, 11 ],
+      "in-vars" : [ 12, 7, 13, 25, 0, 26, 27, 24, 29, 21, 17, 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 26, 17, 13, 25, 1, 27, 21, 24, 6, 29, 7, 11 ],
+      "out-vars" : [ 17, 4, 27, 24, 21, 7, 25, 26, 1, 29, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1021,
       "ast" : {
@@ -3340,9 +3340,9 @@
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 83 ],
-      "in-vars" : [ 29, 11, 1, 13, 21, 24, 6, 7, 25, 26, 17, 27 ],
+      "in-vars" : [ 27, 29, 21, 17, 1, 4, 24, 12, 7, 13, 25, 26 ],
       "exit" : false,
-      "out-vars" : [ 26, 1, 13, 21, 24, 6, 11, 25, 0, 17, 27, 29, 7 ],
+      "out-vars" : [ 4, 27, 29, 21, 12, 7, 13, 1, 25, 0, 26, 24, 17 ],
       "decl-vars" : [ ],
       "line-start" : 1023,
       "ast" : {
@@ -3376,10 +3376,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 64 ],
-      "in-vars" : [ 11, 12, 25, 9, 24, 29, 8, 13, 2, 7, 6, 0, 26, 1, 21, 17 ],
+      "in-vars" : [ 25, 24, 29, 12, 0, 1, 10, 6, 7, 17, 4, 21, 2, 9, 26, 13 ],
       "exit" : false,
-      "out-vars" : [ 7, 0, 24, 6, 9, 2, 8, 1, 17, 12, 26, 21, 29, 25, 13, 11 ],
-      "decl-vars" : [ 37 ],
+      "out-vars" : [ 17, 4, 29, 2, 6, 7, 25, 9, 1, 12, 0, 24, 13, 26, 10, 21 ],
+      "decl-vars" : [ 38 ],
       "line-start" : 1025,
       "ast" : {
         "kind" : "statement",
@@ -3419,9 +3419,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 65, 66 ],
-      "in-vars" : [ 21, 24, 29, 8, 13, 9, 6, 0, 1, 2, 7, 11, 12, 25, 26, 17 ],
+      "in-vars" : [ 25, 10, 12, 17, 26, 1, 29, 21, 2, 7, 9, 13, 4, 24, 6, 0 ],
       "exit" : false,
-      "out-vars" : [ 12, 1, 21, 7, 0, 2, 9, 6, 29, 11, 25, 13, 17, 24, 26, 8 ],
+      "out-vars" : [ 17, 25, 13, 0, 1, 21, 2, 7, 9, 10, 4, 24, 6, 26, 29, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1026,
       "ast" : {
@@ -3459,11 +3459,11 @@
       "entry" : false,
       "use-vars" : [ 0 ]
     }, {
-      "update-vars" : [ 37 ],
+      "update-vars" : [ 38 ],
       "successors" : [ 67 ],
-      "in-vars" : [ 1, 17, 13, 6, 29, 7, 0, 26, 9, 21, 25, 2, 11, 12, 24 ],
+      "in-vars" : [ 7, 29, 2, 12, 21, 0, 1, 24, 25, 9, 13, 6, 17, 26, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 29, 2, 25, 37, 17, 11, 26, 1, 21, 24, 7, 13, 9 ],
+      "out-vars" : [ 26, 13, 25, 38, 29, 12, 6, 7, 17, 1, 4, 24, 2, 21 ],
       "decl-vars" : [ ],
       "line-start" : 1027,
       "ast" : {
@@ -3476,7 +3476,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "sizeclass",
-            "variable" : 37
+            "variable" : 38
           }
         } ],
         "right" : [ {
@@ -3541,31 +3541,31 @@
           },
           "kind" : "expression",
           "target" : {
-            "go-type" : 31,
+            "go-type" : 23,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "size_to_class8",
-              "variable" : 12
+              "variable" : 9
             }
           },
           "type" : "index"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 37 ],
+      "assign-vars" : [ 38 ],
       "line-end" : 1027,
       "code" : "sizeclass = size_to_class8[(size+smallSizeDiv-1)/smallSizeDiv]",
       "entry" : false,
-      "use-vars" : [ 12, 0 ]
+      "use-vars" : [ 0, 9 ]
     }, {
-      "update-vars" : [ 37 ],
+      "update-vars" : [ 38 ],
       "successors" : [ 67 ],
-      "in-vars" : [ 26, 17, 6, 11, 13, 2, 25, 8, 9, 7, 0, 1, 21, 24, 29 ],
+      "in-vars" : [ 13, 1, 0, 24, 29, 12, 7, 25, 6, 4, 26, 10, 21, 2, 17 ],
       "exit" : false,
-      "out-vars" : [ 9, 24, 7, 25, 26, 1, 11, 37, 17, 6, 2, 13, 21, 29 ],
+      "out-vars" : [ 12, 17, 13, 6, 1, 24, 2, 26, 38, 4, 29, 21, 7, 25 ],
       "decl-vars" : [ ],
       "line-start" : 1029,
       "ast" : {
@@ -3578,7 +3578,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "sizeclass",
-            "variable" : 37
+            "variable" : 38
           }
         } ],
         "right" : [ {
@@ -3657,31 +3657,31 @@
           },
           "kind" : "expression",
           "target" : {
-            "go-type" : 21,
+            "go-type" : 24,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "size_to_class128",
-              "variable" : 8
+              "variable" : 10
             }
           },
           "type" : "index"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 37 ],
+      "assign-vars" : [ 38 ],
       "line-end" : 1029,
       "code" : "sizeclass = size_to_class128[(size-smallSizeMax+largeSizeDiv-1)/largeSizeDiv]",
       "entry" : false,
-      "use-vars" : [ 0, 8 ]
+      "use-vars" : [ 0, 10 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 68 ],
-      "in-vars" : [ 9, 24, 29, 26, 1, 21, 7, 25, 11, 37, 13, 2, 6, 17 ],
+      "in-vars" : [ 25, 26, 2, 12, 38, 4, 6, 21, 7, 13, 17, 1, 24, 29 ],
       "exit" : false,
-      "out-vars" : [ 26, 17, 29, 37, 1, 21, 7, 25, 2, 6, 11, 0, 13, 24 ],
+      "out-vars" : [ 38, 26, 29, 25, 1, 4, 2, 12, 7, 17, 0, 24, 21, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1031,
       "ast" : {
@@ -3712,7 +3712,7 @@
           "go-type" : 2,
           "kind" : "expression",
           "target" : {
-            "go-type" : 23,
+            "go-type" : 21,
             "index" : {
               "go-type" : 8,
               "kind" : "expression",
@@ -3721,19 +3721,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "sizeclass",
-                "variable" : 37
+                "variable" : 38
               }
             },
             "kind" : "expression",
             "target" : {
-              "go-type" : 22,
+              "go-type" : 20,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "class_to_size",
-                "variable" : 9
+                "variable" : 6
               }
             },
             "type" : "index"
@@ -3746,14 +3746,14 @@
       "line-end" : 1031,
       "code" : "size = uintptr(class_to_size[sizeclass])",
       "entry" : false,
-      "use-vars" : [ 9, 37 ]
+      "use-vars" : [ 6, 38 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 69 ],
-      "in-vars" : [ 25, 0, 37, 13, 24, 29, 7, 26, 17, 2, 11, 1, 21, 6 ],
+      "in-vars" : [ 26, 1, 4, 29, 12, 17, 0, 24, 2, 7, 25, 38, 21, 13 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 26, 13, 29, 38, 11, 1, 24, 17, 7, 25, 0, 21 ],
-      "decl-vars" : [ 38 ],
+      "out-vars" : [ 26, 1, 4, 17, 24, 29, 12, 13, 25, 0, 39, 21, 2, 7 ],
+      "decl-vars" : [ 39 ],
       "line-start" : 1032,
       "ast" : {
         "kind" : "statement",
@@ -3776,7 +3776,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "sizeclass",
-              "variable" : 37
+              "variable" : 38
             }
           }, {
             "go-type" : 13,
@@ -3791,7 +3791,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 155,
+            "go-type" : 156,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -3811,14 +3811,14 @@
       "line-end" : 1032,
       "code" : "spc := makeSpanClass(sizeclass, noscan)",
       "entry" : false,
-      "use-vars" : [ 37, 29 ]
+      "use-vars" : [ 29, 38 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 70 ],
-      "in-vars" : [ 6, 29, 38, 0, 1, 17, 7, 13, 21, 2, 24, 11, 25, 26 ],
+      "in-vars" : [ 25, 4, 29, 2, 12, 17, 0, 1, 13, 26, 24, 39, 21, 7 ],
       "exit" : false,
-      "out-vars" : [ 25, 13, 2, 29, 26, 39, 38, 0, 17, 7, 1, 21, 24, 6, 11 ],
-      "decl-vars" : [ 39 ],
+      "out-vars" : [ 24, 7, 13, 25, 1, 21, 26, 39, 12, 0, 4, 29, 2, 17, 40 ],
+      "decl-vars" : [ 40 ],
       "line-start" : 1033,
       "ast" : {
         "kind" : "statement",
@@ -3842,7 +3842,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "spc",
-              "variable" : 38
+              "variable" : 39
             }
           },
           "kind" : "expression",
@@ -3876,14 +3876,14 @@
       "line-end" : 1033,
       "code" : "span := c.alloc[spc]",
       "entry" : false,
-      "use-vars" : [ 38, 26 ]
+      "use-vars" : [ 39, 26 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 71 ],
-      "in-vars" : [ 1, 2, 6, 29, 7, 11, 0, 24, 38, 25, 13, 21, 39, 17, 26 ],
+      "in-vars" : [ 25, 0, 4, 2, 39, 29, 21, 7, 26, 24, 40, 12, 17, 1, 13 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 7, 11, 25, 40, 21, 24, 6, 29, 17, 13, 39, 0, 26, 38 ],
-      "decl-vars" : [ 40 ],
+      "out-vars" : [ 41, 40, 21, 25, 0, 1, 12, 17, 4, 24, 2, 13, 26, 39, 29, 7 ],
+      "decl-vars" : [ 41 ],
       "line-start" : 1034,
       "ast" : {
         "kind" : "statement",
@@ -3906,7 +3906,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "span",
-              "variable" : 39
+              "variable" : 40
             }
           } ],
           "ellipsis" : false,
@@ -3931,13 +3931,13 @@
       "line-end" : 1034,
       "code" : "v := nextFreeFast(span)",
       "entry" : false,
-      "use-vars" : [ 39 ]
+      "use-vars" : [ 40 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 72, 73 ],
-      "in-vars" : [ 0, 26, 17, 21, 39, 6, 29, 38, 40, 13, 2, 7, 11, 25, 1, 24 ],
+      "in-vars" : [ 17, 4, 7, 0, 26, 41, 2, 21, 13, 39, 29, 12, 25, 1, 24, 40 ],
       "exit" : false,
-      "out-vars" : [ 0, 26, 1, 38, 11, 25, 13, 21, 39, 24, 29, 7, 17, 40, 2, 6 ],
+      "out-vars" : [ 41, 2, 39, 21, 12, 17, 25, 40, 29, 26, 1, 24, 13, 0, 4, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1035,
       "ast" : {
@@ -3952,7 +3952,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "v",
-              "variable" : 40
+              "variable" : 41
             }
           },
           "operator" : "==",
@@ -3973,13 +3973,13 @@
       "line-end" : 1037,
       "code" : "if v == 0 {\n\tv, span, shouldhelpgc = c.nextFree(spc)\n}",
       "entry" : false,
-      "use-vars" : [ 40 ]
+      "use-vars" : [ 41 ]
     }, {
-      "update-vars" : [ 24, 39, 40 ],
+      "update-vars" : [ 24, 40, 41 ],
       "successors" : [ 73 ],
-      "in-vars" : [ 0, 1, 21, 2, 6, 29, 38, 25, 26, 17, 13, 7, 11 ],
+      "in-vars" : [ 26, 39, 29, 21, 13, 12, 7, 17, 25, 0, 1, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 40, 24, 29, 7, 26, 1, 39, 11, 25, 17, 13, 21, 2, 6 ],
+      "out-vars" : [ 25, 4, 40, 21, 0, 2, 12, 13, 17, 26, 1, 41, 29, 7, 24 ],
       "decl-vars" : [ ],
       "line-start" : 1036,
       "ast" : {
@@ -3992,7 +3992,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "v",
-            "variable" : 40
+            "variable" : 41
           }
         }, {
           "go-type" : 84,
@@ -4002,7 +4002,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "span",
-            "variable" : 39
+            "variable" : 40
           }
         }, {
           "go-type" : 13,
@@ -4024,7 +4024,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "spc",
-              "variable" : 38
+              "variable" : 39
             }
           } ],
           "ellipsis" : false,
@@ -4056,17 +4056,17 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 40, 24, 39 ],
+      "assign-vars" : [ 24, 41, 40 ],
       "line-end" : 1036,
       "code" : "v, span, shouldhelpgc = c.nextFree(spc)",
       "entry" : false,
-      "use-vars" : [ 26, 38 ]
+      "use-vars" : [ 39, 26 ]
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 74 ],
-      "in-vars" : [ 11, 26, 39, 29, 17, 21, 2, 25, 0, 1, 13, 6, 7, 40, 24 ],
+      "in-vars" : [ 21, 2, 1, 24, 12, 13, 17, 26, 40, 29, 7, 25, 0, 4, 41 ],
       "exit" : false,
-      "out-vars" : [ 0, 27, 24, 6, 29, 26, 1, 17, 21, 39, 25, 40, 13, 2, 7, 11 ],
+      "out-vars" : [ 26, 1, 4, 27, 41, 24, 7, 2, 0, 17, 25, 40, 29, 21, 12, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1038,
       "ast" : {
@@ -4110,7 +4110,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "v",
-              "variable" : 40
+              "variable" : 41
             }
           },
           "type" : "cast"
@@ -4121,13 +4121,13 @@
       "line-end" : 1038,
       "code" : "x = unsafe.Pointer(v)",
       "entry" : false,
-      "use-vars" : [ 40 ]
+      "use-vars" : [ 41 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 75, 83 ],
-      "in-vars" : [ 0, 27, 39, 25, 29, 11, 26, 13, 21, 24, 6, 7, 40, 1, 17, 2 ],
+      "in-vars" : [ 25, 0, 29, 17, 1, 21, 2, 27, 41, 12, 7, 13, 26, 4, 24, 40 ],
       "exit" : false,
-      "out-vars" : [ 24, 21, 25, 26, 1, 17, 27, 0, 29, 40, 13, 6, 7, 11 ],
+      "out-vars" : [ 17, 0, 1, 4, 29, 7, 13, 25, 27, 24, 12, 26, 41, 21 ],
       "decl-vars" : [ ],
       "line-start" : 1039,
       "ast" : {
@@ -4154,7 +4154,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "needzero",
-                "variable" : 41
+                "variable" : 42
               },
               "go-type" : 8,
               "kind" : "expression",
@@ -4166,7 +4166,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "span",
-                  "variable" : 39
+                  "variable" : 40
                 }
               },
               "type" : "selector"
@@ -4191,13 +4191,13 @@
       "line-end" : 1041,
       "code" : "if needzero && span.needzero != 0 {\n\tmemclrNoHeapPointers(unsafe.Pointer(v), size)\n}",
       "entry" : false,
-      "use-vars" : [ 2, 39 ]
+      "use-vars" : [ 2, 40 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 83 ],
-      "in-vars" : [ 25, 40, 29, 26, 13, 21, 1, 17, 7, 11, 0, 27, 24, 6 ],
+      "in-vars" : [ 27, 7, 25, 4, 21, 13, 17, 29, 24, 26, 1, 41, 12, 0 ],
       "exit" : false,
-      "out-vars" : [ 24, 11, 0, 27, 1, 17, 13, 21, 6, 29, 25, 26, 7 ],
+      "out-vars" : [ 17, 1, 29, 21, 12, 13, 25, 0, 26, 4, 27, 24, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1040,
       "ast" : {
@@ -4232,7 +4232,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "v",
-                "variable" : 40
+                "variable" : 41
               }
             },
             "type" : "cast"
@@ -4249,7 +4249,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 158,
+            "go-type" : 159,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4268,14 +4268,14 @@
       "line-end" : 1040,
       "code" : "memclrNoHeapPointers(unsafe.Pointer(v), size)",
       "entry" : false,
-      "use-vars" : [ 0, 40 ]
+      "use-vars" : [ 41, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 77 ],
-      "in-vars" : [ 26, 1, 13, 11, 29, 7, 25, 0, 17, 21, 2, 6 ],
+      "in-vars" : [ 25, 1, 4, 2, 7, 13, 17, 0, 26, 29, 21, 12 ],
       "exit" : false,
-      "out-vars" : [ 17, 2, 29, 11, 26, 42, 1, 21, 6, 7, 25, 0, 13 ],
-      "decl-vars" : [ 42 ],
+      "out-vars" : [ 1, 2, 7, 13, 17, 25, 0, 43, 12, 26, 4, 29, 21 ],
+      "decl-vars" : [ 43 ],
       "line-start" : 1044,
       "ast" : {
         "kind" : "statement",
@@ -4320,9 +4320,9 @@
     }, {
       "update-vars" : [ 24 ],
       "successors" : [ 78 ],
-      "in-vars" : [ 6, 25, 0, 26, 42, 17, 13, 2, 29, 7, 11, 1, 21 ],
+      "in-vars" : [ 21, 12, 17, 25, 0, 26, 1, 13, 43, 4, 29, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 13, 6, 11, 25, 26, 1, 2, 24, 17, 21, 29, 0, 42, 7 ],
+      "out-vars" : [ 12, 0, 26, 21, 25, 1, 4, 29, 2, 43, 24, 7, 13, 17 ],
       "decl-vars" : [ ],
       "line-start" : 1045,
       "ast" : {
@@ -4356,9 +4356,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 79 ],
-      "in-vars" : [ 2, 6, 0, 26, 1, 13, 21, 24, 11, 42, 25, 17, 29, 7 ],
+      "in-vars" : [ 17, 25, 0, 29, 12, 43, 26, 1, 24, 2, 7, 4, 21, 13 ],
       "exit" : false,
-      "out-vars" : [ 21, 24, 6, 42, 17, 1, 13, 29, 7, 11, 25, 26 ],
+      "out-vars" : [ 25, 26, 1, 12, 13, 17, 43, 4, 24, 29, 21, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1046,
       "ast" : {
@@ -4376,7 +4376,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "s",
-                  "variable" : 42
+                  "variable" : 43
                 }
               } ],
               "right" : [ {
@@ -4413,7 +4413,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 162,
+                  "go-type" : 163,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -4438,7 +4438,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 160,
+            "go-type" : 161,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4457,13 +4457,13 @@
       "line-end" : 1048,
       "code" : "systemstack(func() {\n\ts = largeAlloc(size, needzero, noscan)\n})",
       "entry" : false,
-      "use-vars" : [ 2, 29, 42, 0 ]
+      "use-vars" : [ 29, 43, 0, 2 ]
     }, {
-      "update-vars" : [ 42 ],
+      "update-vars" : [ 43 ],
       "successors" : [ 80 ],
-      "in-vars" : [ 21, 24, 7, 25, 42, 17, 13, 11, 26, 1, 6, 29 ],
+      "in-vars" : [ 24, 29, 13, 1, 25, 43, 26, 4, 21, 12, 7, 17 ],
       "exit" : false,
-      "out-vars" : [ 25, 42, 1, 17, 13, 21, 24, 6, 7, 26, 29, 11 ],
+      "out-vars" : [ 17, 4, 29, 12, 13, 21, 7, 25, 43, 26, 1, 24 ],
       "decl-vars" : [ ],
       "line-start" : 1049,
       "ast" : {
@@ -4473,7 +4473,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "freeindex",
-            "variable" : 43
+            "variable" : 44
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -4485,7 +4485,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "s",
-              "variable" : 42
+              "variable" : 43
             }
           },
           "type" : "selector"
@@ -4504,13 +4504,13 @@
       "line-end" : 1049,
       "code" : "s.freeindex = 1",
       "entry" : false,
-      "use-vars" : [ 42 ]
+      "use-vars" : [ 43 ]
     }, {
-      "update-vars" : [ 42 ],
+      "update-vars" : [ 43 ],
       "successors" : [ 81 ],
-      "in-vars" : [ 26, 21, 29, 7, 11, 25, 1, 17, 13, 24, 6, 42 ],
+      "in-vars" : [ 7, 13, 1, 29, 21, 26, 4, 24, 12, 17, 25, 43 ],
       "exit" : false,
-      "out-vars" : [ 7, 26, 13, 21, 24, 6, 11, 25, 42, 1, 17, 29 ],
+      "out-vars" : [ 29, 12, 13, 17, 26, 4, 24, 7, 25, 43, 1, 21 ],
       "decl-vars" : [ ],
       "line-start" : 1050,
       "ast" : {
@@ -4520,9 +4520,9 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "allocCount",
-            "variable" : 44
+            "variable" : 45
           },
-          "go-type" : 23,
+          "go-type" : 21,
           "kind" : "expression",
           "target" : {
             "go-type" : 84,
@@ -4532,13 +4532,13 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "s",
-              "variable" : 42
+              "variable" : 43
             }
           },
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 23,
+          "go-type" : 21,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -4551,13 +4551,13 @@
       "line-end" : 1050,
       "code" : "s.allocCount = 1",
       "entry" : false,
-      "use-vars" : [ 42 ]
+      "use-vars" : [ 43 ]
     }, {
       "update-vars" : [ 27 ],
       "successors" : [ 82 ],
-      "in-vars" : [ 24, 6, 29, 42, 17, 21, 13, 7, 11, 25, 26, 1 ],
+      "in-vars" : [ 7, 13, 43, 1, 4, 29, 21, 12, 17, 25, 26, 24 ],
       "exit" : false,
-      "out-vars" : [ 21, 24, 11, 25, 42, 13, 27, 6, 29, 7, 26, 1, 17 ],
+      "out-vars" : [ 17, 26, 27, 29, 21, 13, 25, 43, 1, 4, 24, 12, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1051,
       "ast" : {
@@ -4603,7 +4603,7 @@
                 "kind" : "ident",
                 "value" : "base"
               },
-              "go-type" : 165,
+              "go-type" : 166,
               "kind" : "expression",
               "target" : {
                 "go-type" : 84,
@@ -4613,7 +4613,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "s",
-                  "variable" : 42
+                  "variable" : 43
                 }
               },
               "type" : "selector"
@@ -4630,13 +4630,13 @@
       "line-end" : 1051,
       "code" : "x = unsafe.Pointer(s.base())",
       "entry" : false,
-      "use-vars" : [ 42 ]
+      "use-vars" : [ 43 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 83 ],
-      "in-vars" : [ 26, 42, 17, 27, 21, 24, 6, 25, 7, 11, 29, 13, 1 ],
+      "in-vars" : [ 4, 27, 24, 29, 17, 25, 43, 12, 7, 13, 26, 1, 21 ],
       "exit" : false,
-      "out-vars" : [ 17, 27, 21, 1, 0, 26, 13, 24, 6, 29, 7, 25, 11 ],
+      "out-vars" : [ 1, 4, 27, 24, 29, 21, 12, 26, 7, 25, 0, 13, 17 ],
       "decl-vars" : [ ],
       "line-start" : 1052,
       "ast" : {
@@ -4657,7 +4657,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "elemsize",
-            "variable" : 45
+            "variable" : 47
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -4669,7 +4669,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "s",
-              "variable" : 42
+              "variable" : 43
             }
           },
           "type" : "selector"
@@ -4680,14 +4680,14 @@
       "line-end" : 1052,
       "code" : "size = s.elemsize",
       "entry" : false,
-      "use-vars" : [ 42 ]
+      "use-vars" : [ 43 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 84 ],
-      "in-vars" : [ 11, 0, 13, 27, 21, 29, 7, 25, 26, 1, 17, 24, 6 ],
+      "in-vars" : [ 25, 1, 12, 13, 29, 21, 17, 0, 26, 4, 27, 24, 7 ],
       "exit" : false,
-      "out-vars" : [ 27, 11, 17, 26, 29, 7, 25, 13, 21, 24, 6, 46, 1, 0 ],
-      "decl-vars" : [ 46 ],
+      "out-vars" : [ 48, 21, 29, 17, 1, 24, 13, 0, 4, 27, 12, 7, 25, 26 ],
+      "decl-vars" : [ 48 ],
       "line-start" : 1055,
       "ast" : {
         "kind" : "statement",
@@ -4727,9 +4727,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 85, 93 ],
-      "in-vars" : [ 29, 0, 46, 17, 27, 21, 7, 25, 26, 1, 13, 6, 11, 24 ],
+      "in-vars" : [ 7, 17, 25, 26, 21, 1, 27, 29, 0, 4, 24, 13, 48, 12 ],
       "exit" : false,
-      "out-vars" : [ 25, 0, 17, 13, 27, 24, 6, 26, 46, 1, 21, 7, 11 ],
+      "out-vars" : [ 1, 4, 27, 48, 21, 12, 25, 26, 24, 7, 13, 17, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1056,
       "ast" : {
@@ -4761,9 +4761,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 86, 87 ],
-      "in-vars" : [ 6, 7, 25, 0, 13, 21, 27, 24, 11, 26, 46, 1, 17 ],
+      "in-vars" : [ 17, 25, 26, 27, 48, 24, 21, 0, 1, 4, 12, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 46, 17, 27, 24, 7, 0, 26, 1, 13, 21, 6, 25 ],
+      "out-vars" : [ 21, 26, 27, 48, 24, 4, 12, 7, 17, 25, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1063,
       "ast" : {
@@ -4790,7 +4790,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "deferType",
-              "variable" : 11
+              "variable" : 13
             }
           },
           "type" : "binary"
@@ -4802,13 +4802,13 @@
       "line-end" : 1065,
       "code" : "if typ == deferType {\n\tdataSize = unsafe.Sizeof(_defer{})\n}",
       "entry" : false,
-      "use-vars" : [ 1, 11 ]
+      "use-vars" : [ 1, 13 ]
     }, {
       "update-vars" : [ 25 ],
       "successors" : [ 87 ],
-      "in-vars" : [ 1, 17, 27, 21, 6, 7, 26, 46, 13, 24, 0 ],
+      "in-vars" : [ 17, 1, 48, 24, 12, 7, 0, 26, 4, 27, 21 ],
       "exit" : false,
-      "out-vars" : [ 17, 13, 21, 6, 7, 25, 0, 46, 24, 26, 1, 27 ],
+      "out-vars" : [ 0, 48, 24, 4, 27, 21, 12, 17, 25, 26, 1, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1064,
       "ast" : {
@@ -4842,9 +4842,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 88 ],
-      "in-vars" : [ 46, 1, 17, 21, 6, 0, 26, 13, 27, 24, 7, 25 ],
+      "in-vars" : [ 24, 21, 12, 25, 26, 1, 4, 27, 7, 17, 0, 48 ],
       "exit" : false,
-      "out-vars" : [ 0, 26, 46, 17, 27, 7, 25, 13, 21, 24, 6, 1 ],
+      "out-vars" : [ 1, 27, 0, 26, 4, 48, 24, 21, 12, 7, 17, 25 ],
       "decl-vars" : [ ],
       "line-start" : 1066,
       "ast" : {
@@ -4910,7 +4910,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 166,
+            "go-type" : 168,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4929,13 +4929,13 @@
       "line-end" : 1066,
       "code" : "heapBitsSetType(uintptr(x), size, dataSize, typ)",
       "entry" : false,
-      "use-vars" : [ 0, 25, 1, 27 ]
+      "use-vars" : [ 25, 1, 27, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 89, 91 ],
-      "in-vars" : [ 13, 24, 6, 25, 26, 46, 1, 7, 0, 17, 27, 21 ],
+      "in-vars" : [ 25, 26, 27, 48, 7, 17, 0, 1, 4, 24, 21, 12 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 25, 26, 13, 21, 27, 24, 0, 46, 1, 17 ],
+      "out-vars" : [ 48, 24, 12, 0, 26, 1, 27, 21, 7, 17, 25, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1067,
       "ast" : {
@@ -4959,7 +4959,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "size",
-              "variable" : 47
+              "variable" : 49
             },
             "go-type" : 2,
             "kind" : "expression",
@@ -4985,13 +4985,13 @@
       "line-end" : 1076,
       "code" : "if dataSize > typ.size {\n\n\tif typ.ptrdata != 0 {\n\t\tscanSize = dataSize - typ.size + typ.ptrdata\n\t}\n} else {\n\tscanSize = typ.ptrdata\n}",
       "entry" : false,
-      "use-vars" : [ 1, 25 ]
+      "use-vars" : [ 25, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 90, 92 ],
-      "in-vars" : [ 25, 0, 46, 1, 13, 24, 7, 26, 17, 27, 21, 6 ],
+      "in-vars" : [ 27, 48, 7, 25, 1, 26, 4, 24, 21, 12, 17, 0 ],
       "exit" : false,
-      "out-vars" : [ 13, 27, 6, 7, 25, 26, 17, 21, 24, 0, 46, 1 ],
+      "out-vars" : [ 7, 17, 25, 1, 4, 24, 21, 12, 0, 26, 27, 48 ],
       "decl-vars" : [ ],
       "line-start" : 1071,
       "ast" : {
@@ -5040,11 +5040,11 @@
       "entry" : false,
       "use-vars" : [ 1 ]
     }, {
-      "update-vars" : [ 46 ],
+      "update-vars" : [ 48 ],
       "successors" : [ 92 ],
-      "in-vars" : [ 1, 17, 27, 21, 24, 25, 0, 26, 13, 6, 7 ],
+      "in-vars" : [ 12, 7, 17, 25, 1, 27, 24, 21, 0, 26, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 26, 27, 21, 6, 7, 25, 46, 1, 17, 13, 24 ],
+      "out-vars" : [ 21, 12, 7, 0, 1, 4, 27, 48, 24, 17, 25, 26 ],
       "decl-vars" : [ ],
       "line-start" : 1072,
       "ast" : {
@@ -5057,7 +5057,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "scanSize",
-            "variable" : 46
+            "variable" : 48
           }
         } ],
         "right" : [ {
@@ -5083,7 +5083,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "size",
-                "variable" : 47
+                "variable" : 49
               },
               "go-type" : 2,
               "kind" : "expression",
@@ -5129,17 +5129,17 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 46 ],
+      "assign-vars" : [ 48 ],
       "line-end" : 1072,
       "code" : "scanSize = dataSize - typ.size + typ.ptrdata",
       "entry" : false,
       "use-vars" : [ 25, 1 ]
     }, {
-      "update-vars" : [ 46 ],
+      "update-vars" : [ 48 ],
       "successors" : [ 92 ],
-      "in-vars" : [ 25, 17, 7, 6, 0, 26, 1, 13, 27, 21, 24 ],
+      "in-vars" : [ 1, 12, 7, 17, 26, 4, 27, 24, 21, 25, 0 ],
       "exit" : false,
-      "out-vars" : [ 17, 6, 27, 21, 25, 0, 26, 46, 1, 13, 24, 7 ],
+      "out-vars" : [ 1, 17, 25, 0, 26, 4, 27, 48, 24, 21, 12, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1075,
       "ast" : {
@@ -5152,7 +5152,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "scanSize",
-            "variable" : 46
+            "variable" : 48
           }
         } ],
         "right" : [ {
@@ -5179,7 +5179,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 46 ],
+      "assign-vars" : [ 48 ],
       "line-end" : 1075,
       "code" : "scanSize = typ.ptrdata",
       "entry" : false,
@@ -5187,9 +5187,9 @@
     }, {
       "update-vars" : [ 26 ],
       "successors" : [ 93 ],
-      "in-vars" : [ 27, 24, 25, 46, 17, 13, 6, 7, 0, 26, 1, 21 ],
+      "in-vars" : [ 7, 26, 1, 4, 27, 24, 21, 12, 17, 25, 0, 48 ],
       "exit" : false,
-      "out-vars" : [ 27, 21, 24, 0, 46, 1, 13, 6, 7, 25, 26, 17 ],
+      "out-vars" : [ 1, 48, 7, 17, 25, 0, 26, 12, 4, 27, 24, 21 ],
       "decl-vars" : [ ],
       "line-start" : 1077,
       "ast" : {
@@ -5199,7 +5199,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "local_scan",
-            "variable" : 48
+            "variable" : 50
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -5225,7 +5225,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "scanSize",
-            "variable" : 46
+            "variable" : 48
           }
         } ],
         "type" : "assign-operator"
@@ -5234,13 +5234,13 @@
       "line-end" : 1077,
       "code" : "c.local_scan += scanSize",
       "entry" : false,
-      "use-vars" : [ 26, 46 ]
+      "use-vars" : [ 48, 26 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 94 ],
-      "in-vars" : [ 24, 25, 0, 1, 21, 27, 6, 7, 26, 46, 17, 13 ],
+      "in-vars" : [ 0, 26, 1, 4, 24, 12, 17, 27, 48, 21, 7, 25 ],
       "exit" : false,
-      "out-vars" : [ 7, 0, 17, 13, 27, 6, 24, 25, 26, 46, 1, 21 ],
+      "out-vars" : [ 12, 7, 17, 26, 1, 4, 48, 25, 0, 27, 24, 21 ],
       "decl-vars" : [ ],
       "line-start" : 1086,
       "ast" : {
@@ -5273,9 +5273,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 95, 96 ],
-      "in-vars" : [ 0, 26, 46, 1, 17, 24, 25, 13, 27, 21, 6, 7 ],
+      "in-vars" : [ 4, 48, 24, 21, 17, 26, 1, 27, 12, 7, 25, 0 ],
       "exit" : false,
-      "out-vars" : [ 26, 46, 17, 27, 24, 25, 0, 21, 7, 1, 13 ],
+      "out-vars" : [ 24, 21, 1, 27, 0, 26, 48, 12, 7, 17, 25 ],
       "decl-vars" : [ ],
       "line-start" : 1092,
       "ast" : {
@@ -5290,7 +5290,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "gcphase",
-              "variable" : 6
+              "variable" : 4
             }
           },
           "operator" : "!=",
@@ -5311,13 +5311,13 @@
       "line-end" : 1094,
       "code" : "if gcphase != _GCoff {\n\tgcmarknewobject(uintptr(x), size, scanSize)\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 96 ],
-      "in-vars" : [ 13, 24, 7, 25, 0, 46, 27, 21, 26, 1, 17 ],
+      "in-vars" : [ 17, 12, 27, 48, 24, 21, 25, 0, 26, 1, 7 ],
       "exit" : false,
-      "out-vars" : [ 0, 17, 27, 21, 7, 25, 26, 1, 13, 24 ],
+      "out-vars" : [ 0, 26, 27, 12, 17, 25, 1, 24, 21, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1093,
       "ast" : {
@@ -5368,12 +5368,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "scanSize",
-              "variable" : 46
+              "variable" : 48
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 168,
+            "go-type" : 170,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -5392,13 +5392,13 @@
       "line-end" : 1093,
       "code" : "gcmarknewobject(uintptr(x), size, scanSize)",
       "entry" : false,
-      "use-vars" : [ 27, 0, 46 ]
+      "use-vars" : [ 0, 48, 27 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 97, 98 ],
-      "in-vars" : [ 13, 21, 7, 25, 0, 26, 24, 1, 17, 27 ],
+      "in-vars" : [ 7, 26, 1, 27, 24, 21, 17, 25, 0, 12 ],
       "exit" : false,
-      "out-vars" : [ 21, 7, 25, 26, 13, 27, 0, 1, 17, 24 ],
+      "out-vars" : [ 24, 21, 7, 25, 0, 26, 1, 27, 12, 17 ],
       "decl-vars" : [ ],
       "line-start" : 1096,
       "ast" : {
@@ -5421,91 +5421,11 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 98 ],
-      "in-vars" : [ 7, 25, 0, 13, 21, 24, 26, 1, 17, 27 ],
+      "in-vars" : [ 17, 25, 26, 21, 12, 7, 0, 1, 27, 24 ],
       "exit" : false,
-      "out-vars" : [ 21, 7, 25, 1, 13, 27, 24, 0, 26, 17 ],
+      "out-vars" : [ 25, 26, 27, 21, 12, 17, 0, 1, 24, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1097,
-      "ast" : {
-        "kind" : "statement",
-        "type" : "expression",
-        "value" : {
-          "arguments" : [ {
-            "go-type" : 11,
-            "kind" : "expression",
-            "type" : "identifier",
-            "value" : {
-              "ident-kind" : "Var",
-              "kind" : "ident",
-              "value" : "x",
-              "variable" : 27
-            }
-          }, {
-            "go-type" : 2,
-            "kind" : "expression",
-            "type" : "identifier",
-            "value" : {
-              "ident-kind" : "Var",
-              "kind" : "ident",
-              "value" : "size",
-              "variable" : 0
-            }
-          } ],
-          "ellipsis" : false,
-          "function" : {
-            "go-type" : 170,
-            "kind" : "expression",
-            "type" : "identifier",
-            "value" : {
-              "function" : 19,
-              "ident-kind" : "Func",
-              "kind" : "ident",
-              "value" : "racemalloc"
-            }
-          },
-          "go-type" : 34,
-          "kind" : "expression",
-          "type" : "call"
-        }
-      },
-      "assign-vars" : [ ],
-      "line-end" : 1097,
-      "code" : "racemalloc(x, size)",
-      "entry" : false,
-      "use-vars" : [ 27, 0 ]
-    }, {
-      "update-vars" : [ ],
-      "successors" : [ 99, 100 ],
-      "in-vars" : [ 27, 21, 24, 0, 26, 1, 17, 13, 7, 25 ],
-      "exit" : false,
-      "out-vars" : [ 17, 13, 25, 0, 26, 1, 27, 21, 24, 7 ],
-      "decl-vars" : [ ],
-      "line-start" : 1100,
-      "ast" : {
-        "condition" : {
-          "go-type" : 33,
-          "kind" : "constant",
-          "value" : {
-            "type" : "BOOL",
-            "value" : "false"
-          }
-        },
-        "kind" : "statement",
-        "type" : "if"
-      },
-      "assign-vars" : [ ],
-      "line-end" : 1102,
-      "code" : "if msanenabled {\n\tmsanmalloc(x, size)\n}",
-      "entry" : false,
-      "use-vars" : [ ]
-    }, {
-      "update-vars" : [ ],
-      "successors" : [ 100 ],
-      "in-vars" : [ 13, 27, 24, 25, 26, 1, 7, 0, 17, 21 ],
-      "exit" : false,
-      "out-vars" : [ 25, 1, 17, 21, 24, 7, 0, 26, 13, 27 ],
-      "decl-vars" : [ ],
-      "line-start" : 1101,
       "ast" : {
         "kind" : "statement",
         "type" : "expression",
@@ -5537,6 +5457,86 @@
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
+              "function" : 19,
+              "ident-kind" : "Func",
+              "kind" : "ident",
+              "value" : "racemalloc"
+            }
+          },
+          "go-type" : 34,
+          "kind" : "expression",
+          "type" : "call"
+        }
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1097,
+      "code" : "racemalloc(x, size)",
+      "entry" : false,
+      "use-vars" : [ 27, 0 ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 99, 100 ],
+      "in-vars" : [ 27, 24, 21, 12, 26, 25, 0, 1, 7, 17 ],
+      "exit" : false,
+      "out-vars" : [ 26, 1, 21, 0, 25, 27, 24, 12, 7, 17 ],
+      "decl-vars" : [ ],
+      "line-start" : 1100,
+      "ast" : {
+        "condition" : {
+          "go-type" : 33,
+          "kind" : "constant",
+          "value" : {
+            "type" : "BOOL",
+            "value" : "false"
+          }
+        },
+        "kind" : "statement",
+        "type" : "if"
+      },
+      "assign-vars" : [ ],
+      "line-end" : 1102,
+      "code" : "if msanenabled {\n\tmsanmalloc(x, size)\n}",
+      "entry" : false,
+      "use-vars" : [ ]
+    }, {
+      "update-vars" : [ ],
+      "successors" : [ 100 ],
+      "in-vars" : [ 21, 25, 0, 1, 27, 24, 12, 7, 17, 26 ],
+      "exit" : false,
+      "out-vars" : [ 0, 27, 12, 7, 21, 17, 25, 26, 1, 24 ],
+      "decl-vars" : [ ],
+      "line-start" : 1101,
+      "ast" : {
+        "kind" : "statement",
+        "type" : "expression",
+        "value" : {
+          "arguments" : [ {
+            "go-type" : 11,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "x",
+              "variable" : 27
+            }
+          }, {
+            "go-type" : 2,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
+              "ident-kind" : "Var",
+              "kind" : "ident",
+              "value" : "size",
+              "variable" : 0
+            }
+          } ],
+          "ellipsis" : false,
+          "function" : {
+            "go-type" : 174,
+            "kind" : "expression",
+            "type" : "identifier",
+            "value" : {
               "function" : 20,
               "ident-kind" : "Func",
               "kind" : "ident",
@@ -5556,9 +5556,9 @@
     }, {
       "update-vars" : [ 21 ],
       "successors" : [ 101 ],
-      "in-vars" : [ 13, 27, 21, 0, 26, 1, 17, 25, 24, 7 ],
+      "in-vars" : [ 17, 26, 1, 27, 24, 12, 25, 0, 21, 7 ],
       "exit" : false,
-      "out-vars" : [ 17, 13, 27, 21, 7, 0, 1, 24, 25, 26 ],
+      "out-vars" : [ 17, 25, 0, 27, 24, 21, 26, 1, 12, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1104,
       "ast" : {
@@ -5603,9 +5603,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 102 ],
-      "in-vars" : [ 27, 24, 0, 17, 1, 13, 21, 7, 25, 26 ],
+      "in-vars" : [ 17, 0, 7, 24, 21, 12, 25, 26, 1, 27 ],
       "exit" : false,
-      "out-vars" : [ 26, 24, 7, 0, 1, 17, 13, 27, 25 ],
+      "out-vars" : [ 25, 0, 24, 17, 26, 1, 27, 12, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1105,
       "ast" : {
@@ -5648,9 +5648,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 103, 105 ],
-      "in-vars" : [ 1, 13, 27, 24, 7, 25, 0, 26, 17 ],
+      "in-vars" : [ 17, 25, 26, 24, 0, 1, 27, 12, 7 ],
       "exit" : false,
-      "out-vars" : [ 27, 24, 7, 25, 0, 26, 1, 17 ],
+      "out-vars" : [ 26, 1, 27, 24, 12, 17, 25, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1107,
       "ast" : {
@@ -5662,19 +5662,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "allocfreetrace",
-              "variable" : 49
+              "variable" : 51
             },
             "go-type" : 17,
             "kind" : "expression",
             "target" : {
-              "go-type" : 32,
+              "go-type" : 22,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "debug",
-                "variable" : 13
+                "variable" : 7
               }
             },
             "type" : "selector"
@@ -5697,13 +5697,13 @@
       "line-end" : 1109,
       "code" : "if debug.allocfreetrace != 0 {\n\ttracealloc(x, size, typ)\n}",
       "entry" : false,
-      "use-vars" : [ 13 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 105 ],
-      "in-vars" : [ 1, 17, 27, 24, 7, 25, 0, 26 ],
+      "in-vars" : [ 0, 26, 1, 27, 24, 12, 17, 25 ],
       "exit" : false,
-      "out-vars" : [ 7, 25, 0, 26, 17, 27, 24 ],
+      "out-vars" : [ 0, 26, 27, 24, 12, 17, 25 ],
       "decl-vars" : [ ],
       "line-start" : 1108,
       "ast" : {
@@ -5743,7 +5743,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 174,
+            "go-type" : 176,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -5766,9 +5766,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 106, 111 ],
-      "in-vars" : [ 26, 17, 27, 24, 50, 25, 0 ],
+      "in-vars" : [ 52, 17, 25, 0, 26, 27, 24 ],
       "exit" : false,
-      "out-vars" : [ 24, 50, 25, 0, 26, 17, 27 ],
+      "out-vars" : [ 27, 24, 52, 17, 25, 0, 26 ],
       "decl-vars" : [ ],
       "line-start" : 1111,
       "ast" : {
@@ -5776,19 +5776,19 @@
           "go-type" : 33,
           "kind" : "expression",
           "left" : {
-            "go-type" : 20,
+            "go-type" : 32,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "rate",
-              "variable" : 50
+              "variable" : 52
             }
           },
           "operator" : ">",
           "right" : {
-            "go-type" : 20,
+            "go-type" : 32,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -5804,14 +5804,14 @@
       "line-end" : 1119,
       "code" : "if rate := MemProfileRate; rate > 0 {\n\tif rate != 1 && size < c.next_sample {\n\t\tc.next_sample -= size\n\t} else {\n\t\tmp := acquirem()\n\t\tprofilealloc(mp, x, size)\n\t\treleasem(mp)\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 50 ]
+      "use-vars" : [ 52 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 104 ],
-      "in-vars" : [ 25, 0, 26, 17, 27, 24, 7 ],
+      "in-vars" : [ 17, 25, 0, 26, 27, 24, 12 ],
       "exit" : false,
-      "out-vars" : [ 50, 25, 0, 26, 17, 27, 24 ],
-      "decl-vars" : [ 50 ],
+      "out-vars" : [ 26, 27, 24, 52, 17, 25, 0 ],
+      "decl-vars" : [ 52 ],
       "line-start" : 1111,
       "ast" : {
         "kind" : "statement",
@@ -5826,14 +5826,14 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 20,
+          "go-type" : 32,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "MemProfileRate",
-            "variable" : 7
+            "variable" : 12
           }
         } ],
         "type" : "define"
@@ -5842,13 +5842,13 @@
       "line-end" : 1111,
       "code" : "rate := MemProfileRate",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 12 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 107, 108 ],
-      "in-vars" : [ 50, 25, 0, 26, 17, 27, 24 ],
+      "in-vars" : [ 25, 0, 26, 27, 24, 52, 17 ],
       "exit" : false,
-      "out-vars" : [ 26, 17, 27, 24, 25, 0 ],
+      "out-vars" : [ 24, 17, 25, 0, 26, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1112,
       "ast" : {
@@ -5859,19 +5859,19 @@
             "go-type" : 33,
             "kind" : "expression",
             "left" : {
-              "go-type" : 20,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "rate",
-                "variable" : 50
+                "variable" : 52
               }
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 20,
+              "go-type" : 32,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -5901,7 +5901,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "next_sample",
-                "variable" : 51
+                "variable" : 53
               },
               "go-type" : 2,
               "kind" : "expression",
@@ -5929,13 +5929,13 @@
       "line-end" : 1118,
       "code" : "if rate != 1 && size < c.next_sample {\n\tc.next_sample -= size\n} else {\n\tmp := acquirem()\n\tprofilealloc(mp, x, size)\n\treleasem(mp)\n}",
       "entry" : false,
-      "use-vars" : [ 0, 26, 50 ]
+      "use-vars" : [ 52, 0, 26 ]
     }, {
       "update-vars" : [ 26 ],
       "successors" : [ 111 ],
-      "in-vars" : [ 26, 17, 27, 24, 25, 0 ],
+      "in-vars" : [ 27, 24, 17, 25, 0, 26 ],
       "exit" : false,
-      "out-vars" : [ 25, 0, 17, 27, 24 ],
+      "out-vars" : [ 25, 0, 27, 24, 17 ],
       "decl-vars" : [ ],
       "line-start" : 1113,
       "ast" : {
@@ -5945,7 +5945,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "next_sample",
-            "variable" : 51
+            "variable" : 53
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -5980,14 +5980,14 @@
       "line-end" : 1113,
       "code" : "c.next_sample -= size",
       "entry" : false,
-      "use-vars" : [ 0, 26 ]
+      "use-vars" : [ 26, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 109 ],
-      "in-vars" : [ 25, 0, 17, 27, 24 ],
+      "in-vars" : [ 27, 24, 17, 25, 0 ],
       "exit" : false,
-      "out-vars" : [ 25, 0, 52, 17, 27, 24 ],
-      "decl-vars" : [ 52 ],
+      "out-vars" : [ 27, 24, 54, 17, 25, 0 ],
+      "decl-vars" : [ 54 ],
       "line-start" : 1115,
       "ast" : {
         "kind" : "statement",
@@ -6029,9 +6029,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 110 ],
-      "in-vars" : [ 52, 17, 27, 24, 25, 0 ],
+      "in-vars" : [ 54, 17, 25, 0, 27, 24 ],
       "exit" : false,
-      "out-vars" : [ 25, 0, 52, 17, 27, 24 ],
+      "out-vars" : [ 25, 0, 27, 24, 54, 17 ],
       "decl-vars" : [ ],
       "line-start" : 1116,
       "ast" : {
@@ -6046,7 +6046,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "mp",
-              "variable" : 52
+              "variable" : 54
             }
           }, {
             "go-type" : 11,
@@ -6071,7 +6071,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 176,
+            "go-type" : 178,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -6090,13 +6090,13 @@
       "line-end" : 1116,
       "code" : "profilealloc(mp, x, size)",
       "entry" : false,
-      "use-vars" : [ 52, 27, 0 ]
+      "use-vars" : [ 54, 27, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 111 ],
-      "in-vars" : [ 17, 27, 24, 25, 0, 52 ],
+      "in-vars" : [ 17, 25, 0, 27, 24, 54 ],
       "exit" : false,
-      "out-vars" : [ 27, 24, 25, 0, 17 ],
+      "out-vars" : [ 27, 24, 17, 25, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1117,
       "ast" : {
@@ -6111,7 +6111,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "mp",
-              "variable" : 52
+              "variable" : 54
             }
           } ],
           "ellipsis" : false,
@@ -6135,13 +6135,13 @@
       "line-end" : 1117,
       "code" : "releasem(mp)",
       "entry" : false,
-      "use-vars" : [ 52 ]
+      "use-vars" : [ 54 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 112, 113 ],
-      "in-vars" : [ 25, 0, 17, 27, 24 ],
+      "in-vars" : [ 17, 25, 0, 27, 24 ],
       "exit" : false,
-      "out-vars" : [ 25, 0, 17, 27, 24 ],
+      "out-vars" : [ 27, 24, 17, 25, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1121,
       "ast" : {
@@ -6183,7 +6183,7 @@
     }, {
       "update-vars" : [ 17 ],
       "successors" : [ 113 ],
-      "in-vars" : [ 25, 0, 17, 27, 24 ],
+      "in-vars" : [ 24, 17, 25, 0, 27 ],
       "exit" : false,
       "out-vars" : [ 27, 24 ],
       "decl-vars" : [ ],
@@ -6295,9 +6295,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 116, 117 ],
-      "in-vars" : [ 54, 27 ],
+      "in-vars" : [ 27, 56 ],
       "exit" : false,
-      "out-vars" : [ 27, 54 ],
+      "out-vars" : [ 56, 27 ],
       "decl-vars" : [ ],
       "line-start" : 1128,
       "ast" : {
@@ -6311,17 +6311,17 @@
               "kind" : "ident",
               "value" : "test"
             },
-            "go-type" : 181,
+            "go-type" : 183,
             "kind" : "expression",
             "target" : {
-              "go-type" : 178,
+              "go-type" : 180,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "t",
-                "variable" : 54
+                "variable" : 56
               }
             },
             "type" : "selector"
@@ -6337,14 +6337,14 @@
       "line-end" : 1130,
       "code" : "if t := (gcTrigger{kind: gcTriggerHeap}); t.test() {\n\tgcStart(t)\n}",
       "entry" : false,
-      "use-vars" : [ 54 ]
+      "use-vars" : [ 56 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 114 ],
       "in-vars" : [ 27 ],
       "exit" : false,
-      "out-vars" : [ 27, 54 ],
-      "decl-vars" : [ 54 ],
+      "out-vars" : [ 27, 56 ],
+      "decl-vars" : [ 56 ],
       "line-start" : 1128,
       "ast" : {
         "kind" : "statement",
@@ -6359,21 +6359,21 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 178,
+          "go-type" : 180,
           "kind" : "expression",
           "target" : {
             "declared" : {
-              "go-type" : 178,
+              "go-type" : 180,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 178,
+                "go-type" : 180,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "gcTrigger"
               }
             },
-            "go-type" : 178,
+            "go-type" : 180,
             "kind" : "literal",
             "type" : "composite",
             "values" : [ {
@@ -6386,13 +6386,13 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "kind",
-                  "variable" : 53
+                  "variable" : 55
                 }
               },
               "kind" : "expression",
               "type" : "key-value",
               "value" : {
-                "go-type" : 180,
+                "go-type" : 182,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -6413,7 +6413,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 117 ],
-      "in-vars" : [ 27, 54 ],
+      "in-vars" : [ 27, 56 ],
       "exit" : false,
       "out-vars" : [ 27 ],
       "decl-vars" : [ ],
@@ -6423,19 +6423,19 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 178,
+            "go-type" : 180,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "t",
-              "variable" : 54
+              "variable" : 56
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 182,
+            "go-type" : 185,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -6454,7 +6454,7 @@
       "line-end" : 1129,
       "code" : "gcStart(t)",
       "entry" : false,
-      "use-vars" : [ 54 ]
+      "use-vars" : [ 56 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -6539,37 +6539,37 @@
     }, {
       "name" : "nextFree",
       "package" : 0,
-      "type" : 150,
+      "type" : 152,
       "exported" : false
     }, {
       "name" : "makeSpanClass",
       "package" : 0,
-      "type" : 155,
+      "type" : 156,
       "exported" : false
     }, {
       "name" : "memclrNoHeapPointers",
       "package" : 0,
-      "type" : 158,
+      "type" : 159,
       "exported" : false
     }, {
       "name" : "systemstack",
       "package" : 0,
-      "type" : 160,
+      "type" : 161,
       "exported" : false
     }, {
       "name" : "largeAlloc",
       "package" : 0,
-      "type" : 162,
+      "type" : 163,
       "exported" : false
     }, {
       "name" : "base",
       "package" : 0,
-      "type" : 165,
+      "type" : 167,
       "exported" : false
     }, {
       "name" : "heapBitsSetType",
       "package" : 0,
-      "type" : 166,
+      "type" : 168,
       "exported" : false
     }, {
       "name" : "publicationBarrier",
@@ -6579,37 +6579,37 @@
     }, {
       "name" : "gcmarknewobject",
       "package" : 0,
-      "type" : 168,
+      "type" : 170,
       "exported" : false
     }, {
       "name" : "racemalloc",
       "package" : 0,
-      "type" : 170,
+      "type" : 172,
       "exported" : false
     }, {
       "name" : "msanmalloc",
       "package" : 0,
-      "type" : 172,
+      "type" : 174,
       "exported" : false
     }, {
       "name" : "tracealloc",
       "package" : 0,
-      "type" : 174,
+      "type" : 176,
       "exported" : false
     }, {
       "name" : "profilealloc",
       "package" : 0,
-      "type" : 176,
+      "type" : 178,
       "exported" : false
     }, {
       "name" : "test",
       "package" : 0,
-      "type" : 181,
+      "type" : 184,
       "exported" : false
     }, {
       "name" : "gcStart",
       "package" : 0,
-      "type" : 182,
+      "type" : 185,
       "exported" : false
     } ],
     "line-end" : 1134,
@@ -6790,194 +6790,14 @@
       "type" : "Tuple",
       "underlying" : 19
     }, {
-      "name" : "int",
-      "type" : "Basic",
-      "underlying" : 20
-    }, {
-      "elem" : 8,
-      "name" : "[249]uint8",
-      "type" : "Array",
-      "underlying" : 21
-    }, {
-      "elem" : 23,
+      "elem" : 21,
       "name" : "[67]uint16",
       "type" : "Array",
-      "underlying" : 22
+      "underlying" : 20
     }, {
       "name" : "uint16",
       "type" : "Basic",
-      "underlying" : 23
-    }, {
-      "local-name" : "mstats",
-      "name" : "runtime.mstats",
-      "package" : 0,
-      "type" : "Named",
-      "underlying" : 25
-    }, {
-      "fields" : [ {
-        "name" : "alloc",
-        "type" : 26
-      }, {
-        "name" : "total_alloc",
-        "type" : 26
-      }, {
-        "name" : "sys",
-        "type" : 26
-      }, {
-        "name" : "nlookup",
-        "type" : 26
-      }, {
-        "name" : "nmalloc",
-        "type" : 26
-      }, {
-        "name" : "nfree",
-        "type" : 26
-      }, {
-        "name" : "heap_alloc",
-        "type" : 26
-      }, {
-        "name" : "heap_sys",
-        "type" : 26
-      }, {
-        "name" : "heap_idle",
-        "type" : 26
-      }, {
-        "name" : "heap_inuse",
-        "type" : 26
-      }, {
-        "name" : "heap_released",
-        "type" : 26
-      }, {
-        "name" : "heap_objects",
-        "type" : 26
-      }, {
-        "name" : "stacks_inuse",
-        "type" : 26
-      }, {
-        "name" : "stacks_sys",
-        "type" : 26
-      }, {
-        "name" : "mspan_inuse",
-        "type" : 26
-      }, {
-        "name" : "mspan_sys",
-        "type" : 26
-      }, {
-        "name" : "mcache_inuse",
-        "type" : 26
-      }, {
-        "name" : "mcache_sys",
-        "type" : 26
-      }, {
-        "name" : "buckhash_sys",
-        "type" : 26
-      }, {
-        "name" : "gc_sys",
-        "type" : 26
-      }, {
-        "name" : "other_sys",
-        "type" : 26
-      }, {
-        "name" : "next_gc",
-        "type" : 26
-      }, {
-        "name" : "last_gc_unix",
-        "type" : 26
-      }, {
-        "name" : "pause_total_ns",
-        "type" : 26
-      }, {
-        "name" : "pause_ns",
-        "type" : 27
-      }, {
-        "name" : "pause_end",
-        "type" : 27
-      }, {
-        "name" : "numgc",
-        "type" : 6
-      }, {
-        "name" : "numforcedgc",
-        "type" : 6
-      }, {
-        "name" : "gc_cpu_fraction",
-        "type" : 28
-      }, {
-        "name" : "enablegc",
-        "type" : 13
-      }, {
-        "name" : "debuggc",
-        "type" : 13
-      }, {
-        "name" : "by_size",
-        "type" : 29
-      }, {
-        "name" : "last_gc_nanotime",
-        "type" : 26
-      }, {
-        "name" : "tinyallocs",
-        "type" : 26
-      }, {
-        "name" : "last_next_gc",
-        "type" : 26
-      }, {
-        "name" : "last_heap_inuse",
-        "type" : 26
-      }, {
-        "name" : "triggerRatio",
-        "type" : 28
-      }, {
-        "name" : "gc_trigger",
-        "type" : 26
-      }, {
-        "name" : "heap_live",
-        "type" : 26
-      }, {
-        "name" : "heap_scan",
-        "type" : 26
-      }, {
-        "name" : "heap_marked",
-        "type" : 26
-      } ],
-      "name" : "struct{alloc uint64; total_alloc uint64; sys uint64; nlookup uint64; nmalloc uint64; nfree uint64; heap_alloc uint64; heap_sys uint64; heap_idle uint64; heap_inuse uint64; heap_released uint64; heap_objects uint64; stacks_inuse uint64; stacks_sys uint64; mspan_inuse uint64; mspan_sys uint64; mcache_inuse uint64; mcache_sys uint64; buckhash_sys uint64; gc_sys uint64; other_sys uint64; next_gc uint64; last_gc_unix uint64; pause_total_ns uint64; pause_ns [256]uint64; pause_end [256]uint64; numgc uint32; numforcedgc uint32; gc_cpu_fraction float64; enablegc bool; debuggc bool; by_size [67]struct{size uint32; nmalloc uint64; nfree uint64}; last_gc_nanotime uint64; tinyallocs uint64; last_next_gc uint64; last_heap_inuse uint64; triggerRatio float64; gc_trigger uint64; heap_live uint64; heap_scan uint64; heap_marked uint64}",
-      "type" : "Struct",
-      "underlying" : 25
-    }, {
-      "name" : "uint64",
-      "type" : "Basic",
-      "underlying" : 26
-    }, {
-      "elem" : 26,
-      "name" : "[256]uint64",
-      "type" : "Array",
-      "underlying" : 27
-    }, {
-      "name" : "float64",
-      "type" : "Basic",
-      "underlying" : 28
-    }, {
-      "elem" : 30,
-      "name" : "[67]struct{size uint32; nmalloc uint64; nfree uint64}",
-      "type" : "Array",
-      "underlying" : 29
-    }, {
-      "fields" : [ {
-        "name" : "size",
-        "type" : 6
-      }, {
-        "name" : "nmalloc",
-        "type" : 26
-      }, {
-        "name" : "nfree",
-        "type" : 26
-      } ],
-      "name" : "struct{size uint32; nmalloc uint64; nfree uint64}",
-      "type" : "Struct",
-      "underlying" : 30
-    }, {
-      "elem" : 8,
-      "name" : "[129]uint8",
-      "type" : "Array",
-      "underlying" : 31
+      "underlying" : 21
     }, {
       "fields" : [ {
         "name" : "allocfreetrace",
@@ -7036,6 +6856,186 @@
       } ],
       "name" : "struct{allocfreetrace int32; cgocheck int32; clobberfree int32; efence int32; gccheckmark int32; gcpacertrace int32; gcshrinkstackoff int32; gcstoptheworld int32; gctrace int32; invalidptr int32; madvdontneed int32; sbrk int32; scavenge int32; scavtrace int32; scheddetail int32; schedtrace int32; tracebackancestors int32; asyncpreemptoff int32}",
       "type" : "Struct",
+      "underlying" : 22
+    }, {
+      "elem" : 8,
+      "name" : "[129]uint8",
+      "type" : "Array",
+      "underlying" : 23
+    }, {
+      "elem" : 8,
+      "name" : "[249]uint8",
+      "type" : "Array",
+      "underlying" : 24
+    }, {
+      "local-name" : "mstats",
+      "name" : "runtime.mstats",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 26
+    }, {
+      "fields" : [ {
+        "name" : "alloc",
+        "type" : 27
+      }, {
+        "name" : "total_alloc",
+        "type" : 27
+      }, {
+        "name" : "sys",
+        "type" : 27
+      }, {
+        "name" : "nlookup",
+        "type" : 27
+      }, {
+        "name" : "nmalloc",
+        "type" : 27
+      }, {
+        "name" : "nfree",
+        "type" : 27
+      }, {
+        "name" : "heap_alloc",
+        "type" : 27
+      }, {
+        "name" : "heap_sys",
+        "type" : 27
+      }, {
+        "name" : "heap_idle",
+        "type" : 27
+      }, {
+        "name" : "heap_inuse",
+        "type" : 27
+      }, {
+        "name" : "heap_released",
+        "type" : 27
+      }, {
+        "name" : "heap_objects",
+        "type" : 27
+      }, {
+        "name" : "stacks_inuse",
+        "type" : 27
+      }, {
+        "name" : "stacks_sys",
+        "type" : 27
+      }, {
+        "name" : "mspan_inuse",
+        "type" : 27
+      }, {
+        "name" : "mspan_sys",
+        "type" : 27
+      }, {
+        "name" : "mcache_inuse",
+        "type" : 27
+      }, {
+        "name" : "mcache_sys",
+        "type" : 27
+      }, {
+        "name" : "buckhash_sys",
+        "type" : 27
+      }, {
+        "name" : "gc_sys",
+        "type" : 27
+      }, {
+        "name" : "other_sys",
+        "type" : 27
+      }, {
+        "name" : "next_gc",
+        "type" : 27
+      }, {
+        "name" : "last_gc_unix",
+        "type" : 27
+      }, {
+        "name" : "pause_total_ns",
+        "type" : 27
+      }, {
+        "name" : "pause_ns",
+        "type" : 28
+      }, {
+        "name" : "pause_end",
+        "type" : 28
+      }, {
+        "name" : "numgc",
+        "type" : 6
+      }, {
+        "name" : "numforcedgc",
+        "type" : 6
+      }, {
+        "name" : "gc_cpu_fraction",
+        "type" : 29
+      }, {
+        "name" : "enablegc",
+        "type" : 13
+      }, {
+        "name" : "debuggc",
+        "type" : 13
+      }, {
+        "name" : "by_size",
+        "type" : 30
+      }, {
+        "name" : "last_gc_nanotime",
+        "type" : 27
+      }, {
+        "name" : "tinyallocs",
+        "type" : 27
+      }, {
+        "name" : "last_next_gc",
+        "type" : 27
+      }, {
+        "name" : "last_heap_inuse",
+        "type" : 27
+      }, {
+        "name" : "triggerRatio",
+        "type" : 29
+      }, {
+        "name" : "gc_trigger",
+        "type" : 27
+      }, {
+        "name" : "heap_live",
+        "type" : 27
+      }, {
+        "name" : "heap_scan",
+        "type" : 27
+      }, {
+        "name" : "heap_marked",
+        "type" : 27
+      } ],
+      "name" : "struct{alloc uint64; total_alloc uint64; sys uint64; nlookup uint64; nmalloc uint64; nfree uint64; heap_alloc uint64; heap_sys uint64; heap_idle uint64; heap_inuse uint64; heap_released uint64; heap_objects uint64; stacks_inuse uint64; stacks_sys uint64; mspan_inuse uint64; mspan_sys uint64; mcache_inuse uint64; mcache_sys uint64; buckhash_sys uint64; gc_sys uint64; other_sys uint64; next_gc uint64; last_gc_unix uint64; pause_total_ns uint64; pause_ns [256]uint64; pause_end [256]uint64; numgc uint32; numforcedgc uint32; gc_cpu_fraction float64; enablegc bool; debuggc bool; by_size [67]struct{size uint32; nmalloc uint64; nfree uint64}; last_gc_nanotime uint64; tinyallocs uint64; last_next_gc uint64; last_heap_inuse uint64; triggerRatio float64; gc_trigger uint64; heap_live uint64; heap_scan uint64; heap_marked uint64}",
+      "type" : "Struct",
+      "underlying" : 26
+    }, {
+      "name" : "uint64",
+      "type" : "Basic",
+      "underlying" : 27
+    }, {
+      "elem" : 27,
+      "name" : "[256]uint64",
+      "type" : "Array",
+      "underlying" : 28
+    }, {
+      "name" : "float64",
+      "type" : "Basic",
+      "underlying" : 29
+    }, {
+      "elem" : 31,
+      "name" : "[67]struct{size uint32; nmalloc uint64; nfree uint64}",
+      "type" : "Array",
+      "underlying" : 30
+    }, {
+      "fields" : [ {
+        "name" : "size",
+        "type" : 6
+      }, {
+        "name" : "nmalloc",
+        "type" : 27
+      }, {
+        "name" : "nfree",
+        "type" : 27
+      } ],
+      "name" : "struct{size uint32; nmalloc uint64; nfree uint64}",
+      "type" : "Struct",
+      "underlying" : 31
+    }, {
+      "name" : "int",
+      "type" : "Basic",
       "underlying" : 32
     }, {
       "name" : "untyped bool",
@@ -7098,7 +7098,7 @@
       "type" : "Tuple",
       "underlying" : 41
     }, {
-      "elem" : 26,
+      "elem" : 27,
       "name" : "*uint64",
       "type" : "Pointer",
       "underlying" : 42
@@ -7200,7 +7200,7 @@
         "type" : 72
       }, {
         "name" : "traceseq",
-        "type" : 26
+        "type" : 27
       }, {
         "name" : "tracelastp",
         "type" : 71
@@ -7412,7 +7412,7 @@
         "type" : 6
       }, {
         "name" : "procid",
-        "type" : 26
+        "type" : 27
       }, {
         "name" : "gsignal",
         "type" : 43
@@ -7493,7 +7493,7 @@
         "type" : 8
       }, {
         "name" : "ncgocall",
-        "type" : 26
+        "type" : 27
       }, {
         "name" : "ncgo",
         "type" : 17
@@ -7541,7 +7541,7 @@
         "type" : 15
       }, {
         "name" : "waittraceskip",
-        "type" : 20
+        "type" : 32
       }, {
         "name" : "startingtrace",
         "type" : 13
@@ -7631,7 +7631,7 @@
       "name" : "runtime/internal/sys.Uintreg",
       "package" : 2,
       "type" : "Named",
-      "underlying" : 26
+      "underlying" : 27
     }, {
       "local-name" : "gsignalStack",
       "name" : "runtime.gsignalStack",
@@ -7821,7 +7821,7 @@
         "type" : 2
       }, {
         "name" : "allocCache",
-        "type" : 26
+        "type" : 27
       }, {
         "name" : "allocBits",
         "type" : 91
@@ -7833,13 +7833,13 @@
         "type" : 6
       }, {
         "name" : "divMul",
-        "type" : 23
+        "type" : 21
       }, {
         "name" : "baseMask",
-        "type" : 23
+        "type" : 21
       }, {
         "name" : "allocCount",
-        "type" : 23
+        "type" : 21
       }, {
         "name" : "spanclass",
         "type" : 93
@@ -7959,7 +7959,7 @@
         "type" : 98
       }, {
         "name" : "offset",
-        "type" : 23
+        "type" : 21
       }, {
         "name" : "kind",
         "type" : 15
@@ -8180,7 +8180,7 @@
         "type" : 11
       }, {
         "name" : "elemsize",
-        "type" : 23
+        "type" : 21
       }, {
         "name" : "closed",
         "type" : 6
@@ -8448,26 +8448,34 @@
       "type" : "Tuple",
       "underlying" : 151
     }, {
-      "elem" : 153,
+      "name" : "(*runtime.mcache) func(spc runtime.spanClass) (v runtime.gclinkptr, s *runtime.mspan, shouldhelpgc bool)",
+      "params" : 151,
+      "recv" : 37,
+      "results" : 149,
+      "type" : "Signature",
+      "underlying" : 152,
+      "variadic" : false
+    }, {
+      "elem" : 154,
       "name" : "*[2]uint64",
       "type" : "Pointer",
-      "underlying" : 152
+      "underlying" : 153
     }, {
-      "elem" : 26,
+      "elem" : 27,
       "name" : "[2]uint64",
       "type" : "Array",
-      "underlying" : 153
+      "underlying" : 154
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 154
+      "underlying" : 155
     }, {
       "name" : "func(sizeclass uint8, noscan bool) runtime.spanClass",
-      "params" : 156,
+      "params" : 157,
       "recv" : -1,
-      "results" : 157,
+      "results" : 158,
       "type" : "Signature",
-      "underlying" : 155,
+      "underlying" : 156,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8479,7 +8487,7 @@
       } ],
       "name" : "(sizeclass uint8, noscan bool)",
       "type" : "Tuple",
-      "underlying" : 156
+      "underlying" : 157
     }, {
       "fields" : [ {
         "name" : "",
@@ -8487,14 +8495,14 @@
       } ],
       "name" : "(runtime.spanClass)",
       "type" : "Tuple",
-      "underlying" : 157
+      "underlying" : 158
     }, {
       "name" : "func(ptr unsafe.Pointer, n uintptr)",
-      "params" : 159,
+      "params" : 160,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 158,
+      "underlying" : 159,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8506,14 +8514,14 @@
       } ],
       "name" : "(ptr unsafe.Pointer, n uintptr)",
       "type" : "Tuple",
-      "underlying" : 159
+      "underlying" : 160
     }, {
       "name" : "func(fn func())",
-      "params" : 161,
+      "params" : 162,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 160,
+      "underlying" : 161,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8522,14 +8530,14 @@
       } ],
       "name" : "(fn func())",
       "type" : "Tuple",
-      "underlying" : 161
+      "underlying" : 162
     }, {
       "name" : "func(size uintptr, needzero bool, noscan bool) *runtime.mspan",
-      "params" : 163,
+      "params" : 164,
       "recv" : -1,
-      "results" : 164,
+      "results" : 165,
       "type" : "Signature",
-      "underlying" : 162,
+      "underlying" : 163,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8544,7 +8552,7 @@
       } ],
       "name" : "(size uintptr, needzero bool, noscan bool)",
       "type" : "Tuple",
-      "underlying" : 163
+      "underlying" : 164
     }, {
       "fields" : [ {
         "name" : "",
@@ -8552,22 +8560,30 @@
       } ],
       "name" : "(*runtime.mspan)",
       "type" : "Tuple",
-      "underlying" : 164
+      "underlying" : 165
     }, {
       "name" : "func() uintptr",
       "params" : 34,
       "recv" : -1,
       "results" : 143,
       "type" : "Signature",
-      "underlying" : 165,
+      "underlying" : 166,
+      "variadic" : false
+    }, {
+      "name" : "(*runtime.mspan) func() uintptr",
+      "params" : 34,
+      "recv" : 46,
+      "results" : 143,
+      "type" : "Signature",
+      "underlying" : 167,
       "variadic" : false
     }, {
       "name" : "func(x uintptr, size uintptr, dataSize uintptr, typ *runtime._type)",
-      "params" : 167,
+      "params" : 169,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 166,
+      "underlying" : 168,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8585,14 +8601,14 @@
       } ],
       "name" : "(x uintptr, size uintptr, dataSize uintptr, typ *runtime._type)",
       "type" : "Tuple",
-      "underlying" : 167
+      "underlying" : 169
     }, {
       "name" : "func(obj uintptr, size uintptr, scanSize uintptr)",
-      "params" : 169,
+      "params" : 171,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 168,
+      "underlying" : 170,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8607,14 +8623,14 @@
       } ],
       "name" : "(obj uintptr, size uintptr, scanSize uintptr)",
       "type" : "Tuple",
-      "underlying" : 169
+      "underlying" : 171
     }, {
       "name" : "func(p unsafe.Pointer, sz uintptr)",
-      "params" : 171,
+      "params" : 173,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 170,
+      "underlying" : 172,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8626,14 +8642,14 @@
       } ],
       "name" : "(p unsafe.Pointer, sz uintptr)",
       "type" : "Tuple",
-      "underlying" : 171
+      "underlying" : 173
     }, {
       "name" : "func(addr unsafe.Pointer, sz uintptr)",
-      "params" : 173,
+      "params" : 175,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 172,
+      "underlying" : 174,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8645,14 +8661,14 @@
       } ],
       "name" : "(addr unsafe.Pointer, sz uintptr)",
       "type" : "Tuple",
-      "underlying" : 173
+      "underlying" : 175
     }, {
       "name" : "func(p unsafe.Pointer, size uintptr, typ *runtime._type)",
-      "params" : 175,
+      "params" : 177,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 174,
+      "underlying" : 176,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8667,14 +8683,14 @@
       } ],
       "name" : "(p unsafe.Pointer, size uintptr, typ *runtime._type)",
       "type" : "Tuple",
-      "underlying" : 175
+      "underlying" : 177
     }, {
       "name" : "func(mp *runtime.m, x unsafe.Pointer, size uintptr)",
-      "params" : 177,
+      "params" : 179,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 176,
+      "underlying" : 178,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8689,17 +8705,17 @@
       } ],
       "name" : "(mp *runtime.m, x unsafe.Pointer, size uintptr)",
       "type" : "Tuple",
-      "underlying" : 177
+      "underlying" : 179
     }, {
       "local-name" : "gcTrigger",
       "name" : "runtime.gcTrigger",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 179
+      "underlying" : 181
     }, {
       "fields" : [ {
         "name" : "kind",
-        "type" : 180
+        "type" : 182
       }, {
         "name" : "now",
         "type" : 72
@@ -8709,37 +8725,45 @@
       } ],
       "name" : "struct{kind runtime.gcTriggerKind; now int64; n uint32}",
       "type" : "Struct",
-      "underlying" : 179
+      "underlying" : 181
     }, {
       "local-name" : "gcTriggerKind",
       "name" : "runtime.gcTriggerKind",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 20
+      "underlying" : 32
     }, {
       "name" : "func() bool",
       "params" : 34,
       "recv" : -1,
       "results" : 12,
       "type" : "Signature",
-      "underlying" : 181,
+      "underlying" : 183,
+      "variadic" : false
+    }, {
+      "name" : "(runtime.gcTrigger) func() bool",
+      "params" : 34,
+      "recv" : 57,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 184,
       "variadic" : false
     }, {
       "name" : "func(trigger runtime.gcTrigger)",
-      "params" : 183,
+      "params" : 186,
       "recv" : -1,
       "results" : 34,
       "type" : "Signature",
-      "underlying" : 182,
+      "underlying" : 185,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "trigger",
-        "type" : 178
+        "type" : 180
       } ],
       "name" : "(trigger runtime.gcTrigger)",
       "type" : "Tuple",
-      "underlying" : 183
+      "underlying" : 186
     } ],
     "variables" : [ {
       "name" : "size",
@@ -8770,9 +8794,30 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "gcphase",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "zerobase",
       "package" : 0,
       "type" : 2,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "class_to_size",
+      "package" : 0,
+      "type" : 20,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "debug",
+      "package" : 0,
+      "type" : 22,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -8784,58 +8829,37 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "gcphase",
+      "name" : "size_to_class8",
       "package" : 0,
-      "type" : 6,
+      "type" : 23,
       "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "MemProfileRate",
-      "package" : 0,
-      "type" : 20,
-      "exported" : true,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "size_to_class128",
-      "package" : 0,
-      "type" : 21,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "class_to_size",
-      "package" : 0,
-      "type" : 22,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "memstats",
       "package" : 0,
       "type" : 24,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "memstats",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "MemProfileRate",
+      "package" : 0,
+      "type" : 32,
+      "exported" : true,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "deferType",
       "package" : 0,
       "type" : 3,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "size_to_class8",
-      "package" : 0,
-      "type" : 31,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "debug",
-      "package" : 0,
-      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -8856,7 +8880,7 @@
     }, {
       "name" : "other_sys",
       "package" : 0,
-      "type" : 26,
+      "type" : 27,
       "exported" : false,
       "embedded" : false,
       "field" : true
@@ -9001,6 +9025,13 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 80,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "sizeclass",
       "package" : 0,
       "type" : 8,
@@ -9052,10 +9083,17 @@
     }, {
       "name" : "allocCount",
       "package" : 0,
-      "type" : 23,
+      "type" : 21,
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 84,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "elemsize",
       "package" : 0,
@@ -9094,7 +9132,7 @@
     }, {
       "name" : "rate",
       "package" : 0,
-      "type" : 20,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -9115,14 +9153,21 @@
     }, {
       "name" : "kind",
       "package" : 0,
-      "type" : 180,
+      "type" : 182,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "t",
       "package" : 0,
-      "type" : 178,
+      "type" : 180,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 180,
       "exported" : false,
       "embedded" : false,
       "field" : false

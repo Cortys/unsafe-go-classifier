@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 1, 0, 4, 2 ],
+      "in-vars" : [ 2, 3, 1, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 2, 3, 1 ],
+      "out-vars" : [ 1, 0, 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 3, 1, 0, 4, 2 ],
+      "in-vars" : [ 1, 0, 4, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 2, 3, 1 ],
+      "out-vars" : [ 1, 0, 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 305,
       "ast" : {
@@ -104,9 +104,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 7 ],
-      "in-vars" : [ 0, 4, 2, 3, 1 ],
+      "in-vars" : [ 2, 3, 1, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 2, 3, 1 ],
+      "out-vars" : [ 1, 0, 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 308,
       "ast" : {
@@ -188,13 +188,13 @@
       "line-end" : 310,
       "code" : "if len(hdr) > int(b.hdrsize) {\n\tthrow(\"misuse of profBuf.write\")\n}",
       "entry" : false,
-      "use-vars" : [ 3, 0 ]
+      "use-vars" : [ 0, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 0, 4, 2, 3 ],
+      "in-vars" : [ 4, 2, 3, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 4, 2, 3 ],
+      "out-vars" : [ 4, 2, 3, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 309,
       "ast" : {
@@ -234,9 +234,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 13 ],
-      "in-vars" : [ 0, 4, 6, 2, 3, 1 ],
+      "in-vars" : [ 1, 0, 4, 7, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 3, 1, 0, 4 ],
+      "out-vars" : [ 1, 0, 4, 7, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 312,
       "ast" : {
@@ -251,7 +251,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "hasOverflow",
-              "variable" : 6
+              "variable" : 7
             }
           },
           "operator" : "&&",
@@ -277,7 +277,7 @@
               } ],
               "ellipsis" : false,
               "function" : {
-                "go-type" : 33,
+                "go-type" : 35,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -298,7 +298,7 @@
                 "kind" : "ident",
                 "value" : "canWriteTwoRecords"
               },
-              "go-type" : 31,
+              "go-type" : 32,
               "kind" : "expression",
               "target" : {
                 "go-type" : 10,
@@ -326,14 +326,14 @@
       "line-end" : 328,
       "code" : "if hasOverflow := b.hasOverflow(); hasOverflow && b.canWriteTwoRecords(1, len(stk)) {\n\n\tcount, time := b.takeOverflow()\n\tif count > 0 {\n\t\tvar stk [1]uintptr\n\t\tstk[0] = uintptr(count)\n\t\tb.write(nil, int64(time), nil, stk[:])\n\t}\n} else if hasOverflow || !b.canWriteRecord(len(stk)) {\n\n\tb.incrementOverflow(now)\n\tb.wakeupExtra()\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 6, 0, 4 ]
+      "use-vars" : [ 7, 0, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 3, 1, 0, 4 ],
+      "in-vars" : [ 1, 0, 4, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 6, 2, 3, 1, 0 ],
-      "decl-vars" : [ 6 ],
+      "out-vars" : [ 1, 0, 4, 7, 2, 3 ],
+      "decl-vars" : [ 7 ],
       "line-start" : 312,
       "ast" : {
         "kind" : "statement",
@@ -386,10 +386,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 0, 4, 2, 3, 1 ],
+      "in-vars" : [ 3, 1, 0, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 3, 9, 1, 0, 4 ],
-      "decl-vars" : [ 9, 7 ],
+      "out-vars" : [ 4, 10, 12, 2, 3, 1, 0 ],
+      "decl-vars" : [ 10, 12 ],
       "line-start" : 316,
       "ast" : {
         "kind" : "statement",
@@ -422,7 +422,7 @@
               "kind" : "ident",
               "value" : "takeOverflow"
             },
-            "go-type" : 36,
+            "go-type" : 38,
             "kind" : "expression",
             "target" : {
               "go-type" : 10,
@@ -437,7 +437,7 @@
             },
             "type" : "selector"
           },
-          "go-type" : 35,
+          "go-type" : 37,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -451,9 +451,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 17 ],
-      "in-vars" : [ 0, 4, 7, 2, 3, 9, 1 ],
+      "in-vars" : [ 4, 10, 12, 2, 3, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 7, 2, 3, 9, 1 ],
+      "out-vars" : [ 4, 10, 12, 2, 3, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 317,
       "ast" : {
@@ -468,7 +468,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "count",
-              "variable" : 7
+              "variable" : 10
             }
           },
           "operator" : ">",
@@ -489,14 +489,14 @@
       "line-end" : 321,
       "code" : "if count > 0 {\n\tvar stk [1]uintptr\n\tstk[0] = uintptr(count)\n\tb.write(nil, int64(time), nil, stk[:])\n}",
       "entry" : false,
-      "use-vars" : [ 7 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 2, 3, 9, 1, 0, 4, 7 ],
+      "in-vars" : [ 1, 0, 4, 10, 12, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 9, 1, 0, 4, 8, 7 ],
-      "decl-vars" : [ 8 ],
+      "out-vars" : [ 0, 4, 11, 10, 12, 2, 3, 1 ],
+      "decl-vars" : [ 11 ],
       "line-start" : 318,
       "ast" : {
         "kind" : "statement",
@@ -516,10 +516,10 @@
                   "value" : "uintptr"
                 }
               },
-              "go-type" : 37,
+              "go-type" : 40,
               "kind" : "type",
               "length" : {
-                "go-type" : 38,
+                "go-type" : 41,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -547,11 +547,11 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 8 ],
+      "update-vars" : [ 11 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 4, 8, 7, 2, 3, 9, 1, 0 ],
+      "in-vars" : [ 0, 4, 11, 10, 12, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 8, 2, 3, 9, 1 ],
+      "out-vars" : [ 11, 12, 2, 3, 1, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 319,
       "ast" : {
@@ -568,14 +568,14 @@
           },
           "kind" : "expression",
           "target" : {
-            "go-type" : 37,
+            "go-type" : 40,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "stk",
-              "variable" : 8
+              "variable" : 11
             }
           },
           "type" : "index"
@@ -602,7 +602,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "count",
-              "variable" : 7
+              "variable" : 10
             }
           },
           "type" : "cast"
@@ -613,13 +613,13 @@
       "line-end" : 319,
       "code" : "stk[0] = uintptr(count)",
       "entry" : false,
-      "use-vars" : [ 7, 8 ]
+      "use-vars" : [ 10, 11 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 0, 4, 8, 2, 3, 9, 1 ],
+      "in-vars" : [ 3, 1, 0, 4, 11, 12, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 2, 3, 1 ],
+      "out-vars" : [ 1, 0, 4, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 320,
       "ast" : {
@@ -657,7 +657,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "time",
-                "variable" : 9
+                "variable" : 12
               }
             },
             "type" : "cast"
@@ -679,14 +679,14 @@
             "kind" : "expression",
             "low" : null,
             "target" : {
-              "go-type" : 37,
+              "go-type" : 40,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "stk",
-                "variable" : 8
+                "variable" : 11
               }
             }
           } ],
@@ -698,7 +698,7 @@
               "kind" : "ident",
               "value" : "write"
             },
-            "go-type" : 0,
+            "go-type" : 42,
             "kind" : "expression",
             "target" : {
               "go-type" : 10,
@@ -722,13 +722,13 @@
       "line-end" : 320,
       "code" : "b.write(nil, int64(time), nil, stk[:])",
       "entry" : false,
-      "use-vars" : [ 8, 0, 9 ]
+      "use-vars" : [ 12, 11, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14, 17 ],
-      "in-vars" : [ 0, 4, 6, 2, 3, 1 ],
+      "in-vars" : [ 7, 2, 3, 1, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 2, 3, 1 ],
+      "out-vars" : [ 4, 2, 3, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 322,
       "ast" : {
@@ -743,7 +743,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "hasOverflow",
-              "variable" : 6
+              "variable" : 7
             }
           },
           "operator" : "||",
@@ -766,7 +766,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 33,
+                  "go-type" : 35,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -787,7 +787,7 @@
                   "kind" : "ident",
                   "value" : "canWriteRecord"
                 },
-                "go-type" : 39,
+                "go-type" : 43,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 10,
@@ -817,7 +817,7 @@
       "line-end" : 328,
       "code" : "if hasOverflow || !b.canWriteRecord(len(stk)) {\n\n\tb.incrementOverflow(now)\n\tb.wakeupExtra()\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 0, 4, 6 ]
+      "use-vars" : [ 7, 0, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
@@ -849,7 +849,7 @@
               "kind" : "ident",
               "value" : "incrementOverflow"
             },
-            "go-type" : 41,
+            "go-type" : 46,
             "kind" : "expression",
             "target" : {
               "go-type" : 10,
@@ -895,7 +895,7 @@
               "kind" : "ident",
               "value" : "wakeupExtra"
             },
-            "go-type" : 43,
+            "go-type" : 49,
             "kind" : "expression",
             "target" : {
               "go-type" : 10,
@@ -941,10 +941,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 4, 2, 3, 1, 0 ],
+      "in-vars" : [ 3, 1, 0, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 0, 4, 11, 2 ],
-      "decl-vars" : [ 11 ],
+      "out-vars" : [ 2, 3, 1, 0, 4, 18 ],
+      "decl-vars" : [ 18 ],
       "line-start" : 331,
       "ast" : {
         "kind" : "statement",
@@ -968,14 +968,14 @@
               "kind" : "ident",
               "value" : "load"
             },
-            "go-type" : 44,
+            "go-type" : 51,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "r",
-                "variable" : 10
+                "variable" : 16
               },
               "go-type" : 13,
               "kind" : "expression",
@@ -1008,10 +1008,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 11, 2, 3, 1, 0, 4 ],
+      "in-vars" : [ 4, 18, 2, 3, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 4, 11, 13, 2, 3, 1, 0 ],
-      "decl-vars" : [ 13 ],
+      "out-vars" : [ 4, 20, 18, 2, 3, 1, 0 ],
+      "decl-vars" : [ 20 ],
       "line-start" : 332,
       "ast" : {
         "kind" : "statement",
@@ -1035,14 +1035,14 @@
               "kind" : "ident",
               "value" : "load"
             },
-            "go-type" : 44,
+            "go-type" : 51,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "w",
-                "variable" : 12
+                "variable" : 19
               },
               "go-type" : 13,
               "kind" : "expression",
@@ -1075,10 +1075,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 2, 3, 1, 0, 4, 11, 13 ],
+      "in-vars" : [ 20, 18, 2, 3, 1, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 11, 13, 2, 3, 1 ],
-      "decl-vars" : [ 15 ],
+      "out-vars" : [ 0, 4, 20, 18, 2, 3, 1 ],
+      "decl-vars" : [ 23 ],
       "line-start" : 350,
       "ast" : {
         "kind" : "statement",
@@ -1119,7 +1119,7 @@
                   "kind" : "ident",
                   "value" : "tagCount"
                 },
-                "go-type" : 46,
+                "go-type" : 55,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 16,
@@ -1129,7 +1129,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "bw",
-                    "variable" : 13
+                    "variable" : 20
                   }
                 },
                 "type" : "selector"
@@ -1159,7 +1159,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "tags",
-                    "variable" : 14
+                    "variable" : 22
                   },
                   "go-type" : 15,
                   "kind" : "expression",
@@ -1178,7 +1178,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 48,
+                  "go-type" : 58,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -1203,13 +1203,13 @@
       "line-end" : 350,
       "code" : "wt := int(bw.tagCount() % uint32(len(b.tags)))",
       "entry" : false,
-      "use-vars" : [ 0, 13 ]
+      "use-vars" : [ 0, 20 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 22 ],
-      "in-vars" : [ 1, 0, 4, 11, 13, 2, 3 ],
+      "in-vars" : [ 2, 3, 1, 0, 4, 20, 18 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 4, 11, 13, 2, 3 ],
+      "out-vars" : [ 18, 2, 3, 1, 0, 4, 20 ],
       "decl-vars" : [ ],
       "line-start" : 351,
       "ast" : {
@@ -1251,9 +1251,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 3, 1, 0, 4, 11, 13, 2 ],
+      "in-vars" : [ 2, 3, 1, 0, 4, 20, 18 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 11, 13, 2, 3 ],
+      "out-vars" : [ 0, 4, 20, 18, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 352,
       "ast" : {
@@ -1274,11 +1274,11 @@
                   "value" : "uintptr"
                 }
               },
-              "go-type" : 50,
+              "go-type" : 60,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 50,
+            "go-type" : 60,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
@@ -1314,7 +1314,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "wt",
-                      "variable" : 15
+                      "variable" : 23
                     }
                   },
                   "kind" : "expression",
@@ -1323,7 +1323,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "tags",
-                      "variable" : 14
+                      "variable" : 22
                     },
                     "go-type" : 15,
                     "kind" : "expression",
@@ -1414,10 +1414,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23 ],
-      "in-vars" : [ 11, 13, 2, 3, 0, 4 ],
+      "in-vars" : [ 0, 4, 20, 18, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 4, 17, 11, 13, 2 ],
-      "decl-vars" : [ 17 ],
+      "out-vars" : [ 2, 3, 0, 25, 4, 20, 18 ],
+      "decl-vars" : [ 25 ],
       "line-start" : 358,
       "ast" : {
         "kind" : "statement",
@@ -1458,7 +1458,7 @@
                   "kind" : "ident",
                   "value" : "dataCount"
                 },
-                "go-type" : 46,
+                "go-type" : 55,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 16,
@@ -1468,7 +1468,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "bw",
-                    "variable" : 13
+                    "variable" : 20
                   }
                 },
                 "type" : "selector"
@@ -1498,7 +1498,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "data",
-                    "variable" : 16
+                    "variable" : 24
                   },
                   "go-type" : 5,
                   "kind" : "expression",
@@ -1542,14 +1542,14 @@
       "line-end" : 358,
       "code" : "wd := int(bw.dataCount() % uint32(len(b.data)))",
       "entry" : false,
-      "use-vars" : [ 0, 13 ]
+      "use-vars" : [ 20, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 24 ],
-      "in-vars" : [ 11, 13, 2, 3, 0, 4, 17 ],
+      "in-vars" : [ 4, 20, 18, 2, 3, 0, 25 ],
       "exit" : false,
-      "out-vars" : [ 3, 18, 0, 4, 17, 2 ],
-      "decl-vars" : [ 18 ],
+      "out-vars" : [ 0, 25, 4, 26, 2, 3 ],
+      "decl-vars" : [ 26 ],
       "line-start" : 359,
       "ast" : {
         "kind" : "statement",
@@ -1577,7 +1577,7 @@
                   "kind" : "ident",
                   "value" : "dataCount"
                 },
-                "go-type" : 46,
+                "go-type" : 55,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 16,
@@ -1587,7 +1587,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "br",
-                    "variable" : 11
+                    "variable" : 18
                   }
                 },
                 "type" : "selector"
@@ -1605,7 +1605,7 @@
                   "kind" : "ident",
                   "value" : "dataCount"
                 },
-                "go-type" : 46,
+                "go-type" : 55,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 16,
@@ -1615,7 +1615,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "bw",
-                    "variable" : 13
+                    "variable" : 20
                   }
                 },
                 "type" : "selector"
@@ -1626,7 +1626,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 51,
+              "go-type" : 61,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1647,7 +1647,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "data",
-                "variable" : 16
+                "variable" : 24
               },
               "go-type" : 5,
               "kind" : "expression",
@@ -1687,14 +1687,14 @@
       "line-end" : 359,
       "code" : "nd := countSub(br.dataCount(), bw.dataCount()) + len(b.data)",
       "entry" : false,
-      "use-vars" : [ 0, 11, 13 ]
+      "use-vars" : [ 20, 0, 18 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 25 ],
-      "in-vars" : [ 0, 4, 17, 2, 3, 18 ],
+      "in-vars" : [ 26, 2, 3, 0, 25, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 19, 17, 2, 3, 18 ],
-      "decl-vars" : [ 19 ],
+      "out-vars" : [ 25, 4, 26, 27, 2, 3, 0 ],
+      "decl-vars" : [ 27 ],
       "line-start" : 360,
       "ast" : {
         "kind" : "statement",
@@ -1726,9 +1726,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26, 30 ],
-      "in-vars" : [ 17, 2, 3, 18, 0, 4, 19 ],
+      "in-vars" : [ 0, 25, 4, 26, 27, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 19, 17, 2, 3, 18, 0 ],
+      "out-vars" : [ 27, 2, 3, 0, 25, 4, 26 ],
       "decl-vars" : [ ],
       "line-start" : 361,
       "ast" : {
@@ -1752,7 +1752,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "wd",
-                    "variable" : 17
+                    "variable" : 25
                   }
                 },
                 "operator" : "+",
@@ -1822,7 +1822,7 @@
               } ],
               "ellipsis" : false,
               "function" : {
-                "go-type" : 33,
+                "go-type" : 35,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -1844,7 +1844,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "data",
-                "variable" : 16
+                "variable" : 24
               },
               "go-type" : 5,
               "kind" : "expression",
@@ -1885,13 +1885,13 @@
       "line-end" : 366,
       "code" : "if wd+2+int(b.hdrsize)+len(stk) > len(b.data) {\n\tb.data[wd] = 0\n\tskip = len(b.data) - wd\n\tnd -= skip\n\twd = 0\n}",
       "entry" : false,
-      "use-vars" : [ 0, 17, 4 ]
+      "use-vars" : [ 4, 0, 25 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 27 ],
-      "in-vars" : [ 18, 0, 4, 17, 2, 3 ],
+      "in-vars" : [ 2, 3, 0, 25, 4, 26 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 17, 2, 3, 18 ],
+      "out-vars" : [ 4, 26, 2, 3, 0, 25 ],
       "decl-vars" : [ ],
       "line-start" : 362,
       "ast" : {
@@ -1906,7 +1906,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "wd",
-              "variable" : 17
+              "variable" : 25
             }
           },
           "kind" : "expression",
@@ -1915,7 +1915,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "data",
-              "variable" : 16
+              "variable" : 24
             },
             "go-type" : 5,
             "kind" : "expression",
@@ -1948,13 +1948,13 @@
       "line-end" : 362,
       "code" : "b.data[wd] = 0",
       "entry" : false,
-      "use-vars" : [ 0, 17 ]
+      "use-vars" : [ 0, 25 ]
     }, {
-      "update-vars" : [ 19 ],
+      "update-vars" : [ 27 ],
       "successors" : [ 28 ],
-      "in-vars" : [ 3, 18, 0, 4, 17, 2 ],
+      "in-vars" : [ 25, 4, 26, 2, 3, 0 ],
       "exit" : false,
-      "out-vars" : [ 3, 18, 0, 4, 19, 2 ],
+      "out-vars" : [ 0, 4, 26, 27, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 363,
       "ast" : {
@@ -1967,7 +1967,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "skip",
-            "variable" : 19
+            "variable" : 27
           }
         } ],
         "right" : [ {
@@ -1979,7 +1979,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "data",
-                "variable" : 16
+                "variable" : 24
               },
               "go-type" : 5,
               "kind" : "expression",
@@ -2020,24 +2020,24 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "wd",
-              "variable" : 17
+              "variable" : 25
             }
           },
           "type" : "binary"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 19 ],
+      "assign-vars" : [ 27 ],
       "line-end" : 363,
       "code" : "skip = len(b.data) - wd",
       "entry" : false,
-      "use-vars" : [ 0, 17 ]
+      "use-vars" : [ 25, 0 ]
     }, {
-      "update-vars" : [ 18 ],
+      "update-vars" : [ 26 ],
       "successors" : [ 29 ],
-      "in-vars" : [ 3, 18, 0, 4, 19, 2 ],
+      "in-vars" : [ 27, 2, 3, 0, 4, 26 ],
       "exit" : false,
-      "out-vars" : [ 4, 19, 2, 3, 0 ],
+      "out-vars" : [ 0, 4, 27, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 364,
       "ast" : {
@@ -2050,7 +2050,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "nd",
-            "variable" : 18
+            "variable" : 26
           }
         } ],
         "operator" : "-",
@@ -2062,22 +2062,22 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "skip",
-            "variable" : 19
+            "variable" : 27
           }
         } ],
         "type" : "assign-operator"
       },
-      "assign-vars" : [ 18 ],
+      "assign-vars" : [ 26 ],
       "line-end" : 364,
       "code" : "nd -= skip",
       "entry" : false,
-      "use-vars" : [ 19, 18 ]
+      "use-vars" : [ 27, 26 ]
     }, {
-      "update-vars" : [ 17 ],
+      "update-vars" : [ 25 ],
       "successors" : [ 30 ],
-      "in-vars" : [ 3, 0, 4, 19, 2 ],
+      "in-vars" : [ 0, 4, 27, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 0, 4, 19, 17 ],
+      "out-vars" : [ 3, 0, 25, 4, 27, 2 ],
       "decl-vars" : [ ],
       "line-start" : 365,
       "ast" : {
@@ -2090,7 +2090,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "wd",
-            "variable" : 17
+            "variable" : 25
           }
         } ],
         "right" : [ {
@@ -2103,7 +2103,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 17 ],
+      "assign-vars" : [ 25 ],
       "line-end" : 365,
       "code" : "wd = 0",
       "entry" : false,
@@ -2111,10 +2111,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 31 ],
-      "in-vars" : [ 17, 2, 3, 0, 4, 19 ],
+      "in-vars" : [ 2, 3, 0, 25, 4, 27 ],
       "exit" : false,
-      "out-vars" : [ 19, 20, 2, 3, 0, 4 ],
-      "decl-vars" : [ 20 ],
+      "out-vars" : [ 28, 0, 4, 27, 2, 3 ],
+      "decl-vars" : [ 28 ],
       "line-start" : 367,
       "ast" : {
         "kind" : "statement",
@@ -2143,7 +2143,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "wd",
-              "variable" : 17
+              "variable" : 25
             }
           },
           "target" : {
@@ -2151,7 +2151,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "data",
-              "variable" : 16
+              "variable" : 24
             },
             "go-type" : 5,
             "kind" : "expression",
@@ -2175,13 +2175,13 @@
       "line-end" : 367,
       "code" : "data := b.data[wd:]",
       "entry" : false,
-      "use-vars" : [ 0, 17 ]
+      "use-vars" : [ 0, 25 ]
     }, {
-      "update-vars" : [ 20 ],
+      "update-vars" : [ 28 ],
       "successors" : [ 32 ],
-      "in-vars" : [ 0, 4, 19, 20, 2, 3 ],
+      "in-vars" : [ 27, 2, 3, 28, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 0, 4, 19, 20 ],
+      "out-vars" : [ 28, 0, 4, 27, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 368,
       "ast" : {
@@ -2205,7 +2205,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "data",
-              "variable" : 20
+              "variable" : 28
             }
           },
           "type" : "index"
@@ -2292,7 +2292,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 33,
+                  "go-type" : 35,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -2317,13 +2317,13 @@
       "line-end" : 368,
       "code" : "data[0] = uint64(2 + b.hdrsize + uintptr(len(stk)))",
       "entry" : false,
-      "use-vars" : [ 0, 4, 20 ]
+      "use-vars" : [ 4, 28, 0 ]
     }, {
-      "update-vars" : [ 20 ],
+      "update-vars" : [ 28 ],
       "successors" : [ 33 ],
-      "in-vars" : [ 4, 19, 20, 2, 3, 0 ],
+      "in-vars" : [ 27, 2, 3, 28, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 19, 20, 3, 0 ],
+      "out-vars" : [ 27, 3, 28, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 369,
       "ast" : {
@@ -2347,7 +2347,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "data",
-              "variable" : 20
+              "variable" : 28
             }
           },
           "type" : "index"
@@ -2385,14 +2385,14 @@
       "line-end" : 369,
       "code" : "data[1] = uint64(now)",
       "entry" : false,
-      "use-vars" : [ 2, 20 ]
+      "use-vars" : [ 2, 28 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 34 ],
-      "in-vars" : [ 0, 4, 19, 20, 3 ],
+      "in-vars" : [ 0, 4, 27, 3, 28 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 19, 20, 21 ],
-      "decl-vars" : [ 21 ],
+      "out-vars" : [ 27, 28, 0, 4, 29 ],
+      "decl-vars" : [ 29 ],
       "line-start" : 371,
       "ast" : {
         "kind" : "statement",
@@ -2479,7 +2479,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "data",
-                  "variable" : 20
+                  "variable" : 28
                 }
               }
             }, {
@@ -2495,7 +2495,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 53,
+              "go-type" : 63,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2516,13 +2516,13 @@
       "line-end" : 371,
       "code" : "i := uintptr(copy(data[2:2+b.hdrsize], hdr))",
       "entry" : false,
-      "use-vars" : [ 20, 0, 3 ]
+      "use-vars" : [ 28, 0, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 36, 37 ],
-      "in-vars" : [ 4, 19, 20, 21, 0 ],
+      "in-vars" : [ 28, 0, 4, 29, 27 ],
       "exit" : false,
-      "out-vars" : [ 21, 0, 4, 19, 20 ],
+      "out-vars" : [ 28, 0, 4, 29, 27 ],
       "decl-vars" : [ ],
       "line-start" : 372,
       "ast" : {
@@ -2537,7 +2537,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "i",
-              "variable" : 21
+              "variable" : 29
             }
           },
           "operator" : "<",
@@ -2572,13 +2572,13 @@
       "line-end" : 374,
       "code" : "for ; i < b.hdrsize; i++ {\n\tdata[2+i] = 0\n}",
       "entry" : false,
-      "use-vars" : [ 21, 0 ]
+      "use-vars" : [ 29, 0 ]
     }, {
-      "update-vars" : [ 21 ],
+      "update-vars" : [ 29 ],
       "successors" : [ 34 ],
-      "in-vars" : [ 21, 0, 4, 19, 20 ],
+      "in-vars" : [ 28, 0, 4, 29, 27 ],
       "exit" : false,
-      "out-vars" : [ 21, 0, 4, 19, 20 ],
+      "out-vars" : [ 0, 4, 29, 27, 28 ],
       "decl-vars" : [ ],
       "line-start" : 372,
       "ast" : {
@@ -2592,22 +2592,22 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "i",
-            "variable" : 21
+            "variable" : 29
           }
         },
         "type" : "crement"
       },
-      "assign-vars" : [ 21 ],
+      "assign-vars" : [ 29 ],
       "line-end" : 372,
       "code" : "i++",
       "entry" : false,
-      "use-vars" : [ 21 ]
+      "use-vars" : [ 29 ]
     }, {
-      "update-vars" : [ 20 ],
+      "update-vars" : [ 28 ],
       "successors" : [ 35 ],
-      "in-vars" : [ 19, 20, 21, 0, 4 ],
+      "in-vars" : [ 27, 28, 0, 4, 29 ],
       "exit" : false,
-      "out-vars" : [ 21, 0, 4, 19, 20 ],
+      "out-vars" : [ 0, 4, 29, 27, 28 ],
       "decl-vars" : [ ],
       "line-start" : 373,
       "ast" : {
@@ -2634,7 +2634,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "i",
-                "variable" : 21
+                "variable" : 29
               }
             },
             "type" : "binary"
@@ -2648,7 +2648,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "data",
-              "variable" : 20
+              "variable" : 28
             }
           },
           "type" : "index"
@@ -2667,14 +2667,14 @@
       "line-end" : 373,
       "code" : "data[2+i] = 0",
       "entry" : false,
-      "use-vars" : [ 20, 21 ]
+      "use-vars" : [ 28, 29 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 38, 39 ],
-      "in-vars" : [ 4, 19, 20, 0 ],
+      "in-vars" : [ 4, 27, 28, 0 ],
       "exit" : false,
-      "out-vars" : [ 20, 0, 23, 22, 4, 19 ],
-      "decl-vars" : [ 23, 22 ],
+      "out-vars" : [ 28, 0, 4, 30, 31, 27 ],
+      "decl-vars" : [ 30, 31 ],
       "line-start" : 375,
       "ast" : {
         "is-assign" : false,
@@ -2718,11 +2718,11 @@
       "entry" : false,
       "use-vars" : [ 4 ]
     }, {
-      "update-vars" : [ 20 ],
+      "update-vars" : [ 28 ],
       "successors" : [ 37 ],
-      "in-vars" : [ 0, 23, 22, 4, 19, 20 ],
+      "in-vars" : [ 31, 27, 28, 0, 4, 30 ],
       "exit" : false,
-      "out-vars" : [ 19, 20, 0, 4 ],
+      "out-vars" : [ 28, 0, 4, 27 ],
       "decl-vars" : [ ],
       "line-start" : 376,
       "ast" : {
@@ -2791,7 +2791,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "i",
-                  "variable" : 22
+                  "variable" : 30
                 }
               },
               "type" : "cast"
@@ -2807,7 +2807,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "data",
-              "variable" : 20
+              "variable" : 28
             }
           },
           "type" : "index"
@@ -2834,7 +2834,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "pc",
-              "variable" : 23
+              "variable" : 31
             }
           },
           "type" : "cast"
@@ -2845,13 +2845,13 @@
       "line-end" : 376,
       "code" : "data[2+b.hdrsize+uintptr(i)] = uint64(pc)",
       "entry" : false,
-      "use-vars" : [ 23, 20, 0, 22 ]
+      "use-vars" : [ 30, 28, 0, 31 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 40, 1 ],
-      "in-vars" : [ 0, 4, 19 ],
+      "in-vars" : [ 0, 4, 27 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 19 ],
+      "out-vars" : [ 0, 4, 27 ],
       "decl-vars" : [ ],
       "line-start" : 379,
       "ast" : {
@@ -2867,10 +2867,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 0, 4, 19 ],
+      "in-vars" : [ 0, 4, 27 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 24, 19 ],
-      "decl-vars" : [ 24 ],
+      "out-vars" : [ 0, 4, 32, 27 ],
+      "decl-vars" : [ 32 ],
       "line-start" : 382,
       "ast" : {
         "kind" : "statement",
@@ -2894,14 +2894,14 @@
               "kind" : "ident",
               "value" : "load"
             },
-            "go-type" : 44,
+            "go-type" : 51,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "w",
-                "variable" : 12
+                "variable" : 19
               },
               "go-type" : 13,
               "kind" : "expression",
@@ -2934,10 +2934,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 42 ],
-      "in-vars" : [ 0, 4, 24, 19 ],
+      "in-vars" : [ 0, 4, 32, 27 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 24, 25, 19 ],
-      "decl-vars" : [ 25 ],
+      "out-vars" : [ 0, 4, 32, 27, 35 ],
+      "decl-vars" : [ 35 ],
       "line-start" : 383,
       "ast" : {
         "kind" : "statement",
@@ -2969,7 +2969,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "skip",
-                    "variable" : 19
+                    "variable" : 27
                   }
                 },
                 "operator" : "+",
@@ -2998,7 +2998,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 33,
+                  "go-type" : 35,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -3069,7 +3069,7 @@
               "kind" : "ident",
               "value" : "addCountsAndClearFlags"
             },
-            "go-type" : 55,
+            "go-type" : 65,
             "kind" : "expression",
             "target" : {
               "go-type" : 16,
@@ -3079,7 +3079,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "old",
-                "variable" : 24
+                "variable" : 32
               }
             },
             "type" : "selector"
@@ -3094,13 +3094,13 @@
       "line-end" : 383,
       "code" : "new := old.addCountsAndClearFlags(skip+2+len(stk)+int(b.hdrsize), 1)",
       "entry" : false,
-      "use-vars" : [ 0, 24, 19, 4 ]
+      "use-vars" : [ 27, 4, 0, 32 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 44 ],
-      "in-vars" : [ 25, 19, 0, 4, 24 ],
+      "in-vars" : [ 32, 27, 35, 0, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 24, 19 ],
+      "out-vars" : [ 0, 4, 32, 27 ],
       "decl-vars" : [ ],
       "line-start" : 384,
       "ast" : {
@@ -3117,7 +3117,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "old",
-                "variable" : 24
+                "variable" : 32
               }
             }, {
               "go-type" : 16,
@@ -3127,7 +3127,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "new",
-                "variable" : 25
+                "variable" : 35
               }
             } ],
             "ellipsis" : false,
@@ -3138,14 +3138,14 @@
                 "kind" : "ident",
                 "value" : "cas"
               },
-              "go-type" : 57,
+              "go-type" : 68,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "w",
-                  "variable" : 12
+                  "variable" : 19
                 },
                 "go-type" : 13,
                 "kind" : "expression",
@@ -3177,13 +3177,13 @@
       "line-end" : 386,
       "code" : "if !b.w.cas(old, new) {\n\tcontinue\n}",
       "entry" : false,
-      "use-vars" : [ 25, 0, 24 ]
+      "use-vars" : [ 35, 0, 32 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 0, 4, 19 ],
+      "in-vars" : [ 0, 4, 27 ],
       "exit" : false,
-      "out-vars" : [ 0, 4, 19 ],
+      "out-vars" : [ 0, 4, 27 ],
       "decl-vars" : [ ],
       "line-start" : 385,
       "ast" : {
@@ -3199,7 +3199,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 45, 46 ],
-      "in-vars" : [ 0, 24 ],
+      "in-vars" : [ 0, 32 ],
       "exit" : false,
       "out-vars" : [ 0 ],
       "decl-vars" : [ ],
@@ -3219,7 +3219,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "old",
-                "variable" : 24
+                "variable" : 32
               }
             },
             "operator" : "&",
@@ -3251,7 +3251,7 @@
       "line-end" : 390,
       "code" : "if old&profReaderSleeping != 0 {\n\tnotewakeup(&b.wait)\n}",
       "entry" : false,
-      "use-vars" : [ 24 ]
+      "use-vars" : [ 32 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 46 ],
@@ -3265,7 +3265,7 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 61,
+            "go-type" : 73,
             "kind" : "expression",
             "operator" : "&",
             "target" : {
@@ -3273,7 +3273,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "wait",
-                "variable" : 26
+                "variable" : 36
               },
               "go-type" : 17,
               "kind" : "expression",
@@ -3294,7 +3294,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 59,
+            "go-type" : 71,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -3348,67 +3348,67 @@
     }, {
       "name" : "hasOverflow",
       "package" : 0,
-      "type" : 29,
+      "type" : 31,
       "exported" : false
     }, {
       "name" : "canWriteTwoRecords",
       "package" : 0,
-      "type" : 31,
+      "type" : 34,
       "exported" : false
     }, {
       "name" : "takeOverflow",
       "package" : 0,
-      "type" : 36,
+      "type" : 39,
       "exported" : false
     }, {
       "name" : "canWriteRecord",
       "package" : 0,
-      "type" : 39,
+      "type" : 45,
       "exported" : false
     }, {
       "name" : "incrementOverflow",
       "package" : 0,
-      "type" : 41,
+      "type" : 48,
       "exported" : false
     }, {
       "name" : "wakeupExtra",
       "package" : 0,
-      "type" : 43,
+      "type" : 50,
       "exported" : false
     }, {
       "name" : "load",
       "package" : 0,
-      "type" : 44,
+      "type" : 53,
       "exported" : false
     }, {
       "name" : "tagCount",
       "package" : 0,
-      "type" : 46,
+      "type" : 57,
       "exported" : false
     }, {
       "name" : "dataCount",
       "package" : 0,
-      "type" : 46,
+      "type" : 57,
       "exported" : false
     }, {
       "name" : "countSub",
       "package" : 0,
-      "type" : 51,
+      "type" : 61,
       "exported" : false
     }, {
       "name" : "addCountsAndClearFlags",
       "package" : 0,
-      "type" : 55,
+      "type" : 67,
       "exported" : false
     }, {
       "name" : "cas",
       "package" : 0,
-      "type" : 57,
+      "type" : 70,
       "exported" : false
     }, {
       "name" : "notewakeup",
       "package" : 0,
-      "type" : 59,
+      "type" : 71,
       "exported" : false
     } ],
     "line-end" : 393,
@@ -3427,7 +3427,7 @@
     "results" : [ ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(tagPtr *unsafe.Pointer, now int64, hdr []uint64, stk []uintptr)",
+      "name" : "(*runtime.profBuf) func(tagPtr *unsafe.Pointer, now int64, hdr []uint64, stk []uintptr)",
       "params" : 1,
       "recv" : 0,
       "results" : 9,
@@ -3650,12 +3650,20 @@
       "type" : "Tuple",
       "underlying" : 30
     }, {
-      "name" : "func(nstk1 int, nstk2 int) bool",
-      "params" : 32,
-      "recv" : -1,
+      "name" : "(*runtime.profBuf) func() bool",
+      "params" : 9,
+      "recv" : 6,
       "results" : 30,
       "type" : "Signature",
       "underlying" : 31,
+      "variadic" : false
+    }, {
+      "name" : "func(nstk1 int, nstk2 int) bool",
+      "params" : 33,
+      "recv" : -1,
+      "results" : 30,
+      "type" : "Signature",
+      "underlying" : 32,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3667,14 +3675,22 @@
       } ],
       "name" : "(nstk1 int, nstk2 int)",
       "type" : "Tuple",
-      "underlying" : 32
+      "underlying" : 33
+    }, {
+      "name" : "(*runtime.profBuf) func(nstk1 int, nstk2 int) bool",
+      "params" : 33,
+      "recv" : 8,
+      "results" : 30,
+      "type" : "Signature",
+      "underlying" : 34,
+      "variadic" : false
     }, {
       "name" : "func([]uintptr) int",
-      "params" : 34,
+      "params" : 36,
       "recv" : -1,
       "results" : 24,
       "type" : "Signature",
-      "underlying" : 33,
+      "underlying" : 35,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3683,7 +3699,7 @@
       } ],
       "name" : "([]uintptr)",
       "type" : "Tuple",
-      "underlying" : 34
+      "underlying" : 36
     }, {
       "fields" : [ {
         "name" : "count",
@@ -3694,31 +3710,47 @@
       } ],
       "name" : "(count uint32, time uint64)",
       "type" : "Tuple",
-      "underlying" : 35
+      "underlying" : 37
     }, {
       "name" : "func() (count uint32, time uint64)",
       "params" : 9,
       "recv" : -1,
-      "results" : 35,
+      "results" : 37,
       "type" : "Signature",
-      "underlying" : 36,
+      "underlying" : 38,
+      "variadic" : false
+    }, {
+      "name" : "(*runtime.profBuf) func() (count uint32, time uint64)",
+      "params" : 9,
+      "recv" : 9,
+      "results" : 37,
+      "type" : "Signature",
+      "underlying" : 39,
       "variadic" : false
     }, {
       "elem" : 8,
       "name" : "[1]uintptr",
       "type" : "Array",
-      "underlying" : 37
+      "underlying" : 40
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 38
+      "underlying" : 41
+    }, {
+      "name" : "func(tagPtr *unsafe.Pointer, now int64, hdr []uint64, stk []uintptr)",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 42,
+      "variadic" : false
     }, {
       "name" : "func(nstk int) bool",
-      "params" : 40,
+      "params" : 44,
       "recv" : -1,
       "results" : 30,
       "type" : "Signature",
-      "underlying" : 39,
+      "underlying" : 43,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3727,14 +3759,22 @@
       } ],
       "name" : "(nstk int)",
       "type" : "Tuple",
-      "underlying" : 40
+      "underlying" : 44
+    }, {
+      "name" : "(*runtime.profBuf) func(nstk int) bool",
+      "params" : 44,
+      "recv" : 13,
+      "results" : 30,
+      "type" : "Signature",
+      "underlying" : 45,
+      "variadic" : false
     }, {
       "name" : "func(now int64)",
-      "params" : 42,
+      "params" : 47,
       "recv" : -1,
       "results" : 9,
       "type" : "Signature",
-      "underlying" : 41,
+      "underlying" : 46,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3743,22 +3783,38 @@
       } ],
       "name" : "(now int64)",
       "type" : "Tuple",
-      "underlying" : 42
+      "underlying" : 47
+    }, {
+      "name" : "(*runtime.profBuf) func(now int64)",
+      "params" : 47,
+      "recv" : 14,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 48,
+      "variadic" : false
     }, {
       "name" : "func()",
       "params" : 9,
       "recv" : -1,
       "results" : 9,
       "type" : "Signature",
-      "underlying" : 43,
+      "underlying" : 49,
+      "variadic" : false
+    }, {
+      "name" : "(*runtime.profBuf) func()",
+      "params" : 9,
+      "recv" : 15,
+      "results" : 9,
+      "type" : "Signature",
+      "underlying" : 50,
       "variadic" : false
     }, {
       "name" : "func() runtime.profIndex",
       "params" : 9,
       "recv" : -1,
-      "results" : 45,
+      "results" : 52,
       "type" : "Signature",
-      "underlying" : 44,
+      "underlying" : 51,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3767,14 +3823,27 @@
       } ],
       "name" : "(runtime.profIndex)",
       "type" : "Tuple",
-      "underlying" : 45
+      "underlying" : 52
+    }, {
+      "name" : "(*runtime.profAtomic) func() runtime.profIndex",
+      "params" : 9,
+      "recv" : 17,
+      "results" : 52,
+      "type" : "Signature",
+      "underlying" : 53,
+      "variadic" : false
+    }, {
+      "elem" : 13,
+      "name" : "*runtime.profAtomic",
+      "type" : "Pointer",
+      "underlying" : 54
     }, {
       "name" : "func() uint32",
       "params" : 9,
       "recv" : -1,
-      "results" : 47,
+      "results" : 56,
       "type" : "Signature",
-      "underlying" : 46,
+      "underlying" : 55,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3783,14 +3852,22 @@
       } ],
       "name" : "(uint32)",
       "type" : "Tuple",
-      "underlying" : 47
+      "underlying" : 56
+    }, {
+      "name" : "(runtime.profIndex) func() uint32",
+      "params" : 9,
+      "recv" : 21,
+      "results" : 56,
+      "type" : "Signature",
+      "underlying" : 57,
+      "variadic" : false
     }, {
       "name" : "func([]unsafe.Pointer) int",
-      "params" : 49,
+      "params" : 59,
       "recv" : -1,
       "results" : 24,
       "type" : "Signature",
-      "underlying" : 48,
+      "underlying" : 58,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3799,19 +3876,19 @@
       } ],
       "name" : "([]unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 49
+      "underlying" : 59
     }, {
       "elem" : 8,
       "name" : "*uintptr",
       "type" : "Pointer",
-      "underlying" : 50
+      "underlying" : 60
     }, {
       "name" : "func(x uint32, y uint32) int",
-      "params" : 52,
+      "params" : 62,
       "recv" : -1,
       "results" : 24,
       "type" : "Signature",
-      "underlying" : 51,
+      "underlying" : 61,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3823,14 +3900,14 @@
       } ],
       "name" : "(x uint32, y uint32)",
       "type" : "Tuple",
-      "underlying" : 52
+      "underlying" : 62
     }, {
       "name" : "func([]uint64, []uint64) int",
-      "params" : 54,
+      "params" : 64,
       "recv" : -1,
       "results" : 24,
       "type" : "Signature",
-      "underlying" : 53,
+      "underlying" : 63,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3842,14 +3919,14 @@
       } ],
       "name" : "([]uint64, []uint64)",
       "type" : "Tuple",
-      "underlying" : 54
+      "underlying" : 64
     }, {
       "name" : "func(data int, tag int) runtime.profIndex",
-      "params" : 56,
+      "params" : 66,
       "recv" : -1,
-      "results" : 45,
+      "results" : 52,
       "type" : "Signature",
-      "underlying" : 55,
+      "underlying" : 65,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3861,14 +3938,22 @@
       } ],
       "name" : "(data int, tag int)",
       "type" : "Tuple",
-      "underlying" : 56
+      "underlying" : 66
+    }, {
+      "name" : "(runtime.profIndex) func(data int, tag int) runtime.profIndex",
+      "params" : 66,
+      "recv" : 33,
+      "results" : 52,
+      "type" : "Signature",
+      "underlying" : 67,
+      "variadic" : false
     }, {
       "name" : "func(old runtime.profIndex, new runtime.profIndex) bool",
-      "params" : 58,
+      "params" : 69,
       "recv" : -1,
       "results" : 30,
       "type" : "Signature",
-      "underlying" : 57,
+      "underlying" : 68,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3880,28 +3965,36 @@
       } ],
       "name" : "(old runtime.profIndex, new runtime.profIndex)",
       "type" : "Tuple",
-      "underlying" : 58
+      "underlying" : 69
+    }, {
+      "name" : "(*runtime.profAtomic) func(old runtime.profIndex, new runtime.profIndex) bool",
+      "params" : 69,
+      "recv" : 34,
+      "results" : 30,
+      "type" : "Signature",
+      "underlying" : 70,
+      "variadic" : false
     }, {
       "name" : "func(n *runtime.note)",
-      "params" : 60,
+      "params" : 72,
       "recv" : -1,
       "results" : 9,
       "type" : "Signature",
-      "underlying" : 59,
+      "underlying" : 71,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "n",
-        "type" : 61
+        "type" : 73
       } ],
       "name" : "(n *runtime.note)",
       "type" : "Tuple",
-      "underlying" : 60
+      "underlying" : 72
     }, {
       "elem" : 17,
       "name" : "*runtime.note",
       "type" : "Pointer",
-      "underlying" : 61
+      "underlying" : 73
     } ],
     "variables" : [ {
       "name" : "b",
@@ -3946,9 +4039,30 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "hasOverflow",
       "package" : 0,
       "type" : 28,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 10,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3962,7 +4076,7 @@
     }, {
       "name" : "stk",
       "package" : 0,
-      "type" : 37,
+      "type" : 40,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3974,12 +4088,40 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "r",
       "package" : 0,
       "type" : 13,
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 54,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "br",
       "package" : 0,
@@ -3996,6 +4138,13 @@
       "field" : true
     }, {
       "name" : "bw",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "x",
       "package" : 0,
       "type" : 16,
       "exported" : false,
@@ -4075,6 +4224,20 @@
       "name" : "old",
       "package" : 0,
       "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 54,
       "exported" : false,
       "embedded" : false,
       "field" : false

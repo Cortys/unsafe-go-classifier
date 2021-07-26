@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 0, 3, 4, 5, 2 ],
+      "in-vars" : [ 3, 4, 5, 2, 1, 0 ],
       "exit" : false,
       "out-vars" : [ 0, 3, 4, 5, 2, 1 ],
       "decl-vars" : [ ],
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 5, 2, 1, 0, 3, 4 ],
+      "in-vars" : [ 3, 4, 5, 2, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 2, 1 ],
+      "out-vars" : [ 1, 0, 6, 2 ],
       "decl-vars" : [ 6 ],
       "line-start" : 265,
       "ast" : {
@@ -498,13 +498,13 @@
       "line-end" : 276,
       "code" : "p1 := func(x uintptr) {\n\tvar buf [2 * sys.PtrSize]byte\n\tfor i := len(buf) - 1; i >= 0; i-- {\n\t\tif x&0xF < 10 {\n\t\t\tbuf[i] = byte(x&0xF) + '0'\n\t\t} else {\n\t\t\tbuf[i] = byte(x&0xF) - 10 + 'a'\n\t\t}\n\t\tx >>= 4\n\t}\n\tgwrite(buf[:])\n}",
       "entry" : false,
-      "use-vars" : [ 4, 3, 5 ]
+      "use-vars" : [ 4, 5, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 0, 2, 1, 6 ],
+      "in-vars" : [ 2, 1, 0, 6 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 2, 1 ],
+      "out-vars" : [ 0, 6, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 278,
       "ast" : {
@@ -537,9 +537,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 6, 0, 2, 1 ],
+      "in-vars" : [ 2, 1, 0, 6 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 6, 0 ],
+      "out-vars" : [ 0, 6, 2, 7, 1 ],
       "decl-vars" : [ 7 ],
       "line-start" : 279,
       "ast" : {
@@ -593,9 +593,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 6, 0, 7, 2, 1 ],
+      "in-vars" : [ 7, 1, 0, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 7, 2, 1 ],
+      "out-vars" : [ 1, 0, 6, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 280,
       "ast" : {
@@ -642,9 +642,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 25 ],
-      "in-vars" : [ 2, 1, 8, 6, 0, 7 ],
+      "in-vars" : [ 6, 2, 7, 1, 0, 8 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 8, 6, 0, 7 ],
+      "out-vars" : [ 1, 0, 8, 6, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 281,
       "ast" : {
@@ -700,13 +700,13 @@
       "line-end" : 306,
       "code" : "for i := uintptr(0); p+i < end; i += sys.PtrSize {\n\tif i%16 == 0 {\n\t\tif i != 0 {\n\t\t\tprintln()\n\t\t}\n\t\tp1(p + i)\n\t\tprint(\": \")\n\t}\n\n\tif mark != nil {\n\t\tmarkbuf[0] = mark(p + i)\n\t\tif markbuf[0] == 0 {\n\t\t\tmarkbuf[0] = ' '\n\t\t}\n\t}\n\tgwrite(markbuf[:])\n\tval := *(*uintptr)(unsafe.Pointer(p + i))\n\tp1(val)\n\tprint(\" \")\n\n\tfn := findfunc(val)\n\tif fn.valid() {\n\t\tprint(\"<\", funcname(fn), \"+\", val-fn.entry, \"> \")\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 0, 8, 1 ]
+      "use-vars" : [ 1, 0, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 7, 2, 1, 6, 0 ],
+      "in-vars" : [ 7, 1, 0, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "out-vars" : [ 0, 8, 6, 2, 7, 1 ],
       "decl-vars" : [ 8 ],
       "line-start" : 281,
       "ast" : {
@@ -739,9 +739,9 @@
     }, {
       "update-vars" : [ 8 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "in-vars" : [ 7, 1, 0, 8, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "out-vars" : [ 7, 1, 0, 8, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 281,
       "ast" : {
@@ -776,9 +776,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 14 ],
-      "in-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "in-vars" : [ 6, 2, 7, 1, 0, 8 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 2, 1, 8, 6 ],
+      "out-vars" : [ 0, 8, 6, 2, 7, 1 ],
       "decl-vars" : [ ],
       "line-start" : 282,
       "ast" : {
@@ -832,9 +832,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11, 12 ],
-      "in-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "in-vars" : [ 6, 2, 7, 1, 0, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "out-vars" : [ 8, 6, 2, 7, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 283,
       "ast" : {
@@ -874,9 +874,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "in-vars" : [ 8, 6, 2, 7, 1, 0 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "out-vars" : [ 7, 1, 0, 8, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 284,
       "ast" : {
@@ -908,9 +908,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "in-vars" : [ 2, 7, 1, 0, 8, 6 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 2, 1, 8, 6 ],
+      "out-vars" : [ 1, 0, 8, 6, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 286,
       "ast" : {
@@ -970,9 +970,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "in-vars" : [ 6, 2, 7, 1, 0, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "out-vars" : [ 8, 6, 2, 7, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 287,
       "ast" : {
@@ -1011,9 +1011,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15, 18 ],
-      "in-vars" : [ 0, 7, 2, 1, 8, 6 ],
+      "in-vars" : [ 1, 0, 8, 6, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "out-vars" : [ 2, 7, 1, 0, 8, 6 ],
       "decl-vars" : [ ],
       "line-start" : 290,
       "ast" : {
@@ -1055,9 +1055,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "in-vars" : [ 7, 1, 0, 8, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "out-vars" : [ 8, 6, 2, 7, 1, 0 ],
       "decl-vars" : [ ],
       "line-start" : 291,
       "ast" : {
@@ -1137,13 +1137,13 @@
       "line-end" : 291,
       "code" : "markbuf[0] = mark(p + i)",
       "entry" : false,
-      "use-vars" : [ 7, 2, 0, 8 ]
+      "use-vars" : [ 0, 8, 7, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17, 18 ],
-      "in-vars" : [ 6, 0, 7, 2, 1, 8 ],
+      "in-vars" : [ 7, 1, 0, 8, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 7, 2, 1, 8 ],
+      "out-vars" : [ 7, 1, 0, 8, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 292,
       "ast" : {
@@ -1196,9 +1196,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 6, 0, 7, 2, 1, 8 ],
+      "in-vars" : [ 1, 0, 8, 6, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 0, 7, 2, 1 ],
+      "out-vars" : [ 2, 7, 1, 0, 8, 6 ],
       "decl-vars" : [ ],
       "line-start" : 293,
       "ast" : {
@@ -1245,9 +1245,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 2, 1, 8, 6, 0, 7 ],
+      "in-vars" : [ 1, 0, 8, 6, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 8, 6, 0 ],
+      "out-vars" : [ 6, 2, 7, 1, 0, 8 ],
       "decl-vars" : [ ],
       "line-start" : 296,
       "ast" : {
@@ -1299,9 +1299,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20 ],
-      "in-vars" : [ 0, 7, 2, 1, 8, 6 ],
+      "in-vars" : [ 0, 8, 6, 2, 7, 1 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 0, 7, 9, 2, 1 ],
+      "out-vars" : [ 0, 8, 6, 2, 7, 9, 1 ],
       "decl-vars" : [ 9 ],
       "line-start" : 297,
       "ast" : {
@@ -1402,9 +1402,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 7, 9, 2, 1, 8, 6, 0 ],
+      "in-vars" : [ 9, 1, 0, 8, 6, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 9, 2, 1, 8, 6 ],
+      "out-vars" : [ 6, 2, 7, 9, 1, 0, 8 ],
       "decl-vars" : [ ],
       "line-start" : 298,
       "ast" : {
@@ -1447,9 +1447,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 8, 6, 0, 7, 9, 2, 1 ],
+      "in-vars" : [ 1, 0, 8, 6, 2, 7, 9 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 0, 7, 9, 2, 1 ],
+      "out-vars" : [ 1, 0, 8, 6, 2, 7, 9 ],
       "decl-vars" : [ ],
       "line-start" : 299,
       "ast" : {
@@ -1488,9 +1488,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23 ],
-      "in-vars" : [ 1, 8, 6, 0, 7, 9, 2 ],
+      "in-vars" : [ 0, 8, 6, 2, 7, 9, 1 ],
       "exit" : false,
-      "out-vars" : [ 9, 10, 2, 1, 8, 6, 0, 7 ],
+      "out-vars" : [ 7, 10, 9, 1, 0, 8, 6, 2 ],
       "decl-vars" : [ 10 ],
       "line-start" : 302,
       "ast" : {
@@ -1543,9 +1543,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 24, 8 ],
-      "in-vars" : [ 6, 0, 7, 9, 10, 2, 1, 8 ],
+      "in-vars" : [ 7, 10, 9, 1, 0, 8, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 10, 2, 1, 8, 6, 0, 7, 9 ],
+      "out-vars" : [ 7, 10, 9, 1, 0, 8, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 303,
       "ast" : {
@@ -1589,9 +1589,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 1, 8, 6, 0, 7, 9, 10, 2 ],
+      "in-vars" : [ 6, 2, 7, 10, 9, 1, 0, 8 ],
       "exit" : false,
-      "out-vars" : [ 1, 8, 6, 0, 7, 2 ],
+      "out-vars" : [ 6, 2, 7, 1, 0, 8 ],
       "decl-vars" : [ ],
       "line-start" : 304,
       "ast" : {
@@ -1619,7 +1619,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 89,
+              "go-type" : 90,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1659,7 +1659,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "entry",
-                "variable" : 11
+                "variable" : 12
               },
               "go-type" : 2,
               "kind" : "expression",
@@ -1687,7 +1687,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 87,
+            "go-type" : 88,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1801,12 +1801,12 @@
     }, {
       "name" : "valid",
       "package" : 0,
-      "type" : 86,
+      "type" : 87,
       "exported" : false
     }, {
       "name" : "funcname",
       "package" : 0,
-      "type" : 89,
+      "type" : 90,
       "exported" : false
     }, {
       "name" : "printunlock",
@@ -2584,12 +2584,20 @@
       "underlying" : 86,
       "variadic" : false
     }, {
+      "name" : "(runtime.funcInfo) func() bool",
+      "params" : 7,
+      "recv" : 11,
+      "results" : 59,
+      "type" : "Signature",
+      "underlying" : 87,
+      "variadic" : false
+    }, {
       "name" : "func(string, string, string, uintptr, string)",
-      "params" : 88,
+      "params" : 89,
       "recv" : -1,
       "results" : 7,
       "type" : "Signature",
-      "underlying" : 87,
+      "underlying" : 88,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2610,14 +2618,14 @@
       } ],
       "name" : "(string, string, string, uintptr, string)",
       "type" : "Tuple",
-      "underlying" : 88
+      "underlying" : 89
     }, {
       "name" : "func(f runtime.funcInfo) string",
-      "params" : 90,
+      "params" : 91,
       "recv" : -1,
       "results" : 20,
       "type" : "Signature",
-      "underlying" : 89,
+      "underlying" : 90,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2626,7 +2634,7 @@
       } ],
       "name" : "(f runtime.funcInfo)",
       "type" : "Tuple",
-      "underlying" : 90
+      "underlying" : 91
     } ],
     "variables" : [ {
       "name" : "p",
@@ -2700,6 +2708,13 @@
       "field" : false
     }, {
       "name" : "fn",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "f",
       "package" : 0,
       "type" : 25,
       "exported" : false,

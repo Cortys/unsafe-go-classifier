@@ -44,8 +44,8 @@
       "successors" : [ 3 ],
       "in-vars" : [ 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 1, 2 ],
-      "decl-vars" : [ 6, 7 ],
+      "out-vars" : [ 2, 7, 8, 1 ],
+      "decl-vars" : [ 8, 7 ],
       "line-start" : 53,
       "ast" : {
         "kind" : "statement",
@@ -165,7 +165,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "MmapFlags",
-                "variable" : 5
+                "variable" : 6
               },
               "go-type" : 6,
               "kind" : "expression",
@@ -212,18 +212,18 @@
       "line-end" : 53,
       "code" : "b, err := syscall.Mmap(int(db.file.Fd()), 0, sz, syscall.PROT_READ, syscall.MAP_SHARED|db.MmapFlags)",
       "entry" : false,
-      "use-vars" : [ 1, 2 ]
+      "use-vars" : [ 2, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 6, 7, 1, 2 ],
+      "in-vars" : [ 1, 2, 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 7, 1 ],
+      "out-vars" : [ 7, 8, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 54,
       "ast" : {
         "condition" : {
-          "go-type" : 146,
+          "go-type" : 147,
           "kind" : "expression",
           "left" : {
             "go-type" : 130,
@@ -233,12 +233,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 6
+              "variable" : 8
             }
           },
           "operator" : "!=",
           "right" : {
-            "go-type" : 147,
+            "go-type" : 148,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -256,11 +256,11 @@
       "line-end" : 56,
       "code" : "if err != nil {\n\treturn err\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 6 ],
+      "in-vars" : [ 8 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -276,7 +276,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 6
+            "variable" : 8
           }
         } ]
       },
@@ -284,13 +284,13 @@
       "line-end" : 55,
       "code" : "return err",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 8 ]
     }, {
-      "update-vars" : [ 6 ],
+      "update-vars" : [ 8 ],
       "successors" : [ 6 ],
       "in-vars" : [ 7, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 6, 7 ],
+      "out-vars" : [ 8, 1, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 59,
       "ast" : {
@@ -303,7 +303,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 6
+            "variable" : 8
           }
         } ],
         "right" : [ {
@@ -327,7 +327,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 148,
+            "go-type" : 149,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -343,7 +343,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 6 ],
+      "assign-vars" : [ 8 ],
       "line-end" : 59,
       "code" : "err = madvise(b, syscall.MADV_RANDOM)",
       "entry" : false,
@@ -351,17 +351,17 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 8 ],
-      "in-vars" : [ 7, 1, 2, 6 ],
+      "in-vars" : [ 1, 2, 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 1, 2 ],
+      "out-vars" : [ 2, 7, 8, 1 ],
       "decl-vars" : [ ],
       "line-start" : 60,
       "ast" : {
         "condition" : {
-          "go-type" : 146,
+          "go-type" : 147,
           "kind" : "expression",
           "left" : {
-            "go-type" : 146,
+            "go-type" : 147,
             "kind" : "expression",
             "left" : {
               "go-type" : 130,
@@ -371,12 +371,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "err",
-                "variable" : 6
+                "variable" : 8
               }
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 147,
+              "go-type" : 148,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -389,7 +389,7 @@
           },
           "operator" : "&&",
           "right" : {
-            "go-type" : 146,
+            "go-type" : 147,
             "kind" : "expression",
             "left" : {
               "go-type" : 130,
@@ -399,12 +399,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "err",
-                "variable" : 6
+                "variable" : 8
               }
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 151,
+              "go-type" : 152,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -422,11 +422,11 @@
       "line-end" : 63,
       "code" : "if err != nil && err != syscall.ENOSYS {\n\n\treturn fmt.Errorf(\"madvise: %s\", err)\n}",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 6 ],
+      "in-vars" : [ 8 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -450,12 +450,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 6
+              "variable" : 8
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 152,
+            "go-type" : 153,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -480,11 +480,11 @@
       "line-end" : 62,
       "code" : "return fmt.Errorf(\"madvise: %s\", err)",
       "entry" : false,
-      "use-vars" : [ 6 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 9 ],
-      "in-vars" : [ 2, 7, 1 ],
+      "in-vars" : [ 1, 2, 7 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 7 ],
       "decl-vars" : [ ],
@@ -496,7 +496,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "dataref",
-            "variable" : 8
+            "variable" : 9
           },
           "go-type" : 34,
           "kind" : "expression",
@@ -534,9 +534,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 7, 1, 2 ],
+      "in-vars" : [ 1, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 2 ],
+      "out-vars" : [ 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 67,
       "ast" : {
@@ -546,7 +546,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "data",
-            "variable" : 9
+            "variable" : 10
           },
           "go-type" : 35,
           "kind" : "expression",
@@ -580,7 +580,7 @@
               "go-type" : 36,
               "kind" : "type",
               "length" : {
-                "go-type" : 155,
+                "go-type" : 156,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -671,7 +671,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "datasz",
-            "variable" : 10
+            "variable" : 11
           },
           "go-type" : 6,
           "kind" : "expression",
@@ -718,7 +718,7 @@
         "kind" : "statement",
         "type" : "return",
         "values" : [ {
-          "go-type" : 147,
+          "go-type" : 148,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -749,17 +749,17 @@
     }, {
       "name" : "Fd",
       "package" : 2,
-      "type" : 144,
+      "type" : 146,
       "exported" : true
     }, {
       "name" : "madvise",
       "package" : 0,
-      "type" : 148,
+      "type" : 149,
       "exported" : false
     }, {
       "name" : "Errorf",
       "package" : 7,
-      "type" : 152,
+      "type" : 153,
       "exported" : true
     } ],
     "line-end" : 70,
@@ -2041,7 +2041,7 @@
       "type" : "Interface",
       "underlying" : 131
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 72,
       "recv" : 0,
       "results" : 133,
@@ -2182,20 +2182,28 @@
       "type" : "Tuple",
       "underlying" : 145
     }, {
-      "name" : "untyped bool",
-      "type" : "Basic",
-      "underlying" : 146
+      "name" : "(*os.File) func() uintptr",
+      "params" : 72,
+      "recv" : 5,
+      "results" : 145,
+      "type" : "Signature",
+      "underlying" : 146,
+      "variadic" : false
     }, {
-      "name" : "untyped nil",
+      "name" : "untyped bool",
       "type" : "Basic",
       "underlying" : 147
     }, {
+      "name" : "untyped nil",
+      "type" : "Basic",
+      "underlying" : 148
+    }, {
       "name" : "func(b []byte, advice int) (err error)",
-      "params" : 149,
+      "params" : 150,
       "recv" : -1,
-      "results" : 150,
+      "results" : 151,
       "type" : "Signature",
-      "underlying" : 148,
+      "underlying" : 149,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2207,7 +2215,7 @@
       } ],
       "name" : "(b []byte, advice int)",
       "type" : "Tuple",
-      "underlying" : 149
+      "underlying" : 150
     }, {
       "fields" : [ {
         "name" : "err",
@@ -2215,7 +2223,7 @@
       } ],
       "name" : "(err error)",
       "type" : "Tuple",
-      "underlying" : 150
+      "underlying" : 151
     }, {
       "local-name" : "Errno",
       "name" : "syscall.Errno",
@@ -2224,11 +2232,11 @@
       "underlying" : 24
     }, {
       "name" : "func(format string, a ...interface{}) error",
-      "params" : 153,
+      "params" : 154,
       "recv" : -1,
       "results" : 129,
       "type" : "Signature",
-      "underlying" : 152,
+      "underlying" : 153,
       "variadic" : true
     }, {
       "fields" : [ {
@@ -2236,20 +2244,20 @@
         "type" : 9
       }, {
         "name" : "a",
-        "type" : 154
+        "type" : 155
       } ],
       "name" : "(format string, a []interface{})",
       "type" : "Tuple",
-      "underlying" : 153
+      "underlying" : 154
     }, {
       "elem" : 99,
       "name" : "[]interface{}",
       "type" : "Slice",
-      "underlying" : 154
+      "underlying" : 155
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 155
+      "underlying" : 156
     } ],
     "variables" : [ {
       "name" : "",
@@ -2287,6 +2295,13 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "f",
+      "package" : 2,
+      "type" : 10,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "MmapFlags",
       "package" : 0,
       "type" : 6,
@@ -2294,16 +2309,16 @@
       "embedded" : false,
       "field" : true
     }, {
-      "name" : "err",
+      "name" : "b",
       "package" : 0,
-      "type" : 130,
+      "type" : 34,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "b",
+      "name" : "err",
       "package" : 0,
-      "type" : 34,
+      "type" : 130,
       "exported" : false,
       "embedded" : false,
       "field" : false

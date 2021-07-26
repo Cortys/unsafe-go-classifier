@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 2, 1 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 1, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -112,10 +112,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 0, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 2, 4, 1 ],
-      "decl-vars" : [ 4 ],
+      "out-vars" : [ 1, 0, 5, 2 ],
+      "decl-vars" : [ 5 ],
       "line-start" : 1599,
       "ast" : {
         "kind" : "statement",
@@ -168,9 +168,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 4, 1, 0, 2 ],
+      "in-vars" : [ 1, 0, 5, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 2, 4, 1 ],
+      "out-vars" : [ 1, 0, 5, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1600,
       "ast" : {
@@ -185,7 +185,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "kind",
-              "variable" : 4
+              "variable" : 5
             }
           },
           "operator" : "!=",
@@ -227,7 +227,7 @@
       "line-end" : 1602,
       "code" : "if kind != V.Kind() {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 1, 4 ]
+      "use-vars" : [ 1, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -256,9 +256,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 2, 4, 1, 0 ],
+      "in-vars" : [ 1, 0, 5, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 0, 2 ],
+      "out-vars" : [ 1, 0, 5, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1606,
       "ast" : {
@@ -291,7 +291,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "kind",
-                    "variable" : 4
+                    "variable" : 5
                   }
                 },
                 "type" : "binary"
@@ -308,7 +308,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "kind",
-                    "variable" : 4
+                    "variable" : 5
                   }
                 },
                 "operator" : "<=",
@@ -336,7 +336,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "kind",
-                  "variable" : 4
+                  "variable" : 5
                 }
               },
               "operator" : "==",
@@ -364,7 +364,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "kind",
-                "variable" : 4
+                "variable" : 5
               }
             },
             "operator" : "==",
@@ -387,7 +387,7 @@
       "line-end" : 1608,
       "code" : "if Bool <= kind && kind <= Complex128 || kind == String || kind == UnsafePointer {\n\treturn true\n}",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -416,9 +416,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10, 12, 14, 30, 36, 38, 40, 59 ],
-      "in-vars" : [ 4, 1, 0, 2 ],
+      "in-vars" : [ 2, 1, 0, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 0, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1611,
       "ast" : {
@@ -430,7 +430,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "kind",
-            "variable" : 4
+            "variable" : 5
           }
         },
         "kind" : "statement",
@@ -440,13 +440,13 @@
       "line-end" : 1678,
       "code" : "switch kind {\ncase Array:\n\treturn T.Len() == V.Len() && haveIdenticalType(T.Elem(), V.Elem(), cmpTags)\n\ncase Chan:\n\treturn V.ChanDir() == T.ChanDir() && haveIdenticalType(T.Elem(), V.Elem(), cmpTags)\n\ncase Func:\n\tt := (*funcType)(unsafe.Pointer(T))\n\tv := (*funcType)(unsafe.Pointer(V))\n\tif t.outCount != v.outCount || t.inCount != v.inCount {\n\t\treturn false\n\t}\n\tfor i := 0; i < t.NumIn(); i++ {\n\t\tif !haveIdenticalType(t.In(i), v.In(i), cmpTags) {\n\t\t\treturn false\n\t\t}\n\t}\n\tfor i := 0; i < t.NumOut(); i++ {\n\t\tif !haveIdenticalType(t.Out(i), v.Out(i), cmpTags) {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n\ncase Interface:\n\tt := (*interfaceType)(unsafe.Pointer(T))\n\tv := (*interfaceType)(unsafe.Pointer(V))\n\tif len(t.methods) == 0 && len(v.methods) == 0 {\n\t\treturn true\n\t}\n\n\treturn false\n\ncase Map:\n\treturn haveIdenticalType(T.Key(), V.Key(), cmpTags) && haveIdenticalType(T.Elem(), V.Elem(), cmpTags)\n\ncase Ptr, Slice:\n\treturn haveIdenticalType(T.Elem(), V.Elem(), cmpTags)\n\ncase Struct:\n\tt := (*structType)(unsafe.Pointer(T))\n\tv := (*structType)(unsafe.Pointer(V))\n\tif len(t.fields) != len(v.fields) {\n\t\treturn false\n\t}\n\tif t.pkgPath.name() != v.pkgPath.name() {\n\t\treturn false\n\t}\n\tfor i := range t.fields {\n\t\ttf := &t.fields[i]\n\t\tvf := &v.fields[i]\n\t\tif tf.name.name() != vf.name.name() {\n\t\t\treturn false\n\t\t}\n\t\tif !haveIdenticalType(tf.typ, vf.typ, cmpTags) {\n\t\t\treturn false\n\t\t}\n\t\tif cmpTags && tf.name.tag() != vf.name.tag() {\n\t\t\treturn false\n\t\t}\n\t\tif tf.offsetEmbed != vf.offsetEmbed {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
       "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 1, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1612,
       "ast" : {
@@ -469,7 +469,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 0, 2, 1 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -493,7 +493,7 @@
                   "kind" : "ident",
                   "value" : "Len"
                 },
-                "go-type" : 26,
+                "go-type" : 27,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -508,7 +508,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "expression",
               "type" : "call"
             },
@@ -523,7 +523,7 @@
                   "kind" : "ident",
                   "value" : "Len"
                 },
-                "go-type" : 26,
+                "go-type" : 27,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -538,7 +538,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "expression",
               "type" : "call"
             },
@@ -556,7 +556,7 @@
                   "kind" : "ident",
                   "value" : "Elem"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -571,7 +571,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -584,7 +584,7 @@
                   "kind" : "ident",
                   "value" : "Elem"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -599,7 +599,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -615,7 +615,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -636,13 +636,13 @@
       "line-end" : 1613,
       "code" : "return T.Len() == V.Len() && haveIdenticalType(T.Elem(), V.Elem(), cmpTags)",
       "entry" : false,
-      "use-vars" : [ 0, 1, 2 ]
+      "use-vars" : [ 2, 1, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 1, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1615,
       "ast" : {
@@ -665,7 +665,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -689,7 +689,7 @@
                   "kind" : "ident",
                   "value" : "ChanDir"
                 },
-                "go-type" : 34,
+                "go-type" : 84,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -704,7 +704,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 36,
+              "go-type" : 39,
               "kind" : "expression",
               "type" : "call"
             },
@@ -719,7 +719,7 @@
                   "kind" : "ident",
                   "value" : "ChanDir"
                 },
-                "go-type" : 34,
+                "go-type" : 84,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -734,7 +734,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 36,
+              "go-type" : 39,
               "kind" : "expression",
               "type" : "call"
             },
@@ -752,7 +752,7 @@
                   "kind" : "ident",
                   "value" : "Elem"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -767,7 +767,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -780,7 +780,7 @@
                   "kind" : "ident",
                   "value" : "Elem"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -795,7 +795,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -811,7 +811,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -832,11 +832,11 @@
       "line-end" : 1616,
       "code" : "return V.ChanDir() == T.ChanDir() && haveIdenticalType(T.Elem(), V.Elem(), cmpTags)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 0 ]
+      "use-vars" : [ 0, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 0, 2, 1 ],
       "exit" : false,
       "out-vars" : [ 2, 1, 0 ],
       "decl-vars" : [ ],
@@ -861,10 +861,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 20, 2 ],
-      "decl-vars" : [ 20 ],
+      "out-vars" : [ 26, 1, 2 ],
+      "decl-vars" : [ 26 ],
       "line-start" : 1619,
       "ast" : {
         "kind" : "statement",
@@ -881,21 +881,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 79,
+              "go-type" : 87,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 79,
+                "go-type" : 87,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "funcType"
               }
             },
-            "go-type" : 78,
+            "go-type" : 86,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 78,
+          "go-type" : 86,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -942,10 +942,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 1, 20, 2 ],
+      "in-vars" : [ 26, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 22 ],
-      "decl-vars" : [ 22 ],
+      "out-vars" : [ 26, 2, 28 ],
+      "decl-vars" : [ 28 ],
       "line-start" : 1620,
       "ast" : {
         "kind" : "statement",
@@ -962,21 +962,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 79,
+              "go-type" : 87,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 79,
+                "go-type" : 87,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "funcType"
               }
             },
-            "go-type" : 78,
+            "go-type" : 86,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 78,
+          "go-type" : 86,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -1023,9 +1023,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18, 20 ],
-      "in-vars" : [ 2, 20, 22 ],
+      "in-vars" : [ 26, 2, 28 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 22 ],
+      "out-vars" : [ 26, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1621,
       "ast" : {
@@ -1040,19 +1040,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "outCount",
-                "variable" : 21
+                "variable" : 27
               },
-              "go-type" : 77,
+              "go-type" : 81,
               "kind" : "expression",
               "target" : {
-                "go-type" : 78,
+                "go-type" : 86,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 20
+                  "variable" : 26
                 }
               },
               "type" : "selector"
@@ -1063,19 +1063,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "outCount",
-                "variable" : 21
+                "variable" : 27
               },
-              "go-type" : 77,
+              "go-type" : 81,
               "kind" : "expression",
               "target" : {
-                "go-type" : 78,
+                "go-type" : 86,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "v",
-                  "variable" : 22
+                  "variable" : 28
                 }
               },
               "type" : "selector"
@@ -1091,19 +1091,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "inCount",
-                "variable" : 23
+                "variable" : 29
               },
-              "go-type" : 77,
+              "go-type" : 81,
               "kind" : "expression",
               "target" : {
-                "go-type" : 78,
+                "go-type" : 86,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 20
+                  "variable" : 26
                 }
               },
               "type" : "selector"
@@ -1114,19 +1114,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "inCount",
-                "variable" : 23
+                "variable" : 29
               },
-              "go-type" : 77,
+              "go-type" : 81,
               "kind" : "expression",
               "target" : {
-                "go-type" : 78,
+                "go-type" : 86,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "v",
-                  "variable" : 22
+                  "variable" : 28
                 }
               },
               "type" : "selector"
@@ -1142,7 +1142,7 @@
       "line-end" : 1623,
       "code" : "if t.outCount != v.outCount || t.inCount != v.inCount {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 20, 22 ]
+      "use-vars" : [ 26, 28 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1171,9 +1171,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22, 25 ],
-      "in-vars" : [ 20, 24, 22, 2 ],
+      "in-vars" : [ 28, 30, 26, 2 ],
       "exit" : false,
-      "out-vars" : [ 22, 2, 20, 24 ],
+      "out-vars" : [ 30, 26, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1624,
       "ast" : {
@@ -1181,14 +1181,14 @@
           "go-type" : 19,
           "kind" : "expression",
           "left" : {
-            "go-type" : 25,
+            "go-type" : 26,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "i",
-              "variable" : 24
+              "variable" : 30
             }
           },
           "operator" : "<",
@@ -1202,22 +1202,22 @@
                 "kind" : "ident",
                 "value" : "NumIn"
               },
-              "go-type" : 26,
+              "go-type" : 27,
               "kind" : "expression",
               "target" : {
-                "go-type" : 78,
+                "go-type" : 86,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 20
+                  "variable" : 26
                 }
               },
               "type" : "selector"
             },
-            "go-type" : 25,
+            "go-type" : 26,
             "kind" : "expression",
             "type" : "call"
           },
@@ -1230,14 +1230,14 @@
       "line-end" : 1628,
       "code" : "for i := 0; i < t.NumIn(); i++ {\n\tif !haveIdenticalType(t.In(i), v.In(i), cmpTags) {\n\t\treturn false\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 24, 20 ]
+      "use-vars" : [ 30, 26 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 2, 20, 22 ],
+      "in-vars" : [ 26, 2, 28 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 24, 22 ],
-      "decl-vars" : [ 24 ],
+      "out-vars" : [ 30, 26, 2, 28 ],
+      "decl-vars" : [ 30 ],
       "line-start" : 1624,
       "ast" : {
         "kind" : "statement",
@@ -1252,7 +1252,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 25,
+          "go-type" : 26,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -1267,40 +1267,40 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 24 ],
+      "update-vars" : [ 30 ],
       "successors" : [ 19 ],
-      "in-vars" : [ 2, 20, 24, 22 ],
+      "in-vars" : [ 30, 26, 2, 28 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 24, 22 ],
+      "out-vars" : [ 30, 26, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1624,
       "ast" : {
         "kind" : "statement",
         "operation" : "++",
         "target" : {
-          "go-type" : 25,
+          "go-type" : 26,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "i",
-            "variable" : 24
+            "variable" : 30
           }
         },
         "type" : "crement"
       },
-      "assign-vars" : [ 24 ],
+      "assign-vars" : [ 30 ],
       "line-end" : 1624,
       "code" : "i++",
       "entry" : false,
-      "use-vars" : [ 24 ]
+      "use-vars" : [ 30 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 23, 21 ],
-      "in-vars" : [ 24, 22, 2, 20 ],
+      "in-vars" : [ 28, 30, 26, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 24, 22 ],
+      "out-vars" : [ 30, 26, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1625,
       "ast" : {
@@ -1311,14 +1311,14 @@
           "target" : {
             "arguments" : [ {
               "arguments" : [ {
-                "go-type" : 25,
+                "go-type" : 26,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "i",
-                  "variable" : 24
+                  "variable" : 30
                 }
               } ],
               "ellipsis" : false,
@@ -1329,34 +1329,34 @@
                   "kind" : "ident",
                   "value" : "In"
                 },
-                "go-type" : 57,
+                "go-type" : 89,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 78,
+                  "go-type" : 86,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "t",
-                    "variable" : 20
+                    "variable" : 26
                   }
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
               "arguments" : [ {
-                "go-type" : 25,
+                "go-type" : 26,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "i",
-                  "variable" : 24
+                  "variable" : 30
                 }
               } ],
               "ellipsis" : false,
@@ -1367,22 +1367,22 @@
                   "kind" : "ident",
                   "value" : "In"
                 },
-                "go-type" : 57,
+                "go-type" : 89,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 78,
+                  "go-type" : 86,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "v",
-                    "variable" : 22
+                    "variable" : 28
                   }
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -1398,7 +1398,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1421,7 +1421,7 @@
       "line-end" : 1627,
       "code" : "if !haveIdenticalType(t.In(i), v.In(i), cmpTags) {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 22, 24, 2, 20 ]
+      "use-vars" : [ 30, 2, 26, 28 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1450,9 +1450,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27, 29 ],
-      "in-vars" : [ 2, 20, 25, 22 ],
+      "in-vars" : [ 26, 32, 2, 28 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 25, 22 ],
+      "out-vars" : [ 26, 32, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1629,
       "ast" : {
@@ -1460,14 +1460,14 @@
           "go-type" : 19,
           "kind" : "expression",
           "left" : {
-            "go-type" : 25,
+            "go-type" : 26,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "i",
-              "variable" : 25
+              "variable" : 32
             }
           },
           "operator" : "<",
@@ -1481,22 +1481,22 @@
                 "kind" : "ident",
                 "value" : "NumOut"
               },
-              "go-type" : 26,
+              "go-type" : 27,
               "kind" : "expression",
               "target" : {
-                "go-type" : 78,
+                "go-type" : 86,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 20
+                  "variable" : 26
                 }
               },
               "type" : "selector"
             },
-            "go-type" : 25,
+            "go-type" : 26,
             "kind" : "expression",
             "type" : "call"
           },
@@ -1509,14 +1509,14 @@
       "line-end" : 1633,
       "code" : "for i := 0; i < t.NumOut(); i++ {\n\tif !haveIdenticalType(t.Out(i), v.Out(i), cmpTags) {\n\t\treturn false\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 25, 20 ]
+      "use-vars" : [ 32, 26 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 24 ],
-      "in-vars" : [ 2, 20, 22 ],
+      "in-vars" : [ 28, 26, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 20, 25, 22 ],
-      "decl-vars" : [ 25 ],
+      "out-vars" : [ 26, 32, 2, 28 ],
+      "decl-vars" : [ 32 ],
       "line-start" : 1629,
       "ast" : {
         "kind" : "statement",
@@ -1531,7 +1531,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 25,
+          "go-type" : 26,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -1546,40 +1546,40 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 25 ],
+      "update-vars" : [ 32 ],
       "successors" : [ 24 ],
-      "in-vars" : [ 25, 22, 2, 20 ],
+      "in-vars" : [ 26, 32, 2, 28 ],
       "exit" : false,
-      "out-vars" : [ 25, 22, 2, 20 ],
+      "out-vars" : [ 26, 32, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1629,
       "ast" : {
         "kind" : "statement",
         "operation" : "++",
         "target" : {
-          "go-type" : 25,
+          "go-type" : 26,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "i",
-            "variable" : 25
+            "variable" : 32
           }
         },
         "type" : "crement"
       },
-      "assign-vars" : [ 25 ],
+      "assign-vars" : [ 32 ],
       "line-end" : 1629,
       "code" : "i++",
       "entry" : false,
-      "use-vars" : [ 25 ]
+      "use-vars" : [ 32 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 28, 26 ],
-      "in-vars" : [ 2, 20, 25, 22 ],
+      "in-vars" : [ 26, 32, 2, 28 ],
       "exit" : false,
-      "out-vars" : [ 25, 22, 2, 20 ],
+      "out-vars" : [ 26, 32, 2, 28 ],
       "decl-vars" : [ ],
       "line-start" : 1630,
       "ast" : {
@@ -1590,14 +1590,14 @@
           "target" : {
             "arguments" : [ {
               "arguments" : [ {
-                "go-type" : 25,
+                "go-type" : 26,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "i",
-                  "variable" : 25
+                  "variable" : 32
                 }
               } ],
               "ellipsis" : false,
@@ -1608,34 +1608,34 @@
                   "kind" : "ident",
                   "value" : "Out"
                 },
-                "go-type" : 57,
+                "go-type" : 89,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 78,
+                  "go-type" : 86,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "t",
-                    "variable" : 20
+                    "variable" : 26
                   }
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
               "arguments" : [ {
-                "go-type" : 25,
+                "go-type" : 26,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "i",
-                  "variable" : 25
+                  "variable" : 32
                 }
               } ],
               "ellipsis" : false,
@@ -1646,22 +1646,22 @@
                   "kind" : "ident",
                   "value" : "Out"
                 },
-                "go-type" : 57,
+                "go-type" : 89,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 78,
+                  "go-type" : 86,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "v",
-                    "variable" : 22
+                    "variable" : 28
                   }
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -1677,7 +1677,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1700,7 +1700,7 @@
       "line-end" : 1632,
       "code" : "if !haveIdenticalType(t.Out(i), v.Out(i), cmpTags) {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 20, 25, 22, 2 ]
+      "use-vars" : [ 32, 2, 26, 28 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -1779,10 +1779,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 32 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 26, 1 ],
-      "decl-vars" : [ 26 ],
+      "out-vars" : [ 33, 1 ],
+      "decl-vars" : [ 33 ],
       "line-start" : 1637,
       "ast" : {
         "kind" : "statement",
@@ -1799,21 +1799,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 82,
+              "go-type" : 92,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 82,
+                "go-type" : 92,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "interfaceType"
               }
             },
-            "go-type" : 81,
+            "go-type" : 91,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 81,
+          "go-type" : 91,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -1860,10 +1860,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 33 ],
-      "in-vars" : [ 1, 26 ],
+      "in-vars" : [ 33, 1 ],
       "exit" : false,
-      "out-vars" : [ 26, 28 ],
-      "decl-vars" : [ 28 ],
+      "out-vars" : [ 35, 33 ],
+      "decl-vars" : [ 35 ],
       "line-start" : 1638,
       "ast" : {
         "kind" : "statement",
@@ -1880,21 +1880,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 82,
+              "go-type" : 92,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 82,
+                "go-type" : 92,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "interfaceType"
               }
             },
-            "go-type" : 81,
+            "go-type" : 91,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 81,
+          "go-type" : 91,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -1941,7 +1941,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34, 35 ],
-      "in-vars" : [ 26, 28 ],
+      "in-vars" : [ 35, 33 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -1959,26 +1959,26 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "methods",
-                  "variable" : 27
+                  "variable" : 34
                 },
-                "go-type" : 86,
+                "go-type" : 96,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 81,
+                  "go-type" : 91,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "t",
-                    "variable" : 26
+                    "variable" : 33
                   }
                 },
                 "type" : "selector"
               } ],
               "ellipsis" : false,
               "function" : {
-                "go-type" : 89,
+                "go-type" : 99,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -1987,13 +1987,13 @@
                   "value" : "len"
                 }
               },
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "expression",
               "type" : "call"
             },
             "operator" : "==",
             "right" : {
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -2012,26 +2012,26 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "methods",
-                  "variable" : 27
+                  "variable" : 34
                 },
-                "go-type" : 86,
+                "go-type" : 96,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 81,
+                  "go-type" : 91,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "v",
-                    "variable" : 28
+                    "variable" : 35
                   }
                 },
                 "type" : "selector"
               } ],
               "ellipsis" : false,
               "function" : {
-                "go-type" : 89,
+                "go-type" : 99,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -2040,13 +2040,13 @@
                   "value" : "len"
                 }
               },
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "expression",
               "type" : "call"
             },
             "operator" : "==",
             "right" : {
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -2064,7 +2064,7 @@
       "line-end" : 1641,
       "code" : "if len(t.methods) == 0 && len(v.methods) == 0 {\n\treturn true\n}",
       "entry" : false,
-      "use-vars" : [ 26, 28 ]
+      "use-vars" : [ 33, 35 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -2118,7 +2118,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
       "out-vars" : [ 2, 1, 0 ],
       "decl-vars" : [ ],
@@ -2143,7 +2143,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 0, 2 ],
+      "in-vars" : [ 0, 2, 1 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -2165,7 +2165,7 @@
                   "kind" : "ident",
                   "value" : "Key"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -2180,7 +2180,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -2193,7 +2193,7 @@
                   "kind" : "ident",
                   "value" : "Key"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -2208,7 +2208,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -2224,7 +2224,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2250,7 +2250,7 @@
                   "kind" : "ident",
                   "value" : "Elem"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -2265,7 +2265,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -2278,7 +2278,7 @@
                   "kind" : "ident",
                   "value" : "Elem"
                 },
-                "go-type" : 38,
+                "go-type" : 82,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 2,
@@ -2293,7 +2293,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 30,
+              "go-type" : 32,
               "kind" : "expression",
               "type" : "call"
             }, {
@@ -2309,7 +2309,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2330,13 +2330,13 @@
       "line-end" : 1647,
       "code" : "return haveIdenticalType(T.Key(), V.Key(), cmpTags) && haveIdenticalType(T.Elem(), V.Elem(), cmpTags)",
       "entry" : false,
-      "use-vars" : [ 1, 0, 2 ]
+      "use-vars" : [ 0, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 1, 0, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1649,
       "ast" : {
@@ -2366,7 +2366,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -2385,7 +2385,7 @@
                 "kind" : "ident",
                 "value" : "Elem"
               },
-              "go-type" : 38,
+              "go-type" : 82,
               "kind" : "expression",
               "target" : {
                 "go-type" : 2,
@@ -2400,7 +2400,7 @@
               },
               "type" : "selector"
             },
-            "go-type" : 30,
+            "go-type" : 32,
             "kind" : "expression",
             "type" : "call"
           }, {
@@ -2413,7 +2413,7 @@
                 "kind" : "ident",
                 "value" : "Elem"
               },
-              "go-type" : 38,
+              "go-type" : 82,
               "kind" : "expression",
               "target" : {
                 "go-type" : 2,
@@ -2428,7 +2428,7 @@
               },
               "type" : "selector"
             },
-            "go-type" : 30,
+            "go-type" : 32,
             "kind" : "expression",
             "type" : "call"
           }, {
@@ -2444,7 +2444,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 28,
+            "go-type" : 30,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -2463,11 +2463,11 @@
       "line-end" : 1650,
       "code" : "return haveIdenticalType(T.Elem(), V.Elem(), cmpTags)",
       "entry" : false,
-      "use-vars" : [ 2, 0, 1 ]
+      "use-vars" : [ 1, 2, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 1, 0, 2 ],
       "exit" : false,
       "out-vars" : [ 1, 0, 2 ],
       "decl-vars" : [ ],
@@ -2494,8 +2494,8 @@
       "successors" : [ 42 ],
       "in-vars" : [ 0, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 29 ],
-      "decl-vars" : [ 29 ],
+      "out-vars" : [ 1, 2, 36 ],
+      "decl-vars" : [ 36 ],
       "line-start" : 1653,
       "ast" : {
         "kind" : "statement",
@@ -2512,21 +2512,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 92,
+              "go-type" : 102,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 92,
+                "go-type" : 102,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "structType"
               }
             },
-            "go-type" : 91,
+            "go-type" : 101,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 91,
+          "go-type" : 101,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -2573,10 +2573,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 43 ],
-      "in-vars" : [ 2, 1, 29 ],
+      "in-vars" : [ 1, 2, 36 ],
       "exit" : false,
-      "out-vars" : [ 2, 29, 31 ],
-      "decl-vars" : [ 31 ],
+      "out-vars" : [ 38, 2, 36 ],
+      "decl-vars" : [ 38 ],
       "line-start" : 1654,
       "ast" : {
         "kind" : "statement",
@@ -2593,21 +2593,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 92,
+              "go-type" : 102,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 92,
+                "go-type" : 102,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "structType"
               }
             },
-            "go-type" : 91,
+            "go-type" : 101,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 91,
+          "go-type" : 101,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -2654,9 +2654,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 44, 45 ],
-      "in-vars" : [ 31, 2, 29 ],
+      "in-vars" : [ 36, 38, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 29, 31 ],
+      "out-vars" : [ 38, 2, 36 ],
       "decl-vars" : [ ],
       "line-start" : 1655,
       "ast" : {
@@ -2669,26 +2669,26 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "fields",
-                "variable" : 30
+                "variable" : 37
               },
-              "go-type" : 94,
+              "go-type" : 104,
               "kind" : "expression",
               "target" : {
-                "go-type" : 91,
+                "go-type" : 101,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 29
+                  "variable" : 36
                 }
               },
               "type" : "selector"
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 97,
+              "go-type" : 107,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2697,7 +2697,7 @@
                 "value" : "len"
               }
             },
-            "go-type" : 25,
+            "go-type" : 26,
             "kind" : "expression",
             "type" : "call"
           },
@@ -2708,26 +2708,26 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "fields",
-                "variable" : 30
+                "variable" : 37
               },
-              "go-type" : 94,
+              "go-type" : 104,
               "kind" : "expression",
               "target" : {
-                "go-type" : 91,
+                "go-type" : 101,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "v",
-                  "variable" : 31
+                  "variable" : 38
                 }
               },
               "type" : "selector"
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 97,
+              "go-type" : 107,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2736,7 +2736,7 @@
                 "value" : "len"
               }
             },
-            "go-type" : 25,
+            "go-type" : 26,
             "kind" : "expression",
             "type" : "call"
           },
@@ -2749,7 +2749,7 @@
       "line-end" : 1657,
       "code" : "if len(t.fields) != len(v.fields) {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 31, 29 ]
+      "use-vars" : [ 38, 36 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -2778,9 +2778,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 46, 47 ],
-      "in-vars" : [ 2, 29, 31 ],
+      "in-vars" : [ 38, 2, 36 ],
       "exit" : false,
-      "out-vars" : [ 2, 29, 31 ],
+      "out-vars" : [ 38, 2, 36 ],
       "decl-vars" : [ ],
       "line-start" : 1658,
       "ast" : {
@@ -2797,33 +2797,33 @@
                 "kind" : "ident",
                 "value" : "name"
               },
-              "go-type" : 99,
+              "go-type" : 109,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "pkgPath",
-                  "variable" : 32
+                  "variable" : 39
                 },
-                "go-type" : 84,
+                "go-type" : 94,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 91,
+                  "go-type" : 101,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "t",
-                    "variable" : 29
+                    "variable" : 36
                   }
                 },
                 "type" : "selector"
               },
               "type" : "selector"
             },
-            "go-type" : 45,
+            "go-type" : 48,
             "kind" : "expression",
             "type" : "call"
           },
@@ -2838,33 +2838,33 @@
                 "kind" : "ident",
                 "value" : "name"
               },
-              "go-type" : 99,
+              "go-type" : 109,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "pkgPath",
-                  "variable" : 32
+                  "variable" : 39
                 },
-                "go-type" : 84,
+                "go-type" : 94,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 91,
+                  "go-type" : 101,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "v",
-                    "variable" : 31
+                    "variable" : 38
                   }
                 },
                 "type" : "selector"
               },
               "type" : "selector"
             },
-            "go-type" : 45,
+            "go-type" : 48,
             "kind" : "expression",
             "type" : "call"
           },
@@ -2877,7 +2877,7 @@
       "line-end" : 1660,
       "code" : "if t.pkgPath.name() != v.pkgPath.name() {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 29, 31 ]
+      "use-vars" : [ 38, 36 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -2906,10 +2906,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 48, 58 ],
-      "in-vars" : [ 2, 29, 31 ],
+      "in-vars" : [ 38, 2, 36 ],
       "exit" : false,
-      "out-vars" : [ 2, 29, 33, 31 ],
-      "decl-vars" : [ 33 ],
+      "out-vars" : [ 38, 41, 2, 36 ],
+      "decl-vars" : [ 41 ],
       "line-start" : 1661,
       "ast" : {
         "is-assign" : false,
@@ -2929,19 +2929,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "fields",
-            "variable" : 30
+            "variable" : 37
           },
-          "go-type" : 94,
+          "go-type" : 104,
           "kind" : "expression",
           "target" : {
-            "go-type" : 91,
+            "go-type" : 101,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "t",
-              "variable" : 29
+              "variable" : 36
             }
           },
           "type" : "selector"
@@ -2953,14 +2953,14 @@
       "line-end" : 1676,
       "code" : "for i := range t.fields {\n\ttf := &t.fields[i]\n\tvf := &v.fields[i]\n\tif tf.name.name() != vf.name.name() {\n\t\treturn false\n\t}\n\tif !haveIdenticalType(tf.typ, vf.typ, cmpTags) {\n\t\treturn false\n\t}\n\tif cmpTags && tf.name.tag() != vf.name.tag() {\n\t\treturn false\n\t}\n\tif tf.offsetEmbed != vf.offsetEmbed {\n\t\treturn false\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 29 ]
+      "use-vars" : [ 36 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 49 ],
-      "in-vars" : [ 33, 31, 2, 29 ],
+      "in-vars" : [ 38, 41, 2, 36 ],
       "exit" : false,
-      "out-vars" : [ 31, 2, 34, 29, 33 ],
-      "decl-vars" : [ 34 ],
+      "out-vars" : [ 38, 41, 42, 2, 36 ],
+      "decl-vars" : [ 42 ],
       "line-start" : 1662,
       "ast" : {
         "kind" : "statement",
@@ -2975,20 +2975,20 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 101,
+          "go-type" : 112,
           "kind" : "expression",
           "operator" : "&",
           "target" : {
-            "go-type" : 95,
+            "go-type" : 105,
             "index" : {
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "i",
-                "variable" : 33
+                "variable" : 41
               }
             },
             "kind" : "expression",
@@ -2997,19 +2997,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "fields",
-                "variable" : 30
+                "variable" : 37
               },
-              "go-type" : 94,
+              "go-type" : 104,
               "kind" : "expression",
               "target" : {
-                "go-type" : 91,
+                "go-type" : 101,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "t",
-                  "variable" : 29
+                  "variable" : 36
                 }
               },
               "type" : "selector"
@@ -3024,14 +3024,14 @@
       "line-end" : 1662,
       "code" : "tf := &t.fields[i]",
       "entry" : false,
-      "use-vars" : [ 29, 33 ]
+      "use-vars" : [ 41, 36 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 50 ],
-      "in-vars" : [ 29, 33, 31, 2, 34 ],
+      "in-vars" : [ 38, 41, 42, 2, 36 ],
       "exit" : false,
-      "out-vars" : [ 2, 34, 36, 29, 31 ],
-      "decl-vars" : [ 36 ],
+      "out-vars" : [ 36, 38, 44, 42, 2 ],
+      "decl-vars" : [ 44 ],
       "line-start" : 1663,
       "ast" : {
         "kind" : "statement",
@@ -3046,20 +3046,20 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 101,
+          "go-type" : 112,
           "kind" : "expression",
           "operator" : "&",
           "target" : {
-            "go-type" : 95,
+            "go-type" : 105,
             "index" : {
-              "go-type" : 25,
+              "go-type" : 26,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "i",
-                "variable" : 33
+                "variable" : 41
               }
             },
             "kind" : "expression",
@@ -3068,19 +3068,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "fields",
-                "variable" : 30
+                "variable" : 37
               },
-              "go-type" : 94,
+              "go-type" : 104,
               "kind" : "expression",
               "target" : {
-                "go-type" : 91,
+                "go-type" : 101,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "v",
-                  "variable" : 31
+                  "variable" : 38
                 }
               },
               "type" : "selector"
@@ -3095,13 +3095,13 @@
       "line-end" : 1663,
       "code" : "vf := &v.fields[i]",
       "entry" : false,
-      "use-vars" : [ 33, 31 ]
+      "use-vars" : [ 41, 38 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 51, 52 ],
-      "in-vars" : [ 31, 2, 34, 36, 29 ],
+      "in-vars" : [ 36, 38, 44, 42, 2 ],
       "exit" : false,
-      "out-vars" : [ 34, 36, 29, 31, 2 ],
+      "out-vars" : [ 38, 44, 42, 2, 36 ],
       "decl-vars" : [ ],
       "line-start" : 1664,
       "ast" : {
@@ -3118,33 +3118,33 @@
                 "kind" : "ident",
                 "value" : "name"
               },
-              "go-type" : 99,
+              "go-type" : 109,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "name",
-                  "variable" : 35
+                  "variable" : 43
                 },
-                "go-type" : 84,
+                "go-type" : 94,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 101,
+                  "go-type" : 112,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "tf",
-                    "variable" : 34
+                    "variable" : 42
                   }
                 },
                 "type" : "selector"
               },
               "type" : "selector"
             },
-            "go-type" : 45,
+            "go-type" : 48,
             "kind" : "expression",
             "type" : "call"
           },
@@ -3159,33 +3159,33 @@
                 "kind" : "ident",
                 "value" : "name"
               },
-              "go-type" : 99,
+              "go-type" : 109,
               "kind" : "expression",
               "target" : {
                 "field" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "name",
-                  "variable" : 35
+                  "variable" : 43
                 },
-                "go-type" : 84,
+                "go-type" : 94,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 101,
+                  "go-type" : 112,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "vf",
-                    "variable" : 36
+                    "variable" : 44
                   }
                 },
                 "type" : "selector"
               },
               "type" : "selector"
             },
-            "go-type" : 45,
+            "go-type" : 48,
             "kind" : "expression",
             "type" : "call"
           },
@@ -3198,7 +3198,7 @@
       "line-end" : 1666,
       "code" : "if tf.name.name() != vf.name.name() {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 36, 34 ]
+      "use-vars" : [ 42, 44 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -3227,9 +3227,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 53, 54 ],
-      "in-vars" : [ 34, 36, 29, 31, 2 ],
+      "in-vars" : [ 42, 2, 36, 38, 44 ],
       "exit" : false,
-      "out-vars" : [ 2, 34, 36, 29, 31 ],
+      "out-vars" : [ 38, 44, 42, 2, 36 ],
       "decl-vars" : [ ],
       "line-start" : 1667,
       "ast" : {
@@ -3243,19 +3243,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "typ",
-                "variable" : 37
+                "variable" : 45
               },
               "go-type" : 2,
               "kind" : "expression",
               "target" : {
-                "go-type" : 101,
+                "go-type" : 112,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "tf",
-                  "variable" : 34
+                  "variable" : 42
                 }
               },
               "type" : "selector"
@@ -3264,19 +3264,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "typ",
-                "variable" : 37
+                "variable" : 45
               },
               "go-type" : 2,
               "kind" : "expression",
               "target" : {
-                "go-type" : 101,
+                "go-type" : 112,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "vf",
-                  "variable" : 36
+                  "variable" : 44
                 }
               },
               "type" : "selector"
@@ -3293,7 +3293,7 @@
             } ],
             "ellipsis" : false,
             "function" : {
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -3316,7 +3316,7 @@
       "line-end" : 1669,
       "code" : "if !haveIdenticalType(tf.typ, vf.typ, cmpTags) {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 2, 34, 36 ]
+      "use-vars" : [ 44, 2, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -3345,9 +3345,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 55, 56 ],
-      "in-vars" : [ 29, 31, 2, 34, 36 ],
+      "in-vars" : [ 44, 42, 2, 36, 38 ],
       "exit" : false,
-      "out-vars" : [ 36, 29, 31, 2, 34 ],
+      "out-vars" : [ 38, 44, 42, 2, 36 ],
       "decl-vars" : [ ],
       "line-start" : 1670,
       "ast" : {
@@ -3379,33 +3379,33 @@
                   "kind" : "ident",
                   "value" : "tag"
                 },
-                "go-type" : 99,
+                "go-type" : 109,
                 "kind" : "expression",
                 "target" : {
                   "field" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "name",
-                    "variable" : 35
+                    "variable" : 43
                   },
-                  "go-type" : 84,
+                  "go-type" : 94,
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 101,
+                    "go-type" : 112,
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "tf",
-                      "variable" : 34
+                      "variable" : 42
                     }
                   },
                   "type" : "selector"
                 },
                 "type" : "selector"
               },
-              "go-type" : 45,
+              "go-type" : 48,
               "kind" : "expression",
               "type" : "call"
             },
@@ -3420,33 +3420,33 @@
                   "kind" : "ident",
                   "value" : "tag"
                 },
-                "go-type" : 99,
+                "go-type" : 109,
                 "kind" : "expression",
                 "target" : {
                   "field" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "name",
-                    "variable" : 35
+                    "variable" : 43
                   },
-                  "go-type" : 84,
+                  "go-type" : 94,
                   "kind" : "expression",
                   "target" : {
-                    "go-type" : 101,
+                    "go-type" : 112,
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "vf",
-                      "variable" : 36
+                      "variable" : 44
                     }
                   },
                   "type" : "selector"
                 },
                 "type" : "selector"
               },
-              "go-type" : 45,
+              "go-type" : 48,
               "kind" : "expression",
               "type" : "call"
             },
@@ -3461,7 +3461,7 @@
       "line-end" : 1672,
       "code" : "if cmpTags && tf.name.tag() != vf.name.tag() {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 34, 36, 2 ]
+      "use-vars" : [ 44, 2, 42 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -3490,9 +3490,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 57, 47 ],
-      "in-vars" : [ 2, 34, 36, 29, 31 ],
+      "in-vars" : [ 42, 2, 36, 38, 44 ],
       "exit" : false,
-      "out-vars" : [ 2, 29, 31 ],
+      "out-vars" : [ 38, 2, 36 ],
       "decl-vars" : [ ],
       "line-start" : 1673,
       "ast" : {
@@ -3504,19 +3504,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "offsetEmbed",
-              "variable" : 38
+              "variable" : 46
             },
             "go-type" : 5,
             "kind" : "expression",
             "target" : {
-              "go-type" : 101,
+              "go-type" : 112,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tf",
-                "variable" : 34
+                "variable" : 42
               }
             },
             "type" : "selector"
@@ -3527,19 +3527,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "offsetEmbed",
-              "variable" : 38
+              "variable" : 46
             },
             "go-type" : 5,
             "kind" : "expression",
             "target" : {
-              "go-type" : 101,
+              "go-type" : 112,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "vf",
-                "variable" : 36
+                "variable" : 44
               }
             },
             "type" : "selector"
@@ -3553,7 +3553,7 @@
       "line-end" : 1675,
       "code" : "if tf.offsetEmbed != vf.offsetEmbed {\n\treturn false\n}",
       "entry" : false,
-      "use-vars" : [ 34, 36 ]
+      "use-vars" : [ 42, 44 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -3640,62 +3640,62 @@
     }, {
       "name" : "Kind",
       "package" : 0,
-      "type" : 22,
+      "type" : 25,
       "exported" : true
     }, {
       "name" : "Len",
       "package" : 0,
-      "type" : 26,
+      "type" : 29,
       "exported" : true
     }, {
       "name" : "haveIdenticalType",
       "package" : 0,
-      "type" : 28,
+      "type" : 30,
       "exported" : false
     }, {
       "name" : "Elem",
       "package" : 0,
-      "type" : 38,
+      "type" : 83,
       "exported" : true
     }, {
       "name" : "ChanDir",
       "package" : 0,
-      "type" : 34,
+      "type" : 85,
       "exported" : true
     }, {
       "name" : "NumIn",
       "package" : 0,
-      "type" : 26,
+      "type" : 29,
       "exported" : true
     }, {
       "name" : "In",
       "package" : 0,
-      "type" : 57,
+      "type" : 90,
       "exported" : true
     }, {
       "name" : "NumOut",
       "package" : 0,
-      "type" : 26,
+      "type" : 29,
       "exported" : true
     }, {
       "name" : "Out",
       "package" : 0,
-      "type" : 57,
+      "type" : 90,
       "exported" : true
     }, {
       "name" : "Key",
       "package" : 0,
-      "type" : 38,
+      "type" : 83,
       "exported" : true
     }, {
       "name" : "name",
       "package" : 0,
-      "type" : 99,
+      "type" : 111,
       "exported" : false
     }, {
       "name" : "tag",
       "package" : 0,
-      "type" : 99,
+      "type" : 111,
       "exported" : false
     } ],
     "line-end" : 1681,
@@ -3900,415 +3900,447 @@
       "type" : "Tuple",
       "underlying" : 24
     }, {
+      "name" : "(*reflect.rtype) func() reflect.Kind",
+      "params" : 23,
+      "recv" : 4,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 25,
+      "variadic" : false
+    }, {
       "name" : "int",
       "type" : "Basic",
-      "underlying" : 25
+      "underlying" : 26
     }, {
       "name" : "func() int",
       "params" : 23,
       "recv" : -1,
-      "results" : 27,
+      "results" : 28,
       "type" : "Signature",
-      "underlying" : 26,
+      "underlying" : 27,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 25
+        "type" : 26
       } ],
       "name" : "(int)",
       "type" : "Tuple",
-      "underlying" : 27
+      "underlying" : 28
+    }, {
+      "name" : "(*reflect.rtype) func() int",
+      "params" : 23,
+      "recv" : 6,
+      "results" : 28,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : false
     }, {
       "name" : "func(T reflect.Type, V reflect.Type, cmpTags bool) bool",
-      "params" : 29,
+      "params" : 31,
       "recv" : -1,
       "results" : 12,
       "type" : "Signature",
-      "underlying" : 28,
+      "underlying" : 30,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "T",
-        "type" : 30
+        "type" : 32
       }, {
         "name" : "V",
-        "type" : 30
+        "type" : 32
       }, {
         "name" : "cmpTags",
         "type" : 13
       } ],
       "name" : "(T reflect.Type, V reflect.Type, cmpTags bool)",
       "type" : "Tuple",
-      "underlying" : 29
+      "underlying" : 31
     }, {
       "local-name" : "Type",
       "name" : "reflect.Type",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 31
+      "underlying" : 33
     }, {
       "methods" : [ {
         "name" : "Align",
-        "type" : 26
-      }, {
-        "name" : "AssignableTo",
-        "type" : 32
-      }, {
-        "name" : "Bits",
-        "type" : 26
-      }, {
-        "name" : "ChanDir",
         "type" : 34
       }, {
-        "name" : "Comparable",
+        "name" : "AssignableTo",
+        "type" : 35
+      }, {
+        "name" : "Bits",
+        "type" : 34
+      }, {
+        "name" : "ChanDir",
         "type" : 37
       }, {
-        "name" : "ConvertibleTo",
-        "type" : 32
-      }, {
-        "name" : "Elem",
-        "type" : 38
-      }, {
-        "name" : "Field",
+        "name" : "Comparable",
         "type" : 40
       }, {
+        "name" : "ConvertibleTo",
+        "type" : 35
+      }, {
+        "name" : "Elem",
+        "type" : 41
+      }, {
+        "name" : "Field",
+        "type" : 43
+      }, {
         "name" : "FieldAlign",
-        "type" : 26
+        "type" : 34
       }, {
         "name" : "FieldByIndex",
-        "type" : 48
+        "type" : 51
       }, {
         "name" : "FieldByName",
-        "type" : 50
-      }, {
-        "name" : "FieldByNameFunc",
         "type" : 53
       }, {
+        "name" : "FieldByNameFunc",
+        "type" : 56
+      }, {
         "name" : "Implements",
-        "type" : 32
+        "type" : 35
       }, {
         "name" : "In",
-        "type" : 57
+        "type" : 60
       }, {
         "name" : "IsVariadic",
-        "type" : 37
+        "type" : 40
       }, {
         "name" : "Key",
-        "type" : 38
+        "type" : 41
       }, {
         "name" : "Kind",
-        "type" : 22
+        "type" : 61
       }, {
         "name" : "Len",
-        "type" : 26
+        "type" : 34
       }, {
         "name" : "Method",
-        "type" : 58
+        "type" : 62
       }, {
         "name" : "MethodByName",
-        "type" : 65
+        "type" : 69
       }, {
         "name" : "Name",
-        "type" : 67
+        "type" : 71
       }, {
         "name" : "NumField",
-        "type" : 26
+        "type" : 34
       }, {
         "name" : "NumIn",
-        "type" : 26
+        "type" : 34
       }, {
         "name" : "NumMethod",
-        "type" : 26
+        "type" : 34
       }, {
         "name" : "NumOut",
-        "type" : 26
+        "type" : 34
       }, {
         "name" : "Out",
-        "type" : 57
+        "type" : 60
       }, {
         "name" : "PkgPath",
-        "type" : 67
+        "type" : 71
       }, {
         "name" : "Size",
-        "type" : 68
+        "type" : 72
       }, {
         "name" : "String",
-        "type" : 67
+        "type" : 71
       }, {
         "name" : "common",
-        "type" : 70
+        "type" : 74
       }, {
         "name" : "uncommon",
-        "type" : 72
+        "type" : 76
       } ],
       "name" : "interface{Align() int; AssignableTo(u reflect.Type) bool; Bits() int; ChanDir() reflect.ChanDir; Comparable() bool; ConvertibleTo(u reflect.Type) bool; Elem() reflect.Type; Field(i int) reflect.StructField; FieldAlign() int; FieldByIndex(index []int) reflect.StructField; FieldByName(name string) (reflect.StructField, bool); FieldByNameFunc(match func(string) bool) (reflect.StructField, bool); Implements(u reflect.Type) bool; In(i int) reflect.Type; IsVariadic() bool; Key() reflect.Type; Kind() reflect.Kind; Len() int; Method(int) reflect.Method; MethodByName(string) (reflect.Method, bool); Name() string; NumField() int; NumIn() int; NumMethod() int; NumOut() int; Out(i int) reflect.Type; PkgPath() string; Size() uintptr; String() string; common() *reflect.rtype; uncommon() *reflect.uncommonType}",
       "type" : "Interface",
-      "underlying" : 31
-    }, {
-      "name" : "func(u reflect.Type) bool",
-      "params" : 33,
-      "recv" : 5,
-      "results" : 12,
-      "type" : "Signature",
-      "underlying" : 32,
-      "variadic" : false
-    }, {
-      "fields" : [ {
-        "name" : "u",
-        "type" : 30
-      } ],
-      "name" : "(u reflect.Type)",
-      "type" : "Tuple",
       "underlying" : 33
     }, {
-      "name" : "func() reflect.ChanDir",
+      "name" : "(reflect.Type) func() int",
       "params" : 23,
-      "recv" : 6,
-      "results" : 35,
+      "recv" : 7,
+      "results" : 28,
       "type" : "Signature",
       "underlying" : 34,
       "variadic" : false
     }, {
+      "name" : "(reflect.Type) func(u reflect.Type) bool",
+      "params" : 36,
+      "recv" : 8,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "u",
+        "type" : 32
+      } ],
+      "name" : "(u reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 36
+    }, {
+      "name" : "(reflect.Type) func() reflect.ChanDir",
+      "params" : 23,
+      "recv" : 9,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 37,
+      "variadic" : false
+    }, {
       "fields" : [ {
         "name" : "",
-        "type" : 36
+        "type" : 39
       } ],
       "name" : "(reflect.ChanDir)",
       "type" : "Tuple",
-      "underlying" : 35
+      "underlying" : 38
     }, {
       "local-name" : "ChanDir",
       "name" : "reflect.ChanDir",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 25
+      "underlying" : 26
     }, {
-      "name" : "func() bool",
+      "name" : "(reflect.Type) func() bool",
       "params" : 23,
-      "recv" : 7,
+      "recv" : 10,
       "results" : 12,
-      "type" : "Signature",
-      "underlying" : 37,
-      "variadic" : false
-    }, {
-      "name" : "func() reflect.Type",
-      "params" : 23,
-      "recv" : 8,
-      "results" : 39,
-      "type" : "Signature",
-      "underlying" : 38,
-      "variadic" : false
-    }, {
-      "fields" : [ {
-        "name" : "",
-        "type" : 30
-      } ],
-      "name" : "(reflect.Type)",
-      "type" : "Tuple",
-      "underlying" : 39
-    }, {
-      "name" : "func(i int) reflect.StructField",
-      "params" : 41,
-      "recv" : 9,
-      "results" : 42,
       "type" : "Signature",
       "underlying" : 40,
       "variadic" : false
     }, {
-      "fields" : [ {
-        "name" : "i",
-        "type" : 25
-      } ],
-      "name" : "(i int)",
-      "type" : "Tuple",
-      "underlying" : 41
+      "name" : "(reflect.Type) func() reflect.Type",
+      "params" : 23,
+      "recv" : 11,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 41,
+      "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 43
+        "type" : 32
+      } ],
+      "name" : "(reflect.Type)",
+      "type" : "Tuple",
+      "underlying" : 42
+    }, {
+      "name" : "(reflect.Type) func(i int) reflect.StructField",
+      "params" : 44,
+      "recv" : 12,
+      "results" : 45,
+      "type" : "Signature",
+      "underlying" : 43,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "i",
+        "type" : 26
+      } ],
+      "name" : "(i int)",
+      "type" : "Tuple",
+      "underlying" : 44
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 46
       } ],
       "name" : "(reflect.StructField)",
       "type" : "Tuple",
-      "underlying" : 42
+      "underlying" : 45
     }, {
       "local-name" : "StructField",
       "name" : "reflect.StructField",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 44
+      "underlying" : 47
     }, {
       "fields" : [ {
         "name" : "Name",
-        "type" : 45
+        "type" : 48
       }, {
         "name" : "PkgPath",
-        "type" : 45
+        "type" : 48
       }, {
         "name" : "Type",
-        "type" : 30
+        "type" : 32
       }, {
         "name" : "Tag",
-        "type" : 46
+        "type" : 49
       }, {
         "name" : "Offset",
         "type" : 5
       }, {
         "name" : "Index",
-        "type" : 47
+        "type" : 50
       }, {
         "name" : "Anonymous",
         "type" : 13
       } ],
       "name" : "struct{Name string; PkgPath string; Type reflect.Type; Tag reflect.StructTag; Offset uintptr; Index []int; Anonymous bool}",
       "type" : "Struct",
-      "underlying" : 44
+      "underlying" : 47
     }, {
       "name" : "string",
       "type" : "Basic",
-      "underlying" : 45
+      "underlying" : 48
     }, {
       "local-name" : "StructTag",
       "name" : "reflect.StructTag",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 45
+      "underlying" : 48
     }, {
-      "elem" : 25,
+      "elem" : 26,
       "name" : "[]int",
       "type" : "Slice",
-      "underlying" : 47
+      "underlying" : 50
     }, {
-      "name" : "func(index []int) reflect.StructField",
-      "params" : 49,
-      "recv" : 10,
-      "results" : 42,
+      "name" : "(reflect.Type) func(index []int) reflect.StructField",
+      "params" : 52,
+      "recv" : 13,
+      "results" : 45,
       "type" : "Signature",
-      "underlying" : 48,
+      "underlying" : 51,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "index",
-        "type" : 47
+        "type" : 50
       } ],
       "name" : "(index []int)",
       "type" : "Tuple",
-      "underlying" : 49
+      "underlying" : 52
     }, {
-      "name" : "func(name string) (reflect.StructField, bool)",
-      "params" : 51,
-      "recv" : 11,
-      "results" : 52,
+      "name" : "(reflect.Type) func(name string) (reflect.StructField, bool)",
+      "params" : 54,
+      "recv" : 14,
+      "results" : 55,
       "type" : "Signature",
-      "underlying" : 50,
+      "underlying" : 53,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "name",
-        "type" : 45
+        "type" : 48
       } ],
       "name" : "(name string)",
       "type" : "Tuple",
-      "underlying" : 51
+      "underlying" : 54
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 43
+        "type" : 46
       }, {
         "name" : "",
         "type" : 13
       } ],
       "name" : "(reflect.StructField, bool)",
       "type" : "Tuple",
-      "underlying" : 52
+      "underlying" : 55
     }, {
-      "name" : "func(match func(string) bool) (reflect.StructField, bool)",
-      "params" : 54,
-      "recv" : 12,
-      "results" : 52,
+      "name" : "(reflect.Type) func(match func(string) bool) (reflect.StructField, bool)",
+      "params" : 57,
+      "recv" : 15,
+      "results" : 55,
       "type" : "Signature",
-      "underlying" : 53,
+      "underlying" : 56,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "match",
-        "type" : 55
+        "type" : 58
       } ],
       "name" : "(match func(string) bool)",
       "type" : "Tuple",
-      "underlying" : 54
+      "underlying" : 57
     }, {
       "name" : "func(string) bool",
-      "params" : 56,
+      "params" : 59,
       "recv" : -1,
       "results" : 12,
-      "type" : "Signature",
-      "underlying" : 55,
-      "variadic" : false
-    }, {
-      "fields" : [ {
-        "name" : "",
-        "type" : 45
-      } ],
-      "name" : "(string)",
-      "type" : "Tuple",
-      "underlying" : 56
-    }, {
-      "name" : "func(i int) reflect.Type",
-      "params" : 41,
-      "recv" : 13,
-      "results" : 39,
-      "type" : "Signature",
-      "underlying" : 57,
-      "variadic" : false
-    }, {
-      "name" : "func(int) reflect.Method",
-      "params" : 27,
-      "recv" : 14,
-      "results" : 59,
       "type" : "Signature",
       "underlying" : 58,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 60
+        "type" : 48
+      } ],
+      "name" : "(string)",
+      "type" : "Tuple",
+      "underlying" : 59
+    }, {
+      "name" : "(reflect.Type) func(i int) reflect.Type",
+      "params" : 44,
+      "recv" : 16,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 60,
+      "variadic" : false
+    }, {
+      "name" : "(reflect.Type) func() reflect.Kind",
+      "params" : 23,
+      "recv" : 17,
+      "results" : 24,
+      "type" : "Signature",
+      "underlying" : 61,
+      "variadic" : false
+    }, {
+      "name" : "(reflect.Type) func(int) reflect.Method",
+      "params" : 28,
+      "recv" : 18,
+      "results" : 63,
+      "type" : "Signature",
+      "underlying" : 62,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 64
       } ],
       "name" : "(reflect.Method)",
       "type" : "Tuple",
-      "underlying" : 59
+      "underlying" : 63
     }, {
       "local-name" : "Method",
       "name" : "reflect.Method",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 61
+      "underlying" : 65
     }, {
       "fields" : [ {
         "name" : "Name",
-        "type" : 45
+        "type" : 48
       }, {
         "name" : "PkgPath",
-        "type" : 45
+        "type" : 48
       }, {
         "name" : "Type",
-        "type" : 30
+        "type" : 32
       }, {
         "name" : "Func",
-        "type" : 62
+        "type" : 66
       }, {
         "name" : "Index",
-        "type" : 25
+        "type" : 26
       } ],
       "name" : "struct{Name string; PkgPath string; Type reflect.Type; Func reflect.Value; Index int}",
       "type" : "Struct",
-      "underlying" : 61
+      "underlying" : 65
     }, {
       "local-name" : "Value",
       "name" : "reflect.Value",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 63
+      "underlying" : 67
     }, {
       "fields" : [ {
         "name" : "typ",
@@ -4318,11 +4350,11 @@
         "type" : 11
       }, {
         "name" : "flag",
-        "type" : 64
+        "type" : 68
       } ],
       "name" : "struct{typ *reflect.rtype; ptr unsafe.Pointer; reflect.flag}",
       "type" : "Struct",
-      "underlying" : 63
+      "underlying" : 67
     }, {
       "local-name" : "flag",
       "name" : "reflect.flag",
@@ -4330,39 +4362,39 @@
       "type" : "Named",
       "underlying" : 5
     }, {
-      "name" : "func(string) (reflect.Method, bool)",
-      "params" : 56,
-      "recv" : 15,
-      "results" : 66,
+      "name" : "(reflect.Type) func(string) (reflect.Method, bool)",
+      "params" : 59,
+      "recv" : 19,
+      "results" : 70,
       "type" : "Signature",
-      "underlying" : 65,
+      "underlying" : 69,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 60
+        "type" : 64
       }, {
         "name" : "",
         "type" : 13
       } ],
       "name" : "(reflect.Method, bool)",
       "type" : "Tuple",
-      "underlying" : 66
+      "underlying" : 70
     }, {
-      "name" : "func() string",
+      "name" : "(reflect.Type) func() string",
       "params" : 23,
-      "recv" : 16,
-      "results" : 56,
+      "recv" : 20,
+      "results" : 59,
       "type" : "Signature",
-      "underlying" : 67,
+      "underlying" : 71,
       "variadic" : false
     }, {
-      "name" : "func() uintptr",
+      "name" : "(reflect.Type) func() uintptr",
       "params" : 23,
-      "recv" : 17,
-      "results" : 69,
+      "recv" : 21,
+      "results" : 73,
       "type" : "Signature",
-      "underlying" : 68,
+      "underlying" : 72,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -4371,14 +4403,14 @@
       } ],
       "name" : "(uintptr)",
       "type" : "Tuple",
-      "underlying" : 69
+      "underlying" : 73
     }, {
-      "name" : "func() *reflect.rtype",
+      "name" : "(reflect.Type) func() *reflect.rtype",
       "params" : 23,
-      "recv" : 18,
-      "results" : 71,
+      "recv" : 22,
+      "results" : 75,
       "type" : "Signature",
-      "underlying" : 70,
+      "underlying" : 74,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -4387,44 +4419,44 @@
       } ],
       "name" : "(*reflect.rtype)",
       "type" : "Tuple",
-      "underlying" : 71
+      "underlying" : 75
     }, {
-      "name" : "func() *reflect.uncommonType",
+      "name" : "(reflect.Type) func() *reflect.uncommonType",
       "params" : 23,
-      "recv" : 19,
-      "results" : 73,
+      "recv" : 23,
+      "results" : 77,
       "type" : "Signature",
-      "underlying" : 72,
+      "underlying" : 76,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 74
+        "type" : 78
       } ],
       "name" : "(*reflect.uncommonType)",
       "type" : "Tuple",
-      "underlying" : 73
+      "underlying" : 77
     }, {
-      "elem" : 75,
+      "elem" : 79,
       "name" : "*reflect.uncommonType",
       "type" : "Pointer",
-      "underlying" : 74
+      "underlying" : 78
     }, {
       "local-name" : "uncommonType",
       "name" : "reflect.uncommonType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 76
+      "underlying" : 80
     }, {
       "fields" : [ {
         "name" : "pkgPath",
         "type" : 16
       }, {
         "name" : "mcount",
-        "type" : 77
+        "type" : 81
       }, {
         "name" : "xcount",
-        "type" : 77
+        "type" : 81
       }, {
         "name" : "moff",
         "type" : 6
@@ -4434,67 +4466,115 @@
       } ],
       "name" : "struct{pkgPath reflect.nameOff; mcount uint16; xcount uint16; moff uint32; _ uint32}",
       "type" : "Struct",
-      "underlying" : 76
+      "underlying" : 80
     }, {
       "name" : "uint16",
       "type" : "Basic",
-      "underlying" : 77
+      "underlying" : 81
     }, {
-      "elem" : 79,
+      "name" : "func() reflect.Type",
+      "params" : 23,
+      "recv" : -1,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 82,
+      "variadic" : false
+    }, {
+      "name" : "(*reflect.rtype) func() reflect.Type",
+      "params" : 23,
+      "recv" : 24,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 83,
+      "variadic" : false
+    }, {
+      "name" : "func() reflect.ChanDir",
+      "params" : 23,
+      "recv" : -1,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 84,
+      "variadic" : false
+    }, {
+      "name" : "(*reflect.rtype) func() reflect.ChanDir",
+      "params" : 23,
+      "recv" : 25,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 85,
+      "variadic" : false
+    }, {
+      "elem" : 87,
       "name" : "*reflect.funcType",
       "type" : "Pointer",
-      "underlying" : 78
+      "underlying" : 86
     }, {
       "local-name" : "funcType",
       "name" : "reflect.funcType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 80
+      "underlying" : 88
     }, {
       "fields" : [ {
         "name" : "rtype",
         "type" : 3
       }, {
         "name" : "inCount",
-        "type" : 77
+        "type" : 81
       }, {
         "name" : "outCount",
-        "type" : 77
+        "type" : 81
       } ],
       "name" : "struct{reflect.rtype; inCount uint16; outCount uint16}",
       "type" : "Struct",
-      "underlying" : 80
+      "underlying" : 88
     }, {
-      "elem" : 82,
+      "name" : "func(i int) reflect.Type",
+      "params" : 44,
+      "recv" : -1,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 89,
+      "variadic" : false
+    }, {
+      "name" : "(*reflect.rtype) func(i int) reflect.Type",
+      "params" : 44,
+      "recv" : 31,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 90,
+      "variadic" : false
+    }, {
+      "elem" : 92,
       "name" : "*reflect.interfaceType",
       "type" : "Pointer",
-      "underlying" : 81
+      "underlying" : 91
     }, {
       "local-name" : "interfaceType",
       "name" : "reflect.interfaceType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 83
+      "underlying" : 93
     }, {
       "fields" : [ {
         "name" : "rtype",
         "type" : 3
       }, {
         "name" : "pkgPath",
-        "type" : 84
+        "type" : 94
       }, {
         "name" : "methods",
-        "type" : 86
+        "type" : 96
       } ],
       "name" : "struct{reflect.rtype; pkgPath reflect.name; methods []reflect.imethod}",
       "type" : "Struct",
-      "underlying" : 83
+      "underlying" : 93
     }, {
       "local-name" : "name",
       "name" : "reflect.name",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 85
+      "underlying" : 95
     }, {
       "fields" : [ {
         "name" : "bytes",
@@ -4502,18 +4582,18 @@
       } ],
       "name" : "struct{bytes *byte}",
       "type" : "Struct",
-      "underlying" : 85
+      "underlying" : 95
     }, {
-      "elem" : 87,
+      "elem" : 97,
       "name" : "[]reflect.imethod",
       "type" : "Slice",
-      "underlying" : 86
+      "underlying" : 96
     }, {
       "local-name" : "imethod",
       "name" : "reflect.imethod",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 88
+      "underlying" : 98
     }, {
       "fields" : [ {
         "name" : "name",
@@ -4524,63 +4604,63 @@
       } ],
       "name" : "struct{name reflect.nameOff; typ reflect.typeOff}",
       "type" : "Struct",
-      "underlying" : 88
+      "underlying" : 98
     }, {
       "name" : "func([]reflect.imethod) int",
-      "params" : 90,
+      "params" : 100,
       "recv" : -1,
-      "results" : 27,
+      "results" : 28,
       "type" : "Signature",
-      "underlying" : 89,
+      "underlying" : 99,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 86
+        "type" : 96
       } ],
       "name" : "([]reflect.imethod)",
       "type" : "Tuple",
-      "underlying" : 90
+      "underlying" : 100
     }, {
-      "elem" : 92,
+      "elem" : 102,
       "name" : "*reflect.structType",
       "type" : "Pointer",
-      "underlying" : 91
+      "underlying" : 101
     }, {
       "local-name" : "structType",
       "name" : "reflect.structType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 93
+      "underlying" : 103
     }, {
       "fields" : [ {
         "name" : "rtype",
         "type" : 3
       }, {
         "name" : "pkgPath",
-        "type" : 84
+        "type" : 94
       }, {
         "name" : "fields",
-        "type" : 94
+        "type" : 104
       } ],
       "name" : "struct{reflect.rtype; pkgPath reflect.name; fields []reflect.structField}",
       "type" : "Struct",
-      "underlying" : 93
+      "underlying" : 103
     }, {
-      "elem" : 95,
+      "elem" : 105,
       "name" : "[]reflect.structField",
       "type" : "Slice",
-      "underlying" : 94
+      "underlying" : 104
     }, {
       "local-name" : "structField",
       "name" : "reflect.structField",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 96
+      "underlying" : 106
     }, {
       "fields" : [ {
         "name" : "name",
-        "type" : 84
+        "type" : 94
       }, {
         "name" : "typ",
         "type" : 2
@@ -4590,44 +4670,52 @@
       } ],
       "name" : "struct{name reflect.name; typ *reflect.rtype; offsetEmbed uintptr}",
       "type" : "Struct",
-      "underlying" : 96
+      "underlying" : 106
     }, {
       "name" : "func([]reflect.structField) int",
-      "params" : 98,
+      "params" : 108,
       "recv" : -1,
-      "results" : 27,
+      "results" : 28,
       "type" : "Signature",
-      "underlying" : 97,
+      "underlying" : 107,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 94
+        "type" : 104
       } ],
       "name" : "([]reflect.structField)",
       "type" : "Tuple",
-      "underlying" : 98
+      "underlying" : 108
     }, {
       "name" : "func() (s string)",
       "params" : 23,
       "recv" : -1,
-      "results" : 100,
+      "results" : 110,
       "type" : "Signature",
-      "underlying" : 99,
+      "underlying" : 109,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "s",
-        "type" : 45
+        "type" : 48
       } ],
       "name" : "(s string)",
       "type" : "Tuple",
-      "underlying" : 100
+      "underlying" : 110
     }, {
-      "elem" : 95,
+      "name" : "(reflect.name) func() (s string)",
+      "params" : 23,
+      "recv" : 40,
+      "results" : 110,
+      "type" : "Signature",
+      "underlying" : 111,
+      "variadic" : false
+    }, {
+      "elem" : 105,
       "name" : "*reflect.structField",
       "type" : "Pointer",
-      "underlying" : 101
+      "underlying" : 112
     } ],
     "variables" : [ {
       "name" : "T",
@@ -4658,6 +4746,13 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "kind",
       "package" : 0,
       "type" : 20,
@@ -4665,226 +4760,275 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "",
+      "name" : "t",
       "package" : 0,
-      "type" : 30,
+      "type" : 2,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 32,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 32,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "t",
       "package" : 0,
-      "type" : 78,
+      "type" : 2,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 2,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 86,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "outCount",
       "package" : 0,
-      "type" : 77,
+      "type" : 81,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "v",
       "package" : 0,
-      "type" : 78,
+      "type" : 86,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "inCount",
       "package" : 0,
-      "type" : 77,
+      "type" : 81,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "i",
       "package" : 0,
-      "type" : 25,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "i",
-      "package" : 0,
-      "type" : 25,
+      "type" : 26,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "t",
       "package" : 0,
-      "type" : 81,
+      "type" : 2,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "i",
+      "package" : 0,
+      "type" : 26,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 91,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "methods",
       "package" : 0,
-      "type" : 86,
+      "type" : 96,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "v",
       "package" : 0,
-      "type" : 81,
+      "type" : 91,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "t",
       "package" : 0,
-      "type" : 91,
+      "type" : 101,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "fields",
       "package" : 0,
-      "type" : 94,
+      "type" : 104,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "v",
       "package" : 0,
-      "type" : 91,
+      "type" : 101,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "pkgPath",
       "package" : 0,
-      "type" : 84,
+      "type" : 94,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 94,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "i",
       "package" : 0,
-      "type" : 25,
+      "type" : 26,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "tf",
       "package" : 0,
-      "type" : 101,
+      "type" : 112,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "name",
       "package" : 0,
-      "type" : 84,
+      "type" : 94,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "vf",
       "package" : 0,
-      "type" : 101,
+      "type" : 112,
       "exported" : false,
       "embedded" : false,
       "field" : false

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 51, 54, 55, 53 ],
+      "in-vars" : [ 61, 59, 62, 63 ],
       "exit" : false,
-      "out-vars" : [ 53, 51, 54, 55 ],
+      "out-vars" : [ 61, 59, 62, 63 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,10 +42,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 53, 51, 54, 55 ],
+      "in-vars" : [ 61, 59, 62, 63 ],
       "exit" : false,
-      "out-vars" : [ 51, 54, 55 ],
-      "decl-vars" : [ 56 ],
+      "out-vars" : [ 59, 62, 63 ],
+      "decl-vars" : [ 64 ],
       "line-start" : 368,
       "ast" : {
         "kind" : "statement",
@@ -62,21 +62,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 289,
+              "go-type" : 297,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 289,
+                "go-type" : 297,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "unsafeReflectValue"
               }
             },
-            "go-type" : 288,
+            "go-type" : 296,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 288,
+          "go-type" : 296,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -99,7 +99,7 @@
             "go-type" : 61,
             "kind" : "expression",
             "target" : {
-              "go-type" : 291,
+              "go-type" : 299,
               "kind" : "expression",
               "operator" : "&",
               "target" : {
@@ -110,7 +110,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "rv",
-                  "variable" : 53
+                  "variable" : 61
                 }
               },
               "type" : "unary"
@@ -125,11 +125,11 @@
       "line-end" : 368,
       "code" : "urv := (*unsafeReflectValue)(unsafe.Pointer(&rv))",
       "entry" : false,
-      "use-vars" : [ 53 ]
+      "use-vars" : [ 61 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 51, 54, 55 ],
+      "in-vars" : [ 62, 63, 59 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -152,30 +152,30 @@
                   "value" : "uint"
                 }
               },
-              "go-type" : 292,
+              "go-type" : 300,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 292,
+            "go-type" : 300,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "ptr",
-                "variable" : 57
+                "variable" : 65
               },
               "go-type" : 61,
               "kind" : "expression",
               "target" : {
-                "go-type" : 288,
+                "go-type" : 296,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "urv",
-                  "variable" : 56
+                  "variable" : 64
                 }
               },
               "type" : "selector"
@@ -209,14 +209,14 @@
                   "kind" : "ident",
                   "value" : "DecodeUint64"
                 },
-                "go-type" : 153,
+                "go-type" : 305,
                 "kind" : "expression",
                 "target" : {
                   "field" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "d",
-                    "variable" : 58
+                    "variable" : 67
                   },
                   "go-type" : 116,
                   "kind" : "expression",
@@ -228,7 +228,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "d",
-                      "variable" : 51
+                      "variable" : 59
                     }
                   },
                   "type" : "selector"
@@ -246,7 +246,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "uintBitsize",
-                "variable" : 54
+                "variable" : 62
               }
             } ],
             "ellipsis" : false,
@@ -257,17 +257,17 @@
                 "kind" : "ident",
                 "value" : "UintV"
               },
-              "go-type" : 293,
+              "go-type" : 301,
               "kind" : "expression",
               "target" : {
-                "go-type" : 287,
+                "go-type" : 295,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "chkOvf",
-                  "variable" : 55
+                  "variable" : 63
                 }
               },
               "type" : "selector"
@@ -284,7 +284,7 @@
       "line-end" : 369,
       "code" : "*(*uint)(urv.ptr) = uint(chkOvf.UintV(d.d.DecodeUint64(), uintBitsize))",
       "entry" : false,
-      "use-vars" : [ 55, 51, 54 ]
+      "use-vars" : [ 62, 63, 59 ]
     } ],
     "code" : "func (d *Decoder) kUint(f *codecFnInfo, rv reflect.Value) {\n\turv := (*unsafeReflectValue)(unsafe.Pointer(&rv))\n\t*(*uint)(urv.ptr) = uint(chkOvf.UintV(d.d.DecodeUint64(), uintBitsize))\n}",
     "defines" : [ 0 ],
@@ -296,12 +296,12 @@
     }, {
       "name" : "UintV",
       "package" : 0,
-      "type" : 293,
+      "type" : 304,
       "exported" : true
     }, {
       "name" : "DecodeUint64",
       "package" : 0,
-      "type" : 153,
+      "type" : 154,
       "exported" : true
     } ],
     "line-end" : 370,
@@ -327,14 +327,14 @@
       "name" : "sync",
       "path" : "sync"
     } ],
-    "params" : [ 52, 53 ],
-    "receivers" : [ 51 ],
+    "params" : [ 60, 61 ],
+    "receivers" : [ 59 ],
     "results" : [ ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(f *github.com/hashicorp/go-msgpack/codec.codecFnInfo, rv reflect.Value)",
+      "name" : "(*github.com/hashicorp/go-msgpack/codec.Decoder) func(f *github.com/hashicorp/go-msgpack/codec.codecFnInfo, rv reflect.Value)",
       "params" : 1,
-      "recv" : 51,
+      "recv" : 59,
       "results" : 11,
       "type" : "Signature",
       "underlying" : 0,
@@ -613,7 +613,7 @@
       "type" : "Interface",
       "underlying" : 9
     }, {
-      "name" : "func() int",
+      "name" : "(reflect.Type) func() int",
       "params" : 11,
       "recv" : 0,
       "results" : 12,
@@ -638,7 +638,7 @@
       "type" : "Basic",
       "underlying" : 13
     }, {
-      "name" : "func(u reflect.Type) bool",
+      "name" : "(reflect.Type) func(u reflect.Type) bool",
       "params" : 15,
       "recv" : 1,
       "results" : 16,
@@ -666,7 +666,7 @@
       "type" : "Basic",
       "underlying" : 17
     }, {
-      "name" : "func() reflect.ChanDir",
+      "name" : "(reflect.Type) func() reflect.ChanDir",
       "params" : 11,
       "recv" : 2,
       "results" : 19,
@@ -688,7 +688,7 @@
       "type" : "Named",
       "underlying" : 13
     }, {
-      "name" : "func() bool",
+      "name" : "(reflect.Type) func() bool",
       "params" : 11,
       "recv" : 3,
       "results" : 16,
@@ -696,7 +696,7 @@
       "underlying" : 21,
       "variadic" : false
     }, {
-      "name" : "func() reflect.Type",
+      "name" : "(reflect.Type) func() reflect.Type",
       "params" : 11,
       "recv" : 4,
       "results" : 23,
@@ -712,7 +712,7 @@
       "type" : "Tuple",
       "underlying" : 23
     }, {
-      "name" : "func(i int) reflect.StructField",
+      "name" : "(reflect.Type) func(i int) reflect.StructField",
       "params" : 25,
       "recv" : 5,
       "results" : 26,
@@ -787,7 +787,7 @@
       "type" : "Slice",
       "underlying" : 32
     }, {
-      "name" : "func(index []int) reflect.StructField",
+      "name" : "(reflect.Type) func(index []int) reflect.StructField",
       "params" : 34,
       "recv" : 6,
       "results" : 26,
@@ -803,7 +803,7 @@
       "type" : "Tuple",
       "underlying" : 34
     }, {
-      "name" : "func(name string) (reflect.StructField, bool)",
+      "name" : "(reflect.Type) func(name string) (reflect.StructField, bool)",
       "params" : 36,
       "recv" : 7,
       "results" : 37,
@@ -830,7 +830,7 @@
       "type" : "Tuple",
       "underlying" : 37
     }, {
-      "name" : "func(match func(string) bool) (reflect.StructField, bool)",
+      "name" : "(reflect.Type) func(match func(string) bool) (reflect.StructField, bool)",
       "params" : 39,
       "recv" : 8,
       "results" : 37,
@@ -862,7 +862,7 @@
       "type" : "Tuple",
       "underlying" : 41
     }, {
-      "name" : "func(i int) reflect.Type",
+      "name" : "(reflect.Type) func(i int) reflect.Type",
       "params" : 25,
       "recv" : 9,
       "results" : 23,
@@ -870,7 +870,7 @@
       "underlying" : 42,
       "variadic" : false
     }, {
-      "name" : "func() reflect.Kind",
+      "name" : "(reflect.Type) func() reflect.Kind",
       "params" : 11,
       "recv" : 10,
       "results" : 44,
@@ -896,7 +896,7 @@
       "type" : "Basic",
       "underlying" : 46
     }, {
-      "name" : "func(int) reflect.Method",
+      "name" : "(reflect.Type) func(int) reflect.Method",
       "params" : 12,
       "recv" : 11,
       "results" : 48,
@@ -1077,7 +1077,7 @@
       "type" : "Named",
       "underlying" : 31
     }, {
-      "name" : "func(string) (reflect.Method, bool)",
+      "name" : "(reflect.Type) func(string) (reflect.Method, bool)",
       "params" : 41,
       "recv" : 12,
       "results" : 69,
@@ -1096,7 +1096,7 @@
       "type" : "Tuple",
       "underlying" : 69
     }, {
-      "name" : "func() string",
+      "name" : "(reflect.Type) func() string",
       "params" : 11,
       "recv" : 13,
       "results" : 41,
@@ -1104,7 +1104,7 @@
       "underlying" : 70,
       "variadic" : false
     }, {
-      "name" : "func() uintptr",
+      "name" : "(reflect.Type) func() uintptr",
       "params" : 11,
       "recv" : 14,
       "results" : 72,
@@ -1120,7 +1120,7 @@
       "type" : "Tuple",
       "underlying" : 72
     }, {
-      "name" : "func() *reflect.rtype",
+      "name" : "(reflect.Type) func() *reflect.rtype",
       "params" : 11,
       "recv" : 15,
       "results" : 74,
@@ -1136,7 +1136,7 @@
       "type" : "Tuple",
       "underlying" : 74
     }, {
-      "name" : "func() *reflect.uncommonType",
+      "name" : "(reflect.Type) func() *reflect.uncommonType",
       "params" : 11,
       "recv" : 16,
       "results" : 76,
@@ -1299,7 +1299,7 @@
       "type" : "Interface",
       "underlying" : 95
     }, {
-      "name" : "func(v interface{}) interface{}",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.InterfaceExt) func(v interface{}) interface{}",
       "params" : 97,
       "recv" : 18,
       "results" : 99,
@@ -1345,7 +1345,7 @@
       "type" : "Interface",
       "underlying" : 101
     }, {
-      "name" : "func(dst interface{}, src interface{})",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.InterfaceExt) func(dst interface{}, src interface{})",
       "params" : 103,
       "recv" : 17,
       "results" : 11,
@@ -1364,7 +1364,7 @@
       "type" : "Tuple",
       "underlying" : 103
     }, {
-      "name" : "func(dst interface{}, src []byte)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.BytesExt) func(dst interface{}, src []byte)",
       "params" : 105,
       "recv" : 20,
       "results" : 11,
@@ -1400,7 +1400,7 @@
       "type" : "Interface",
       "underlying" : 107
     }, {
-      "name" : "func(v interface{}) []byte",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.BytesExt) func(v interface{}) []byte",
       "params" : 97,
       "recv" : 19,
       "results" : 109,
@@ -1441,7 +1441,7 @@
         "type" : 116
       }, {
         "name" : "r",
-        "type" : 155
+        "type" : 157
       }, {
         "name" : "mtid",
         "type" : 31
@@ -1450,34 +1450,34 @@
         "type" : 31
       }, {
         "name" : "hh",
-        "type" : 195
+        "type" : 198
       }, {
         "name" : "h",
-        "type" : 199
+        "type" : 203
       }, {
         "name" : "decReaderSwitch",
-        "type" : 156
+        "type" : 158
       }, {
         "name" : "n",
-        "type" : 281
+        "type" : 289
       }, {
         "name" : "err",
-        "type" : 170
+        "type" : 172
       }, {
         "name" : "depth",
-        "type" : 222
+        "type" : 226
       }, {
         "name" : "maxdepth",
-        "type" : 222
+        "type" : 226
       }, {
         "name" : "_",
-        "type" : 284
+        "type" : 292
       }, {
         "name" : "is",
-        "type" : 285
+        "type" : 293
       }, {
         "name" : "b",
-        "type" : 286
+        "type" : 294
       } ],
       "name" : "struct{github.com/hashicorp/go-msgpack/codec.panicHdl; d github.com/hashicorp/go-msgpack/codec.decDriver; r *github.com/hashicorp/go-msgpack/codec.decReaderSwitch; mtid uintptr; stid uintptr; hh github.com/hashicorp/go-msgpack/codec.Handle; h *github.com/hashicorp/go-msgpack/codec.BasicHandle; github.com/hashicorp/go-msgpack/codec.decReaderSwitch; n github.com/hashicorp/go-msgpack/codec.decNaked; err error; depth int16; maxdepth int16; _ [4]uint8; is map[string]string; b [64]byte}",
       "type" : "Struct",
@@ -1502,81 +1502,89 @@
     }, {
       "methods" : [ {
         "name" : "CheckBreak",
-        "type" : 21
-      }, {
-        "name" : "ContainerType",
         "type" : 118
       }, {
+        "name" : "ContainerType",
+        "type" : 119
+      }, {
         "name" : "DecodeBool",
-        "type" : 120
+        "type" : 121
       }, {
         "name" : "DecodeBytes",
-        "type" : 122
+        "type" : 123
       }, {
         "name" : "DecodeExt",
-        "type" : 125
+        "type" : 126
       }, {
         "name" : "DecodeFloat64",
-        "type" : 128
+        "type" : 129
       }, {
         "name" : "DecodeInt64",
-        "type" : 131
+        "type" : 132
       }, {
         "name" : "DecodeNaked",
-        "type" : 134
-      }, {
-        "name" : "DecodeString",
         "type" : 135
       }, {
+        "name" : "DecodeString",
+        "type" : 136
+      }, {
         "name" : "DecodeStringAsBytes",
-        "type" : 137
+        "type" : 138
       }, {
         "name" : "DecodeTime",
-        "type" : 139
+        "type" : 140
       }, {
         "name" : "DecodeUint64",
-        "type" : 153
+        "type" : 154
       }, {
         "name" : "ReadArrayElem",
-        "type" : 134
+        "type" : 135
       }, {
         "name" : "ReadArrayEnd",
-        "type" : 134
+        "type" : 135
       }, {
         "name" : "ReadArrayStart",
-        "type" : 10
+        "type" : 156
       }, {
         "name" : "ReadMapElemKey",
-        "type" : 134
+        "type" : 135
       }, {
         "name" : "ReadMapElemValue",
-        "type" : 134
+        "type" : 135
       }, {
         "name" : "ReadMapEnd",
-        "type" : 134
+        "type" : 135
       }, {
         "name" : "ReadMapStart",
-        "type" : 10
+        "type" : 156
       }, {
         "name" : "TryDecodeAsNil",
-        "type" : 21
+        "type" : 118
       }, {
         "name" : "reset",
-        "type" : 134
+        "type" : 135
       }, {
         "name" : "uncacheRead",
-        "type" : 134
+        "type" : 135
       } ],
       "name" : "interface{CheckBreak() bool; ContainerType() (vt github.com/hashicorp/go-msgpack/codec.valueType); DecodeBool() (b bool); DecodeBytes(bs []byte, zerocopy bool) (bsOut []byte); DecodeExt(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext) (realxtag uint64); DecodeFloat64() (f float64); DecodeInt64() (i int64); DecodeNaked(); DecodeString() (s string); DecodeStringAsBytes() (v []byte); DecodeTime() (t time.Time); DecodeUint64() (ui uint64); ReadArrayElem(); ReadArrayEnd(); ReadArrayStart() int; ReadMapElemKey(); ReadMapElemValue(); ReadMapEnd(); ReadMapStart() int; TryDecodeAsNil() bool; reset(); uncacheRead()}",
       "type" : "Interface",
       "underlying" : 117
     }, {
-      "name" : "func() (vt github.com/hashicorp/go-msgpack/codec.valueType)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() bool",
       "params" : 11,
       "recv" : 21,
-      "results" : 119,
+      "results" : 16,
       "type" : "Signature",
       "underlying" : 118,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (vt github.com/hashicorp/go-msgpack/codec.valueType)",
+      "params" : 11,
+      "recv" : 22,
+      "results" : 120,
+      "type" : "Signature",
+      "underlying" : 119,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1585,14 +1593,14 @@
       } ],
       "name" : "(vt github.com/hashicorp/go-msgpack/codec.valueType)",
       "type" : "Tuple",
-      "underlying" : 119
+      "underlying" : 120
     }, {
-      "name" : "func() (b bool)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (b bool)",
       "params" : 11,
-      "recv" : 22,
-      "results" : 121,
+      "recv" : 23,
+      "results" : 122,
       "type" : "Signature",
-      "underlying" : 120,
+      "underlying" : 121,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1601,14 +1609,14 @@
       } ],
       "name" : "(b bool)",
       "type" : "Tuple",
-      "underlying" : 121
+      "underlying" : 122
     }, {
-      "name" : "func(bs []byte, zerocopy bool) (bsOut []byte)",
-      "params" : 123,
-      "recv" : 23,
-      "results" : 124,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func(bs []byte, zerocopy bool) (bsOut []byte)",
+      "params" : 124,
+      "recv" : 24,
+      "results" : 125,
       "type" : "Signature",
-      "underlying" : 122,
+      "underlying" : 123,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1620,7 +1628,7 @@
       } ],
       "name" : "(bs []byte, zerocopy bool)",
       "type" : "Tuple",
-      "underlying" : 123
+      "underlying" : 124
     }, {
       "fields" : [ {
         "name" : "bsOut",
@@ -1628,14 +1636,14 @@
       } ],
       "name" : "(bsOut []byte)",
       "type" : "Tuple",
-      "underlying" : 124
+      "underlying" : 125
     }, {
-      "name" : "func(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext) (realxtag uint64)",
-      "params" : 126,
-      "recv" : 24,
-      "results" : 127,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext) (realxtag uint64)",
+      "params" : 127,
+      "recv" : 25,
+      "results" : 128,
       "type" : "Signature",
-      "underlying" : 125,
+      "underlying" : 126,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1650,7 +1658,7 @@
       } ],
       "name" : "(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext)",
       "type" : "Tuple",
-      "underlying" : 126
+      "underlying" : 127
     }, {
       "fields" : [ {
         "name" : "realxtag",
@@ -1658,62 +1666,62 @@
       } ],
       "name" : "(realxtag uint64)",
       "type" : "Tuple",
-      "underlying" : 127
+      "underlying" : 128
     }, {
-      "name" : "func() (f float64)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (f float64)",
       "params" : 11,
-      "recv" : 25,
-      "results" : 129,
+      "recv" : 26,
+      "results" : 130,
       "type" : "Signature",
-      "underlying" : 128,
+      "underlying" : 129,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "f",
-        "type" : 130
+        "type" : 131
       } ],
       "name" : "(f float64)",
       "type" : "Tuple",
-      "underlying" : 129
+      "underlying" : 130
     }, {
       "name" : "float64",
       "type" : "Basic",
-      "underlying" : 130
+      "underlying" : 131
     }, {
-      "name" : "func() (i int64)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (i int64)",
       "params" : 11,
-      "recv" : 26,
-      "results" : 132,
+      "recv" : 27,
+      "results" : 133,
       "type" : "Signature",
-      "underlying" : 131,
+      "underlying" : 132,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "i",
-        "type" : 133
+        "type" : 134
       } ],
       "name" : "(i int64)",
       "type" : "Tuple",
-      "underlying" : 132
+      "underlying" : 133
     }, {
       "name" : "int64",
       "type" : "Basic",
-      "underlying" : 133
+      "underlying" : 134
     }, {
-      "name" : "func()",
-      "params" : 11,
-      "recv" : 27,
-      "results" : 11,
-      "type" : "Signature",
-      "underlying" : 134,
-      "variadic" : false
-    }, {
-      "name" : "func() (s string)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func()",
       "params" : 11,
       "recv" : 28,
-      "results" : 136,
+      "results" : 11,
       "type" : "Signature",
       "underlying" : 135,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (s string)",
+      "params" : 11,
+      "recv" : 29,
+      "results" : 137,
+      "type" : "Signature",
+      "underlying" : 136,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1722,14 +1730,14 @@
       } ],
       "name" : "(s string)",
       "type" : "Tuple",
-      "underlying" : 136
+      "underlying" : 137
     }, {
-      "name" : "func() (v []byte)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (v []byte)",
       "params" : 11,
-      "recv" : 29,
-      "results" : 138,
+      "recv" : 30,
+      "results" : 139,
       "type" : "Signature",
-      "underlying" : 137,
+      "underlying" : 138,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1738,88 +1746,88 @@
       } ],
       "name" : "(v []byte)",
       "type" : "Tuple",
-      "underlying" : 138
+      "underlying" : 139
     }, {
-      "name" : "func() (t time.Time)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (t time.Time)",
       "params" : 11,
-      "recv" : 30,
-      "results" : 140,
+      "recv" : 31,
+      "results" : 141,
       "type" : "Signature",
-      "underlying" : 139,
+      "underlying" : 140,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "t",
-        "type" : 141
+        "type" : 142
       } ],
       "name" : "(t time.Time)",
       "type" : "Tuple",
-      "underlying" : 140
+      "underlying" : 141
     }, {
       "local-name" : "Time",
       "name" : "time.Time",
       "package" : 3,
       "type" : "Named",
-      "underlying" : 142
+      "underlying" : 143
     }, {
       "fields" : [ {
         "name" : "wall",
         "type" : 93
       }, {
         "name" : "ext",
-        "type" : 133
+        "type" : 134
       }, {
         "name" : "loc",
-        "type" : 143
+        "type" : 144
       } ],
       "name" : "struct{wall uint64; ext int64; loc *time.Location}",
       "type" : "Struct",
-      "underlying" : 142
+      "underlying" : 143
     }, {
-      "elem" : 144,
+      "elem" : 145,
       "name" : "*time.Location",
       "type" : "Pointer",
-      "underlying" : 143
+      "underlying" : 144
     }, {
       "local-name" : "Location",
       "name" : "time.Location",
       "package" : 3,
       "type" : "Named",
-      "underlying" : 145
+      "underlying" : 146
     }, {
       "fields" : [ {
         "name" : "name",
         "type" : 29
       }, {
         "name" : "zone",
-        "type" : 146
+        "type" : 147
       }, {
         "name" : "tx",
-        "type" : 149
+        "type" : 150
       }, {
         "name" : "cacheStart",
-        "type" : 133
+        "type" : 134
       }, {
         "name" : "cacheEnd",
-        "type" : 133
+        "type" : 134
       }, {
         "name" : "cacheZone",
-        "type" : 152
+        "type" : 153
       } ],
       "name" : "struct{name string; zone []time.zone; tx []time.zoneTrans; cacheStart int64; cacheEnd int64; cacheZone *time.zone}",
       "type" : "Struct",
-      "underlying" : 145
+      "underlying" : 146
     }, {
-      "elem" : 147,
+      "elem" : 148,
       "name" : "[]time.zone",
       "type" : "Slice",
-      "underlying" : 146
+      "underlying" : 147
     }, {
       "local-name" : "zone",
       "name" : "time.zone",
       "package" : 3,
       "type" : "Named",
-      "underlying" : 148
+      "underlying" : 149
     }, {
       "fields" : [ {
         "name" : "name",
@@ -1833,22 +1841,22 @@
       } ],
       "name" : "struct{name string; offset int; isDST bool}",
       "type" : "Struct",
-      "underlying" : 148
+      "underlying" : 149
     }, {
-      "elem" : 150,
+      "elem" : 151,
       "name" : "[]time.zoneTrans",
       "type" : "Slice",
-      "underlying" : 149
+      "underlying" : 150
     }, {
       "local-name" : "zoneTrans",
       "name" : "time.zoneTrans",
       "package" : 3,
       "type" : "Named",
-      "underlying" : 151
+      "underlying" : 152
     }, {
       "fields" : [ {
         "name" : "when",
-        "type" : 133
+        "type" : 134
       }, {
         "name" : "index",
         "type" : 58
@@ -1861,19 +1869,19 @@
       } ],
       "name" : "struct{when int64; index uint8; isstd bool; isutc bool}",
       "type" : "Struct",
-      "underlying" : 151
-    }, {
-      "elem" : 147,
-      "name" : "*time.zone",
-      "type" : "Pointer",
       "underlying" : 152
     }, {
-      "name" : "func() (ui uint64)",
+      "elem" : 148,
+      "name" : "*time.zone",
+      "type" : "Pointer",
+      "underlying" : 153
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() (ui uint64)",
       "params" : 11,
-      "recv" : 31,
-      "results" : 154,
+      "recv" : 32,
+      "results" : 155,
       "type" : "Signature",
-      "underlying" : 153,
+      "underlying" : 154,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1882,28 +1890,36 @@
       } ],
       "name" : "(ui uint64)",
       "type" : "Tuple",
-      "underlying" : 154
+      "underlying" : 155
     }, {
-      "elem" : 156,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver) func() int",
+      "params" : 11,
+      "recv" : 33,
+      "results" : 12,
+      "type" : "Signature",
+      "underlying" : 156,
+      "variadic" : false
+    }, {
+      "elem" : 158,
       "name" : "*github.com/hashicorp/go-msgpack/codec.decReaderSwitch",
       "type" : "Pointer",
-      "underlying" : 155
+      "underlying" : 157
     }, {
       "local-name" : "decReaderSwitch",
       "name" : "github.com/hashicorp/go-msgpack/codec.decReaderSwitch",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 157
+      "underlying" : 159
     }, {
       "fields" : [ {
         "name" : "rb",
-        "type" : 158
-      }, {
-        "name" : "ri",
         "type" : 160
       }, {
+        "name" : "ri",
+        "type" : 162
+      }, {
         "name" : "bi",
-        "type" : 184
+        "type" : 187
       }, {
         "name" : "mtr",
         "type" : 17
@@ -1931,13 +1947,13 @@
       } ],
       "name" : "struct{rb github.com/hashicorp/go-msgpack/codec.bytesDecReader; ri *github.com/hashicorp/go-msgpack/codec.ioDecReader; bi *github.com/hashicorp/go-msgpack/codec.bufioDecReader; mtr bool; str bool; be bool; js bool; jsms bool; esep bool; bytes bool; bufio bool}",
       "type" : "Struct",
-      "underlying" : 157
+      "underlying" : 159
     }, {
       "local-name" : "bytesDecReader",
       "name" : "github.com/hashicorp/go-msgpack/codec.bytesDecReader",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 159
+      "underlying" : 161
     }, {
       "fields" : [ {
         "name" : "b",
@@ -1951,48 +1967,48 @@
       } ],
       "name" : "struct{b []byte; c uint; t uint}",
       "type" : "Struct",
-      "underlying" : 159
+      "underlying" : 161
     }, {
-      "elem" : 161,
+      "elem" : 163,
       "name" : "*github.com/hashicorp/go-msgpack/codec.ioDecReader",
       "type" : "Pointer",
-      "underlying" : 160
+      "underlying" : 162
     }, {
       "local-name" : "ioDecReader",
       "name" : "github.com/hashicorp/go-msgpack/codec.ioDecReader",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 162
+      "underlying" : 164
     }, {
       "fields" : [ {
         "name" : "ioDecReaderCommon",
-        "type" : 163
-      }, {
-        "name" : "rr",
         "type" : 165
       }, {
+        "name" : "rr",
+        "type" : 167
+      }, {
         "name" : "br",
-        "type" : 174
+        "type" : 177
       }, {
         "name" : "x",
-        "type" : 182
+        "type" : 185
       }, {
         "name" : "_",
-        "type" : 183
+        "type" : 186
       } ],
       "name" : "struct{github.com/hashicorp/go-msgpack/codec.ioDecReaderCommon; rr io.Reader; br io.ByteScanner; x [32]byte; _ [1]uint64}",
       "type" : "Struct",
-      "underlying" : 162
+      "underlying" : 164
     }, {
       "local-name" : "ioDecReaderCommon",
       "name" : "github.com/hashicorp/go-msgpack/codec.ioDecReaderCommon",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 164
+      "underlying" : 166
     }, {
       "fields" : [ {
         "name" : "r",
-        "type" : 165
+        "type" : 167
       }, {
         "name" : "n",
         "type" : 46
@@ -2001,7 +2017,7 @@
         "type" : 63
       }, {
         "name" : "ls",
-        "type" : 172
+        "type" : 175
       }, {
         "name" : "trb",
         "type" : 17
@@ -2010,35 +2026,35 @@
         "type" : 17
       }, {
         "name" : "b",
-        "type" : 173
+        "type" : 176
       }, {
         "name" : "tr",
         "type" : 89
       } ],
       "name" : "struct{r io.Reader; n uint; l byte; ls github.com/hashicorp/go-msgpack/codec.unreadByteStatus; trb bool; _ bool; b [4]byte; tr []byte}",
       "type" : "Struct",
-      "underlying" : 164
+      "underlying" : 166
     }, {
       "local-name" : "Reader",
       "name" : "io.Reader",
       "package" : 4,
       "type" : "Named",
-      "underlying" : 166
+      "underlying" : 168
     }, {
       "methods" : [ {
         "name" : "Read",
-        "type" : 167
+        "type" : 169
       } ],
       "name" : "interface{Read(p []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 166
+      "underlying" : 168
     }, {
-      "name" : "func(p []byte) (n int, err error)",
-      "params" : 168,
-      "recv" : 32,
-      "results" : 169,
+      "name" : "(io.Reader) func(p []byte) (n int, err error)",
+      "params" : 170,
+      "recv" : 35,
+      "results" : 171,
       "type" : "Signature",
-      "underlying" : 167,
+      "underlying" : 169,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2047,32 +2063,40 @@
       } ],
       "name" : "(p []byte)",
       "type" : "Tuple",
-      "underlying" : 168
+      "underlying" : 170
     }, {
       "fields" : [ {
         "name" : "n",
         "type" : 13
       }, {
         "name" : "err",
-        "type" : 170
+        "type" : 172
       } ],
       "name" : "(n int, err error)",
       "type" : "Tuple",
-      "underlying" : 169
+      "underlying" : 171
     }, {
       "local-name" : "error",
       "name" : "error",
       "package" : -1,
       "type" : "Named",
-      "underlying" : 171
+      "underlying" : 173
     }, {
       "methods" : [ {
         "name" : "Error",
-        "type" : 70
+        "type" : 174
       } ],
       "name" : "interface{Error() string}",
       "type" : "Interface",
-      "underlying" : 171
+      "underlying" : 173
+    }, {
+      "name" : "(error) func() string",
+      "params" : 11,
+      "recv" : 34,
+      "results" : 41,
+      "type" : "Signature",
+      "underlying" : 174,
+      "variadic" : false
     }, {
       "local-name" : "unreadByteStatus",
       "name" : "github.com/hashicorp/go-msgpack/codec.unreadByteStatus",
@@ -2083,31 +2107,31 @@
       "elem" : 63,
       "name" : "[4]byte",
       "type" : "Array",
-      "underlying" : 173
+      "underlying" : 176
     }, {
       "local-name" : "ByteScanner",
       "name" : "io.ByteScanner",
       "package" : 4,
       "type" : "Named",
-      "underlying" : 175
+      "underlying" : 178
     }, {
       "methods" : [ {
         "name" : "ReadByte",
-        "type" : 176
+        "type" : 179
       }, {
         "name" : "UnreadByte",
-        "type" : 180
+        "type" : 183
       } ],
       "name" : "interface{UnreadByte() error; io.ByteReader}",
       "type" : "Interface",
-      "underlying" : 175
+      "underlying" : 178
     }, {
-      "name" : "func() (byte, error)",
+      "name" : "(io.ByteReader) func() (byte, error)",
       "params" : 11,
-      "recv" : 33,
-      "results" : 177,
+      "recv" : 36,
+      "results" : 180,
       "type" : "Signature",
-      "underlying" : 176,
+      "underlying" : 179,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2115,66 +2139,66 @@
         "type" : 63
       }, {
         "name" : "",
-        "type" : 170
+        "type" : 172
       } ],
       "name" : "(byte, error)",
       "type" : "Tuple",
-      "underlying" : 177
+      "underlying" : 180
     }, {
       "local-name" : "ByteReader",
       "name" : "io.ByteReader",
       "package" : 4,
       "type" : "Named",
-      "underlying" : 179
+      "underlying" : 182
     }, {
       "methods" : [ {
         "name" : "ReadByte",
-        "type" : 176
+        "type" : 179
       } ],
       "name" : "interface{ReadByte() (byte, error)}",
       "type" : "Interface",
-      "underlying" : 179
+      "underlying" : 182
     }, {
-      "name" : "func() error",
+      "name" : "(io.ByteScanner) func() error",
       "params" : 11,
-      "recv" : 34,
-      "results" : 181,
+      "recv" : 37,
+      "results" : 184,
       "type" : "Signature",
-      "underlying" : 180,
+      "underlying" : 183,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 170
+        "type" : 172
       } ],
       "name" : "(error)",
       "type" : "Tuple",
-      "underlying" : 181
+      "underlying" : 184
     }, {
       "elem" : 63,
       "name" : "[32]byte",
       "type" : "Array",
-      "underlying" : 182
+      "underlying" : 185
     }, {
       "elem" : 93,
       "name" : "[1]uint64",
       "type" : "Array",
-      "underlying" : 183
+      "underlying" : 186
     }, {
-      "elem" : 185,
+      "elem" : 188,
       "name" : "*github.com/hashicorp/go-msgpack/codec.bufioDecReader",
       "type" : "Pointer",
-      "underlying" : 184
+      "underlying" : 187
     }, {
       "local-name" : "bufioDecReader",
       "name" : "github.com/hashicorp/go-msgpack/codec.bufioDecReader",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 186
+      "underlying" : 189
     }, {
       "fields" : [ {
         "name" : "ioDecReaderCommon",
-        "type" : 163
+        "type" : 165
       }, {
         "name" : "c",
         "type" : 46
@@ -2183,52 +2207,52 @@
         "type" : 89
       }, {
         "name" : "bytesBufPooler",
-        "type" : 187
+        "type" : 190
       }, {
         "name" : "calls",
         "type" : 80
       }, {
         "name" : "_",
-        "type" : 194
+        "type" : 197
       }, {
         "name" : "_",
-        "type" : 183
+        "type" : 186
       } ],
       "name" : "struct{github.com/hashicorp/go-msgpack/codec.ioDecReaderCommon; c uint; buf []byte; github.com/hashicorp/go-msgpack/codec.bytesBufPooler; calls uint16; _ [6]uint8; _ [1]uint64}",
       "type" : "Struct",
-      "underlying" : 186
+      "underlying" : 189
     }, {
       "local-name" : "bytesBufPooler",
       "name" : "github.com/hashicorp/go-msgpack/codec.bytesBufPooler",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 188
+      "underlying" : 191
     }, {
       "fields" : [ {
         "name" : "pool",
-        "type" : 189
+        "type" : 192
       }, {
         "name" : "poolbuf",
         "type" : 98
       } ],
       "name" : "struct{pool *sync.Pool; poolbuf interface{}}",
       "type" : "Struct",
-      "underlying" : 188
+      "underlying" : 191
     }, {
-      "elem" : 190,
+      "elem" : 193,
       "name" : "*sync.Pool",
       "type" : "Pointer",
-      "underlying" : 189
+      "underlying" : 192
     }, {
       "local-name" : "Pool",
       "name" : "sync.Pool",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 191
+      "underlying" : 194
     }, {
       "fields" : [ {
         "name" : "noCopy",
-        "type" : 192
+        "type" : 195
       }, {
         "name" : "local",
         "type" : 61
@@ -2243,11 +2267,11 @@
         "type" : 31
       }, {
         "name" : "New",
-        "type" : 193
+        "type" : 196
       } ],
       "name" : "struct{noCopy sync.noCopy; local unsafe.Pointer; localSize uintptr; victim unsafe.Pointer; victimSize uintptr; New func() interface{}}",
       "type" : "Struct",
-      "underlying" : 191
+      "underlying" : 194
     }, {
       "local-name" : "noCopy",
       "name" : "sync.noCopy",
@@ -2260,82 +2284,90 @@
       "recv" : -1,
       "results" : 99,
       "type" : "Signature",
-      "underlying" : 193,
+      "underlying" : 196,
       "variadic" : false
     }, {
       "elem" : 58,
       "name" : "[6]uint8",
       "type" : "Array",
-      "underlying" : 194
+      "underlying" : 197
     }, {
       "local-name" : "Handle",
       "name" : "github.com/hashicorp/go-msgpack/codec.Handle",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 196
+      "underlying" : 199
     }, {
       "methods" : [ {
         "name" : "Name",
-        "type" : 70
+        "type" : 200
       }, {
         "name" : "getBasicHandle",
-        "type" : 197
+        "type" : 201
       }, {
         "name" : "hasElemSeparators",
-        "type" : 21
+        "type" : 231
       }, {
         "name" : "isBinary",
-        "type" : 21
+        "type" : 231
       }, {
         "name" : "newDecDriver",
-        "type" : 227
+        "type" : 232
       }, {
         "name" : "newEncDriver",
-        "type" : 230
+        "type" : 235
       }, {
         "name" : "recreateEncDriver",
-        "type" : 280
+        "type" : 288
       } ],
       "name" : "interface{Name() string; getBasicHandle() *github.com/hashicorp/go-msgpack/codec.BasicHandle; hasElemSeparators() bool; isBinary() bool; newDecDriver(r *github.com/hashicorp/go-msgpack/codec.Decoder) github.com/hashicorp/go-msgpack/codec.decDriver; newEncDriver(w *github.com/hashicorp/go-msgpack/codec.Encoder) github.com/hashicorp/go-msgpack/codec.encDriver; recreateEncDriver(github.com/hashicorp/go-msgpack/codec.encDriver) bool}",
       "type" : "Interface",
-      "underlying" : 196
+      "underlying" : 199
     }, {
-      "name" : "func() *github.com/hashicorp/go-msgpack/codec.BasicHandle",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.Handle) func() string",
       "params" : 11,
-      "recv" : 35,
-      "results" : 198,
+      "recv" : 38,
+      "results" : 41,
       "type" : "Signature",
-      "underlying" : 197,
+      "underlying" : 200,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.Handle) func() *github.com/hashicorp/go-msgpack/codec.BasicHandle",
+      "params" : 11,
+      "recv" : 39,
+      "results" : 202,
+      "type" : "Signature",
+      "underlying" : 201,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 199
+        "type" : 203
       } ],
       "name" : "(*github.com/hashicorp/go-msgpack/codec.BasicHandle)",
       "type" : "Tuple",
-      "underlying" : 198
+      "underlying" : 202
     }, {
-      "elem" : 200,
+      "elem" : 204,
       "name" : "*github.com/hashicorp/go-msgpack/codec.BasicHandle",
       "type" : "Pointer",
-      "underlying" : 199
+      "underlying" : 203
     }, {
       "local-name" : "BasicHandle",
       "name" : "github.com/hashicorp/go-msgpack/codec.BasicHandle",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 201
+      "underlying" : 205
     }, {
       "fields" : [ {
         "name" : "TypeInfos",
-        "type" : 202
+        "type" : 206
       }, {
         "name" : "extHandle",
-        "type" : 210
+        "type" : 214
       }, {
         "name" : "intf2impls",
-        "type" : 214
+        "type" : 218
       }, {
         "name" : "inited",
         "type" : 56
@@ -2344,7 +2376,7 @@
         "type" : 56
       }, {
         "name" : "RPCOptions",
-        "type" : 218
+        "type" : 222
       }, {
         "name" : "TimeNotBuiltin",
         "type" : 17
@@ -2365,54 +2397,54 @@
         "type" : 80
       }, {
         "name" : "DecodeOptions",
-        "type" : 220
+        "type" : 224
       }, {
         "name" : "EncodeOptions",
-        "type" : 223
+        "type" : 227
       }, {
         "name" : "rtidFns",
-        "type" : 226
+        "type" : 230
       }, {
         "name" : "mu",
-        "type" : 207
+        "type" : 211
       } ],
       "name" : "struct{TypeInfos *github.com/hashicorp/go-msgpack/codec.TypeInfos; github.com/hashicorp/go-msgpack/codec.extHandle; github.com/hashicorp/go-msgpack/codec.intf2impls; inited uint32; _ uint32; github.com/hashicorp/go-msgpack/codec.RPCOptions; TimeNotBuiltin bool; ExplicitRelease bool; be bool; js bool; n byte; _ uint16; github.com/hashicorp/go-msgpack/codec.DecodeOptions; github.com/hashicorp/go-msgpack/codec.EncodeOptions; rtidFns github.com/hashicorp/go-msgpack/codec.atomicRtidFnSlice; mu sync.Mutex}",
       "type" : "Struct",
-      "underlying" : 201
+      "underlying" : 205
     }, {
-      "elem" : 203,
+      "elem" : 207,
       "name" : "*github.com/hashicorp/go-msgpack/codec.TypeInfos",
       "type" : "Pointer",
-      "underlying" : 202
+      "underlying" : 206
     }, {
       "local-name" : "TypeInfos",
       "name" : "github.com/hashicorp/go-msgpack/codec.TypeInfos",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 204
+      "underlying" : 208
     }, {
       "fields" : [ {
         "name" : "infos",
-        "type" : 205
+        "type" : 209
       }, {
         "name" : "mu",
-        "type" : 207
+        "type" : 211
       }, {
         "name" : "tags",
-        "type" : 209
+        "type" : 213
       }, {
         "name" : "_",
         "type" : 92
       } ],
       "name" : "struct{infos github.com/hashicorp/go-msgpack/codec.atomicTypeInfoSlice; mu sync.Mutex; tags []string; _ [2]uint64}",
       "type" : "Struct",
-      "underlying" : 204
+      "underlying" : 208
     }, {
       "local-name" : "atomicTypeInfoSlice",
       "name" : "github.com/hashicorp/go-msgpack/codec.atomicTypeInfoSlice",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 206
+      "underlying" : 210
     }, {
       "fields" : [ {
         "name" : "v",
@@ -2423,13 +2455,13 @@
       } ],
       "name" : "struct{v unsafe.Pointer; _ uintptr}",
       "type" : "Struct",
-      "underlying" : 206
+      "underlying" : 210
     }, {
       "local-name" : "Mutex",
       "name" : "sync.Mutex",
       "package" : 5,
       "type" : "Named",
-      "underlying" : 208
+      "underlying" : 212
     }, {
       "fields" : [ {
         "name" : "state",
@@ -2440,29 +2472,29 @@
       } ],
       "name" : "struct{state int32; sema uint32}",
       "type" : "Struct",
-      "underlying" : 208
+      "underlying" : 212
     }, {
       "elem" : 29,
       "name" : "[]string",
       "type" : "Slice",
-      "underlying" : 209
+      "underlying" : 213
     }, {
       "local-name" : "extHandle",
       "name" : "github.com/hashicorp/go-msgpack/codec.extHandle",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 211
+      "underlying" : 215
     }, {
-      "elem" : 212,
+      "elem" : 216,
       "name" : "[]github.com/hashicorp/go-msgpack/codec.extTypeTagFn",
       "type" : "Slice",
-      "underlying" : 211
+      "underlying" : 215
     }, {
       "local-name" : "extTypeTagFn",
       "name" : "github.com/hashicorp/go-msgpack/codec.extTypeTagFn",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 213
+      "underlying" : 217
     }, {
       "fields" : [ {
         "name" : "rtid",
@@ -2481,28 +2513,28 @@
         "type" : 94
       }, {
         "name" : "_",
-        "type" : 183
+        "type" : 186
       } ],
       "name" : "struct{rtid uintptr; rtidptr uintptr; rt reflect.Type; tag uint64; ext github.com/hashicorp/go-msgpack/codec.Ext; _ [1]uint64}",
       "type" : "Struct",
-      "underlying" : 213
+      "underlying" : 217
     }, {
       "local-name" : "intf2impls",
       "name" : "github.com/hashicorp/go-msgpack/codec.intf2impls",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 215
+      "underlying" : 219
     }, {
-      "elem" : 216,
+      "elem" : 220,
       "name" : "[]github.com/hashicorp/go-msgpack/codec.intf2impl",
       "type" : "Slice",
-      "underlying" : 215
+      "underlying" : 219
     }, {
       "local-name" : "intf2impl",
       "name" : "github.com/hashicorp/go-msgpack/codec.intf2impl",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 217
+      "underlying" : 221
     }, {
       "fields" : [ {
         "name" : "rtid",
@@ -2513,13 +2545,13 @@
       } ],
       "name" : "struct{rtid uintptr; impl reflect.Type}",
       "type" : "Struct",
-      "underlying" : 217
+      "underlying" : 221
     }, {
       "local-name" : "RPCOptions",
       "name" : "github.com/hashicorp/go-msgpack/codec.RPCOptions",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 219
+      "underlying" : 223
     }, {
       "fields" : [ {
         "name" : "RPCNoBuffer",
@@ -2527,13 +2559,13 @@
       } ],
       "name" : "struct{RPCNoBuffer bool}",
       "type" : "Struct",
-      "underlying" : 219
+      "underlying" : 223
     }, {
       "local-name" : "DecodeOptions",
       "name" : "github.com/hashicorp/go-msgpack/codec.DecodeOptions",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 221
+      "underlying" : 225
     }, {
       "fields" : [ {
         "name" : "MapType",
@@ -2549,7 +2581,7 @@
         "type" : 13
       }, {
         "name" : "MaxDepth",
-        "type" : 222
+        "type" : 226
       }, {
         "name" : "ErrorIfNoField",
         "type" : 17
@@ -2583,24 +2615,24 @@
       } ],
       "name" : "struct{MapType reflect.Type; SliceType reflect.Type; MaxInitLen int; ReaderBufferSize int; MaxDepth int16; ErrorIfNoField bool; ErrorIfNoArrayExpand bool; SignedInteger bool; MapValueReset bool; SliceElementReset bool; InterfaceReset bool; InternString bool; PreferArrayOverSlice bool; DeleteOnNilMapValue bool; RawToString bool}",
       "type" : "Struct",
-      "underlying" : 221
+      "underlying" : 225
     }, {
       "name" : "int16",
       "type" : "Basic",
-      "underlying" : 222
+      "underlying" : 226
     }, {
       "local-name" : "EncodeOptions",
       "name" : "github.com/hashicorp/go-msgpack/codec.EncodeOptions",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 224
+      "underlying" : 228
     }, {
       "fields" : [ {
         "name" : "WriterBufferSize",
         "type" : 13
       }, {
         "name" : "ChanRecvTimeout",
-        "type" : 225
+        "type" : 229
       }, {
         "name" : "StructToArray",
         "type" : 17
@@ -2622,26 +2654,34 @@
       } ],
       "name" : "struct{WriterBufferSize int; ChanRecvTimeout time.Duration; StructToArray bool; Canonical bool; CheckCircularRef bool; RecursiveEmptyCheck bool; Raw bool; StringToRaw bool}",
       "type" : "Struct",
-      "underlying" : 224
+      "underlying" : 228
     }, {
       "local-name" : "Duration",
       "name" : "time.Duration",
       "package" : 3,
       "type" : "Named",
-      "underlying" : 133
+      "underlying" : 134
     }, {
       "local-name" : "atomicRtidFnSlice",
       "name" : "github.com/hashicorp/go-msgpack/codec.atomicRtidFnSlice",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 206
+      "underlying" : 210
     }, {
-      "name" : "func(r *github.com/hashicorp/go-msgpack/codec.Decoder) github.com/hashicorp/go-msgpack/codec.decDriver",
-      "params" : 228,
-      "recv" : 36,
-      "results" : 229,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.Handle) func() bool",
+      "params" : 11,
+      "recv" : 40,
+      "results" : 16,
       "type" : "Signature",
-      "underlying" : 227,
+      "underlying" : 231,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.Handle) func(r *github.com/hashicorp/go-msgpack/codec.Decoder) github.com/hashicorp/go-msgpack/codec.decDriver",
+      "params" : 233,
+      "recv" : 41,
+      "results" : 234,
+      "type" : "Signature",
+      "underlying" : 232,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2650,7 +2690,7 @@
       } ],
       "name" : "(r *github.com/hashicorp/go-msgpack/codec.Decoder)",
       "type" : "Tuple",
-      "underlying" : 228
+      "underlying" : 233
     }, {
       "fields" : [ {
         "name" : "",
@@ -2658,161 +2698,161 @@
       } ],
       "name" : "(github.com/hashicorp/go-msgpack/codec.decDriver)",
       "type" : "Tuple",
-      "underlying" : 229
+      "underlying" : 234
     }, {
-      "name" : "func(w *github.com/hashicorp/go-msgpack/codec.Encoder) github.com/hashicorp/go-msgpack/codec.encDriver",
-      "params" : 231,
-      "recv" : 49,
-      "results" : 279,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.Handle) func(w *github.com/hashicorp/go-msgpack/codec.Encoder) github.com/hashicorp/go-msgpack/codec.encDriver",
+      "params" : 236,
+      "recv" : 57,
+      "results" : 287,
       "type" : "Signature",
-      "underlying" : 230,
+      "underlying" : 235,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "w",
-        "type" : 232
+        "type" : 237
       } ],
       "name" : "(w *github.com/hashicorp/go-msgpack/codec.Encoder)",
       "type" : "Tuple",
-      "underlying" : 231
+      "underlying" : 236
     }, {
-      "elem" : 233,
+      "elem" : 238,
       "name" : "*github.com/hashicorp/go-msgpack/codec.Encoder",
       "type" : "Pointer",
-      "underlying" : 232
+      "underlying" : 237
     }, {
       "local-name" : "Encoder",
       "name" : "github.com/hashicorp/go-msgpack/codec.Encoder",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 234
+      "underlying" : 239
     }, {
       "fields" : [ {
         "name" : "panicHdl",
         "type" : 114
       }, {
         "name" : "e",
-        "type" : 235
+        "type" : 240
       }, {
         "name" : "w",
-        "type" : 262
+        "type" : 268
       }, {
         "name" : "as",
-        "type" : 274
+        "type" : 281
       }, {
         "name" : "err",
-        "type" : 170
+        "type" : 172
       }, {
         "name" : "h",
-        "type" : 199
+        "type" : 203
       }, {
         "name" : "hh",
-        "type" : 195
+        "type" : 198
       }, {
         "name" : "encWriterSwitch",
-        "type" : 263
+        "type" : 269
       }, {
         "name" : "ci",
-        "type" : 276
+        "type" : 284
       }, {
         "name" : "b",
-        "type" : 278
+        "type" : 286
       } ],
       "name" : "struct{github.com/hashicorp/go-msgpack/codec.panicHdl; e github.com/hashicorp/go-msgpack/codec.encDriver; w *github.com/hashicorp/go-msgpack/codec.encWriterSwitch; as github.com/hashicorp/go-msgpack/codec.encDriverAsis; err error; h *github.com/hashicorp/go-msgpack/codec.BasicHandle; hh github.com/hashicorp/go-msgpack/codec.Handle; github.com/hashicorp/go-msgpack/codec.encWriterSwitch; ci github.com/hashicorp/go-msgpack/codec.set; b [40]byte}",
       "type" : "Struct",
-      "underlying" : 234
+      "underlying" : 239
     }, {
       "local-name" : "encDriver",
       "name" : "github.com/hashicorp/go-msgpack/codec.encDriver",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 236
+      "underlying" : 241
     }, {
       "methods" : [ {
         "name" : "EncodeBool",
-        "type" : 237
+        "type" : 242
       }, {
         "name" : "EncodeExt",
-        "type" : 238
-      }, {
-        "name" : "EncodeFloat32",
-        "type" : 240
-      }, {
-        "name" : "EncodeFloat64",
         "type" : 243
       }, {
-        "name" : "EncodeInt",
-        "type" : 244
-      }, {
-        "name" : "EncodeNil",
-        "type" : 134
-      }, {
-        "name" : "EncodeRawExt",
+        "name" : "EncodeFloat32",
         "type" : 245
       }, {
+        "name" : "EncodeFloat64",
+        "type" : 248
+      }, {
+        "name" : "EncodeInt",
+        "type" : 249
+      }, {
+        "name" : "EncodeNil",
+        "type" : 250
+      }, {
+        "name" : "EncodeRawExt",
+        "type" : 251
+      }, {
         "name" : "EncodeString",
-        "type" : 250
-      }, {
-        "name" : "EncodeStringBytes",
-        "type" : 253
-      }, {
-        "name" : "EncodeStringBytesRaw",
-        "type" : 255
-      }, {
-        "name" : "EncodeStringEnc",
-        "type" : 250
-      }, {
-        "name" : "EncodeTime",
         "type" : 256
       }, {
+        "name" : "EncodeStringBytes",
+        "type" : 259
+      }, {
+        "name" : "EncodeStringBytesRaw",
+        "type" : 261
+      }, {
+        "name" : "EncodeStringEnc",
+        "type" : 256
+      }, {
+        "name" : "EncodeTime",
+        "type" : 262
+      }, {
         "name" : "EncodeUint",
-        "type" : 258
+        "type" : 264
       }, {
         "name" : "WriteArrayElem",
-        "type" : 134
+        "type" : 250
       }, {
         "name" : "WriteArrayEnd",
-        "type" : 134
+        "type" : 250
       }, {
         "name" : "WriteArrayStart",
-        "type" : 260
+        "type" : 266
       }, {
         "name" : "WriteMapElemKey",
-        "type" : 134
+        "type" : 250
       }, {
         "name" : "WriteMapElemValue",
-        "type" : 134
+        "type" : 250
       }, {
         "name" : "WriteMapEnd",
-        "type" : 134
+        "type" : 250
       }, {
         "name" : "WriteMapStart",
-        "type" : 260
+        "type" : 266
       }, {
         "name" : "atEndOfEncode",
-        "type" : 134
+        "type" : 250
       }, {
         "name" : "reset",
-        "type" : 134
+        "type" : 250
       } ],
       "name" : "interface{EncodeBool(b bool); EncodeExt(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext, e *github.com/hashicorp/go-msgpack/codec.Encoder); EncodeFloat32(f float32); EncodeFloat64(f float64); EncodeInt(i int64); EncodeNil(); EncodeRawExt(re *github.com/hashicorp/go-msgpack/codec.RawExt, e *github.com/hashicorp/go-msgpack/codec.Encoder); EncodeString(c github.com/hashicorp/go-msgpack/codec.charEncoding, v string); EncodeStringBytes(c github.com/hashicorp/go-msgpack/codec.charEncoding, v []byte); EncodeStringBytesRaw(v []byte); EncodeStringEnc(c github.com/hashicorp/go-msgpack/codec.charEncoding, v string); EncodeTime(time.Time); EncodeUint(i uint64); WriteArrayElem(); WriteArrayEnd(); WriteArrayStart(length int); WriteMapElemKey(); WriteMapElemValue(); WriteMapEnd(); WriteMapStart(length int); atEndOfEncode(); reset()}",
       "type" : "Interface",
-      "underlying" : 236
+      "underlying" : 241
     }, {
-      "name" : "func(b bool)",
-      "params" : 121,
-      "recv" : 37,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(b bool)",
+      "params" : 122,
+      "recv" : 42,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 237,
+      "underlying" : 242,
       "variadic" : false
     }, {
-      "name" : "func(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
-      "params" : 239,
-      "recv" : 38,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
+      "params" : 244,
+      "recv" : 43,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 238,
+      "underlying" : 243,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2826,77 +2866,85 @@
         "type" : 94
       }, {
         "name" : "e",
-        "type" : 232
+        "type" : 237
       } ],
       "name" : "(v interface{}, xtag uint64, ext github.com/hashicorp/go-msgpack/codec.Ext, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
       "type" : "Tuple",
-      "underlying" : 239
+      "underlying" : 244
     }, {
-      "name" : "func(f float32)",
-      "params" : 241,
-      "recv" : 39,
-      "results" : 11,
-      "type" : "Signature",
-      "underlying" : 240,
-      "variadic" : false
-    }, {
-      "fields" : [ {
-        "name" : "f",
-        "type" : 242
-      } ],
-      "name" : "(f float32)",
-      "type" : "Tuple",
-      "underlying" : 241
-    }, {
-      "name" : "float32",
-      "type" : "Basic",
-      "underlying" : 242
-    }, {
-      "name" : "func(f float64)",
-      "params" : 129,
-      "recv" : 40,
-      "results" : 11,
-      "type" : "Signature",
-      "underlying" : 243,
-      "variadic" : false
-    }, {
-      "name" : "func(i int64)",
-      "params" : 132,
-      "recv" : 41,
-      "results" : 11,
-      "type" : "Signature",
-      "underlying" : 244,
-      "variadic" : false
-    }, {
-      "name" : "func(re *github.com/hashicorp/go-msgpack/codec.RawExt, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(f float32)",
       "params" : 246,
-      "recv" : 42,
+      "recv" : 44,
       "results" : 11,
       "type" : "Signature",
       "underlying" : 245,
       "variadic" : false
     }, {
       "fields" : [ {
-        "name" : "re",
+        "name" : "f",
         "type" : 247
-      }, {
-        "name" : "e",
-        "type" : 232
       } ],
-      "name" : "(re *github.com/hashicorp/go-msgpack/codec.RawExt, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
+      "name" : "(f float32)",
       "type" : "Tuple",
       "underlying" : 246
     }, {
-      "elem" : 248,
+      "name" : "float32",
+      "type" : "Basic",
+      "underlying" : 247
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(f float64)",
+      "params" : 130,
+      "recv" : 45,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 248,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(i int64)",
+      "params" : 133,
+      "recv" : 46,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 249,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func()",
+      "params" : 11,
+      "recv" : 47,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 250,
+      "variadic" : false
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(re *github.com/hashicorp/go-msgpack/codec.RawExt, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
+      "params" : 252,
+      "recv" : 48,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 251,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "re",
+        "type" : 253
+      }, {
+        "name" : "e",
+        "type" : 237
+      } ],
+      "name" : "(re *github.com/hashicorp/go-msgpack/codec.RawExt, e *github.com/hashicorp/go-msgpack/codec.Encoder)",
+      "type" : "Tuple",
+      "underlying" : 252
+    }, {
+      "elem" : 254,
       "name" : "*github.com/hashicorp/go-msgpack/codec.RawExt",
       "type" : "Pointer",
-      "underlying" : 247
+      "underlying" : 253
     }, {
       "local-name" : "RawExt",
       "name" : "github.com/hashicorp/go-msgpack/codec.RawExt",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 249
+      "underlying" : 255
     }, {
       "fields" : [ {
         "name" : "Tag",
@@ -2910,26 +2958,26 @@
       } ],
       "name" : "struct{Tag uint64; Data []byte; Value interface{}}",
       "type" : "Struct",
-      "underlying" : 249
+      "underlying" : 255
     }, {
-      "name" : "func(c github.com/hashicorp/go-msgpack/codec.charEncoding, v string)",
-      "params" : 251,
-      "recv" : 43,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(c github.com/hashicorp/go-msgpack/codec.charEncoding, v string)",
+      "params" : 257,
+      "recv" : 49,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 250,
+      "underlying" : 256,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "c",
-        "type" : 252
+        "type" : 258
       }, {
         "name" : "v",
         "type" : 29
       } ],
       "name" : "(c github.com/hashicorp/go-msgpack/codec.charEncoding, v string)",
       "type" : "Tuple",
-      "underlying" : 251
+      "underlying" : 257
     }, {
       "local-name" : "charEncoding",
       "name" : "github.com/hashicorp/go-msgpack/codec.charEncoding",
@@ -2937,55 +2985,55 @@
       "type" : "Named",
       "underlying" : 58
     }, {
-      "name" : "func(c github.com/hashicorp/go-msgpack/codec.charEncoding, v []byte)",
-      "params" : 254,
-      "recv" : 44,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(c github.com/hashicorp/go-msgpack/codec.charEncoding, v []byte)",
+      "params" : 260,
+      "recv" : 50,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 253,
+      "underlying" : 259,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "c",
-        "type" : 252
+        "type" : 258
       }, {
         "name" : "v",
         "type" : 89
       } ],
       "name" : "(c github.com/hashicorp/go-msgpack/codec.charEncoding, v []byte)",
       "type" : "Tuple",
-      "underlying" : 254
+      "underlying" : 260
     }, {
-      "name" : "func(v []byte)",
-      "params" : 138,
-      "recv" : 45,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(v []byte)",
+      "params" : 139,
+      "recv" : 51,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 255,
+      "underlying" : 261,
       "variadic" : false
     }, {
-      "name" : "func(time.Time)",
-      "params" : 257,
-      "recv" : 46,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(time.Time)",
+      "params" : 263,
+      "recv" : 52,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 256,
+      "underlying" : 262,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 141
+        "type" : 142
       } ],
       "name" : "(time.Time)",
       "type" : "Tuple",
-      "underlying" : 257
+      "underlying" : 263
     }, {
-      "name" : "func(i uint64)",
-      "params" : 259,
-      "recv" : 47,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(i uint64)",
+      "params" : 265,
+      "recv" : 53,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 258,
+      "underlying" : 264,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2994,14 +3042,14 @@
       } ],
       "name" : "(i uint64)",
       "type" : "Tuple",
-      "underlying" : 259
+      "underlying" : 265
     }, {
-      "name" : "func(length int)",
-      "params" : 261,
-      "recv" : 48,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver) func(length int)",
+      "params" : 267,
+      "recv" : 54,
       "results" : 11,
       "type" : "Signature",
-      "underlying" : 260,
+      "underlying" : 266,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3010,25 +3058,25 @@
       } ],
       "name" : "(length int)",
       "type" : "Tuple",
-      "underlying" : 261
+      "underlying" : 267
     }, {
-      "elem" : 263,
+      "elem" : 269,
       "name" : "*github.com/hashicorp/go-msgpack/codec.encWriterSwitch",
       "type" : "Pointer",
-      "underlying" : 262
+      "underlying" : 268
     }, {
       "local-name" : "encWriterSwitch",
       "name" : "github.com/hashicorp/go-msgpack/codec.encWriterSwitch",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 264
+      "underlying" : 270
     }, {
       "fields" : [ {
         "name" : "wb",
-        "type" : 265
+        "type" : 271
       }, {
         "name" : "wf",
-        "type" : 268
+        "type" : 274
       }, {
         "name" : "bytes",
         "type" : 17
@@ -3046,51 +3094,51 @@
         "type" : 17
       }, {
         "name" : "_",
-        "type" : 273
+        "type" : 280
       } ],
       "name" : "struct{wb github.com/hashicorp/go-msgpack/codec.bytesEncAppender; wf *github.com/hashicorp/go-msgpack/codec.bufioEncWriter; bytes bool; esep bool; isas bool; js bool; be bool; _ [2]byte}",
       "type" : "Struct",
-      "underlying" : 264
+      "underlying" : 270
     }, {
       "local-name" : "bytesEncAppender",
       "name" : "github.com/hashicorp/go-msgpack/codec.bytesEncAppender",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 266
+      "underlying" : 272
     }, {
       "fields" : [ {
         "name" : "b",
         "type" : 89
       }, {
         "name" : "out",
-        "type" : 267
+        "type" : 273
       } ],
       "name" : "struct{b []byte; out *[]byte}",
       "type" : "Struct",
-      "underlying" : 266
+      "underlying" : 272
     }, {
       "elem" : 89,
       "name" : "*[]byte",
       "type" : "Pointer",
-      "underlying" : 267
+      "underlying" : 273
     }, {
-      "elem" : 269,
+      "elem" : 275,
       "name" : "*github.com/hashicorp/go-msgpack/codec.bufioEncWriter",
       "type" : "Pointer",
-      "underlying" : 268
+      "underlying" : 274
     }, {
       "local-name" : "bufioEncWriter",
       "name" : "github.com/hashicorp/go-msgpack/codec.bufioEncWriter",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 270
+      "underlying" : 276
     }, {
       "fields" : [ {
         "name" : "buf",
         "type" : 89
       }, {
         "name" : "w",
-        "type" : 271
+        "type" : 277
       }, {
         "name" : "n",
         "type" : 13
@@ -3102,98 +3150,114 @@
         "type" : 80
       }, {
         "name" : "_",
-        "type" : 194
+        "type" : 197
       }, {
         "name" : "bytesBufPooler",
-        "type" : 187
+        "type" : 190
       }, {
         "name" : "_",
-        "type" : 183
+        "type" : 186
       } ],
       "name" : "struct{buf []byte; w io.Writer; n int; sz int; calls uint16; _ [6]uint8; github.com/hashicorp/go-msgpack/codec.bytesBufPooler; _ [1]uint64}",
       "type" : "Struct",
-      "underlying" : 270
+      "underlying" : 276
     }, {
       "local-name" : "Writer",
       "name" : "io.Writer",
       "package" : 4,
       "type" : "Named",
-      "underlying" : 272
+      "underlying" : 278
     }, {
       "methods" : [ {
         "name" : "Write",
-        "type" : 167
+        "type" : 279
       } ],
       "name" : "interface{Write(p []byte) (n int, err error)}",
       "type" : "Interface",
-      "underlying" : 272
+      "underlying" : 278
+    }, {
+      "name" : "(io.Writer) func(p []byte) (n int, err error)",
+      "params" : 170,
+      "recv" : 55,
+      "results" : 171,
+      "type" : "Signature",
+      "underlying" : 279,
+      "variadic" : false
     }, {
       "elem" : 63,
       "name" : "[2]byte",
       "type" : "Array",
-      "underlying" : 273
+      "underlying" : 280
     }, {
       "local-name" : "encDriverAsis",
       "name" : "github.com/hashicorp/go-msgpack/codec.encDriverAsis",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 275
+      "underlying" : 282
     }, {
       "methods" : [ {
         "name" : "EncodeAsis",
-        "type" : 255
+        "type" : 283
       } ],
       "name" : "interface{EncodeAsis(v []byte)}",
       "type" : "Interface",
-      "underlying" : 275
+      "underlying" : 282
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.encDriverAsis) func(v []byte)",
+      "params" : 139,
+      "recv" : 56,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 283,
+      "variadic" : false
     }, {
       "local-name" : "set",
       "name" : "github.com/hashicorp/go-msgpack/codec.set",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 277
+      "underlying" : 285
     }, {
       "elem" : 31,
       "name" : "[]uintptr",
       "type" : "Slice",
-      "underlying" : 277
+      "underlying" : 285
     }, {
       "elem" : 63,
       "name" : "[40]byte",
       "type" : "Array",
-      "underlying" : 278
+      "underlying" : 286
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 235
+        "type" : 240
       } ],
       "name" : "(github.com/hashicorp/go-msgpack/codec.encDriver)",
       "type" : "Tuple",
-      "underlying" : 279
+      "underlying" : 287
     }, {
-      "name" : "func(github.com/hashicorp/go-msgpack/codec.encDriver) bool",
-      "params" : 279,
-      "recv" : 50,
+      "name" : "(github.com/hashicorp/go-msgpack/codec.Handle) func(github.com/hashicorp/go-msgpack/codec.encDriver) bool",
+      "params" : 287,
+      "recv" : 58,
       "results" : 16,
       "type" : "Signature",
-      "underlying" : 280,
+      "underlying" : 288,
       "variadic" : false
     }, {
       "local-name" : "decNaked",
       "name" : "github.com/hashicorp/go-msgpack/codec.decNaked",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 282
+      "underlying" : 290
     }, {
       "fields" : [ {
         "name" : "u",
         "type" : 93
       }, {
         "name" : "i",
-        "type" : 133
+        "type" : 134
       }, {
         "name" : "f",
-        "type" : 130
+        "type" : 131
       }, {
         "name" : "l",
         "type" : 89
@@ -3202,7 +3266,7 @@
         "type" : 29
       }, {
         "name" : "t",
-        "type" : 141
+        "type" : 142
       }, {
         "name" : "b",
         "type" : 17
@@ -3211,32 +3275,32 @@
         "type" : 81
       }, {
         "name" : "_",
-        "type" : 283
+        "type" : 291
       } ],
       "name" : "struct{u uint64; i int64; f float64; l []byte; s string; t time.Time; b bool; v github.com/hashicorp/go-msgpack/codec.valueType; _ [6]bool}",
       "type" : "Struct",
-      "underlying" : 282
+      "underlying" : 290
     }, {
       "elem" : 17,
       "name" : "[6]bool",
       "type" : "Array",
-      "underlying" : 283
+      "underlying" : 291
     }, {
       "elem" : 58,
       "name" : "[4]uint8",
       "type" : "Array",
-      "underlying" : 284
+      "underlying" : 292
     }, {
       "elem" : 29,
       "key" : 29,
       "name" : "map[string]string",
       "type" : "Map",
-      "underlying" : 285
+      "underlying" : 293
     }, {
       "elem" : 63,
       "name" : "[64]byte",
       "type" : "Array",
-      "underlying" : 286
+      "underlying" : 294
     }, {
       "local-name" : "checkOverflow",
       "name" : "github.com/hashicorp/go-msgpack/codec.checkOverflow",
@@ -3244,16 +3308,16 @@
       "type" : "Named",
       "underlying" : 115
     }, {
-      "elem" : 289,
+      "elem" : 297,
       "name" : "*github.com/hashicorp/go-msgpack/codec.unsafeReflectValue",
       "type" : "Pointer",
-      "underlying" : 288
+      "underlying" : 296
     }, {
       "local-name" : "unsafeReflectValue",
       "name" : "github.com/hashicorp/go-msgpack/codec.unsafeReflectValue",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 290
+      "underlying" : 298
     }, {
       "fields" : [ {
         "name" : "typ",
@@ -3267,24 +3331,24 @@
       } ],
       "name" : "struct{typ unsafe.Pointer; ptr unsafe.Pointer; flag uintptr}",
       "type" : "Struct",
-      "underlying" : 290
+      "underlying" : 298
     }, {
       "elem" : 51,
       "name" : "*reflect.Value",
       "type" : "Pointer",
-      "underlying" : 291
+      "underlying" : 299
     }, {
       "elem" : 46,
       "name" : "*uint",
       "type" : "Pointer",
-      "underlying" : 292
+      "underlying" : 300
     }, {
       "name" : "func(v uint64, bitsize uint8) uint64",
-      "params" : 294,
+      "params" : 302,
       "recv" : -1,
-      "results" : 295,
+      "results" : 303,
       "type" : "Signature",
-      "underlying" : 293,
+      "underlying" : 301,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3296,7 +3360,7 @@
       } ],
       "name" : "(v uint64, bitsize uint8)",
       "type" : "Tuple",
-      "underlying" : 294
+      "underlying" : 302
     }, {
       "fields" : [ {
         "name" : "",
@@ -3304,7 +3368,23 @@
       } ],
       "name" : "(uint64)",
       "type" : "Tuple",
-      "underlying" : 295
+      "underlying" : 303
+    }, {
+      "name" : "(github.com/hashicorp/go-msgpack/codec.checkOverflow) func(v uint64, bitsize uint8) uint64",
+      "params" : 302,
+      "recv" : 66,
+      "results" : 303,
+      "type" : "Signature",
+      "underlying" : 304,
+      "variadic" : false
+    }, {
+      "name" : "func() (ui uint64)",
+      "params" : 11,
+      "recv" : -1,
+      "results" : 155,
+      "type" : "Signature",
+      "underlying" : 305,
+      "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
@@ -3532,134 +3612,190 @@
       "field" : false
     }, {
       "name" : "",
+      "package" : 0,
+      "type" : 116,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 116,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : -1,
+      "type" : 172,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
       "package" : 4,
-      "type" : 165,
+      "type" : 167,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 4,
-      "type" : 178,
+      "type" : 181,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 4,
-      "type" : 174,
+      "type" : 177,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 195,
+      "type" : 198,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 195,
+      "type" : 198,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 198,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 198,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 235,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 195,
+      "type" : 240,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : 0,
-      "type" : 195,
+      "type" : 240,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 240,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 4,
+      "type" : 277,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 281,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 198,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "",
+      "package" : 0,
+      "type" : 198,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3694,14 +3830,14 @@
     }, {
       "name" : "chkOvf",
       "package" : 0,
-      "type" : 287,
+      "type" : 295,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "urv",
       "package" : 0,
-      "type" : 288,
+      "type" : 296,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3712,6 +3848,13 @@
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 295,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "d",
       "package" : 0,

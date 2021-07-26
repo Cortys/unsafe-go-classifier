@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 1 ],
+      "out-vars" : [ 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -92,8 +92,8 @@
       "successors" : [ 4 ],
       "in-vars" : [ 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 5, 2 ],
-      "decl-vars" : [ 5 ],
+      "out-vars" : [ 2, 6, 1 ],
+      "decl-vars" : [ 6 ],
       "line-start" : 334,
       "ast" : {
         "kind" : "statement",
@@ -146,14 +146,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 1, 5, 2 ],
+      "in-vars" : [ 2, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 1 ],
+      "out-vars" : [ 2, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 335,
       "ast" : {
         "condition" : {
-          "go-type" : 48,
+          "go-type" : 49,
           "kind" : "expression",
           "left" : {
             "go-type" : 37,
@@ -163,7 +163,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "lenids",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "operator" : "==",
@@ -184,11 +184,11 @@
       "line-end" : 344,
       "code" : "if lenids == 0 {\n\tp.count = uint16(lenids)\n} else if lenids < 0xFFFF {\n\tp.count = uint16(lenids)\n\tf.copyallunsafe(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p)))\n} else {\n\tp.count = 0xFFFF\n\t*(*pgid)(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p))) = pgid(lenids)\n\tf.copyallunsafe(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p) + unsafe.Sizeof(pgid(0))))\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 5, 2 ],
+      "in-vars" : [ 2, 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -200,7 +200,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "count",
-            "variable" : 6
+            "variable" : 7
           },
           "go-type" : 7,
           "kind" : "expression",
@@ -239,7 +239,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "lenids",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "type" : "cast"
@@ -250,18 +250,18 @@
       "line-end" : 336,
       "code" : "p.count = uint16(lenids)",
       "entry" : false,
-      "use-vars" : [ 5, 2 ]
+      "use-vars" : [ 6, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 9 ],
-      "in-vars" : [ 2, 1, 5 ],
+      "in-vars" : [ 1, 2, 6 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 1 ],
+      "out-vars" : [ 2, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 337,
       "ast" : {
         "condition" : {
-          "go-type" : 48,
+          "go-type" : 49,
           "kind" : "expression",
           "left" : {
             "go-type" : 37,
@@ -271,7 +271,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "lenids",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "operator" : "<",
@@ -292,13 +292,13 @@
       "line-end" : 344,
       "code" : "if lenids < 0xFFFF {\n\tp.count = uint16(lenids)\n\tf.copyallunsafe(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p)))\n} else {\n\tp.count = 0xFFFF\n\t*(*pgid)(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p))) = pgid(lenids)\n\tf.copyallunsafe(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p) + unsafe.Sizeof(pgid(0))))\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 5, 2, 1 ],
+      "in-vars" : [ 2, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 1 ],
+      "out-vars" : [ 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 338,
       "ast" : {
@@ -308,7 +308,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "count",
-            "variable" : 6
+            "variable" : 7
           },
           "go-type" : 7,
           "kind" : "expression",
@@ -347,7 +347,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "lenids",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "type" : "cast"
@@ -358,11 +358,11 @@
       "line-end" : 338,
       "code" : "p.count = uint16(lenids)",
       "entry" : false,
-      "use-vars" : [ 5, 2 ]
+      "use-vars" : [ 6, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 1, 2 ],
+      "in-vars" : [ 2, 1 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -373,7 +373,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 51,
+              "go-type" : 52,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -383,34 +383,34 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 51,
+                "go-type" : 52,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 51,
+            "go-type" : 52,
             "kind" : "expression",
             "target" : {
-              "go-type" : 52,
+              "go-type" : 54,
               "kind" : "expression",
               "left" : {
                 "coerced-to" : {
-                  "go-type" : 52,
+                  "go-type" : 54,
                   "kind" : "type",
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 52,
+                    "go-type" : 54,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "uintptr"
                   }
                 },
-                "go-type" : 52,
+                "go-type" : 54,
                 "kind" : "expression",
                 "target" : {
                   "coerced-to" : {
-                    "go-type" : 51,
+                    "go-type" : 52,
                     "kind" : "type",
                     "qualifier" : {
                       "ident-kind" : "PkgName",
@@ -420,13 +420,13 @@
                     },
                     "type" : "identifier",
                     "value" : {
-                      "go-type" : 51,
+                      "go-type" : 52,
                       "ident-kind" : "TypeName",
                       "kind" : "ident",
                       "value" : "Pointer"
                     }
                   },
-                  "go-type" : 51,
+                  "go-type" : 52,
                   "kind" : "expression",
                   "target" : {
                     "go-type" : 2,
@@ -445,7 +445,7 @@
               },
               "operator" : "+",
               "right" : {
-                "go-type" : 52,
+                "go-type" : 54,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -464,7 +464,7 @@
               "kind" : "ident",
               "value" : "copyallunsafe"
             },
-            "go-type" : 49,
+            "go-type" : 50,
             "kind" : "expression",
             "target" : {
               "go-type" : 16,
@@ -492,9 +492,9 @@
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 5, 2, 1 ],
+      "in-vars" : [ 2, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 1 ],
+      "out-vars" : [ 2, 6, 1 ],
       "decl-vars" : [ ],
       "line-start" : 341,
       "ast" : {
@@ -504,7 +504,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "count",
-            "variable" : 6
+            "variable" : 7
           },
           "go-type" : 7,
           "kind" : "expression",
@@ -539,9 +539,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 5, 2, 1 ],
+      "in-vars" : [ 2, 6, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2 ],
+      "out-vars" : [ 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 342,
       "ast" : {
@@ -562,15 +562,15 @@
                   "value" : "pgid"
                 }
               },
-              "go-type" : 53,
+              "go-type" : 55,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 53,
+            "go-type" : 55,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 51,
+                "go-type" : 52,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -580,34 +580,34 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 51,
+                  "go-type" : 52,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 51,
+              "go-type" : 52,
               "kind" : "expression",
               "target" : {
-                "go-type" : 52,
+                "go-type" : 54,
                 "kind" : "expression",
                 "left" : {
                   "coerced-to" : {
-                    "go-type" : 52,
+                    "go-type" : 54,
                     "kind" : "type",
                     "type" : "identifier",
                     "value" : {
-                      "go-type" : 52,
+                      "go-type" : 54,
                       "ident-kind" : "TypeName",
                       "kind" : "ident",
                       "value" : "uintptr"
                     }
                   },
-                  "go-type" : 52,
+                  "go-type" : 54,
                   "kind" : "expression",
                   "target" : {
                     "coerced-to" : {
-                      "go-type" : 51,
+                      "go-type" : 52,
                       "kind" : "type",
                       "qualifier" : {
                         "ident-kind" : "PkgName",
@@ -617,13 +617,13 @@
                       },
                       "type" : "identifier",
                       "value" : {
-                        "go-type" : 51,
+                        "go-type" : 52,
                         "ident-kind" : "TypeName",
                         "kind" : "ident",
                         "value" : "Pointer"
                       }
                     },
-                    "go-type" : 51,
+                    "go-type" : 52,
                     "kind" : "expression",
                     "target" : {
                       "go-type" : 2,
@@ -642,7 +642,7 @@
                 },
                 "operator" : "+",
                 "right" : {
-                  "go-type" : 52,
+                  "go-type" : 54,
                   "kind" : "constant",
                   "value" : {
                     "type" : "INT",
@@ -679,7 +679,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "lenids",
-              "variable" : 5
+              "variable" : 6
             }
           },
           "type" : "cast"
@@ -690,7 +690,7 @@
       "line-end" : 342,
       "code" : "*(*pgid)(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p))) = pgid(lenids)",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
@@ -705,7 +705,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 51,
+              "go-type" : 52,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -715,37 +715,37 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 51,
+                "go-type" : 52,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 51,
+            "go-type" : 52,
             "kind" : "expression",
             "target" : {
-              "go-type" : 52,
+              "go-type" : 54,
               "kind" : "expression",
               "left" : {
-                "go-type" : 52,
+                "go-type" : 54,
                 "kind" : "expression",
                 "left" : {
                   "coerced-to" : {
-                    "go-type" : 52,
+                    "go-type" : 54,
                     "kind" : "type",
                     "type" : "identifier",
                     "value" : {
-                      "go-type" : 52,
+                      "go-type" : 54,
                       "ident-kind" : "TypeName",
                       "kind" : "ident",
                       "value" : "uintptr"
                     }
                   },
-                  "go-type" : 52,
+                  "go-type" : 54,
                   "kind" : "expression",
                   "target" : {
                     "coerced-to" : {
-                      "go-type" : 51,
+                      "go-type" : 52,
                       "kind" : "type",
                       "qualifier" : {
                         "ident-kind" : "PkgName",
@@ -755,13 +755,13 @@
                       },
                       "type" : "identifier",
                       "value" : {
-                        "go-type" : 51,
+                        "go-type" : 52,
                         "ident-kind" : "TypeName",
                         "kind" : "ident",
                         "value" : "Pointer"
                       }
                     },
-                    "go-type" : 51,
+                    "go-type" : 52,
                     "kind" : "expression",
                     "target" : {
                       "go-type" : 2,
@@ -780,7 +780,7 @@
                 },
                 "operator" : "+",
                 "right" : {
-                  "go-type" : 52,
+                  "go-type" : 54,
                   "kind" : "constant",
                   "value" : {
                     "type" : "INT",
@@ -791,7 +791,7 @@
               },
               "operator" : "+",
               "right" : {
-                "go-type" : 52,
+                "go-type" : 54,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -810,7 +810,7 @@
               "kind" : "ident",
               "value" : "copyallunsafe"
             },
-            "go-type" : 49,
+            "go-type" : 50,
             "kind" : "expression",
             "target" : {
               "go-type" : 16,
@@ -834,7 +834,7 @@
       "line-end" : 343,
       "code" : "f.copyallunsafe(unsafe.Pointer(uintptr(unsafe.Pointer(p)) + unsafe.Sizeof(*p) + unsafe.Sizeof(pgid(0))))",
       "entry" : false,
-      "use-vars" : [ 1, 2 ]
+      "use-vars" : [ 2, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -847,7 +847,7 @@
         "kind" : "statement",
         "type" : "return",
         "values" : [ {
-          "go-type" : 54,
+          "go-type" : 56,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -873,12 +873,12 @@
     }, {
       "name" : "count",
       "package" : 0,
-      "type" : 39,
+      "type" : 48,
       "exported" : false
     }, {
       "name" : "copyallunsafe",
       "package" : 0,
-      "type" : 49,
+      "type" : 53,
       "exported" : false
     } ],
     "line-end" : 347,
@@ -897,7 +897,7 @@
     "results" : [ 3 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(p *go.etcd.io/bbolt.page) error",
+      "name" : "(*go.etcd.io/bbolt.freelist) func(p *go.etcd.io/bbolt.page) error",
       "params" : 1,
       "recv" : 1,
       "results" : 9,
@@ -981,7 +981,7 @@
       "type" : "Interface",
       "underlying" : 11
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 13,
       "recv" : 0,
       "results" : 14,
@@ -1260,44 +1260,60 @@
       "type" : "Tuple",
       "underlying" : 47
     }, {
+      "name" : "(*go.etcd.io/bbolt.freelist) func() int",
+      "params" : 13,
+      "recv" : 5,
+      "results" : 40,
+      "type" : "Signature",
+      "underlying" : 48,
+      "variadic" : false
+    }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 48
+      "underlying" : 49
     }, {
       "name" : "func(dstptr unsafe.Pointer)",
-      "params" : 50,
+      "params" : 51,
       "recv" : -1,
       "results" : 13,
       "type" : "Signature",
-      "underlying" : 49,
+      "underlying" : 50,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "dstptr",
-        "type" : 51
+        "type" : 52
       } ],
       "name" : "(dstptr unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 50
+      "underlying" : 51
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 51
+      "underlying" : 52
+    }, {
+      "name" : "(*go.etcd.io/bbolt.freelist) func(dstptr unsafe.Pointer)",
+      "params" : 51,
+      "recv" : 8,
+      "results" : 13,
+      "type" : "Signature",
+      "underlying" : 53,
+      "variadic" : false
     }, {
       "name" : "uintptr",
       "type" : "Basic",
-      "underlying" : 52
+      "underlying" : 54
     }, {
       "elem" : 5,
       "name" : "*go.etcd.io/bbolt.pgid",
       "type" : "Pointer",
-      "underlying" : 53
+      "underlying" : 55
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 54
+      "underlying" : 56
     } ],
     "variables" : [ {
       "name" : "",
@@ -1335,6 +1351,13 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "f",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "lenids",
       "package" : 0,
       "type" : 37,
@@ -1348,6 +1371,13 @@
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "f",
+      "package" : 0,
+      "type" : 16,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     } ]
   },
   "go-version" : "1.14.3"

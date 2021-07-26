@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 0, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 1, 2 ],
+      "out-vars" : [ 0, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 0, 1, 2 ],
+      "in-vars" : [ 0, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 1, 2, 3 ],
+      "out-vars" : [ 0, 5, 1, 2, 3 ],
       "decl-vars" : [ 5 ],
       "line-start" : 87,
       "ast" : {
@@ -148,9 +148,9 @@
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 2, 3, 5, 0 ],
+      "in-vars" : [ 0, 5, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 1, 2, 3 ],
+      "out-vars" : [ 5, 1, 2, 3, 0 ],
       "decl-vars" : [ ],
       "line-start" : 88,
       "ast" : {
@@ -194,18 +194,18 @@
       "line-end" : 88,
       "code" : "b.next = start",
       "entry" : false,
-      "use-vars" : [ 0, 5 ]
+      "use-vars" : [ 5, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 2, 3, 5, 0, 1 ],
+      "in-vars" : [ 0, 5, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 5, 0 ],
+      "out-vars" : [ 0, 5 ],
       "decl-vars" : [ ],
       "line-start" : 89,
       "ast" : {
         "condition" : {
-          "go-type" : 9,
+          "go-type" : 8,
           "kind" : "expression",
           "left" : {
             "field" : {
@@ -214,30 +214,30 @@
               "value" : "cgo",
               "variable" : 7
             },
-            "go-type" : 9,
+            "go-type" : 8,
             "kind" : "expression",
             "target" : {
-              "go-type" : 8,
+              "go-type" : 9,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "writeBarrier",
-                "variable" : 1
+                "variable" : 3
               }
             },
             "type" : "selector"
           },
           "operator" : "||",
           "right" : {
-            "go-type" : 9,
+            "go-type" : 8,
             "kind" : "expression",
             "target" : {
-              "go-type" : 9,
+              "go-type" : 8,
               "kind" : "expression",
               "left" : {
-                "go-type" : 9,
+                "go-type" : 8,
                 "kind" : "constant",
                 "value" : {
                   "type" : "BOOL",
@@ -246,25 +246,25 @@
               },
               "operator" : "&&",
               "right" : {
-                "go-type" : 9,
+                "go-type" : 8,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 9,
+                  "go-type" : 8,
                   "kind" : "expression",
                   "left" : {
-                    "go-type" : 9,
+                    "go-type" : 8,
                     "kind" : "expression",
                     "type" : "identifier",
                     "value" : {
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "throwOnGCWork",
-                      "variable" : 3
+                      "variable" : 1
                     }
                   },
                   "operator" : "||",
                   "right" : {
-                    "go-type" : 9,
+                    "go-type" : 8,
                     "kind" : "expression",
                     "left" : {
                       "field" : {
@@ -348,7 +348,7 @@
       "line-end" : 101,
       "code" : "if writeBarrier.cgo || (debugCachedWork && (throwOnGCWork || b.debugGen == atomic.Load(&gcWorkPauseGen))) {\n\n\tb.end = uintptr(unsafe.Pointer(&b.buf[wbBufEntryPointers]))\n} else if testSmallBuf {\n\n\tb.end = uintptr(unsafe.Pointer(&b.buf[2*wbBufEntryPointers]))\n} else {\n\tb.end = start + uintptr(len(b.buf))*unsafe.Sizeof(b.buf[0])\n}",
       "entry" : false,
-      "use-vars" : [ 3, 0, 2, 1 ]
+      "use-vars" : [ 2, 1, 0, 3 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 9 ],
@@ -470,9 +470,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 8 ],
-      "in-vars" : [ 5, 0 ],
+      "in-vars" : [ 0, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 0 ],
+      "out-vars" : [ 0, 5 ],
       "decl-vars" : [ ],
       "line-start" : 93,
       "ast" : {
@@ -854,7 +854,7 @@
     "results" : [ ],
     "type" : "function",
     "types" : [ {
-      "name" : "func()",
+      "name" : "(*runtime.wbBuf) func()",
       "params" : 1,
       "recv" : 0,
       "results" : 1,
@@ -908,28 +908,28 @@
       "type" : "Basic",
       "underlying" : 7
     }, {
+      "name" : "bool",
+      "type" : "Basic",
+      "underlying" : 8
+    }, {
       "fields" : [ {
         "name" : "enabled",
-        "type" : 9
+        "type" : 8
       }, {
         "name" : "pad",
         "type" : 10
       }, {
         "name" : "needed",
-        "type" : 9
+        "type" : 8
       }, {
         "name" : "cgo",
-        "type" : 9
+        "type" : 8
       }, {
         "name" : "alignme",
         "type" : 12
       } ],
       "name" : "struct{enabled bool; pad [3]byte; needed bool; cgo bool; alignme uint64}",
       "type" : "Struct",
-      "underlying" : 8
-    }, {
-      "name" : "bool",
-      "type" : "Basic",
       "underlying" : 9
     }, {
       "elem" : 11,
@@ -1021,7 +1021,7 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "writeBarrier",
+      "name" : "throwOnGCWork",
       "package" : 0,
       "type" : 8,
       "exported" : false,
@@ -1035,7 +1035,7 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "throwOnGCWork",
+      "name" : "writeBarrier",
       "package" : 0,
       "type" : 9,
       "exported" : false,
@@ -1065,7 +1065,7 @@
     }, {
       "name" : "cgo",
       "package" : 0,
-      "type" : 9,
+      "type" : 8,
       "exported" : false,
       "embedded" : false,
       "field" : true

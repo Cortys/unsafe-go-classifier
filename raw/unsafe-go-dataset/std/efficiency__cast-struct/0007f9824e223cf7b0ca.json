@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 2, 4, 3 ],
+      "in-vars" : [ 2, 3, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 4, 3 ],
+      "out-vars" : [ 3, 4, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 1, 2, 4, 3 ],
+      "in-vars" : [ 2, 3, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 4, 3 ],
+      "out-vars" : [ 4, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 219,
       "ast" : {
@@ -86,7 +86,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2, 4, 1 ],
+      "in-vars" : [ 1, 2, 4 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -160,9 +160,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 4, 3, 1, 2 ],
+      "in-vars" : [ 3, 4, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 3, 1, 2 ],
+      "out-vars" : [ 3, 4, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 222,
       "ast" : {
@@ -243,7 +243,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 2, 4, 3 ],
+      "in-vars" : [ 3, 4, 1, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -389,7 +389,7 @@
       "line-end" : 225,
       "code" : "return utimensat(dirfd, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), flags)",
       "entry" : false,
-      "use-vars" : [ 3, 4, 1, 2 ]
+      "use-vars" : [ 4, 1, 2, 3 ]
     } ],
     "code" : "func UtimesNanoAt(dirfd int, path string, ts []Timespec, flags int) error {\n\tif ts == nil {\n\t\treturn utimensat(dirfd, path, nil, flags)\n\t}\n\tif len(ts) != 2 {\n\t\treturn EINVAL\n\t}\n\treturn utimensat(dirfd, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), flags)\n}",
     "defines" : [ 0 ],
@@ -504,7 +504,7 @@
       "type" : "Interface",
       "underlying" : 10
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 12,
       "recv" : 0,
       "results" : 13,

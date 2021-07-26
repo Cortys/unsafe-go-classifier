@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 3, 1, 2 ],
+      "in-vars" : [ 3, 1, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 0, 3, 1 ],
+      "out-vars" : [ 0, 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 1, 2, 0 ],
+      "in-vars" : [ 1, 0, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 1, 5, 2 ],
+      "out-vars" : [ 5, 0, 2, 3, 1 ],
       "decl-vars" : [ 5 ],
       "line-start" : 266,
       "ast" : {
@@ -124,9 +124,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 0, 3, 1, 5, 2 ],
+      "in-vars" : [ 5, 0, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 1, 8, 2 ],
+      "out-vars" : [ 2, 3, 1, 0, 8 ],
       "decl-vars" : [ 8 ],
       "line-start" : 267,
       "ast" : {
@@ -280,14 +280,14 @@
       "line-end" : 267,
       "code" : "slot := seg.slotsData[slotOff : slotOff+seg.slotLens[slotId] : slotOff+seg.slotCap]",
       "entry" : false,
-      "use-vars" : [ 1, 5, 0 ]
+      "use-vars" : [ 5, 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 0, 3, 1, 8 ],
+      "in-vars" : [ 0, 8, 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 9, 0, 3, 1, 8, 10 ],
-      "decl-vars" : [ 10, 9 ],
+      "out-vars" : [ 10, 11, 0, 8, 3, 1 ],
+      "decl-vars" : [ 10, 11 ],
       "line-start" : 268,
       "ast" : {
         "kind" : "statement",
@@ -375,13 +375,13 @@
       "line-end" : 268,
       "code" : "idx, match := seg.lookupByOff(slot, hash16, offset)",
       "entry" : false,
-      "use-vars" : [ 0, 8, 2, 3 ]
+      "use-vars" : [ 3, 0, 8, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 9, 0, 3, 1, 8, 10 ],
+      "in-vars" : [ 8, 3, 1, 10, 11, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 1, 8, 10 ],
+      "out-vars" : [ 3, 1, 11, 0, 8 ],
       "decl-vars" : [ ],
       "line-start" : 269,
       "ast" : {
@@ -397,7 +397,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "match",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "type" : "unary"
@@ -409,7 +409,7 @@
       "line-end" : 271,
       "code" : "if !match {\n\treturn\n}",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -431,10 +431,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 0, 3, 1, 8, 10 ],
+      "in-vars" : [ 11, 0, 8, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 8, 10, 0, 11, 3, 1 ],
-      "decl-vars" : [ 11 ],
+      "out-vars" : [ 0, 8, 3, 1, 12, 11 ],
+      "decl-vars" : [ 12 ],
       "line-start" : 272,
       "ast" : {
         "kind" : "statement",
@@ -454,10 +454,10 @@
                   "value" : "byte"
                 }
               },
-              "go-type" : 24,
+              "go-type" : 25,
               "kind" : "type",
               "length" : {
-                "go-type" : 25,
+                "go-type" : 26,
                 "kind" : "constant",
                 "value" : {
                   "type" : "INT",
@@ -487,9 +487,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 0, 11, 3, 1, 8, 10 ],
+      "in-vars" : [ 1, 12, 11, 0, 8, 3 ],
       "exit" : false,
-      "out-vars" : [ 11, 3, 1, 8, 10, 0 ],
+      "out-vars" : [ 8, 3, 1, 12, 11, 0 ],
       "decl-vars" : [ ],
       "line-start" : 273,
       "ast" : {
@@ -505,14 +505,14 @@
             "kind" : "expression",
             "low" : null,
             "target" : {
-              "go-type" : 24,
+              "go-type" : 25,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "entryHdrBuf",
-                "variable" : 11
+                "variable" : 12
               }
             }
           }, {
@@ -534,14 +534,14 @@
               "kind" : "ident",
               "value" : "ReadAt"
             },
-            "go-type" : 32,
+            "go-type" : 33,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "rb",
-                "variable" : 13
+                "variable" : 14
               },
               "go-type" : 9,
               "kind" : "expression",
@@ -560,7 +560,7 @@
             },
             "type" : "selector"
           },
-          "go-type" : 26,
+          "go-type" : 27,
           "kind" : "expression",
           "type" : "call"
         }
@@ -569,14 +569,14 @@
       "line-end" : 273,
       "code" : "seg.rb.ReadAt(entryHdrBuf[:], offset)",
       "entry" : false,
-      "use-vars" : [ 0, 11, 3 ]
+      "use-vars" : [ 12, 3, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 3, 1, 8, 10, 0, 11 ],
+      "in-vars" : [ 11, 0, 8, 3, 1, 12 ],
       "exit" : false,
-      "out-vars" : [ 14, 1, 8, 10, 0, 11, 3 ],
-      "decl-vars" : [ 14 ],
+      "out-vars" : [ 0, 8, 3, 1, 12, 16, 11 ],
+      "decl-vars" : [ 16 ],
       "line-start" : 274,
       "ast" : {
         "kind" : "statement",
@@ -593,25 +593,25 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 35,
+              "go-type" : 38,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 35,
+                "go-type" : 38,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "entryHdr"
               }
             },
-            "go-type" : 34,
+            "go-type" : 37,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 34,
+          "go-type" : 37,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
-              "go-type" : 37,
+              "go-type" : 40,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -621,16 +621,16 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 37,
+                "go-type" : 40,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 37,
+            "go-type" : 40,
             "kind" : "expression",
             "target" : {
-              "go-type" : 38,
+              "go-type" : 41,
               "kind" : "expression",
               "operator" : "&",
               "target" : {
@@ -645,14 +645,14 @@
                 },
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 24,
+                  "go-type" : 25,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "entryHdrBuf",
-                    "variable" : 11
+                    "variable" : 12
                   }
                 },
                 "type" : "index"
@@ -669,13 +669,13 @@
       "line-end" : 274,
       "code" : "entryHdr := (*entryHdr)(unsafe.Pointer(&entryHdrBuf[0]))",
       "entry" : false,
-      "use-vars" : [ 11 ]
+      "use-vars" : [ 12 ]
     }, {
-      "update-vars" : [ 14 ],
+      "update-vars" : [ 16 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 10, 0, 11, 3, 14, 1, 8 ],
+      "in-vars" : [ 11, 0, 8, 3, 1, 12, 16 ],
       "exit" : false,
-      "out-vars" : [ 10, 0, 11, 3, 1, 8 ],
+      "out-vars" : [ 12, 11, 0, 8, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : 275,
       "ast" : {
@@ -685,19 +685,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "deleted",
-            "variable" : 15
+            "variable" : 17
           },
           "go-type" : 21,
           "kind" : "expression",
           "target" : {
-            "go-type" : 34,
+            "go-type" : 37,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "entryHdr",
-              "variable" : 14
+              "variable" : 16
             }
           },
           "type" : "selector"
@@ -716,13 +716,13 @@
       "line-end" : 275,
       "code" : "entryHdr.deleted = true",
       "entry" : false,
-      "use-vars" : [ 14 ]
+      "use-vars" : [ 16 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 11, 3, 1, 8, 10, 0 ],
+      "in-vars" : [ 1, 12, 11, 0, 8, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 8, 10 ],
+      "out-vars" : [ 11, 0, 8, 1 ],
       "decl-vars" : [ ],
       "line-start" : 276,
       "ast" : {
@@ -738,14 +738,14 @@
             "kind" : "expression",
             "low" : null,
             "target" : {
-              "go-type" : 24,
+              "go-type" : 25,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "entryHdrBuf",
-                "variable" : 11
+                "variable" : 12
               }
             }
           }, {
@@ -767,14 +767,14 @@
               "kind" : "ident",
               "value" : "WriteAt"
             },
-            "go-type" : 32,
+            "go-type" : 33,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "rb",
-                "variable" : 13
+                "variable" : 14
               },
               "go-type" : 9,
               "kind" : "expression",
@@ -793,7 +793,7 @@
             },
             "type" : "selector"
           },
-          "go-type" : 26,
+          "go-type" : 27,
           "kind" : "expression",
           "type" : "call"
         }
@@ -802,11 +802,11 @@
       "line-end" : 276,
       "code" : "seg.rb.WriteAt(entryHdrBuf[:], offset)",
       "entry" : false,
-      "use-vars" : [ 3, 0, 11 ]
+      "use-vars" : [ 12, 3, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 0, 1, 8, 10 ],
+      "in-vars" : [ 11, 0, 8, 1 ],
       "exit" : false,
       "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
@@ -830,7 +830,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "idx",
-                "variable" : 10
+                "variable" : 11
               }
             },
             "target" : {
@@ -862,7 +862,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "idx",
-                  "variable" : 10
+                  "variable" : 11
                 }
               },
               "operator" : "+",
@@ -890,7 +890,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 39,
+            "go-type" : 42,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -908,7 +908,7 @@
       "line-end" : 277,
       "code" : "copy(slot[idx:], slot[idx+1:])",
       "entry" : false,
-      "use-vars" : [ 8, 10 ]
+      "use-vars" : [ 8, 11 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 14 ],
@@ -964,7 +964,7 @@
       "line-end" : 278,
       "code" : "seg.slotLens[slotId]--",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 1 ],
@@ -981,7 +981,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "entryCount",
-            "variable" : 16
+            "variable" : 18
           },
           "go-type" : 4,
           "kind" : "expression",
@@ -1016,17 +1016,17 @@
     }, {
       "name" : "lookupByOff",
       "package" : 0,
-      "type" : 22,
+      "type" : 24,
       "exported" : false
     }, {
       "name" : "ReadAt",
       "package" : 0,
-      "type" : 32,
+      "type" : 35,
       "exported" : true
     }, {
       "name" : "WriteAt",
       "package" : 0,
-      "type" : 32,
+      "type" : 35,
       "exported" : true
     } ],
     "line-end" : 280,
@@ -1045,7 +1045,7 @@
     "results" : [ ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(slotId uint8, hash16 uint16, offset int64)",
+      "name" : "(*github.com/coocood/freecache.segment) func(slotId uint8, hash16 uint16, offset int64)",
       "params" : 1,
       "recv" : 0,
       "results" : 5,
@@ -1247,66 +1247,74 @@
       "type" : "Tuple",
       "underlying" : 23
     }, {
+      "name" : "(*github.com/coocood/freecache.segment) func(slot []github.com/coocood/freecache.entryPtr, hash16 uint16, offset int64) (idx int, match bool)",
+      "params" : 23,
+      "recv" : 9,
+      "results" : 20,
+      "type" : "Signature",
+      "underlying" : 24,
+      "variadic" : false
+    }, {
       "elem" : 12,
       "name" : "[24]byte",
       "type" : "Array",
-      "underlying" : 24
+      "underlying" : 25
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 25
+      "underlying" : 26
     }, {
       "fields" : [ {
         "name" : "n",
         "type" : 13
       }, {
         "name" : "err",
-        "type" : 27
+        "type" : 28
       } ],
       "name" : "(n int, err error)",
       "type" : "Tuple",
-      "underlying" : 26
+      "underlying" : 27
     }, {
       "local-name" : "error",
       "name" : "error",
       "package" : -1,
       "type" : "Named",
-      "underlying" : 28
+      "underlying" : 29
     }, {
       "methods" : [ {
         "name" : "Error",
-        "type" : 29
+        "type" : 30
       } ],
       "name" : "interface{Error() string}",
       "type" : "Interface",
-      "underlying" : 28
+      "underlying" : 29
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 5,
-      "recv" : 12,
-      "results" : 30,
+      "recv" : 13,
+      "results" : 31,
       "type" : "Signature",
-      "underlying" : 29,
+      "underlying" : 30,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 31
+        "type" : 32
       } ],
       "name" : "(string)",
       "type" : "Tuple",
-      "underlying" : 30
+      "underlying" : 31
     }, {
       "name" : "string",
       "type" : "Basic",
-      "underlying" : 31
+      "underlying" : 32
     }, {
       "name" : "func(p []byte, off int64) (n int, err error)",
-      "params" : 33,
+      "params" : 34,
       "recv" : -1,
-      "results" : 26,
+      "results" : 27,
       "type" : "Signature",
-      "underlying" : 32,
+      "underlying" : 33,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1318,18 +1326,31 @@
       } ],
       "name" : "(p []byte, off int64)",
       "type" : "Tuple",
-      "underlying" : 33
+      "underlying" : 34
     }, {
-      "elem" : 35,
+      "name" : "(*github.com/coocood/freecache.RingBuf) func(p []byte, off int64) (n int, err error)",
+      "params" : 34,
+      "recv" : 15,
+      "results" : 27,
+      "type" : "Signature",
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "elem" : 9,
+      "name" : "*github.com/coocood/freecache.RingBuf",
+      "type" : "Pointer",
+      "underlying" : 36
+    }, {
+      "elem" : 38,
       "name" : "*github.com/coocood/freecache.entryHdr",
       "type" : "Pointer",
-      "underlying" : 34
+      "underlying" : 37
     }, {
       "local-name" : "entryHdr",
       "name" : "github.com/coocood/freecache.entryHdr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 36
+      "underlying" : 39
     }, {
       "fields" : [ {
         "name" : "accessTime",
@@ -1361,25 +1382,25 @@
       } ],
       "name" : "struct{accessTime uint32; expireAt uint32; keyLen uint16; hash16 uint16; valLen uint32; valCap uint32; deleted bool; slotId uint8; reserved uint16}",
       "type" : "Struct",
-      "underlying" : 36
+      "underlying" : 39
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 37
+      "underlying" : 40
     }, {
       "elem" : 12,
       "name" : "*byte",
       "type" : "Pointer",
-      "underlying" : 38
+      "underlying" : 41
     }, {
       "name" : "func([]github.com/coocood/freecache.entryPtr, []github.com/coocood/freecache.entryPtr) int",
-      "params" : 40,
+      "params" : 43,
       "recv" : -1,
-      "results" : 41,
+      "results" : 44,
       "type" : "Signature",
-      "underlying" : 39,
+      "underlying" : 42,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1391,7 +1412,7 @@
       } ],
       "name" : "([]github.com/coocood/freecache.entryPtr, []github.com/coocood/freecache.entryPtr)",
       "type" : "Tuple",
-      "underlying" : 40
+      "underlying" : 43
     }, {
       "fields" : [ {
         "name" : "",
@@ -1399,7 +1420,7 @@
       } ],
       "name" : "(int)",
       "type" : "Tuple",
-      "underlying" : 41
+      "underlying" : 44
     } ],
     "variables" : [ {
       "name" : "seg",
@@ -1465,6 +1486,13 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "seg",
+      "package" : 0,
+      "type" : 6,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "match",
       "package" : 0,
       "type" : 21,
@@ -1481,14 +1509,14 @@
     }, {
       "name" : "entryHdrBuf",
       "package" : 0,
-      "type" : 24,
+      "type" : 25,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "",
       "package" : -1,
-      "type" : 27,
+      "type" : 28,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -1500,9 +1528,16 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "rb",
+      "package" : 0,
+      "type" : 36,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "entryHdr",
       "package" : 0,
-      "type" : 34,
+      "type" : 37,
       "exported" : false,
       "embedded" : false,
       "field" : false

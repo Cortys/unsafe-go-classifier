@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 6, 1, 3 ],
+      "in-vars" : [ 6, 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 1, 3, 2 ],
+      "out-vars" : [ 6, 2, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 2, 6, 1, 3 ],
+      "in-vars" : [ 3, 6, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 2, 6 ],
+      "out-vars" : [ 2, 1, 3, 6 ],
       "decl-vars" : [ 7 ],
       "line-start" : 2082,
       "ast" : {
@@ -91,9 +91,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 1, 3, 2, 6 ],
+      "in-vars" : [ 1, 3, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 3 ],
+      "out-vars" : [ 1, 3, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 2083,
       "ast" : {
@@ -151,7 +151,7 @@
       "successors" : [ 6 ],
       "in-vars" : [ 2, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 1, 3 ],
+      "out-vars" : [ 3, 7, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 2084,
       "ast" : {
@@ -229,7 +229,7 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 1, 3, 2 ],
+      "in-vars" : [ 2, 1, 3, 6 ],
       "exit" : false,
       "out-vars" : [ 7, 2, 1, 3 ],
       "decl-vars" : [ ],
@@ -296,10 +296,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 7, 2, 1, 3 ],
+      "in-vars" : [ 3, 7, 2, 1 ],
       "exit" : false,
       "out-vars" : [ 8, 9 ],
-      "decl-vars" : [ 10, 8, 9 ],
+      "decl-vars" : [ 9, 8, 10 ],
       "line-start" : 2088,
       "ast" : {
         "kind" : "statement",
@@ -496,13 +496,13 @@
       "line-end" : 2088,
       "code" : "r0, _, e1 := Syscall6(SYS_PWRITE64, uintptr(fd), uintptr(_p0), uintptr(len(p)), uintptr(offset), 0, 0)",
       "entry" : false,
-      "use-vars" : [ 7, 3, 2, 1 ]
+      "use-vars" : [ 7, 2, 3, 1 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 8 ],
-      "in-vars" : [ 8, 9 ],
+      "in-vars" : [ 9, 8 ],
       "exit" : false,
-      "out-vars" : [ 9 ],
+      "out-vars" : [ 8 ],
       "decl-vars" : [ ],
       "line-start" : 2089,
       "ast" : {
@@ -540,7 +540,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "r0",
-              "variable" : 8
+              "variable" : 9
             }
           },
           "type" : "cast"
@@ -551,13 +551,13 @@
       "line-end" : 2089,
       "code" : "n = int(r0)",
       "entry" : false,
-      "use-vars" : [ 8 ]
+      "use-vars" : [ 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 8 ],
       "exit" : false,
-      "out-vars" : [ 9 ],
+      "out-vars" : [ 8 ],
       "decl-vars" : [ ],
       "line-start" : 2090,
       "ast" : {
@@ -572,7 +572,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 9
+              "variable" : 8
             }
           },
           "operator" : "!=",
@@ -593,11 +593,11 @@
       "line-end" : 2092,
       "code" : "if e1 != 0 {\n\terr = errnoErr(e1)\n}",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 9 ],
+      "in-vars" : [ 8 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -624,7 +624,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "e1",
-              "variable" : 9
+              "variable" : 8
             }
           } ],
           "ellipsis" : false,
@@ -649,7 +649,7 @@
       "line-end" : 2091,
       "code" : "err = errnoErr(e1)",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -770,7 +770,7 @@
       "type" : "Interface",
       "underlying" : 8
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 10,
       "recv" : 0,
       "results" : 11,
@@ -978,16 +978,16 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "r0",
+      "name" : "e1",
       "package" : 0,
-      "type" : 13,
+      "type" : 22,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "e1",
+      "name" : "r0",
       "package" : 0,
-      "type" : 22,
+      "type" : 13,
       "exported" : false,
       "embedded" : false,
       "field" : false

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 0, 1, 2, 3, 4 ],
+      "in-vars" : [ 1, 2, 3, 4, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 4, 0, 1 ],
+      "out-vars" : [ 3, 4, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,46 +42,46 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 7 ],
-      "in-vars" : [ 0, 1, 2, 3, 4 ],
+      "in-vars" : [ 3, 4, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 4 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 899,
       "ast" : {
         "condition" : {
-          "go-type" : 13,
+          "go-type" : 14,
           "kind" : "expression",
           "left" : {
-            "go-type" : 13,
+            "go-type" : 14,
             "kind" : "expression",
             "operator" : "!",
             "target" : {
-              "go-type" : 13,
+              "go-type" : 14,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "iscgo",
-                "variable" : 2
+                "variable" : 3
               }
             },
             "type" : "unary"
           },
           "operator" : "&&",
           "right" : {
-            "go-type" : 13,
+            "go-type" : 14,
             "kind" : "expression",
             "operator" : "!",
             "target" : {
-              "go-type" : 13,
+              "go-type" : 14,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "cgoHasExtraM",
-                "variable" : 3
+                "variable" : 4
               }
             },
             "type" : "unary"
@@ -95,11 +95,11 @@
       "line-end" : 907,
       "code" : "if !iscgo && !cgoHasExtraM {\n\n\ts := stringStructOf(&badginsignalMsg)\n\twrite(2, s.str, int32(s.len))\n\texit(2)\n\t*(*uintptr)(unsafe.Pointer(uintptr(123))) = 2\n}",
       "entry" : false,
-      "use-vars" : [ 2, 3 ]
+      "use-vars" : [ 3, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 0, 1, 4 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 0, 1, 5 ],
       "decl-vars" : [ 5 ],
@@ -122,14 +122,14 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 14,
+              "go-type" : 13,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "badginsignalMsg",
-                "variable" : 4
+                "variable" : 2
               }
             },
             "type" : "unary"
@@ -156,7 +156,7 @@
       "line-end" : 903,
       "code" : "s := stringStructOf(&badginsignalMsg)",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
@@ -302,9 +302,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 0 ],
+      "in-vars" : [ 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 0 ],
+      "out-vars" : [ 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 906,
       "ast" : {
@@ -432,7 +432,7 @@
       "line-start" : 909,
       "ast" : {
         "condition" : {
-          "go-type" : 13,
+          "go-type" : 14,
           "kind" : "expression",
           "operator" : "!",
           "target" : {
@@ -475,7 +475,7 @@
                 "value" : "sigsend"
               }
             },
-            "go-type" : 13,
+            "go-type" : 14,
             "kind" : "expression",
             "type" : "call"
           },
@@ -559,7 +559,7 @@
       "line-end" : 912,
       "code" : "raisebadsignal(uint32(sig), c)",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -747,11 +747,11 @@
       "type" : "Tuple",
       "underlying" : 12
     }, {
-      "name" : "bool",
+      "name" : "string",
       "type" : "Basic",
       "underlying" : 13
     }, {
-      "name" : "string",
+      "name" : "bool",
       "type" : "Basic",
       "underlying" : 14
     }, {
@@ -797,7 +797,7 @@
       "type" : "Tuple",
       "underlying" : 20
     }, {
-      "elem" : 14,
+      "elem" : 13,
       "name" : "*string",
       "type" : "Pointer",
       "underlying" : 21
@@ -903,7 +903,7 @@
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 13
+        "type" : 14
       } ],
       "name" : "(bool)",
       "type" : "Tuple",
@@ -951,21 +951,21 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "iscgo",
+      "name" : "badginsignalMsg",
       "package" : 0,
       "type" : 13,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "iscgo",
+      "package" : 0,
+      "type" : 14,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "cgoHasExtraM",
-      "package" : 0,
-      "type" : 13,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "badginsignalMsg",
       "package" : 0,
       "type" : 14,
       "exported" : false,

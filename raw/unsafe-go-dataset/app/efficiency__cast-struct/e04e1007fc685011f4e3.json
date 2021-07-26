@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 4, 2 ],
+      "in-vars" : [ 2, 4 ],
       "exit" : false,
       "out-vars" : [ 2, 4 ],
       "decl-vars" : [ ],
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 4, 2 ],
+      "in-vars" : [ 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 4, 6 ],
+      "out-vars" : [ 6, 2, 1, 4 ],
       "decl-vars" : [ 6, 1 ],
       "line-start" : 124,
       "ast" : {
@@ -113,9 +113,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 4, 6, 1, 2 ],
+      "in-vars" : [ 6, 2, 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 7 ],
+      "out-vars" : [ 2, 1, 6, 7 ],
       "decl-vars" : [ 7 ],
       "line-start" : 128,
       "ast" : {
@@ -253,9 +253,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 6, 1, 7, 2 ],
+      "in-vars" : [ 6, 7, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 7, 2, 6, 1 ],
+      "out-vars" : [ 6, 7, 2, 1 ],
       "decl-vars" : [ ],
       "line-start" : 130,
       "ast" : {
@@ -281,9 +281,9 @@
     }, {
       "update-vars" : [ 2 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 6, 1, 7, 2 ],
+      "in-vars" : [ 2, 1, 6, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 7, 2, 6 ],
+      "out-vars" : [ 2, 1, 6, 7 ],
       "decl-vars" : [ ],
       "line-start" : 131,
       "ast" : {
@@ -337,7 +337,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7, 9 ],
-      "in-vars" : [ 6, 1, 7, 2 ],
+      "in-vars" : [ 6, 7, 2, 1 ],
       "exit" : false,
       "out-vars" : [ 6, 2 ],
       "decl-vars" : [ ],
@@ -406,7 +406,7 @@
       "line-end" : 141,
       "code" : "if b.tx.writable && !unaligned {\n\tchild.bucket = &bucket{}\n\t*child.bucket = *(*bucket)(unsafe.Pointer(&value[0]))\n} else {\n\tchild.bucket = (*bucket)(unsafe.Pointer(&value[0]))\n}",
       "entry" : false,
-      "use-vars" : [ 7, 1 ]
+      "use-vars" : [ 1, 7 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 8 ],
@@ -472,9 +472,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 6 ],
+      "in-vars" : [ 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 6 ],
+      "out-vars" : [ 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 138,
       "ast" : {
@@ -596,7 +596,7 @@
       "successors" : [ 10 ],
       "in-vars" : [ 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 2 ],
+      "out-vars" : [ 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : 140,
       "ast" : {
@@ -708,7 +708,7 @@
       "successors" : [ 11, 12 ],
       "in-vars" : [ 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 2 ],
+      "out-vars" : [ 2, 6 ],
       "decl-vars" : [ ],
       "line-start" : 144,
       "ast" : {
@@ -867,7 +867,7 @@
       "line-end" : 145,
       "code" : "child.page = (*page)(unsafe.Pointer(&value[bucketHeaderSize]))",
       "entry" : false,
-      "use-vars" : [ 6, 2 ]
+      "use-vars" : [ 2, 6 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -952,7 +952,7 @@
     "results" : [ 3 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(value []byte) *go.etcd.io/bbolt.Bucket",
+      "name" : "(*go.etcd.io/bbolt.Bucket) func(value []byte) *go.etcd.io/bbolt.Bucket",
       "params" : 1,
       "recv" : 1,
       "results" : 4,
@@ -1486,7 +1486,7 @@
       "type" : "Interface",
       "underlying" : 52
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 54,
       "recv" : 0,
       "results" : 55,

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 5, 6, 2, 1, 3, 7 ],
+      "in-vars" : [ 5, 6, 2, 7, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 1, 3, 7, 5 ],
+      "out-vars" : [ 3, 5, 6, 2, 7, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 5, 6, 2, 1, 3, 7 ],
+      "in-vars" : [ 2, 7, 1, 3, 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 7, 8, 5, 6, 2, 1 ],
+      "out-vars" : [ 8, 6, 2, 7, 1, 3, 5 ],
       "decl-vars" : [ 8 ],
       "line-start" : 226,
       "ast" : {
@@ -85,10 +85,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 2, 1, 3, 7, 8, 5, 6 ],
+      "in-vars" : [ 7, 1, 3, 5, 8, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 7, 9, 8 ],
-      "decl-vars" : [ 9 ],
+      "out-vars" : [ 5, 8, 10, 1, 3 ],
+      "decl-vars" : [ 10 ],
       "line-start" : 227,
       "ast" : {
         "kind" : "statement",
@@ -120,7 +120,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "ok",
-                  "variable" : 5
+                  "variable" : 7
                 }
               },
               "operator" : "==",
@@ -319,13 +319,13 @@
       "line-end" : 234,
       "code" : "OK := func(ok C.int, name string) {\n\tif ok == C.DPI_SUCCESS {\n\t\treturn\n\t}\n\tif firstErr == nil {\n\t\tfirstErr = errors.Errorf(\"%s: %w\", name, d.getError())\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 8, 5, 6, 2 ]
+      "use-vars" : [ 8, 6, 7, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 8 ],
-      "in-vars" : [ 9, 8, 1, 3, 7 ],
+      "in-vars" : [ 10, 1, 3, 5, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 3, 7, 9 ],
+      "out-vars" : [ 10, 1, 3, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 235,
       "ast" : {
@@ -337,7 +337,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "Correlation",
-              "variable" : 10
+              "variable" : 11
             },
             "go-type" : 18,
             "kind" : "expression",
@@ -376,10 +376,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 9, 8, 1, 3, 7 ],
+      "in-vars" : [ 1, 3, 5, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 3, 7, 9, 8, 1, 11 ],
-      "decl-vars" : [ 11 ],
+      "out-vars" : [ 10, 1, 3, 12, 5, 8 ],
+      "decl-vars" : [ 12 ],
       "line-start" : 236,
       "ast" : {
         "kind" : "statement",
@@ -399,7 +399,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "Correlation",
-              "variable" : 10
+              "variable" : 11
             },
             "go-type" : 18,
             "kind" : "expression",
@@ -447,9 +447,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 9, 8, 1, 11, 3, 7 ],
+      "in-vars" : [ 12, 5, 8, 10, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 11, 3, 7 ],
+      "out-vars" : [ 12, 5, 8, 10, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 237,
       "ast" : {
@@ -475,7 +475,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "value",
-                "variable" : 11
+                "variable" : 12
               }
             }, {
               "arguments" : [ {
@@ -484,7 +484,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "Correlation",
-                    "variable" : 10
+                    "variable" : 11
                   },
                   "go-type" : 18,
                   "kind" : "expression",
@@ -503,7 +503,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 87,
+                  "go-type" : 88,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -574,7 +574,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -586,13 +586,13 @@
       "line-end" : 237,
       "code" : "OK(C.dpiMsgProps_setCorrelation(props, value, C.uint(len(M.Correlation))), \"setCorrelation\")",
       "entry" : false,
-      "use-vars" : [ 11, 9, 3, 1 ]
+      "use-vars" : [ 10, 12, 1, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 7, 9, 8, 1, 11, 3 ],
+      "in-vars" : [ 10, 1, 3, 12, 5, 8 ],
       "exit" : false,
-      "out-vars" : [ 7, 9, 8, 1, 3 ],
+      "out-vars" : [ 3, 5, 8, 10, 1 ],
       "decl-vars" : [ ],
       "line-start" : 238,
       "ast" : {
@@ -601,7 +601,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 89,
+              "go-type" : 90,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -611,7 +611,7 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 89,
+                "go-type" : 90,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
@@ -627,7 +627,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "value",
-                "variable" : 11
+                "variable" : 12
               }
             },
             "type" : "cast"
@@ -658,13 +658,13 @@
       "line-end" : 238,
       "code" : "C.free(unsafe.Pointer(value))",
       "entry" : false,
-      "use-vars" : [ 11 ]
+      "use-vars" : [ 12 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 7, 9, 8, 1, 3 ],
+      "in-vars" : [ 10, 1, 3, 5, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 3, 7, 9 ],
+      "out-vars" : [ 10, 1, 3, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 241,
       "ast" : {
@@ -676,7 +676,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "Delay",
-              "variable" : 12
+              "variable" : 13
             },
             "go-type" : 7,
             "kind" : "expression",
@@ -715,9 +715,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 9, 8, 1, 3, 7 ],
+      "in-vars" : [ 10, 1, 3, 5, 8 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 7, 9, 8 ],
+      "out-vars" : [ 5, 8, 10, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 242,
       "ast" : {
@@ -741,7 +741,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Delay",
-                  "variable" : 12
+                  "variable" : 13
                 },
                 "go-type" : 7,
                 "kind" : "expression",
@@ -816,7 +816,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -828,13 +828,13 @@
       "line-end" : 242,
       "code" : "OK(C.dpiMsgProps_setDelay(props, C.int(M.Delay)), \"setDelay\")",
       "entry" : false,
-      "use-vars" : [ 9, 3, 1 ]
+      "use-vars" : [ 3, 1, 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11, 14 ],
-      "in-vars" : [ 9, 8, 1, 3, 7 ],
+      "in-vars" : [ 10, 1, 3, 5, 8 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 3, 7 ],
+      "out-vars" : [ 10, 1, 3, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 245,
       "ast" : {
@@ -846,7 +846,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "ExceptionQ",
-              "variable" : 13
+              "variable" : 14
             },
             "go-type" : 18,
             "kind" : "expression",
@@ -885,10 +885,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 9, 8, 1, 3, 7 ],
+      "in-vars" : [ 8, 10, 1, 3, 5 ],
       "exit" : false,
-      "out-vars" : [ 7, 9, 8, 1, 3, 14 ],
-      "decl-vars" : [ 14 ],
+      "out-vars" : [ 5, 8, 10, 1, 3, 15 ],
+      "decl-vars" : [ 15 ],
       "line-start" : 246,
       "ast" : {
         "kind" : "statement",
@@ -908,7 +908,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "ExceptionQ",
-              "variable" : 13
+              "variable" : 14
             },
             "go-type" : 18,
             "kind" : "expression",
@@ -956,9 +956,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 1, 3, 14, 7, 9, 8 ],
+      "in-vars" : [ 15, 5, 8, 10, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 14, 7, 9, 8, 1 ],
+      "out-vars" : [ 10, 1, 3, 15, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 247,
       "ast" : {
@@ -984,7 +984,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "value",
-                "variable" : 14
+                "variable" : 15
               }
             }, {
               "arguments" : [ {
@@ -993,7 +993,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "ExceptionQ",
-                    "variable" : 13
+                    "variable" : 14
                   },
                   "go-type" : 18,
                   "kind" : "expression",
@@ -1012,7 +1012,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 87,
+                  "go-type" : 88,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -1083,7 +1083,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -1095,13 +1095,13 @@
       "line-end" : 247,
       "code" : "OK(C.dpiMsgProps_setExceptionQ(props, value, C.uint(len(M.ExceptionQ))), \"setExceptionQ\")",
       "entry" : false,
-      "use-vars" : [ 9, 3, 14, 1 ]
+      "use-vars" : [ 15, 10, 3, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 9, 8, 1, 3, 14, 7 ],
+      "in-vars" : [ 5, 8, 10, 1, 3, 15 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 7, 9, 8 ],
+      "out-vars" : [ 10, 1, 3, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 248,
       "ast" : {
@@ -1110,7 +1110,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 89,
+              "go-type" : 90,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -1120,7 +1120,7 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 89,
+                "go-type" : 90,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
@@ -1136,7 +1136,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "value",
-                "variable" : 14
+                "variable" : 15
               }
             },
             "type" : "cast"
@@ -1167,13 +1167,13 @@
       "line-end" : 248,
       "code" : "C.free(unsafe.Pointer(value))",
       "entry" : false,
-      "use-vars" : [ 14 ]
+      "use-vars" : [ 15 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15, 16 ],
-      "in-vars" : [ 7, 9, 8, 1, 3 ],
+      "in-vars" : [ 10, 1, 3, 5, 8 ],
       "exit" : false,
-      "out-vars" : [ 8, 1, 3, 7, 9 ],
+      "out-vars" : [ 10, 1, 3, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 251,
       "ast" : {
@@ -1185,7 +1185,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "Expiration",
-              "variable" : 15
+              "variable" : 16
             },
             "go-type" : 7,
             "kind" : "expression",
@@ -1224,9 +1224,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 8, 1, 3, 7, 9 ],
+      "in-vars" : [ 5, 8, 10, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 3, 7 ],
+      "out-vars" : [ 10, 1, 3, 5, 8 ],
       "decl-vars" : [ ],
       "line-start" : 252,
       "ast" : {
@@ -1250,7 +1250,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Expiration",
-                  "variable" : 15
+                  "variable" : 16
                 },
                 "go-type" : 7,
                 "kind" : "expression",
@@ -1325,7 +1325,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -1337,13 +1337,13 @@
       "line-end" : 252,
       "code" : "OK(C.dpiMsgProps_setExpiration(props, C.int(M.Expiration)), \"setExpiration\")",
       "entry" : false,
-      "use-vars" : [ 9, 3, 1 ]
+      "use-vars" : [ 10, 3, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17, 18 ],
-      "in-vars" : [ 9, 8, 1, 3, 7 ],
+      "in-vars" : [ 1, 3, 5, 8, 10 ],
       "exit" : false,
-      "out-vars" : [ 1, 3, 9, 8 ],
+      "out-vars" : [ 3, 8, 10, 1 ],
       "decl-vars" : [ ],
       "line-start" : 255,
       "ast" : {
@@ -1355,7 +1355,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OriginalMsgID",
-              "variable" : 16
+              "variable" : 17
             },
             "go-type" : 44,
             "kind" : "expression",
@@ -1381,7 +1381,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "zeroMsgID",
-              "variable" : 7
+              "variable" : 5
             }
           },
           "type" : "binary"
@@ -1393,13 +1393,13 @@
       "line-end" : 257,
       "code" : "if M.OriginalMsgID != zeroMsgID {\n\tOK(C.dpiMsgProps_setOriginalMsgId(props, (*C.char)(unsafe.Pointer(&M.OriginalMsgID[0])), MsgIDLength), \"setMsgOriginalId\")\n}",
       "entry" : false,
-      "use-vars" : [ 1, 7 ]
+      "use-vars" : [ 5, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 9, 8, 1, 3 ],
+      "in-vars" : [ 10, 1, 3, 8 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 3 ],
+      "out-vars" : [ 10, 1, 3, 8 ],
       "decl-vars" : [ ],
       "line-start" : 256,
       "ast" : {
@@ -1443,7 +1443,7 @@
               "kind" : "expression",
               "target" : {
                 "coerced-to" : {
-                  "go-type" : 89,
+                  "go-type" : 90,
                   "kind" : "type",
                   "qualifier" : {
                     "ident-kind" : "PkgName",
@@ -1453,16 +1453,16 @@
                   },
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 89,
+                    "go-type" : 90,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "Pointer"
                   }
                 },
-                "go-type" : 89,
+                "go-type" : 90,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 90,
+                  "go-type" : 91,
                   "kind" : "expression",
                   "operator" : "&",
                   "target" : {
@@ -1481,7 +1481,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "OriginalMsgID",
-                        "variable" : 16
+                        "variable" : 17
                       },
                       "go-type" : 44,
                       "kind" : "expression",
@@ -1506,7 +1506,7 @@
               },
               "type" : "cast"
             }, {
-              "go-type" : 91,
+              "go-type" : 92,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -1550,7 +1550,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -1562,13 +1562,13 @@
       "line-end" : 256,
       "code" : "OK(C.dpiMsgProps_setOriginalMsgId(props, (*C.char)(unsafe.Pointer(&M.OriginalMsgID[0])), MsgIDLength), \"setMsgOriginalId\")",
       "entry" : false,
-      "use-vars" : [ 1, 9, 3 ]
+      "use-vars" : [ 10, 1, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 9, 8, 1, 3 ],
+      "in-vars" : [ 10, 1, 3, 8 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 3 ],
+      "out-vars" : [ 10, 1, 3, 8 ],
       "decl-vars" : [ ],
       "line-start" : 259,
       "ast" : {
@@ -1592,7 +1592,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Priority",
-                  "variable" : 17
+                  "variable" : 18
                 },
                 "go-type" : 7,
                 "kind" : "expression",
@@ -1667,7 +1667,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -1679,13 +1679,13 @@
       "line-end" : 259,
       "code" : "OK(C.dpiMsgProps_setPriority(props, C.int(M.Priority)), \"setPriority\")",
       "entry" : false,
-      "use-vars" : [ 3, 1, 9 ]
+      "use-vars" : [ 3, 1, 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 20, 21 ],
-      "in-vars" : [ 3, 9, 8, 1 ],
+      "in-vars" : [ 8, 10, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 9, 8, 1, 3 ],
+      "out-vars" : [ 10, 1, 3, 8 ],
       "decl-vars" : [ ],
       "line-start" : 261,
       "ast" : {
@@ -1697,7 +1697,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "Object",
-              "variable" : 18
+              "variable" : 19
             },
             "go-type" : 47,
             "kind" : "expression",
@@ -1738,7 +1738,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 3, 9, 8, 1 ],
+      "in-vars" : [ 10, 1, 3, 8 ],
       "exit" : false,
       "out-vars" : [ 8 ],
       "decl-vars" : [ ],
@@ -1784,7 +1784,7 @@
               "kind" : "expression",
               "target" : {
                 "coerced-to" : {
-                  "go-type" : 89,
+                  "go-type" : 90,
                   "kind" : "type",
                   "qualifier" : {
                     "ident-kind" : "PkgName",
@@ -1794,16 +1794,16 @@
                   },
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 89,
+                    "go-type" : 90,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "Pointer"
                   }
                 },
-                "go-type" : 89,
+                "go-type" : 90,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 90,
+                  "go-type" : 91,
                   "kind" : "expression",
                   "operator" : "&",
                   "target" : {
@@ -1822,7 +1822,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "Raw",
-                        "variable" : 19
+                        "variable" : 20
                       },
                       "go-type" : 46,
                       "kind" : "expression",
@@ -1853,7 +1853,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "Raw",
-                    "variable" : 19
+                    "variable" : 20
                   },
                   "go-type" : 46,
                   "kind" : "expression",
@@ -1872,7 +1872,7 @@
                 } ],
                 "ellipsis" : false,
                 "function" : {
-                  "go-type" : 92,
+                  "go-type" : 93,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
@@ -1943,7 +1943,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -1955,11 +1955,11 @@
       "line-end" : 262,
       "code" : "OK(C.dpiMsgProps_setPayloadBytes(props, (*C.char)(unsafe.Pointer(&M.Raw[0])), C.uint(len(M.Raw))), \"setPayloadBytes\")",
       "entry" : false,
-      "use-vars" : [ 1, 9, 3 ]
+      "use-vars" : [ 1, 10, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 9, 8, 1, 3 ],
+      "in-vars" : [ 10, 1, 3, 8 ],
       "exit" : false,
       "out-vars" : [ 8 ],
       "decl-vars" : [ ],
@@ -1984,7 +1984,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "dpiObject",
-                "variable" : 20
+                "variable" : 21
               },
               "go-type" : 9,
               "kind" : "expression",
@@ -1993,7 +1993,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "Object",
-                  "variable" : 18
+                  "variable" : 19
                 },
                 "go-type" : 47,
                 "kind" : "expression",
@@ -2049,7 +2049,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "OK",
-              "variable" : 9
+              "variable" : 10
             }
           },
           "go-type" : 36,
@@ -2061,7 +2061,7 @@
       "line-end" : 264,
       "code" : "OK(C.dpiMsgProps_setPayloadObject(props, M.Object.dpiObject), \"setPayloadObject\")",
       "entry" : false,
-      "use-vars" : [ 9, 3, 1 ]
+      "use-vars" : [ 1, 10, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -2106,7 +2106,7 @@
     }, {
       "name" : "getError",
       "package" : 0,
-      "type" : 85,
+      "type" : 87,
       "exported" : false
     } ],
     "line-end" : 268,
@@ -2137,7 +2137,7 @@
     "results" : [ 4 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(d *github.com/godror/godror.drv, props *invalid type) error",
+      "name" : "(*github.com/godror/godror.Message) func(d *github.com/godror/godror.drv, props *invalid type) error",
       "params" : 1,
       "recv" : 1,
       "results" : 32,
@@ -2418,7 +2418,7 @@
       "type" : "Interface",
       "underlying" : 34
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 36,
       "recv" : 0,
       "results" : 37,
@@ -2967,12 +2967,20 @@
       "type" : "Tuple",
       "underlying" : 86
     }, {
+      "name" : "(*github.com/godror/godror.drv) func() *github.com/godror/godror.OraErr",
+      "params" : 36,
+      "recv" : 9,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 87,
+      "variadic" : false
+    }, {
       "name" : "func(string) int",
       "params" : 37,
       "recv" : -1,
-      "results" : 88,
+      "results" : 89,
       "type" : "Signature",
-      "underlying" : 87,
+      "underlying" : 88,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2981,29 +2989,29 @@
       } ],
       "name" : "(int)",
       "type" : "Tuple",
-      "underlying" : 88
+      "underlying" : 89
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 5,
       "type" : "Basic",
-      "underlying" : 89
+      "underlying" : 90
     }, {
       "elem" : 45,
       "name" : "*byte",
       "type" : "Pointer",
-      "underlying" : 90
+      "underlying" : 91
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 91
+      "underlying" : 92
     }, {
       "name" : "func([]byte) int",
-      "params" : 93,
+      "params" : 94,
       "recv" : -1,
-      "results" : 88,
+      "results" : 89,
       "type" : "Signature",
-      "underlying" : 92,
+      "underlying" : 93,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -3012,7 +3020,7 @@
       } ],
       "name" : "([]byte)",
       "type" : "Tuple",
-      "underlying" : 93
+      "underlying" : 94
     } ],
     "variables" : [ {
       "name" : "",
@@ -3050,9 +3058,9 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "ok",
+      "name" : "zeroMsgID",
       "package" : 0,
-      "type" : 10,
+      "type" : 44,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3064,9 +3072,9 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "zeroMsgID",
+      "name" : "ok",
       "package" : 0,
-      "type" : 44,
+      "type" : 10,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -3074,6 +3082,13 @@
       "name" : "firstErr",
       "package" : 0,
       "type" : 33,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "d",
+      "package" : 0,
+      "type" : 2,
       "exported" : false,
       "embedded" : false,
       "field" : false

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 2, 4 ],
+      "in-vars" : [ 3, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 3, 2 ],
+      "out-vars" : [ 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 4, 3, 2 ],
+      "in-vars" : [ 3, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 3, 6 ],
+      "out-vars" : [ 6, 3, 4 ],
       "decl-vars" : [ 6 ],
       "line-start" : 3227,
       "ast" : {
@@ -129,7 +129,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 6, 4, 3 ],
+      "in-vars" : [ 3, 4, 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -196,7 +196,7 @@
       "line-end" : 3228,
       "code" : "return e.EncodeElement(*cp2, start)",
       "entry" : false,
-      "use-vars" : [ 4, 3, 6 ]
+      "use-vars" : [ 6, 4, 3 ]
     } ],
     "code" : "// MarshalXML implements the xml.Marshaler interface for ContainerProperties.\nfunc (cp ContainerProperties) MarshalXML(e *xml.Encoder, start xml.StartElement) error {\n\tcp2 := (*containerProperties)(unsafe.Pointer(&cp))\n\treturn e.EncodeElement(*cp2, start)\n}",
     "defines" : [ 0 ],
@@ -208,7 +208,7 @@
     }, {
       "name" : "EncodeElement",
       "package" : 1,
-      "type" : 66,
+      "type" : 69,
       "exported" : true
     } ],
     "line-end" : 3229,
@@ -239,7 +239,7 @@
     "results" : [ 5 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(e *encoding/xml.Encoder, start encoding/xml.StartElement) error",
+      "name" : "(github.com/Azure/azure-storage-blob-go/azblob.ContainerProperties) func(e *encoding/xml.Encoder, start encoding/xml.StartElement) error",
       "params" : 1,
       "recv" : 2,
       "results" : 35,
@@ -366,7 +366,7 @@
       "type" : "Interface",
       "underlying" : 11
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 13,
       "recv" : 0,
       "results" : 14,
@@ -418,7 +418,7 @@
       "type" : "Interface",
       "underlying" : 20
     }, {
-      "name" : "func(p []byte) (n int, err error)",
+      "name" : "(io.Writer) func(p []byte) (n int, err error)",
       "params" : 22,
       "recv" : 1,
       "results" : 23,
@@ -811,6 +811,14 @@
       "name" : "interface{}",
       "type" : "Interface",
       "underlying" : 68
+    }, {
+      "name" : "(*encoding/xml.Encoder) func(v interface{}, start encoding/xml.StartElement) error",
+      "params" : 67,
+      "recv" : 7,
+      "results" : 35,
+      "type" : "Signature",
+      "underlying" : 69,
+      "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
@@ -858,6 +866,13 @@
       "name" : "cp2",
       "package" : 0,
       "type" : 59,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "enc",
+      "package" : 1,
+      "type" : 2,
       "exported" : false,
       "embedded" : false,
       "field" : false

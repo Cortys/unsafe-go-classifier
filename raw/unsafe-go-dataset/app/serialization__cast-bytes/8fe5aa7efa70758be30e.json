@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 4, 5 ],
+      "in-vars" : [ 5, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 5 ],
+      "out-vars" : [ 3, 5, 4 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 4, 5 ],
+      "in-vars" : [ 5, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 9 ],
+      "out-vars" : [ 9, 4, 3 ],
       "decl-vars" : [ 9 ],
       "line-start" : 18,
       "ast" : {
@@ -244,9 +244,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 9, 3, 4 ],
+      "in-vars" : [ 9, 4, 3 ],
       "exit" : false,
-      "out-vars" : [ 10, 3, 4 ],
+      "out-vars" : [ 3, 10, 4 ],
       "decl-vars" : [ 10 ],
       "line-start" : 22,
       "ast" : {
@@ -360,7 +360,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 3, 4, 10 ],
+      "in-vars" : [ 4, 3, 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -422,7 +422,7 @@
       "line-end" : 23,
       "code" : "return so.Set(c, b)",
       "entry" : false,
-      "use-vars" : [ 4, 10, 3 ]
+      "use-vars" : [ 3, 4, 10 ]
     } ],
     "code" : "func (so *sockOpt) setAttachFilter(c *socket.Conn, f []bpf.RawInstruction) error {\n\tprog := unix.SockFprog{\n\t\tLen:    uint16(len(f)),\n\t\tFilter: (*unix.SockFilter)(unsafe.Pointer(&f[0])),\n\t}\n\tb := (*[unix.SizeofSockFprog]byte)(unsafe.Pointer(&prog))[:unix.SizeofSockFprog]\n\treturn so.Set(c, b)\n}",
     "defines" : [ 0 ],
@@ -434,7 +434,7 @@
     }, {
       "name" : "Set",
       "package" : 1,
-      "type" : 52,
+      "type" : 54,
       "exported" : true
     } ],
     "line-end" : 24,
@@ -465,7 +465,7 @@
     "results" : [ 6 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(c *golang.org/x/net/internal/socket.Conn, f []golang.org/x/net/bpf.RawInstruction) error",
+      "name" : "(*golang.org/x/net/ipv4.sockOpt) func(c *golang.org/x/net/internal/socket.Conn, f []golang.org/x/net/bpf.RawInstruction) error",
       "params" : 1,
       "recv" : 3,
       "results" : 14,
@@ -530,7 +530,7 @@
       "type" : "Interface",
       "underlying" : 7
     }, {
-      "name" : "func(f func(fd uintptr)) error",
+      "name" : "(syscall.RawConn) func(f func(fd uintptr)) error",
       "params" : 9,
       "recv" : 1,
       "results" : 14,
@@ -593,7 +593,7 @@
       "type" : "Interface",
       "underlying" : 16
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 13,
       "recv" : 0,
       "results" : 18,
@@ -609,7 +609,7 @@
       "type" : "Tuple",
       "underlying" : 18
     }, {
-      "name" : "func(f func(fd uintptr) (done bool)) error",
+      "name" : "(syscall.RawConn) func(f func(fd uintptr) (done bool)) error",
       "params" : 20,
       "recv" : 2,
       "results" : 14,
@@ -857,6 +857,19 @@
       "name" : "(c *golang.org/x/net/internal/socket.Conn, b []byte)",
       "type" : "Tuple",
       "underlying" : 53
+    }, {
+      "name" : "(*golang.org/x/net/internal/socket.Option) func(c *golang.org/x/net/internal/socket.Conn, b []byte) error",
+      "params" : 53,
+      "recv" : 11,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 54,
+      "variadic" : false
+    }, {
+      "elem" : 33,
+      "name" : "*golang.org/x/net/internal/socket.Option",
+      "type" : "Pointer",
+      "underlying" : 55
     } ],
     "variables" : [ {
       "name" : "",
@@ -932,6 +945,13 @@
       "name" : "b",
       "package" : 0,
       "type" : 46,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "o",
+      "package" : 1,
+      "type" : 55,
       "exported" : false,
       "embedded" : false,
       "field" : false

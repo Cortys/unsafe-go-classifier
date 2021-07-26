@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 0, 1, 2 ],
+      "in-vars" : [ 2, 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 4, 5, 0, 1, 2, 3 ],
       "decl-vars" : [ 4, 5 ],
       "line-start" : 162,
       "ast" : {
@@ -54,7 +54,7 @@
           "specs" : [ {
             "comments" : [ ],
             "declared-type" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -64,7 +64,7 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 14,
+                "go-type" : 16,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
@@ -81,11 +81,11 @@
           }, {
             "comments" : [ ],
             "declared-type" : {
-              "go-type" : 13,
+              "go-type" : 4,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 13,
+                "go-type" : 4,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "uintptr"
@@ -112,9 +112,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 1 ],
-      "in-vars" : [ 4, 0, 5, 1, 2, 3 ],
+      "in-vars" : [ 4, 5, 0, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 5, 1, 2, 3, 4 ],
+      "out-vars" : [ 5, 0, 1, 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : 167,
       "ast" : {
@@ -130,9 +130,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 4, 0, 5, 1, 2, 3 ],
+      "in-vars" : [ 5, 0, 1, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3, 4, 0, 5 ],
+      "out-vars" : [ 4, 5, 0, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 168,
       "ast" : {
@@ -144,14 +144,14 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 31,
+              "go-type" : 2,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "finlock",
-                "variable" : 2
+                "variable" : 0
               }
             },
             "type" : "unary"
@@ -177,13 +177,13 @@
       "line-end" : 168,
       "code" : "lock(&finlock)",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 3, 4, 0, 5, 1, 2 ],
+      "in-vars" : [ 3, 4, 5, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 6, 4, 0, 5 ],
+      "out-vars" : [ 1, 6, 3, 4, 5, 0 ],
       "decl-vars" : [ 6 ],
       "line-start" : 169,
       "ast" : {
@@ -199,14 +199,14 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "finq",
-            "variable" : 3
+            "variable" : 2
           }
         } ],
         "type" : "define"
@@ -215,26 +215,26 @@
       "line-end" : 169,
       "code" : "fb := finq",
       "entry" : false,
-      "use-vars" : [ 3 ]
+      "use-vars" : [ 2 ]
     }, {
-      "update-vars" : [ 3 ],
+      "update-vars" : [ 2 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 0, 5, 1, 2, 6, 4 ],
+      "in-vars" : [ 6, 3, 4, 5, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 2, 3, 6, 4, 0 ],
+      "out-vars" : [ 0, 1, 6, 2, 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 170,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "finq",
-            "variable" : 3
+            "variable" : 2
           }
         } ],
         "right" : [ {
@@ -249,7 +249,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 3 ],
+      "assign-vars" : [ 2 ],
       "line-end" : 170,
       "code" : "finq = nil",
       "entry" : false,
@@ -257,9 +257,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 13 ],
-      "in-vars" : [ 1, 2, 3, 6, 4, 0, 5 ],
+      "in-vars" : [ 0, 1, 6, 2, 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 2, 3, 6, 4, 0 ],
+      "out-vars" : [ 5, 0, 1, 6, 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : 171,
       "ast" : {
@@ -267,7 +267,7 @@
           "go-type" : 37,
           "kind" : "expression",
           "left" : {
-            "go-type" : 2,
+            "go-type" : 6,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -301,9 +301,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 4, 0, 5, 1, 2, 3, 6 ],
+      "in-vars" : [ 5, 0, 1, 6, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 0, 5, 1, 2, 8, 3, 6, 4 ],
+      "out-vars" : [ 2, 3, 8, 4, 5, 0, 1, 6 ],
       "decl-vars" : [ 8 ],
       "line-start" : 172,
       "ast" : {
@@ -346,9 +346,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 6, 4, 0, 5, 1, 2, 8, 3 ],
+      "in-vars" : [ 0, 1, 6, 2, 3, 8, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 173,
       "ast" : {
@@ -385,15 +385,15 @@
     }, {
       "update-vars" : [ 9 ],
       "successors" : [ 11 ],
-      "in-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "in-vars" : [ 2, 3, 4, 5, 0, 1, 6 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 6, 4, 0, 5, 1 ],
+      "out-vars" : [ 0, 1, 6, 2, 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 174,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 23,
+          "go-type" : 25,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -404,7 +404,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 23,
+          "go-type" : 25,
           "kind" : "constant",
           "value" : {
             "type" : "BOOL",
@@ -421,9 +421,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
-      "in-vars" : [ 1, 2, 3, 6, 4, 0, 5 ],
+      "in-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 1, 2, 3, 6 ],
+      "out-vars" : [ 3, 4, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 175,
       "ast" : {
@@ -435,14 +435,14 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 31,
+              "go-type" : 2,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "finlock",
-                "variable" : 2
+                "variable" : 0
               }
             },
             "type" : "unary"
@@ -454,7 +454,7 @@
               "value" : "16"
             }
           }, {
-            "go-type" : 25,
+            "go-type" : 27,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -489,13 +489,13 @@
       "line-end" : 175,
       "code" : "goparkunlock(&finlock, waitReasonFinalizerWait, traceEvGoBlock, 1)",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 1, 2, 3, 6, 4, 0, 5 ],
+      "in-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 1, 2, 3, 6 ],
+      "out-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 176,
       "ast" : {
@@ -511,9 +511,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 2, 3, 6, 4, 0, 5, 1 ],
+      "in-vars" : [ 5, 0, 1, 6, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 3, 4, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 178,
       "ast" : {
@@ -525,14 +525,14 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 31,
+              "go-type" : 2,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "finlock",
-                "variable" : 2
+                "variable" : 0
               }
             },
             "type" : "unary"
@@ -558,13 +558,13 @@
       "line-end" : 178,
       "code" : "unlock(&finlock)",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15, 16 ],
-      "in-vars" : [ 4, 0, 5, 1, 2, 3, 6 ],
+      "in-vars" : [ 6, 2, 3, 4, 5, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 6, 4, 0, 5, 1 ],
+      "out-vars" : [ 3, 4, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 179,
       "ast" : {
@@ -587,9 +587,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 16 ],
-      "in-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "in-vars" : [ 0, 1, 6, 2, 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 3, 6, 4, 0, 5, 1 ],
+      "out-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 180,
       "ast" : {
@@ -622,9 +622,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18, 3 ],
-      "in-vars" : [ 0, 5, 1, 2, 3, 6, 4 ],
+      "in-vars" : [ 1, 6, 2, 3, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 2, 3, 4, 5, 0, 1, 6 ],
       "decl-vars" : [ ],
       "line-start" : 182,
       "ast" : {
@@ -632,7 +632,7 @@
           "go-type" : 37,
           "kind" : "expression",
           "left" : {
-            "go-type" : 2,
+            "go-type" : 6,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -666,9 +666,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20, 46 ],
-      "in-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "in-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3, 6, 4, 0, 5 ],
+      "out-vars" : [ 1, 6, 2, 3, 4, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 183,
       "ast" : {
@@ -708,9 +708,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 6, 4, 0, 5, 2, 3 ],
+      "in-vars" : [ 5, 0, 6, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "decl-vars" : [ 1 ],
       "line-start" : 183,
       "ast" : {
@@ -735,7 +735,7 @@
           "go-type" : 5,
           "kind" : "expression",
           "target" : {
-            "go-type" : 2,
+            "go-type" : 6,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -757,9 +757,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 17 ],
-      "in-vars" : [ 0, 5, 1, 2, 3, 6, 4 ],
+      "in-vars" : [ 0, 1, 6, 2, 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "out-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 183,
       "ast" : {
@@ -786,9 +786,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 2, 3, 6, 4, 0, 5, 1 ],
+      "in-vars" : [ 2, 3, 4, 5, 0, 1, 6 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3, 6, 4, 0, 5, 12 ],
+      "out-vars" : [ 2, 3, 4, 5, 12, 0, 1, 6 ],
       "decl-vars" : [ 12 ],
       "line-start" : 184,
       "ast" : {
@@ -808,7 +808,7 @@
           "kind" : "expression",
           "operator" : "&",
           "target" : {
-            "go-type" : 8,
+            "go-type" : 11,
             "index" : {
               "go-type" : 5,
               "kind" : "expression",
@@ -842,10 +842,10 @@
                 "value" : "fin",
                 "variable" : 11
               },
-              "go-type" : 7,
+              "go-type" : 10,
               "kind" : "expression",
               "target" : {
-                "go-type" : 2,
+                "go-type" : 6,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -871,9 +871,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
-      "in-vars" : [ 2, 3, 6, 4, 0, 5, 12, 1 ],
+      "in-vars" : [ 3, 4, 5, 12, 0, 1, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 14, 0, 5, 12, 3, 4, 1, 2 ],
+      "out-vars" : [ 2, 3, 6, 5, 14, 12, 0, 1, 4 ],
       "decl-vars" : [ 14 ],
       "line-start" : 186,
       "ast" : {
@@ -889,10 +889,10 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 13,
+          "go-type" : 4,
           "kind" : "expression",
           "left" : {
-            "go-type" : 13,
+            "go-type" : 4,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -907,7 +907,7 @@
               "value" : "nret",
               "variable" : 13
             },
-            "go-type" : 13,
+            "go-type" : 4,
             "kind" : "expression",
             "target" : {
               "go-type" : 130,
@@ -934,9 +934,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 23, 25 ],
-      "in-vars" : [ 6, 0, 5, 12, 1, 4, 14, 2, 3 ],
+      "in-vars" : [ 4, 5, 12, 0, 3, 14, 1, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 12, 1, 2, 6, 4, 0, 5, 3 ],
+      "out-vars" : [ 5, 6, 2, 4, 12, 0, 1, 3, 14 ],
       "decl-vars" : [ ],
       "line-start" : 187,
       "ast" : {
@@ -944,7 +944,7 @@
           "go-type" : 37,
           "kind" : "expression",
           "left" : {
-            "go-type" : 13,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -956,7 +956,7 @@
           },
           "operator" : "<",
           "right" : {
-            "go-type" : 13,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -979,15 +979,15 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 24 ],
-      "in-vars" : [ 1, 2, 3, 6, 14, 0, 12 ],
+      "in-vars" : [ 2, 3, 14, 12, 0, 1, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 4, 14, 0, 12, 1, 2 ],
+      "out-vars" : [ 1, 6, 2, 3, 4, 14, 12, 0 ],
       "decl-vars" : [ ],
       "line-start" : 192,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -999,7 +999,7 @@
         } ],
         "right" : [ {
           "arguments" : [ {
-            "go-type" : 13,
+            "go-type" : 4,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1018,7 +1018,7 @@
               "value" : "nil"
             }
           }, {
-            "go-type" : 23,
+            "go-type" : 25,
             "kind" : "constant",
             "value" : {
               "type" : "BOOL",
@@ -1037,7 +1037,7 @@
               "value" : "mallocgc"
             }
           },
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -1051,15 +1051,15 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 25 ],
-      "in-vars" : [ 14, 0, 12, 1, 2, 3, 6, 4 ],
+      "in-vars" : [ 14, 12, 0, 1, 6, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 12, 14, 5, 1, 2, 6, 4 ],
+      "out-vars" : [ 3, 5, 12, 0, 6, 2, 4, 14, 1 ],
       "decl-vars" : [ ],
       "line-start" : 193,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 13,
+          "go-type" : 4,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -1070,7 +1070,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 13,
+          "go-type" : 4,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -1090,9 +1090,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26, 27 ],
-      "in-vars" : [ 14, 5, 1, 2, 6, 4, 0, 12, 3 ],
+      "in-vars" : [ 5, 14, 12, 1, 2, 4, 0, 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 5, 12, 2, 6, 4, 14, 1, 3 ],
+      "out-vars" : [ 4, 5, 14, 12, 0, 1, 2, 3, 6 ],
       "decl-vars" : [ ],
       "line-start" : 196,
       "ast" : {
@@ -1106,7 +1106,7 @@
               "value" : "fint",
               "variable" : 15
             },
-            "go-type" : 15,
+            "go-type" : 17,
             "kind" : "expression",
             "target" : {
               "go-type" : 130,
@@ -1145,9 +1145,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27 ],
-      "in-vars" : [ 4, 14, 5, 2, 3, 6, 0, 12, 1 ],
+      "in-vars" : [ 12, 1, 2, 5, 14, 0, 6, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 6, 12, 3, 4, 14, 0, 5, 1, 2 ],
+      "out-vars" : [ 4, 14, 12, 3, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 197,
       "ast" : {
@@ -1187,9 +1187,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 28 ],
-      "in-vars" : [ 3, 6, 14, 0, 5, 12, 2, 4, 1 ],
+      "in-vars" : [ 14, 2, 0, 1, 6, 3, 4, 5, 12 ],
       "exit" : false,
-      "out-vars" : [ 14, 5, 12, 1, 3, 6, 0, 2, 4 ],
+      "out-vars" : [ 4, 5, 14, 12, 0, 1, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 203,
       "ast" : {
@@ -1201,11 +1201,11 @@
             "coerced-to" : {
               "contained" : {
                 "element" : {
-                  "go-type" : 13,
+                  "go-type" : 4,
                   "kind" : "type",
                   "type" : "identifier",
                   "value" : {
-                    "go-type" : 13,
+                    "go-type" : 4,
                     "ident-kind" : "TypeName",
                     "kind" : "ident",
                     "value" : "uintptr"
@@ -1230,7 +1230,7 @@
             "go-type" : 137,
             "kind" : "expression",
             "target" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1247,11 +1247,11 @@
         "right" : [ {
           "declared" : {
             "element" : {
-              "go-type" : 13,
+              "go-type" : 4,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 13,
+                "go-type" : 4,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "uintptr"
@@ -1284,14 +1284,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 29, 31, 37 ],
-      "in-vars" : [ 6, 14, 1, 2, 3, 4, 0, 5, 12 ],
+      "in-vars" : [ 1, 2, 3, 4, 14, 12, 0, 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 4, 14, 0, 12, 2, 6, 5, 1, 3 ],
+      "out-vars" : [ 2, 14, 12, 6, 1, 3, 4, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 204,
       "ast" : {
         "condition" : {
-          "go-type" : 19,
+          "go-type" : 21,
           "kind" : "expression",
           "left" : {
             "field" : {
@@ -1300,7 +1300,7 @@
               "value" : "kind",
               "variable" : 16
             },
-            "go-type" : 19,
+            "go-type" : 21,
             "kind" : "expression",
             "target" : {
               "field" : {
@@ -1309,7 +1309,7 @@
                 "value" : "fint",
                 "variable" : 15
               },
-              "go-type" : 15,
+              "go-type" : 17,
               "kind" : "expression",
               "target" : {
                 "go-type" : 130,
@@ -1328,7 +1328,7 @@
           },
           "operator" : "&",
           "right" : {
-            "go-type" : 19,
+            "go-type" : 21,
             "kind" : "constant",
             "value" : {
               "type" : "INT",
@@ -1348,14 +1348,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 30 ],
-      "in-vars" : [ 12, 1, 3, 6, 4, 14, 0, 5, 2 ],
+      "in-vars" : [ 3, 4, 14, 0, 1, 6, 5, 12, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 12, 2, 6, 4, 14, 5, 1, 3 ],
+      "out-vars" : [ 2, 3, 4, 14, 12, 0, 5, 1, 6 ],
       "decl-vars" : [ ],
       "line-start" : 205,
       "ast" : {
         "expressions" : [ {
-          "go-type" : 19,
+          "go-type" : 21,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -1373,20 +1373,20 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 12, 1, 2, 3, 6, 14, 0, 5, 4 ],
+      "in-vars" : [ 2, 3, 1, 6, 14, 12, 0, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 4, 14, 0, 1, 3, 6, 5, 12, 2 ],
+      "out-vars" : [ 14, 12, 0, 1, 6, 4, 5, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 207,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
               "contained" : {
-                "go-type" : 14,
+                "go-type" : 16,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -1396,7 +1396,7 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 14,
+                  "go-type" : 16,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
@@ -1409,7 +1409,7 @@
             "go-type" : 139,
             "kind" : "expression",
             "target" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1430,7 +1430,7 @@
             "value" : "arg",
             "variable" : 17
           },
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "target" : {
             "go-type" : 130,
@@ -1455,14 +1455,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 32 ],
-      "in-vars" : [ 14, 0, 1, 2, 4, 5, 12, 3, 6 ],
+      "in-vars" : [ 5, 14, 0, 6, 2, 3, 4, 12, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 12, 1, 6, 14, 0, 4, 2, 3 ],
+      "out-vars" : [ 5, 12, 6, 2, 3, 4, 14, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 208,
       "ast" : {
         "expressions" : [ {
-          "go-type" : 19,
+          "go-type" : 21,
           "kind" : "constant",
           "value" : {
             "type" : "INT",
@@ -1480,9 +1480,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 33 ],
-      "in-vars" : [ 3, 6, 0, 1, 2, 4, 14, 5, 12 ],
+      "in-vars" : [ 6, 2, 4, 5, 14, 12, 0, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 5, 22, 6, 14, 1, 2, 3, 4, 12 ],
+      "out-vars" : [ 22, 4, 14, 12, 3, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ 22 ],
       "line-start" : 209,
       "ast" : {
@@ -1518,7 +1518,7 @@
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -1528,13 +1528,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 14,
+                "go-type" : 16,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 14,
+            "go-type" : 16,
             "kind" : "expression",
             "target" : {
               "field" : {
@@ -1543,7 +1543,7 @@
                 "value" : "fint",
                 "variable" : 15
               },
-              "go-type" : 15,
+              "go-type" : 17,
               "kind" : "expression",
               "target" : {
                 "go-type" : 130,
@@ -1572,9 +1572,9 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 34 ],
-      "in-vars" : [ 6, 5, 12, 2, 3, 4, 14, 0, 1, 22 ],
+      "in-vars" : [ 22, 4, 5, 14, 1, 2, 12, 0, 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 14, 3, 0, 5, 12, 1, 2, 22, 6, 4 ],
+      "out-vars" : [ 1, 3, 22, 5, 14, 12, 4, 0, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 211,
       "ast" : {
@@ -1586,7 +1586,7 @@
             "value" : "_type",
             "variable" : 18
           },
-          "go-type" : 15,
+          "go-type" : 17,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -1608,7 +1608,7 @@
             "go-type" : 148,
             "kind" : "expression",
             "target" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1623,7 +1623,7 @@
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 15,
+          "go-type" : 17,
           "kind" : "expression",
           "operator" : "&",
           "target" : {
@@ -1633,7 +1633,7 @@
               "value" : "typ",
               "variable" : 20
             },
-            "go-type" : 16,
+            "go-type" : 18,
             "kind" : "expression",
             "target" : {
               "field" : {
@@ -1642,7 +1642,7 @@
                 "value" : "ot",
                 "variable" : 19
               },
-              "go-type" : 28,
+              "go-type" : 30,
               "kind" : "expression",
               "target" : {
                 "go-type" : 130,
@@ -1667,13 +1667,13 @@
       "line-end" : 211,
       "code" : "(*eface)(frame)._type = &f.ot.typ",
       "entry" : false,
-      "use-vars" : [ 12, 4 ]
+      "use-vars" : [ 4, 12 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 35 ],
-      "in-vars" : [ 1, 2, 6, 4, 14, 12, 0, 5, 22, 3 ],
+      "in-vars" : [ 12, 0, 6, 3, 22, 4, 5, 14, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 12, 2, 6, 14, 0, 5, 1, 22, 3 ],
+      "out-vars" : [ 22, 12, 1, 6, 2, 3, 4, 5, 14, 0 ],
       "decl-vars" : [ ],
       "line-start" : 212,
       "ast" : {
@@ -1685,7 +1685,7 @@
             "value" : "data",
             "variable" : 21
           },
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -1707,7 +1707,7 @@
             "go-type" : 148,
             "kind" : "expression",
             "target" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1728,7 +1728,7 @@
             "value" : "arg",
             "variable" : 17
           },
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "target" : {
             "go-type" : 130,
@@ -1749,13 +1749,13 @@
       "line-end" : 212,
       "code" : "(*eface)(frame).data = f.arg",
       "entry" : false,
-      "use-vars" : [ 4, 12 ]
+      "use-vars" : [ 12, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 36, 39 ],
-      "in-vars" : [ 4, 14, 2, 22, 3, 6, 0, 5, 12, 1 ],
+      "in-vars" : [ 14, 12, 2, 3, 22, 5, 1, 6, 4, 0 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 1, 22, 6, 14, 12, 2, 3 ],
+      "out-vars" : [ 14, 6, 2, 22, 4, 5, 12, 0, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 213,
       "ast" : {
@@ -1822,9 +1822,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 5, 12, 2, 6, 14, 0, 3, 4, 1, 22 ],
+      "in-vars" : [ 6, 3, 22, 4, 5, 14, 1, 12, 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 12, 1, 14, 0, 5, 3, 6, 4 ],
+      "out-vars" : [ 4, 5, 0, 2, 3, 14, 12, 1, 6 ],
       "decl-vars" : [ ],
       "line-start" : 216,
       "ast" : {
@@ -1852,7 +1852,7 @@
             "go-type" : 161,
             "kind" : "expression",
             "target" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -1900,7 +1900,7 @@
               "go-type" : 148,
               "kind" : "expression",
               "target" : {
-                "go-type" : 14,
+                "go-type" : 16,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -1940,9 +1940,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 38 ],
-      "in-vars" : [ 3, 14, 0, 5, 12, 2, 6, 4, 1 ],
+      "in-vars" : [ 0, 1, 2, 4, 5, 6, 3, 14, 12 ],
       "exit" : false,
-      "out-vars" : [ 4, 12, 1, 5, 2, 3, 6, 14, 0 ],
+      "out-vars" : [ 5, 0, 6, 2, 3, 4, 14, 12, 1 ],
       "decl-vars" : [ ],
       "line-start" : 218,
       "ast" : {
@@ -1958,9 +1958,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 12, 3, 0, 5, 1, 2, 6, 4, 14 ],
+      "in-vars" : [ 14, 12, 6, 2, 3, 4, 5, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 4, 14, 1, 0, 5, 12, 2 ],
+      "out-vars" : [ 5, 14, 0, 4, 12, 1, 6, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 219,
       "ast" : {
@@ -2000,15 +2000,15 @@
     }, {
       "update-vars" : [ 24 ],
       "successors" : [ 40 ],
-      "in-vars" : [ 5, 12, 1, 2, 4, 14, 3, 6, 0 ],
+      "in-vars" : [ 1, 3, 0, 5, 14, 12, 6, 2, 4 ],
       "exit" : false,
-      "out-vars" : [ 5, 12, 1, 3, 6, 4, 2, 14, 0 ],
+      "out-vars" : [ 12, 6, 4, 14, 1, 2, 3, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 221,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 23,
+          "go-type" : 25,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -2019,7 +2019,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 23,
+          "go-type" : 25,
           "kind" : "constant",
           "value" : {
             "type" : "BOOL",
@@ -2036,9 +2036,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 6, 4, 0, 1, 2, 3, 14, 5, 12 ],
+      "in-vars" : [ 4, 12, 6, 3, 2, 5, 14, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 12, 1, 2, 3, 6 ],
+      "out-vars" : [ 1, 6, 2, 3, 4, 5, 12, 0 ],
       "decl-vars" : [ ],
       "line-start" : 222,
       "ast" : {
@@ -2056,7 +2056,7 @@
             }
           }, {
             "coerced-to" : {
-              "go-type" : 14,
+              "go-type" : 16,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -2066,13 +2066,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 14,
+                "go-type" : 16,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 14,
+            "go-type" : 16,
             "kind" : "expression",
             "target" : {
               "field" : {
@@ -2081,7 +2081,7 @@
                 "value" : "fn",
                 "variable" : 25
               },
-              "go-type" : 10,
+              "go-type" : 13,
               "kind" : "expression",
               "target" : {
                 "go-type" : 130,
@@ -2098,7 +2098,7 @@
             },
             "type" : "cast"
           }, {
-            "go-type" : 14,
+            "go-type" : 16,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -2122,7 +2122,7 @@
             "go-type" : 5,
             "kind" : "expression",
             "target" : {
-              "go-type" : 13,
+              "go-type" : 4,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2148,7 +2148,7 @@
             "go-type" : 5,
             "kind" : "expression",
             "target" : {
-              "go-type" : 13,
+              "go-type" : 4,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -2181,19 +2181,19 @@
       "line-end" : 222,
       "code" : "reflectcall(nil, unsafe.Pointer(f.fn), frame, uint32(framesz), uint32(framesz))",
       "entry" : false,
-      "use-vars" : [ 4, 14, 12 ]
+      "use-vars" : [ 14, 12, 4 ]
     }, {
       "update-vars" : [ 24 ],
       "successors" : [ 42 ],
-      "in-vars" : [ 3, 6, 4, 0, 5, 12, 1, 2 ],
+      "in-vars" : [ 6, 2, 3, 4, 5, 12, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 12, 1, 2, 3 ],
+      "out-vars" : [ 5, 12, 0, 1, 6, 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : 223,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 23,
+          "go-type" : 25,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -2204,7 +2204,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 23,
+          "go-type" : 25,
           "kind" : "constant",
           "value" : {
             "type" : "BOOL",
@@ -2221,9 +2221,9 @@
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 43 ],
-      "in-vars" : [ 4, 0, 5, 12, 1, 2, 3, 6 ],
+      "in-vars" : [ 4, 5, 12, 0, 1, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 12, 1, 2, 3, 6 ],
+      "out-vars" : [ 1, 6, 2, 3, 4, 5, 12, 0 ],
       "decl-vars" : [ ],
       "line-start" : 229,
       "ast" : {
@@ -2235,7 +2235,7 @@
             "value" : "fn",
             "variable" : 25
           },
-          "go-type" : 10,
+          "go-type" : 13,
           "kind" : "expression",
           "target" : {
             "go-type" : 130,
@@ -2270,9 +2270,9 @@
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 44 ],
-      "in-vars" : [ 6, 4, 0, 5, 12, 1, 2, 3 ],
+      "in-vars" : [ 6, 2, 3, 4, 5, 12, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 12, 1, 2, 3, 6, 4, 0 ],
+      "out-vars" : [ 12, 0, 1, 6, 2, 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 230,
       "ast" : {
@@ -2284,7 +2284,7 @@
             "value" : "arg",
             "variable" : 17
           },
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "target" : {
             "go-type" : 130,
@@ -2300,7 +2300,7 @@
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 14,
+          "go-type" : 16,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -2319,9 +2319,9 @@
     }, {
       "update-vars" : [ 12 ],
       "successors" : [ 45 ],
-      "in-vars" : [ 3, 6, 4, 0, 5, 12, 1, 2 ],
+      "in-vars" : [ 5, 12, 0, 1, 6, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 4, 0, 5, 1, 2 ],
+      "out-vars" : [ 3, 4, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 231,
       "ast" : {
@@ -2333,7 +2333,7 @@
             "value" : "ot",
             "variable" : 19
           },
-          "go-type" : 28,
+          "go-type" : 30,
           "kind" : "expression",
           "target" : {
             "go-type" : 130,
@@ -2368,9 +2368,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 6, 4, 0, 5, 1, 2, 3 ],
+      "in-vars" : [ 4, 5, 0, 1, 6, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 5, 1, 2, 3, 6 ],
+      "out-vars" : [ 2, 3, 4, 5, 0, 1, 6 ],
       "decl-vars" : [ ],
       "line-start" : 232,
       "ast" : {
@@ -2391,7 +2391,7 @@
               "go-type" : 5,
               "kind" : "expression",
               "target" : {
-                "go-type" : 2,
+                "go-type" : 6,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -2460,9 +2460,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 47 ],
-      "in-vars" : [ 3, 6, 4, 0, 5, 1, 2 ],
+      "in-vars" : [ 3, 4, 5, 0, 1, 6, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 27, 3, 6, 4, 0, 5 ],
+      "out-vars" : [ 2, 3, 27, 4, 5, 0, 1, 6 ],
       "decl-vars" : [ 27 ],
       "line-start" : 234,
       "ast" : {
@@ -2484,10 +2484,10 @@
             "value" : "next",
             "variable" : 26
           },
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "target" : {
-            "go-type" : 2,
+            "go-type" : 6,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -2509,9 +2509,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 48 ],
-      "in-vars" : [ 3, 6, 4, 0, 5, 1, 2, 27 ],
+      "in-vars" : [ 1, 6, 2, 3, 27, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 6, 4, 0, 5, 1, 2, 27, 3 ],
+      "out-vars" : [ 6, 2, 3, 27, 4, 5, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 235,
       "ast" : {
@@ -2523,14 +2523,14 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 31,
+              "go-type" : 2,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "finlock",
-                "variable" : 2
+                "variable" : 0
               }
             },
             "type" : "unary"
@@ -2556,13 +2556,13 @@
       "line-end" : 235,
       "code" : "lock(&finlock)",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 0 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 49 ],
-      "in-vars" : [ 0, 5, 1, 2, 27, 3, 6, 4 ],
+      "in-vars" : [ 0, 1, 6, 2, 3, 27, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 4, 5, 1, 2, 27 ],
+      "out-vars" : [ 27, 4, 5, 0, 1, 6, 2 ],
       "decl-vars" : [ ],
       "line-start" : 236,
       "ast" : {
@@ -2574,10 +2574,10 @@
             "value" : "next",
             "variable" : 26
           },
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "target" : {
-            "go-type" : 2,
+            "go-type" : 6,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -2590,14 +2590,14 @@
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "finc",
-            "variable" : 0
+            "variable" : 3
           }
         } ],
         "type" : "assign"
@@ -2606,30 +2606,30 @@
       "line-end" : 236,
       "code" : "fb.next = finc",
       "entry" : false,
-      "use-vars" : [ 0, 6 ]
+      "use-vars" : [ 6, 3 ]
     }, {
-      "update-vars" : [ 0 ],
+      "update-vars" : [ 3 ],
       "successors" : [ 50 ],
-      "in-vars" : [ 5, 1, 2, 27, 3, 6, 4 ],
+      "in-vars" : [ 1, 6, 2, 27, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 27, 3, 4, 0, 5 ],
+      "out-vars" : [ 4, 5, 0, 1, 2, 3, 27 ],
       "decl-vars" : [ ],
       "line-start" : 237,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "finc",
-            "variable" : 0
+            "variable" : 3
           }
         } ],
         "right" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -2641,7 +2641,7 @@
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 0 ],
+      "assign-vars" : [ 3 ],
       "line-end" : 237,
       "code" : "finc = fb",
       "entry" : false,
@@ -2649,9 +2649,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 51 ],
-      "in-vars" : [ 4, 0, 5, 1, 2, 27, 3 ],
+      "in-vars" : [ 3, 27, 4, 5, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 0, 5, 1, 2, 27 ],
+      "out-vars" : [ 1, 2, 3, 27, 4, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 238,
       "ast" : {
@@ -2663,14 +2663,14 @@
             "kind" : "expression",
             "operator" : "&",
             "target" : {
-              "go-type" : 31,
+              "go-type" : 2,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "finlock",
-                "variable" : 2
+                "variable" : 0
               }
             },
             "type" : "unary"
@@ -2696,19 +2696,19 @@
       "line-end" : 238,
       "code" : "unlock(&finlock)",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 0 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 16 ],
-      "in-vars" : [ 4, 0, 5, 1, 2, 27, 3 ],
+      "in-vars" : [ 4, 5, 0, 1, 2, 3, 27 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 2, 3, 6, 4, 0 ],
+      "out-vars" : [ 5, 0, 1, 6, 2, 3, 4 ],
       "decl-vars" : [ ],
       "line-start" : 239,
       "ast" : {
         "kind" : "statement",
         "left" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -2719,7 +2719,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 2,
+          "go-type" : 6,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -2830,249 +2830,249 @@
       "type" : "Tuple",
       "underlying" : 1
     }, {
-      "elem" : 3,
-      "name" : "*runtime.finblock",
-      "type" : "Pointer",
-      "underlying" : 2
-    }, {
-      "local-name" : "finblock",
-      "name" : "runtime.finblock",
+      "local-name" : "mutex",
+      "name" : "runtime.mutex",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 4
+      "underlying" : 3
     }, {
       "fields" : [ {
-        "name" : "alllink",
-        "type" : 2
-      }, {
-        "name" : "next",
-        "type" : 2
-      }, {
-        "name" : "cnt",
-        "type" : 5
-      }, {
-        "name" : "_",
-        "type" : 6
-      }, {
-        "name" : "fin",
-        "type" : 7
+        "name" : "key",
+        "type" : 4
       } ],
-      "name" : "struct{alllink *runtime.finblock; next *runtime.finblock; cnt uint32; _ int32; fin [101]runtime.finalizer}",
+      "name" : "struct{key uintptr}",
       "type" : "Struct",
+      "underlying" : 3
+    }, {
+      "name" : "uintptr",
+      "type" : "Basic",
       "underlying" : 4
     }, {
       "name" : "uint32",
       "type" : "Basic",
       "underlying" : 5
     }, {
-      "name" : "int32",
-      "type" : "Basic",
+      "elem" : 7,
+      "name" : "*runtime.finblock",
+      "type" : "Pointer",
       "underlying" : 6
     }, {
-      "elem" : 8,
+      "local-name" : "finblock",
+      "name" : "runtime.finblock",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 8
+    }, {
+      "fields" : [ {
+        "name" : "alllink",
+        "type" : 6
+      }, {
+        "name" : "next",
+        "type" : 6
+      }, {
+        "name" : "cnt",
+        "type" : 5
+      }, {
+        "name" : "_",
+        "type" : 9
+      }, {
+        "name" : "fin",
+        "type" : 10
+      } ],
+      "name" : "struct{alllink *runtime.finblock; next *runtime.finblock; cnt uint32; _ int32; fin [101]runtime.finalizer}",
+      "type" : "Struct",
+      "underlying" : 8
+    }, {
+      "name" : "int32",
+      "type" : "Basic",
+      "underlying" : 9
+    }, {
+      "elem" : 11,
       "name" : "[101]runtime.finalizer",
       "type" : "Array",
-      "underlying" : 7
+      "underlying" : 10
     }, {
       "local-name" : "finalizer",
       "name" : "runtime.finalizer",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 9
+      "underlying" : 12
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 10
-      }, {
-        "name" : "arg",
-        "type" : 14
-      }, {
-        "name" : "nret",
         "type" : 13
       }, {
+        "name" : "arg",
+        "type" : 16
+      }, {
+        "name" : "nret",
+        "type" : 4
+      }, {
         "name" : "fint",
-        "type" : 15
+        "type" : 17
       }, {
         "name" : "ot",
-        "type" : 28
+        "type" : 30
       } ],
       "name" : "struct{fn *runtime.funcval; arg unsafe.Pointer; nret uintptr; fint *runtime._type; ot *runtime.ptrtype}",
       "type" : "Struct",
-      "underlying" : 9
+      "underlying" : 12
     }, {
-      "elem" : 11,
+      "elem" : 14,
       "name" : "*runtime.funcval",
       "type" : "Pointer",
-      "underlying" : 10
+      "underlying" : 13
     }, {
       "local-name" : "funcval",
       "name" : "runtime.funcval",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 12
+      "underlying" : 15
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{fn uintptr}",
       "type" : "Struct",
-      "underlying" : 12
-    }, {
-      "name" : "uintptr",
-      "type" : "Basic",
-      "underlying" : 13
+      "underlying" : 15
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 14
+      "underlying" : 16
     }, {
-      "elem" : 16,
+      "elem" : 18,
       "name" : "*runtime._type",
       "type" : "Pointer",
-      "underlying" : 15
+      "underlying" : 17
     }, {
       "local-name" : "_type",
       "name" : "runtime._type",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 17
+      "underlying" : 19
     }, {
       "fields" : [ {
         "name" : "size",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "ptrdata",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "hash",
         "type" : 5
       }, {
         "name" : "tflag",
-        "type" : 18
-      }, {
-        "name" : "align",
-        "type" : 19
-      }, {
-        "name" : "fieldAlign",
-        "type" : 19
-      }, {
-        "name" : "kind",
-        "type" : 19
-      }, {
-        "name" : "equal",
         "type" : 20
       }, {
-        "name" : "gcdata",
-        "type" : 24
+        "name" : "align",
+        "type" : 21
       }, {
-        "name" : "str",
+        "name" : "fieldAlign",
+        "type" : 21
+      }, {
+        "name" : "kind",
+        "type" : 21
+      }, {
+        "name" : "equal",
+        "type" : 22
+      }, {
+        "name" : "gcdata",
         "type" : 26
       }, {
+        "name" : "str",
+        "type" : 28
+      }, {
         "name" : "ptrToThis",
-        "type" : 27
+        "type" : 29
       } ],
       "name" : "struct{size uintptr; ptrdata uintptr; hash uint32; tflag runtime.tflag; align uint8; fieldAlign uint8; kind uint8; equal func(unsafe.Pointer, unsafe.Pointer) bool; gcdata *byte; str runtime.nameOff; ptrToThis runtime.typeOff}",
       "type" : "Struct",
-      "underlying" : 17
+      "underlying" : 19
     }, {
       "local-name" : "tflag",
       "name" : "runtime.tflag",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 19
+      "underlying" : 21
     }, {
       "name" : "uint8",
       "type" : "Basic",
-      "underlying" : 19
+      "underlying" : 21
     }, {
       "name" : "func(unsafe.Pointer, unsafe.Pointer) bool",
-      "params" : 21,
+      "params" : 23,
       "recv" : -1,
-      "results" : 22,
+      "results" : 24,
       "type" : "Signature",
-      "underlying" : 20,
+      "underlying" : 22,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "",
-        "type" : 14
+        "type" : 16
       } ],
       "name" : "(unsafe.Pointer, unsafe.Pointer)",
       "type" : "Tuple",
-      "underlying" : 21
+      "underlying" : 23
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 23
+        "type" : 25
       } ],
       "name" : "(bool)",
       "type" : "Tuple",
-      "underlying" : 22
+      "underlying" : 24
     }, {
       "name" : "bool",
       "type" : "Basic",
-      "underlying" : 23
+      "underlying" : 25
     }, {
-      "elem" : 25,
+      "elem" : 27,
       "name" : "*byte",
       "type" : "Pointer",
-      "underlying" : 24
+      "underlying" : 26
     }, {
       "name" : "byte",
       "type" : "Basic",
-      "underlying" : 25
+      "underlying" : 27
     }, {
       "local-name" : "nameOff",
       "name" : "runtime.nameOff",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 6
+      "underlying" : 9
     }, {
       "local-name" : "typeOff",
       "name" : "runtime.typeOff",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 6
+      "underlying" : 9
     }, {
-      "elem" : 29,
+      "elem" : 31,
       "name" : "*runtime.ptrtype",
       "type" : "Pointer",
-      "underlying" : 28
+      "underlying" : 30
     }, {
       "local-name" : "ptrtype",
       "name" : "runtime.ptrtype",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 30
-    }, {
-      "fields" : [ {
-        "name" : "typ",
-        "type" : 16
-      }, {
-        "name" : "elem",
-        "type" : 15
-      } ],
-      "name" : "struct{typ runtime._type; elem *runtime._type}",
-      "type" : "Struct",
-      "underlying" : 30
-    }, {
-      "local-name" : "mutex",
-      "name" : "runtime.mutex",
-      "package" : 0,
-      "type" : "Named",
       "underlying" : 32
     }, {
       "fields" : [ {
-        "name" : "key",
-        "type" : 13
+        "name" : "typ",
+        "type" : 18
+      }, {
+        "name" : "elem",
+        "type" : 17
       } ],
-      "name" : "struct{key uintptr}",
+      "name" : "struct{typ runtime._type; elem *runtime._type}",
       "type" : "Struct",
       "underlying" : 32
     }, {
@@ -3092,7 +3092,7 @@
       "type" : "Tuple",
       "underlying" : 34
     }, {
-      "elem" : 31,
+      "elem" : 2,
       "name" : "*runtime.mutex",
       "type" : "Pointer",
       "underlying" : 35
@@ -3121,10 +3121,10 @@
         "type" : 41
       }, {
         "name" : "stackguard0",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "stackguard1",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "_panic",
         "type" : 43
@@ -3139,16 +3139,16 @@
         "type" : 53
       }, {
         "name" : "syscallsp",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "syscallpc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "stktopsp",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "param",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "atomicstatus",
         "type" : 5
@@ -3169,34 +3169,34 @@
         "type" : 105
       }, {
         "name" : "preempt",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "preemptStop",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "preemptShrink",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "asyncSafePoint",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "paniconfault",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "gcscandone",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "throwsplit",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "activeStackChans",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "raceignore",
         "type" : 66
       }, {
         "name" : "sysblocktraced",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "sysexitticks",
         "type" : 64
@@ -3217,25 +3217,25 @@
         "type" : 106
       }, {
         "name" : "sigcode0",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "sigcode1",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "sigpc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "gopc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "ancestors",
         "type" : 107
       }, {
         "name" : "startpc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "racectx",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "waiting",
         "type" : 112
@@ -3244,7 +3244,7 @@
         "type" : 111
       }, {
         "name" : "labels",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "timer",
         "type" : 121
@@ -3267,10 +3267,10 @@
     }, {
       "fields" : [ {
         "name" : "lo",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "hi",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{lo uintptr; hi uintptr}",
       "type" : "Struct",
@@ -3289,7 +3289,7 @@
     }, {
       "fields" : [ {
         "name" : "argp",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "arg",
         "type" : 46
@@ -3298,19 +3298,19 @@
         "type" : 43
       }, {
         "name" : "pc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "sp",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "recovered",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "aborted",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "goexit",
-        "type" : 23
+        "type" : 25
       } ],
       "name" : "struct{argp unsafe.Pointer; arg interface{}; link *runtime._panic; pc uintptr; sp unsafe.Pointer; recovered bool; aborted bool; goexit bool}",
       "type" : "Struct",
@@ -3334,25 +3334,25 @@
     }, {
       "fields" : [ {
         "name" : "siz",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "started",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "heap",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "openDefer",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "sp",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "pc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "fn",
-        "type" : 10
+        "type" : 13
       }, {
         "name" : "_panic",
         "type" : 43
@@ -3361,13 +3361,13 @@
         "type" : 47
       }, {
         "name" : "fd",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "varp",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "framepc",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{siz int32; started bool; heap bool; openDefer bool; sp uintptr; pc uintptr; fn *runtime.funcval; _panic *runtime._panic; link *runtime._defer; fd unsafe.Pointer; varp uintptr; framepc uintptr}",
       "type" : "Struct",
@@ -3431,37 +3431,37 @@
         "type" : 64
       }, {
         "name" : "mallocing",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "throwing",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "preemptoff",
         "type" : 65
       }, {
         "name" : "locks",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "dying",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "profilehz",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "spinning",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "blocked",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "newSigstack",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "printlock",
         "type" : 66
       }, {
         "name" : "incgo",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "freeWait",
         "type" : 5
@@ -3470,16 +3470,16 @@
         "type" : 61
       }, {
         "name" : "needextram",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "traceback",
-        "type" : 19
+        "type" : 21
       }, {
         "name" : "ncgocall",
         "type" : 57
       }, {
         "name" : "ncgo",
-        "type" : 6
+        "type" : 9
       }, {
         "name" : "cgoCallersUse",
         "type" : 5
@@ -3518,16 +3518,16 @@
         "type" : 97
       }, {
         "name" : "waitlock",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "waittraceev",
-        "type" : 25
+        "type" : 27
       }, {
         "name" : "waittraceskip",
         "type" : 99
       }, {
         "name" : "startingtrace",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "syscalltick",
         "type" : 5
@@ -3539,10 +3539,10 @@
         "type" : 100
       }, {
         "name" : "libcallpc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "libcallsp",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "libcallg",
         "type" : 55
@@ -3551,10 +3551,10 @@
         "type" : 100
       }, {
         "name" : "vdsoSP",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "vdsoPC",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "preemptGen",
         "type" : 5
@@ -3580,25 +3580,25 @@
     }, {
       "fields" : [ {
         "name" : "sp",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "pc",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "g",
         "type" : 55
       }, {
         "name" : "ctxt",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "ret",
         "type" : 56
       }, {
         "name" : "lr",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "bp",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{sp uintptr; pc uintptr; g runtime.guintptr; ctxt unsafe.Pointer; ret runtime/internal/sys.Uintreg; lr uintptr; bp uintptr}",
       "type" : "Struct",
@@ -3608,7 +3608,7 @@
       "name" : "runtime.guintptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 13
+      "underlying" : 4
     }, {
       "local-name" : "Uintreg",
       "name" : "runtime/internal/sys.Uintreg",
@@ -3631,13 +3631,13 @@
         "type" : 41
       }, {
         "name" : "stackguard0",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "stackguard1",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "stktopsp",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{stack runtime.stack; stackguard0 uintptr; stackguard1 uintptr; stktopsp uintptr}",
       "type" : "Struct",
@@ -3654,7 +3654,7 @@
       "type" : "Array",
       "underlying" : 61
     }, {
-      "elem" : 13,
+      "elem" : 4,
       "name" : "[6]uintptr",
       "type" : "Array",
       "underlying" : 62
@@ -3663,7 +3663,7 @@
       "name" : "runtime.puintptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 13
+      "underlying" : 4
     }, {
       "name" : "int64",
       "type" : "Basic",
@@ -3688,7 +3688,7 @@
       "type" : "Named",
       "underlying" : 69
     }, {
-      "elem" : 13,
+      "elem" : 4,
       "name" : "[32]uintptr",
       "type" : "Array",
       "underlying" : 69
@@ -3697,13 +3697,13 @@
       "name" : "runtime.note",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 32
+      "underlying" : 3
     }, {
       "local-name" : "muintptr",
       "name" : "runtime.muintptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 13
+      "underlying" : 4
     }, {
       "elem" : 73,
       "name" : "*runtime.mcache",
@@ -3718,19 +3718,19 @@
     }, {
       "fields" : [ {
         "name" : "next_sample",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "local_scan",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "tiny",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "tinyoffset",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "local_tinyallocs",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "alloc",
         "type" : 75
@@ -3739,10 +3739,10 @@
         "type" : 93
       }, {
         "name" : "local_largefree",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "local_nlargefree",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "local_nsmallfree",
         "type" : 96
@@ -3781,19 +3781,19 @@
         "type" : 79
       }, {
         "name" : "startAddr",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "npages",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "manualFreeList",
         "type" : 82
       }, {
         "name" : "freeindex",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "nelems",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "allocCache",
         "type" : 57
@@ -3823,22 +3823,22 @@
         "type" : 87
       }, {
         "name" : "needzero",
-        "type" : 19
+        "type" : 21
       }, {
         "name" : "divShift",
-        "type" : 19
+        "type" : 21
       }, {
         "name" : "divShift2",
-        "type" : 19
+        "type" : 21
       }, {
         "name" : "elemsize",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "limit",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "speciallock",
-        "type" : 31
+        "type" : 2
       }, {
         "name" : "specials",
         "type" : 90
@@ -3873,7 +3873,7 @@
       "name" : "runtime.gclinkptr",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 13
+      "underlying" : 4
     }, {
       "elem" : 84,
       "name" : "*runtime.gcBits",
@@ -3884,7 +3884,7 @@
       "name" : "runtime.gcBits",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 19
+      "underlying" : 21
     }, {
       "name" : "uint16",
       "type" : "Basic",
@@ -3894,7 +3894,7 @@
       "name" : "runtime.spanClass",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 19
+      "underlying" : 21
     }, {
       "local-name" : "mSpanStateBox",
       "name" : "runtime.mSpanStateBox",
@@ -3914,7 +3914,7 @@
       "name" : "runtime.mSpanState",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 19
+      "underlying" : 21
     }, {
       "elem" : 91,
       "name" : "*runtime.special",
@@ -3935,7 +3935,7 @@
         "type" : 85
       }, {
         "name" : "kind",
-        "type" : 25
+        "type" : 27
       } ],
       "name" : "struct{next *runtime.special; offset uint16; kind byte}",
       "type" : "Struct",
@@ -3957,13 +3957,13 @@
         "type" : 82
       }, {
         "name" : "size",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{list runtime.gclinkptr; size uintptr}",
       "type" : "Struct",
       "underlying" : 95
     }, {
-      "elem" : 13,
+      "elem" : 4,
       "name" : "[67]uintptr",
       "type" : "Array",
       "underlying" : 96
@@ -3971,7 +3971,7 @@
       "name" : "func(*runtime.g, unsafe.Pointer) bool",
       "params" : 98,
       "recv" : -1,
-      "results" : 22,
+      "results" : 24,
       "type" : "Signature",
       "underlying" : 97,
       "variadic" : false
@@ -3981,7 +3981,7 @@
         "type" : 38
       }, {
         "name" : "",
-        "type" : 14
+        "type" : 16
       } ],
       "name" : "(*runtime.g, unsafe.Pointer)",
       "type" : "Tuple",
@@ -3999,22 +3999,22 @@
     }, {
       "fields" : [ {
         "name" : "fn",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "n",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "args",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "r1",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "r2",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "err",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{fn uintptr; n uintptr; args uintptr; r1 uintptr; r2 uintptr; err uintptr}",
       "type" : "Struct",
@@ -4041,9 +4041,9 @@
       "name" : "runtime.waitReason",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 19
+      "underlying" : 21
     }, {
-      "elem" : 25,
+      "elem" : 27,
       "name" : "[]byte",
       "type" : "Slice",
       "underlying" : 106
@@ -4072,13 +4072,13 @@
         "type" : 64
       }, {
         "name" : "gopc",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "struct{pcs []uintptr; goid int64; gopc uintptr}",
       "type" : "Struct",
       "underlying" : 110
     }, {
-      "elem" : 13,
+      "elem" : 4,
       "name" : "[]uintptr",
       "type" : "Slice",
       "underlying" : 111
@@ -4099,7 +4099,7 @@
         "type" : 38
       }, {
         "name" : "isSelect",
-        "type" : 23
+        "type" : 25
       }, {
         "name" : "next",
         "type" : 112
@@ -4108,7 +4108,7 @@
         "type" : 112
       }, {
         "name" : "elem",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "acquiretime",
         "type" : 64
@@ -4154,7 +4154,7 @@
         "type" : 118
       }, {
         "name" : "buf",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "elemsize",
         "type" : 85
@@ -4163,7 +4163,7 @@
         "type" : 5
       }, {
         "name" : "elemtype",
-        "type" : 15
+        "type" : 17
       }, {
         "name" : "sendx",
         "type" : 118
@@ -4178,7 +4178,7 @@
         "type" : 119
       }, {
         "name" : "lock",
-        "type" : 31
+        "type" : 2
       } ],
       "name" : "struct{qcount uint; dataqsiz uint; buf unsafe.Pointer; elemsize uint16; closed uint32; elemtype *runtime._type; sendx uint; recvx uint; recvq runtime.waitq; sendq runtime.waitq; lock runtime.mutex}",
       "type" : "Struct",
@@ -4233,7 +4233,7 @@
         "type" : 46
       }, {
         "name" : "seq",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "nextwhen",
         "type" : 64
@@ -4258,7 +4258,7 @@
         "type" : 46
       }, {
         "name" : "",
-        "type" : 13
+        "type" : 4
       } ],
       "name" : "(interface{}, uintptr)",
       "type" : "Tuple",
@@ -4296,7 +4296,7 @@
         "type" : 105
       }, {
         "name" : "traceEv",
-        "type" : 25
+        "type" : 27
       }, {
         "name" : "traceskip",
         "type" : 99
@@ -4305,7 +4305,7 @@
       "type" : "Tuple",
       "underlying" : 129
     }, {
-      "elem" : 8,
+      "elem" : 11,
       "name" : "*runtime.finalizer",
       "type" : "Pointer",
       "underlying" : 130
@@ -4320,13 +4320,13 @@
     }, {
       "fields" : [ {
         "name" : "size",
-        "type" : 13
+        "type" : 4
       }, {
         "name" : "typ",
-        "type" : 15
+        "type" : 17
       }, {
         "name" : "needzero",
-        "type" : 23
+        "type" : 25
       } ],
       "name" : "(size uintptr, typ *runtime._type, needzero bool)",
       "type" : "Tuple",
@@ -4334,7 +4334,7 @@
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 14
+        "type" : 16
       } ],
       "name" : "(unsafe.Pointer)",
       "type" : "Tuple",
@@ -4356,7 +4356,7 @@
       "type" : "Tuple",
       "underlying" : 135
     }, {
-      "elem" : 13,
+      "elem" : 4,
       "name" : "[2]uintptr",
       "type" : "Array",
       "underlying" : 136
@@ -4370,7 +4370,7 @@
       "type" : "Basic",
       "underlying" : 138
     }, {
-      "elem" : 14,
+      "elem" : 16,
       "name" : "*unsafe.Pointer",
       "type" : "Pointer",
       "underlying" : 139
@@ -4388,7 +4388,7 @@
     }, {
       "fields" : [ {
         "name" : "typ",
-        "type" : 16
+        "type" : 18
       }, {
         "name" : "pkgpath",
         "type" : 143
@@ -4408,7 +4408,7 @@
     }, {
       "fields" : [ {
         "name" : "bytes",
-        "type" : 24
+        "type" : 26
       } ],
       "name" : "struct{bytes *byte}",
       "type" : "Struct",
@@ -4427,10 +4427,10 @@
     }, {
       "fields" : [ {
         "name" : "name",
-        "type" : 26
+        "type" : 28
       }, {
         "name" : "ityp",
-        "type" : 27
+        "type" : 29
       } ],
       "name" : "struct{name runtime.nameOff; ityp runtime.typeOff}",
       "type" : "Struct",
@@ -4449,10 +4449,10 @@
     }, {
       "fields" : [ {
         "name" : "_type",
-        "type" : 15
+        "type" : 17
       }, {
         "name" : "data",
-        "type" : 14
+        "type" : 16
       } ],
       "name" : "struct{_type *runtime._type; data unsafe.Pointer}",
       "type" : "Struct",
@@ -4493,7 +4493,7 @@
         "type" : 156
       }, {
         "name" : "data",
-        "type" : 14
+        "type" : 16
       } ],
       "name" : "struct{tab *runtime.itab; data unsafe.Pointer}",
       "type" : "Struct",
@@ -4515,7 +4515,7 @@
         "type" : 140
       }, {
         "name" : "_type",
-        "type" : 15
+        "type" : 17
       }, {
         "name" : "hash",
         "type" : 5
@@ -4530,12 +4530,12 @@
       "type" : "Struct",
       "underlying" : 158
     }, {
-      "elem" : 25,
+      "elem" : 27,
       "name" : "[4]byte",
       "type" : "Array",
       "underlying" : 159
     }, {
-      "elem" : 13,
+      "elem" : 4,
       "name" : "[1]uintptr",
       "type" : "Array",
       "underlying" : 160
@@ -4582,13 +4582,13 @@
     }, {
       "fields" : [ {
         "name" : "argtype",
-        "type" : 15
+        "type" : 17
       }, {
         "name" : "fn",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "arg",
-        "type" : 14
+        "type" : 16
       }, {
         "name" : "argsize",
         "type" : 5
@@ -4625,7 +4625,7 @@
       "underlying" : 169
     } ],
     "variables" : [ {
-      "name" : "finc",
+      "name" : "finlock",
       "package" : 0,
       "type" : 2,
       "exported" : false,
@@ -4639,37 +4639,37 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "finlock",
+      "name" : "finq",
       "package" : 0,
-      "type" : 31,
+      "type" : 6,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "finq",
+      "name" : "finc",
       "package" : 0,
-      "type" : 2,
+      "type" : 6,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "frame",
       "package" : 0,
-      "type" : 14,
+      "type" : 16,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "framecap",
       "package" : 0,
-      "type" : 13,
+      "type" : 4,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "fb",
       "package" : 0,
-      "type" : 2,
+      "type" : 6,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -4690,7 +4690,7 @@
     }, {
       "name" : "fingwait",
       "package" : 0,
-      "type" : 23,
+      "type" : 25,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -4704,7 +4704,7 @@
     }, {
       "name" : "fin",
       "package" : 0,
-      "type" : 7,
+      "type" : 10,
       "exported" : false,
       "embedded" : false,
       "field" : true
@@ -4718,63 +4718,63 @@
     }, {
       "name" : "nret",
       "package" : 0,
-      "type" : 13,
+      "type" : 4,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "framesz",
       "package" : 0,
-      "type" : 13,
+      "type" : 4,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "fint",
       "package" : 0,
-      "type" : 15,
+      "type" : 17,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "kind",
       "package" : 0,
-      "type" : 19,
+      "type" : 21,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "arg",
       "package" : 0,
-      "type" : 14,
+      "type" : 16,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "_type",
       "package" : 0,
-      "type" : 15,
+      "type" : 17,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "ot",
       "package" : 0,
-      "type" : 28,
+      "type" : 30,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "typ",
       "package" : 0,
-      "type" : 16,
+      "type" : 18,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "data",
       "package" : 0,
-      "type" : 14,
+      "type" : 16,
       "exported" : false,
       "embedded" : false,
       "field" : true
@@ -4795,28 +4795,28 @@
     }, {
       "name" : "fingRunning",
       "package" : 0,
-      "type" : 23,
+      "type" : 25,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
       "name" : "fn",
       "package" : 0,
-      "type" : 10,
+      "type" : 13,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "next",
       "package" : 0,
-      "type" : 2,
+      "type" : 6,
       "exported" : false,
       "embedded" : false,
       "field" : true
     }, {
       "name" : "next",
       "package" : 0,
-      "type" : 2,
+      "type" : 6,
       "exported" : false,
       "embedded" : false,
       "field" : false

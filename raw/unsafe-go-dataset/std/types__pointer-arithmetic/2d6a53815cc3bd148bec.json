@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 2, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 0 ],
+      "out-vars" : [ 2, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 1, 2, 0 ],
+      "in-vars" : [ 2, 0, 1 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -133,7 +133,7 @@
       "line-end" : 1991,
       "code" : "return add(p, uintptr(i)*eltSize, \"i < len\")",
       "entry" : false,
-      "use-vars" : [ 0, 1, 2 ]
+      "use-vars" : [ 2, 0, 1 ]
     } ],
     "code" : "// arrayAt returns the i-th element of p,\n// an array whose elements are eltSize bytes wide.\n// The array pointed at by p must have at least i+1 elements:\n// it is invalid (but impossible to check here) to pass i >= len,\n// because then the result will point outside the array.\n// whySafe must explain why i < len. (Passing \"i < len\" is fine;\n// the benefit is to surface this assumption at the call site.)\nfunc arrayAt(p unsafe.Pointer, i int, eltSize uintptr, whySafe string) unsafe.Pointer {\n\treturn add(p, uintptr(i)*eltSize, \"i < len\")\n}",
     "defines" : [ 0 ],

@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 1, 2, 5, 0 ],
+      "in-vars" : [ 0, 2, 1, 5, 3 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 3, 1, 2 ],
+      "out-vars" : [ 3, 0, 2, 1, 5 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 3, 1, 2, 5, 0 ],
+      "in-vars" : [ 3, 0, 2, 1, 5 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 3, 6, 1, 2 ],
+      "out-vars" : [ 3, 0, 2, 1, 5, 6 ],
       "decl-vars" : [ 6 ],
       "line-start" : 864,
       "ast" : {
@@ -90,9 +90,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 0, 3, 6, 1, 2, 5 ],
+      "in-vars" : [ 5, 6, 3, 0, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 6 ],
+      "out-vars" : [ 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : 865,
       "ast" : {
@@ -234,7 +234,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "heap_inuse",
-                      "variable" : 8
+                      "variable" : 10
                     },
                     "go-type" : 14,
                     "kind" : "expression",
@@ -261,7 +261,7 @@
                     "kind" : "ident",
                     "value" : "allocSpan"
                   },
-                  "go-type" : 121,
+                  "go-type" : 122,
                   "kind" : "expression",
                   "target" : {
                     "go-type" : 28,
@@ -310,13 +310,13 @@
       "line-end" : 872,
       "code" : "systemstack(func() {\n\n\tif h.sweepdone == 0 {\n\t\th.reclaim(npages)\n\t}\n\ts = h.allocSpan(npages, false, spanclass, &memstats.heap_inuse)\n})",
       "entry" : false,
-      "use-vars" : [ 1, 6, 5, 0, 2 ]
+      "use-vars" : [ 5, 6, 2, 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 8 ],
-      "in-vars" : [ 3, 6 ],
+      "in-vars" : [ 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 3, 6 ],
+      "out-vars" : [ 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : 874,
       "ast" : {
@@ -336,7 +336,7 @@
           },
           "operator" : "!=",
           "right" : {
-            "go-type" : 124,
+            "go-type" : 126,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -387,7 +387,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "needzero",
-                "variable" : 9
+                "variable" : 11
               },
               "go-type" : 4,
               "kind" : "expression",
@@ -467,7 +467,7 @@
                   "kind" : "ident",
                   "value" : "base"
                 },
-                "go-type" : 127,
+                "go-type" : 129,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 7,
@@ -495,7 +495,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "npages",
-                "variable" : 10
+                "variable" : 13
               },
               "go-type" : 2,
               "kind" : "expression",
@@ -514,7 +514,7 @@
             },
             "operator" : "<<",
             "right" : {
-              "go-type" : 129,
+              "go-type" : 132,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -525,7 +525,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 125,
+            "go-type" : 127,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -560,7 +560,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "needzero",
-            "variable" : 9
+            "variable" : 11
           },
           "go-type" : 4,
           "kind" : "expression",
@@ -636,22 +636,22 @@
     }, {
       "name" : "reclaim",
       "package" : 0,
-      "type" : 119,
+      "type" : 121,
       "exported" : false
     }, {
       "name" : "allocSpan",
       "package" : 0,
-      "type" : 121,
+      "type" : 125,
       "exported" : false
     }, {
       "name" : "memclrNoHeapPointers",
       "package" : 0,
-      "type" : 125,
+      "type" : 127,
       "exported" : false
     }, {
       "name" : "base",
       "package" : 0,
-      "type" : 127,
+      "type" : 131,
       "exported" : false
     } ],
     "line-end" : 881,
@@ -670,7 +670,7 @@
     "results" : [ 4 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(npages uintptr, spanclass runtime.spanClass, needzero bool) *runtime.mspan",
+      "name" : "(*runtime.mheap) func(npages uintptr, spanclass runtime.spanClass, needzero bool) *runtime.mspan",
       "params" : 1,
       "recv" : 0,
       "results" : 6,
@@ -1896,12 +1896,20 @@
       "type" : "Tuple",
       "underlying" : 120
     }, {
-      "name" : "func(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64) (s *runtime.mspan)",
-      "params" : 122,
-      "recv" : -1,
-      "results" : 123,
+      "name" : "(*runtime.mheap) func(npage uintptr)",
+      "params" : 120,
+      "recv" : 8,
+      "results" : 86,
       "type" : "Signature",
       "underlying" : 121,
+      "variadic" : false
+    }, {
+      "name" : "func(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64) (s *runtime.mspan)",
+      "params" : 123,
+      "recv" : -1,
+      "results" : 124,
+      "type" : "Signature",
+      "underlying" : 122,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1919,7 +1927,7 @@
       } ],
       "name" : "(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64)",
       "type" : "Tuple",
-      "underlying" : 122
+      "underlying" : 123
     }, {
       "fields" : [ {
         "name" : "s",
@@ -1927,18 +1935,26 @@
       } ],
       "name" : "(s *runtime.mspan)",
       "type" : "Tuple",
-      "underlying" : 123
+      "underlying" : 124
+    }, {
+      "name" : "(*runtime.mheap) func(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64) (s *runtime.mspan)",
+      "params" : 123,
+      "recv" : 9,
+      "results" : 124,
+      "type" : "Signature",
+      "underlying" : 125,
+      "variadic" : false
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 124
+      "underlying" : 126
     }, {
       "name" : "func(ptr unsafe.Pointer, n uintptr)",
-      "params" : 126,
+      "params" : 128,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 125,
+      "underlying" : 127,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1950,14 +1966,14 @@
       } ],
       "name" : "(ptr unsafe.Pointer, n uintptr)",
       "type" : "Tuple",
-      "underlying" : 126
+      "underlying" : 128
     }, {
       "name" : "func() uintptr",
       "params" : 86,
       "recv" : -1,
-      "results" : 128,
+      "results" : 130,
       "type" : "Signature",
-      "underlying" : 127,
+      "underlying" : 129,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -1966,11 +1982,19 @@
       } ],
       "name" : "(uintptr)",
       "type" : "Tuple",
-      "underlying" : 128
+      "underlying" : 130
+    }, {
+      "name" : "(*runtime.mspan) func() uintptr",
+      "params" : 86,
+      "recv" : 12,
+      "results" : 130,
+      "type" : "Signature",
+      "underlying" : 131,
+      "variadic" : false
     }, {
       "name" : "untyped int",
       "type" : "Basic",
-      "underlying" : 129
+      "underlying" : 132
     } ],
     "variables" : [ {
       "name" : "h",
@@ -2029,6 +2053,20 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 28,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 28,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "heap_inuse",
       "package" : 0,
       "type" : 14,
@@ -2042,6 +2080,13 @@
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 7,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "npages",
       "package" : 0,

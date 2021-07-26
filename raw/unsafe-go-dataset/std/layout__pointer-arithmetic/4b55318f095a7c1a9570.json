@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 0, 3 ],
+      "in-vars" : [ 0, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 3 ],
+      "out-vars" : [ 3, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ 1 ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 0, 3 ],
+      "in-vars" : [ 3, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 0 ],
+      "out-vars" : [ 0, 1, 3 ],
       "decl-vars" : [ ],
       "line-start" : 494,
       "ast" : {
@@ -119,13 +119,13 @@
       "line-end" : 494,
       "code" : "n += uintptr(h.shift) / heapBitsShift",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 3, 1, 0 ],
+      "in-vars" : [ 1, 3, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 6, 1 ],
+      "out-vars" : [ 0, 6, 1, 3 ],
       "decl-vars" : [ 6 ],
       "line-start" : 495,
       "ast" : {
@@ -237,13 +237,13 @@
       "line-end" : 495,
       "code" : "nbitp := uintptr(unsafe.Pointer(h.bitp)) + n/4",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 5 ],
-      "in-vars" : [ 6, 1, 0, 3 ],
+      "in-vars" : [ 0, 6, 1, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 3, 6 ],
+      "out-vars" : [ 0, 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : 496,
       "ast" : {
@@ -331,13 +331,13 @@
       "line-end" : 496,
       "code" : "h.shift = uint32(n%4) * heapBitsShift",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 8 ],
-      "in-vars" : [ 6, 0, 3 ],
+      "in-vars" : [ 6, 3, 0 ],
       "exit" : false,
-      "out-vars" : [ 6, 0, 3 ],
+      "out-vars" : [ 0, 6, 3 ],
       "decl-vars" : [ ],
       "line-start" : 497,
       "ast" : {
@@ -429,7 +429,7 @@
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 6, 0 ],
+      "in-vars" : [ 0, 6 ],
       "exit" : false,
       "out-vars" : [ 0 ],
       "decl-vars" : [ ],
@@ -550,7 +550,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 6, 0, 3 ],
+      "in-vars" : [ 0, 6, 3 ],
       "exit" : false,
       "out-vars" : [ 0, 8, 3 ],
       "decl-vars" : [ 8 ],
@@ -673,7 +673,7 @@
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 0, 8, 3 ],
+      "in-vars" : [ 8, 3, 0 ],
       "exit" : false,
       "out-vars" : [ 0, 8, 3 ],
       "decl-vars" : [ ],
@@ -764,13 +764,13 @@
       "line-end" : 504,
       "code" : "h.arena += 1 + uint32(past/heapArenaBitmapBytes)",
       "entry" : false,
-      "use-vars" : [ 8, 0 ]
+      "use-vars" : [ 0, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 12 ],
       "in-vars" : [ 0, 8, 3 ],
       "exit" : false,
-      "out-vars" : [ 10, 3, 0, 8 ],
+      "out-vars" : [ 3, 0, 10, 8 ],
       "decl-vars" : [ 10 ],
       "line-start" : 505,
       "ast" : {
@@ -833,9 +833,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 16 ],
-      "in-vars" : [ 0, 8, 10, 12 ],
+      "in-vars" : [ 13, 8, 0, 10 ],
       "exit" : false,
-      "out-vars" : [ 0, 8, 10, 12 ],
+      "out-vars" : [ 13, 8, 0, 10 ],
       "decl-vars" : [ ],
       "line-start" : 506,
       "ast" : {
@@ -853,12 +853,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "l2",
-                "variable" : 12
+                "variable" : 13
               }
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 115,
+              "go-type" : 116,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -913,14 +913,14 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "l2",
-                  "variable" : 12
+                  "variable" : 13
                 }
               },
               "type" : "index"
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 115,
+              "go-type" : 116,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -940,14 +940,14 @@
       "line-end" : 512,
       "code" : "if l2 := mheap_.arenas[ai.l1()]; l2 != nil && l2[ai.l2()] != nil {\n\ta := l2[ai.l2()]\n\th.bitp = &a.bitmap[past%heapArenaBitmapBytes]\n\th.last = &a.bitmap[len(a.bitmap)-1]\n} else {\n\th.bitp, h.last = nil, nil\n}",
       "entry" : false,
-      "use-vars" : [ 12, 10 ]
+      "use-vars" : [ 13, 10 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 0, 8, 10, 3 ],
+      "in-vars" : [ 0, 10, 8, 3 ],
       "exit" : false,
-      "out-vars" : [ 0, 8, 10, 12 ],
-      "decl-vars" : [ 12 ],
+      "out-vars" : [ 8, 0, 10, 13 ],
+      "decl-vars" : [ 13 ],
       "line-start" : 506,
       "ast" : {
         "kind" : "statement",
@@ -1023,14 +1023,14 @@
       "line-end" : 506,
       "code" : "l2 := mheap_.arenas[ai.l1()]",
       "entry" : false,
-      "use-vars" : [ 3, 10 ]
+      "use-vars" : [ 10, 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 14 ],
-      "in-vars" : [ 12, 0, 8, 10 ],
+      "in-vars" : [ 0, 10, 13, 8 ],
       "exit" : false,
-      "out-vars" : [ 13, 0, 8 ],
-      "decl-vars" : [ 13 ],
+      "out-vars" : [ 0, 14, 8 ],
+      "decl-vars" : [ 14 ],
       "line-start" : 507,
       "ast" : {
         "kind" : "statement",
@@ -1084,7 +1084,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "l2",
-              "variable" : 12
+              "variable" : 13
             }
           },
           "type" : "index"
@@ -1095,13 +1095,13 @@
       "line-end" : 507,
       "code" : "a := l2[ai.l2()]",
       "entry" : false,
-      "use-vars" : [ 10, 12 ]
+      "use-vars" : [ 13, 10 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 15 ],
-      "in-vars" : [ 0, 8, 13 ],
+      "in-vars" : [ 0, 14, 8 ],
       "exit" : false,
-      "out-vars" : [ 0, 13 ],
+      "out-vars" : [ 0, 14 ],
       "decl-vars" : [ ],
       "line-start" : 508,
       "ast" : {
@@ -1165,7 +1165,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "bitmap",
-                "variable" : 14
+                "variable" : 15
               },
               "go-type" : 68,
               "kind" : "expression",
@@ -1177,7 +1177,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "a",
-                  "variable" : 13
+                  "variable" : 14
                 }
               },
               "type" : "selector"
@@ -1192,11 +1192,11 @@
       "line-end" : 508,
       "code" : "h.bitp = &a.bitmap[past%heapArenaBitmapBytes]",
       "entry" : false,
-      "use-vars" : [ 0, 13, 8 ]
+      "use-vars" : [ 0, 14, 8 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 17 ],
-      "in-vars" : [ 0, 13 ],
+      "in-vars" : [ 14, 0 ],
       "exit" : false,
       "out-vars" : [ 0 ],
       "decl-vars" : [ ],
@@ -1232,7 +1232,7 @@
           "target" : {
             "go-type" : 55,
             "index" : {
-              "go-type" : 116,
+              "go-type" : 117,
               "kind" : "constant",
               "value" : {
                 "type" : "INT",
@@ -1245,7 +1245,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "bitmap",
-                "variable" : 14
+                "variable" : 15
               },
               "go-type" : 68,
               "kind" : "expression",
@@ -1257,7 +1257,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "a",
-                  "variable" : 13
+                  "variable" : 14
                 }
               },
               "type" : "selector"
@@ -1272,7 +1272,7 @@
       "line-end" : 509,
       "code" : "h.last = &a.bitmap[len(a.bitmap)-1]",
       "entry" : false,
-      "use-vars" : [ 13, 0 ]
+      "use-vars" : [ 0, 14 ]
     }, {
       "update-vars" : [ 0 ],
       "successors" : [ 17 ],
@@ -1327,7 +1327,7 @@
           "type" : "selector"
         } ],
         "right" : [ {
-          "go-type" : 115,
+          "go-type" : 116,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -1336,7 +1336,7 @@
             "value" : "nil"
           }
         }, {
-          "go-type" : 115,
+          "go-type" : 116,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -1391,12 +1391,12 @@
     }, {
       "name" : "l1",
       "package" : 0,
-      "type" : 113,
+      "type" : 115,
       "exported" : false
     }, {
       "name" : "l2",
       "package" : 0,
-      "type" : 113,
+      "type" : 115,
       "exported" : false
     } ],
     "line-end" : 514,
@@ -1415,7 +1415,7 @@
     "results" : [ 2 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(n uintptr) runtime.heapBits",
+      "name" : "(runtime.heapBits) func(n uintptr) runtime.heapBits",
       "params" : 1,
       "recv" : 0,
       "results" : 3,
@@ -2476,13 +2476,21 @@
       "type" : "Tuple",
       "underlying" : 114
     }, {
+      "name" : "(runtime.arenaIdx) func() uint",
+      "params" : 88,
+      "recv" : 12,
+      "results" : 114,
+      "type" : "Signature",
+      "underlying" : 115,
+      "variadic" : false
+    }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 115
+      "underlying" : 116
     }, {
       "name" : "int",
       "type" : "Basic",
-      "underlying" : 116
+      "underlying" : 117
     } ],
     "variables" : [ {
       "name" : "h",
@@ -2568,6 +2576,13 @@
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "i",
+      "package" : 0,
+      "type" : 77,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "l2",
       "package" : 0,

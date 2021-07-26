@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 5, 2 ],
+      "in-vars" : [ 2, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 1 ],
+      "out-vars" : [ 2, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 5, 2, 1 ],
+      "in-vars" : [ 5, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 5, 2, 1 ],
+      "out-vars" : [ 2, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 614,
       "ast" : {
@@ -151,9 +151,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 1, 5 ],
+      "in-vars" : [ 2, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 2, 6, 1, 5 ],
+      "out-vars" : [ 2, 5, 6, 1 ],
       "decl-vars" : [ 6 ],
       "line-start" : 617,
       "ast" : {
@@ -251,10 +251,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 5, 2, 6, 1 ],
+      "in-vars" : [ 1, 2, 5, 6 ],
       "exit" : false,
-      "out-vars" : [ 8, 5, 9 ],
-      "decl-vars" : [ 9, 8 ],
+      "out-vars" : [ 9, 10, 5 ],
+      "decl-vars" : [ 9, 10 ],
       "line-start" : 618,
       "ast" : {
         "kind" : "statement",
@@ -366,7 +366,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 5, 9, 8 ],
+      "in-vars" : [ 5, 9, 10 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -385,7 +385,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "n",
-              "variable" : 8
+              "variable" : 10
             }
           },
           "operator" : "+",
@@ -433,7 +433,7 @@
       "line-end" : 619,
       "code" : "return n + int(sndRcvInfoSize), err",
       "entry" : false,
-      "use-vars" : [ 8, 5, 9 ]
+      "use-vars" : [ 10, 5, 9 ]
     } ],
     "code" : "func (c *SCTPSndRcvInfoWrappedConn) Write(b []byte) (int, error) {\n\tif len(b) < int(sndRcvInfoSize) {\n\t\treturn 0, syscall.EINVAL\n\t}\n\tinfo := (*SndRcvInfo)(unsafe.Pointer(&b[0]))\n\tn, err := c.conn.SCTPWrite(b[sndRcvInfoSize:], info)\n\treturn n + int(sndRcvInfoSize), err\n}",
     "defines" : [ 0 ],
@@ -445,7 +445,7 @@
     }, {
       "name" : "SCTPWrite",
       "package" : 0,
-      "type" : 35,
+      "type" : 37,
       "exported" : true
     } ],
     "line-end" : 620,
@@ -467,7 +467,7 @@
     "results" : [ 3, 4 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(b []byte) (int, error)",
+      "name" : "(*github.com/ishidawataru/sctp.SCTPSndRcvInfoWrappedConn) func(b []byte) (int, error)",
       "params" : 1,
       "recv" : 1,
       "results" : 4,
@@ -521,7 +521,7 @@
       "type" : "Interface",
       "underlying" : 7
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 9,
       "recv" : 0,
       "results" : 10,
@@ -734,6 +734,14 @@
       "name" : "(b []byte, info *github.com/ishidawataru/sctp.SndRcvInfo)",
       "type" : "Tuple",
       "underlying" : 36
+    }, {
+      "name" : "(*github.com/ishidawataru/sctp.SCTPConn) func(b []byte, info *github.com/ishidawataru/sctp.SndRcvInfo) (int, error)",
+      "params" : 36,
+      "recv" : 8,
+      "results" : 4,
+      "type" : "Signature",
+      "underlying" : 37,
+      "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
@@ -792,9 +800,9 @@
       "embedded" : false,
       "field" : true
     }, {
-      "name" : "n",
+      "name" : "c",
       "package" : 0,
-      "type" : 5,
+      "type" : 15,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -802,6 +810,13 @@
       "name" : "err",
       "package" : 0,
       "type" : 6,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 5,
       "exported" : false,
       "embedded" : false,
       "field" : false

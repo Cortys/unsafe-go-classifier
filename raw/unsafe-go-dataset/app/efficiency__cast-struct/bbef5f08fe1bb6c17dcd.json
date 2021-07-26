@@ -98,8 +98,8 @@
       "successors" : [ 4 ],
       "in-vars" : [ 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 4 ],
-      "decl-vars" : [ 4, 5 ],
+      "out-vars" : [ 4, 1 ],
+      "decl-vars" : [ 4, 6 ],
       "line-start" : 617,
       "ast" : {
         "kind" : "statement",
@@ -195,7 +195,7 @@
       "in-vars" : [ 4, 1 ],
       "exit" : false,
       "out-vars" : [ 4, 1 ],
-      "decl-vars" : [ 5, 6 ],
+      "decl-vars" : [ 6, 7 ],
       "line-start" : 620,
       "ast" : {
         "kind" : "statement",
@@ -273,7 +273,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "value",
-                        "variable" : 5
+                        "variable" : 6
                       }
                     },
                     "type" : "index"
@@ -297,7 +297,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6 ],
-      "in-vars" : [ 1, 4 ],
+      "in-vars" : [ 4, 1 ],
       "exit" : false,
       "out-vars" : [ 4 ],
       "decl-vars" : [ ],
@@ -315,7 +315,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bucket",
-              "variable" : 6
+              "variable" : 7
             }
           },
           "type" : "star"
@@ -328,7 +328,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "bucket",
-              "variable" : 7
+              "variable" : 8
             },
             "go-type" : 8,
             "kind" : "expression",
@@ -359,8 +359,8 @@
       "successors" : [ 7 ],
       "in-vars" : [ 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 8 ],
-      "decl-vars" : [ 8, 5 ],
+      "out-vars" : [ 9, 6, 4 ],
+      "decl-vars" : [ 6, 9 ],
       "line-start" : 624,
       "ast" : {
         "kind" : "statement",
@@ -438,7 +438,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "value",
-                        "variable" : 5
+                        "variable" : 6
                       }
                     },
                     "type" : "index"
@@ -462,9 +462,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 5, 8, 4 ],
+      "in-vars" : [ 6, 4, 9 ],
       "exit" : false,
-      "out-vars" : [ 5 ],
+      "out-vars" : [ 6 ],
       "decl-vars" : [ ],
       "line-start" : 625,
       "ast" : {
@@ -479,7 +479,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "p",
-              "variable" : 8
+              "variable" : 9
             }
           } ],
           "ellipsis" : false,
@@ -490,7 +490,7 @@
               "kind" : "ident",
               "value" : "write"
             },
-            "go-type" : 162,
+            "go-type" : 163,
             "kind" : "expression",
             "target" : {
               "go-type" : 151,
@@ -514,11 +514,11 @@
       "line-end" : 625,
       "code" : "n.write(p)",
       "entry" : false,
-      "use-vars" : [ 4, 8 ]
+      "use-vars" : [ 4, 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 5 ],
+      "in-vars" : [ 6 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -534,7 +534,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "value",
-            "variable" : 5
+            "variable" : 6
           }
         } ]
       },
@@ -542,7 +542,7 @@
       "line-end" : 627,
       "code" : "return value",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 6 ]
     } ],
     "code" : "// write allocates and writes a bucket to a byte slice.\nfunc (b *Bucket) write() []byte {\n\t// Allocate the appropriate size.\n\tvar n = b.rootNode\n\tvar value = make([]byte, bucketHeaderSize+n.size())\n\n\t// Write a bucket header.\n\tvar bucket = (*bucket)(unsafe.Pointer(&value[0]))\n\t*bucket = *b.bucket\n\n\t// Convert byte slice to a fake page and write the root node.\n\tvar p = (*page)(unsafe.Pointer(&value[bucketHeaderSize]))\n\tn.write(p)\n\n\treturn value\n}",
     "defines" : [ 0 ],
@@ -554,12 +554,12 @@
     }, {
       "name" : "size",
       "package" : 0,
-      "type" : 85,
+      "type" : 162,
       "exported" : false
     }, {
       "name" : "write",
       "package" : 0,
-      "type" : 162,
+      "type" : 165,
       "exported" : false
     } ],
     "line-end" : 628,
@@ -593,7 +593,7 @@
     "results" : [ 2 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func() []byte",
+      "name" : "(*go.etcd.io/bbolt.Bucket) func() []byte",
       "params" : 1,
       "recv" : 1,
       "results" : 2,
@@ -1124,7 +1124,7 @@
       "type" : "Interface",
       "underlying" : 52
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 1,
       "recv" : 0,
       "results" : 54,
@@ -2117,12 +2117,20 @@
       "type" : "Basic",
       "underlying" : 161
     }, {
+      "name" : "(*go.etcd.io/bbolt.node) func() int",
+      "params" : 1,
+      "recv" : 5,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 162,
+      "variadic" : false
+    }, {
       "name" : "func(p *go.etcd.io/bbolt.page)",
-      "params" : 163,
+      "params" : 164,
       "recv" : -1,
       "results" : 1,
       "type" : "Signature",
-      "underlying" : 162,
+      "underlying" : 163,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -2131,7 +2139,15 @@
       } ],
       "name" : "(p *go.etcd.io/bbolt.page)",
       "type" : "Tuple",
-      "underlying" : 163
+      "underlying" : 164
+    }, {
+      "name" : "(*go.etcd.io/bbolt.node) func(p *go.etcd.io/bbolt.page)",
+      "params" : 164,
+      "recv" : 10,
+      "results" : 1,
+      "type" : "Signature",
+      "underlying" : 165,
+      "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
@@ -2169,6 +2185,13 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 151,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "value",
       "package" : 0,
       "type" : 3,
@@ -2193,6 +2216,13 @@
       "name" : "p",
       "package" : 0,
       "type" : 144,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "n",
+      "package" : 0,
+      "type" : 151,
       "exported" : false,
       "embedded" : false,
       "field" : false

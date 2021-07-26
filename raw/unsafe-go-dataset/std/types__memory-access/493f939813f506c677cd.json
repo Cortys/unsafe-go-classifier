@@ -42,7 +42,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 1, 2, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 0 ],
       "decl-vars" : [ ],
@@ -111,9 +111,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 0, 1 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 5, 0 ],
+      "out-vars" : [ 1, 2, 0, 5 ],
       "decl-vars" : [ 5 ],
       "line-start" : 283,
       "ast" : {
@@ -160,9 +160,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 7 ],
-      "in-vars" : [ 5, 0, 1, 2 ],
+      "in-vars" : [ 2, 0, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 5, 0 ],
+      "out-vars" : [ 0, 5, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 284,
       "ast" : {
@@ -204,9 +204,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 1, 2, 5, 0 ],
+      "in-vars" : [ 0, 5, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 1, 2 ],
+      "out-vars" : [ 0, 5, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 285,
       "ast" : {
@@ -296,7 +296,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 9 ],
-      "in-vars" : [ 5, 0, 1, 2 ],
+      "in-vars" : [ 0, 5, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 5 ],
       "decl-vars" : [ ],
@@ -316,7 +316,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 29,
+            "go-type" : 30,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -386,7 +386,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2, 5, 1 ],
+      "in-vars" : [ 5, 1, 2 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -437,7 +437,7 @@
       "line-end" : 293,
       "code" : "return eq(x, y)",
       "entry" : false,
-      "use-vars" : [ 2, 5, 1 ]
+      "use-vars" : [ 1, 2, 5 ]
     } ],
     "code" : "func efaceeq(t *_type, x, y unsafe.Pointer) bool {\n\tif t == nil {\n\t\treturn true\n\t}\n\teq := t.equal\n\tif eq == nil {\n\t\tpanic(errorString(\"comparing uncomparable type \" + t.string()))\n\t}\n\tif isDirectIface(t) {\n\n\t\treturn x == y\n\t}\n\treturn eq(x, y)\n}",
     "defines" : [ 0 ],
@@ -449,12 +449,12 @@
     }, {
       "name" : "string",
       "package" : 0,
-      "type" : 27,
+      "type" : 29,
       "exported" : false
     }, {
       "name" : "isDirectIface",
       "package" : 0,
-      "type" : 29,
+      "type" : 30,
       "exported" : false
     } ],
     "line-end" : 294,
@@ -684,12 +684,20 @@
       "type" : "Tuple",
       "underlying" : 28
     }, {
+      "name" : "(*runtime._type) func() string",
+      "params" : 21,
+      "recv" : 6,
+      "results" : 28,
+      "type" : "Signature",
+      "underlying" : 29,
+      "variadic" : false
+    }, {
       "name" : "func(t *runtime._type) bool",
-      "params" : 30,
+      "params" : 31,
       "recv" : -1,
       "results" : 12,
       "type" : "Signature",
-      "underlying" : 29,
+      "underlying" : 30,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -698,7 +706,7 @@
       } ],
       "name" : "(t *runtime._type)",
       "type" : "Tuple",
-      "underlying" : 30
+      "underlying" : 31
     } ],
     "variables" : [ {
       "name" : "t",
@@ -739,6 +747,13 @@
       "name" : "eq",
       "package" : 0,
       "type" : 9,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 2,
       "exported" : false,
       "embedded" : false,
       "field" : false

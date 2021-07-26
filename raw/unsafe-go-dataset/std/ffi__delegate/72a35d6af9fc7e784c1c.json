@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 7, 3, 4, 1, 2 ],
+      "in-vars" : [ 1, 7, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 2, 7, 3 ],
+      "out-vars" : [ 4, 1, 7, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2, 7, 3, 4 ],
+      "in-vars" : [ 2, 3, 4, 1, 7 ],
       "exit" : false,
-      "out-vars" : [ 3, 4, 1, 8, 7 ],
+      "out-vars" : [ 8, 3, 4, 1, 7 ],
       "decl-vars" : [ 8 ],
       "line-start" : 1795,
       "ast" : {
@@ -97,9 +97,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4, 5 ],
-      "in-vars" : [ 4, 1, 8, 7, 3 ],
+      "in-vars" : [ 8, 3, 4, 1, 7 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 8, 7, 3 ],
+      "out-vars" : [ 8, 3, 4, 1, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1796,
       "ast" : {
@@ -122,9 +122,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 4, 1, 8, 7, 3 ],
+      "in-vars" : [ 7, 8, 3, 4, 1 ],
       "exit" : false,
-      "out-vars" : [ 8, 3, 4, 1 ],
+      "out-vars" : [ 4, 1, 8, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1797,
       "ast" : {
@@ -198,7 +198,7 @@
       "in-vars" : [ 4, 1, 8, 3 ],
       "exit" : false,
       "out-vars" : [ 1, 8, 9, 10, 4 ],
-      "decl-vars" : [ 10, 9 ],
+      "decl-vars" : [ 9, 10 ],
       "line-start" : 1799,
       "ast" : {
         "kind" : "statement",
@@ -261,7 +261,7 @@
       "successors" : [ 7 ],
       "in-vars" : [ 1, 8, 9, 10, 4 ],
       "exit" : false,
-      "out-vars" : [ 5, 6, 8 ],
+      "out-vars" : [ 8, 5, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1800,
       "ast" : {
@@ -316,7 +316,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "lo",
-              "variable" : 9
+              "variable" : 10
             }
           }, {
             "go-type" : 28,
@@ -326,7 +326,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "hi",
-              "variable" : 10
+              "variable" : 9
             }
           }, {
             "go-type" : 2,
@@ -361,11 +361,11 @@
       "line-end" : 1800,
       "code" : "n, err = pwritev2(fd, iovecs, lo, hi, flags)",
       "entry" : false,
-      "use-vars" : [ 8, 9, 10, 4, 1 ]
+      "use-vars" : [ 1, 8, 10, 9, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 5, 6, 8 ],
+      "in-vars" : [ 8, 5, 6 ],
       "exit" : false,
       "out-vars" : [ 5, 6 ],
       "decl-vars" : [ ],
@@ -416,7 +416,7 @@
       "line-end" : 1801,
       "code" : "writevRacedetect(iovecs, n)",
       "entry" : false,
-      "use-vars" : [ 8, 5 ]
+      "use-vars" : [ 5, 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -454,7 +454,7 @@
       "line-end" : 1802,
       "code" : "return n, err",
       "entry" : false,
-      "use-vars" : [ 5, 6 ]
+      "use-vars" : [ 6, 5 ]
     } ],
     "code" : "func Pwritev2(fd int, iovs [][]byte, offset int64, flags int) (n int, err error) {\n\tiovecs := bytes2iovec(iovs)\n\tif raceenabled {\n\t\traceReleaseMerge(unsafe.Pointer(&ioSync))\n\t}\n\tlo, hi := offs2lohi(offset)\n\tn, err = pwritev2(fd, iovecs, lo, hi, flags)\n\twritevRacedetect(iovecs, n)\n\treturn n, err\n}",
     "defines" : [ 0 ],
@@ -577,7 +577,7 @@
       "type" : "Interface",
       "underlying" : 9
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 11,
       "recv" : 0,
       "results" : 12,
@@ -830,14 +830,14 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "lo",
+      "name" : "hi",
       "package" : 0,
       "type" : 28,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "hi",
+      "name" : "lo",
       "package" : 0,
       "type" : 28,
       "exported" : false,

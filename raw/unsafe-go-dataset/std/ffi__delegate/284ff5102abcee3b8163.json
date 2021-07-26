@@ -14,7 +14,7 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 3, 1 ],
+      "in-vars" : [ 1, 2, 3 ],
       "exit" : false,
       "out-vars" : [ 1, 2, 3 ],
       "decl-vars" : [ ],
@@ -87,7 +87,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 6, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 7, 1, 2, 3 ],
+      "out-vars" : [ 3, 6, 7, 1, 2 ],
       "decl-vars" : [ 7 ],
       "line-start" : 600,
       "ast" : {
@@ -120,9 +120,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 3, 6, 7, 1 ],
+      "in-vars" : [ 6, 7, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 6, 8 ],
+      "out-vars" : [ 8, 6 ],
       "decl-vars" : [ 8 ],
       "line-start" : 601,
       "ast" : {
@@ -245,7 +245,7 @@
       "line-end" : 601,
       "code" : "err := getsockopt(fd, level, opt, unsafe.Pointer(&value), &vallen)",
       "entry" : false,
-      "use-vars" : [ 3, 6, 7, 1, 2 ]
+      "use-vars" : [ 2, 3, 6, 7, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -289,7 +289,7 @@
       "line-end" : 602,
       "code" : "return &value, err",
       "entry" : false,
-      "use-vars" : [ 6, 8 ]
+      "use-vars" : [ 8, 6 ]
     } ],
     "code" : "func GetsockoptUcred(fd, level, opt int) (*Ucred, error) {\n\tvar value Ucred\n\tvallen := _Socklen(SizeofUcred)\n\terr := getsockopt(fd, level, opt, unsafe.Pointer(&value), &vallen)\n\treturn &value, err\n}",
     "defines" : [ 0 ],
@@ -404,7 +404,7 @@
       "type" : "Interface",
       "underlying" : 10
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 12,
       "recv" : 0,
       "results" : 13,

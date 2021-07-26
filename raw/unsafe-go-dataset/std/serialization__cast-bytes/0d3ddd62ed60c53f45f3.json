@@ -428,7 +428,7 @@
       "line-end" : 59,
       "code" : "return h, b[cmsgAlignOf(SizeofCmsghdr):h.Len], nil",
       "entry" : false,
-      "use-vars" : [ 5, 1 ]
+      "use-vars" : [ 1, 5 ]
     } ],
     "code" : "func socketControlMessageHeaderAndData(b []byte) (*Cmsghdr, []byte, error) {\n\th := (*Cmsghdr)(unsafe.Pointer(&b[0]))\n\tif h.Len < SizeofCmsghdr || uint64(h.Len) > uint64(len(b)) {\n\t\treturn nil, nil, EINVAL\n\t}\n\treturn h, b[cmsgAlignOf(SizeofCmsghdr):h.Len], nil\n}",
     "defines" : [ 0 ],
@@ -545,7 +545,7 @@
       "type" : "Interface",
       "underlying" : 11
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 13,
       "recv" : 0,
       "results" : 14,

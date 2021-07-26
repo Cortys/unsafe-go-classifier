@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 2, 0, 1 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 2 ],
+      "out-vars" : [ 1, 2, 0 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -44,7 +44,7 @@
       "successors" : [ 3 ],
       "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 4, 0, 1 ],
+      "out-vars" : [ 4, 0, 1, 2 ],
       "decl-vars" : [ 4 ],
       "line-start" : 54,
       "ast" : {
@@ -140,9 +140,9 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 4 ],
-      "in-vars" : [ 2, 4, 0, 1 ],
+      "in-vars" : [ 4, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 4, 0 ],
+      "out-vars" : [ 4, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 55,
       "ast" : {
@@ -187,9 +187,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 2, 4, 0, 1 ],
+      "in-vars" : [ 4, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 2 ],
+      "out-vars" : [ 2, 0 ],
       "decl-vars" : [ ],
       "line-start" : 56,
       "ast" : {
@@ -257,13 +257,13 @@
       "line-end" : 56,
       "code" : "copy(sa.Addr[:], grp)",
       "entry" : false,
-      "use-vars" : [ 1, 4 ]
+      "use-vars" : [ 4, 1 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 6 ],
-      "in-vars" : [ 2, 0 ],
+      "in-vars" : [ 0, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 2 ],
+      "out-vars" : [ 2, 4 ],
       "decl-vars" : [ ],
       "line-start" : 57,
       "ast" : {
@@ -360,7 +360,7 @@
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 4 ],
+      "in-vars" : [ 4, 2 ],
       "exit" : false,
       "out-vars" : [ 2, 4 ],
       "decl-vars" : [ ],
@@ -407,7 +407,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4, 2 ],
+      "in-vars" : [ 2, 4 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -477,7 +477,7 @@
       "line-end" : 59,
       "code" : "copy(sa.Addr[:], src)",
       "entry" : false,
-      "use-vars" : [ 4, 2 ]
+      "use-vars" : [ 2, 4 ]
     } ],
     "code" : "func (gsr *groupSourceReq) setSourceGroup(grp, src net.IP) {\n\tsa := (*sockaddrInet)(unsafe.Pointer(&gsr.Group))\n\tsa.Family = syscall.AF_INET\n\tcopy(sa.Addr[:], grp)\n\tsa = (*sockaddrInet)(unsafe.Pointer(&gsr.Source))\n\tsa.Family = syscall.AF_INET\n\tcopy(sa.Addr[:], src)\n}",
     "defines" : [ 0 ],
@@ -506,7 +506,7 @@
     "results" : [ ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(grp net.IP, src net.IP)",
+      "name" : "(*golang.org/x/net/ipv4.groupSourceReq) func(grp net.IP, src net.IP)",
       "params" : 1,
       "recv" : 0,
       "results" : 5,

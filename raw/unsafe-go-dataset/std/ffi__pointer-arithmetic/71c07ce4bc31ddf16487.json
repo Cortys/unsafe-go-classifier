@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 3, 4, 2, 1, 0, 5 ],
+      "in-vars" : [ 2, 3, 4, 5, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 2, 1, 0, 5, 3 ],
+      "out-vars" : [ 0, 1, 2, 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3, 4 ],
-      "in-vars" : [ 2, 1, 0, 5, 3, 4 ],
+      "in-vars" : [ 5, 0, 1, 2, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0, 5, 3, 4 ],
+      "out-vars" : [ 0, 1, 2, 3, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 27,
       "ast" : {
@@ -100,9 +100,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 4, 2, 1, 0, 5, 3 ],
+      "in-vars" : [ 1, 2, 3, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 4, 2, 1, 0, 5, 3 ],
+      "out-vars" : [ 4, 5, 0, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 28,
       "ast" : {
@@ -111,7 +111,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 9,
+              "go-type" : 10,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -121,13 +121,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 9,
+                "go-type" : 10,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 9,
+            "go-type" : 10,
             "kind" : "expression",
             "target" : {
               "go-type" : 3,
@@ -174,32 +174,32 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 4, 2, 1, 0, 5, 3 ],
+      "in-vars" : [ 0, 1, 2, 3, 4, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0, 5 ],
+      "out-vars" : [ 0, 1, 2, 3 ],
       "decl-vars" : [ ],
       "line-start" : 31,
       "ast" : {
         "condition" : {
-          "go-type" : 10,
+          "go-type" : 9,
           "kind" : "expression",
           "left" : {
-            "go-type" : 10,
+            "go-type" : 9,
             "kind" : "expression",
             "left" : {
-              "go-type" : 9,
+              "go-type" : 10,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "_cgo_sigaction",
-                "variable" : 3
+                "variable" : 4
               }
             },
             "operator" : "==",
             "right" : {
-              "go-type" : 9,
+              "go-type" : 10,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -212,14 +212,14 @@
           },
           "operator" : "||",
           "right" : {
-            "go-type" : 10,
+            "go-type" : 9,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "inForkedChild",
-              "variable" : 4
+              "variable" : 5
             }
           },
           "type" : "binary"
@@ -231,11 +231,11 @@
       "line-end" : 77,
       "code" : "if _cgo_sigaction == nil || inForkedChild {\n\tsysSigaction(sig, new, old)\n} else {\n\n\tvar ret int32\n\n\tvar g *g\n\tif mainStarted {\n\t\tg = getg()\n\t}\n\tsp := uintptr(unsafe.Pointer(&sig))\n\tswitch {\n\tcase g == nil:\n\n\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\tcase sp < g.stack.lo || sp >= g.stack.hi:\n\n\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\tdefault:\n\n\t\tsystemstack(func() {\n\t\t\tret = callCgoSigaction(uintptr(sig), new, old)\n\t\t})\n\t}\n\n\tconst EINVAL = 22\n\tif ret == EINVAL {\n\n\t\tsysSigaction(sig, new, old)\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 4, 3 ]
+      "use-vars" : [ 5, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 2 ],
       "decl-vars" : [ ],
@@ -300,9 +300,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 2, 1, 0, 5 ],
+      "in-vars" : [ 0, 1, 2, 3 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 7, 5, 2 ],
+      "out-vars" : [ 1, 2, 3, 7, 0 ],
       "decl-vars" : [ 7 ],
       "line-start" : 40,
       "ast" : {
@@ -343,9 +343,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 8 ],
-      "in-vars" : [ 2, 1, 0, 7, 5 ],
+      "in-vars" : [ 0, 1, 2, 3, 7 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 1, 0, 7, 5 ],
+      "out-vars" : [ 0, 1, 2, 3, 6, 7 ],
       "decl-vars" : [ 6 ],
       "line-start" : 42,
       "ast" : {
@@ -391,21 +391,21 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 9, 10 ],
-      "in-vars" : [ 1, 0, 7, 5, 6, 2 ],
+      "in-vars" : [ 1, 2, 3, 6, 7, 0 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 1, 0, 7 ],
+      "out-vars" : [ 0, 1, 2, 6, 7 ],
       "decl-vars" : [ ],
       "line-start" : 43,
       "ast" : {
         "condition" : {
-          "go-type" : 10,
+          "go-type" : 9,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "mainStarted",
-            "variable" : 5
+            "variable" : 3
           }
         },
         "kind" : "statement",
@@ -415,13 +415,13 @@
       "line-end" : 45,
       "code" : "if mainStarted {\n\tg = getg()\n}",
       "entry" : false,
-      "use-vars" : [ 5 ]
+      "use-vars" : [ 3 ]
     }, {
       "update-vars" : [ 6 ],
       "successors" : [ 10 ],
-      "in-vars" : [ 2, 1, 0, 7 ],
+      "in-vars" : [ 0, 1, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 1, 0, 7, 6, 2 ],
+      "out-vars" : [ 2, 6, 7, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 44,
       "ast" : {
@@ -465,9 +465,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 6, 2, 1, 0, 7 ],
+      "in-vars" : [ 6, 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 8, 6, 2, 1, 0, 7 ],
+      "out-vars" : [ 0, 1, 2, 6, 7, 8 ],
       "decl-vars" : [ 8 ],
       "line-start" : 46,
       "ast" : {
@@ -498,7 +498,7 @@
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
-              "go-type" : 9,
+              "go-type" : 10,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -508,13 +508,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 9,
+                "go-type" : 10,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 9,
+            "go-type" : 10,
             "kind" : "expression",
             "target" : {
               "go-type" : 123,
@@ -547,9 +547,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 12, 14, 16 ],
-      "in-vars" : [ 6, 2, 1, 0, 7, 8 ],
+      "in-vars" : [ 0, 1, 2, 6, 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 8, 6, 2, 1 ],
+      "out-vars" : [ 0, 1, 2, 6, 7, 8 ],
       "decl-vars" : [ ],
       "line-start" : 47,
       "ast" : {
@@ -565,14 +565,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 13 ],
-      "in-vars" : [ 1, 0, 6, 2 ],
+      "in-vars" : [ 6, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 48,
       "ast" : {
         "expressions" : [ {
-          "go-type" : 10,
+          "go-type" : 9,
           "kind" : "expression",
           "left" : {
             "go-type" : 16,
@@ -609,9 +609,9 @@
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 2, 1, 0 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 2, 1 ],
+      "out-vars" : [ 0, 1, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 50,
       "ast" : {
@@ -697,21 +697,21 @@
       "line-end" : 50,
       "code" : "ret = callCgoSigaction(uintptr(sig), new, old)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 0 ]
+      "use-vars" : [ 0, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 15 ],
-      "in-vars" : [ 8, 6, 2, 1, 0 ],
+      "in-vars" : [ 0, 1, 2, 6, 8 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 51,
       "ast" : {
         "expressions" : [ {
-          "go-type" : 10,
+          "go-type" : 9,
           "kind" : "expression",
           "left" : {
-            "go-type" : 10,
+            "go-type" : 9,
             "kind" : "expression",
             "left" : {
               "go-type" : 6,
@@ -762,7 +762,7 @@
           },
           "operator" : "||",
           "right" : {
-            "go-type" : 10,
+            "go-type" : 9,
             "kind" : "expression",
             "left" : {
               "go-type" : 6,
@@ -820,13 +820,13 @@
       "line-end" : 55,
       "code" : "case sp < g.stack.lo || sp >= g.stack.hi:\n\n\tret = callCgoSigaction(uintptr(sig), new, old)",
       "entry" : false,
-      "use-vars" : [ 6, 8 ]
+      "use-vars" : [ 8, 6 ]
     }, {
       "update-vars" : [ 7 ],
       "successors" : [ 18 ],
-      "in-vars" : [ 0, 2, 1 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0, 7 ],
+      "out-vars" : [ 7, 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 55,
       "ast" : {
@@ -912,13 +912,13 @@
       "line-end" : 55,
       "code" : "ret = callCgoSigaction(uintptr(sig), new, old)",
       "entry" : false,
-      "use-vars" : [ 1, 2, 0 ]
+      "use-vars" : [ 2, 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 0, 7, 2, 1 ],
+      "in-vars" : [ 0, 1, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 0, 7, 2, 1 ],
+      "out-vars" : [ 0, 1, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 56,
       "ast" : {
@@ -934,9 +934,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18 ],
-      "in-vars" : [ 2, 1, 0, 7 ],
+      "in-vars" : [ 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0, 7 ],
+      "out-vars" : [ 0, 1, 2, 7 ],
       "decl-vars" : [ ],
       "line-start" : 65,
       "ast" : {
@@ -1051,13 +1051,13 @@
       "line-end" : 67,
       "code" : "systemstack(func() {\n\tret = callCgoSigaction(uintptr(sig), new, old)\n})",
       "entry" : false,
-      "use-vars" : [ 0, 1, 2, 7 ]
+      "use-vars" : [ 7, 0, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 19 ],
-      "in-vars" : [ 2, 1, 0, 7 ],
+      "in-vars" : [ 7, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 0, 7 ],
+      "out-vars" : [ 2, 7, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 70,
       "ast" : {
@@ -1095,9 +1095,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 20, 21 ],
-      "in-vars" : [ 7, 2, 1, 0 ],
+      "in-vars" : [ 1, 2, 7, 0 ],
       "exit" : false,
-      "out-vars" : [ 0, 2, 1 ],
+      "out-vars" : [ 0, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 71,
       "ast" : {
@@ -1137,7 +1137,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21 ],
-      "in-vars" : [ 1, 0, 2 ],
+      "in-vars" : [ 0, 1, 2 ],
       "exit" : false,
       "out-vars" : [ 2 ],
       "decl-vars" : [ ],
@@ -1198,7 +1198,7 @@
       "line-end" : 75,
       "code" : "sysSigaction(sig, new, old)",
       "entry" : false,
-      "use-vars" : [ 2, 0, 1 ]
+      "use-vars" : [ 0, 1, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 22, 1 ],
@@ -1271,7 +1271,7 @@
         "value" : {
           "arguments" : [ {
             "coerced-to" : {
-              "go-type" : 9,
+              "go-type" : 10,
               "kind" : "type",
               "qualifier" : {
                 "ident-kind" : "PkgName",
@@ -1281,13 +1281,13 @@
               },
               "type" : "identifier",
               "value" : {
-                "go-type" : 9,
+                "go-type" : 10,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "Pointer"
               }
             },
-            "go-type" : 9,
+            "go-type" : 10,
             "kind" : "expression",
             "target" : {
               "go-type" : 3,
@@ -1456,13 +1456,13 @@
       "type" : "Tuple",
       "underlying" : 8
     }, {
-      "local-name" : "Pointer",
-      "name" : "unsafe.Pointer",
-      "package" : 1,
+      "name" : "bool",
       "type" : "Basic",
       "underlying" : 9
     }, {
-      "name" : "bool",
+      "local-name" : "Pointer",
+      "name" : "unsafe.Pointer",
+      "package" : 1,
       "type" : "Basic",
       "underlying" : 10
     }, {
@@ -1484,7 +1484,7 @@
     }, {
       "fields" : [ {
         "name" : "addr",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "sz",
         "type" : 6
@@ -1540,7 +1540,7 @@
         "type" : 6
       }, {
         "name" : "param",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "atomicstatus",
         "type" : 2
@@ -1561,34 +1561,34 @@
         "type" : 91
       }, {
         "name" : "preempt",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "preemptStop",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "preemptShrink",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "asyncSafePoint",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "paniconfault",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "gcscandone",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "throwsplit",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "activeStackChans",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "raceignore",
         "type" : 47
       }, {
         "name" : "sysblocktraced",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "sysexitticks",
         "type" : 45
@@ -1636,7 +1636,7 @@
         "type" : 97
       }, {
         "name" : "labels",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "timer",
         "type" : 116
@@ -1681,7 +1681,7 @@
     }, {
       "fields" : [ {
         "name" : "argp",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "arg",
         "type" : 24
@@ -1693,16 +1693,16 @@
         "type" : 6
       }, {
         "name" : "sp",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "recovered",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "aborted",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "goexit",
-        "type" : 10
+        "type" : 9
       } ],
       "name" : "struct{argp unsafe.Pointer; arg interface{}; link *runtime._panic; pc uintptr; sp unsafe.Pointer; recovered bool; aborted bool; goexit bool}",
       "type" : "Struct",
@@ -1729,13 +1729,13 @@
         "type" : 15
       }, {
         "name" : "started",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "heap",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "openDefer",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "sp",
         "type" : 6
@@ -1753,7 +1753,7 @@
         "type" : 25
       }, {
         "name" : "fd",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "varp",
         "type" : 6
@@ -1860,19 +1860,19 @@
         "type" : 15
       }, {
         "name" : "spinning",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "blocked",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "newSigstack",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "printlock",
         "type" : 47
       }, {
         "name" : "incgo",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "freeWait",
         "type" : 2
@@ -1881,7 +1881,7 @@
         "type" : 41
       }, {
         "name" : "needextram",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "traceback",
         "type" : 48
@@ -1929,7 +1929,7 @@
         "type" : 82
       }, {
         "name" : "waitlock",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "waittraceev",
         "type" : 77
@@ -1938,7 +1938,7 @@
         "type" : 85
       }, {
         "name" : "startingtrace",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "syscalltick",
         "type" : 2
@@ -2000,7 +2000,7 @@
         "type" : 36
       }, {
         "name" : "ctxt",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "ret",
         "type" : 37
@@ -2418,7 +2418,7 @@
         "type" : 16
       }, {
         "name" : "",
-        "type" : 9
+        "type" : 10
       } ],
       "name" : "(*runtime.g, unsafe.Pointer)",
       "type" : "Tuple",
@@ -2426,7 +2426,7 @@
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 10
+        "type" : 9
       } ],
       "name" : "(bool)",
       "type" : "Tuple",
@@ -2544,7 +2544,7 @@
         "type" : 16
       }, {
         "name" : "isSelect",
-        "type" : 10
+        "type" : 9
       }, {
         "name" : "next",
         "type" : 98
@@ -2553,7 +2553,7 @@
         "type" : 98
       }, {
         "name" : "elem",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "acquiretime",
         "type" : 45
@@ -2599,7 +2599,7 @@
         "type" : 104
       }, {
         "name" : "buf",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "elemsize",
         "type" : 68
@@ -2698,10 +2698,10 @@
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 9
+        "type" : 10
       }, {
         "name" : "",
-        "type" : 9
+        "type" : 10
       } ],
       "name" : "(unsafe.Pointer, unsafe.Pointer)",
       "type" : "Tuple",
@@ -2893,23 +2893,23 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "_cgo_sigaction",
+      "name" : "mainStarted",
       "package" : 0,
       "type" : 9,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "inForkedChild",
+      "name" : "_cgo_sigaction",
       "package" : 0,
       "type" : 10,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "mainStarted",
+      "name" : "inForkedChild",
       "package" : 0,
-      "type" : 10,
+      "type" : 9,
       "exported" : false,
       "embedded" : false,
       "field" : false

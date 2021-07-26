@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 1, 6, 7, 8, 9, 10, 5, 0, 11, 4, 2, 3, 12 ],
+      "in-vars" : [ 3, 6, 7, 8, 4, 9, 2, 10, 5, 0, 1, 11, 12 ],
       "exit" : false,
-      "out-vars" : [ 10, 0, 1, 7, 8, 12, 4, 2, 3, 5, 6, 11, 9 ],
+      "out-vars" : [ 10, 8, 12, 0, 1, 4, 2, 6, 7, 5, 3, 11, 9 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 12, 10, 3, 5, 0, 1, 6, 8, 11, 4, 2, 7, 9 ],
+      "in-vars" : [ 5, 3, 11, 4, 2, 12, 0, 1, 9, 6, 10, 7, 8 ],
       "exit" : false,
-      "out-vars" : [ 6, 10, 2, 3, 13, 12, 11, 9, 1, 7, 8, 5, 0, 4 ],
+      "out-vars" : [ 9, 2, 7, 3, 11, 13, 4, 10, 12, 8, 5, 0, 1, 6 ],
       "decl-vars" : [ 13 ],
       "line-start" : 1077,
       "ast" : {
@@ -87,10 +87,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 1, 12, 13, 5, 7, 8, 6, 11, 4, 9, 10, 2, 3, 0 ],
+      "in-vars" : [ 13, 12, 0, 9, 6, 11, 4, 2, 7, 5, 3, 1, 10, 8 ],
       "exit" : false,
-      "out-vars" : [ 3, 1, 14, 7, 12, 11, 10, 0, 4, 13, 5, 8, 2, 15, 6, 9 ],
-      "decl-vars" : [ 15, 14 ],
+      "out-vars" : [ 5, 6, 8, 12, 0, 14, 2, 4, 10, 7, 13, 3, 1, 11, 15, 9 ],
+      "decl-vars" : [ 14, 15 ],
       "line-start" : 1078,
       "ast" : {
         "kind" : "statement",
@@ -138,10 +138,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 10, 0, 15, 14, 11, 4, 9, 3, 8, 1, 6, 7, 13, 2, 5, 12 ],
+      "in-vars" : [ 9, 14, 11, 8, 0, 3, 1, 4, 6, 2, 10, 12, 5, 15, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 13, 15, 8, 11, 18, 3, 5, 12, 2, 0, 1, 14, 9, 10, 6, 7, 4 ],
-      "decl-vars" : [ 18 ],
+      "out-vars" : [ 1, 2, 14, 9, 6, 7, 8, 15, 0, 3, 11, 10, 12, 5, 4, 13, 19 ],
+      "decl-vars" : [ 19 ],
       "line-start" : 1081,
       "ast" : {
         "kind" : "statement",
@@ -216,17 +216,17 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 6, 16 ],
-      "in-vars" : [ 6, 8, 13, 2, 5, 0, 15, 7, 4, 18, 3, 14, 10, 1, 12, 11, 9 ],
+      "in-vars" : [ 14, 19, 11, 2, 10, 8, 5, 3, 12, 7, 13, 15, 6, 4, 9, 0, 1 ],
       "exit" : false,
-      "out-vars" : [ 15, 9, 10, 7, 2, 13, 3, 0, 1, 14, 12, 4, 18, 6, 8, 11, 5 ],
+      "out-vars" : [ 15, 14, 19, 1, 4, 9, 6, 3, 10, 7, 11, 8, 0, 2, 13, 12, 5 ],
       "decl-vars" : [ ],
       "line-start" : 1082,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
-            "go-type" : 248,
+            "go-type" : 249,
             "kind" : "expression",
             "left" : {
               "go-type" : 207,
@@ -236,12 +236,12 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "pp",
-                "variable" : 18
+                "variable" : 19
               }
             },
             "operator" : "!=",
             "right" : {
-              "go-type" : 249,
+              "go-type" : 250,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
@@ -254,7 +254,7 @@
           },
           "operator" : "&&",
           "right" : {
-            "go-type" : 248,
+            "go-type" : 249,
             "kind" : "expression",
             "left" : {
               "go-type" : 2,
@@ -287,14 +287,14 @@
       "line-end" : 1114,
       "code" : "if pp != nil && npages < pageCachePages/4 {\n\tc := &pp.pcache\n\n\tif c.empty() {\n\t\tlock(&h.lock)\n\t\t*c = h.pages.allocToCache()\n\t\tunlock(&h.lock)\n\t}\n\n\tbase, scav = c.alloc(npages)\n\tif base != 0 {\n\t\ts = h.tryAllocMSpan()\n\n\t\tif s != nil && gcBlackenEnabled == 0 && (manual || spanclass.sizeclass() != 0) {\n\t\t\tgoto HaveSpan\n\t\t}\n\n\t}\n}",
       "entry" : false,
-      "use-vars" : [ 1, 18 ]
+      "use-vars" : [ 1, 19 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 7 ],
-      "in-vars" : [ 18, 10, 3, 5, 1, 4, 13, 2, 0, 8, 12, 11, 9, 7, 6 ],
+      "in-vars" : [ 5, 4, 9, 0, 13, 2, 7, 3, 19, 1, 8, 12, 11, 6, 10 ],
       "exit" : false,
-      "out-vars" : [ 20, 7, 8, 4, 11, 13, 3, 1, 9, 10, 2, 5, 0, 6, 12 ],
-      "decl-vars" : [ 20 ],
+      "out-vars" : [ 6, 13, 5, 1, 4, 10, 7, 8, 0, 9, 2, 12, 3, 11, 21 ],
+      "decl-vars" : [ 21 ],
       "line-start" : 1083,
       "ast" : {
         "kind" : "statement",
@@ -309,7 +309,7 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 250,
+          "go-type" : 251,
           "kind" : "expression",
           "operator" : "&",
           "target" : {
@@ -317,7 +317,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "pcache",
-              "variable" : 19
+              "variable" : 20
             },
             "go-type" : 212,
             "kind" : "expression",
@@ -329,7 +329,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "pp",
-                "variable" : 18
+                "variable" : 19
               }
             },
             "type" : "selector"
@@ -342,13 +342,13 @@
       "line-end" : 1083,
       "code" : "c := &pp.pcache",
       "entry" : false,
-      "use-vars" : [ 18 ]
+      "use-vars" : [ 19 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 8, 11 ],
-      "in-vars" : [ 13, 2, 0, 1, 6, 10, 3, 5, 20, 7, 8, 12, 11, 4, 9 ],
+      "in-vars" : [ 11, 21, 0, 2, 5, 9, 6, 10, 7, 13, 8, 3, 1, 4, 12 ],
       "exit" : false,
-      "out-vars" : [ 9, 3, 6, 12, 11, 7, 8, 4, 13, 1, 20, 10, 2, 5, 0 ],
+      "out-vars" : [ 7, 9, 2, 0, 3, 4, 10, 8, 5, 11, 6, 12, 1, 21, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1086,
       "ast" : {
@@ -362,17 +362,17 @@
               "kind" : "ident",
               "value" : "empty"
             },
-            "go-type" : 251,
+            "go-type" : 252,
             "kind" : "expression",
             "target" : {
-              "go-type" : 250,
+              "go-type" : 251,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "c",
-                "variable" : 20
+                "variable" : 21
               }
             },
             "type" : "selector"
@@ -388,13 +388,13 @@
       "line-end" : 1090,
       "code" : "if c.empty() {\n\tlock(&h.lock)\n\t*c = h.pages.allocToCache()\n\tunlock(&h.lock)\n}",
       "entry" : false,
-      "use-vars" : [ 20 ]
+      "use-vars" : [ 21 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 9 ],
-      "in-vars" : [ 6, 4, 9, 13, 3, 0, 1, 20, 12, 10, 8, 2, 5, 7, 11 ],
+      "in-vars" : [ 1, 8, 12, 5, 0, 7, 11, 9, 6, 13, 3, 4, 21, 2, 10 ],
       "exit" : false,
-      "out-vars" : [ 13, 9, 0, 1, 12, 4, 3, 7, 8, 10, 2, 5, 20, 6, 11 ],
+      "out-vars" : [ 11, 4, 10, 5, 0, 3, 1, 21, 9, 6, 8, 2, 7, 13, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1087,
       "ast" : {
@@ -410,7 +410,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "lock",
-                "variable" : 21
+                "variable" : 23
               },
               "go-type" : 23,
               "kind" : "expression",
@@ -431,7 +431,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 252,
+            "go-type" : 254,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -454,9 +454,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 10 ],
-      "in-vars" : [ 1, 8, 12, 3, 4, 11, 5, 6, 9, 2, 10, 0, 20, 7, 13 ],
+      "in-vars" : [ 21, 9, 6, 5, 2, 10, 8, 12, 13, 0, 3, 1, 4, 7, 11 ],
       "exit" : false,
-      "out-vars" : [ 11, 13, 2, 1, 12, 4, 3, 5, 6, 7, 0, 9, 10, 20, 8 ],
+      "out-vars" : [ 5, 8, 1, 11, 21, 9, 6, 2, 0, 3, 10, 4, 7, 13, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1088,
       "ast" : {
@@ -465,14 +465,14 @@
           "go-type" : 212,
           "kind" : "expression",
           "target" : {
-            "go-type" : 250,
+            "go-type" : 251,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "c",
-              "variable" : 20
+              "variable" : 21
             }
           },
           "type" : "star"
@@ -487,14 +487,14 @@
               "kind" : "ident",
               "value" : "allocToCache"
             },
-            "go-type" : 254,
+            "go-type" : 256,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "pages",
-                "variable" : 22
+                "variable" : 24
               },
               "go-type" : 32,
               "kind" : "expression",
@@ -527,9 +527,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 11 ],
-      "in-vars" : [ 10, 2, 5, 6, 4, 8, 12, 13, 3, 0, 1, 20, 7, 11, 9 ],
+      "in-vars" : [ 13, 3, 4, 9, 2, 10, 8, 5, 0, 1, 21, 6, 7, 12, 11 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 12, 3, 5, 7, 11, 4, 9, 2, 6, 20, 8, 13, 10 ],
+      "out-vars" : [ 11, 4, 21, 10, 5, 8, 3, 2, 7, 12, 0, 1, 9, 6, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1089,
       "ast" : {
@@ -545,7 +545,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "lock",
-                "variable" : 21
+                "variable" : 23
               },
               "go-type" : 23,
               "kind" : "expression",
@@ -566,7 +566,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 252,
+            "go-type" : 254,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -589,9 +589,9 @@
     }, {
       "update-vars" : [ 14, 15 ],
       "successors" : [ 12 ],
-      "in-vars" : [ 1, 5, 0, 7, 4, 13, 6, 11, 8, 12, 9, 10, 2, 3, 20 ],
+      "in-vars" : [ 10, 1, 9, 2, 21, 6, 4, 5, 11, 7, 13, 8, 12, 0, 3 ],
       "exit" : false,
-      "out-vars" : [ 15, 12, 13, 0, 1, 4, 3, 8, 9, 7, 2, 5, 14, 6, 11, 10 ],
+      "out-vars" : [ 0, 2, 10, 13, 5, 12, 7, 14, 1, 11, 4, 9, 3, 15, 6, 8 ],
       "decl-vars" : [ ],
       "line-start" : 1093,
       "ast" : {
@@ -637,22 +637,22 @@
               "kind" : "ident",
               "value" : "alloc"
             },
-            "go-type" : 257,
+            "go-type" : 261,
             "kind" : "expression",
             "target" : {
-              "go-type" : 250,
+              "go-type" : 251,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "c",
-                "variable" : 20
+                "variable" : 21
               }
             },
             "type" : "selector"
           },
-          "go-type" : 256,
+          "go-type" : 260,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -662,18 +662,18 @@
       "line-end" : 1093,
       "code" : "base, scav = c.alloc(npages)",
       "entry" : false,
-      "use-vars" : [ 1, 20 ]
+      "use-vars" : [ 1, 21 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 13, 16 ],
-      "in-vars" : [ 4, 9, 14, 12, 13, 10, 2, 5, 8, 11, 3, 0, 1, 15, 6, 7 ],
+      "in-vars" : [ 7, 0, 4, 6, 2, 12, 5, 15, 13, 8, 1, 9, 10, 3, 14, 11 ],
       "exit" : false,
-      "out-vars" : [ 12, 5, 1, 14, 6, 9, 13, 10, 8, 11, 4, 2, 15, 7, 3, 0 ],
+      "out-vars" : [ 5, 2, 13, 0, 11, 10, 1, 9, 14, 4, 6, 7, 8, 12, 3, 15 ],
       "decl-vars" : [ ],
       "line-start" : 1094,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 2,
@@ -708,9 +708,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 14 ],
-      "in-vars" : [ 14, 6, 8, 11, 13, 2, 0, 1, 9, 10, 3, 15, 4, 7, 12 ],
+      "in-vars" : [ 10, 7, 14, 4, 12, 0, 15, 1, 2, 13, 3, 11, 9, 6, 8 ],
       "exit" : false,
-      "out-vars" : [ 3, 5, 1, 13, 6, 8, 12, 9, 2, 0, 15, 14, 11, 10, 7, 4 ],
+      "out-vars" : [ 13, 8, 3, 4, 9, 14, 11, 6, 15, 10, 7, 2, 12, 5, 0, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1095,
       "ast" : {
@@ -736,7 +736,7 @@
               "kind" : "ident",
               "value" : "tryAllocMSpan"
             },
-            "go-type" : 259,
+            "go-type" : 264,
             "kind" : "expression",
             "target" : {
               "go-type" : 29,
@@ -765,9 +765,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 15, 16 ],
-      "in-vars" : [ 3, 14, 8, 12, 0, 1, 7, 13, 5, 6, 11, 4, 10, 2, 15, 9 ],
+      "in-vars" : [ 4, 7, 3, 14, 9, 2, 13, 12, 5, 0, 15, 1, 11, 6, 10, 8 ],
       "exit" : false,
-      "out-vars" : [ 12, 13, 10, 8, 11, 9, 15, 7, 0, 1, 14, 2, 5, 4, 3, 6 ],
+      "out-vars" : [ 1, 4, 9, 2, 10, 8, 5, 15, 13, 12, 11, 3, 14, 6, 7, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1097,
       "ast" : {
@@ -793,7 +793,7 @@
               },
               "operator" : "!=",
               "right" : {
-                "go-type" : 249,
+                "go-type" : 250,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
@@ -864,7 +864,7 @@
                       "kind" : "ident",
                       "value" : "sizeclass"
                     },
-                    "go-type" : 261,
+                    "go-type" : 267,
                     "kind" : "expression",
                     "target" : {
                       "go-type" : 4,
@@ -907,13 +907,13 @@
       "line-end" : 1099,
       "code" : "if s != nil && gcBlackenEnabled == 0 && (manual || spanclass.sizeclass() != 0) {\n\tgoto HaveSpan\n}",
       "entry" : false,
-      "use-vars" : [ 10, 2, 3, 5 ]
+      "use-vars" : [ 3, 5, 10, 2 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 40 ],
-      "in-vars" : [ 1, 15, 6, 7, 2, 3, 5, 12, 4, 0, 14, 8 ],
+      "in-vars" : [ 2, 14, 1, 4, 9, 6, 12, 5, 0, 3, 15, 11 ],
       "exit" : false,
-      "out-vars" : [ 1, 15, 6, 7, 4, 3, 5, 14, 8, 12, 2, 0 ],
+      "out-vars" : [ 2, 0, 15, 1, 11, 9, 6, 12, 5, 3, 14, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1098,
       "ast" : {
@@ -933,9 +933,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 17 ],
-      "in-vars" : [ 5, 1, 14, 6, 8, 9, 10, 2, 4, 13, 3, 0, 7, 12, 11, 15 ],
+      "in-vars" : [ 11, 9, 13, 8, 0, 3, 1, 7, 12, 15, 14, 4, 5, 6, 2, 10 ],
       "exit" : false,
-      "out-vars" : [ 15, 8, 10, 2, 5, 14, 6, 7, 4, 3, 12, 13, 0, 1, 11, 9 ],
+      "out-vars" : [ 12, 0, 13, 8, 11, 6, 7, 3, 15, 14, 2, 5, 4, 9, 1, 10 ],
       "decl-vars" : [ ],
       "line-start" : 1118,
       "ast" : {
@@ -951,7 +951,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "lock",
-                "variable" : 21
+                "variable" : 23
               },
               "go-type" : 23,
               "kind" : "expression",
@@ -972,7 +972,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 252,
+            "go-type" : 254,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -995,14 +995,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 18, 26 ],
-      "in-vars" : [ 1, 14, 12, 11, 13, 3, 6, 7, 5, 0, 8, 10, 2, 9, 15, 4 ],
+      "in-vars" : [ 1, 11, 6, 8, 12, 0, 15, 4, 2, 5, 3, 14, 9, 10, 7, 13 ],
       "exit" : false,
-      "out-vars" : [ 6, 8, 13, 3, 15, 12, 2, 0, 1, 14, 11, 10, 7, 4, 9, 5 ],
+      "out-vars" : [ 9, 8, 1, 11, 2, 12, 5, 14, 10, 3, 15, 6, 7, 13, 0, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1120,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 2,
@@ -1037,9 +1037,9 @@
     }, {
       "update-vars" : [ 14, 15 ],
       "successors" : [ 19 ],
-      "in-vars" : [ 10, 1, 8, 2, 0, 5, 7, 13, 3, 11, 4, 9, 6, 12 ],
+      "in-vars" : [ 13, 7, 2, 10, 0, 1, 11, 4, 9, 5, 6, 8, 12, 3 ],
       "exit" : false,
-      "out-vars" : [ 13, 14, 6, 8, 4, 0, 7, 12, 11, 9, 2, 3, 10, 5, 1, 15 ],
+      "out-vars" : [ 3, 15, 14, 1, 11, 2, 5, 9, 10, 7, 0, 6, 13, 8, 12, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1122,
       "ast" : {
@@ -1085,14 +1085,14 @@
               "kind" : "ident",
               "value" : "alloc"
             },
-            "go-type" : 264,
+            "go-type" : 271,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "pages",
-                "variable" : 22
+                "variable" : 24
               },
               "go-type" : 32,
               "kind" : "expression",
@@ -1111,28 +1111,28 @@
             },
             "type" : "selector"
           },
-          "go-type" : 263,
+          "go-type" : 270,
           "kind" : "expression",
           "type" : "call"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 14, 15 ],
+      "assign-vars" : [ 15, 14 ],
       "line-end" : 1122,
       "code" : "base, scav = h.pages.alloc(npages)",
       "entry" : false,
-      "use-vars" : [ 1, 0 ]
+      "use-vars" : [ 0, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 20, 26 ],
-      "in-vars" : [ 13, 1, 7, 10, 15, 8, 4, 9, 3, 5, 0, 14, 12, 2, 6, 11 ],
+      "in-vars" : [ 10, 12, 5, 3, 13, 0, 14, 11, 9, 7, 8, 15, 4, 6, 2, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 12, 10, 15, 3, 0, 14, 8, 11, 13, 5, 7, 4, 9, 2 ],
+      "out-vars" : [ 13, 12, 15, 4, 10, 8, 11, 6, 14, 1, 5, 3, 2, 7, 0, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1123,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 2,
@@ -1167,9 +1167,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 21, 23 ],
-      "in-vars" : [ 6, 13, 10, 0, 2, 8, 12, 9, 4, 3, 5, 1, 7, 11 ],
+      "in-vars" : [ 1, 10, 13, 0, 3, 9, 7, 8, 12, 5, 11, 2, 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 9, 13, 10, 2, 5, 0, 7, 1, 6, 12, 8, 11, 4 ],
+      "out-vars" : [ 2, 7, 13, 0, 4, 10, 12, 3, 9, 6, 11, 8, 5, 1 ],
       "decl-vars" : [ ],
       "line-start" : 1124,
       "ast" : {
@@ -1197,7 +1197,7 @@
                 "kind" : "ident",
                 "value" : "grow"
               },
-              "go-type" : 265,
+              "go-type" : 273,
               "kind" : "expression",
               "target" : {
                 "go-type" : 29,
@@ -1225,7 +1225,7 @@
       "line-end" : 1127,
       "code" : "if !h.grow(npages) {\n\tunlock(&h.lock)\n\treturn nil\n}",
       "entry" : false,
-      "use-vars" : [ 0, 1 ]
+      "use-vars" : [ 1, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 22 ],
@@ -1247,7 +1247,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "lock",
-                "variable" : 21
+                "variable" : 23
               },
               "go-type" : 23,
               "kind" : "expression",
@@ -1268,7 +1268,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 252,
+            "go-type" : 254,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1300,7 +1300,7 @@
         "kind" : "statement",
         "type" : "return",
         "values" : [ {
-          "go-type" : 249,
+          "go-type" : 250,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -1316,11 +1316,11 @@
       "entry" : false,
       "use-vars" : [ ]
     }, {
-      "update-vars" : [ 15, 14 ],
+      "update-vars" : [ 14, 15 ],
       "successors" : [ 24 ],
-      "in-vars" : [ 7, 11, 3, 0, 1, 2, 8, 13, 10, 5, 6, 12, 4, 9 ],
+      "in-vars" : [ 0, 13, 5, 9, 7, 11, 2, 8, 10, 12, 3, 1, 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 3, 8, 9, 11, 4, 13, 5, 6, 7, 15, 14, 12, 10, 2, 0, 1 ],
+      "out-vars" : [ 1, 6, 2, 8, 15, 14, 11, 4, 9, 5, 0, 3, 12, 10, 7, 13 ],
       "decl-vars" : [ ],
       "line-start" : 1128,
       "ast" : {
@@ -1366,14 +1366,14 @@
               "kind" : "ident",
               "value" : "alloc"
             },
-            "go-type" : 264,
+            "go-type" : 271,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "pages",
-                "variable" : 22
+                "variable" : 24
               },
               "go-type" : 32,
               "kind" : "expression",
@@ -1392,13 +1392,13 @@
             },
             "type" : "selector"
           },
-          "go-type" : 263,
+          "go-type" : 270,
           "kind" : "expression",
           "type" : "call"
         } ],
         "type" : "assign"
       },
-      "assign-vars" : [ 14, 15 ],
+      "assign-vars" : [ 15, 14 ],
       "line-end" : 1128,
       "code" : "base, scav = h.pages.alloc(npages)",
       "entry" : false,
@@ -1406,14 +1406,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 25, 26 ],
-      "in-vars" : [ 9, 10, 1, 6, 8, 4, 2, 11, 12, 3, 5, 0, 14, 7, 13, 15 ],
+      "in-vars" : [ 11, 2, 3, 1, 6, 10, 7, 13, 12, 0, 14, 4, 9, 8, 5, 15 ],
       "exit" : false,
-      "out-vars" : [ 6, 2, 3, 9, 1, 15, 14, 8, 5, 0, 7, 12, 11, 4, 13, 10 ],
+      "out-vars" : [ 1, 11, 6, 2, 10, 8, 15, 14, 12, 0, 7, 13, 5, 4, 9, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1129,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 2,
@@ -1448,9 +1448,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 26 ],
-      "in-vars" : [ 2, 3, 0, 6, 12, 1, 7, 4, 13, 10, 5, 15, 14, 8, 11, 9 ],
+      "in-vars" : [ 5, 0, 15, 1, 4, 8, 3, 14, 11, 10, 13, 9, 6, 2, 7, 12 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 7, 11, 2, 5, 1, 14, 8, 10, 4, 9, 15, 0, 12, 13 ],
+      "out-vars" : [ 15, 1, 6, 10, 7, 13, 0, 14, 4, 5, 3, 11, 9, 2, 8, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1130,
       "ast" : {
@@ -1467,7 +1467,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 267,
+            "go-type" : 276,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1490,14 +1490,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 27, 28 ],
-      "in-vars" : [ 13, 10, 12, 5, 7, 8, 0, 15, 14, 4, 9, 2, 3, 1, 6, 11 ],
+      "in-vars" : [ 1, 9, 2, 10, 7, 5, 15, 11, 8, 12, 0, 3, 14, 4, 6, 13 ],
       "exit" : false,
-      "out-vars" : [ 7, 9, 10, 0, 1, 12, 3, 6, 8, 4, 13, 5, 15, 2, 14, 11 ],
+      "out-vars" : [ 0, 14, 1, 6, 13, 5, 15, 4, 9, 2, 10, 7, 12, 3, 11, 8 ],
       "decl-vars" : [ ],
       "line-start" : 1134,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 9,
@@ -1512,7 +1512,7 @@
           },
           "operator" : "==",
           "right" : {
-            "go-type" : 249,
+            "go-type" : 250,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -1534,9 +1534,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 28 ],
-      "in-vars" : [ 10, 1, 6, 8, 12, 11, 3, 7, 9, 0, 14, 13, 2, 15, 4 ],
+      "in-vars" : [ 4, 6, 2, 15, 14, 1, 7, 13, 12, 0, 3, 9, 11, 10, 8 ],
       "exit" : false,
-      "out-vars" : [ 13, 10, 0, 14, 1, 11, 9, 2, 15, 7, 8, 12, 3, 5, 6, 4 ],
+      "out-vars" : [ 11, 4, 6, 10, 7, 3, 14, 13, 12, 1, 9, 2, 5, 0, 15, 8 ],
       "decl-vars" : [ ],
       "line-start" : 1137,
       "ast" : {
@@ -1562,7 +1562,7 @@
               "kind" : "ident",
               "value" : "allocMSpanLocked"
             },
-            "go-type" : 259,
+            "go-type" : 264,
             "kind" : "expression",
             "target" : {
               "go-type" : 29,
@@ -1591,9 +1591,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 29, 39 ],
-      "in-vars" : [ 13, 3, 2, 15, 14, 7, 4, 0, 6, 9, 10, 5, 1, 8, 12, 11 ],
+      "in-vars" : [ 1, 11, 2, 8, 5, 10, 7, 13, 12, 0, 4, 6, 3, 15, 14, 9 ],
       "exit" : false,
-      "out-vars" : [ 7, 5, 14, 4, 2, 0, 11, 9, 10, 12, 1, 15, 6, 8, 13, 3 ],
+      "out-vars" : [ 7, 15, 11, 2, 4, 9, 13, 0, 14, 1, 10, 8, 12, 5, 3, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1139,
       "ast" : {
@@ -1623,11 +1623,11 @@
       "entry" : false,
       "use-vars" : [ 2 ]
     }, {
-      "update-vars" : [ 6 ],
+      "update-vars" : [ 9 ],
       "successors" : [ 30 ],
-      "in-vars" : [ 13, 2, 14, 3, 6, 12, 10, 0, 1, 15, 8, 11, 4, 5, 7, 9 ],
+      "in-vars" : [ 9, 2, 10, 3, 14, 5, 13, 1, 11, 4, 7, 12, 0, 15, 6, 8 ],
       "exit" : false,
-      "out-vars" : [ 10, 0, 1, 15, 7, 13, 14, 6, 2, 4, 9, 3, 5, 8, 12, 11 ],
+      "out-vars" : [ 0, 3, 4, 10, 1, 8, 15, 14, 11, 9, 13, 5, 6, 2, 7, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1144,
       "ast" : {
@@ -1637,19 +1637,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "heap_scan",
-            "variable" : 23
+            "variable" : 31
           },
           "go-type" : 7,
           "kind" : "expression",
           "target" : {
-            "go-type" : 110,
+            "go-type" : 119,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "memstats",
-              "variable" : 6
+              "variable" : 9
             }
           },
           "type" : "selector"
@@ -1674,7 +1674,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "local_scan",
-              "variable" : 25
+              "variable" : 33
             },
             "go-type" : 2,
             "kind" : "expression",
@@ -1683,7 +1683,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "mcache",
-                "variable" : 24
+                "variable" : 32
               },
               "go-type" : 159,
               "kind" : "expression",
@@ -1721,13 +1721,13 @@
       "line-end" : 1144,
       "code" : "memstats.heap_scan += uint64(gp.m.mcache.local_scan)",
       "entry" : false,
-      "use-vars" : [ 6, 13 ]
+      "use-vars" : [ 13, 9 ]
     }, {
       "update-vars" : [ 13 ],
       "successors" : [ 31 ],
-      "in-vars" : [ 0, 7, 8, 11, 9, 13, 1, 10, 15, 2, 3, 5, 14, 6, 12, 4 ],
+      "in-vars" : [ 10, 12, 5, 14, 1, 11, 0, 7, 8, 6, 2, 13, 3, 15, 4, 9 ],
       "exit" : false,
-      "out-vars" : [ 3, 0, 14, 6, 8, 12, 11, 9, 13, 10, 5, 1, 15, 2, 7, 4 ],
+      "out-vars" : [ 5, 2, 10, 8, 12, 11, 4, 7, 3, 14, 13, 0, 15, 1, 9, 6 ],
       "decl-vars" : [ ],
       "line-start" : 1145,
       "ast" : {
@@ -1737,7 +1737,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "local_scan",
-            "variable" : 25
+            "variable" : 33
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -1746,7 +1746,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "mcache",
-              "variable" : 24
+              "variable" : 32
             },
             "go-type" : 159,
             "kind" : "expression",
@@ -1792,11 +1792,11 @@
       "entry" : false,
       "use-vars" : [ 13 ]
     }, {
-      "update-vars" : [ 6 ],
+      "update-vars" : [ 9 ],
       "successors" : [ 32 ],
-      "in-vars" : [ 0, 7, 8, 11, 4, 9, 13, 10, 15, 12, 2, 3, 5, 1, 14, 6 ],
+      "in-vars" : [ 2, 7, 8, 6, 0, 3, 1, 4, 13, 12, 5, 14, 11, 9, 10, 15 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 7, 8, 11, 10, 6, 12, 9, 3, 1, 15, 14, 2, 4, 13 ],
+      "out-vars" : [ 3, 1, 9, 2, 0, 11, 6, 10, 15, 14, 4, 12, 5, 13, 8, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1146,
       "ast" : {
@@ -1806,19 +1806,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "tinyallocs",
-            "variable" : 26
+            "variable" : 34
           },
           "go-type" : 7,
           "kind" : "expression",
           "target" : {
-            "go-type" : 110,
+            "go-type" : 119,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "memstats",
-              "variable" : 6
+              "variable" : 9
             }
           },
           "type" : "selector"
@@ -1843,7 +1843,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "local_tinyallocs",
-              "variable" : 27
+              "variable" : 35
             },
             "go-type" : 2,
             "kind" : "expression",
@@ -1852,7 +1852,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "mcache",
-                "variable" : 24
+                "variable" : 32
               },
               "go-type" : 159,
               "kind" : "expression",
@@ -1890,13 +1890,13 @@
       "line-end" : 1146,
       "code" : "memstats.tinyallocs += uint64(gp.m.mcache.local_tinyallocs)",
       "entry" : false,
-      "use-vars" : [ 6, 13 ]
+      "use-vars" : [ 9, 13 ]
     }, {
       "update-vars" : [ 13 ],
       "successors" : [ 33 ],
-      "in-vars" : [ 15, 14, 8, 4, 2, 5, 3, 6, 9, 0, 10, 1, 7, 12, 11, 13 ],
+      "in-vars" : [ 13, 0, 2, 10, 14, 7, 12, 1, 6, 8, 11, 4, 9, 5, 3, 15 ],
       "exit" : false,
-      "out-vars" : [ 8, 12, 4, 10, 0, 1, 6, 7, 9, 3, 15, 14, 5, 11, 2 ],
+      "out-vars" : [ 0, 15, 1, 14, 4, 9, 2, 7, 8, 5, 3, 11, 6, 10, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1147,
       "ast" : {
@@ -1906,7 +1906,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "local_tinyallocs",
-            "variable" : 27
+            "variable" : 35
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -1915,7 +1915,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "mcache",
-              "variable" : 24
+              "variable" : 32
             },
             "go-type" : 159,
             "kind" : "expression",
@@ -1963,14 +1963,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 34, 37 ],
-      "in-vars" : [ 12, 4, 3, 14, 7, 10, 0, 15, 9, 6, 8, 11, 2, 5, 1 ],
+      "in-vars" : [ 0, 2, 11, 7, 8, 5, 14, 1, 12, 4, 6, 10, 3, 15, 9 ],
       "exit" : false,
-      "out-vars" : [ 3, 12, 11, 5, 7, 10, 2, 0, 15, 6, 8, 4, 9, 1, 14 ],
+      "out-vars" : [ 6, 7, 3, 9, 2, 12, 14, 1, 4, 10, 5, 11, 8, 0, 15 ],
       "decl-vars" : [ ],
       "line-start" : 1150,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "arguments" : [ ],
@@ -1982,7 +1982,7 @@
                 "kind" : "ident",
                 "value" : "sizeclass"
               },
-              "go-type" : 261,
+              "go-type" : 267,
               "kind" : "expression",
               "target" : {
                 "go-type" : 4,
@@ -2021,11 +2021,11 @@
       "entry" : false,
       "use-vars" : [ 3 ]
     }, {
-      "update-vars" : [ 11 ],
+      "update-vars" : [ 8 ],
       "successors" : [ 35 ],
-      "in-vars" : [ 14, 4, 10, 5, 1, 7, 8, 2, 6, 11, 9, 15, 0, 12, 3 ],
+      "in-vars" : [ 8, 15, 7, 11, 4, 6, 2, 14, 1, 10, 12, 0, 3, 5, 9 ],
       "exit" : false,
-      "out-vars" : [ 10, 6, 7, 8, 11, 2, 15, 14, 4, 9, 3, 5, 0, 1, 12 ],
+      "out-vars" : [ 5, 15, 1, 4, 7, 0, 9, 8, 6, 12, 3, 14, 11, 2, 10 ],
       "decl-vars" : [ ],
       "line-start" : 1151,
       "ast" : {
@@ -2035,7 +2035,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "largealloc",
-            "variable" : 28
+            "variable" : 36
           },
           "go-type" : 7,
           "kind" : "expression",
@@ -2047,7 +2047,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "mheap_",
-              "variable" : 11
+              "variable" : 8
             }
           },
           "type" : "selector"
@@ -2100,13 +2100,13 @@
       "line-end" : 1151,
       "code" : "mheap_.largealloc += uint64(npages * pageSize)",
       "entry" : false,
-      "use-vars" : [ 1, 11 ]
+      "use-vars" : [ 1, 8 ]
     }, {
-      "update-vars" : [ 11 ],
+      "update-vars" : [ 8 ],
       "successors" : [ 36 ],
-      "in-vars" : [ 1, 15, 7, 11, 3, 5, 0, 8, 4, 9, 10, 12, 2, 14, 6 ],
+      "in-vars" : [ 0, 3, 1, 4, 8, 14, 10, 5, 11, 6, 12, 15, 9, 2, 7 ],
       "exit" : false,
-      "out-vars" : [ 3, 14, 7, 8, 10, 15, 9, 1, 5, 0, 6, 12, 4, 2 ],
+      "out-vars" : [ 6, 10, 0, 15, 7, 12, 5, 3, 1, 11, 4, 2, 14, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1152,
       "ast" : {
@@ -2117,7 +2117,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "nlargealloc",
-            "variable" : 29
+            "variable" : 37
           },
           "go-type" : 7,
           "kind" : "expression",
@@ -2129,7 +2129,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "mheap_",
-              "variable" : 11
+              "variable" : 8
             }
           },
           "type" : "selector"
@@ -2140,13 +2140,13 @@
       "line-end" : 1152,
       "code" : "mheap_.nlargealloc++",
       "entry" : false,
-      "use-vars" : [ 11 ]
+      "use-vars" : [ 8 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 37 ],
-      "in-vars" : [ 10, 2, 3, 15, 9, 5, 14, 6, 4, 1, 7, 0, 8, 12 ],
+      "in-vars" : [ 1, 10, 5, 0, 9, 15, 4, 7, 12, 3, 14, 2, 11, 6 ],
       "exit" : false,
-      "out-vars" : [ 0, 15, 7, 12, 5, 1, 6, 10, 8, 2, 14, 4, 9, 3 ],
+      "out-vars" : [ 14, 11, 4, 10, 5, 0, 1, 9, 6, 2, 3, 15, 7, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1153,
       "ast" : {
@@ -2162,19 +2162,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "heap_live",
-                "variable" : 30
+                "variable" : 38
               },
               "go-type" : 7,
               "kind" : "expression",
               "target" : {
-                "go-type" : 110,
+                "go-type" : 119,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "memstats",
-                  "variable" : 6
+                  "variable" : 9
                 }
               },
               "type" : "selector"
@@ -2182,17 +2182,17 @@
             "type" : "unary"
           }, {
             "coerced-to" : {
-              "go-type" : 121,
+              "go-type" : 115,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 121,
+                "go-type" : 115,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "int64"
               }
             },
-            "go-type" : 121,
+            "go-type" : 115,
             "kind" : "expression",
             "target" : {
               "go-type" : 2,
@@ -2223,7 +2223,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 269,
+            "go-type" : 278,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -2248,18 +2248,18 @@
       "line-end" : 1153,
       "code" : "atomic.Xadd64(&memstats.heap_live, int64(npages*pageSize))",
       "entry" : false,
-      "use-vars" : [ 1, 6 ]
+      "use-vars" : [ 9, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 38, 39 ],
-      "in-vars" : [ 10, 4, 3, 5, 12, 15, 6, 7, 9, 2, 0, 1, 14, 8 ],
+      "in-vars" : [ 5, 15, 1, 4, 7, 3, 10, 14, 11, 2, 12, 0, 9, 6 ],
       "exit" : false,
-      "out-vars" : [ 8, 12, 2, 5, 0, 15, 14, 7, 4, 3, 1, 6, 9 ],
+      "out-vars" : [ 5, 3, 1, 11, 4, 2, 12, 0, 15, 14, 9, 6, 7 ],
       "decl-vars" : [ ],
       "line-start" : 1157,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 18,
@@ -2294,9 +2294,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 39 ],
-      "in-vars" : [ 8, 4, 9, 0, 15, 6, 7, 14, 12, 2, 3, 5, 1 ],
+      "in-vars" : [ 0, 3, 15, 14, 11, 4, 9, 5, 6, 2, 7, 12, 1 ],
       "exit" : false,
-      "out-vars" : [ 3, 5, 0, 7, 12, 8, 4, 2, 1, 15, 14, 6 ],
+      "out-vars" : [ 0, 1, 11, 4, 9, 5, 15, 14, 6, 2, 12, 3 ],
       "decl-vars" : [ ],
       "line-start" : 1158,
       "ast" : {
@@ -2315,14 +2315,14 @@
             "go-type" : 150,
             "kind" : "expression",
             "target" : {
-              "go-type" : 119,
+              "go-type" : 113,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "gcController",
-                "variable" : 9
+                "variable" : 7
               }
             },
             "type" : "selector"
@@ -2336,13 +2336,13 @@
       "line-end" : 1158,
       "code" : "gcController.revise()",
       "entry" : false,
-      "use-vars" : [ 9 ]
+      "use-vars" : [ 7 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 40 ],
-      "in-vars" : [ 6, 7, 12, 2, 5, 0, 1, 15, 4, 3, 14, 8 ],
+      "in-vars" : [ 3, 15, 14, 1, 9, 6, 2, 12, 5, 0, 11, 4 ],
       "exit" : false,
-      "out-vars" : [ 3, 5, 0, 7, 8, 4, 2, 1, 15, 14, 6, 12 ],
+      "out-vars" : [ 12, 3, 15, 14, 4, 6, 2, 5, 0, 1, 11, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1161,
       "ast" : {
@@ -2358,7 +2358,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "lock",
-                "variable" : 21
+                "variable" : 23
               },
               "go-type" : 23,
               "kind" : "expression",
@@ -2379,7 +2379,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 252,
+            "go-type" : 254,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -2402,9 +2402,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 41 ],
-      "in-vars" : [ 1, 6, 8, 2, 5, 0, 15, 14, 7, 12, 4, 3 ],
+      "in-vars" : [ 12, 5, 0, 3, 15, 11, 9, 2, 14, 1, 4, 6 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 1, 4, 7, 8, 12, 2, 3, 15, 14, 6 ],
+      "out-vars" : [ 2, 3, 14, 1, 11, 4, 9, 6, 12, 5, 0, 15 ],
       "decl-vars" : [ ],
       "line-start" : 1163,
       "ast" : {
@@ -2440,7 +2440,7 @@
               "kind" : "ident",
               "value" : "init"
             },
-            "go-type" : 272,
+            "go-type" : 283,
             "kind" : "expression",
             "target" : {
               "go-type" : 9,
@@ -2468,9 +2468,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 42 ],
-      "in-vars" : [ 14, 6, 7, 12, 3, 1, 15, 8, 4, 2, 5, 0 ],
+      "in-vars" : [ 5, 3, 1, 4, 9, 0, 15, 14, 11, 6, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 3, 5, 1, 4, 12, 2, 0, 15, 14, 6, 7, 8 ],
+      "out-vars" : [ 1, 6, 12, 3, 15, 14, 4, 9, 2, 5, 0, 11 ],
       "decl-vars" : [ ],
       "line-start" : 1166,
       "ast" : {
@@ -2506,7 +2506,7 @@
               "kind" : "ident",
               "value" : "init"
             },
-            "go-type" : 272,
+            "go-type" : 283,
             "kind" : "expression",
             "target" : {
               "go-type" : 9,
@@ -2530,13 +2530,13 @@
       "line-end" : 1166,
       "code" : "s.init(base, npages)",
       "entry" : false,
-      "use-vars" : [ 1, 5, 15 ]
+      "use-vars" : [ 5, 15, 1 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 43, 44 ],
-      "in-vars" : [ 1, 7, 12, 4, 2, 3, 5, 0, 15, 14, 6, 8 ],
+      "in-vars" : [ 0, 3, 1, 6, 5, 15, 14, 11, 4, 9, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 15, 14, 6, 8, 4, 3, 5, 0, 1, 7, 12, 2 ],
+      "out-vars" : [ 5, 3, 15, 1, 4, 9, 0, 14, 11, 6, 2, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1167,
       "ast" : {
@@ -2570,7 +2570,7 @@
               "kind" : "ident",
               "value" : "allocNeedsZero"
             },
-            "go-type" : 274,
+            "go-type" : 286,
             "kind" : "expression",
             "target" : {
               "go-type" : 29,
@@ -2600,9 +2600,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 44 ],
-      "in-vars" : [ 6, 7, 8, 12, 5, 14, 0, 1, 15, 4, 2, 3 ],
+      "in-vars" : [ 2, 12, 5, 0, 15, 1, 11, 6, 3, 14, 4, 9 ],
       "exit" : false,
-      "out-vars" : [ 3, 5, 0, 1, 15, 7, 8, 2, 4, 12, 6, 14 ],
+      "out-vars" : [ 15, 14, 1, 9, 6, 5, 3, 4, 2, 12, 0, 11 ],
       "decl-vars" : [ ],
       "line-start" : 1168,
       "ast" : {
@@ -2612,7 +2612,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "needzero",
-            "variable" : 31
+            "variable" : 42
           },
           "go-type" : 5,
           "kind" : "expression",
@@ -2647,10 +2647,10 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 45 ],
-      "in-vars" : [ 0, 15, 6, 8, 4, 2, 3, 14, 7, 12, 5, 1 ],
+      "in-vars" : [ 15, 14, 1, 11, 9, 6, 2, 12, 5, 0, 3, 4 ],
       "exit" : false,
-      "out-vars" : [ 7, 8, 12, 0, 1, 15, 14, 32, 2, 3, 5, 6, 4 ],
-      "decl-vars" : [ 32 ],
+      "out-vars" : [ 5, 3, 15, 14, 1, 11, 4, 12, 0, 43, 9, 6, 2 ],
+      "decl-vars" : [ 43 ],
       "line-start" : 1170,
       "ast" : {
         "kind" : "statement",
@@ -2699,9 +2699,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 46, 51 ],
-      "in-vars" : [ 32, 8, 12, 4, 3, 14, 0, 1, 15, 6, 7, 2, 5 ],
+      "in-vars" : [ 14, 1, 4, 5, 0, 3, 15, 2, 12, 43, 11, 9, 6 ],
       "exit" : false,
-      "out-vars" : [ 12, 4, 15, 32, 7, 0, 1, 14, 6, 8, 2, 3, 5 ],
+      "out-vars" : [ 43, 14, 11, 6, 2, 12, 5, 0, 3, 15, 1, 4, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1171,
       "ast" : {
@@ -2727,9 +2727,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 47 ],
-      "in-vars" : [ 32, 2, 5, 0, 1, 15, 14, 6, 12, 4 ],
+      "in-vars" : [ 5, 43, 1, 4, 9, 0, 15, 14, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 5, 1, 6, 12, 32, 4, 2, 0, 15, 14 ],
+      "out-vars" : [ 1, 9, 5, 43, 14, 2, 12, 0, 15, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1172,
       "ast" : {
@@ -2739,7 +2739,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "manualFreeList",
-            "variable" : 33
+            "variable" : 44
           },
           "go-type" : 15,
           "kind" : "expression",
@@ -2774,9 +2774,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 48 ],
-      "in-vars" : [ 32, 2, 5, 6, 14, 12, 4, 0, 1, 15 ],
+      "in-vars" : [ 0, 43, 15, 4, 2, 5, 14, 1, 9, 12 ],
       "exit" : false,
-      "out-vars" : [ 4, 2, 0, 1, 15, 14, 32, 5, 6, 12 ],
+      "out-vars" : [ 14, 2, 12, 5, 0, 43, 9, 15, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1173,
       "ast" : {
@@ -2786,7 +2786,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "nelems",
-            "variable" : 34
+            "variable" : 45
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -2821,9 +2821,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 49 ],
-      "in-vars" : [ 6, 2, 5, 1, 32, 12, 4, 0, 15, 14 ],
+      "in-vars" : [ 14, 5, 0, 43, 15, 12, 1, 4, 9, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 0, 14, 1, 15, 6, 32, 12, 4 ],
+      "out-vars" : [ 43, 14, 1, 4, 2, 12, 0, 15, 9, 5 ],
       "decl-vars" : [ ],
       "line-start" : 1174,
       "ast" : {
@@ -2833,7 +2833,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "limit",
-            "variable" : 35
+            "variable" : 46
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -2863,7 +2863,7 @@
                 "kind" : "ident",
                 "value" : "base"
               },
-              "go-type" : 277,
+              "go-type" : 290,
               "kind" : "expression",
               "target" : {
                 "go-type" : 9,
@@ -2891,7 +2891,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "npages",
-                "variable" : 36
+                "variable" : 48
               },
               "go-type" : 2,
               "kind" : "expression",
@@ -2931,9 +2931,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 50 ],
-      "in-vars" : [ 2, 1, 15, 4, 5, 0, 14, 6, 32, 12 ],
+      "in-vars" : [ 14, 1, 2, 12, 5, 0, 43, 15, 4, 9 ],
       "exit" : false,
-      "out-vars" : [ 4, 0, 14, 1, 15, 6, 32, 12, 2, 5 ],
+      "out-vars" : [ 5, 1, 9, 2, 12, 0, 43, 15, 14, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1176,
       "ast" : {
@@ -2949,19 +2949,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "heap_sys",
-                "variable" : 37
+                "variable" : 49
               },
               "go-type" : 7,
               "kind" : "expression",
               "target" : {
-                "go-type" : 110,
+                "go-type" : 119,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "memstats",
-                  "variable" : 6
+                  "variable" : 9
                 }
               },
               "type" : "selector"
@@ -2975,7 +2975,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "npages",
-                "variable" : 36
+                "variable" : 48
               },
               "go-type" : 2,
               "kind" : "expression",
@@ -3005,7 +3005,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 279,
+            "go-type" : 293,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -3024,13 +3024,13 @@
       "line-end" : 1176,
       "code" : "mSysStatDec(&memstats.heap_sys, s.npages*pageSize)",
       "entry" : false,
-      "use-vars" : [ 5, 6 ]
+      "use-vars" : [ 9, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 73 ],
-      "in-vars" : [ 2, 5, 0, 1, 15, 32, 4, 14, 6, 12 ],
+      "in-vars" : [ 0, 15, 1, 9, 2, 5, 14, 4, 12, 43 ],
       "exit" : false,
-      "out-vars" : [ 12, 4, 0, 1, 6, 14, 32, 2, 5, 15 ],
+      "out-vars" : [ 9, 12, 0, 14, 1, 4, 5, 43, 15, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1177,
       "ast" : {
@@ -3053,14 +3053,14 @@
               "kind" : "ident",
               "value" : "set"
             },
-            "go-type" : 281,
+            "go-type" : 295,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "state",
-                "variable" : 38
+                "variable" : 50
               },
               "go-type" : 20,
               "kind" : "expression",
@@ -3092,9 +3092,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 53 ],
-      "in-vars" : [ 5, 0, 7, 8, 4, 2, 1, 15, 14, 6, 32, 12, 3 ],
+      "in-vars" : [ 0, 43, 4, 12, 9, 6, 5, 3, 15, 14, 1, 11, 2 ],
       "exit" : false,
-      "out-vars" : [ 6, 32, 7, 12, 4, 3, 1, 15, 14, 8, 2, 5, 0 ],
+      "out-vars" : [ 5, 0, 43, 4, 2, 12, 6, 3, 15, 14, 1, 11, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1181,
       "ast" : {
@@ -3104,7 +3104,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "spanclass",
-            "variable" : 39
+            "variable" : 52
           },
           "go-type" : 4,
           "kind" : "expression",
@@ -3142,14 +3142,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 54, 60 ],
-      "in-vars" : [ 12, 2, 5, 6, 32, 8, 7, 4, 0, 1, 15, 14, 40 ],
+      "in-vars" : [ 5, 0, 43, 11, 4, 6, 15, 14, 1, 53, 9, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 40, 32, 7, 8, 2, 0, 1, 15, 12, 4, 5, 14, 6 ],
+      "out-vars" : [ 43, 14, 1, 53, 11, 4, 9, 0, 2, 6, 15, 12, 5 ],
       "decl-vars" : [ ],
       "line-start" : 1182,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 153,
@@ -3159,7 +3159,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "sizeclass",
-              "variable" : 40
+              "variable" : 53
             }
           },
           "operator" : "==",
@@ -3180,14 +3180,14 @@
       "line-end" : 1199,
       "code" : "if sizeclass := spanclass.sizeclass(); sizeclass == 0 {\n\ts.elemsize = nbytes\n\ts.nelems = 1\n\n\ts.divShift = 0\n\ts.divMul = 0\n\ts.divShift2 = 0\n\ts.baseMask = 0\n} else {\n\ts.elemsize = uintptr(class_to_size[sizeclass])\n\ts.nelems = nbytes / s.elemsize\n\n\tm := &class_to_divmagic[sizeclass]\n\ts.divShift = m.shift\n\ts.divMul = m.mul\n\ts.divShift2 = m.shift2\n\ts.baseMask = m.baseMask\n}",
       "entry" : false,
-      "use-vars" : [ 40 ]
+      "use-vars" : [ 53 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 52 ],
-      "in-vars" : [ 2, 3, 1, 15, 6, 32, 8, 12, 5, 0, 14, 7, 4 ],
+      "in-vars" : [ 43, 15, 1, 6, 12, 0, 3, 14, 11, 4, 9, 2, 5 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 1, 14, 8, 12, 4, 0, 15, 6, 40, 32, 7 ],
-      "decl-vars" : [ 40 ],
+      "out-vars" : [ 9, 6, 2, 12, 14, 1, 53, 4, 11, 5, 0, 43, 15 ],
+      "decl-vars" : [ 53 ],
       "line-start" : 1182,
       "ast" : {
         "kind" : "statement",
@@ -3211,7 +3211,7 @@
               "kind" : "ident",
               "value" : "sizeclass"
             },
-            "go-type" : 261,
+            "go-type" : 267,
             "kind" : "expression",
             "target" : {
               "go-type" : 4,
@@ -3240,9 +3240,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 55 ],
-      "in-vars" : [ 2, 0, 14, 6, 12, 4, 5, 1, 15, 32 ],
+      "in-vars" : [ 5, 0, 43, 14, 12, 15, 1, 4, 9, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 15, 12, 5, 0, 14, 6, 32, 4 ],
+      "out-vars" : [ 5, 14, 9, 12, 2, 0, 43, 15, 1, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1183,
       "ast" : {
@@ -3252,7 +3252,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "elemsize",
-            "variable" : 41
+            "variable" : 54
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -3277,7 +3277,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "nbytes",
-            "variable" : 32
+            "variable" : 43
           }
         } ],
         "type" : "assign"
@@ -3286,13 +3286,13 @@
       "line-end" : 1183,
       "code" : "s.elemsize = nbytes",
       "entry" : false,
-      "use-vars" : [ 5, 32 ]
+      "use-vars" : [ 43, 5 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 56 ],
-      "in-vars" : [ 14, 32, 12, 4, 5, 15, 1, 6, 2, 0 ],
+      "in-vars" : [ 9, 2, 5, 0, 15, 14, 1, 4, 43, 12 ],
       "exit" : false,
-      "out-vars" : [ 2, 15, 6, 12, 32, 4, 5, 0, 1, 14 ],
+      "out-vars" : [ 0, 43, 1, 4, 5, 15, 14, 9, 2, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1184,
       "ast" : {
@@ -3302,7 +3302,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "nelems",
-            "variable" : 34
+            "variable" : 45
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -3337,9 +3337,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 57 ],
-      "in-vars" : [ 2, 5, 0, 15, 6, 1, 14, 32, 12, 4 ],
+      "in-vars" : [ 43, 9, 2, 14, 1, 4, 12, 5, 0, 15 ],
       "exit" : false,
-      "out-vars" : [ 1, 15, 14, 32, 4, 2, 5, 0, 6, 12 ],
+      "out-vars" : [ 9, 2, 12, 0, 43, 14, 1, 4, 5, 15 ],
       "decl-vars" : [ ],
       "line-start" : 1186,
       "ast" : {
@@ -3349,7 +3349,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "divShift",
-            "variable" : 42
+            "variable" : 55
           },
           "go-type" : 5,
           "kind" : "expression",
@@ -3384,9 +3384,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 58 ],
-      "in-vars" : [ 2, 5, 0, 6, 4, 1, 15, 14, 32, 12 ],
+      "in-vars" : [ 5, 14, 12, 4, 9, 2, 0, 43, 15, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 0, 15, 12, 32, 2, 1, 14, 6 ],
+      "out-vars" : [ 2, 12, 0, 43, 15, 14, 5, 1, 4, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1187,
       "ast" : {
@@ -3396,7 +3396,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "divMul",
-            "variable" : 43
+            "variable" : 56
           },
           "go-type" : 19,
           "kind" : "expression",
@@ -3431,9 +3431,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 59 ],
-      "in-vars" : [ 0, 14, 2, 5, 1, 15, 6, 32, 12, 4 ],
+      "in-vars" : [ 2, 14, 4, 9, 15, 1, 12, 5, 0, 43 ],
       "exit" : false,
-      "out-vars" : [ 5, 15, 14, 32, 12, 4, 2, 0, 1, 6 ],
+      "out-vars" : [ 5, 43, 14, 4, 2, 0, 15, 1, 9, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1188,
       "ast" : {
@@ -3443,7 +3443,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "divShift2",
-            "variable" : 44
+            "variable" : 57
           },
           "go-type" : 5,
           "kind" : "expression",
@@ -3478,9 +3478,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 67 ],
-      "in-vars" : [ 15, 14, 6, 32, 4, 1, 5, 0, 12, 2 ],
+      "in-vars" : [ 12, 2, 0, 43, 15, 14, 1, 4, 9, 5 ],
       "exit" : false,
-      "out-vars" : [ 4, 5, 15, 6, 32, 12, 2, 0, 1, 14 ],
+      "out-vars" : [ 0, 43, 1, 2, 5, 15, 14, 4, 9, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1189,
       "ast" : {
@@ -3490,7 +3490,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "baseMask",
-            "variable" : 45
+            "variable" : 58
           },
           "go-type" : 19,
           "kind" : "expression",
@@ -3525,9 +3525,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 61 ],
-      "in-vars" : [ 15, 4, 6, 40, 32, 2, 5, 0, 1, 14, 7, 8, 12 ],
+      "in-vars" : [ 12, 0, 15, 53, 11, 6, 2, 5, 43, 14, 1, 4, 9 ],
       "exit" : false,
-      "out-vars" : [ 14, 40, 7, 4, 2, 5, 0, 15, 1, 6, 32, 12 ],
+      "out-vars" : [ 4, 9, 2, 14, 1, 53, 6, 5, 0, 43, 15, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1191,
       "ast" : {
@@ -3537,7 +3537,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "elemsize",
-            "variable" : 41
+            "variable" : 54
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -3578,19 +3578,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "sizeclass",
-                "variable" : 40
+                "variable" : 53
               }
             },
             "kind" : "expression",
             "target" : {
-              "go-type" : 118,
+              "go-type" : 124,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "class_to_size",
-                "variable" : 8
+                "variable" : 11
               }
             },
             "type" : "index"
@@ -3603,13 +3603,13 @@
       "line-end" : 1191,
       "code" : "s.elemsize = uintptr(class_to_size[sizeclass])",
       "entry" : false,
-      "use-vars" : [ 5, 8, 40 ]
+      "use-vars" : [ 11, 53, 5 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 62 ],
-      "in-vars" : [ 15, 6, 32, 7, 4, 2, 0, 1, 14, 40, 12, 5 ],
+      "in-vars" : [ 14, 1, 53, 9, 6, 12, 0, 15, 4, 2, 5, 43 ],
       "exit" : false,
-      "out-vars" : [ 14, 12, 4, 2, 5, 0, 15, 7, 1, 6, 40, 32 ],
+      "out-vars" : [ 9, 12, 5, 53, 15, 14, 1, 4, 6, 2, 0, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1192,
       "ast" : {
@@ -3619,7 +3619,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "nelems",
-            "variable" : 34
+            "variable" : 45
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -3647,7 +3647,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "nbytes",
-              "variable" : 32
+              "variable" : 43
             }
           },
           "operator" : "/",
@@ -3656,7 +3656,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "elemsize",
-              "variable" : 41
+              "variable" : 54
             },
             "go-type" : 2,
             "kind" : "expression",
@@ -3681,14 +3681,14 @@
       "line-end" : 1192,
       "code" : "s.nelems = nbytes / s.elemsize",
       "entry" : false,
-      "use-vars" : [ 32, 5 ]
+      "use-vars" : [ 5, 43 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 63 ],
-      "in-vars" : [ 0, 1, 14, 32, 7, 12, 4, 5, 15, 6, 40, 2 ],
+      "in-vars" : [ 43, 14, 4, 9, 6, 12, 5, 0, 15, 1, 53, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 1, 12, 5, 0, 15, 14, 6, 46, 32, 4 ],
-      "decl-vars" : [ 46 ],
+      "out-vars" : [ 5, 9, 2, 12, 0, 43, 59, 15, 14, 1, 4 ],
+      "decl-vars" : [ 59 ],
       "line-start" : 1194,
       "ast" : {
         "kind" : "statement",
@@ -3703,11 +3703,11 @@
           }
         } ],
         "right" : [ {
-          "go-type" : 283,
+          "go-type" : 299,
           "kind" : "expression",
           "operator" : "&",
           "target" : {
-            "go-type" : 116,
+            "go-type" : 111,
             "index" : {
               "go-type" : 153,
               "kind" : "expression",
@@ -3716,19 +3716,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "sizeclass",
-                "variable" : 40
+                "variable" : 53
               }
             },
             "kind" : "expression",
             "target" : {
-              "go-type" : 115,
+              "go-type" : 110,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "class_to_divmagic",
-                "variable" : 7
+                "variable" : 6
               }
             },
             "type" : "index"
@@ -3741,13 +3741,13 @@
       "line-end" : 1194,
       "code" : "m := &class_to_divmagic[sizeclass]",
       "entry" : false,
-      "use-vars" : [ 40, 7 ]
+      "use-vars" : [ 6, 53 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 64 ],
-      "in-vars" : [ 0, 1, 4, 2, 15, 14, 6, 46, 32, 12, 5 ],
+      "in-vars" : [ 1, 4, 9, 12, 5, 43, 15, 14, 2, 0, 59 ],
       "exit" : false,
-      "out-vars" : [ 5, 0, 14, 6, 32, 2, 1, 15, 46, 12, 4 ],
+      "out-vars" : [ 43, 15, 14, 1, 9, 2, 12, 0, 59, 4, 5 ],
       "decl-vars" : [ ],
       "line-start" : 1195,
       "ast" : {
@@ -3757,7 +3757,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "divShift",
-            "variable" : 42
+            "variable" : 55
           },
           "go-type" : 5,
           "kind" : "expression",
@@ -3779,19 +3779,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "shift",
-            "variable" : 47
+            "variable" : 60
           },
           "go-type" : 5,
           "kind" : "expression",
           "target" : {
-            "go-type" : 283,
+            "go-type" : 299,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "m",
-              "variable" : 46
+              "variable" : 59
             }
           },
           "type" : "selector"
@@ -3802,13 +3802,13 @@
       "line-end" : 1195,
       "code" : "s.divShift = m.shift",
       "entry" : false,
-      "use-vars" : [ 46, 5 ]
+      "use-vars" : [ 59, 5 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 65 ],
-      "in-vars" : [ 14, 32, 12, 0, 15, 1, 6, 46, 4, 2, 5 ],
+      "in-vars" : [ 2, 15, 14, 1, 9, 4, 12, 5, 0, 43, 59 ],
       "exit" : false,
-      "out-vars" : [ 6, 46, 12, 4, 5, 15, 14, 32, 2, 0, 1 ],
+      "out-vars" : [ 2, 12, 43, 15, 14, 1, 9, 5, 0, 59, 4 ],
       "decl-vars" : [ ],
       "line-start" : 1196,
       "ast" : {
@@ -3818,7 +3818,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "divMul",
-            "variable" : 43
+            "variable" : 56
           },
           "go-type" : 19,
           "kind" : "expression",
@@ -3840,19 +3840,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "mul",
-            "variable" : 48
+            "variable" : 61
           },
           "go-type" : 19,
           "kind" : "expression",
           "target" : {
-            "go-type" : 283,
+            "go-type" : 299,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "m",
-              "variable" : 46
+              "variable" : 59
             }
           },
           "type" : "selector"
@@ -3863,13 +3863,13 @@
       "line-end" : 1196,
       "code" : "s.divMul = m.mul",
       "entry" : false,
-      "use-vars" : [ 46, 5 ]
+      "use-vars" : [ 59, 5 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 66 ],
-      "in-vars" : [ 1, 15, 6, 46, 12, 2, 0, 32, 4, 5, 14 ],
+      "in-vars" : [ 5, 43, 14, 1, 2, 0, 59, 15, 4, 9, 12 ],
       "exit" : false,
-      "out-vars" : [ 4, 14, 32, 12, 1, 15, 6, 46, 2, 5, 0 ],
+      "out-vars" : [ 12, 0, 43, 9, 14, 1, 4, 2, 5, 59, 15 ],
       "decl-vars" : [ ],
       "line-start" : 1197,
       "ast" : {
@@ -3879,7 +3879,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "divShift2",
-            "variable" : 44
+            "variable" : 57
           },
           "go-type" : 5,
           "kind" : "expression",
@@ -3901,19 +3901,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "shift2",
-            "variable" : 49
+            "variable" : 62
           },
           "go-type" : 5,
           "kind" : "expression",
           "target" : {
-            "go-type" : 283,
+            "go-type" : 299,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "m",
-              "variable" : 46
+              "variable" : 59
             }
           },
           "type" : "selector"
@@ -3924,13 +3924,13 @@
       "line-end" : 1197,
       "code" : "s.divShift2 = m.shift2",
       "entry" : false,
-      "use-vars" : [ 5, 46 ]
+      "use-vars" : [ 59, 5 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 67 ],
-      "in-vars" : [ 5, 14, 32, 12, 2, 0, 1, 15, 6, 46, 4 ],
+      "in-vars" : [ 15, 14, 1, 9, 2, 12, 43, 59, 4, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 4, 2, 5, 0, 1, 15, 14, 32, 6, 12 ],
+      "out-vars" : [ 43, 15, 2, 0, 14, 1, 4, 9, 12, 5 ],
       "decl-vars" : [ ],
       "line-start" : 1198,
       "ast" : {
@@ -3940,7 +3940,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "baseMask",
-            "variable" : 45
+            "variable" : 58
           },
           "go-type" : 19,
           "kind" : "expression",
@@ -3962,19 +3962,19 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "baseMask",
-            "variable" : 50
+            "variable" : 63
           },
           "go-type" : 19,
           "kind" : "expression",
           "target" : {
-            "go-type" : 283,
+            "go-type" : 299,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "m",
-              "variable" : 46
+              "variable" : 59
             }
           },
           "type" : "selector"
@@ -3985,13 +3985,13 @@
       "line-end" : 1198,
       "code" : "s.baseMask = m.baseMask",
       "entry" : false,
-      "use-vars" : [ 46, 5 ]
+      "use-vars" : [ 5, 59 ]
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 68 ],
-      "in-vars" : [ 2, 6, 32, 12, 4, 5, 0, 1, 15, 14 ],
+      "in-vars" : [ 12, 5, 0, 43, 15, 14, 9, 1, 4, 2 ],
       "exit" : false,
-      "out-vars" : [ 14, 12, 2, 5, 0, 1, 15, 6, 32, 4 ],
+      "out-vars" : [ 12, 5, 0, 15, 1, 4, 43, 14, 9, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1202,
       "ast" : {
@@ -4001,7 +4001,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "freeindex",
-            "variable" : 51
+            "variable" : 64
           },
           "go-type" : 2,
           "kind" : "expression",
@@ -4036,9 +4036,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 69 ],
-      "in-vars" : [ 2, 0, 1, 14, 6, 4, 5, 15, 32, 12 ],
+      "in-vars" : [ 4, 9, 2, 12, 5, 0, 43, 15, 14, 1 ],
       "exit" : false,
-      "out-vars" : [ 15, 6, 12, 4, 0, 5, 1, 14, 32, 2 ],
+      "out-vars" : [ 1, 4, 9, 5, 0, 43, 15, 14, 2, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1203,
       "ast" : {
@@ -4048,7 +4048,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "allocCache",
-            "variable" : 52
+            "variable" : 65
           },
           "go-type" : 7,
           "kind" : "expression",
@@ -4083,9 +4083,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 70 ],
-      "in-vars" : [ 2, 0, 1, 6, 32, 4, 5, 15, 14, 12 ],
+      "in-vars" : [ 5, 43, 15, 14, 12, 0, 1, 4, 9, 2 ],
       "exit" : false,
-      "out-vars" : [ 32, 12, 4, 2, 5, 14, 6, 0, 1, 15 ],
+      "out-vars" : [ 0, 43, 15, 14, 4, 2, 5, 1, 9, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1204,
       "ast" : {
@@ -4095,7 +4095,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "gcmarkBits",
-            "variable" : 53
+            "variable" : 66
           },
           "go-type" : 16,
           "kind" : "expression",
@@ -4118,7 +4118,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "nelems",
-              "variable" : 34
+              "variable" : 45
             },
             "go-type" : 2,
             "kind" : "expression",
@@ -4137,7 +4137,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 284,
+            "go-type" : 300,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4161,9 +4161,9 @@
     }, {
       "update-vars" : [ 5 ],
       "successors" : [ 71 ],
-      "in-vars" : [ 2, 5, 1, 32, 12, 4, 0, 15, 14, 6 ],
+      "in-vars" : [ 5, 0, 43, 15, 14, 12, 1, 4, 9, 2 ],
       "exit" : false,
-      "out-vars" : [ 1, 14, 0, 15, 6, 32, 12, 4, 2, 5 ],
+      "out-vars" : [ 9, 12, 0, 15, 14, 4, 5, 43, 1, 2 ],
       "decl-vars" : [ ],
       "line-start" : 1205,
       "ast" : {
@@ -4173,7 +4173,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "allocBits",
-            "variable" : 54
+            "variable" : 67
           },
           "go-type" : 16,
           "kind" : "expression",
@@ -4196,7 +4196,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "nelems",
-              "variable" : 34
+              "variable" : 45
             },
             "go-type" : 2,
             "kind" : "expression",
@@ -4215,7 +4215,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 284,
+            "go-type" : 300,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4239,9 +4239,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 72 ],
-      "in-vars" : [ 15, 32, 4, 5, 0, 14, 6, 12, 2, 1 ],
+      "in-vars" : [ 9, 43, 14, 1, 4, 12, 5, 0, 15, 2 ],
       "exit" : false,
-      "out-vars" : [ 4, 1, 15, 14, 32, 12, 2, 5, 0, 6 ],
+      "out-vars" : [ 4, 5, 43, 1, 9, 2, 12, 0, 15, 14 ],
       "decl-vars" : [ ],
       "line-start" : 1210,
       "ast" : {
@@ -4249,7 +4249,7 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 289,
+            "go-type" : 305,
             "kind" : "expression",
             "operator" : "&",
             "target" : {
@@ -4257,7 +4257,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "sweepgen",
-                "variable" : 55
+                "variable" : 68
               },
               "go-type" : 18,
               "kind" : "expression",
@@ -4280,7 +4280,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "sweepgen",
-              "variable" : 56
+              "variable" : 69
             },
             "go-type" : 18,
             "kind" : "expression",
@@ -4299,7 +4299,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 287,
+            "go-type" : 303,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -4328,9 +4328,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 73 ],
-      "in-vars" : [ 1, 15, 14, 6, 2, 5, 0, 32, 12, 4 ],
+      "in-vars" : [ 1, 4, 9, 2, 12, 5, 0, 43, 15, 14 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 15, 32, 12, 0, 1, 14, 6, 4 ],
+      "out-vars" : [ 2, 0, 15, 1, 4, 12, 5, 43, 14, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1222,
       "ast" : {
@@ -4353,14 +4353,14 @@
               "kind" : "ident",
               "value" : "set"
             },
-            "go-type" : 281,
+            "go-type" : 295,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "state",
-                "variable" : 38
+                "variable" : 50
               },
               "go-type" : 20,
               "kind" : "expression",
@@ -4392,14 +4392,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 74, 76 ],
-      "in-vars" : [ 15, 12, 2, 5, 0, 1, 14, 6, 32, 4 ],
+      "in-vars" : [ 0, 43, 14, 4, 12, 5, 15, 1, 9, 2 ],
       "exit" : false,
-      "out-vars" : [ 15, 14, 12, 4, 2, 5, 0, 1, 6, 32 ],
+      "out-vars" : [ 4, 2, 5, 43, 15, 14, 1, 0, 9, 12 ],
       "decl-vars" : [ ],
       "line-start" : 1226,
       "ast" : {
         "condition" : {
-          "go-type" : 248,
+          "go-type" : 249,
           "kind" : "expression",
           "left" : {
             "go-type" : 2,
@@ -4434,9 +4434,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 75 ],
-      "in-vars" : [ 6, 32, 12, 2, 1, 15, 14, 4, 5, 0 ],
+      "in-vars" : [ 5, 43, 14, 9, 2, 12, 0, 15, 1, 4 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 32, 4, 2, 5, 0, 14, 12 ],
+      "out-vars" : [ 14, 9, 12, 1, 4, 2, 5, 0, 43 ],
       "decl-vars" : [ ],
       "line-start" : 1229,
       "ast" : {
@@ -4483,12 +4483,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "nbytes",
-              "variable" : 32
+              "variable" : 43
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 290,
+            "go-type" : 306,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4507,13 +4507,13 @@
       "line-end" : 1229,
       "code" : "sysUsed(unsafe.Pointer(base), nbytes)",
       "entry" : false,
-      "use-vars" : [ 15, 32 ]
+      "use-vars" : [ 43, 15 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 76 ],
-      "in-vars" : [ 14, 32, 2, 5, 0, 4, 1, 6, 12 ],
+      "in-vars" : [ 5, 43, 9, 0, 14, 1, 4, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 1, 6, 32, 12, 4, 2, 5, 0 ],
+      "out-vars" : [ 2, 12, 5, 0, 43, 1, 4, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1230,
       "ast" : {
@@ -4529,19 +4529,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "heap_released",
-                "variable" : 57
+                "variable" : 70
               },
               "go-type" : 7,
               "kind" : "expression",
               "target" : {
-                "go-type" : 110,
+                "go-type" : 119,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "memstats",
-                  "variable" : 6
+                  "variable" : 9
                 }
               },
               "type" : "selector"
@@ -4560,7 +4560,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 279,
+            "go-type" : 293,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4579,13 +4579,13 @@
       "line-end" : 1230,
       "code" : "mSysStatDec(&memstats.heap_released, scav)",
       "entry" : false,
-      "use-vars" : [ 6, 14 ]
+      "use-vars" : [ 9, 14 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 77 ],
-      "in-vars" : [ 2, 5, 0, 1, 6, 32, 12, 4 ],
+      "in-vars" : [ 43, 1, 4, 9, 2, 12, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 0, 1, 6, 32, 12 ],
+      "out-vars" : [ 2, 12, 5, 0, 43, 1, 9 ],
       "decl-vars" : [ ],
       "line-start" : 1233,
       "ast" : {
@@ -4610,12 +4610,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "nbytes",
-              "variable" : 32
+              "variable" : 43
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 279,
+            "go-type" : 293,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4634,13 +4634,13 @@
       "line-end" : 1233,
       "code" : "mSysStatInc(sysStat, nbytes)",
       "entry" : false,
-      "use-vars" : [ 4, 32 ]
+      "use-vars" : [ 4, 43 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 78 ],
-      "in-vars" : [ 0, 1, 6, 32, 12, 2, 5 ],
+      "in-vars" : [ 5, 0, 43, 1, 9, 2, 12 ],
       "exit" : false,
-      "out-vars" : [ 1, 12, 2, 5, 0 ],
+      "out-vars" : [ 1, 2, 12, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1234,
       "ast" : {
@@ -4656,19 +4656,19 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "heap_idle",
-                "variable" : 58
+                "variable" : 71
               },
               "go-type" : 7,
               "kind" : "expression",
               "target" : {
-                "go-type" : 110,
+                "go-type" : 119,
                 "kind" : "expression",
                 "type" : "identifier",
                 "value" : {
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "memstats",
-                  "variable" : 6
+                  "variable" : 9
                 }
               },
               "type" : "selector"
@@ -4682,12 +4682,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "nbytes",
-              "variable" : 32
+              "variable" : 43
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 279,
+            "go-type" : 293,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -4706,13 +4706,13 @@
       "line-end" : 1234,
       "code" : "mSysStatDec(&memstats.heap_idle, nbytes)",
       "entry" : false,
-      "use-vars" : [ 6, 32 ]
+      "use-vars" : [ 43, 9 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 79 ],
-      "in-vars" : [ 0, 1, 12, 2, 5 ],
+      "in-vars" : [ 12, 5, 0, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 2, 5, 0, 1, 12 ],
+      "out-vars" : [ 1, 2, 12, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1242,
       "ast" : {
@@ -4729,7 +4729,7 @@
                 "kind" : "ident",
                 "value" : "base"
               },
-              "go-type" : 277,
+              "go-type" : 290,
               "kind" : "expression",
               "target" : {
                 "go-type" : 9,
@@ -4776,7 +4776,7 @@
               "kind" : "ident",
               "value" : "setSpans"
             },
-            "go-type" : 292,
+            "go-type" : 308,
             "kind" : "expression",
             "target" : {
               "go-type" : 29,
@@ -4800,11 +4800,11 @@
       "line-end" : 1242,
       "code" : "h.setSpans(s.base(), npages, s)",
       "entry" : false,
-      "use-vars" : [ 0, 5, 1 ]
+      "use-vars" : [ 1, 5, 0 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 80, 86 ],
-      "in-vars" : [ 2, 5, 0, 1, 12 ],
+      "in-vars" : [ 2, 12, 5, 0, 1 ],
       "exit" : false,
       "out-vars" : [ 12, 5, 0, 1 ],
       "decl-vars" : [ ],
@@ -4838,9 +4838,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 81 ],
-      "in-vars" : [ 12, 5, 0, 1 ],
+      "in-vars" : [ 5, 0, 1, 12 ],
       "exit" : false,
-      "out-vars" : [ 0, 1, 12, 5 ],
+      "out-vars" : [ 1, 12, 5, 0 ],
       "decl-vars" : [ ],
       "line-start" : 1251,
       "ast" : {
@@ -4866,7 +4866,7 @@
               "kind" : "ident",
               "value" : "push"
             },
-            "go-type" : 294,
+            "go-type" : 311,
             "kind" : "expression",
             "target" : {
               "go-type" : 55,
@@ -4881,7 +4881,7 @@
                       "ident-kind" : "Var",
                       "kind" : "ident",
                       "value" : "sweepgen",
-                      "variable" : 56
+                      "variable" : 69
                     },
                     "go-type" : 18,
                     "kind" : "expression",
@@ -4926,7 +4926,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "sweepSpans",
-                  "variable" : 59
+                  "variable" : 73
                 },
                 "go-type" : 54,
                 "kind" : "expression",
@@ -4956,14 +4956,14 @@
       "line-end" : 1251,
       "code" : "h.sweepSpans[h.sweepgen/2%2].push(s)",
       "entry" : false,
-      "use-vars" : [ 5, 0 ]
+      "use-vars" : [ 0, 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 82 ],
-      "in-vars" : [ 5, 0, 1, 12 ],
+      "in-vars" : [ 1, 12, 5, 0 ],
       "exit" : false,
-      "out-vars" : [ 1, 62, 63, 60, 12, 5, 0 ],
-      "decl-vars" : [ 60, 63, 62 ],
+      "out-vars" : [ 1, 12, 5, 0, 78, 77, 75 ],
+      "decl-vars" : [ 78, 77, 75 ],
       "line-start" : 1258,
       "ast" : {
         "kind" : "statement",
@@ -5006,7 +5006,7 @@
                 "kind" : "ident",
                 "value" : "base"
               },
-              "go-type" : 277,
+              "go-type" : 290,
               "kind" : "expression",
               "target" : {
                 "go-type" : 9,
@@ -5027,7 +5027,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 296,
+            "go-type" : 315,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -5037,7 +5037,7 @@
               "value" : "pageIndexOf"
             }
           },
-          "go-type" : 295,
+          "go-type" : 314,
           "kind" : "expression",
           "type" : "call"
         } ],
@@ -5051,7 +5051,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 83 ],
-      "in-vars" : [ 62, 63, 60, 12, 5, 0, 1 ],
+      "in-vars" : [ 77, 75, 1, 12, 5, 0, 78 ],
       "exit" : false,
       "out-vars" : [ 1, 12, 5, 0 ],
       "decl-vars" : [ ],
@@ -5061,7 +5061,7 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 300,
+            "go-type" : 319,
             "kind" : "expression",
             "operator" : "&",
             "target" : {
@@ -5074,7 +5074,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "pageIdx",
-                  "variable" : 62
+                  "variable" : 77
                 }
               },
               "kind" : "expression",
@@ -5083,7 +5083,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "pageInUse",
-                  "variable" : 61
+                  "variable" : 76
                 },
                 "go-type" : 68,
                 "kind" : "expression",
@@ -5095,7 +5095,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "arena",
-                    "variable" : 60
+                    "variable" : 75
                   }
                 },
                 "type" : "selector"
@@ -5111,12 +5111,12 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "pageMask",
-              "variable" : 63
+              "variable" : 78
             }
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 298,
+            "go-type" : 317,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -5141,11 +5141,11 @@
       "line-end" : 1259,
       "code" : "atomic.Or8(&arena.pageInUse[pageIdx], pageMask)",
       "entry" : false,
-      "use-vars" : [ 62, 63, 60 ]
+      "use-vars" : [ 77, 78, 75 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 84 ],
-      "in-vars" : [ 5, 0, 1, 12 ],
+      "in-vars" : [ 0, 1, 12, 5 ],
       "exit" : false,
       "out-vars" : [ 5, 12 ],
       "decl-vars" : [ ],
@@ -5163,7 +5163,7 @@
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "pagesInUse",
-                "variable" : 64
+                "variable" : 79
               },
               "go-type" : 7,
               "kind" : "expression",
@@ -5183,17 +5183,17 @@
             "type" : "unary"
           }, {
             "coerced-to" : {
-              "go-type" : 121,
+              "go-type" : 115,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 121,
+                "go-type" : 115,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "int64"
               }
             },
-            "go-type" : 121,
+            "go-type" : 115,
             "kind" : "expression",
             "target" : {
               "go-type" : 2,
@@ -5210,7 +5210,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 269,
+            "go-type" : 278,
             "kind" : "expression",
             "qualifier" : {
               "ident-kind" : "PkgName",
@@ -5239,7 +5239,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 85, 86 ],
-      "in-vars" : [ 5, 12 ],
+      "in-vars" : [ 12, 5 ],
       "exit" : false,
       "out-vars" : [ 5 ],
       "decl-vars" : [ ],
@@ -5250,7 +5250,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "enabled",
-            "variable" : 65
+            "variable" : 80
           },
           "go-type" : 3,
           "kind" : "expression",
@@ -5354,142 +5354,142 @@
     }, {
       "name" : "ptr",
       "package" : 0,
-      "type" : 246,
+      "type" : 248,
       "exported" : false
     }, {
       "name" : "empty",
       "package" : 0,
-      "type" : 251,
+      "type" : 253,
       "exported" : false
     }, {
       "name" : "lock",
       "package" : 0,
-      "type" : 252,
+      "type" : 254,
       "exported" : false
     }, {
       "name" : "allocToCache",
       "package" : 0,
-      "type" : 254,
+      "type" : 258,
       "exported" : false
     }, {
       "name" : "unlock",
       "package" : 0,
-      "type" : 252,
+      "type" : 254,
       "exported" : false
     }, {
       "name" : "alloc",
       "package" : 0,
-      "type" : 257,
+      "type" : 263,
       "exported" : false
     }, {
       "name" : "tryAllocMSpan",
       "package" : 0,
-      "type" : 259,
+      "type" : 266,
       "exported" : false
     }, {
       "name" : "sizeclass",
       "package" : 0,
-      "type" : 261,
+      "type" : 269,
       "exported" : false
     }, {
       "name" : "alloc",
       "package" : 0,
-      "type" : 264,
+      "type" : 272,
       "exported" : false
     }, {
       "name" : "grow",
       "package" : 0,
-      "type" : 265,
+      "type" : 275,
       "exported" : false
     }, {
       "name" : "throw",
       "package" : 0,
-      "type" : 267,
+      "type" : 276,
       "exported" : false
     }, {
       "name" : "allocMSpanLocked",
       "package" : 0,
-      "type" : 259,
+      "type" : 266,
       "exported" : false
     }, {
       "name" : "Xadd64",
       "package" : 4,
-      "type" : 269,
+      "type" : 278,
       "exported" : true
     }, {
       "name" : "revise",
       "package" : 0,
-      "type" : 150,
+      "type" : 281,
       "exported" : false
     }, {
       "name" : "init",
       "package" : 0,
-      "type" : 272,
+      "type" : 285,
       "exported" : false
     }, {
       "name" : "allocNeedsZero",
       "package" : 0,
-      "type" : 274,
+      "type" : 289,
       "exported" : false
     }, {
       "name" : "base",
       "package" : 0,
-      "type" : 277,
+      "type" : 292,
       "exported" : false
     }, {
       "name" : "mSysStatDec",
       "package" : 0,
-      "type" : 279,
+      "type" : 293,
       "exported" : false
     }, {
       "name" : "set",
       "package" : 0,
-      "type" : 281,
+      "type" : 297,
       "exported" : false
     }, {
       "name" : "newMarkBits",
       "package" : 0,
-      "type" : 284,
+      "type" : 300,
       "exported" : false
     }, {
       "name" : "newAllocBits",
       "package" : 0,
-      "type" : 284,
+      "type" : 300,
       "exported" : false
     }, {
       "name" : "Store",
       "package" : 4,
-      "type" : 287,
+      "type" : 303,
       "exported" : true
     }, {
       "name" : "sysUsed",
       "package" : 0,
-      "type" : 290,
+      "type" : 306,
       "exported" : false
     }, {
       "name" : "mSysStatInc",
       "package" : 0,
-      "type" : 279,
+      "type" : 293,
       "exported" : false
     }, {
       "name" : "setSpans",
       "package" : 0,
-      "type" : 292,
+      "type" : 310,
       "exported" : false
     }, {
       "name" : "push",
       "package" : 0,
-      "type" : 294,
+      "type" : 312,
       "exported" : false
     }, {
       "name" : "pageIndexOf",
       "package" : 0,
-      "type" : 296,
+      "type" : 315,
       "exported" : false
     }, {
       "name" : "Or8",
       "package" : 4,
-      "type" : 298,
+      "type" : 317,
       "exported" : true
     }, {
       "name" : "traceHeapAlloc",
@@ -5522,7 +5522,7 @@
     "results" : [ 5 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64) (s *runtime.mspan)",
+      "name" : "(*runtime.mheap) func(npages uintptr, manual bool, spanclass runtime.spanClass, sysStat *uint64) (s *runtime.mspan)",
       "params" : 1,
       "recv" : 0,
       "results" : 8,
@@ -6549,11 +6549,109 @@
       "type" : "Struct",
       "underlying" : 109
     }, {
+      "elem" : 111,
+      "name" : "[67]runtime.divMagic",
+      "type" : "Array",
+      "underlying" : 110
+    }, {
+      "local-name" : "divMagic",
+      "name" : "runtime.divMagic",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 112
+    }, {
+      "fields" : [ {
+        "name" : "shift",
+        "type" : 5
+      }, {
+        "name" : "shift2",
+        "type" : 5
+      }, {
+        "name" : "mul",
+        "type" : 19
+      }, {
+        "name" : "baseMask",
+        "type" : 19
+      } ],
+      "name" : "struct{shift uint8; shift2 uint8; mul uint16; baseMask uint16}",
+      "type" : "Struct",
+      "underlying" : 112
+    }, {
+      "local-name" : "gcControllerState",
+      "name" : "runtime.gcControllerState",
+      "package" : 0,
+      "type" : "Named",
+      "underlying" : 114
+    }, {
+      "fields" : [ {
+        "name" : "scanWork",
+        "type" : 115
+      }, {
+        "name" : "bgScanCredit",
+        "type" : 115
+      }, {
+        "name" : "assistTime",
+        "type" : 115
+      }, {
+        "name" : "dedicatedMarkTime",
+        "type" : 115
+      }, {
+        "name" : "fractionalMarkTime",
+        "type" : 115
+      }, {
+        "name" : "idleMarkTime",
+        "type" : 115
+      }, {
+        "name" : "markStartTime",
+        "type" : 115
+      }, {
+        "name" : "dedicatedMarkWorkersNeeded",
+        "type" : 115
+      }, {
+        "name" : "assistWorkPerByte",
+        "type" : 58
+      }, {
+        "name" : "assistBytesPerWork",
+        "type" : 58
+      }, {
+        "name" : "fractionalUtilizationGoal",
+        "type" : 58
+      }, {
+        "name" : "_",
+        "type" : 116
+      } ],
+      "name" : "struct{scanWork int64; bgScanCredit int64; assistTime int64; dedicatedMarkTime int64; fractionalMarkTime int64; idleMarkTime int64; markStartTime int64; dedicatedMarkWorkersNeeded int64; assistWorkPerByte float64; assistBytesPerWork float64; fractionalUtilizationGoal float64; _ internal/cpu.CacheLinePad}",
+      "type" : "Struct",
+      "underlying" : 114
+    }, {
+      "name" : "int64",
+      "type" : "Basic",
+      "underlying" : 115
+    }, {
+      "local-name" : "CacheLinePad",
+      "name" : "internal/cpu.CacheLinePad",
+      "package" : 2,
+      "type" : "Named",
+      "underlying" : 117
+    }, {
+      "fields" : [ {
+        "name" : "_",
+        "type" : 118
+      } ],
+      "name" : "struct{_ [64]byte}",
+      "type" : "Struct",
+      "underlying" : 117
+    }, {
+      "elem" : 28,
+      "name" : "[64]byte",
+      "type" : "Array",
+      "underlying" : 118
+    }, {
       "local-name" : "mstats",
       "name" : "runtime.mstats",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 111
+      "underlying" : 120
     }, {
       "fields" : [ {
         "name" : "alloc",
@@ -6629,10 +6727,10 @@
         "type" : 7
       }, {
         "name" : "pause_ns",
-        "type" : 112
+        "type" : 121
       }, {
         "name" : "pause_end",
-        "type" : 112
+        "type" : 121
       }, {
         "name" : "numgc",
         "type" : 18
@@ -6650,7 +6748,7 @@
         "type" : 3
       }, {
         "name" : "by_size",
-        "type" : 113
+        "type" : 122
       }, {
         "name" : "last_gc_nanotime",
         "type" : 7
@@ -6681,17 +6779,17 @@
       } ],
       "name" : "struct{alloc uint64; total_alloc uint64; sys uint64; nlookup uint64; nmalloc uint64; nfree uint64; heap_alloc uint64; heap_sys uint64; heap_idle uint64; heap_inuse uint64; heap_released uint64; heap_objects uint64; stacks_inuse uint64; stacks_sys uint64; mspan_inuse uint64; mspan_sys uint64; mcache_inuse uint64; mcache_sys uint64; buckhash_sys uint64; gc_sys uint64; other_sys uint64; next_gc uint64; last_gc_unix uint64; pause_total_ns uint64; pause_ns [256]uint64; pause_end [256]uint64; numgc uint32; numforcedgc uint32; gc_cpu_fraction float64; enablegc bool; debuggc bool; by_size [67]struct{size uint32; nmalloc uint64; nfree uint64}; last_gc_nanotime uint64; tinyallocs uint64; last_next_gc uint64; last_heap_inuse uint64; triggerRatio float64; gc_trigger uint64; heap_live uint64; heap_scan uint64; heap_marked uint64}",
       "type" : "Struct",
-      "underlying" : 111
+      "underlying" : 120
     }, {
       "elem" : 7,
       "name" : "[256]uint64",
       "type" : "Array",
-      "underlying" : 112
+      "underlying" : 121
     }, {
-      "elem" : 114,
+      "elem" : 123,
       "name" : "[67]struct{size uint32; nmalloc uint64; nfree uint64}",
       "type" : "Array",
-      "underlying" : 113
+      "underlying" : 122
     }, {
       "fields" : [ {
         "name" : "size",
@@ -6705,108 +6803,10 @@
       } ],
       "name" : "struct{size uint32; nmalloc uint64; nfree uint64}",
       "type" : "Struct",
-      "underlying" : 114
-    }, {
-      "elem" : 116,
-      "name" : "[67]runtime.divMagic",
-      "type" : "Array",
-      "underlying" : 115
-    }, {
-      "local-name" : "divMagic",
-      "name" : "runtime.divMagic",
-      "package" : 0,
-      "type" : "Named",
-      "underlying" : 117
-    }, {
-      "fields" : [ {
-        "name" : "shift",
-        "type" : 5
-      }, {
-        "name" : "shift2",
-        "type" : 5
-      }, {
-        "name" : "mul",
-        "type" : 19
-      }, {
-        "name" : "baseMask",
-        "type" : 19
-      } ],
-      "name" : "struct{shift uint8; shift2 uint8; mul uint16; baseMask uint16}",
-      "type" : "Struct",
-      "underlying" : 117
+      "underlying" : 123
     }, {
       "elem" : 19,
       "name" : "[67]uint16",
-      "type" : "Array",
-      "underlying" : 118
-    }, {
-      "local-name" : "gcControllerState",
-      "name" : "runtime.gcControllerState",
-      "package" : 0,
-      "type" : "Named",
-      "underlying" : 120
-    }, {
-      "fields" : [ {
-        "name" : "scanWork",
-        "type" : 121
-      }, {
-        "name" : "bgScanCredit",
-        "type" : 121
-      }, {
-        "name" : "assistTime",
-        "type" : 121
-      }, {
-        "name" : "dedicatedMarkTime",
-        "type" : 121
-      }, {
-        "name" : "fractionalMarkTime",
-        "type" : 121
-      }, {
-        "name" : "idleMarkTime",
-        "type" : 121
-      }, {
-        "name" : "markStartTime",
-        "type" : 121
-      }, {
-        "name" : "dedicatedMarkWorkersNeeded",
-        "type" : 121
-      }, {
-        "name" : "assistWorkPerByte",
-        "type" : 58
-      }, {
-        "name" : "assistBytesPerWork",
-        "type" : 58
-      }, {
-        "name" : "fractionalUtilizationGoal",
-        "type" : 58
-      }, {
-        "name" : "_",
-        "type" : 122
-      } ],
-      "name" : "struct{scanWork int64; bgScanCredit int64; assistTime int64; dedicatedMarkTime int64; fractionalMarkTime int64; idleMarkTime int64; markStartTime int64; dedicatedMarkWorkersNeeded int64; assistWorkPerByte float64; assistBytesPerWork float64; fractionalUtilizationGoal float64; _ internal/cpu.CacheLinePad}",
-      "type" : "Struct",
-      "underlying" : 120
-    }, {
-      "name" : "int64",
-      "type" : "Basic",
-      "underlying" : 121
-    }, {
-      "local-name" : "CacheLinePad",
-      "name" : "internal/cpu.CacheLinePad",
-      "package" : 2,
-      "type" : "Named",
-      "underlying" : 123
-    }, {
-      "fields" : [ {
-        "name" : "_",
-        "type" : 124
-      } ],
-      "name" : "struct{_ [64]byte}",
-      "type" : "Struct",
-      "underlying" : 123
-    }, {
-      "elem" : 28,
-      "name" : "[64]byte",
       "type" : "Array",
       "underlying" : 124
     }, {
@@ -6836,16 +6836,16 @@
         "type" : 7
       }, {
         "name" : "ticksStart",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "ticksEnd",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "timeStart",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "timeEnd",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "seqGC",
         "type" : 7
@@ -6942,13 +6942,13 @@
         "type" : 18
       }, {
         "name" : "goid",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "schedlink",
         "type" : 143
       }, {
         "name" : "waitsince",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "waitreason",
         "type" : 175
@@ -6984,7 +6984,7 @@
         "type" : 3
       }, {
         "name" : "sysexitticks",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "traceseq",
         "type" : 7
@@ -7038,7 +7038,7 @@
         "type" : 18
       }, {
         "name" : "gcAssistBytes",
-        "type" : 121
+        "type" : 115
       } ],
       "name" : "struct{stack runtime.stack; stackguard0 uintptr; stackguard1 uintptr; _panic *runtime._panic; _defer *runtime._defer; m *runtime.m; sched runtime.gobuf; syscallsp uintptr; syscallpc uintptr; stktopsp uintptr; param unsafe.Pointer; atomicstatus uint32; stackLock uint32; goid int64; schedlink runtime.guintptr; waitsince int64; waitreason runtime.waitReason; preempt bool; preemptStop bool; preemptShrink bool; asyncSafePoint bool; paniconfault bool; gcscandone bool; throwsplit bool; activeStackChans bool; raceignore int8; sysblocktraced bool; sysexitticks int64; traceseq uint64; tracelastp runtime.puintptr; lockedm runtime.muintptr; sig uint32; writebuf []byte; sigcode0 uintptr; sigcode1 uintptr; sigpc uintptr; gopc uintptr; ancestors *[]runtime.ancestorInfo; startpc uintptr; racectx uintptr; waiting *runtime.sudog; cgoCtxt []uintptr; labels unsafe.Pointer; timer *runtime.timer; selectDone uint32; gcAssistBytes int64}",
       "type" : "Struct",
@@ -7213,7 +7213,7 @@
         "type" : 151
       }, {
         "name" : "id",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "mallocing",
         "type" : 105
@@ -7672,7 +7672,7 @@
         "type" : 181
       }, {
         "name" : "goid",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "gopc",
         "type" : 2
@@ -7714,10 +7714,10 @@
         "type" : 57
       }, {
         "name" : "acquiretime",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "releasetime",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "ticket",
         "type" : 18
@@ -7820,10 +7820,10 @@
         "type" : 151
       }, {
         "name" : "when",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "period",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "f",
         "type" : 193
@@ -7835,7 +7835,7 @@
         "type" : 2
       }, {
         "name" : "nextwhen",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "status",
         "type" : 18
@@ -8053,10 +8053,10 @@
         "type" : 7
       }, {
         "name" : "gcAssistTime",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "gcFractionalMarkTime",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "gcBgMarkWorker",
         "type" : 143
@@ -8065,7 +8065,7 @@
         "type" : 230
       }, {
         "name" : "gcMarkWorkerStartTime",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "gcw",
         "type" : 231
@@ -8098,7 +8098,7 @@
         "type" : 3
       }, {
         "name" : "pad",
-        "type" : 122
+        "type" : 116
       } ],
       "name" : "struct{id int32; status uint32; link runtime.puintptr; schedtick uint32; syscalltick uint32; sysmontick runtime.sysmontick; m runtime.muintptr; mcache *runtime.mcache; pcache runtime.pageCache; raceprocctx uintptr; deferpool [5][]*runtime._defer; deferpoolbuf [5][32]*runtime._defer; goidcache uint64; goidcacheend uint64; runqhead uint32; runqtail uint32; runq [256]runtime.guintptr; runnext runtime.guintptr; gFree struct{runtime.gList; n int32}; sudogcache []*runtime.sudog; sudogbuf [128]*runtime.sudog; mspancache struct{len int; buf [128]*runtime.mspan}; tracebuf runtime.traceBufPtr; traceSweep bool; traceSwept uintptr; traceReclaimed uintptr; palloc runtime.persistentAlloc; _ uint32; timer0When uint64; gcAssistTime int64; gcFractionalMarkTime int64; gcBgMarkWorker runtime.guintptr; gcMarkWorkerMode runtime.gcMarkWorkerMode; gcMarkWorkerStartTime int64; gcw runtime.gcWork; wbBuf runtime.wbBuf; runSafePointFn uint32; timersLock runtime.mutex; timers []*runtime.timer; numTimers uint32; adjustTimers uint32; deletedTimers uint32; timerRaceCtx uintptr; preempt bool; pad internal/cpu.CacheLinePad}",
       "type" : "Struct",
@@ -8115,13 +8115,13 @@
         "type" : 18
       }, {
         "name" : "schedwhen",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "syscalltick",
         "type" : 18
       }, {
         "name" : "syscallwhen",
-        "type" : 121
+        "type" : 115
       } ],
       "name" : "struct{schedtick uint32; schedwhen int64; syscalltick uint32; syscallwhen int64}",
       "type" : "Struct",
@@ -8274,7 +8274,7 @@
         "type" : 7
       }, {
         "name" : "scanWork",
-        "type" : 121
+        "type" : 115
       }, {
         "name" : "flushedWork",
         "type" : 3
@@ -8407,33 +8407,49 @@
       "type" : "Tuple",
       "underlying" : 247
     }, {
+      "name" : "(runtime.puintptr) func() *runtime.p",
+      "params" : 86,
+      "recv" : 18,
+      "results" : 247,
+      "type" : "Signature",
+      "underlying" : 248,
+      "variadic" : false
+    }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 248
+      "underlying" : 249
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 249
+      "underlying" : 250
     }, {
       "elem" : 212,
       "name" : "*runtime.pageCache",
       "type" : "Pointer",
-      "underlying" : 250
+      "underlying" : 251
     }, {
       "name" : "func() bool",
       "params" : 86,
       "recv" : -1,
       "results" : 102,
       "type" : "Signature",
-      "underlying" : 251,
+      "underlying" : 252,
+      "variadic" : false
+    }, {
+      "name" : "(*runtime.pageCache) func() bool",
+      "params" : 86,
+      "recv" : 22,
+      "results" : 102,
+      "type" : "Signature",
+      "underlying" : 253,
       "variadic" : false
     }, {
       "name" : "func(l *runtime.mutex)",
-      "params" : 253,
+      "params" : 255,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 252,
+      "underlying" : 254,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8442,14 +8458,14 @@
       } ],
       "name" : "(l *runtime.mutex)",
       "type" : "Tuple",
-      "underlying" : 253
+      "underlying" : 255
     }, {
       "name" : "func() runtime.pageCache",
       "params" : 86,
       "recv" : -1,
-      "results" : 255,
+      "results" : 257,
       "type" : "Signature",
-      "underlying" : 254,
+      "underlying" : 256,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8458,7 +8474,20 @@
       } ],
       "name" : "(runtime.pageCache)",
       "type" : "Tuple",
-      "underlying" : 255
+      "underlying" : 257
+    }, {
+      "name" : "(*runtime.pageAlloc) func() runtime.pageCache",
+      "params" : 86,
+      "recv" : 25,
+      "results" : 257,
+      "type" : "Signature",
+      "underlying" : 258,
+      "variadic" : false
+    }, {
+      "elem" : 32,
+      "name" : "*runtime.pageAlloc",
+      "type" : "Pointer",
+      "underlying" : 259
     }, {
       "fields" : [ {
         "name" : "",
@@ -8469,14 +8498,14 @@
       } ],
       "name" : "(uintptr, uintptr)",
       "type" : "Tuple",
-      "underlying" : 256
+      "underlying" : 260
     }, {
       "name" : "func(npages uintptr) (uintptr, uintptr)",
-      "params" : 258,
+      "params" : 262,
       "recv" : -1,
-      "results" : 256,
+      "results" : 260,
       "type" : "Signature",
-      "underlying" : 257,
+      "underlying" : 261,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8485,14 +8514,22 @@
       } ],
       "name" : "(npages uintptr)",
       "type" : "Tuple",
-      "underlying" : 258
+      "underlying" : 262
+    }, {
+      "name" : "(*runtime.pageCache) func(npages uintptr) (uintptr, uintptr)",
+      "params" : 262,
+      "recv" : 26,
+      "results" : 260,
+      "type" : "Signature",
+      "underlying" : 263,
+      "variadic" : false
     }, {
       "name" : "func() *runtime.mspan",
       "params" : 86,
       "recv" : -1,
-      "results" : 260,
+      "results" : 265,
       "type" : "Signature",
-      "underlying" : 259,
+      "underlying" : 264,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8501,14 +8538,22 @@
       } ],
       "name" : "(*runtime.mspan)",
       "type" : "Tuple",
-      "underlying" : 260
+      "underlying" : 265
+    }, {
+      "name" : "(*runtime.mheap) func() *runtime.mspan",
+      "params" : 86,
+      "recv" : 27,
+      "results" : 265,
+      "type" : "Signature",
+      "underlying" : 266,
+      "variadic" : false
     }, {
       "name" : "func() int8",
       "params" : 86,
       "recv" : -1,
-      "results" : 262,
+      "results" : 268,
       "type" : "Signature",
-      "underlying" : 261,
+      "underlying" : 267,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8517,7 +8562,15 @@
       } ],
       "name" : "(int8)",
       "type" : "Tuple",
-      "underlying" : 262
+      "underlying" : 268
+    }, {
+      "name" : "(runtime.spanClass) func() int8",
+      "params" : 86,
+      "recv" : 28,
+      "results" : 268,
+      "type" : "Signature",
+      "underlying" : 269,
+      "variadic" : false
     }, {
       "fields" : [ {
         "name" : "addr",
@@ -8528,22 +8581,30 @@
       } ],
       "name" : "(addr uintptr, scav uintptr)",
       "type" : "Tuple",
-      "underlying" : 263
+      "underlying" : 270
     }, {
       "name" : "func(npages uintptr) (addr uintptr, scav uintptr)",
-      "params" : 258,
+      "params" : 262,
       "recv" : -1,
-      "results" : 263,
+      "results" : 270,
       "type" : "Signature",
-      "underlying" : 264,
+      "underlying" : 271,
+      "variadic" : false
+    }, {
+      "name" : "(*runtime.pageAlloc) func(npages uintptr) (addr uintptr, scav uintptr)",
+      "params" : 262,
+      "recv" : 29,
+      "results" : 270,
+      "type" : "Signature",
+      "underlying" : 272,
       "variadic" : false
     }, {
       "name" : "func(npage uintptr) bool",
-      "params" : 266,
+      "params" : 274,
       "recv" : -1,
       "results" : 102,
       "type" : "Signature",
-      "underlying" : 265,
+      "underlying" : 273,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8552,14 +8613,22 @@
       } ],
       "name" : "(npage uintptr)",
       "type" : "Tuple",
-      "underlying" : 266
+      "underlying" : 274
+    }, {
+      "name" : "(*runtime.mheap) func(npage uintptr) bool",
+      "params" : 274,
+      "recv" : 30,
+      "results" : 102,
+      "type" : "Signature",
+      "underlying" : 275,
+      "variadic" : false
     }, {
       "name" : "func(s string)",
-      "params" : 268,
+      "params" : 277,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 267,
+      "underlying" : 276,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8568,14 +8637,14 @@
       } ],
       "name" : "(s string)",
       "type" : "Tuple",
-      "underlying" : 268
+      "underlying" : 277
     }, {
       "name" : "func(ptr *uint64, delta int64) uint64",
-      "params" : 270,
+      "params" : 279,
       "recv" : -1,
-      "results" : 271,
+      "results" : 280,
       "type" : "Signature",
-      "underlying" : 269,
+      "underlying" : 278,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8583,11 +8652,11 @@
         "type" : 6
       }, {
         "name" : "delta",
-        "type" : 121
+        "type" : 115
       } ],
       "name" : "(ptr *uint64, delta int64)",
       "type" : "Tuple",
-      "underlying" : 270
+      "underlying" : 279
     }, {
       "fields" : [ {
         "name" : "",
@@ -8595,14 +8664,27 @@
       } ],
       "name" : "(uint64)",
       "type" : "Tuple",
-      "underlying" : 271
+      "underlying" : 280
+    }, {
+      "name" : "(*runtime.gcControllerState) func()",
+      "params" : 86,
+      "recv" : 39,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 281,
+      "variadic" : false
+    }, {
+      "elem" : 113,
+      "name" : "*runtime.gcControllerState",
+      "type" : "Pointer",
+      "underlying" : 282
     }, {
       "name" : "func(base uintptr, npages uintptr)",
-      "params" : 273,
+      "params" : 284,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 272,
+      "underlying" : 283,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8614,14 +8696,22 @@
       } ],
       "name" : "(base uintptr, npages uintptr)",
       "type" : "Tuple",
-      "underlying" : 273
+      "underlying" : 284
+    }, {
+      "name" : "(*runtime.mspan) func(base uintptr, npages uintptr)",
+      "params" : 284,
+      "recv" : 40,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 285,
+      "variadic" : false
     }, {
       "name" : "func(base uintptr, npage uintptr) (needZero bool)",
-      "params" : 275,
+      "params" : 287,
       "recv" : -1,
-      "results" : 276,
+      "results" : 288,
       "type" : "Signature",
-      "underlying" : 274,
+      "underlying" : 286,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8633,7 +8723,7 @@
       } ],
       "name" : "(base uintptr, npage uintptr)",
       "type" : "Tuple",
-      "underlying" : 275
+      "underlying" : 287
     }, {
       "fields" : [ {
         "name" : "needZero",
@@ -8641,14 +8731,22 @@
       } ],
       "name" : "(needZero bool)",
       "type" : "Tuple",
-      "underlying" : 276
+      "underlying" : 288
+    }, {
+      "name" : "(*runtime.mheap) func(base uintptr, npage uintptr) (needZero bool)",
+      "params" : 287,
+      "recv" : 41,
+      "results" : 288,
+      "type" : "Signature",
+      "underlying" : 289,
+      "variadic" : false
     }, {
       "name" : "func() uintptr",
       "params" : 86,
       "recv" : -1,
-      "results" : 278,
+      "results" : 291,
       "type" : "Signature",
-      "underlying" : 277,
+      "underlying" : 290,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8657,14 +8755,22 @@
       } ],
       "name" : "(uintptr)",
       "type" : "Tuple",
-      "underlying" : 278
+      "underlying" : 291
+    }, {
+      "name" : "(*runtime.mspan) func() uintptr",
+      "params" : 86,
+      "recv" : 47,
+      "results" : 291,
+      "type" : "Signature",
+      "underlying" : 292,
+      "variadic" : false
     }, {
       "name" : "func(sysStat *uint64, n uintptr)",
-      "params" : 280,
+      "params" : 294,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 279,
+      "underlying" : 293,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8676,14 +8782,14 @@
       } ],
       "name" : "(sysStat *uint64, n uintptr)",
       "type" : "Tuple",
-      "underlying" : 280
+      "underlying" : 294
     }, {
       "name" : "func(s runtime.mSpanState)",
-      "params" : 282,
+      "params" : 296,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 281,
+      "underlying" : 295,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8692,19 +8798,32 @@
       } ],
       "name" : "(s runtime.mSpanState)",
       "type" : "Tuple",
-      "underlying" : 282
+      "underlying" : 296
     }, {
-      "elem" : 116,
+      "name" : "(*runtime.mSpanStateBox) func(s runtime.mSpanState)",
+      "params" : 296,
+      "recv" : 51,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 297,
+      "variadic" : false
+    }, {
+      "elem" : 20,
+      "name" : "*runtime.mSpanStateBox",
+      "type" : "Pointer",
+      "underlying" : 298
+    }, {
+      "elem" : 111,
       "name" : "*runtime.divMagic",
       "type" : "Pointer",
-      "underlying" : 283
+      "underlying" : 299
     }, {
       "name" : "func(nelems uintptr) *runtime.gcBits",
-      "params" : 285,
+      "params" : 301,
       "recv" : -1,
-      "results" : 286,
+      "results" : 302,
       "type" : "Signature",
-      "underlying" : 284,
+      "underlying" : 300,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8713,7 +8832,7 @@
       } ],
       "name" : "(nelems uintptr)",
       "type" : "Tuple",
-      "underlying" : 285
+      "underlying" : 301
     }, {
       "fields" : [ {
         "name" : "",
@@ -8721,38 +8840,38 @@
       } ],
       "name" : "(*runtime.gcBits)",
       "type" : "Tuple",
-      "underlying" : 286
+      "underlying" : 302
     }, {
       "name" : "func(ptr *uint32, val uint32)",
-      "params" : 288,
+      "params" : 304,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 287,
+      "underlying" : 303,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "ptr",
-        "type" : 289
+        "type" : 305
       }, {
         "name" : "val",
         "type" : 18
       } ],
       "name" : "(ptr *uint32, val uint32)",
       "type" : "Tuple",
-      "underlying" : 288
+      "underlying" : 304
     }, {
       "elem" : 18,
       "name" : "*uint32",
       "type" : "Pointer",
-      "underlying" : 289
+      "underlying" : 305
     }, {
       "name" : "func(v unsafe.Pointer, n uintptr)",
-      "params" : 291,
+      "params" : 307,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 290,
+      "underlying" : 306,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8764,14 +8883,14 @@
       } ],
       "name" : "(v unsafe.Pointer, n uintptr)",
       "type" : "Tuple",
-      "underlying" : 291
+      "underlying" : 307
     }, {
       "name" : "func(base uintptr, npage uintptr, s *runtime.mspan)",
-      "params" : 293,
+      "params" : 309,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 292,
+      "underlying" : 308,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8786,15 +8905,36 @@
       } ],
       "name" : "(base uintptr, npage uintptr, s *runtime.mspan)",
       "type" : "Tuple",
-      "underlying" : 293
+      "underlying" : 309
+    }, {
+      "name" : "(*runtime.mheap) func(base uintptr, npage uintptr, s *runtime.mspan)",
+      "params" : 309,
+      "recv" : 72,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 310,
+      "variadic" : false
     }, {
       "name" : "func(s *runtime.mspan)",
       "params" : 8,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 294,
+      "underlying" : 311,
       "variadic" : false
+    }, {
+      "name" : "(*runtime.gcSweepBuf) func(s *runtime.mspan)",
+      "params" : 8,
+      "recv" : 74,
+      "results" : 86,
+      "type" : "Signature",
+      "underlying" : 312,
+      "variadic" : false
+    }, {
+      "elem" : 55,
+      "name" : "*runtime.gcSweepBuf",
+      "type" : "Pointer",
+      "underlying" : 313
     }, {
       "fields" : [ {
         "name" : "arena",
@@ -8808,14 +8948,14 @@
       } ],
       "name" : "(arena *runtime.heapArena, pageIdx uintptr, pageMask uint8)",
       "type" : "Tuple",
-      "underlying" : 295
+      "underlying" : 314
     }, {
       "name" : "func(p uintptr) (arena *runtime.heapArena, pageIdx uintptr, pageMask uint8)",
-      "params" : 297,
+      "params" : 316,
       "recv" : -1,
-      "results" : 295,
+      "results" : 314,
       "type" : "Signature",
-      "underlying" : 296,
+      "underlying" : 315,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -8824,31 +8964,31 @@
       } ],
       "name" : "(p uintptr)",
       "type" : "Tuple",
-      "underlying" : 297
+      "underlying" : 316
     }, {
       "name" : "func(ptr *uint8, val uint8)",
-      "params" : 299,
+      "params" : 318,
       "recv" : -1,
       "results" : 86,
       "type" : "Signature",
-      "underlying" : 298,
+      "underlying" : 317,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "ptr",
-        "type" : 300
+        "type" : 319
       }, {
         "name" : "val",
         "type" : 5
       } ],
       "name" : "(ptr *uint8, val uint8)",
       "type" : "Tuple",
-      "underlying" : 299
+      "underlying" : 318
     }, {
       "elem" : 5,
       "name" : "*uint8",
       "type" : "Pointer",
-      "underlying" : 300
+      "underlying" : 319
     } ],
     "variables" : [ {
       "name" : "h",
@@ -8893,28 +9033,28 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "memstats",
+      "name" : "class_to_divmagic",
       "package" : 0,
       "type" : 110,
       "exported" : false,
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "class_to_divmagic",
-      "package" : 0,
-      "type" : 115,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
-      "name" : "class_to_size",
-      "package" : 0,
-      "type" : 118,
-      "exported" : false,
-      "embedded" : false,
-      "field" : false
-    }, {
       "name" : "gcController",
+      "package" : 0,
+      "type" : 113,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "mheap_",
+      "package" : 0,
+      "type" : 30,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "memstats",
       "package" : 0,
       "type" : 119,
       "exported" : false,
@@ -8928,9 +9068,9 @@
       "embedded" : false,
       "field" : false
     }, {
-      "name" : "mheap_",
+      "name" : "class_to_size",
       "package" : 0,
-      "type" : 30,
+      "type" : 124,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -8979,6 +9119,13 @@
     }, {
       "name" : "pp",
       "package" : 0,
+      "type" : 151,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "pp",
+      "package" : 0,
       "type" : 207,
       "exported" : false,
       "embedded" : false,
@@ -8993,7 +9140,14 @@
     }, {
       "name" : "c",
       "package" : 0,
-      "type" : 250,
+      "type" : 251,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 251,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -9011,6 +9165,48 @@
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 259,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 251,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 29,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "sc",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 259,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 29,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "heap_scan",
       "package" : 0,
@@ -9068,6 +9264,27 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 282,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "span",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 29,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "needzero",
       "package" : 0,
       "type" : 5,
@@ -9103,6 +9320,13 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "s",
+      "package" : 0,
+      "type" : 9,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "npages",
       "package" : 0,
       "type" : 2,
@@ -9123,6 +9347,13 @@
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 298,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "spanclass",
       "package" : 0,
@@ -9175,7 +9406,7 @@
     }, {
       "name" : "m",
       "package" : 0,
-      "type" : 283,
+      "type" : 299,
       "exported" : false,
       "embedded" : false,
       "field" : false
@@ -9264,12 +9495,26 @@
       "embedded" : false,
       "field" : true
     }, {
+      "name" : "h",
+      "package" : 0,
+      "type" : 29,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "sweepSpans",
       "package" : 0,
       "type" : 54,
       "exported" : false,
       "embedded" : false,
       "field" : true
+    }, {
+      "name" : "b",
+      "package" : 0,
+      "type" : 313,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
     }, {
       "name" : "arena",
       "package" : 0,

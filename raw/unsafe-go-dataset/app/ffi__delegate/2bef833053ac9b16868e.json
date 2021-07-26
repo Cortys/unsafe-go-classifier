@@ -129,8 +129,8 @@
       "successors" : [ 5 ],
       "in-vars" : [ 4, 5, 1 ],
       "exit" : false,
-      "out-vars" : [ 4, 6 ],
-      "decl-vars" : [ 6, 7, 8 ],
+      "out-vars" : [ 4, 7 ],
+      "decl-vars" : [ 7, 8, 9 ],
       "line-start" : 489,
       "ast" : {
         "kind" : "statement",
@@ -214,7 +214,7 @@
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 30,
+                "go-type" : 31,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -224,13 +224,13 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 30,
+                  "go-type" : 31,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 30,
+              "go-type" : 31,
               "kind" : "expression",
               "target" : {
                 "go-type" : 3,
@@ -262,7 +262,7 @@
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 30,
+                "go-type" : 31,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -272,16 +272,16 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 30,
+                  "go-type" : 31,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 30,
+              "go-type" : 31,
               "kind" : "expression",
               "target" : {
-                "go-type" : 31,
+                "go-type" : 32,
                 "kind" : "expression",
                 "operator" : "&",
                 "target" : {
@@ -323,11 +323,11 @@
       "line-end" : 489,
       "code" : "_, _, err := getsockopt(c.fd(), SCTP_DEFAULT_SENT_PARAM, uintptr(unsafe.Pointer(info)), uintptr(unsafe.Pointer(&optlen)))",
       "entry" : false,
-      "use-vars" : [ 4, 5, 1 ]
+      "use-vars" : [ 1, 5, 4 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 6, 4 ],
+      "in-vars" : [ 4, 7 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -353,7 +353,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 6
+            "variable" : 7
           }
         } ]
       },
@@ -361,7 +361,7 @@
       "line-end" : 490,
       "code" : "return info, err",
       "entry" : false,
-      "use-vars" : [ 6, 4 ]
+      "use-vars" : [ 4, 7 ]
     } ],
     "code" : "func (c *SCTPConn) GetDefaultSentParam() (*SndRcvInfo, error) {\n\tinfo := &SndRcvInfo{}\n\toptlen := unsafe.Sizeof(*info)\n\t_, _, err := getsockopt(c.fd(), SCTP_DEFAULT_SENT_PARAM, uintptr(unsafe.Pointer(info)), uintptr(unsafe.Pointer(&optlen)))\n\treturn info, err\n}",
     "defines" : [ 0 ],
@@ -378,7 +378,7 @@
     }, {
       "name" : "fd",
       "package" : 0,
-      "type" : 28,
+      "type" : 30,
       "exported" : false
     } ],
     "line-end" : 491,
@@ -397,7 +397,7 @@
     "results" : [ 2, 3 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func() (*github.com/ishidawataru/sctp.SndRcvInfo, error)",
+      "name" : "(*github.com/ishidawataru/sctp.SCTPConn) func() (*github.com/ishidawataru/sctp.SndRcvInfo, error)",
       "params" : 1,
       "recv" : 1,
       "results" : 2,
@@ -493,7 +493,7 @@
       "type" : "Interface",
       "underlying" : 10
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 1,
       "recv" : 0,
       "results" : 12,
@@ -637,16 +637,24 @@
       "type" : "Tuple",
       "underlying" : 29
     }, {
+      "name" : "(*github.com/ishidawataru/sctp.SCTPConn) func() int",
+      "params" : 1,
+      "recv" : 6,
+      "results" : 29,
+      "type" : "Signature",
+      "underlying" : 30,
+      "variadic" : false
+    }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 1,
       "type" : "Basic",
-      "underlying" : 30
+      "underlying" : 31
     }, {
       "elem" : 23,
       "name" : "*uintptr",
       "type" : "Pointer",
-      "underlying" : 31
+      "underlying" : 32
     } ],
     "variables" : [ {
       "name" : "",
@@ -687,6 +695,13 @@
       "name" : "optlen",
       "package" : 0,
       "type" : 23,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "c",
+      "package" : 0,
+      "type" : 14,
       "exported" : false,
       "embedded" : false,
       "field" : false

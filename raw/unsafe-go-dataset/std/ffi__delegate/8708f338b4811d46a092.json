@@ -16,7 +16,7 @@
       "successors" : [ 2 ],
       "in-vars" : [ 2, 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 1, 2, 3 ],
+      "out-vars" : [ 2, 3, 1 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -42,9 +42,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 2, 3 ],
+      "in-vars" : [ 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 6, 1, 2 ],
+      "out-vars" : [ 6, 3, 1, 2 ],
       "decl-vars" : [ 6 ],
       "line-start" : 1082,
       "ast" : {
@@ -85,9 +85,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 4 ],
-      "in-vars" : [ 6, 1, 2, 3 ],
+      "in-vars" : [ 1, 2, 6, 3 ],
       "exit" : false,
-      "out-vars" : [ 7, 6, 1, 2, 3 ],
+      "out-vars" : [ 6, 7, 3, 1, 2 ],
       "decl-vars" : [ 7 ],
       "line-start" : 1083,
       "ast" : {
@@ -120,9 +120,9 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5 ],
-      "in-vars" : [ 7, 6, 1, 2, 3 ],
+      "in-vars" : [ 6, 7, 3, 1, 2 ],
       "exit" : false,
-      "out-vars" : [ 8, 6 ],
+      "out-vars" : [ 6, 8 ],
       "decl-vars" : [ 8 ],
       "line-start" : 1084,
       "ast" : {
@@ -249,7 +249,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 8, 6 ],
+      "in-vars" : [ 6, 8 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -289,7 +289,7 @@
       "line-end" : 1085,
       "code" : "return &value, err",
       "entry" : false,
-      "use-vars" : [ 8, 6 ]
+      "use-vars" : [ 6, 8 ]
     } ],
     "code" : "func GetsockoptTpacketStatsV3(fd, level, opt int) (*TpacketStatsV3, error) {\n\tvar value TpacketStatsV3\n\tvallen := _Socklen(SizeofTpacketStatsV3)\n\terr := getsockopt(fd, level, opt, unsafe.Pointer(&value), &vallen)\n\treturn &value, err\n}",
     "defines" : [ 0 ],
@@ -400,7 +400,7 @@
       "type" : "Interface",
       "underlying" : 9
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 11,
       "recv" : 0,
       "results" : 12,

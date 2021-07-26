@@ -14,9 +14,9 @@
     "blocks" : [ {
       "update-vars" : [ ],
       "successors" : [ 2 ],
-      "in-vars" : [ 9, 8 ],
+      "in-vars" : [ 8, 9 ],
       "exit" : false,
-      "out-vars" : [ 8, 9 ],
+      "out-vars" : [ 9, 8 ],
       "decl-vars" : [ ],
       "line-start" : -1,
       "ast" : null,
@@ -61,7 +61,7 @@
                 "kind" : "ident",
                 "value" : "Kind"
               },
-              "go-type" : 13,
+              "go-type" : 46,
               "kind" : "expression",
               "target" : {
                 "go-type" : 25,
@@ -104,7 +104,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 8, 9 ],
       "exit" : false,
-      "out-vars" : [ 8, 9 ],
+      "out-vars" : [ 9, 8 ],
       "decl-vars" : [ ],
       "line-start" : 570,
       "ast" : {
@@ -121,7 +121,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 46,
+            "go-type" : 48,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -145,8 +145,8 @@
       "successors" : [ 5 ],
       "in-vars" : [ 8, 9 ],
       "exit" : false,
-      "out-vars" : [ 11, 9 ],
-      "decl-vars" : [ 11 ],
+      "out-vars" : [ 12, 9 ],
+      "decl-vars" : [ 12 ],
       "line-start" : 572,
       "ast" : {
         "kind" : "statement",
@@ -163,21 +163,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 50,
+              "go-type" : 52,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 50,
+                "go-type" : 52,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "funcType"
               }
             },
-            "go-type" : 49,
+            "go-type" : 51,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 49,
+          "go-type" : 51,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -224,7 +224,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 11, 9 ],
+      "in-vars" : [ 12, 9 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -257,22 +257,22 @@
                   "kind" : "ident",
                   "value" : "in"
                 },
-                "go-type" : 55,
+                "go-type" : 57,
                 "kind" : "expression",
                 "target" : {
-                  "go-type" : 49,
+                  "go-type" : 51,
                   "kind" : "expression",
                   "type" : "identifier",
                   "value" : {
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "tt",
-                    "variable" : 11
+                    "variable" : 12
                   }
                 },
                 "type" : "selector"
               },
-              "go-type" : 54,
+              "go-type" : 56,
               "kind" : "expression",
               "type" : "call"
             },
@@ -280,7 +280,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 52,
+            "go-type" : 54,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -299,7 +299,7 @@
       "line-end" : 573,
       "code" : "return toType(tt.in()[i])",
       "entry" : false,
-      "use-vars" : [ 9, 11 ]
+      "use-vars" : [ 12, 9 ]
     } ],
     "code" : "func (t *rtype) In(i int) Type {\n\tif t.Kind() != Func {\n\t\tpanic(\"reflect: In of non-func type\")\n\t}\n\ttt := (*funcType)(unsafe.Pointer(t))\n\treturn toType(tt.in()[i])\n}",
     "defines" : [ 0 ],
@@ -311,17 +311,17 @@
     }, {
       "name" : "Kind",
       "package" : 0,
-      "type" : 13,
+      "type" : 47,
       "exported" : true
     }, {
       "name" : "toType",
       "package" : 0,
-      "type" : 52,
+      "type" : 54,
       "exported" : false
     }, {
       "name" : "in",
       "package" : 0,
-      "type" : 55,
+      "type" : 59,
       "exported" : false
     } ],
     "line-end" : 574,
@@ -340,7 +340,7 @@
     "results" : [ 10 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func(i int) internal/reflectlite.Type",
+      "name" : "(*internal/reflectlite.rtype) func(i int) internal/reflectlite.Type",
       "params" : 1,
       "recv" : 8,
       "results" : 3,
@@ -412,7 +412,7 @@
       "type" : "Interface",
       "underlying" : 5
     }, {
-      "name" : "func(u internal/reflectlite.Type) bool",
+      "name" : "(internal/reflectlite.Type) func(u internal/reflectlite.Type) bool",
       "params" : 7,
       "recv" : 0,
       "results" : 8,
@@ -440,7 +440,7 @@
       "type" : "Basic",
       "underlying" : 9
     }, {
-      "name" : "func() bool",
+      "name" : "(internal/reflectlite.Type) func() bool",
       "params" : 11,
       "recv" : 1,
       "results" : 8,
@@ -453,7 +453,7 @@
       "type" : "Tuple",
       "underlying" : 11
     }, {
-      "name" : "func() internal/reflectlite.Type",
+      "name" : "(internal/reflectlite.Type) func() internal/reflectlite.Type",
       "params" : 11,
       "recv" : 2,
       "results" : 3,
@@ -461,7 +461,7 @@
       "underlying" : 12,
       "variadic" : false
     }, {
-      "name" : "func() internal/reflectlite.Kind",
+      "name" : "(internal/reflectlite.Type) func() internal/reflectlite.Kind",
       "params" : 11,
       "recv" : 3,
       "results" : 14,
@@ -487,7 +487,7 @@
       "type" : "Basic",
       "underlying" : 16
     }, {
-      "name" : "func() string",
+      "name" : "(internal/reflectlite.Type) func() string",
       "params" : 11,
       "recv" : 4,
       "results" : 18,
@@ -507,7 +507,7 @@
       "type" : "Basic",
       "underlying" : 19
     }, {
-      "name" : "func() uintptr",
+      "name" : "(internal/reflectlite.Type) func() uintptr",
       "params" : 11,
       "recv" : 5,
       "results" : 21,
@@ -527,7 +527,7 @@
       "type" : "Basic",
       "underlying" : 22
     }, {
-      "name" : "func() *internal/reflectlite.rtype",
+      "name" : "(internal/reflectlite.Type) func() *internal/reflectlite.rtype",
       "params" : 11,
       "recv" : 6,
       "results" : 24,
@@ -656,7 +656,7 @@
       "type" : "Named",
       "underlying" : 37
     }, {
-      "name" : "func() *internal/reflectlite.uncommonType",
+      "name" : "(internal/reflectlite.Type) func() *internal/reflectlite.uncommonType",
       "params" : 11,
       "recv" : 7,
       "results" : 40,
@@ -711,37 +711,53 @@
       "type" : "Basic",
       "underlying" : 45
     }, {
-      "name" : "func(interface{})",
-      "params" : 47,
+      "name" : "func() internal/reflectlite.Kind",
+      "params" : 11,
       "recv" : -1,
-      "results" : 11,
+      "results" : 14,
       "type" : "Signature",
       "underlying" : 46,
       "variadic" : false
     }, {
+      "name" : "(*internal/reflectlite.rtype) func() internal/reflectlite.Kind",
+      "params" : 11,
+      "recv" : 11,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 47,
+      "variadic" : false
+    }, {
+      "name" : "func(interface{})",
+      "params" : 49,
+      "recv" : -1,
+      "results" : 11,
+      "type" : "Signature",
+      "underlying" : 48,
+      "variadic" : false
+    }, {
       "fields" : [ {
         "name" : "",
-        "type" : 48
+        "type" : 50
       } ],
       "name" : "(interface{})",
       "type" : "Tuple",
-      "underlying" : 47
+      "underlying" : 49
     }, {
       "methods" : [ ],
       "name" : "interface{}",
       "type" : "Interface",
-      "underlying" : 48
+      "underlying" : 50
     }, {
-      "elem" : 50,
+      "elem" : 52,
       "name" : "*internal/reflectlite.funcType",
       "type" : "Pointer",
-      "underlying" : 49
+      "underlying" : 51
     }, {
       "local-name" : "funcType",
       "name" : "internal/reflectlite.funcType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 51
+      "underlying" : 53
     }, {
       "fields" : [ {
         "name" : "rtype",
@@ -755,14 +771,14 @@
       } ],
       "name" : "struct{internal/reflectlite.rtype; inCount uint16; outCount uint16}",
       "type" : "Struct",
-      "underlying" : 51
+      "underlying" : 53
     }, {
       "name" : "func(t *internal/reflectlite.rtype) internal/reflectlite.Type",
-      "params" : 53,
+      "params" : 55,
       "recv" : -1,
       "results" : 3,
       "type" : "Signature",
-      "underlying" : 52,
+      "underlying" : 54,
       "variadic" : false
     }, {
       "fields" : [ {
@@ -771,28 +787,36 @@
       } ],
       "name" : "(t *internal/reflectlite.rtype)",
       "type" : "Tuple",
-      "underlying" : 53
+      "underlying" : 55
     }, {
       "elem" : 25,
       "name" : "[]*internal/reflectlite.rtype",
       "type" : "Slice",
-      "underlying" : 54
+      "underlying" : 56
     }, {
       "name" : "func() []*internal/reflectlite.rtype",
       "params" : 11,
       "recv" : -1,
-      "results" : 56,
+      "results" : 58,
       "type" : "Signature",
-      "underlying" : 55,
+      "underlying" : 57,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 54
+        "type" : 56
       } ],
       "name" : "([]*internal/reflectlite.rtype)",
       "type" : "Tuple",
-      "underlying" : 56
+      "underlying" : 58
+    }, {
+      "name" : "(*internal/reflectlite.funcType) func() []*internal/reflectlite.rtype",
+      "params" : 11,
+      "recv" : 13,
+      "results" : 58,
+      "type" : "Signature",
+      "underlying" : 59,
+      "variadic" : false
     } ],
     "variables" : [ {
       "name" : "",
@@ -872,9 +896,23 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 25,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "tt",
       "package" : 0,
-      "type" : 49,
+      "type" : 51,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 51,
       "exported" : false,
       "embedded" : false,
       "field" : false

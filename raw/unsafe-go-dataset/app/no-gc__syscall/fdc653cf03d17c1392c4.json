@@ -85,14 +85,14 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 5, 6 ],
-      "in-vars" : [ 4 ],
+      "in-vars" : [ 5 ],
       "exit" : false,
-      "out-vars" : [ 4 ],
+      "out-vars" : [ 5 ],
       "decl-vars" : [ ],
       "line-start" : 36,
       "ast" : {
         "condition" : {
-          "go-type" : 45,
+          "go-type" : 46,
           "kind" : "expression",
           "left" : {
             "go-type" : 38,
@@ -102,7 +102,7 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "err",
-              "variable" : 4
+              "variable" : 5
             }
           },
           "operator" : "!=",
@@ -123,14 +123,14 @@
       "line-end" : 38,
       "code" : "if _, _, err := unix.Syscall(unix.SYS_IOCTL, f.Fd(), unix.TIOCSPTLCK, uintptr(unsafe.Pointer(&u))); err != 0 {\n\treturn err\n}",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 3 ],
-      "in-vars" : [ 1, 3 ],
+      "in-vars" : [ 3, 1 ],
       "exit" : false,
-      "out-vars" : [ 4 ],
-      "decl-vars" : [ 4, 5, 6 ],
+      "out-vars" : [ 5 ],
+      "decl-vars" : [ 6, 7, 5 ],
       "line-start" : 36,
       "ast" : {
         "kind" : "statement",
@@ -221,7 +221,7 @@
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 43,
+                "go-type" : 44,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -231,16 +231,16 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 43,
+                  "go-type" : 44,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 43,
+              "go-type" : 44,
               "kind" : "expression",
               "target" : {
-                "go-type" : 44,
+                "go-type" : 45,
                 "kind" : "expression",
                 "operator" : "&",
                 "target" : {
@@ -292,7 +292,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4 ],
+      "in-vars" : [ 5 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -308,7 +308,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "err",
-            "variable" : 4
+            "variable" : 5
           }
         } ]
       },
@@ -316,7 +316,7 @@
       "line-end" : 37,
       "code" : "return err",
       "entry" : false,
-      "use-vars" : [ 4 ]
+      "use-vars" : [ 5 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -329,7 +329,7 @@
         "kind" : "statement",
         "type" : "return",
         "values" : [ {
-          "go-type" : 46,
+          "go-type" : 47,
           "kind" : "expression",
           "type" : "identifier",
           "value" : {
@@ -360,7 +360,7 @@
     }, {
       "name" : "Fd",
       "package" : 1,
-      "type" : 41,
+      "type" : 43,
       "exported" : true
     } ],
     "line-end" : 40,
@@ -644,7 +644,7 @@
       "type" : "Interface",
       "underlying" : 32
     }, {
-      "name" : "func() string",
+      "name" : "(error) func() string",
       "params" : 34,
       "recv" : 0,
       "results" : 35,
@@ -730,24 +730,32 @@
       "type" : "Tuple",
       "underlying" : 42
     }, {
+      "name" : "(*os.File) func() uintptr",
+      "params" : 34,
+      "recv" : 4,
+      "results" : 42,
+      "type" : "Signature",
+      "underlying" : 43,
+      "variadic" : false
+    }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 5,
       "type" : "Basic",
-      "underlying" : 43
+      "underlying" : 44
     }, {
       "elem" : 36,
       "name" : "*int32",
       "type" : "Pointer",
-      "underlying" : 44
+      "underlying" : 45
     }, {
       "name" : "untyped bool",
       "type" : "Basic",
-      "underlying" : 45
+      "underlying" : 46
     }, {
       "name" : "untyped nil",
       "type" : "Basic",
-      "underlying" : 46
+      "underlying" : 47
     } ],
     "variables" : [ {
       "name" : "",
@@ -774,6 +782,13 @@
       "name" : "u",
       "package" : 0,
       "type" : 36,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "f",
+      "package" : 1,
+      "type" : 2,
       "exported" : false,
       "embedded" : false,
       "field" : false

@@ -112,10 +112,10 @@
         "type" : "expression",
         "value" : {
           "arguments" : [ {
-            "go-type" : 29,
+            "go-type" : 30,
             "kind" : "expression",
             "left" : {
-              "go-type" : 29,
+              "go-type" : 30,
               "kind" : "constant",
               "value" : {
                 "type" : "STRING",
@@ -133,7 +133,7 @@
                   "kind" : "ident",
                   "value" : "String"
                 },
-                "go-type" : 30,
+                "go-type" : 31,
                 "kind" : "expression",
                 "target" : {
                   "go-type" : 4,
@@ -148,7 +148,7 @@
                 },
                 "type" : "selector"
               },
-              "go-type" : 29,
+              "go-type" : 30,
               "kind" : "expression",
               "type" : "call"
             },
@@ -156,7 +156,7 @@
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 26,
+            "go-type" : 27,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -180,8 +180,8 @@
       "successors" : [ 5 ],
       "in-vars" : [ 0 ],
       "exit" : false,
-      "out-vars" : [ 2 ],
-      "decl-vars" : [ 2 ],
+      "out-vars" : [ 4 ],
+      "decl-vars" : [ 4 ],
       "line-start" : 967,
       "ast" : {
         "kind" : "statement",
@@ -198,21 +198,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 33,
+              "go-type" : 35,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 33,
+                "go-type" : 35,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "arrayType"
               }
             },
-            "go-type" : 32,
+            "go-type" : 34,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 32,
+          "go-type" : 34,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -259,7 +259,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2 ],
+      "in-vars" : [ 4 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -286,19 +286,19 @@
               "ident-kind" : "Var",
               "kind" : "ident",
               "value" : "len",
-              "variable" : 3
+              "variable" : 5
             },
             "go-type" : 7,
             "kind" : "expression",
             "target" : {
-              "go-type" : 32,
+              "go-type" : 34,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tt",
-                "variable" : 2
+                "variable" : 4
               }
             },
             "type" : "selector"
@@ -310,7 +310,7 @@
       "line-end" : 968,
       "code" : "return int(tt.len)",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 4 ]
     } ],
     "code" : "func (t *rtype) Len() int {\n\tif t.Kind() != Array {\n\t\tpanic(\"reflect: Len of non-array type \" + t.String())\n\t}\n\ttt := (*arrayType)(unsafe.Pointer(t))\n\treturn int(tt.len)\n}",
     "defines" : [ 0 ],
@@ -322,12 +322,12 @@
     }, {
       "name" : "Kind",
       "package" : 0,
-      "type" : 24,
+      "type" : 26,
       "exported" : true
     }, {
       "name" : "String",
       "package" : 0,
-      "type" : 30,
+      "type" : 33,
       "exported" : true
     } ],
     "line-end" : 969,
@@ -346,7 +346,7 @@
     "results" : [ 1 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func() int",
+      "name" : "(*reflect.rtype) func() int",
       "params" : 1,
       "recv" : 0,
       "results" : 2,
@@ -530,57 +530,73 @@
       "type" : "Tuple",
       "underlying" : 25
     }, {
-      "name" : "func(interface{})",
-      "params" : 27,
-      "recv" : -1,
-      "results" : 1,
+      "name" : "(*reflect.rtype) func() reflect.Kind",
+      "params" : 1,
+      "recv" : 2,
+      "results" : 25,
       "type" : "Signature",
       "underlying" : 26,
       "variadic" : false
     }, {
-      "fields" : [ {
-        "name" : "",
-        "type" : 28
-      } ],
-      "name" : "(interface{})",
-      "type" : "Tuple",
-      "underlying" : 27
-    }, {
-      "methods" : [ ],
-      "name" : "interface{}",
-      "type" : "Interface",
-      "underlying" : 28
-    }, {
-      "name" : "string",
-      "type" : "Basic",
-      "underlying" : 29
-    }, {
-      "name" : "func() string",
-      "params" : 1,
+      "name" : "func(interface{})",
+      "params" : 28,
       "recv" : -1,
-      "results" : 31,
+      "results" : 1,
       "type" : "Signature",
-      "underlying" : 30,
+      "underlying" : 27,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
         "type" : 29
       } ],
+      "name" : "(interface{})",
+      "type" : "Tuple",
+      "underlying" : 28
+    }, {
+      "methods" : [ ],
+      "name" : "interface{}",
+      "type" : "Interface",
+      "underlying" : 29
+    }, {
+      "name" : "string",
+      "type" : "Basic",
+      "underlying" : 30
+    }, {
+      "name" : "func() string",
+      "params" : 1,
+      "recv" : -1,
+      "results" : 32,
+      "type" : "Signature",
+      "underlying" : 31,
+      "variadic" : false
+    }, {
+      "fields" : [ {
+        "name" : "",
+        "type" : 30
+      } ],
       "name" : "(string)",
       "type" : "Tuple",
-      "underlying" : 31
+      "underlying" : 32
     }, {
-      "elem" : 33,
+      "name" : "(*reflect.rtype) func() string",
+      "params" : 1,
+      "recv" : 3,
+      "results" : 32,
+      "type" : "Signature",
+      "underlying" : 33,
+      "variadic" : false
+    }, {
+      "elem" : 35,
       "name" : "*reflect.arrayType",
       "type" : "Pointer",
-      "underlying" : 32
+      "underlying" : 34
     }, {
       "local-name" : "arrayType",
       "name" : "reflect.arrayType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 34
+      "underlying" : 36
     }, {
       "fields" : [ {
         "name" : "rtype",
@@ -597,7 +613,7 @@
       } ],
       "name" : "struct{reflect.rtype; elem *reflect.rtype; slice *reflect.rtype; len uintptr}",
       "type" : "Struct",
-      "underlying" : 34
+      "underlying" : 36
     } ],
     "variables" : [ {
       "name" : "t",
@@ -614,9 +630,23 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "tt",
       "package" : 0,
-      "type" : 32,
+      "type" : 34,
       "exported" : false,
       "embedded" : false,
       "field" : false

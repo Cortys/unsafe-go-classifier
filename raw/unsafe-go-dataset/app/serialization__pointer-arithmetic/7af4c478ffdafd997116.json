@@ -131,7 +131,7 @@
       "successors" : [ 4 ],
       "in-vars" : [ 3, 2 ],
       "exit" : false,
-      "out-vars" : [ 3, 2 ],
+      "out-vars" : [ 2, 3 ],
       "decl-vars" : [ 4 ],
       "line-start" : 87,
       "ast" : {
@@ -210,7 +210,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "flag",
-                    "variable" : 5
+                    "variable" : 6
                   },
                   "go-type" : 7,
                   "kind" : "expression",
@@ -279,7 +279,7 @@
                   "ident-kind" : "Var",
                   "kind" : "ident",
                   "value" : "flag",
-                  "variable" : 5
+                  "variable" : 6
                 },
                 "go-type" : 7,
                 "kind" : "expression",
@@ -327,7 +327,7 @@
       "line-end" : 92,
       "code" : "if refBitset.isset(byte(urv.flag&(1<<5-1))) && urv.flag&unsafeFlagIndir != 0 {\n\tptr = *(*unsafe.Pointer)(urv.ptr)\n} else {\n\tptr = urv.ptr\n}",
       "entry" : false,
-      "use-vars" : [ 3, 2 ]
+      "use-vars" : [ 2, 3 ]
     }, {
       "update-vars" : [ 4 ],
       "successors" : [ 7 ],
@@ -371,18 +371,18 @@
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 32,
+              "go-type" : 34,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 32,
+            "go-type" : 34,
             "kind" : "expression",
             "target" : {
               "field" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "ptr",
-                "variable" : 6
+                "variable" : 7
               },
               "go-type" : 13,
               "kind" : "expression",
@@ -436,7 +436,7 @@
             "ident-kind" : "Var",
             "kind" : "ident",
             "value" : "ptr",
-            "variable" : 6
+            "variable" : 7
           },
           "go-type" : 13,
           "kind" : "expression",
@@ -463,7 +463,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 4, 3 ],
+      "in-vars" : [ 3, 4 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -483,11 +483,11 @@
                 "methods" : [ ],
                 "type" : "interface"
               },
-              "go-type" : 33,
+              "go-type" : 35,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 33,
+            "go-type" : 35,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
@@ -510,22 +510,22 @@
               "go-type" : 13,
               "kind" : "expression",
               "target" : {
-                "go-type" : 34,
+                "go-type" : 36,
                 "kind" : "expression",
                 "operator" : "&",
                 "target" : {
                   "declared" : {
-                    "go-type" : 35,
+                    "go-type" : 37,
                     "kind" : "type",
                     "type" : "identifier",
                     "value" : {
-                      "go-type" : 35,
+                      "go-type" : 37,
                       "ident-kind" : "TypeName",
                       "kind" : "ident",
                       "value" : "unsafeIntf"
                     }
                   },
-                  "go-type" : 35,
+                  "go-type" : 37,
                   "kind" : "literal",
                   "type" : "composite",
                   "values" : [ {
@@ -538,7 +538,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "typ",
-                        "variable" : 7
+                        "variable" : 8
                       }
                     },
                     "kind" : "expression",
@@ -548,7 +548,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "typ",
-                        "variable" : 8
+                        "variable" : 9
                       },
                       "go-type" : 13,
                       "kind" : "expression",
@@ -575,7 +575,7 @@
                         "ident-kind" : "Var",
                         "kind" : "ident",
                         "value" : "word",
-                        "variable" : 9
+                        "variable" : 10
                       }
                     },
                     "kind" : "expression",
@@ -606,7 +606,7 @@
       "line-end" : 93,
       "code" : "return *(*interface{})(unsafe.Pointer(&unsafeIntf{typ: urv.typ, word: ptr}))",
       "entry" : false,
-      "use-vars" : [ 3, 4 ]
+      "use-vars" : [ 4, 3 ]
     } ],
     "code" : "func rv2i(rv reflect.Value) interface{} {\n\n\turv := (*unsafeReflectValue)(unsafe.Pointer(&rv))\n\t// true references (map, func, chan, ptr - NOT slice) may be double-referenced as flagIndir\n\tvar ptr unsafe.Pointer\n\tif refBitset.isset(byte(urv.flag&(1<<5-1))) && urv.flag&unsafeFlagIndir != 0 {\n\t\tptr = *(*unsafe.Pointer)(urv.ptr)\n\t} else {\n\t\tptr = urv.ptr\n\t}\n\treturn *(*interface{})(unsafe.Pointer(&unsafeIntf{typ: urv.typ, word: ptr}))\n}",
     "defines" : [ 0 ],
@@ -618,7 +618,7 @@
     }, {
       "name" : "isset",
       "package" : 0,
-      "type" : 30,
+      "type" : 32,
       "exported" : false
     } ],
     "line-end" : 94,
@@ -881,26 +881,39 @@
       "type" : "Tuple",
       "underlying" : 31
     }, {
+      "name" : "(*github.com/hashicorp/go-msgpack/codec.bitset256) func(pos byte) bool",
+      "params" : 31,
+      "recv" : 5,
+      "results" : 14,
+      "type" : "Signature",
+      "underlying" : 32,
+      "variadic" : false
+    }, {
+      "elem" : 24,
+      "name" : "*github.com/hashicorp/go-msgpack/codec.bitset256",
+      "type" : "Pointer",
+      "underlying" : 33
+    }, {
       "elem" : 13,
       "name" : "*unsafe.Pointer",
       "type" : "Pointer",
-      "underlying" : 32
+      "underlying" : 34
     }, {
       "elem" : 23,
       "name" : "*interface{}",
       "type" : "Pointer",
-      "underlying" : 33
+      "underlying" : 35
     }, {
-      "elem" : 35,
+      "elem" : 37,
       "name" : "*github.com/hashicorp/go-msgpack/codec.unsafeIntf",
       "type" : "Pointer",
-      "underlying" : 34
+      "underlying" : 36
     }, {
       "local-name" : "unsafeIntf",
       "name" : "github.com/hashicorp/go-msgpack/codec.unsafeIntf",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 36
+      "underlying" : 38
     }, {
       "fields" : [ {
         "name" : "typ",
@@ -911,7 +924,7 @@
       } ],
       "name" : "struct{typ unsafe.Pointer; word unsafe.Pointer}",
       "type" : "Struct",
-      "underlying" : 36
+      "underlying" : 38
     } ],
     "variables" : [ {
       "name" : "rv",
@@ -945,6 +958,13 @@
       "name" : "ptr",
       "package" : 0,
       "type" : 13,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "x",
+      "package" : 0,
+      "type" : 33,
       "exported" : false,
       "embedded" : false,
       "field" : false

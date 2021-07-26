@@ -104,8 +104,8 @@
       "successors" : [ 4 ],
       "in-vars" : [ 0 ],
       "exit" : false,
-      "out-vars" : [ 2 ],
-      "decl-vars" : [ 2 ],
+      "out-vars" : [ 3 ],
+      "decl-vars" : [ 3 ],
       "line-start" : 793,
       "ast" : {
         "kind" : "statement",
@@ -122,21 +122,21 @@
         "right" : [ {
           "coerced-to" : {
             "contained" : {
-              "go-type" : 27,
+              "go-type" : 28,
               "kind" : "type",
               "type" : "identifier",
               "value" : {
-                "go-type" : 27,
+                "go-type" : 28,
                 "ident-kind" : "TypeName",
                 "kind" : "ident",
                 "value" : "interfaceType"
               }
             },
-            "go-type" : 26,
+            "go-type" : 27,
             "kind" : "type",
             "type" : "pointer"
           },
-          "go-type" : 26,
+          "go-type" : 27,
           "kind" : "expression",
           "target" : {
             "coerced-to" : {
@@ -183,7 +183,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2 ],
+      "in-vars" : [ 3 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -201,17 +201,17 @@
               "kind" : "ident",
               "value" : "NumMethod"
             },
-            "go-type" : 0,
+            "go-type" : 35,
             "kind" : "expression",
             "target" : {
-              "go-type" : 26,
+              "go-type" : 27,
               "kind" : "expression",
               "type" : "identifier",
               "value" : {
                 "ident-kind" : "Var",
                 "kind" : "ident",
                 "value" : "tt",
-                "variable" : 2
+                "variable" : 3
               }
             },
             "type" : "selector"
@@ -225,7 +225,7 @@
       "line-end" : 794,
       "code" : "return tt.NumMethod()",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 3 ]
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
@@ -248,7 +248,7 @@
                 "kind" : "ident",
                 "value" : "exportedMethods"
               },
-              "go-type" : 40,
+              "go-type" : 43,
               "kind" : "expression",
               "target" : {
                 "go-type" : 4,
@@ -263,13 +263,13 @@
               },
               "type" : "selector"
             },
-            "go-type" : 36,
+            "go-type" : 39,
             "kind" : "expression",
             "type" : "call"
           } ],
           "ellipsis" : false,
           "function" : {
-            "go-type" : 34,
+            "go-type" : 37,
             "kind" : "expression",
             "type" : "identifier",
             "value" : {
@@ -299,17 +299,17 @@
     }, {
       "name" : "Kind",
       "package" : 0,
-      "type" : 24,
+      "type" : 26,
       "exported" : true
     }, {
       "name" : "NumMethod",
       "package" : 0,
-      "type" : 0,
+      "type" : 36,
       "exported" : true
     }, {
       "name" : "exportedMethods",
       "package" : 0,
-      "type" : 40,
+      "type" : 44,
       "exported" : false
     } ],
     "line-end" : 797,
@@ -328,7 +328,7 @@
     "results" : [ 1 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func() int",
+      "name" : "(*reflect.rtype) func() int",
       "params" : 1,
       "recv" : 0,
       "results" : 2,
@@ -512,36 +512,44 @@
       "type" : "Tuple",
       "underlying" : 25
     }, {
-      "elem" : 27,
+      "name" : "(*reflect.rtype) func() reflect.Kind",
+      "params" : 1,
+      "recv" : 2,
+      "results" : 25,
+      "type" : "Signature",
+      "underlying" : 26,
+      "variadic" : false
+    }, {
+      "elem" : 28,
       "name" : "*reflect.interfaceType",
       "type" : "Pointer",
-      "underlying" : 26
+      "underlying" : 27
     }, {
       "local-name" : "interfaceType",
       "name" : "reflect.interfaceType",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 28
+      "underlying" : 29
     }, {
       "fields" : [ {
         "name" : "rtype",
         "type" : 5
       }, {
         "name" : "pkgPath",
-        "type" : 29
+        "type" : 30
       }, {
         "name" : "methods",
-        "type" : 31
+        "type" : 32
       } ],
       "name" : "struct{reflect.rtype; pkgPath reflect.name; methods []reflect.imethod}",
       "type" : "Struct",
-      "underlying" : 28
+      "underlying" : 29
     }, {
       "local-name" : "name",
       "name" : "reflect.name",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 30
+      "underlying" : 31
     }, {
       "fields" : [ {
         "name" : "bytes",
@@ -549,18 +557,18 @@
       } ],
       "name" : "struct{bytes *byte}",
       "type" : "Struct",
-      "underlying" : 30
+      "underlying" : 31
     }, {
-      "elem" : 32,
+      "elem" : 33,
       "name" : "[]reflect.imethod",
       "type" : "Slice",
-      "underlying" : 31
+      "underlying" : 32
     }, {
       "local-name" : "imethod",
       "name" : "reflect.imethod",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 33
+      "underlying" : 34
     }, {
       "fields" : [ {
         "name" : "name",
@@ -571,34 +579,50 @@
       } ],
       "name" : "struct{name reflect.nameOff; typ reflect.typeOff}",
       "type" : "Struct",
-      "underlying" : 33
+      "underlying" : 34
     }, {
-      "name" : "func([]reflect.method) int",
-      "params" : 35,
+      "name" : "func() int",
+      "params" : 1,
       "recv" : -1,
       "results" : 2,
       "type" : "Signature",
-      "underlying" : 34,
+      "underlying" : 35,
+      "variadic" : false
+    }, {
+      "name" : "(*reflect.interfaceType) func() int",
+      "params" : 1,
+      "recv" : 4,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 36,
+      "variadic" : false
+    }, {
+      "name" : "func([]reflect.method) int",
+      "params" : 38,
+      "recv" : -1,
+      "results" : 2,
+      "type" : "Signature",
+      "underlying" : 37,
       "variadic" : false
     }, {
       "fields" : [ {
         "name" : "",
-        "type" : 36
+        "type" : 39
       } ],
       "name" : "([]reflect.method)",
       "type" : "Tuple",
-      "underlying" : 35
+      "underlying" : 38
     }, {
-      "elem" : 37,
+      "elem" : 40,
       "name" : "[]reflect.method",
       "type" : "Slice",
-      "underlying" : 36
+      "underlying" : 39
     }, {
       "local-name" : "method",
       "name" : "reflect.method",
       "package" : 0,
       "type" : "Named",
-      "underlying" : 38
+      "underlying" : 41
     }, {
       "fields" : [ {
         "name" : "name",
@@ -608,14 +632,14 @@
         "type" : 20
       }, {
         "name" : "ifn",
-        "type" : 39
+        "type" : 42
       }, {
         "name" : "tfn",
-        "type" : 39
+        "type" : 42
       } ],
       "name" : "struct{name reflect.nameOff; mtyp reflect.typeOff; ifn reflect.textOff; tfn reflect.textOff}",
       "type" : "Struct",
-      "underlying" : 38
+      "underlying" : 41
     }, {
       "local-name" : "textOff",
       "name" : "reflect.textOff",
@@ -626,9 +650,17 @@
       "name" : "func() []reflect.method",
       "params" : 1,
       "recv" : -1,
-      "results" : 35,
+      "results" : 38,
       "type" : "Signature",
-      "underlying" : 40,
+      "underlying" : 43,
+      "variadic" : false
+    }, {
+      "name" : "(*reflect.rtype) func() []reflect.method",
+      "params" : 1,
+      "recv" : 5,
+      "results" : 38,
+      "type" : "Signature",
+      "underlying" : 44,
       "variadic" : false
     } ],
     "variables" : [ {
@@ -646,9 +678,30 @@
       "embedded" : false,
       "field" : false
     }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 4,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
       "name" : "tt",
       "package" : 0,
-      "type" : 26,
+      "type" : 27,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 27,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "t",
+      "package" : 0,
+      "type" : 4,
       "exported" : false,
       "embedded" : false,
       "field" : false

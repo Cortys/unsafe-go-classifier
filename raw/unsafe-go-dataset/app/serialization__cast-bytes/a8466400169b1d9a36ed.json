@@ -44,8 +44,8 @@
       "successors" : [ 3 ],
       "in-vars" : [ 0 ],
       "exit" : false,
-      "out-vars" : [ 2 ],
-      "decl-vars" : [ 2 ],
+      "out-vars" : [ 3 ],
+      "decl-vars" : [ 3 ],
       "line-start" : 70,
       "ast" : {
         "kind" : "statement",
@@ -98,7 +98,7 @@
     }, {
       "update-vars" : [ ],
       "successors" : [ 1 ],
-      "in-vars" : [ 2 ],
+      "in-vars" : [ 3 ],
       "exit" : false,
       "out-vars" : [ ],
       "decl-vars" : [ ],
@@ -122,15 +122,15 @@
                   "value" : "string"
                 }
               },
-              "go-type" : 16,
+              "go-type" : 18,
               "kind" : "type",
               "type" : "pointer"
             },
-            "go-type" : 16,
+            "go-type" : 18,
             "kind" : "expression",
             "target" : {
               "coerced-to" : {
-                "go-type" : 17,
+                "go-type" : 19,
                 "kind" : "type",
                 "qualifier" : {
                   "ident-kind" : "PkgName",
@@ -140,16 +140,16 @@
                 },
                 "type" : "identifier",
                 "value" : {
-                  "go-type" : 17,
+                  "go-type" : 19,
                   "ident-kind" : "TypeName",
                   "kind" : "ident",
                   "value" : "Pointer"
                 }
               },
-              "go-type" : 17,
+              "go-type" : 19,
               "kind" : "expression",
               "target" : {
-                "go-type" : 18,
+                "go-type" : 20,
                 "kind" : "expression",
                 "operator" : "&",
                 "target" : {
@@ -160,7 +160,7 @@
                     "ident-kind" : "Var",
                     "kind" : "ident",
                     "value" : "b",
-                    "variable" : 2
+                    "variable" : 3
                   }
                 },
                 "type" : "unary"
@@ -176,7 +176,7 @@
       "line-end" : 71,
       "code" : "return *(*string)(unsafe.Pointer(&b))",
       "entry" : false,
-      "use-vars" : [ 2 ]
+      "use-vars" : [ 3 ]
     } ],
     "code" : "func (r *reusableBuilder) unsafeString() string {\n\tb := r.Bytes()\n\treturn *(*string)(unsafe.Pointer(&b))\n}",
     "defines" : [ 0 ],
@@ -188,7 +188,7 @@
     }, {
       "name" : "Bytes",
       "package" : 1,
-      "type" : 14,
+      "type" : 16,
       "exported" : true
     } ],
     "line-end" : 72,
@@ -210,7 +210,7 @@
     "results" : [ 1 ],
     "type" : "function",
     "types" : [ {
-      "name" : "func() string",
+      "name" : "(*sigs.k8s.io/structured-merge-diff/v3/fieldpath.reusableBuilder) func() string",
       "params" : 1,
       "recv" : 0,
       "results" : 2,
@@ -313,21 +313,34 @@
       "type" : "Tuple",
       "underlying" : 15
     }, {
+      "name" : "(*bytes.Buffer) func() []byte",
+      "params" : 1,
+      "recv" : 2,
+      "results" : 15,
+      "type" : "Signature",
+      "underlying" : 16,
+      "variadic" : false
+    }, {
+      "elem" : 7,
+      "name" : "*bytes.Buffer",
+      "type" : "Pointer",
+      "underlying" : 17
+    }, {
       "elem" : 3,
       "name" : "*string",
       "type" : "Pointer",
-      "underlying" : 16
+      "underlying" : 18
     }, {
       "local-name" : "Pointer",
       "name" : "unsafe.Pointer",
       "package" : 2,
       "type" : "Basic",
-      "underlying" : 17
+      "underlying" : 19
     }, {
       "elem" : 9,
       "name" : "*[]byte",
       "type" : "Pointer",
-      "underlying" : 18
+      "underlying" : 20
     } ],
     "variables" : [ {
       "name" : "r",
@@ -340,6 +353,13 @@
       "name" : "[res0]",
       "package" : 0,
       "type" : 3,
+      "exported" : false,
+      "embedded" : false,
+      "field" : false
+    }, {
+      "name" : "b",
+      "package" : 1,
+      "type" : 17,
       "exported" : false,
       "embedded" : false,
       "field" : false
