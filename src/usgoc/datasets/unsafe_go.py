@@ -19,27 +19,15 @@ DATA_DIR = Path(f"{utils.PROJECT_ROOT}/data/unsafe-go-dataset")
 no_default_label_subtype = {
   "type", "blocktype", "vartype"
 }
-node_label_type_dim_count = {
+node_label_type_dim_limits = {
   "v0_d0_f0_p0": dict(
     varname=0,
     datatype=0,
     function=0,
     package=0
   ),
-  "v0_d63_f63_p63": dict(
-    varname=0,
-    datatype=63,
-    function=63,
-    package=63
-  ),
   "v15_d63_f63_p63": dict(
     varname=15,
-    datatype=63,
-    function=63,
-    package=63
-  ),
-  "v63_d63_f63_p63": dict(
-    varname=63,
     datatype=63,
     function=63,
     package=63
@@ -55,8 +43,22 @@ node_label_type_dim_count = {
     datatype=255,
     function=255,
     package=255
-  )
+  ),
+  "vS_d127_f127_p127": dict(
+    varname=cfg_utils.is_semantic_name,
+    datatype=127,
+    function=127,
+    package=127
+  ),
 }
+
+for k, d in list(node_label_type_dim_limits.items()):
+  node_label_type_dim_limits[f"{k}_core"] = {
+    **d, "only_core_packages": True
+  }
+  d["only_core_packages"] = False
+
+default_mode = "atomic_blocks"
 default_limit_id = "v127_d127_f127_p127"
 graph_features = dict()
 graph_feature_eye = np.eye(len(cfg_utils.cfg_types), dtype=np.float32)
@@ -74,12 +76,17 @@ def load_raw():
       res.append(json.load(fp))
   return res
 
-@utils.cached(DATA_DIR, "cfgs")
-def raw_to_graphs(raw_dataset):
+@utils.cached(DATA_DIR, lambda _, mode=default_mode: f"cfgs_{mode}")
+def raw_to_graphs(raw_dataset, mode=default_mode):
   graphs = np.empty(len(raw_dataset), dtype="O")
   for i, inst in enumerate(raw_dataset):
+    if i == 0 or i % 100 == 99:
+      print(f"[dbg] Preprocessing CFG {i+1}/{len(raw_dataset)} (mode={mode}).")
     graphs[i] = cfg_utils.cfg_to_graph(
-      inst["cfg"], int(inst["usage"]["line"]))
+      inst["cfg"],
+      int(inst["usage"]["line"]),
+      inst["usage"]["module"],
+      mode=mode)
 
   return graphs
 
@@ -108,46 +115,76 @@ def raw_to_usages(raw_dataset):
     usage2s[i] = label2s[usage["label2"]]
   return usage1s, usage2s
 
-def load_dataset():
+def load_dataset(mode=default_mode):
   raw_dataset = load_raw()
-  return raw_to_graphs(raw_dataset), raw_to_usages(raw_dataset)
+  return raw_to_graphs(raw_dataset, mode), raw_to_usages(raw_dataset)
 
 @utils.cached(
   DATA_DIR / "node_label_histogram",
-  lambda _, split_id=None: (
-    f"node_labels{'' if split_id is None else '_' + split_id}"),
+  lambda _, split_id=None, mode=default_mode: (
+    f"node_labels_{mode}{'' if split_id is None else '_' + split_id}"),
   "pretty_json")
-def collect_node_label_histogram(graphs, split_id=None):
+def collect_node_label_histogram(graphs, split_id=None, mode=default_mode):
   labels = {
     type: defaultdict(lambda: 0)
     for type in cfg_utils.node_label_types.keys()}
+  is_core_package = dict()
+  is_core_datatype = dict()
+  is_core_function = dict()
 
   for g in graphs:
+    types_to_pkgs = g.types_to_pkgs
+    funcs_to_pkgs = g.funcs_to_pkgs
     for v, data in g.nodes(data=True):
       v_labels = data["labels"]
       for lt, ls in v_labels:
         labels[lt][ls] += 1
+        if lt == "package" and ls not in is_core_package:
+          is_core_package[ls] = cfg_utils.is_core_package(ls)
+        elif lt == "datatype" and ls not in is_core_datatype:
+          is_core_datatype[ls] = cfg_utils.is_core_label(ls, types_to_pkgs)
+        elif lt == "function" and ls not in is_core_function:
+          is_core_function[ls] = cfg_utils.is_core_label(ls, funcs_to_pkgs)
 
   for lt, ls in labels.items():
     ls = sorted(ls.items(), key=lambda e: e[1], reverse=True)
     labels[lt] = ls
 
+  labels["core_package"] = is_core_package
+  labels["core_datatype"] = is_core_datatype
+  labels["core_function"] = is_core_function
+
   return labels
 
 @utils.cached(
   DATA_DIR / "cfg_dims",
-  lambda _, limit_id=default_limit_id, split_id=None: (
-    f"dims_{limit_id}{'' if split_id is None else '_' + split_id}"),
+  lambda _, limit_id=default_limit_id, split_id=None, mode=default_mode: (
+    f"dims_{mode}_{limit_id}{'' if split_id is None else '_' + split_id}"),
   "pretty_json")
-def create_graph_dims(graphs, limit_id=default_limit_id, split_id=None):
+def create_graph_dims(
+  graphs, limit_id=default_limit_id, split_id=None, mode=default_mode):
   labels = collect_node_label_histogram(graphs, split_id)
   node_dim_count = 0
   node_dims = dict()
   edge_dims = dict()
-  dim_limits = node_label_type_dim_count.get(limit_id, {})
+  dim_limits = node_label_type_dim_limits.get(limit_id, {})
+  only_core_packages = dim_limits.get("only_core_packages", False)
+  if only_core_packages:
+    core_packages = labels["core_package"]
+    core_datatypes = labels["core_datatype"]
+    core_functions = labels["core_function"]
 
   for lt in cfg_utils.node_label_types.keys():
     ls = labels[lt]
+
+    if only_core_packages:
+      if lt == "package":
+        ls = fy.filter(lambda l: core_packages.get(l[0], False), ls)
+      elif lt == "datatype":
+        ls = fy.filter(lambda l: core_datatypes.get(l[0], False), ls)
+      elif lt == "function":
+        ls = fy.filter(lambda l: core_functions.get(l[0], False), ls)
+
     d = dict()
     node_dims[lt] = d
     if lt not in no_default_label_subtype:
@@ -156,7 +193,7 @@ def create_graph_dims(graphs, limit_id=default_limit_id, split_id=None):
 
     limit = dim_limits.get(lt, None)
     if limit is not None:
-      ls = ls[:limit]
+      ls = fy.take(limit, ls)
     for lb, c in ls:
       d[lb] = node_dim_count
       node_dim_count += 1
@@ -305,18 +342,21 @@ dataset_encoders = dict(
 def get_encoded_dataset_slices(
   dataset, enc, split_idxs,
   outer_i=0, inner_i=0,
-  limit_id=default_limit_id, **kwargs):
+  limit_id=default_limit_id, mode=default_mode, **kwargs):
   split_id = f"{outer_i}_{inner_i}"
   encoder = dataset_encoders[enc]
   train_slice, val_slice, test_slice = get_dataset_slices(
     dataset, split_idxs, outer_i, inner_i)
   train_dims = create_graph_dims(
-    train_slice[0], limit_id, f"{split_id}_train")
+    train_slice[0], limit_id, f"{split_id}_train", mode)
 
   train_ds = encoder(
-    train_slice, train_dims, split_id=f"{limit_id}_{split_id}_train", **kwargs)
+    train_slice, train_dims,
+    split_id=f"{mode}_{limit_id}_{split_id}_train", **kwargs)
   val_ds = encoder(
-    val_slice, train_dims, split_id=f"{limit_id}_{split_id}_val", **kwargs)
+    val_slice, train_dims,
+    split_id=f"{mode}_{limit_id}_{split_id}_val", **kwargs)
   test_ds = encoder(
-    test_slice, train_dims, split_id=f"{limit_id}_{split_id}_test", **kwargs)
+    test_slice, train_dims,
+    split_id=f"{mode}_{limit_id}_{split_id}_test", **kwargs)
   return train_dims, train_ds, val_ds, test_ds

@@ -15,11 +15,33 @@ import usgoc.utils as utils
 import usgoc.metrics.multi as mm
 import usgoc.evaluation.evaluate as ee
 
+fold = 0
+mode = "atomic_blocks"
+limit_id = "v127_d127_f127_p127_core"
+batch_size_limit = 200
+
 with utils.cache_env(use_cache=True):
   files = dataset.load_filenames()
-  ds = dataset.load_dataset()
+  raw = dataset.load_raw()
+  ds = dataset.load_dataset(mode=mode)
   graphs, targets = ds
-  # full_dims = dataset.create_graph_dims(graphs)
+  full_dims = dataset.create_graph_dims(graphs, mode=mode)
+
+# files[683]
+# with utils.cache_env(use_cache=True): gs = dataset.raw_to_graphs(raw)
+# g = gs[0]
+# print(raw[1205]["cfg"]["code"])
+# files.index("/app/raw/unsafe-go-dataset/app/ffi__delegate/f1455d7a3d0f953020cc.json")
+#
+# utils.draw_graph(g, layout="dot")
+# [k for k in g.types_to_pkgs.keys() if k.startswith("gorgonia.org")]
+# g.types_to_pkgs
+# # g.types_to_pkgs, g.funcs_to_pkgs
+# h = dataset.collect_node_label_histogram(gs)
+# [k for k, v in h["core_datatype"].items() if not v]
+# h["core_datatype"]["github.com/godror/godror.ObjectType"]
+
+# .%%
 
 with utils.cache_env(use_cache=True):
   splits = dataset.get_split_idxs(ds)
@@ -40,13 +62,9 @@ model = gnn.RGIN
 # model1 = em.DeepSetsBuilder
 # model = em.GGNNBuilder
 
-fold = 0
-limit_id = "v127_d127_f127_p127"
-batch_size_limit = 200
-
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
-    ds, model.in_enc, splits, fold, limit_id=limit_id,
+    ds, model.in_enc, splits, fold, limit_id=limit_id, mode=mode,
     batch_size_limit=batch_size_limit)
   train_ds = train_ds.cache()
   val_ds = val_ds.cache()
@@ -124,7 +142,7 @@ def experiment(model, epochs=100, log=True):
 # m[0][2].evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
-m2 = experiment(model)
+# m2 = experiment(model)
 
 def debug_graph(i=None, file=None, test_j=None, val_j=None, draw=True):
   if i is None:
@@ -168,8 +186,9 @@ def draw_confusion(pred_labels, target_labels, normalize=True):
   utils.draw_confusion_matrix(m1.astype(int), labels1_keys)
   utils.draw_confusion_matrix(m2.astype(int), labels2_keys)
 
-
 # debug_graph(file="5179906774f18e1f8520", draw=False)
+# debug_graph(401)
+
 
 # interesting i's: 40, 70, 874 (44b41ab329d2624a449e),
 # Instances on which both DeepSets and GGNN fail (both labels):

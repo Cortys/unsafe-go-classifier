@@ -1,3 +1,4 @@
+from collections import defaultdict
 import funcy as fy
 import networkx as nx
 
@@ -33,6 +34,9 @@ edge_labels = [
   "call",
   "contains"
 ]
+semantic_names = {
+  "_", "in", "out", "err", "ptr", "at", "to", "ok", "path",
+  "fd", "key", "val", "newVal", "data", "typ", "size", "i"}
 
 def get_node_label(labels):
   def l2s(label):
@@ -53,48 +57,138 @@ def ast_type(ast):
     return None
   return ast["type"]
 
-def type_to_labels(types, selfrefs, tid):
+def is_core_package(pkg_path):
+  if "." in pkg_path and not pkg_path.startswith("golang.org"):
+    return False
+  return True
+
+def is_core_label(label, label_to_pkgs):
+  pkgs = label_to_pkgs.get(label, None)
+  return pkgs is None or fy.all(is_core_package, pkgs)
+
+def is_semantic_name(name):
+  if len(name) == 1:
+    return True
+  elif name in semantic_names:
+    return True
+  elif name[0] == "[":
+    return True
+  else:
+    return False
+
+def type_to_labels(
+  types, vars, tid,
+  selfrefs=set(), pkg_registry=None,
+  parents=None, visited=None):
+
   if tid == -1:
     return set()
+  if parents is None:
+    parents = set()
+  if visited is None:
+    visited = set()
 
+  # Break recursive type loops and
+  # cut type branches that are isomorphic to a visited branch:
+  if tid in parents or tid in visited:
+    # Propagate referenced packages to parents:
+    pkgs = pkg_registry.get(types[tid]["name"])
+    if pkgs is not None:
+      for p in parents:
+        pkg_registry[types[p]["name"]].update(pkgs)
+    return set()
+
+  tids = {tid}
   ctid = tid
   ct = types[ctid]
   res = set()
 
-  if tid in selfrefs:
-    res.add(("selfref", "type"))
+  while True:
+    if ctid in selfrefs:
+      res.add(("selfref", "type"))
 
-  while ct["underlying"] != ctid:
-    ctid = ct["underlying"]
-    ct = types[ctid]
+    if ct["type"] == "Named":
+      res.add(("datatype", ct["name"]))
+      if pkg_registry is not None:
+        ct_pkg = ct["package"]
+        for p in tids | parents:
+          pkg_registry[types[p]["name"]].add(ct_pkg)
+      res.add(("datatype_flag", ct["type"]))
 
-  # Flatten pointer/array/slice types and add corresponding flags instead:
-  while ct["type"] in {"Pointer", "Slice", "Array"}:
-    res.add(("datatype_flag", ct["type"]))
-    ctid = ct["elem"]
-    ct = types[ctid]
+    if ct["underlying"] != ctid:
+      ctid = ct["underlying"]
+      tids.add(ctid)
+      ct = types[ctid]
+    # Flatten pointer/array/slice types and add corresponding flags instead:
+    elif ct["type"] in {"Pointer", "Slice", "Array", "Chan"}:
+      res.add(("datatype_flag", ct["type"]))
+      if ct["type"] == "Chan":
+        res.add(("datatype_flag", f"Chan_{ct['dir']}"))
+      ctid = ct["elem"]
+      tids.add(ctid)
+      ct = types[ctid]
+    else:
+      break
 
-  # Reduce tuple types to set of contained types:
-  if ct["type"] == "Tuple":
+  res.add(("datatype", ct["name"]))
+  res.add(("datatype_flag", ct["type"]))
+  parents = parents | tids
+  visited.update(tids)
+
+  # Reduce tuple and struct types to set of contained types:
+  if ct["type"] in {"Tuple", "Struct"}:
     for field in ct["fields"]:
-      res |= type_to_labels(types, selfrefs, field["type"])
-  else:
-    res.add(("datatype", ct["name"]))
-    res.add(("datatype_flag", ct["type"]))
+      res |= type_to_labels(
+        types, vars, field["type"], selfrefs, pkg_registry,
+        parents=parents, visited=visited)
+  # Reduce maps to their key/value types:
+  elif ct["type"] == "Map":
+    res |= type_to_labels(
+      types, vars, ct["key"], selfrefs, pkg_registry,
+      parents=parents, visited=visited)
+    res |= type_to_labels(
+      types, vars, ct["elem"], selfrefs, pkg_registry,
+      parents=parents, visited=visited)
+  # Compute package dependencies of signatures and interfaces:
+  elif ct["type"] == "Interface":
+    for method in ct["methods"]:
+      type_to_labels(
+        types, vars, method["type"], selfrefs, pkg_registry,
+        parents=parents, visited=visited)
+  elif ct["type"] == "Signature":
+    recv_vid = ct["recv"]
+    if recv_vid != -1:
+      recv_tid = vars[recv_vid]["type"]
+      type_to_labels(
+        types, vars, recv_tid, selfrefs, pkg_registry,
+        parents=parents, visited=visited)
+    type_to_labels(
+      types, vars, ct["params"], selfrefs, pkg_registry,
+      parents=parents, visited=visited)
+    type_to_labels(
+      types, vars, ct["results"], selfrefs, pkg_registry,
+      parents=parents, visited=visited)
+
   return res
 
-def pkg_to_labels(pkgs, cfg_pkg, pid):
+def pkg_to_labels(pkgs, pid, cfg_pkg=-1, cfg_module=None):
   if pid == -1:
     return set()
-  res = {("package", pkgs[pid]["path"])}
+  pkg_path = pkgs[pid]["path"]
+  res = {("package", pkg_path)}
 
   if pid == cfg_pkg:
     res.add(("selfref", "package"))
+    res.add(("selfref", "module"))
+  elif cfg_module is not None and pkg_path.startswith(cfg_module):
+    res.add(("selfref", "module"))
 
   return res
 
 def func_to_labels(
-  funcs, pkgs, selfrefs, cfg_pkg, fid, with_pkg=True):
+  funcs, pkgs, fid,
+  selfrefs=set(), cfg_pkg=-1, cfg_module=None,
+  pkg_registry=None, with_pkg=True):
   if fid == -1:
     return set()
 
@@ -108,9 +202,10 @@ def func_to_labels(
     pkg_path = pkgs[pid]["path"]
     fname = pkg_path + "." + func["name"]
     if with_pkg:
-      res.add(("package", pkg_path))
-      if pid == cfg_pkg:
-        res.add(("selfref", "package"))
+      res |= pkg_to_labels(
+        pkgs, pid, cfg_pkg, cfg_module)
+    if pkg_registry is not None:
+      pkg_registry[fname].add(pid)
   else:
     fname = func["name"]
 
@@ -239,6 +334,9 @@ def _walk_ast_for_ops(t2l, f2l, ops, s):
   elif k == "statement" and t == "assign-operator":
     ops.add(("binary_op", s["operator"]))
     return ops, ["left", "right"]
+  elif k == "literal" and t == "composite":
+    ops |= t2l(s.get("go-type", -1))
+    return ops, ["values"]
   elif k == "decl" and t == "type-alias":
     for b_outer in s["binds"]:
       b = b_outer["value"]
@@ -266,6 +364,9 @@ def _walk_ast_for_ops(t2l, f2l, ops, s):
     ops |= t2l(s.get("go-type", -1))
     ops |= f2l("new")
     return ops, ["argument"]
+  elif k == "constant":
+    ops |= t2l(s.get("go-type", -1))
+    return ops, False
 
   return ops, True
 
@@ -282,7 +383,7 @@ def ast_to_labels(t2l, f2l, ast):
 
   return res
 
-def cfg_to_graph(cfg, mark_line=None):
+def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
   g = nx.MultiDiGraph()
   cfg_type = cfg["type"]
   cfg_package = cfg["package"]
@@ -298,6 +399,8 @@ def cfg_to_graph(cfg, mark_line=None):
   n = 0
   block_ids = dict()
   var_ids = dict()
+  type_pkg_registry = defaultdict(set)
+  func_pkg_registry = defaultdict(set)
   func_defined = set()
   var_defined = set()
   type_defined = set()
@@ -309,10 +412,15 @@ def cfg_to_graph(cfg, mark_line=None):
   elif cfg_type == "type":
     type_defined = defined
 
-  t2l = utils.memoize(fy.partial(type_to_labels, types, type_defined))
+  t2l = utils.memoize(fy.partial(
+    type_to_labels, types, vars, selfrefs=type_defined,
+    pkg_registry=type_pkg_registry))
   f2l = utils.memoize(fy.partial(
-    func_to_labels, funcs, pkgs, func_defined, cfg_package))
-  p2l = utils.memoize(fy.partial(pkg_to_labels, pkgs, cfg_package))
+    func_to_labels, funcs, pkgs,
+    selfrefs=func_defined, cfg_pkg=cfg_package, cfg_module=module,
+    pkg_registry=func_pkg_registry))
+  p2l = utils.memoize(fy.partial(
+    pkg_to_labels, pkgs, cfg_pkg=cfg_package, cfg_module=module))
   mark_block = None
   mark_block_lines = None
 
@@ -442,8 +550,21 @@ def cfg_to_graph(cfg, mark_line=None):
     if ("type", "var") in g.nodes[v]["labels"] and g.degree(v) == 0:
       g.remove_node(v)
 
+  types_to_pkgs = dict()
+  funcs_to_pkgs = dict()
+
+  for type, pids in type_pkg_registry.items():
+    types_to_pkgs[type] = set(
+      pkgs[pid]["path"] for pid in pids if pid != -1)
+
+  for func, pids in func_pkg_registry.items():
+    funcs_to_pkgs[func] = set(
+      pkgs[pid]["path"] for pid in pids if pid != -1)
+
   g.source_code = cfg["code"]
   g.cfg_type = cfg_type
   g.package = pkgs[cfg_package]["path"]
+  g.types_to_pkgs = types_to_pkgs
+  g.funcs_to_pkgs = funcs_to_pkgs
 
   return g

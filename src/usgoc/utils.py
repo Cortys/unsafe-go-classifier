@@ -348,13 +348,13 @@ class memoize:
     self.f = f
     self.lut = {}
 
-  def __call__(self, *args):
+  def __call__(self, *args, **kwargs):
     key = tuple(args)
 
     if key in self.lut:
       return self.lut[key]
 
-    res = self.f(*args)
+    res = self.f(*args, **kwargs)
     self.lut[key] = res
     return res
 
