@@ -28,20 +28,20 @@ with utils.cache_env(use_cache=True):
   full_dims = dataset.create_graph_dims(graphs, mode=mode)
 
 # files[683]
-# with utils.cache_env(use_cache=True): gs = dataset.raw_to_graphs(raw)
-# g = gs[0]
-# print(raw[1205]["cfg"]["code"])
-# files.index("/app/raw/unsafe-go-dataset/app/ffi__delegate/f1455d7a3d0f953020cc.json")
+files.index("/app/raw/unsafe-go-dataset/app/efficiency__cast-pointer/efb20d96d7e6d3b08653.json")
+with utils.cache_env(use_cache=True): gs = dataset.raw_to_graphs(raw)
+g = gs[1347]
+print(raw[1347]["cfg"]["code"])
 #
 # utils.draw_graph(g, layout="dot")
 # [k for k in g.types_to_pkgs.keys() if k.startswith("gorgonia.org")]
 # g.types_to_pkgs
 # # g.types_to_pkgs, g.funcs_to_pkgs
-# h = dataset.collect_node_label_histogram(gs)
-# [k for k, v in h["core_datatype"].items() if not v]
+h = dataset.collect_node_label_histogram(gs)
+[k for k, v in h["core_datatype"].items() if not v and "github" not in k and "k8" not in k and "gorgonia" not in k and "google.golang" not in k and "go.elastic.co" not in k]
 # h["core_datatype"]["github.com/godror/godror.ObjectType"]
 
-# .%%
+# %%
 
 with utils.cache_env(use_cache=True):
   splits = dataset.get_split_idxs(ds)
@@ -52,15 +52,15 @@ with utils.cache_env(use_cache=True):
   labels2_inv = fy.flip(labels2)
 
 # model = gnn.MLP
-model1 = gnn.DeepSets
+# model1 = gnn.DeepSets
 # model = gnn.GCN
 # model = gnn.GIN
 # model = gnn.GGNN
 # model = gnn.RGCN
 model = gnn.RGIN
 
-# model1 = em.DeepSetsBuilder
-# model = em.GGNNBuilder
+model1 = em.DeepSetsBuilder
+model = em.GGNNBuilder
 
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
@@ -73,8 +73,8 @@ with utils.cache_env(use_cache=True):
 
 # list(train_ds)[0]
 
-# model1 = model1(**dims)
-# model = model(**dims)
+model1 = model1(**dims)
+model = model(**dims)
 
 def time_str():
   return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

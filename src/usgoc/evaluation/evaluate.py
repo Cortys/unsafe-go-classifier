@@ -54,9 +54,8 @@ def find_inner_run(fold, repeat):
   return runs[0]
 
 def evaluate_single(
-  get_tuner, get_ds,
-  model_name, repeat=0,
-  fold=0, epochs=1000, patience=100, limit_id=None,
+  get_model_ctr, get_ds, model_name,
+  repeat=0, fold=0, epochs=1000, patience=100, limit_id=None,
   ds_id="", override=False, dry=False, tensorboard_embeddings=False,
   return_models=True):
     if repeat < 0 or fold < 0:
@@ -87,7 +86,7 @@ def evaluate_single(
           raise DryRunException(
             f"Run {run_id} would be overidden. Doing nothing due to dry.")
 
-      tuner = get_tuner()
+      model_ctr = get_model_ctr()
       mlflow.tensorflow.autolog(log_models=False)
 
       with mlflow.start_run(
@@ -101,8 +100,8 @@ def evaluate_single(
         if dry:
           raise DryRunException(f"Dry run {run_id}. Doing nothing.")
 
-        model, hp_dict = em.get_best_model(tuner)
         dims, train_ds, val_ds, test_ds = get_ds()
+        model, hp_dict = model_ctr()
         mlflow.log_params(hp_dict["values"])
 
         log_dir = f"{log_dir_base}/{run_id}"
@@ -143,32 +142,52 @@ def evaluate_single(
 
 def evaluate_fold(
   hypermodel_builder, fold=0, repeats=REPEATS_MAX,
-  start_repeat=0, repeat=None, limit_id=None, ds_name="", **kwargs):
+  start_repeat=0, repeat=None, limit_id=None, ds_name="",
+  tuner_limit_id=None,
+  **kwargs):
 
   ds_id = f"{ds_name}/{limit_id}_fold{fold}"
   get_ds = utils.memoize(lambda: ed.get_encoded(
     hypermodel_builder.in_enc, fold=fold, limit_id=limit_id))
 
+  if tuner_limit_id is None:
+    tune_ds_id = ds_id
+    get_tune_ds = get_ds
+  else:
+    tune_ds_id = f"{ds_name}/{tuner_limit_id}_fold{fold}"
+    get_tune_ds = lambda: ed.get_encoded(
+      hypermodel_builder.in_enc, fold=fold, limit_id=tuner_limit_id)
+
   @utils.memoize
-  def get_tuner():
-    dims, train_ds, val_ds, test_ds = get_ds()
-    hypermodel = hypermodel_builder(**dims)
+  def get_model_ctr():
+    tune_dims, train_ds, val_ds, test_ds = get_tune_ds()
+    tuner_hypermodel = hypermodel_builder(**tune_dims)
 
     mlflow.tensorflow.autolog(disable=True)
     tuner = em.tune_hyperparams(
-      hypermodel, train_ds, val_ds, ds_id=ds_id)
+      tuner_hypermodel, train_ds, val_ds, ds_id=tune_ds_id)
     tuner.search_space_summary()
-    return tuner
+    if tuner_limit_id is None:
+      return lambda: em.get_best_model(tuner)
+    else:
+      dims = get_ds()[0]
+      hypermodel = hypermodel_builder(**dims)
+
+      def model_ctr():
+        best_hps = em.get_best_hps(tuner)
+        return hypermodel.build(best_hps), best_hps.get_config()
+
+      return model_ctr
 
   if repeat is not None:
     return evaluate_single(
-      get_tuner, get_ds, hypermodel_builder.name, repeat,
+      get_model_ctr, get_ds, hypermodel_builder.name, repeat,
       fold=fold, limit_id=limit_id, ds_id=ds_id,
       **kwargs)
 
   return [
     evaluate_single(
-      get_tuner, get_ds, hypermodel_builder.name, i,
+      get_model_ctr, get_ds, hypermodel_builder.name, i,
       fold=fold, limit_id=limit_id, ds_id=ds_id, **kwargs)
     for i in range(start_repeat, repeats)]
 
@@ -177,6 +196,7 @@ def summarize_inner_runs():
 
 def evaluate_limit_id(
   hypermodel_builder, limit_id=None, folds=FOLDS_MAX,
+  tuner_limit_id=None,
   start_fold=0, fold=None, ds_name=None, **kwargs):
   run = find_outer_run(limit_id, hypermodel_builder.name)
   if run is not None:
@@ -193,15 +213,25 @@ def evaluate_limit_id(
 
     print(f"Starting outer {ds_name}/{limit_id}, {hypermodel_builder.name}...")
 
+    if tuner_limit_id is not None:
+      mlflow.set_tag("tuner_limit_id", tuner_limit_id)
+      print(f"(Tuned with HPs for limit {tuner_limit_id})")
+      if tuner_limit_id == limit_id:
+        tuner_limit_id = None
+    else:
+      mlflow.set_tag("tuner_limit_id", limit_id)
+
     if fold is not None:
       res = evaluate_fold(
         hypermodel_builder, fold=fold,
-        limit_id=limit_id, ds_name=ds_name, **kwargs)
+        limit_id=limit_id, ds_name=ds_name,
+        tuner_limit_id=tuner_limit_id, **kwargs)
     else:
       res = [
         evaluate_fold(
           hypermodel_builder, fold=i, limit_id=limit_id,
-          ds_name=ds_name, **kwargs)
+          ds_name=ds_name, tuner_limit_id=tuner_limit_id,
+          **kwargs)
         for i in range(start_fold, folds)]
 
     summarize_inner_runs()

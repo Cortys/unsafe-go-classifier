@@ -16,6 +16,10 @@ import usgoc.evaluation.evaluate as ee
   default=ed.evaluate_limit_ids,
   multiple=True)
 @click.option(
+  "--tuner-limit-id",
+  type=click.Choice(ed.limit_ids),
+  default=None)
+@click.option(
   "--fold", "-f",
   type=click.IntRange(0, ee.FOLDS_MAX),
   default=None)
@@ -29,7 +33,7 @@ import usgoc.evaluation.evaluate as ee
 @click.option("--yes", "-y", is_flag=True, default=False)
 def evaluate(
   model, limit_id, fold=None, repeat=None,
-  override=False, dry=False,
+  override=False, dry=False, tuner_limit_id=None,
   suffix="", yes=False):
   print("Starting evaluation.")
   print(f"Will use the following {len(model)} models:")
@@ -41,6 +45,7 @@ def evaluate(
   print("Other options:")
   print(f"- Fold: {str(fold)}")
   print(f"- Repeat: {str(repeat)}")
+  print(f"- Tuner limit_id: {str(tuner_limit_id)}")
   print(f"- Override: {str(override)}")
   print(f"- Dry run: {str(dry)}")
   print(f"- Experiment suffix: \"{suffix}\"")
@@ -57,6 +62,7 @@ def evaluate(
       repeat=repeat,
       override=override, dry=dry,
       experiment_suffix=suffix,
+      tuner_limit_id=tuner_limit_id,
       return_models=False)
     print("\n----------------------------------------------------------\n")
 

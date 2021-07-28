@@ -79,8 +79,11 @@ def tune_hyperparams(
     shutil.rmtree(ck_dir)
   return tuner
 
+def get_best_hps(tuner: kt.Tuner) -> kt.HyperParameter:
+  return tuner.get_best_hyperparameters(num_trials=1)[0]
+
 def get_best_model(tuner: kt.Tuner):
-  best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
+  best_hps = get_best_hps(tuner)
   return tuner.hypermodel.build(best_hps), best_hps.get_config()
 
 
