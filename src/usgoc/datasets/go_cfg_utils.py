@@ -135,21 +135,20 @@ def type_to_labels(
   parents = parents | tids
   visited.update(tids)
 
-  # Reduce tuple and struct types to set of contained types:
+  # Compute package dependencies of nested types:
   if ct["type"] in {"Tuple", "Struct"}:
     for field in ct["fields"]:
-      res |= type_to_labels(
+      type_to_labels(
         types, vars, field["type"], selfrefs, pkg_registry,
         parents=parents, visited=visited)
   # Reduce maps to their key/value types:
   elif ct["type"] == "Map":
-    res |= type_to_labels(
+    type_to_labels(
       types, vars, ct["key"], selfrefs, pkg_registry,
       parents=parents, visited=visited)
-    res |= type_to_labels(
+    type_to_labels(
       types, vars, ct["elem"], selfrefs, pkg_registry,
       parents=parents, visited=visited)
-  # Compute package dependencies of signatures and interfaces:
   elif ct["type"] == "Interface":
     for method in ct["methods"]:
       type_to_labels(
