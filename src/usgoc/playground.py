@@ -23,23 +23,21 @@ batch_size_limit = 200
 with utils.cache_env(use_cache=True):
   files = dataset.load_filenames()
   raw = dataset.load_raw()
-  ds = dataset.load_dataset(mode=mode)
-  graphs, targets = ds
-  full_dims = dataset.create_graph_dims(graphs, mode=mode)
+  # ds = dataset.load_dataset(mode=mode)
+  # graphs, targets = ds
+  # full_dims = dataset.create_graph_dims(graphs, mode=mode)
 
+i = 40
 # files[683]
-files.index("/app/raw/unsafe-go-dataset/app/efficiency__cast-pointer/efb20d96d7e6d3b08653.json")
-with utils.cache_env(use_cache=True): gs = dataset.raw_to_graphs(raw)
-g = gs[1347]
-print(raw[1347]["cfg"]["code"])
-#
-# utils.draw_graph(g, layout="dot")
-# [k for k in g.types_to_pkgs.keys() if k.startswith("gorgonia.org")]
+# files.index("/app/raw/unsafe-go-dataset/app/efficiency__cast-pointer/efb20d96d7e6d3b08653.json")
+with utils.cache_env(use_cache=False): gs = dataset.raw_to_graphs([raw[i]], mode="split_blocks")
+utils.draw_graph(gs[0], layout="dot")
+g = gs[0]
+print(raw[40]["cfg"]["code"])
+# [k for k in g.types_to_pkgs.keys()]
 # g.types_to_pkgs
-# # g.types_to_pkgs, g.funcs_to_pkgs
-h = dataset.collect_node_label_histogram(gs)
-[k for k, v in h["core_datatype"].items() if not v and "github" not in k and "k8" not in k and "gorgonia" not in k and "google.golang" not in k and "go.elastic.co" not in k]
-# h["core_datatype"]["github.com/godror/godror.ObjectType"]
+# h = dataset.collect_node_label_histogram(gs)
+# [k for k, v in h["core_datatype"].items() if not v]
 
 # %%
 
@@ -59,8 +57,8 @@ with utils.cache_env(use_cache=True):
 # model = gnn.RGCN
 model = gnn.RGIN
 
-model1 = em.DeepSetsBuilder
-model = em.GGNNBuilder
+# model1 = em.DeepSetsBuilder
+# model = em.GGNNBuilder
 
 with utils.cache_env(use_cache=True):
   dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
@@ -73,8 +71,8 @@ with utils.cache_env(use_cache=True):
 
 # list(train_ds)[0]
 
-model1 = model1(**dims)
-model = model(**dims)
+# model1 = model1(**dims)
+# model = model(**dims)
 
 def time_str():
   return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

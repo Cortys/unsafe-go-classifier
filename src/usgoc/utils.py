@@ -358,20 +358,20 @@ class memoize:
     self.lut[key] = res
     return res
 
-def walk_nested(f, state, s):
+def walk_nested(f, state, s, **kwargs):
   "Walks nested structure recursively. Must not contain ref loops."
-  state, filter = f(state, s)
+  state, filter = f(state, s, **kwargs)
   if filter is not False:
     if isinstance(filter, Iterable):
       for i in filter:
         if not isinstance(i, str) and isinstance(i, (Iterable, dict)):
-          state = walk_nested(f, state, i)
+          state = walk_nested(f, state, i, **kwargs)
         elif i in s:
-          state = walk_nested(f, state, s[i])
+          state = walk_nested(f, state, s[i], **kwargs)
     elif isinstance(s, dict):
       for v in s.values():
-        state = walk_nested(f, state, v)
+        state = walk_nested(f, state, v, **kwargs)
     elif not isinstance(s, str) and isinstance(s, Iterable):
       for v in s:
-        state = walk_nested(f, state, v)
+        state = walk_nested(f, state, v, **kwargs)
   return state

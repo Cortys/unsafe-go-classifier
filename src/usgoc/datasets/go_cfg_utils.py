@@ -4,6 +4,7 @@ import networkx as nx
 
 import usgoc.utils as utils
 
+convert_modes = {"atomic_blocks", "split_blocks"}
 cfg_types = ["function", "external", "type", "variable"]
 node_label_types = dict(
   type="",
@@ -232,11 +233,11 @@ def _walk_var_selector_chain(state, s):
       v = s["value"].get("variable", -1)
     if v is not None and v >= 0:
       if at_root:
-        state["var_root"] = v
+        state["root_var"] = v
       if state["edge_target"] is not None:
         state["contains"].add((v, state["edge_target"]))
       state["edge_target"] = v
-      state["var_used"].add(v)
+      state["used_vars"].add(v)
       return state, ["target"]
   elif k == "expression" and t == "index":
     state["missing_exprs"].append(s["index"])
@@ -245,74 +246,83 @@ def _walk_var_selector_chain(state, s):
   return state, False
 
 def find_vars_in_selectors(exprs):
-  var_roots = set()
-  var_used = set()
+  root_vars = set()
+  used_vars = set()
   contains = set()
   missing_exprs = []
 
   for expr in exprs:
     state = utils.walk_nested(_walk_var_selector_chain, dict(
       at_root=True,
-      var_root=None,
+      root_var=None,
       edge_target=None,
-      var_used=var_used,
+      used_vars=used_vars,
       contains=contains,
       missing_exprs=missing_exprs), expr)
-    var_used = state["var_used"]
+    used_vars = state["used_vars"]
     contains = state["contains"]
     missing_exprs = state["missing_exprs"]
-    if state["var_root"] is not None:
-      var_roots.add(state["var_root"])
+    if state["root_var"] is not None:
+      root_vars.add(state["root_var"])
 
   return dict(
-    var_roots=var_roots,
-    var_used=var_used,
+    root_vars=root_vars,
+    used_vars=used_vars,
     contains=contains,
     missing_exprs=missing_exprs)
 
-def _walk_expr_for_vars(state, s):
+def _walk_ast(state, s, t2l, f2l, split_blocks=False):
   if not isinstance(s, dict):
     return state, True
 
-  k = s.get("kind", None)
-  t = s.get("type", None)
   si = {"selector", "identifier"}
-
-  if k == "expression" and t in si:
-    vars = find_vars_in_selectors([s])
-    state["vars"] |= vars["var_used"]
-    state["contains"] |= vars["contains"]
-    return state, vars["missing_exprs"]
-  elif k == "expression" and t == "call":
-    func = s["function"]
-    if func["kind"] == "expression" and func["type"] in si:
-      if func["type"] == "selector":
-        v = func["field"].get("variable", -1)
-      else:
-        v = func["value"].get("variable", -1)
-      if v is not None and v >= 0:
-        state["called_vars"].add(v)
-        return state, ["function", "arguments"]
-
-  return state, True
-
-def find_vars_in_expr(expr):
-  state = utils.walk_nested(
-    _walk_expr_for_vars, dict(
-      vars=set(),
-      called_vars=set(),
-      contains=set(),
-    ), expr)
-
-  return state
-
-def _walk_ast_for_ops(t2l, f2l, ops, s):
-  if not isinstance(s, dict):
-    return ops, True
-
+  at_root = state["at_root"]
+  state["at_root"] = False
+  labels: dict = state["labels"]
   k = s.get("kind", None)
   t = s.get("type", None)
-  if k == "expression" and t in {"unary", "binary"}:
+
+  if split_blocks and not at_root:
+    if (k == "expression" and t in {"unary", "binary"}) \
+        or (k == "literal" and t == "composite") \
+        or (k == "expression" and t == "cast") \
+        or (k == "expression" and t == "call") \
+        or (k == "expression" and t == "new"):
+      state["subblock_asts"].append(s)
+      return state, False
+
+  # Statement and declaration handlers (i.e. block level asts):
+  if k == "statement" and t in {"assign", "assign-operator", "define"}:
+    succs = [s["right"]]
+    if t in {"assign", "assign-operator"}:  # Var defs. are assumed to be known
+      if t == "assign-operator":
+        labels.add(("binary_op", s["operator"]))
+
+      left_vars = find_vars_in_selectors(s["left"])
+      state["assigned_vars"] |= left_vars["root_vars"]
+      state["updated_vars"] |= left_vars["used_vars"]
+      state["var_contains"] |= left_vars["contains"]
+      succs += left_vars["missing_exprs"]
+
+    return state, succs
+  elif k == "statement" and t == "crement":
+    labels.add(("unary_op", s["operation"]))
+    return state, ["target"]
+  elif k == "decl" and t == "type-alias":
+    for b_outer in s["binds"]:
+      b = b_outer["value"]
+      labels.update(t2l(b.get("go-type", -1)))
+      if b["kind"] == "type" and b["type"] == "struct":
+        for field in b["fields"]:
+          labels.update(t2l(field["declared-type"].get("go-type", -1)))
+    return state, False
+  # Expression handlers (i.e. typically nested asts):
+  elif k == "expression" and t in si:
+    vars = find_vars_in_selectors([s])
+    state["used_vars"] |= vars["used_vars"]
+    state["var_contains"] |= vars["contains"]
+    return state, vars["missing_exprs"]
+  elif k == "expression" and t in {"unary", "binary"}:
     op = s["operator"]
     if t == "binary":
       p = "binary_op"
@@ -325,64 +335,64 @@ def _walk_ast_for_ops(t2l, f2l, ops, s):
     else:
       p = "unary_op"
       succ = ["target"]
-    ops.add((p, op))
-    return ops, succ
-  elif k == "statement" and t == "crement":
-    ops.add(("unary_op", s["operation"]))
-    return ops, ["target"]
-  elif k == "statement" and t == "assign-operator":
-    ops.add(("binary_op", s["operator"]))
-    return ops, ["left", "right"]
+    labels.add((p, op))
+    return state, succ
   elif k == "literal" and t == "composite":
-    ops |= t2l(s.get("go-type", -1))
-    return ops, ["values"]
-  elif k == "decl" and t == "type-alias":
-    for b_outer in s["binds"]:
-      b = b_outer["value"]
-      ops |= t2l(b.get("go-type", -1))
-      if b["kind"] == "type" and b["type"] == "struct":
-        for field in b["fields"]:
-          ops |= t2l(field["declared-type"].get("go-type", -1))
-    return ops, False
+    labels.update(t2l(s.get("go-type", -1)))
+    return state, ["values"]
   elif k == "expression" and t == "cast":
-    ops |= t2l(s["coerced-to"].get("go-type", -1))
-    return ops, ["target"]
+    labels.update(t2l(s["coerced-to"].get("go-type", -1)))
+    return state, ["target"]
   elif k == "expression" and t == "call":
-    ops |= t2l(s.get("go-type", -1))
+    labels.update(t2l(s.get("go-type", -1)))
     func = s["function"]
+    fid = -1
+    fvid = -1
     if func["kind"] == "expression" and func["type"] == "identifier":
       if func["value"]["ident-kind"] == "Builtin":
         fid = func["value"]["value"]
       else:
         fid = func["value"].get("function", -1)
+        fvid = func["value"].get("variable", -1)
     elif func["kind"] == "expression" and func["type"] == "selector":
       fid = func["field"].get("function", -1)
-    ops |= f2l(fid)
-    return ops, ["arguments", "function"]
+      fvid = func["field"].get("variable", -1)
+    if fid != -1:
+      labels.update(f2l(fid))
+    elif fvid != -1:
+      state["called_vars"].add(fvid)
+    return state, ["arguments", "function"]
   elif k == "expression" and t == "new":
-    ops |= t2l(s.get("go-type", -1))
-    ops |= f2l("new")
-    return ops, ["argument"]
+    labels.update(t2l(s.get("go-type", -1)))
+    labels.update(f2l("new"))
+    return state, ["argument"]
   elif k == "constant":
-    ops |= t2l(s.get("go-type", -1))
-    return ops, False
+    labels.update(t2l(s.get("go-type", -1)))
+    return state, False
 
-  return ops, True
+  return state, True
 
-def find_operations_in_ast(t2l, f2l, ast):
-  return utils.walk_nested(
-    fy.partial(_walk_ast_for_ops, t2l, f2l), set(), ast)
-
-def ast_to_labels(t2l, f2l, ast):
+def walk_ast(t2l, f2l, ast, split_blocks=False):
   if ast is None:
-    return set()
+    labels = set()
+  else:
+    labels = {("blocktype", ast["type"])}
 
-  res = find_operations_in_ast(t2l, f2l, ast)
-  res.add(("blocktype", ast["type"]))
-
-  return res
+  return utils.walk_nested(
+    _walk_ast, dict(
+      at_root=True,
+      labels=labels,
+      assigned_vars=set(),
+      updated_vars=set(),
+      used_vars=set(),
+      called_vars=set(),
+      var_contains=set(),
+      subblock_asts=[]
+    ), ast, t2l=t2l, f2l=f2l, split_blocks=split_blocks)
 
 def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
+  assert mode in convert_modes, f"Unknown CFG conversion mode '{mode}'."
+  split_blocks = mode == "split_blocks"
   g = nx.MultiDiGraph()
   cfg_type = cfg["type"]
   cfg_package = cfg["package"]
@@ -423,33 +433,6 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
   mark_block = None
   mark_block_lines = None
 
-  # Add block nodes:
-  for i, block in enumerate(blocks):
-    labels = {("type", "block")}
-    if block["entry"]:
-      if mark_block is None:
-        mark_block = n
-      labels.add(("blocktype", "entry"))
-    elif block["exit"]:
-      labels.add(("blocktype", "exit"))
-    labels |= ast_to_labels(t2l, f2l, block["ast"])
-    g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
-    block_ids[i] = n
-    if mark_line is not None:
-      line_start = block["line-start"]
-      line_end = block["line-end"]
-      block_lines = line_end - line_start
-      if line_start <= mark_line <= line_end \
-          and (mark_block_lines is None or block_lines < mark_block_lines):
-        mark_block = n
-        mark_block_lines = block_lines
-    n += 1
-
-  if mark_line is not None and mark_block is not None:
-    b = g.nodes[mark_block]
-    b["marked"] = True
-    b["color"] = "red"
-
   # Add variable nodes:
   for i, v in enumerate(vars):
     labels = {("type", "var")}
@@ -471,19 +454,44 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
     var_ids[i] = n
     n += 1
 
-  # Add edges:
+  # Add block nodes:
   for i, block in enumerate(blocks):
+    labels = {("type", "block")}
+    if block["entry"]:
+      if mark_block is None:
+        mark_block = n
+      labels.add(("blocktype", "entry"))
+    elif block["exit"]:
+      labels.add(("blocktype", "exit"))
+    walk_result = walk_ast(
+      t2l, f2l, block["ast"], split_blocks=split_blocks)
+    labels.update(walk_result["labels"])
+
+    g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
+    block_ids[i] = n
+
+    if mark_line is not None:
+      line_start = block["line-start"]
+      line_end = block["line-end"]
+      block_lines = line_end - line_start
+      if line_start <= mark_line <= line_end \
+          and (mark_block_lines is None or block_lines < mark_block_lines):
+        mark_block = n
+        mark_block_lines = block_lines
+
     b = block_ids[i]
     ast = block["ast"]
     btype = ast_type(ast)
-    succs = block["successors"]
-    assign_vars = set(block["assign-vars"])
     decl_vars = set(block["decl-vars"])
-    up_vars = set(block["update-vars"])
-    use_vars = set(block["use-vars"])
-    call_vars = set()
-    var_contains = set()
-    nested_vars = None
+    assign_vars = walk_result["assigned_vars"]
+    assign_vars.update(block["assign-vars"])
+    up_vars = walk_result["updated_vars"]
+    up_vars.update(block["update-vars"])
+    use_vars = walk_result["used_vars"]
+    call_vars = walk_result["called_vars"]
+    var_contains = walk_result["var_contains"]
+    if not split_blocks:
+      use_vars.update(block["use-vars"])
 
     if block["entry"]:
       for param in params:
@@ -492,34 +500,11 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
         g.add_edge(b, var_ids[rec], key="decl", label="decl")
       for res in results:
         g.add_edge(b, var_ids[res], key="decl", label="decl")
-
-    if btype == "return":
+    elif btype == "return":
       for res in results:
         if res not in use_vars:
           g.add_edge(b, var_ids[res], key="assign", label="assign")
           g.add_edge(b, var_ids[res], key="update", label="update")
-    elif btype in {"assign", "assign-operator", "define"}:
-      ls = ast["left"]
-      rs = ast["right"]
-      # Find nested assign targets (non-nested ones would be in assign_vars):
-      if btype in {"assign", "assign-operator"} and len(assign_vars) < len(ls):
-        left_vars = find_vars_in_selectors(ls)
-        assign_vars |= left_vars["var_roots"]
-        up_vars |= left_vars["var_used"]
-        var_contains |= left_vars["contains"]
-        leftover_vars = find_vars_in_expr(left_vars["missing_exprs"])
-        use_vars |= leftover_vars["vars"]
-        var_contains |= leftover_vars["contains"]
-
-      # Find variables on right side of assignment/definition:
-      nested_vars = find_vars_in_expr(rs)
-
-    if nested_vars is None:
-      # Find variable usages anywhere in AST:
-      nested_vars = find_vars_in_expr(ast)
-    use_vars |= nested_vars["vars"]
-    call_vars |= nested_vars["called_vars"]
-    var_contains |= nested_vars["contains"]
 
     for v1, v2 in var_contains:
       g.add_edge(
@@ -533,7 +518,21 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
     for v in use_vars:
       g.add_edge(b, var_ids[v], key="use", label="use")
     for v in call_vars:
-      g.add_edge(b, var_ids[v], key="use", label="call")
+      g.add_edge(b, var_ids[v], key="call", label="call")
+
+    n += 1
+
+  if mark_line is not None and mark_block is not None:
+    b = g.nodes[mark_block]
+    b["marked"] = True
+    b["color"] = "red"
+
+  # Add flow edges:
+  for i, block in enumerate(blocks):
+    b = block_ids[i]
+    btype = ast_type(ast)
+    succs = block["successors"]
+
     for i, s in enumerate(succs):
       if btype == "switch":
         a = blocks[s]["ast"]
