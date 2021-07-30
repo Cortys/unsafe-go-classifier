@@ -89,7 +89,7 @@ def cfg_classifier(
     in_meta = dict(
       node_label_count=node_label_count,
       graph_feature_dim=4,
-      edge_label_count=8,
+      edge_label_count=9,
       with_marked_node=True)
 
     inputs = tf_pre.make_inputs(in_enc, in_meta)

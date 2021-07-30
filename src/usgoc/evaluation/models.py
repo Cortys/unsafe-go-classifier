@@ -108,6 +108,11 @@ models = dict(
   RGIN=RGINBuilder
 )
 evaluate_models = [
+  "MLP",
   "DeepSets",
+  "GCN",
   "GIN",
-  "RGIN"]
+  "GGNN",
+  "RGCN",
+  "RGIN"
+]

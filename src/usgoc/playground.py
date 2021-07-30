@@ -16,30 +16,28 @@ import usgoc.metrics.multi as mm
 import usgoc.evaluation.evaluate as ee
 
 fold = 0
-mode = "atomic_blocks"
+mode = "split_blocks"
 limit_id = "v127_d127_f127_p127_core"
 batch_size_limit = 200
 
 with utils.cache_env(use_cache=True):
   files = dataset.load_filenames()
   raw = dataset.load_raw()
-  # ds = dataset.load_dataset(mode=mode)
-  # graphs, targets = ds
-  # full_dims = dataset.create_graph_dims(graphs, mode=mode)
+  ds = dataset.load_dataset(mode=mode)
+  graphs, targets = ds
+  full_dims = dataset.create_graph_dims(graphs, mode=mode)
 
-i = 40
 # files[683]
 # files.index("/app/raw/unsafe-go-dataset/app/efficiency__cast-pointer/efb20d96d7e6d3b08653.json")
-with utils.cache_env(use_cache=False): gs = dataset.raw_to_graphs([raw[i]], mode="split_blocks")
-utils.draw_graph(gs[0], layout="dot")
-g = gs[0]
-print(raw[40]["cfg"]["code"])
+# with utils.cache_env(use_cache=True): gs = dataset.raw_to_graphs(raw, mode=mode)
+# g = gs[683]; print(g.source_code)
+# utils.draw_graph(g, layout="dot")
 # [k for k in g.types_to_pkgs.keys()]
 # g.types_to_pkgs
-# h = dataset.collect_node_label_histogram(gs)
+# h = dataset.collect_node_label_histogram(gs, mode=mode)
 # [k for k, v in h["core_datatype"].items() if not v]
 
-# %%
+# -%%
 
 with utils.cache_env(use_cache=True):
   splits = dataset.get_split_idxs(ds)
@@ -140,7 +138,7 @@ def experiment(model, epochs=100, log=True):
 # m[0][2].evaluate(test_ds, return_dict=True)
 
 # m = experiment(model1)
-# m2 = experiment(model)
+m2 = experiment(model)
 
 def debug_graph(i=None, file=None, test_j=None, val_j=None, draw=True):
   if i is None:

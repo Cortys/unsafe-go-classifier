@@ -58,6 +58,7 @@ for k, d in list(node_label_type_dim_limits.items()):
   }
   d["only_core_packages"] = False
 
+convert_modes = cfg_utils.convert_modes
 default_mode = "atomic_blocks"
 default_limit_id = "v127_d127_f127_p127"
 graph_features = dict()
@@ -277,7 +278,7 @@ def node_set_tf_dataset(
   dataset, dims, split_id=None,
   batch_size_limit=None, batch_space_limit=None):
   graphs, targets = dataset
-  encoded_graphs = wl1_encode_graphs(graphs, dims, True, split_id)
+  encoded_graphs = wl1_encode_graphs(graphs, dims, False, split_id)
 
   node_label_count = dims["node_label_count"]
   ds_batcher = trans.tuple(

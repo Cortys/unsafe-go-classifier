@@ -32,6 +32,7 @@ edge_labels = [
   "assign",
   "update",
   "use",
+  "dir-use",
   "call",
   "contains"
 ]
@@ -299,9 +300,9 @@ def _walk_ast(state, s, t2l, f2l, split_blocks=False):
         labels.add(("binary_op", s["operator"]))
 
       left_vars = find_vars_in_selectors(s["left"])
-      state["assigned_vars"] |= left_vars["root_vars"]
-      state["updated_vars"] |= left_vars["used_vars"]
-      state["var_contains"] |= left_vars["contains"]
+      state["assigned_vars"].update(left_vars["root_vars"])
+      state["updated_vars"].update(left_vars["used_vars"])
+      state["var_contains"].update(left_vars["contains"])
       succs += left_vars["missing_exprs"]
 
     return state, succs
@@ -319,8 +320,10 @@ def _walk_ast(state, s, t2l, f2l, split_blocks=False):
   # Expression handlers (i.e. typically nested asts):
   elif k == "expression" and t in si:
     vars = find_vars_in_selectors([s])
-    state["used_vars"] |= vars["used_vars"]
-    state["var_contains"] |= vars["contains"]
+    root_vars = vars["root_vars"]
+    state["used_vars"].update(vars["used_vars"] - root_vars)
+    state["directly_used_vars"].update(root_vars)
+    state["var_contains"].update(vars["contains"])
     return state, vars["missing_exprs"]
   elif k == "expression" and t in {"unary", "binary"}:
     op = s["operator"]
@@ -339,7 +342,20 @@ def _walk_ast(state, s, t2l, f2l, split_blocks=False):
     return state, succ
   elif k == "literal" and t == "composite":
     labels.update(t2l(s.get("go-type", -1)))
-    return state, ["values"]
+    succs = []
+
+    for part in s["values"]:
+      key = part.get("key")
+      val = part.get("value", None)
+      if key is not None:
+        key_vars = find_vars_in_selectors([key])
+        state["assigned_vars"].update(key_vars["root_vars"])
+        state["updated_vars"].update(key_vars["used_vars"])
+        state["var_contains"].update(key_vars["contains"])
+      if val is not None:
+        succs.append(val)
+
+    return state, succs
   elif k == "expression" and t == "cast":
     labels.update(t2l(s["coerced-to"].get("go-type", -1)))
     return state, ["target"]
@@ -385,10 +401,26 @@ def walk_ast(t2l, f2l, ast, split_blocks=False):
       assigned_vars=set(),
       updated_vars=set(),
       used_vars=set(),
+      directly_used_vars=set(),
       called_vars=set(),
       var_contains=set(),
       subblock_asts=[]
     ), ast, t2l=t2l, f2l=f2l, split_blocks=split_blocks)
+
+def add_block_var_edges(g, block_id, var_ids, vars):
+  for v1, v2 in vars["var_contains"]:
+    g.add_edge(
+      var_ids[v1], var_ids[v2], key="contains", label="contains")
+  for v in vars["assigned_vars"]:
+    g.add_edge(block_id, var_ids[v], key="assign", label="assign")
+  for v in vars["updated_vars"]:
+    g.add_edge(block_id, var_ids[v], key="update", label="update")
+  for v in vars["used_vars"]:
+    g.add_edge(block_id, var_ids[v], key="use", label="use")
+  for v in vars["directly_used_vars"]:
+    g.add_edge(block_id, var_ids[v], key="dir-use", label="dir-use")
+  for v in vars["called_vars"]:
+    g.add_edge(block_id, var_ids[v], key="call", label="call")
 
 def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
   assert mode in convert_modes, f"Unknown CFG conversion mode '{mode}'."
@@ -454,8 +486,11 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
     var_ids[i] = n
     n += 1
 
+  subblock_stack = []
+
   # Add block nodes:
   for i, block in enumerate(blocks):
+    ast = block["ast"]
     labels = {("type", "block")}
     if block["entry"]:
       if mark_block is None:
@@ -463,8 +498,7 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
       labels.add(("blocktype", "entry"))
     elif block["exit"]:
       labels.add(("blocktype", "exit"))
-    walk_result = walk_ast(
-      t2l, f2l, block["ast"], split_blocks=split_blocks)
+    walk_result = walk_ast(t2l, f2l, ast, split_blocks=split_blocks)
     labels.update(walk_result["labels"])
 
     g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
@@ -479,47 +513,45 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
         mark_block = n
         mark_block_lines = block_lines
 
-    b = block_ids[i]
-    ast = block["ast"]
     btype = ast_type(ast)
     decl_vars = set(block["decl-vars"])
-    assign_vars = walk_result["assigned_vars"]
-    assign_vars.update(block["assign-vars"])
-    up_vars = walk_result["updated_vars"]
-    up_vars.update(block["update-vars"])
-    use_vars = walk_result["used_vars"]
-    call_vars = walk_result["called_vars"]
-    var_contains = walk_result["var_contains"]
-    if not split_blocks:
-      use_vars.update(block["use-vars"])
+    used_vars = walk_result["used_vars"]
+    directly_used_vars = walk_result["directly_used_vars"]
 
     if block["entry"]:
       for param in params:
-        g.add_edge(b, var_ids[param], key="decl", label="decl")
+        g.add_edge(n, var_ids[param], key="decl", label="decl")
       for rec in receivers:
-        g.add_edge(b, var_ids[rec], key="decl", label="decl")
+        g.add_edge(n, var_ids[rec], key="decl", label="decl")
       for res in results:
-        g.add_edge(b, var_ids[res], key="decl", label="decl")
+        g.add_edge(n, var_ids[res], key="decl", label="decl")
     elif btype == "return":
       for res in results:
-        if res not in use_vars:
-          g.add_edge(b, var_ids[res], key="assign", label="assign")
-          g.add_edge(b, var_ids[res], key="update", label="update")
+        if res not in used_vars and res not in directly_used_vars:
+          g.add_edge(n, var_ids[res], key="assign", label="assign")
+          g.add_edge(n, var_ids[res], key="update", label="update")
 
-    for v1, v2 in var_contains:
-      g.add_edge(
-        var_ids[v1], var_ids[v2], key="contains", label="contains")
-    for v in assign_vars:
-      g.add_edge(b, var_ids[v], key="assign", label="assign")
     for v in decl_vars:
-      g.add_edge(b, var_ids[v], key="decl", label="decl")
-    for v in up_vars:
-      g.add_edge(b, var_ids[v], key="update", label="update")
-    for v in use_vars:
-      g.add_edge(b, var_ids[v], key="use", label="use")
-    for v in call_vars:
-      g.add_edge(b, var_ids[v], key="call", label="call")
+      g.add_edge(n, var_ids[v], key="decl", label="decl")
+    add_block_var_edges(g, n, var_ids, walk_result)
 
+    for sub_ast in walk_result["subblock_asts"]:
+      subblock_stack.append(dict(parent=n, ast=sub_ast))
+
+    n += 1
+
+  while len(subblock_stack) > 0:
+    subblock = subblock_stack.pop()
+    ast = subblock["ast"]
+    parent_id = subblock["parent"]
+    walk_result = walk_ast(t2l, f2l, ast, split_blocks=split_blocks)
+    labels = walk_result["labels"]
+    labels.add(("type", "subblock"))
+    g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
+    add_block_var_edges(g, n, var_ids, walk_result)
+    g.add_edge(parent_id, n, key="use", label="use")
+    for sub_ast in walk_result["subblock_asts"]:
+      subblock_stack.append(dict(parent=n, ast=sub_ast))
     n += 1
 
   if mark_line is not None and mark_block is not None:

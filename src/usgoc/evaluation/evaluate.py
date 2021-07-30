@@ -16,11 +16,14 @@ REPEATS_MAX = 3
 class DryRunException(Exception):
   pass
 
-def find_outer_run(limit_id, model_name):
+def find_outer_run(convert_mode, limit_id, model_name):
   eid = mlflow.tracking.fluent._get_experiment_id()
   runs = mlflow.search_runs(
     [eid],
-    f"tags.limit_id = '{limit_id}' and tags.model = '{model_name}'",
+    " and ".join([
+      f"tags.convert_mode = '{convert_mode}'",
+      f"tags.limit_id = '{limit_id}'",
+      f"tags.model = '{model_name}'"]),
     max_results=1, output_format="list")
   if len(runs) == 0:
     return None
@@ -55,7 +58,8 @@ def find_inner_run(fold, repeat):
 
 def evaluate_single(
   get_model_ctr, get_ds, model_name,
-  repeat=0, fold=0, epochs=1000, patience=100, limit_id=None,
+  repeat=0, fold=0, epochs=1000, patience=100,
+  convert_mode=None, limit_id=None,
   ds_id="", override=False, dry=False, tensorboard_embeddings=False,
   return_models=True):
     if repeat < 0 or fold < 0:
@@ -142,21 +146,23 @@ def evaluate_single(
 
 def evaluate_fold(
   hypermodel_builder, fold=0, repeats=REPEATS_MAX,
-  start_repeat=0, repeat=None, limit_id=None, ds_name="",
-  tuner_limit_id=None,
+  start_repeat=0, repeat=None, convert_mode=None, limit_id=None,
+  ds_name="", tuner_convert_mode=None, tuner_limit_id=None,
   **kwargs):
 
-  ds_id = f"{ds_name}/{limit_id}_fold{fold}"
+  ds_id = f"{ds_name}/{convert_mode}_{limit_id}_fold{fold}"
   get_ds = utils.memoize(lambda: ed.get_encoded(
-    hypermodel_builder.in_enc, fold=fold, limit_id=limit_id))
+    hypermodel_builder.in_enc, fold=fold,
+    convert_mode=convert_mode, limit_id=limit_id))
 
-  if tuner_limit_id is None:
+  if tuner_convert_mode == convert_mode and tuner_limit_id == limit_id:
     tune_ds_id = ds_id
     get_tune_ds = get_ds
   else:
-    tune_ds_id = f"{ds_name}/{tuner_limit_id}_fold{fold}"
+    tune_ds_id = f"{ds_name}/{tuner_convert_mode}_{tuner_limit_id}_fold{fold}"
     get_tune_ds = lambda: ed.get_encoded(
-      hypermodel_builder.in_enc, fold=fold, limit_id=tuner_limit_id)
+      hypermodel_builder.in_enc, fold=fold,
+      convert_mode=tuner_convert_mode, limit_id=tuner_limit_id)
 
   @utils.memoize
   def get_model_ctr():
@@ -182,23 +188,26 @@ def evaluate_fold(
   if repeat is not None:
     return evaluate_single(
       get_model_ctr, get_ds, hypermodel_builder.name, repeat,
-      fold=fold, limit_id=limit_id, ds_id=ds_id,
+      fold=fold, convert_mode=convert_mode, limit_id=limit_id, ds_id=ds_id,
       **kwargs)
 
   return [
     evaluate_single(
       get_model_ctr, get_ds, hypermodel_builder.name, i,
-      fold=fold, limit_id=limit_id, ds_id=ds_id, **kwargs)
+      fold=fold, convert_mode=convert_mode, limit_id=limit_id, ds_id=ds_id,
+      **kwargs)
     for i in range(start_repeat, repeats)]
 
 def summarize_inner_runs():
   pass
 
 def evaluate_limit_id(
-  hypermodel_builder, limit_id=None, folds=FOLDS_MAX,
-  tuner_limit_id=None,
+  hypermodel_builder, convert_mode=None, limit_id=None,
+  folds=FOLDS_MAX,
+  tuner_convert_mode=None, tuner_limit_id=None,
   start_fold=0, fold=None, ds_name=None, **kwargs):
-  run = find_outer_run(limit_id, hypermodel_builder.name)
+  mname = hypermodel_builder.name
+  run = find_outer_run(convert_mode, limit_id, mname)
   if run is not None:
     run_id = run.info.run_id
   else:
@@ -206,45 +215,67 @@ def evaluate_limit_id(
 
   with mlflow.start_run(
     run_id=run_id,
-    run_name=f"{limit_id}_{hypermodel_builder.name}"):
-    mlflow.set_tag("model", hypermodel_builder.name)
+    run_name=f"{convert_mode}_{limit_id}_{mname}"):
+    mlflow.set_tag("model", mname)
     mlflow.set_tag("dataset", ds_name)
+    mlflow.set_tag("convert_mode", convert_mode)
     mlflow.set_tag("limit_id", limit_id)
 
-    print(f"Starting outer {ds_name}/{limit_id}, {hypermodel_builder.name}...")
+    print(f"Starting outer {ds_name}/{convert_mode}/{limit_id} for {mname}...")
+
+    if tuner_convert_mode is not None:
+      print(f"(Tuned with HPs for convert mode {tuner_convert_mode})")
+    else:
+      tuner_convert_mode = convert_mode
 
     if tuner_limit_id is not None:
-      mlflow.set_tag("tuner_limit_id", tuner_limit_id)
       print(f"(Tuned with HPs for limit {tuner_limit_id})")
-      if tuner_limit_id == limit_id:
-        tuner_limit_id = None
     else:
-      mlflow.set_tag("tuner_limit_id", limit_id)
+      tuner_limit_id = limit_id
+
+    mlflow.set_tag("tuner_convert_mode", tuner_convert_mode)
+    mlflow.set_tag("tuner_limit_id", tuner_limit_id)
 
     if fold is not None:
       res = evaluate_fold(
         hypermodel_builder, fold=fold,
-        limit_id=limit_id, ds_name=ds_name,
-        tuner_limit_id=tuner_limit_id, **kwargs)
+        convert_mode=convert_mode, limit_id=limit_id, ds_name=ds_name,
+        tuner_convert_mode=tuner_convert_mode, tuner_limit_id=tuner_limit_id,
+        **kwargs)
     else:
       res = [
         evaluate_fold(
-          hypermodel_builder, fold=i, limit_id=limit_id,
-          ds_name=ds_name, tuner_limit_id=tuner_limit_id,
+          hypermodel_builder, fold=i, convert_mode=convert_mode,
+          limit_id=limit_id, ds_name=ds_name, tuner_limit_id=tuner_limit_id,
           **kwargs)
         for i in range(start_fold, folds)]
 
     summarize_inner_runs()
-    print(f"Completed outer {ds_name}/{limit_id}, {hypermodel_builder.name}.")
+    print(f"Completed outer {ds_name}/{limit_id} for {mname}.")
 
     return res
+
+def evaluate_convert_mode(
+  hypermodel_builder, convert_mode=None,
+  limit_ids=ed.evaluate_limit_ids,
+  limit_id=None, **kwargs):
+
+  if limit_id is not None:
+    return evaluate_limit_id(
+      hypermodel_builder, convert_mode, limit_id, **kwargs)
+
+  return {
+    limit_id: evaluate_limit_id(
+      hypermodel_builder, convert_mode, limit_id, **kwargs)
+    for limit_id in limit_ids}
 
 def evaluate(
   hypermodel_builder,
   ds_name=ed.dataset_names[0],
-  limit_ids=ed.evaluate_limit_ids, limit_id=None,
-  experiment_suffix="", **kwargs):
-
+  convert_modes=ed.convert_modes,
+  convert_mode=None,
+  experiment_suffix="", **kwargs
+):
   if isinstance(hypermodel_builder, str):
     assert hypermodel_builder in em.models,\
         f"Unknown model {hypermodel_builder}."
@@ -254,13 +285,13 @@ def evaluate(
   print(f"Opening experiment {hypermodel_builder.name}{experiment_suffix}...")
 
   try:
-    if limit_id is not None:
-      return evaluate_limit_id(
-        hypermodel_builder, limit_id, ds_name=ds_name, **kwargs)
+    if convert_mode is not None:
+      return evaluate_convert_mode(
+        hypermodel_builder, convert_mode, ds_name=ds_name, **kwargs)
 
     return {
-      limit_id: evaluate_limit_id(
-        hypermodel_builder, limit_id, ds_name=ds_name, **kwargs)
-      for limit_id in limit_ids}
+      convert_mode: evaluate_convert_mode(
+        hypermodel_builder, convert_mode, ds_name=ds_name, **kwargs)
+      for convert_mode in convert_modes}
   finally:
     print(f"Closing experiment {hypermodel_builder.name}{experiment_suffix}.")
