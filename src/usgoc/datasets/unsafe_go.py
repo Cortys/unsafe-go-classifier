@@ -7,6 +7,7 @@ import numpy as np
 
 import usgoc.utils as utils
 import usgoc.preprocessing.graph.wl1 as wl1
+import usgoc.preprocessing.graph.wl2 as wl2
 import usgoc.preprocessing.transformer as trans
 import usgoc.preprocessing.batcher as batcher
 import usgoc.preprocessing.tf as tf
@@ -218,7 +219,7 @@ def get_node_label_dims(node_dims, node_data):
       return d[ls]
     return d[""]
 
-  return fy.lmap(lookup, labels)
+  return np.array(fy.lmap(lookup, labels))
 
 def get_edge_label_dim(edge_dims, edge_data):
   return edge_dims[edge_data["label"]]
@@ -250,6 +251,30 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
 
   return enc_graphs
 
+@utils.cached(
+  DATA_DIR / "wl2",
+  lambda graphs, dims, radius=1, split_id=None: (
+    f"wl2_r{radius}" + ("" if split_id is None else "_" + split_id)))
+def wl2_encode_graphs(graphs, dims, radius=1, split_id=None):
+  enc_graphs = np.empty(len(graphs), dtype="O")
+  node_label_fn = fy.partial(get_node_label_dims, dims["node_labels"])
+  edge_label_fn = fy.partial(get_edge_label_dim, dims["edge_labels"])
+  node_label_count = dims["node_label_count"]
+  edge_label_count = dims["edge_label_count"]
+
+  for i, g in enumerate(graphs):
+    enc_g = wl2.encode_graph(
+      g, radius=radius,
+      node_label_count=node_label_count,
+      edge_label_count=edge_label_count,
+      node_label_fn=node_label_fn,
+      edge_label_fn=edge_label_fn,
+      with_marked_node=True)
+    enc_g["graph_X"] = graph_features[g.cfg_type]
+    enc_graphs[i] = enc_g
+
+  return enc_graphs
+
 def wl1_tf_dataset(
   dataset, dims, multirefs=True, split_id=None,
   batch_size_limit=None, batch_space_limit=None):
@@ -266,6 +291,30 @@ def wl1_tf_dataset(
   gen = ds_batcher.batch_generator((encoded_graphs, targets))
 
   in_enc = "mwl1" if multirefs else "wl1"
+  in_meta = dict(
+    node_label_count=node_label_count,
+    edge_label_count=edge_label_count,
+    graph_feature_dim=len(graph_features),
+    with_marked_node=True)
+  out_meta = dict()
+  return tf.make_dataset(gen, in_enc, in_meta, "int32_pair", out_meta)
+
+def wl2_tf_dataset(
+  dataset, dims, radius=1, split_id=None,
+  batch_size_limit=None, batch_space_limit=None):
+  graphs, targets = dataset
+  encoded_graphs = wl2_encode_graphs(graphs, dims, radius, split_id)
+
+  node_label_count = dims["node_label_count"]
+  edge_label_count = dims["edge_label_count"]
+  ds_batcher = trans.tuple(
+    wl2.WL2Batcher(
+      batch_size_limit=batch_size_limit,
+      batch_space_limit=batch_space_limit),
+    trans.pair(batcher.Batcher.identity))
+  gen = ds_batcher.batch_generator((encoded_graphs, targets))
+
+  in_enc = "wl2"
   in_meta = dict(
     node_label_count=node_label_count,
     edge_label_count=edge_label_count,

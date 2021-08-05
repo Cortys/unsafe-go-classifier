@@ -2,6 +2,7 @@ import tensorflow as tf
 import tensorflow.keras as keras
 
 import usgoc.preprocessing.graph.wl1 as wl1_enc
+import usgoc.preprocessing.graph.wl2 as wl2_enc
 
 def wl1(meta):
   node_dim, edge_dim = wl1_enc.feature_dims(**meta)
@@ -35,6 +36,26 @@ def rwl1(meta):
 def mwl1(meta):
   meta["multirefs"] = True
   return wl1(meta)
+
+def wl2(meta):
+  X_dim = wl2_enc.feature_dim(**meta)
+  graph_dim = meta.get("graph_feature_dim", 0)
+
+  res = {
+    "X": tf.TensorSpec(shape=[None, X_dim], dtype=tf.float32),
+    "ref_a": tf.TensorSpec(shape=[None], dtype=tf.int32),
+    "ref_b": tf.TensorSpec(shape=[None], dtype=tf.int32),
+    "backref": tf.TensorSpec(shape=[None], dtype=tf.int32),
+    "graph_idx": tf.TensorSpec(shape=[None], dtype=tf.int32),
+    "n": tf.TensorSpec(shape=[None], dtype=tf.int32)
+  }
+
+  if meta.get("with_marked_node", False):
+    res["marked_idx"] = tf.TensorSpec(shape=[None], dtype=tf.int32)
+  if graph_dim > 0:
+    res["graph_X"] = tf.TensorSpec(shape=[None, graph_dim], dtype=tf.float32)
+
+  return res
 
 def node_set(meta):
   node_dim, _ = wl1_enc.feature_dims(**meta)
@@ -84,6 +105,7 @@ encodings = dict(
   wl1=wl1,
   rwl1=rwl1,
   mwl1=mwl1,
+  wl2=wl2,
   node_set=node_set,
   float=vec32,
   vector=vec32,

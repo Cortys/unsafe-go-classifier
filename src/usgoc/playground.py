@@ -1,13 +1,14 @@
 import tensorflow as tf
 import keras_tuner as kt
 import numpy as np
+import networkx as nx
 import funcy as fy
 from datetime import datetime
 import matplotlib
 import matplotlib.pyplot as plt
 import mlflow
 
-# import usgoc.preprocessing.graph.wl1 as wl1
+import usgoc.preprocessing.graph.wl2 as wl2
 import usgoc.datasets.unsafe_go as dataset
 import usgoc.models.gnn as gnn
 import usgoc.evaluation.models as em
@@ -36,8 +37,12 @@ with utils.cache_env(use_cache=True):
 # g.types_to_pkgs
 # h = dataset.collect_node_label_histogram(gs, mode=mode)
 # [k for k, v in h["core_datatype"].items() if not v]
+list(dataset.wl2_tf_dataset(ds, full_dims, 1))
 
-# -%%
+# graphs[0].nodes[4]
+# utils.draw_graph(graphs[0], layout="dot")
+
+# %%
 
 with utils.cache_env(use_cache=True):
   splits = dataset.get_split_idxs(ds)
