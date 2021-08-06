@@ -246,7 +246,8 @@ def evaluate_limit_id(
       res = [
         evaluate_fold(
           hypermodel_builder, fold=i, convert_mode=convert_mode,
-          limit_id=limit_id, ds_name=ds_name, tuner_limit_id=tuner_limit_id,
+          limit_id=limit_id, ds_name=ds_name,
+          tuner_convert_mode=tuner_convert_mode, tuner_limit_id=tuner_limit_id,
           **kwargs)
         for i in range(start_fold, folds)]
 

@@ -93,6 +93,7 @@ DeepSetsBuilder = create_model_builder(gnn.DeepSets)
 GCNBuilder = create_model_builder(gnn.GCN)
 GINBuilder = create_model_builder(gnn.GIN)
 GGNNBuilder = create_model_builder(gnn.GGNN, True)
+WL2GNNBuilder = create_model_builder(gnn.WL2GNN, True)
 
 RGCNBuilder = create_model_builder(gnn.RGCN)
 RGINBuilder = create_model_builder(gnn.RGIN)
@@ -104,6 +105,7 @@ models = dict(
   GCN=GCNBuilder,
   GIN=GINBuilder,
   GGNN=GGNNBuilder,
+  WL2GNN=WL2GNNBuilder,
   RGCN=RGCNBuilder,
   RGIN=RGINBuilder
 )
@@ -113,6 +115,7 @@ evaluate_models = [
   "GCN",
   "GIN",
   "GGNN",
+  "WL2GNN",
   "RGCN",
   "RGIN"
 ]

@@ -27,11 +27,35 @@ node_label_type_dim_limits = {
     function=0,
     package=0
   ),
-  "v15_d63_f63_p63": dict(
-    varname=15,
-    datatype=63,
-    function=63,
-    package=63
+  "v127_d0_f0_p0": dict(
+    varname=127,
+    datatype=0,
+    function=0,
+    package=0
+  ),
+  "vS_d0_f0_p0": dict(
+    varname=cfg_utils.is_semantic_name,
+    datatype=0,
+    function=0,
+    package=0
+  ),
+  "v0_d127_f0_p0": dict(
+    varname=0,
+    datatype=127,
+    function=0,
+    package=0
+  ),
+  "v0_d0_f127_p0": dict(
+    varname=0,
+    datatype=0,
+    function=127,
+    package=0
+  ),
+  "v0_d0_f0_p127": dict(
+    varname=0,
+    datatype=0,
+    function=0,
+    package=127
   ),
   "v127_d127_f127_p127": dict(
     varname=127,
@@ -386,6 +410,7 @@ def get_dataset_slices(dataset, split_idxs, outer_i=0, inner_i=0):
 dataset_encoders = dict(
   wl1=fy.partial(wl1_tf_dataset, multirefs=False),
   mwl1=wl1_tf_dataset,
+  wl2=wl2_tf_dataset,
   node_set=node_set_tf_dataset
 )
 

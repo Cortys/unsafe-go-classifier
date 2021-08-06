@@ -17,8 +17,10 @@ import usgoc.metrics.multi as mm
 import usgoc.evaluation.evaluate as ee
 
 fold = 0
-mode = "split_blocks"
-limit_id = "v127_d127_f127_p127_core"
+# mode = "split_blocks"
+mode = "atomic_blocks"
+# limit_id = "v127_d127_f127_p127_core"
+limit_id = "v0_d0_f0_p0"
 batch_size_limit = 200
 
 with utils.cache_env(use_cache=True):
@@ -37,12 +39,11 @@ with utils.cache_env(use_cache=True):
 # g.types_to_pkgs
 # h = dataset.collect_node_label_histogram(gs, mode=mode)
 # [k for k, v in h["core_datatype"].items() if not v]
-list(dataset.wl2_tf_dataset(ds, full_dims, 1))
 
 # graphs[0].nodes[4]
 # utils.draw_graph(graphs[0], layout="dot")
 
-# %%
+# -%%
 
 with utils.cache_env(use_cache=True):
   splits = dataset.get_split_idxs(ds)
@@ -53,12 +54,12 @@ with utils.cache_env(use_cache=True):
   labels2_inv = fy.flip(labels2)
 
 # model = gnn.MLP
-# model1 = gnn.DeepSets
+model = gnn.DeepSets
 # model = gnn.GCN
 # model = gnn.GIN
 # model = gnn.GGNN
 # model = gnn.RGCN
-model = gnn.RGIN
+# model = gnn.WL2GNN
 
 # model1 = em.DeepSetsBuilder
 # model = em.GGNNBuilder
@@ -71,6 +72,8 @@ with utils.cache_env(use_cache=True):
   val_ds = val_ds.cache()
   train_slice, val_slice, test_slice = dataset.get_dataset_slices(
     ds, splits, fold)
+
+list(train_ds)[0]
 
 # list(train_ds)[0]
 

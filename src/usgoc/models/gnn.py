@@ -4,6 +4,7 @@ import funcy as fy
 
 import usgoc.preprocessing.tf as tf_pre
 import usgoc.layers.wl1 as wl1
+import usgoc.layers.wl2 as wl2
 import usgoc.layers.pooling as pl
 from usgoc.layers.utils import with_reg, conv_with_reg
 import usgoc.metrics.multi as mm
@@ -165,6 +166,7 @@ GGNN = cfg_classifier(
   "GGNN", wl1.GGNNLayer,
   conv_args=dict(use_diff=True, reverse=True),
   in_enc="wl1")
+WL2GNN = cfg_classifier("WL2GNN", wl2.WL2Layer, in_enc="wl2")
 
 # Multirelational models:
 RGCN = cfg_classifier(
