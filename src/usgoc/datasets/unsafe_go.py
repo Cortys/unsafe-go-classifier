@@ -189,7 +189,7 @@ def collect_node_label_histogram(graphs, split_id=None, mode=default_mode):
   "pretty_json")
 def create_graph_dims(
   graphs, limit_id=default_limit_id, split_id=None, mode=default_mode):
-  labels = collect_node_label_histogram(graphs, split_id)
+  labels = collect_node_label_histogram(graphs, split_id, mode)
   node_dim_count = 0
   node_dims = dict()
   edge_dims = dict()
@@ -241,9 +241,11 @@ def get_node_label_dims(node_dims, node_data):
     d = node_dims[lt]
     if ls in d:
       return d[ls]
-    return d[""]
+    return d.get("", -1)
 
-  return np.array(fy.lmap(lookup, labels))
+  return np.array(fy.lfilter(
+    lambda idx: idx >= 0,
+    fy.map(lookup, labels)))
 
 def get_edge_label_dim(edge_dims, edge_data):
   return edge_dims[edge_data["label"]]
