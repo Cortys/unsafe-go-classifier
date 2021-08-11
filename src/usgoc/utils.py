@@ -4,6 +4,7 @@ import pickle
 import inspect
 import numbers
 import contextlib
+import itertools
 from collections.abc import Iterable
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -111,6 +112,17 @@ def vec_to_unit(feat):
     u += (2 ** -i) * s
 
   return u
+
+def cart(*pos_params, **params):
+  "Lazily computes the cartesian product of the given lists or dicts."
+  if len(pos_params) > 0:
+    return itertools.product(*pos_params)
+
+  return (dict(zip(params, x)) for x in itertools.product(*params.values()))
+
+def cart_merge(*dicts):
+  "Lazily computes all possible merge combinations of the given dicts."
+  return (fy.merge(*c) for c in itertools.product(*dicts))
 
 def draw_graph(
   g, y=None, with_features=False, with_colors=True,

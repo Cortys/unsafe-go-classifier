@@ -96,18 +96,29 @@ def encode_graph(
   for node in node_ordering:
     data = g.nodes[node]
     if node_label_count > 0:
-      X[i, node_label_fn(data)] = 1
+      label_dims = node_label_fn(data)
+      if label_dims is False:
+        continue
+      X[i, label_dims] = 1
     if node_feature_dim > 0:
       X[i, node_label_count:node_dim] = data["features"]
     if with_marked_node and data.get("marked", False):
       marked = i
     n_ids[node] = i
     i += 1
+  if i < n_count:
+    X = X[:i]
+    n_count = i
+    filtered_nodes = True
+  else:
+    filtered_nodes = False
 
   i = 0
   for e in edge_ordering:
     a = e[0]
     b = e[1]
+    if filtered_nodes and (a not in n_ids or b not in n_ids):
+      continue
     if edge_dim > 0:
       data = g.edges[e]
       if edge_label_count > 0:
@@ -129,10 +140,17 @@ def encode_graph(
   if refs_count > 1:
     ref_a = tuple(np.array(r, dtype=np.int32) for r in ref_a)
     ref_b = tuple(np.array(r, dtype=np.int32) for r in ref_b)
-  elif multirefs:
-    ref_a = (ref_a,)
-    ref_b = (ref_b,)
-    ref_sizes = np.array([[i]], dtype=np.int32)
+    if i < e_count:
+      ref_sizes = ref_sizes[:(i+1)]
+      ref_labels = ref_labels[:i]
+  else:
+    if i < e_count:
+      ref_a = ref_a[:i]
+      ref_b = ref_b[:i]
+    if multirefs:
+      ref_a = (ref_a,)
+      ref_b = (ref_b,)
+      ref_sizes = np.array([[i]], dtype=np.int32)
 
   return dict(
     X=X, R=R,

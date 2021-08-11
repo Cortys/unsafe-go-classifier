@@ -20,69 +20,71 @@ DATA_DIR = Path(f"{utils.PROJECT_ROOT}/data/unsafe-go-dataset")
 no_default_label_subtype = {
   "type", "blocktype", "vartype"
 }
-node_label_type_dim_limits = {
-  "v0_d0_f0_p0": dict(
-    varname=0,
-    datatype=0,
-    function=0,
-    package=0
-  ),
-  "v127_d0_f0_p0": dict(
-    varname=127,
-    datatype=0,
-    function=0,
-    package=0
-  ),
-  "vS_d0_f0_p0": dict(
-    varname=cfg_utils.is_semantic_name,
-    datatype=0,
-    function=0,
-    package=0
-  ),
-  "v0_d127_f0_p0": dict(
-    varname=0,
-    datatype=127,
-    function=0,
-    package=0
-  ),
-  "v0_d0_f127_p0": dict(
-    varname=0,
-    datatype=0,
-    function=127,
-    package=0
-  ),
-  "v0_d0_f0_p127": dict(
-    varname=0,
-    datatype=0,
-    function=0,
-    package=127
-  ),
-  "v127_d127_f127_p127": dict(
-    varname=127,
-    datatype=127,
-    function=127,
-    package=127
-  ),
-  "v255_d255_f255_p255": dict(
-    varname=255,
-    datatype=255,
-    function=255,
-    package=255
-  ),
-  "vS_d127_f127_p127": dict(
-    varname=cfg_utils.is_semantic_name,
-    datatype=127,
-    function=127,
-    package=127
-  ),
-}
 
-for k, d in list(node_label_type_dim_limits.items()):
-  node_label_type_dim_limits[f"{k}_core"] = {
-    **d, "only_core_packages": True
-  }
-  d["only_core_packages"] = False
+def get_limit_name(limit_dict):
+  v = limit_dict["varname"]
+  d = limit_dict["datatype"]
+  f = limit_dict["function"]
+  p = limit_dict["package"]
+  if v == cfg_utils.is_semantic_name:
+    v = "S"
 
+  excl_suffix = ""
+  types = limit_dict["type"]
+  if "var" not in types:
+    excl_suffix += "_v"
+    v = 0
+    limit_dict["varname"] = 0
+    limit_dict["vartype"] = False
+
+  if not limit_dict["vartype"]:
+    excl_suffix += "_vt"
+  if not limit_dict["blocktype"]:
+    excl_suffix += "_bt"
+  if not limit_dict["datatype_flag"]:
+    excl_suffix += "_tf"
+  if not limit_dict["builtin_function"]:
+    excl_suffix += "_fb"
+  if not limit_dict["binary_op"]:
+    excl_suffix += "_ob"
+  if not limit_dict["unary_op"]:
+    excl_suffix += "_ou"
+  if not limit_dict["selfref"]:
+    excl_suffix += "_s"
+
+  limit_name = f"v{v}_d{d}_f{f}_p{p}"
+  if limit_dict["only_core_packages"]:
+    limit_name += "_core"
+  if excl_suffix != "":
+    limit_name += f"_no{excl_suffix}"
+
+  return limit_name
+
+def compute_dim_limit_dict():
+  dim_limits = dict(all={})
+  limit_combinations = utils.cart(
+    varname=[0, 127, cfg_utils.is_semantic_name],
+    type=[{"block", "subblock", "var"}, {"block", "subblock"}],
+    datatype=[0, 127],
+    function=[0, 127],
+    package=[0, 127],
+    blocktype=[False, True],
+    selfref=[False, True],
+    vartype=[False, True],
+    datatype_flag=[False, True],
+    builtin_function=[False, True],
+    binary_op=[False, True],
+    unary_op=[False, True],
+    only_core_packages=[False, True],
+  )
+
+  for limit_dict in limit_combinations:
+    limit_name = get_limit_name(limit_dict)
+    dim_limits[limit_name] = limit_dict
+  return dim_limits
+
+
+node_label_type_dim_limits = compute_dim_limit_dict()
 convert_modes = cfg_utils.convert_modes
 default_mode = "atomic_blocks"
 default_limit_id = "v127_d127_f127_p127"
@@ -193,7 +195,7 @@ def create_graph_dims(
   node_dim_count = 0
   node_dims = dict()
   edge_dims = dict()
-  dim_limits = node_label_type_dim_limits.get(limit_id, {})
+  dim_limits = node_label_type_dim_limits[limit_id]
   only_core_packages = dim_limits.get("only_core_packages", False)
   if only_core_packages:
     core_packages = labels["core_package"]
@@ -213,13 +215,19 @@ def create_graph_dims(
 
     d = dict()
     node_dims[lt] = d
-    if lt not in no_default_label_subtype:
+    limit = dim_limits.get(lt, None)
+    if limit is not False and lt not in no_default_label_subtype:
       d[""] = node_dim_count
       node_dim_count += 1
 
-    limit = dim_limits.get(lt, None)
     if limit is not None:
-      ls = fy.take(limit, ls)
+      if limit is False:
+        ls = []
+      elif isinstance(limit, set):
+        ls = fy.filter(lambda t: t[0] in limit, ls)
+      elif limit is not True:
+        ls = fy.take(limit, ls)
+
     for lb, c in ls:
       d[lb] = node_dim_count
       node_dim_count += 1
@@ -235,17 +243,19 @@ def create_graph_dims(
 
 def get_node_label_dims(node_dims, node_data):
   labels = node_data["labels"]
+  dims = []
 
-  def lookup(label):
+  for label in labels:
     lt, ls = label
     d = node_dims[lt]
     if ls in d:
-      return d[ls]
-    return d.get("", -1)
+      dims.append(d[ls])
+    elif "" in d:
+      dims.append(d[""])
+    elif lt == "type":
+      return False
 
-  return np.array(fy.lfilter(
-    lambda idx: idx >= 0,
-    fy.map(lookup, labels)))
+  return np.array(dims)
 
 def get_edge_label_dim(edge_dims, edge_data):
   return edge_dims[edge_data["label"]]

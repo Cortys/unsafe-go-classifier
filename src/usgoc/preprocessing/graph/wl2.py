@@ -55,6 +55,19 @@ def encode_graph(
 
   marked = -1 if with_marked_node else None
   multi = isinstance(g, nx.MultiGraph)
+  node_label_dims = dict()
+
+  if node_label_count > 0:
+    remove_nodes = set()
+    for n in g.nodes:
+      d = g.nodes[n]
+      label_dims = node_label_fn(g.nodes[n])
+      if label_dims is False:
+        remove_nodes.add(n)
+      node_label_dims[n] = label_dims
+    if len(remove_nodes) > 0:
+      g = g.copy()
+      g.remove_nodes_from(remove_nodes)
 
   if isinstance(g, nx.DiGraph):
     g_base = g.to_undirected(as_view=True)
@@ -93,10 +106,11 @@ def encode_graph(
 
     if a == b:
       X[i, 0] = 1
-      d = g_base.nodes[a]
       if node_label_count > 0:
-        X[i, node_label_offset + node_label_fn(d)] = 1
+        label_dims = node_label_dims[a]
+        X[i, node_label_offset + label_dims] = 1
       if node_feature_dim > 0:
+        d = g_base.nodes[a]
         X[i, node_feature_offset:edge_label_offset] = d["features"]
       if with_marked_node and d.get("marked", False):
         marked = i

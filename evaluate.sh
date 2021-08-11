@@ -20,7 +20,12 @@ docker exec -it $USER $CUDA_ENV --workdir /app/src $CONTAINER_ID python3 ./usgoc
 	# | grep --line-buffered -vE \
 	# "BaseCollectiveExecutor::StartAbort|IteratorGetNext|Shape/|Shape_[0-9]+/"
 
-echo "Pruning MLFLow db..."
-EXPERIMENT_NAME=${EXPERIMENT_NAME:-$(cat EXPERIMENT_NAME)}
-docker exec -it $USER --workdir /app $CONTAINER_ID mlflow gc --backend-store-uri file:./mlruns
-docker exec -it $USER -e EXPERIMENT_NAME=$EXPERIMENT_NAME --workdir /app $CONTAINER_ID mlflow_migrate/sqlite_migrate.sh
+if [ $? -eq 0 ]; then
+	echo "Pruning MLFLow db..."
+	EXPERIMENT_NAME=${EXPERIMENT_NAME:-$(cat EXPERIMENT_NAME)}
+	docker exec -it $USER --workdir /app $CONTAINER_ID mlflow gc --backend-store-uri file:./mlruns
+	docker exec -it $USER -e EXPERIMENT_NAME=$EXPERIMENT_NAME --workdir /app $CONTAINER_ID mlflow_migrate/sqlite_migrate.sh
+else
+	echo "Evaluation failed."
+	exit 1
+fi

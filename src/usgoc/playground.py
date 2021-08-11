@@ -20,7 +20,8 @@ fold = 0
 # mode = "split_blocks"
 mode = "atomic_blocks"
 # limit_id = "v127_d127_f127_p127_core"
-limit_id = "v0_d0_f0_p0"
+limit_id = "v0_d0_f0_p0_no_v_vt_bt_tf" # "datatype_flag" important!
+limit_id = "v0_d0_f0_p0_no_v_vt_bt"
 batch_size_limit = 200
 
 with utils.cache_env(use_cache=True):
@@ -42,6 +43,10 @@ with utils.cache_env(use_cache=True):
 
 # graphs[0].nodes[4]
 # utils.draw_graph(graphs[0], layout="dot")
+
+# len(dataset.node_label_type_dim_limits.keys())
+
+dataset.node_label_type_dim_limits[limit_id]
 
 # -%%
 
@@ -144,7 +149,6 @@ def experiment(model, epochs=100, log=True):
 
 # m = ee.evaluate(em.DeepSetsBuilder, limit_id=limit_id)
 # m[0][2].evaluate(test_ds, return_dict=True)
-
 # m = experiment(model1)
 m2 = experiment(model)
 
