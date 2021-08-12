@@ -20,8 +20,15 @@ fold = 0
 # mode = "split_blocks"
 mode = "atomic_blocks"
 # limit_id = "v127_d127_f127_p127_core"
-limit_id = "v0_d0_f0_p0_no_v_vt_bt_tf" # "datatype_flag" important!
-limit_id = "v0_d0_f0_p0_no_v_vt_bt"
+limit_id = "v0_d0_f0_p0_no_v_vt_bt_tf_fb"  # "datatype_flag" important!
+limit_id = "v0_d0_f0_p0_no_v_vt_bt_tf_fb_ob"  # "ob" important!
+limit_id = "v0_d0_f0_p0_no_v_vt"
+limit_id = "v0_d127_f0_p0_core"
+limit_id = "v127_d127_f127_p127"
+limit_id = "v0_d0_f0_p0_no_v_vt_bt_tf_fb_ob_ou_s"  #
+limit_id = "v0_d0_f0_p0_only_tfArrayBasicInterfaceMapNamedPointerSliceStructTuple_no_v_vt_bt_fb_ob_ou_s"  #
+limit_id = "v0_d0_f0_p0_only_tfBasicInterfaceNamedPointer_no_v_vt_bt_fb_ob_ou_s"  #
+limit_id = "v0_d0_f0_p0_no_v_vt_bt_fb_ob_ou_s"  #
 batch_size_limit = 200
 
 with utils.cache_env(use_cache=True):
@@ -88,7 +95,7 @@ list(train_ds)[0]
 def time_str():
   return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-def experiment(model, epochs=100, log=True):
+def experiment(model, epochs=150, log=True):
   if isinstance(model, kt.HyperModel):
     tuner = kt.Hyperband(
       model,
@@ -135,9 +142,11 @@ def experiment(model, epochs=100, log=True):
       embeddings_freq=10,
       write_graph=True,
       update_freq="batch")
+    patient_stop_early = tf.keras.callbacks.EarlyStopping(
+      monitor="val_loss", patience=100, restore_best_weights=True)
     m.fit(
       train_ds, validation_data=val_ds, verbose=2, epochs=epochs,
-      callbacks=[tb] if log else [])
+      callbacks=[tb, patient_stop_early] if log else [patient_stop_early])
     res = m.evaluate(test_ds, return_dict=True)
     print(res)
     return m

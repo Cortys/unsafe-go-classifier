@@ -30,6 +30,7 @@ def get_limit_name(limit_dict):
     v = "S"
 
   excl_suffix = ""
+  only_suffix = ""
   types = limit_dict["type"]
   if "var" not in types:
     excl_suffix += "_v"
@@ -43,6 +44,8 @@ def get_limit_name(limit_dict):
     excl_suffix += "_bt"
   if not limit_dict["datatype_flag"]:
     excl_suffix += "_tf"
+  elif isinstance(limit_dict["datatype_flag"], set):
+    only_suffix = "_tf" + "".join(sorted(limit_dict["datatype_flag"]))
   if not limit_dict["builtin_function"]:
     excl_suffix += "_fb"
   if not limit_dict["binary_op"]:
@@ -52,9 +55,14 @@ def get_limit_name(limit_dict):
   if not limit_dict["selfref"]:
     excl_suffix += "_s"
 
+  if d == 0 and f == 0 and p == 0:
+    limit_dict["only_core_packages"] = False
+
   limit_name = f"v{v}_d{d}_f{f}_p{p}"
   if limit_dict["only_core_packages"]:
     limit_name += "_core"
+  if only_suffix != "":
+    limit_name += f"_only{only_suffix}"
   if excl_suffix != "":
     limit_name += f"_no{excl_suffix}"
 
@@ -71,7 +79,12 @@ def compute_dim_limit_dict():
     blocktype=[False, True],
     selfref=[False, True],
     vartype=[False, True],
-    datatype_flag=[False, True],
+    datatype_flag=[
+      False, True,
+      {"Pointer"},
+      {"Basic", "Pointer"},
+      {"Basic", "Named", "Pointer"},
+      {"Basic", "Interface", "Named", "Pointer"}],
     builtin_function=[False, True],
     binary_op=[False, True],
     unary_op=[False, True],
