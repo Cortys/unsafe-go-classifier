@@ -22,6 +22,9 @@ no_default_label_subtype = {
 }
 
 def get_limit_name(limit_dict):
+  if isinstance(limit_dict, str):
+    return limit_dict
+
   v = limit_dict["varname"]
   d = limit_dict["datatype"]
   f = limit_dict["function"]
@@ -31,7 +34,15 @@ def get_limit_name(limit_dict):
 
   excl_suffix = ""
   only_suffix = ""
-  types = limit_dict["type"]
+  types: set = limit_dict["type"]
+
+  if "block" not in types:
+    types.remove("subblock")
+    excl_suffix += "_b"
+    f = 0
+    limit_dict["function"] = 0
+  if "subblock" not in types:
+    excl_suffix = "_sb"
   if "var" not in types:
     excl_suffix += "_v"
     v = 0
@@ -79,12 +90,7 @@ def compute_dim_limit_dict():
     blocktype=[False, True],
     selfref=[False, True],
     vartype=[False, True],
-    datatype_flag=[
-      False, True,
-      {"Pointer"},
-      {"Basic", "Pointer"},
-      {"Basic", "Named", "Pointer"},
-      {"Basic", "Interface", "Named", "Pointer"}],
+    datatype_flag=[False, True],
     builtin_function=[False, True],
     binary_op=[False, True],
     unary_op=[False, True],
@@ -200,7 +206,8 @@ def collect_node_label_histogram(graphs, split_id=None, mode=default_mode):
 @utils.cached(
   DATA_DIR / "cfg_dims",
   lambda _, limit_id=default_limit_id, split_id=None, mode=default_mode: (
-    f"dims_{mode}_{limit_id}{'' if split_id is None else '_' + split_id}"),
+    f"dims_{mode}_{get_limit_name(limit_id)}"
+    + ("" if split_id is None else f"_{split_id}")),
   "pretty_json")
 def create_graph_dims(
   graphs, limit_id=default_limit_id, split_id=None, mode=default_mode):
@@ -208,7 +215,10 @@ def create_graph_dims(
   node_dim_count = 0
   node_dims = dict()
   edge_dims = dict()
-  dim_limits = node_label_type_dim_limits[limit_id]
+  if isinstance(limit_id, dict):
+    dim_limits = limit_id
+  else:
+    dim_limits = node_label_type_dim_limits[limit_id]
   only_core_packages = dim_limits.get("only_core_packages", False)
   if only_core_packages:
     core_packages = labels["core_package"]
@@ -452,11 +462,11 @@ def get_encoded_dataset_slices(
 
   train_ds = encoder(
     train_slice, train_dims,
-    split_id=f"{mode}_{limit_id}_{split_id}_train", **kwargs)
+    split_id=f"{mode}_{get_limit_name(limit_id)}_{split_id}_train", **kwargs)
   val_ds = encoder(
     val_slice, train_dims,
-    split_id=f"{mode}_{limit_id}_{split_id}_val", **kwargs)
+    split_id=f"{mode}_{get_limit_name(limit_id)}_{split_id}_val", **kwargs)
   test_ds = encoder(
     test_slice, train_dims,
-    split_id=f"{mode}_{limit_id}_{split_id}_test", **kwargs)
+    split_id=f"{mode}_{get_limit_name(limit_id)}_{split_id}_test", **kwargs)
   return train_dims, train_ds, val_ds, test_ds

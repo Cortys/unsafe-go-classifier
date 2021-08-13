@@ -26,10 +26,23 @@ limit_id = "v0_d0_f0_p0_no_v_vt"
 limit_id = "v0_d127_f0_p0_core"
 limit_id = "v127_d127_f127_p127"
 limit_id = "v0_d0_f0_p0_no_v_vt_bt_tf_fb_ob_ou_s"  #
-limit_id = "v0_d0_f0_p0_only_tfArrayBasicInterfaceMapNamedPointerSliceStructTuple_no_v_vt_bt_fb_ob_ou_s"  #
-limit_id = "v0_d0_f0_p0_only_tfBasicInterfaceNamedPointer_no_v_vt_bt_fb_ob_ou_s"  #
 limit_id = "v0_d0_f0_p0_no_v_vt_bt_fb_ob_ou_s"  #
+limit_id = dict(
+  varname=0, datatype=0, function=0, package=0,
+  type={"block", "subblock"},
+  # type={"block", "subblock", "var"},
+  blocktype=False, selfref=False, vartype=False,
+  # datatype_flag={"Basic", "Interface", "Named", "Pointer"},
+  # datatype_flag=True,
+  datatype_flag=False,
+  builtin_function=False,
+  binary_op=False, unary_op=False,
+  only_core_packages=False
+)
+limit_name = dataset.get_limit_name(limit_id)
 batch_size_limit = 200
+
+limit_name
 
 with utils.cache_env(use_cache=True):
   files = dataset.load_filenames()
@@ -53,7 +66,7 @@ with utils.cache_env(use_cache=True):
 
 # len(dataset.node_label_type_dim_limits.keys())
 
-dataset.node_label_type_dim_limits[limit_id]
+# dataset.node_label_type_dim_limits[limit_id]
 
 # -%%
 
@@ -66,8 +79,8 @@ with utils.cache_env(use_cache=True):
   labels2_inv = fy.flip(labels2)
 
 # model = gnn.MLP
-model = gnn.DeepSets
-# model = gnn.GCN
+# model = gnn.DeepSets
+model = gnn.GCN
 # model = gnn.GIN
 # model = gnn.GGNN
 # model = gnn.RGCN
@@ -128,16 +141,23 @@ def experiment(model, epochs=150, log=True):
       conv_layer_units=[400] * 4, fc_layer_units=[200] * 2,
       conv_activation="tanh",
       conv_inner_activation="elu",
+      fc_activation="tanh",
+      pooling="min",
+      # For 2-WL-GNN:
+      # conv_activation="tanh",
+      # conv_inner_activation="tanh",
+      # fc_activation="elu",
+      # pooling="mean",
+      #
       # conv_dropout_rate=0.1,
       # fc_dropout_rate=0.2,
       conv_batch_norm=True,
       fc_batch_norm=True,
-      fc_activation="tanh",
       out_activation=None,
-      pooling="min", learning_rate=0.001)
+      learning_rate=0.001)
 
     tb = tf.keras.callbacks.TensorBoard(
-      log_dir=f"/app/logs/{time_str()}_{model.name}_{limit_id}_fold{fold}",
+      log_dir=f"/app/logs/{time_str()}_{model.name}_{limit_name}_fold{fold}",
       histogram_freq=10,
       embeddings_freq=10,
       write_graph=True,
