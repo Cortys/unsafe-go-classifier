@@ -21,6 +21,7 @@ def find_outer_run(convert_mode, limit_id, model_name):
   runs = mlflow.search_runs(
     [eid],
     " and ".join([
+      "tags.type = 'outer'",
       f"tags.convert_mode = '{convert_mode}'",
       f"tags.limit_id = '{limit_id}'",
       f"tags.model = '{model_name}'"]),
@@ -35,6 +36,7 @@ def find_inner_runs(fold=None, repeat=None) -> List[mlflow.entities.Run]:
   parent_id = mlflow.active_run().info.run_id
   max_results = 1
   conditions = [
+    "tags.type = 'inner'",
     f"tags.mlflow.parentRunId = '{parent_id}'"]
   if fold is not None:
     conditions.append(f"tags.fold = '{fold}'")
@@ -90,14 +92,19 @@ def evaluate_single(
           raise DryRunException(
             f"Run {run_id} would be overidden. Doing nothing due to dry.")
 
+      parent_tags = mlflow.active_run().data.tags
       model_ctr = get_model_ctr()
       mlflow.tensorflow.autolog(log_models=False)
 
       with mlflow.start_run(
         run_name=f"fold{fold}_repeat{repeat}",
         nested=True) as run:
+        for k, v in parent_tags.items():
+          if not k.startswith("mlflow") and k != "type":
+            mlflow.set_tag(k, v)
         mlflow.set_tag("fold", fold)
         mlflow.set_tag("repeat", repeat)
+        mlflow.set_tag("type", "inner")
         run_id = run.info.run_id
         print(f"Starting {ds_id}_repeat{repeat}, {model_name} ({run_id})...")
 
@@ -220,6 +227,7 @@ def evaluate_limit_id(
     mlflow.set_tag("dataset", ds_name)
     mlflow.set_tag("convert_mode", convert_mode)
     mlflow.set_tag("limit_id", limit_id)
+    mlflow.set_tag("type", "outer")
 
     print(f"Starting outer {ds_name}/{convert_mode}/{limit_id} for {mname}...")
 
