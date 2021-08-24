@@ -1,0 +1,23 @@
+# Build CFG creation tool:
+FROM golang:1.17.0-alpine AS dac
+
+WORKDIR /app
+ADD unsafe_go_tools/scripts/data-acquisition-tool /app
+RUN go get -d -v
+RUN go build
+
+# TF model container:
+FROM tensorflow/tensorflow:2.5.0
+
+RUN apt-get update &&\
+	apt-get install -y graphviz graphviz-dev &&\
+	apt-get clean
+
+WORKDIR /app
+ADD requirements.prod.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY --from=dac /app/data-acquisition-tool /usr/bin/
+
+ENV PYTHONPATH=/app/src
+ADD src/usgoc /app/src/usgoc
