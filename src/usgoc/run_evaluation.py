@@ -1,6 +1,7 @@
 import click
 
 import usgoc.evaluation.datasets as ed
+import usgoc.evaluation.utils as eu
 import usgoc.evaluation.models as em
 import usgoc.evaluation.evaluate as ee
 
@@ -30,22 +31,28 @@ import usgoc.evaluation.evaluate as ee
   default=None)
 @click.option(
   "--fold", "-f",
-  type=click.IntRange(0, ee.FOLDS_MAX),
+  type=click.IntRange(0, eu.FOLDS_MAX),
   default=None)
 @click.option(
   "--repeat", "-r",
-  type=click.IntRange(0, ee.REPEATS_MAX),
+  type=click.IntRange(0, eu.REPEATS_MAX),
   default=None)
 @click.option("--override/--no-override", default=False)
 @click.option("--dry/--no-dry", default=False)
 @click.option("--suffix", type=click.STRING, default="")
 @click.option("--yes", "-y", is_flag=True, default=False)
+@click.option("--export", "-e", is_flag=True, default=False)
 def evaluate(
   model, convert_mode, limit_id, fold=None, repeat=None,
   override=False, dry=False,
   tuner_convert_mode=None, tuner_limit_id=None,
-  suffix="", yes=False):
-  print("Starting evaluation.")
+  suffix="", yes=False, export=False):
+  if export:
+    print("Starting export of winning models.")
+    f = ee.export_best
+  else:
+    print("Starting evaluation.")
+    f = ee.evaluate
   print(f"Will use the following {len(model)} models:")
   for m in model:
     print(f"- {m}")
@@ -70,7 +77,7 @@ def evaluate(
   print("----------------------------------------------------------\n")
 
   for m in model:
-    ee.evaluate(
+    f(
       m,
       convert_modes=convert_mode,
       limit_ids=limit_id,
@@ -79,11 +86,13 @@ def evaluate(
       override=override, dry=dry,
       experiment_suffix=suffix,
       tuner_convert_mode=tuner_convert_mode,
-      tuner_limit_id=tuner_limit_id,
-      return_models=False)
+      tuner_limit_id=tuner_limit_id)
     print("\n----------------------------------------------------------\n")
 
-  print("Evaluation completed.")
+  if export:
+    print("Exported models.")
+  else:
+    print("Evaluation completed.")
 
 
 if __name__ == "__main__":

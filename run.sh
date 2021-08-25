@@ -47,8 +47,8 @@ echo ""
 
 mkdir -p logs
 mkdir -p evaluations
+mkdir -p exported_models
 mkdir -p data
-mkdir -p raw
 mkdir -p plots
 
 docker run --gpus all --name $CONTAINER_NAME \
