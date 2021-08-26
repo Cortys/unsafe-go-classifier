@@ -1,3 +1,4 @@
+import usgoc.utils as utils
 import usgoc.datasets.unsafe_go as dataset
 
 dataset_names = ["usgo_v1"]
@@ -13,6 +14,12 @@ def get_batch_size(convert_mode=None, limit_id=None):
   if convert_mode == "split_blocks":
     return 100
   return 200
+
+def get_dims(
+  fold=0, name=dataset_names[0], convert_mode=None, limit_id=None):
+  return dataset.create_graph_dims(
+    None, limit_id=limit_id, split_id=f"{fold}_0_train", mode=convert_mode,
+    force_cache=True)
 
 def get_encoded(
   in_enc, fold=0,

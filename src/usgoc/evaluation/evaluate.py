@@ -18,7 +18,7 @@ def evaluate_single(
   repeat=0, fold=0, epochs=1000, patience=100,
   convert_mode=None, limit_id=None,
   ds_id="", override=False, dry=False, tensorboard_embeddings=False,
-  return_models=False, return_model_paths=False, return_metrics=False):
+  return_models=False, return_model_paths=False, return_metrics=False, return_dims=False):
     if repeat < 0 or fold < 0:
       return None
 
@@ -42,6 +42,8 @@ def evaluate_single(
               os.path.join(run.info.artifact_uri, "models", "data", "model"),)
           if return_metrics:
             res += (run.data.metrics,)
+          if return_dims:
+            res += (ed.get_dims(fold, convert_mode=convert_mode, limit_id=limit_id),)
           if len(res) == 1:
             res = res[0]
           elif len(res) == 0:
@@ -117,6 +119,8 @@ def evaluate_single(
             os.path.join(run.info.artifact_uri, "models", "data", "model"),)
         if return_metrics:
           res += (run.data.metrics,)
+        if return_dims:
+          res += (dims,)
         if len(res) == 1:
           res = res[0]
         elif len(res) == 0:
@@ -302,6 +306,7 @@ def export_best(
     model_name = hypermodel_builder.name
   kwargs["return_model_paths"] = True
   kwargs["return_metrics"] = True
+  kwargs["return_dims"] = True
   kwargs["dry"] = True
   kwargs["keep_nesting"] = True
   cms = evaluate(hypermodel_builder, **kwargs)
@@ -310,11 +315,13 @@ def export_best(
       target_dir = f"{models_dir}/{convert_mode}_{limit_id}/{model_name}"
       best_fold_crit = None
       best_fold_path = None
+      best_fold_dims = None
       for fold in folds:
         fold_crits = []
         best_repeat_crit = None
         best_repeat_path = None
-        for model_path, metrics in fold:
+        best_repeat_dims = None
+        for model_path, metrics, dims in fold:
           if isinstance(criterion, str):
             crit = metrics[criterion]
           else:
@@ -323,13 +330,17 @@ def export_best(
           if best_repeat_crit is None or crit > best_repeat_crit:
             best_repeat_crit = crit
             best_repeat_path = model_path
+            best_repeat_dims = dims
         # Use mean - 1std as fold peformance criterion:
         fold_crit = np.mean(fold_crits) - np.std(fold_crits)
         if best_fold_crit is None or fold_crit > best_fold_crit:
           best_fold_crit = fold_crit
           best_fold_path = best_repeat_path
+          best_fold_dims = best_repeat_dims
 
       model_path = best_fold_path[len("file://"):]
       print(f"{convert_mode} {limit_id}: Selected model {model_path}.")
       shutil.rmtree(target_dir, ignore_errors=True)
-      shutil.copytree(model_path, target_dir)
+      shutil.copytree(model_path, f"{target_dir}/model")
+      utils.cache_write(
+        f"{target_dir}/dims.json", best_fold_dims, "json")

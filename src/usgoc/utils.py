@@ -312,9 +312,12 @@ def cache_write(file, data, format="pickle"):
     with open(file, "wb" if type == "binary" else "w") as f:
       cache_format.dump(data, f)
 
-def cache(f, file, format="pickle"):
+def cache(f, file, format="pickle", force=False):
   if file.exists():
     return cache_read(file, format)
+
+  if force:
+    raise Exception(f"Could not find cached {file}.")
 
   res = f()
   cache_write(file, res, format)
@@ -322,7 +325,7 @@ def cache(f, file, format="pickle"):
   return res
 
 
-_cache_env_default = dict(use_cache=True)
+_cache_env_default = dict(use_cache=True, force_cache=False)
 _cache_env = _cache_env_default
 
 
@@ -339,9 +342,12 @@ def cache_env(**kwargs):
 def cached(dir_name=None, file_name="", format="pickle"):
   def cache_annotator(f):
     @fy.wraps(f)
-    def cached_fn(*args, use_cache=None, **kwargs):
+    def cached_fn(*args, use_cache=None, force_cache=None, **kwargs):
       if use_cache is None:
         use_cache = _cache_env["use_cache"]
+      if force_cache is None:
+        force_cache = _cache_env["force_cache"]
+      assert not force_cache or use_cache, "Cannot force and forbid cache."
       if not use_cache:
         return f(*args, **kwargs)
 
@@ -351,7 +357,7 @@ def cached(dir_name=None, file_name="", format="pickle"):
 
       dir = make_dir(dir_name)
       cache_file = dir / f"{fn}.{ext}"
-      return cache(lambda: f(*args, **kwargs), cache_file, fm)
+      return cache(lambda: f(*args, **kwargs), cache_file, fm, force=force_cache)
     return cached_fn
   return cache_annotator
 
