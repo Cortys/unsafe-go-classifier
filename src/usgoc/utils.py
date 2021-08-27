@@ -6,7 +6,10 @@ import numbers
 import contextlib
 import itertools
 from collections.abc import Iterable
-import matplotlib.pyplot as plt
+try:
+  import matplotlib.pyplot as plt
+except ImportError:
+  plt = None
 import networkx as nx
 import numpy as np
 import funcy as fy

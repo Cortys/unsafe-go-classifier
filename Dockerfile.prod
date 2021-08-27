@@ -10,8 +10,16 @@ RUN go build
 FROM tensorflow/tensorflow:2.5.0
 
 RUN apt-get update &&\
-	apt-get install -y graphviz graphviz-dev &&\
+	apt-get install -y git golang graphviz graphviz-dev &&\
 	apt-get clean
+
+ENV HOME=/root \
+	PATH="/root/go/bin:${PATH}"
+
+RUN go get golang.org/dl/go1.14.3 &&\
+	go1.14.3 download
+RUN go get golang.org/dl/go1.17 &&\
+	go1.17 download
 
 WORKDIR /app
 ADD requirements.prod.txt requirements.txt
@@ -20,4 +28,8 @@ RUN pip3 install -r requirements.txt
 COPY --from=dac /app/data-acquisition-tool /usr/bin/
 
 ENV PYTHONPATH=/app/src
+ENV PROJECTROOT=/app
 ADD src/usgoc /app/src/usgoc
+ADD exported_models /app/exported_models
+
+ENTRYPOINT ["python3", "src/usgoc/run_prediction.py"]
