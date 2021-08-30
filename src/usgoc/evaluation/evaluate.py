@@ -301,9 +301,11 @@ def export_best(
   **kwargs):
   models_dir = f"{utils.PROJECT_ROOT}/exported_models"
   if isinstance(hypermodel_builder, str):
-    model_name = hypermodel_builder
-  else:
-    model_name = hypermodel_builder.name
+    assert hypermodel_builder in em.models,\
+        f"Unknown model {hypermodel_builder}."
+    hypermodel_builder = em.models[hypermodel_builder]
+
+  model_name = hypermodel_builder.name
   kwargs["return_model_paths"] = True
   kwargs["return_metrics"] = True
   kwargs["return_dims"] = True
@@ -342,5 +344,6 @@ def export_best(
       print(f"{convert_mode} {limit_id}: Selected model {model_path}.")
       shutil.rmtree(target_dir, ignore_errors=True)
       shutil.copytree(model_path, f"{target_dir}/model")
+      best_fold_dims["in_enc"] = hypermodel_builder.in_enc
       utils.cache_write(
         f"{target_dir}/dims.json", best_fold_dims, "json")

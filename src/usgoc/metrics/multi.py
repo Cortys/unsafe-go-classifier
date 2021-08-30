@@ -1,7 +1,7 @@
 import uuid
 import tensorflow as tf
 from tensorflow import keras
-import tensorflow_addons as tfa
+# import tensorflow_addons as tfa
 
 _groups = dict()
 
@@ -96,16 +96,16 @@ class SparseMultiAccuracy(keras.metrics.Metric):
 
     return res
 
-class SparseMultiBinaryConfusionMatrix(tfa.metrics.MultiLabelConfusionMatrix):
-  def update_state(self, y_true, y_pred, sample_weight=None):
-    y_true = tf.reshape(y_true, [-1])
-    y_true = tf.one_hot(y_true, self.num_classes, dtype=tf.int32)
-    y_pred_max = tf.argmax(y_pred, -1, output_type=tf.int32)
-    y_pred = tf.one_hot(y_pred_max, self.num_classes, dtype=tf.int32)
-    super().update_state(y_true, y_pred, sample_weight)
-
-  def reset_state(self):
-    self.reset_states()
+# class SparseMultiBinaryConfusionMatrix(tfa.metrics.MultiLabelConfusionMatrix):
+#   def update_state(self, y_true, y_pred, sample_weight=None):
+#     y_true = tf.reshape(y_true, [-1])
+#     y_true = tf.one_hot(y_true, self.num_classes, dtype=tf.int32)
+#     y_pred_max = tf.argmax(y_pred, -1, output_type=tf.int32)
+#     y_pred = tf.one_hot(y_pred_max, self.num_classes, dtype=tf.int32)
+#     super().update_state(y_true, y_pred, sample_weight)
+#
+#   def reset_state(self):
+#     self.reset_states()
 
 def sparse_multi_confusion_matrix(y_true, y_pred):
   y_true = tf.reshape(y_true, [-1])

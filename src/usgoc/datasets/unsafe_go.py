@@ -127,7 +127,7 @@ def load_raw():
 def raw_to_graphs(raw_dataset, mode=default_mode):
   graphs = np.empty(len(raw_dataset), dtype="O")
   for i, inst in enumerate(raw_dataset):
-    if i == 0 or i % 100 == 99:
+    if i % 100 == 99:
       print(f"[dbg] Preprocessing CFG {i+1}/{len(raw_dataset)} (mode={mode}).")
     graphs[i] = cfg_utils.cfg_to_graph(
       inst["cfg"],
@@ -337,17 +337,27 @@ def wl2_encode_graphs(graphs, dims, radius=1, split_id=None):
 def wl1_tf_dataset(
   dataset, dims, multirefs=True, split_id=None,
   batch_size_limit=None, batch_space_limit=None):
-  graphs, targets = dataset
+  if isinstance(dataset, tuple):
+    graphs, targets = dataset
+  else:
+    graphs = dataset
+    targets = None
   encoded_graphs = wl1_encode_graphs(graphs, dims, multirefs, split_id)
 
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
-  ds_batcher = trans.tuple(
-    wl1.WL1Batcher(
-      batch_size_limit=batch_size_limit,
-      batch_space_limit=batch_space_limit),
-    trans.pair(batcher.Batcher.identity))
-  gen = ds_batcher.batch_generator((encoded_graphs, targets))
+  ds_batcher = wl1.WL1Batcher(
+    batch_size_limit=batch_size_limit,
+    batch_space_limit=batch_space_limit)
+  if targets is not None:
+    ds_batcher = trans.tuple(
+      ds_batcher,
+      trans.pair(batcher.Batcher.identity))
+    gen = ds_batcher.batch_generator((encoded_graphs, targets))
+    out_enc = "int32_pair"
+  else:
+    gen = ds_batcher.batch_generator(encoded_graphs)
+    out_enc = None
 
   in_enc = "mwl1" if multirefs else "wl1"
   in_meta = dict(
@@ -356,22 +366,32 @@ def wl1_tf_dataset(
     graph_feature_dim=len(graph_features),
     with_marked_node=True)
   out_meta = dict()
-  return tf.make_dataset(gen, in_enc, in_meta, "int32_pair", out_meta)
+  return tf.make_dataset(gen, in_enc, in_meta, out_enc, out_meta)
 
 def wl2_tf_dataset(
   dataset, dims, radius=1, split_id=None,
   batch_size_limit=None, batch_space_limit=None):
-  graphs, targets = dataset
+  if isinstance(dataset, tuple):
+    graphs, targets = dataset
+  else:
+    graphs = dataset
+    targets = None
   encoded_graphs = wl2_encode_graphs(graphs, dims, radius, split_id)
 
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
-  ds_batcher = trans.tuple(
-    wl2.WL2Batcher(
-      batch_size_limit=batch_size_limit,
-      batch_space_limit=batch_space_limit),
-    trans.pair(batcher.Batcher.identity))
-  gen = ds_batcher.batch_generator((encoded_graphs, targets))
+  ds_batcher = wl2.WL2Batcher(
+    batch_size_limit=batch_size_limit,
+    batch_space_limit=batch_space_limit)
+  if targets is not None:
+    ds_batcher = trans.tuple(
+      ds_batcher,
+      trans.pair(batcher.Batcher.identity))
+    gen = ds_batcher.batch_generator((encoded_graphs, targets))
+    out_enc = "int32_pair"
+  else:
+    gen = ds_batcher.batch_generator(encoded_graphs)
+    out_enc = None
 
   in_enc = "wl2"
   in_meta = dict(
@@ -380,28 +400,38 @@ def wl2_tf_dataset(
     graph_feature_dim=len(graph_features),
     with_marked_node=True)
   out_meta = dict()
-  return tf.make_dataset(gen, in_enc, in_meta, "int32_pair", out_meta)
+  return tf.make_dataset(gen, in_enc, in_meta, out_enc, out_meta)
 
 def node_set_tf_dataset(
   dataset, dims, split_id=None,
   batch_size_limit=None, batch_space_limit=None):
-  graphs, targets = dataset
+  if isinstance(dataset, tuple):
+    graphs, targets = dataset
+  else:
+    graphs = dataset
+    targets = None
   encoded_graphs = wl1_encode_graphs(graphs, dims, False, split_id)
 
   node_label_count = dims["node_label_count"]
-  ds_batcher = trans.tuple(
-    wl1.SetBatcher(
-      batch_size_limit=batch_size_limit,
-      batch_space_limit=batch_space_limit),
-    trans.pair(batcher.Batcher.identity))
-  gen = ds_batcher.batch_generator((encoded_graphs, targets))
+  ds_batcher = wl1.SetBatcher(
+    batch_size_limit=batch_size_limit,
+    batch_space_limit=batch_space_limit)
+  if targets is not None:
+    ds_batcher = trans.tuple(
+      ds_batcher,
+      trans.pair(batcher.Batcher.identity))
+    gen = ds_batcher.batch_generator((encoded_graphs, targets))
+    out_enc = "int32_pair"
+  else:
+    gen = ds_batcher.batch_generator(encoded_graphs)
+    out_enc = None
 
   in_meta = dict(
     node_label_count=node_label_count,
     graph_feature_dim=len(graph_features),
     with_marked_node=True)
   out_meta = dict()
-  return tf.make_dataset(gen, "node_set", in_meta, "int32_pair", out_meta)
+  return tf.make_dataset(gen, "node_set", in_meta, out_enc, out_meta)
 
 def slice(dataset, indices=None):
   if indices is None:
