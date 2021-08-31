@@ -112,7 +112,7 @@ def encode_graph(
       if node_feature_dim > 0:
         d = g_base.nodes[a]
         X[i, node_feature_offset:edge_label_offset] = d["features"]
-      if with_marked_node and d.get("marked", False):
+      if with_marked_node and g_base.nodes[a].get("marked", False):
         marked = i
 
       ref_a.append(i)

@@ -80,11 +80,11 @@ with utils.cache_env(use_cache=True):
 
 # model = gnn.MLP
 # model = gnn.DeepSets
-model = gnn.GCN
+# model = gnn.GCN
 # model = gnn.GIN
 # model = gnn.GGNN
 # model = gnn.RGCN
-# model = gnn.WL2GNN
+model = gnn.WL2GNN
 
 # model1 = em.DeepSetsBuilder
 # model = em.GGNNBuilder
@@ -104,6 +104,8 @@ list(train_ds)[0]
 
 # model1 = model1(**dims)
 # model = model(**dims)
+
+# %%
 
 def time_str():
   return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
