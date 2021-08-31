@@ -79,7 +79,8 @@ def get_limit_name(limit_dict):
 
   return limit_name
 
-def compute_dim_limit_dict():
+@utils.memoize
+def get_dim_limit_dict():
   dim_limits = dict(all={})
   limit_combinations = utils.cart(
     varname=[0, 127, cfg_utils.is_semantic_name],
@@ -103,7 +104,6 @@ def compute_dim_limit_dict():
   return dim_limits
 
 
-node_label_type_dim_limits = compute_dim_limit_dict()
 convert_modes = cfg_utils.convert_modes
 default_mode = "atomic_blocks"
 default_limit_id = "v127_d127_f127_p127"
@@ -218,7 +218,7 @@ def create_graph_dims(
   if isinstance(limit_id, dict):
     dim_limits = limit_id
   else:
-    dim_limits = node_label_type_dim_limits[limit_id]
+    dim_limits = get_dim_limit_dict()[limit_id]
   only_core_packages = dim_limits.get("only_core_packages", False)
   if only_core_packages:
     core_packages = labels["core_package"]

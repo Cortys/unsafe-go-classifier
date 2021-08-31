@@ -3,7 +3,7 @@ import usgoc.datasets.unsafe_go as dataset
 
 dataset_names = ["usgo_v1"]
 convert_modes = dataset.convert_modes
-limit_ids = dataset.node_label_type_dim_limits.keys()
+limit_ids = dataset.get_dim_limit_dict().keys()
 evaluate_convert_modes = ["atomic_blocks", "split_blocks"]
 evaluate_limit_ids = [
   "v127_d127_f127_p127",
@@ -20,6 +20,9 @@ def get_dims(
   return dataset.create_graph_dims(
     None, limit_id=limit_id, split_id=f"{fold}_0_train", mode=convert_mode,
     force_cache=True)
+
+def get_target_label_dims():
+  return dataset.create_target_label_dims(None, force_cache=True)
 
 def get_encoded(
   in_enc, fold=0,

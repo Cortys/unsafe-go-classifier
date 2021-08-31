@@ -6,4 +6,4 @@ if [ -z "$CONTAINER_NAME" ]; then
 	CONTAINER_NAME="usgoc/pred"
 fi
 
-docker build . -f Dockerfile.pred -t $CONTAINER_NAME
+docker build . -f Dockerfile.pred -t $CONTAINER_NAME $@

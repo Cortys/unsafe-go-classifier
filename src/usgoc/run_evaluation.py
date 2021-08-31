@@ -20,7 +20,7 @@ import usgoc.evaluation.evaluate as ee
   "--limit-id", "-l",
   type=click.Choice(ed.limit_ids),
   default=ed.evaluate_limit_ids,
-  multiple=True)
+  multiple=True, show_choices=False, hidden=True)
 @click.option(
   "--tuner-convert-mode",
   type=click.Choice(ed.convert_modes),
@@ -28,7 +28,7 @@ import usgoc.evaluation.evaluate as ee
 @click.option(
   "--tuner-limit-id",
   type=click.Choice(ed.limit_ids),
-  default=None)
+  default=None, show_choices=False, hidden=True)
 @click.option(
   "--fold", "-f",
   type=click.IntRange(0, eu.FOLDS_MAX),

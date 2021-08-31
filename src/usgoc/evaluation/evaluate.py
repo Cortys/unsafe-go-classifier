@@ -305,6 +305,11 @@ def export_best(
         f"Unknown model {hypermodel_builder}."
     hypermodel_builder = em.models[hypermodel_builder]
 
+  utils.cache_write(
+    f"{models_dir}/target_label_dims.json",
+    ed.get_target_label_dims(),
+    "json")
+
   model_name = hypermodel_builder.name
   kwargs["return_model_paths"] = True
   kwargs["return_metrics"] = True

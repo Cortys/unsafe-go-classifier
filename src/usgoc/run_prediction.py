@@ -108,9 +108,10 @@ def show(obj, format):
   "--limit-id", "-l",
   type=click.STRING,
   default="v127_d127_f127_p127")
+@click.option("--logits", is_flag=True, default=False)
 @click.pass_obj
 def predict(
-  obj, model, limit_id):
+  obj, model, limit_id, logits=False):
   with utils.cache_env(use_cache=False):
     convert_mode = obj["convert_mode"]
     cfg = get_cfg_json(**obj)
@@ -131,8 +132,12 @@ def predict(
     model = tf.keras.models.load_model(f"{dir}/model", custom_objects=dict(
       SparseMultiAccuracy=mm.SparseMultiAccuracy))
     l1_pred, l2_pred = model.predict(ds)
-    prob1 = tf.nn.softmax(l1_pred, -1).numpy()[0]
-    prob2 = tf.nn.softmax(l2_pred, -1).numpy()[0]
+    if logits:
+      prob1 = l1_pred[0]
+      prob2 = l2_pred[0]
+    else:
+      prob1 = tf.nn.softmax(l1_pred, -1).numpy()[0]
+      prob2 = tf.nn.softmax(l2_pred, -1).numpy()[0]
     l1_dict = fy.zipdict(labels1_keys, prob1)
     l2_dict = fy.zipdict(labels2_keys, prob2)
     print(json.dumps([l1_dict, l2_dict], cls=utils.NumpyEncoder))

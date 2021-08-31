@@ -36,6 +36,9 @@ elif [ "$1" == "detached" ]; then
 	fi
 fi
 
+if [[ "$(docker images -q usgoc/usgoc:latest 2> /dev/null)" == "" ]]; then
+	REBUILD="1"
+fi
 
 if [ "$REBUILD" == "1" ]; then
 	echo "Building container..."

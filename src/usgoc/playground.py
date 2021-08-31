@@ -64,9 +64,9 @@ with utils.cache_env(use_cache=True):
 # graphs[0].nodes[4]
 # utils.draw_graph(graphs[0], layout="dot")
 
-# len(dataset.node_label_type_dim_limits.keys())
+# len(dataset.get_dim_limit_dict().keys())
 
-# dataset.node_label_type_dim_limits[limit_id]
+# dataset.get_dim_limit_dict()[limit_id]
 
 # -%%
 
