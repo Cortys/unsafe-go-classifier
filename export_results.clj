@@ -1,12 +1,15 @@
 (ns usgoc.export-results
-  (:require [babashka.pods :as pods]
+  (:require [babashka.deps :as deps]
+            [babashka.pods :as pods]
             [clojure.math :as math]
             [clojure.string :as str]
             [clojure.java.io :as io]
             [clojure.data.csv :as csv]))
 
+(deps/add-deps '{:deps {camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}})
 (pods/load-pod 'org.babashka/go-sqlite3 "0.1.0")
-(require '[pod.babashka.go-sqlite3 :as sqlite])
+(require '[pod.babashka.go-sqlite3 :as sqlite]
+         '[camel-snake-kebab.core :as csk])
 
 (def db-path "./mlflow.db")
 (def results-path "./results")
@@ -21,12 +24,20 @@
 
 (def metric-accessors
   (for [split [nil "val" "test"]
-        base ["accuracy" "label1_accuracy" "label2_accuracy"]
+        base ["loss" "label1_loss" "label2_loss"
+              "accuracy" "label1_accuracy" "label2_accuracy"]
         stat [:mean :std]
-        :let [split-base (str/join "_" (filter some? [split base]))]]
-    [(keyword (str split-base "_" (name stat)))
-     (comp stat (keyword split-base) :metrics)]))
+        :let [split-base (str/join "_" (filter some? [split base]))
+              split-base-kw (keyword split-base)
+              metric-desc {:name (keyword (str split-base "_" (name stat)))
+                           :accessor (comp stat split-base-kw :metrics)}]]
+    (if (= stat :mean)
+      (assoc metric-desc
+             :best-name (keyword (str split-base "_best"))
+             :best-accessor (comp :best? split-base-kw :metrics))
+      metric-desc)))
 
+(defn loss-metric? [metric] (str/ends-with? (name metric) "loss"))
 
 (defn mean [vals] (/ (apply + vals) (count vals)))
 
@@ -81,12 +92,31 @@
   [run-seq]
   (aggregate-maps (map :metrics run-seq)))
 
+(defn find-best-run-metrics
+  ([run-seq] (find-best-run-metrics run-seq :metrics identity))
+  ([run-seq get-value] (find-best-run-metrics run-seq :metrics get-value))
+  ([run-seq get-metrics get-value]
+   (persistent!
+    (reduce (fn [best-metrics run]
+              (reduce-kv (fn [best-metrics metric value]
+                           (let [value (get-value value)
+                                 pred (if (loss-metric? metric) < >)
+                                 best-value (best-metrics metric)]
+                             (if (or (nil? best-value)
+                                     (pred value best-value))
+                               (assoc! best-metrics metric value)
+                               best-metrics)))
+                         best-metrics
+                         (get-metrics run)))
+            (transient {}) run-seq))))
+
 (defn get-runs
   [& {:keys [experiment-id include-metrics? aggregate-children?]
       :or {experiment-id (get-experiment-id)
            include-metrics? false
            aggregate-children? false}}]
-  (let [runs (sqlite/query db-path ["SELECT * FROM runs WHERE experiment_id = ?" experiment-id])
+  (let [runs (sqlite/query db-path ["SELECT * FROM runs WHERE experiment_id = ? ORDER BY name"
+                                    experiment-id])
         run-ids (into #{} (map :run_uuid) runs)
         tags (group-by-run run-ids (sqlite/query db-path ["SELECT * FROM tags"]))
         params (group-by-run run-ids (sqlite/query db-path ["SELECT * FROM params"]))
@@ -109,14 +139,28 @@
                                       (aggregate-runs children))
                                (assoc run :children children))))
                          (runs nil))]
-    parent-runs))
+    (if aggregate-children?
+      (let [best-means (find-best-run-metrics parent-runs :mean)]
+        (map (fn [run]
+               (let [metrics (:metrics run)
+                     metrics (reduce-kv (fn [metrics metric best-mean]
+                                          (assoc-in metrics [metric :best?]
+                                                    (= (-> metrics metric :mean) best-mean)))
+                                        metrics best-means)]
+                 (assoc run :metrics metrics)))
+             parent-runs))
+      parent-runs)))
 
 (defn write-csv
   ([path cols maps]
    (write-csv path cols (map (apply juxt cols)) maps))
   ([path cols xform maps]
    (with-open [w (io/writer path)]
-     (let [data (into [(mapv name cols)]
+     (let [data (into [(mapv (comp (fn [c]
+                                     (str/replace c #"\d+"
+                                                  #(apply str (repeat (parse-long %) \I))))
+                                   csk/->camelCase name)
+                             cols)]
                       xform
                       maps)]
        (csv/write-csv w data)))))
@@ -125,14 +169,20 @@
   []
   (let [runs (get-runs :include-metrics? true :aggregate-children? true)
         model-kws [:model :limit_id :convert_mode :dataset]
-        metric-kws (map first metric-accessors)]
-    (println model-kws metric-kws)
+        metric-kws (map :name metric-accessors)
+        best-kws (keep :best-name metric-accessors)
+        columns (-> model-kws (into metric-kws) (into best-kws))]
+    (println (str "Writing results CSV. "
+                  (count runs) " rows, " (count columns) " columns."))
     (write-csv "results/results.csv"
-               (into model-kws metric-kws)
+               columns
                (map (fn [run]
-                      (into ((apply juxt model-kws) run)
-                            (comp (map second) (map #(% run)))
-                            metric-accessors)))
+                      (-> ((apply juxt model-kws) run)
+                          (into (comp (map :accessor) (map #(% run)))
+                                metric-accessors)
+                          (into (comp (keep :best-accessor)
+                                      (map #(% run)) (map #(if % 1 0)))
+                                metric-accessors))))
                runs)))
 
 (comment
