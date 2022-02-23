@@ -180,7 +180,7 @@ def draw_graph(
 
 def draw_confusion_matrix(m, labels, show=True):
   fig, ax = plt.subplots()
-  ax.imshow(m)
+  ax.imshow(m, cmap="BuGn")
   ax.set_xticks(np.arange(len(labels)))
   ax.set_yticks(np.arange(len(labels)))
   ax.set_xticklabels(labels)
@@ -191,7 +191,11 @@ def draw_confusion_matrix(m, labels, show=True):
 
   for i in range(len(labels)):
     for j in range(len(labels)):
-      ax.text(j, i, m[i, j], ha="center", va="center", color="w")
+      v = m[i, j]
+      color = "black" if v <= 60 else "w"
+      ax.text(
+        j, i, v, ha="center",
+        va="center", color=color)
   fig.tight_layout()
   if show:
     plt.show()
