@@ -42,14 +42,18 @@ import usgoc.evaluation.evaluate as ee
 @click.option("--suffix", type=click.STRING, default="")
 @click.option("--yes", "-y", is_flag=True, default=False)
 @click.option("--export", "-e", is_flag=True, default=False)
+@click.option("--confusion-matrices", is_flag=True, default=False)
 def evaluate(
   model, convert_mode, limit_id, fold=None, repeat=None,
   override=False, dry=False,
   tuner_convert_mode=None, tuner_limit_id=None,
-  suffix="", yes=False, export=False):
+  suffix="", yes=False, export=False, confusion_matrices=False):
   if export:
     print("Starting export of winning models.")
     f = ee.export_best
+  elif confusion_matrices:
+    print("Starting export of confusion matrices.")
+    f = ee.export_confusion_matrices
   else:
     print("Starting evaluation.")
     f = ee.evaluate
@@ -91,6 +95,8 @@ def evaluate(
 
   if export:
     print("Exported models.")
+  elif confusion_matrices:
+    print("Exported confusion matrices.")
   else:
     print("Evaluation completed.")
 

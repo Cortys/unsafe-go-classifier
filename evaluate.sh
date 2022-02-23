@@ -20,7 +20,9 @@ docker exec -it $USER $CUDA_ENV --workdir /app/src $CONTAINER_ID python3 ./usgoc
 	# | grep --line-buffered -vE \
 	# "BaseCollectiveExecutor::StartAbort|IteratorGetNext|Shape/|Shape_[0-9]+/"
 
-if [ $? -eq 0 ]; then
+if [ ! -z "$NO_EXPORT" ]; then
+	echo "No MLFLow DB export."
+elif [ $? -eq 0 ]; then
 	echo "Pruning MLFLow db..."
 	EXPERIMENT_NAME=${EXPERIMENT_NAME:-$(cat EXPERIMENT_NAME)}
 	docker exec -it $USER --workdir /app $CONTAINER_ID mlflow gc --backend-store-uri file:./mlruns

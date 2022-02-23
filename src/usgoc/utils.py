@@ -5,6 +5,7 @@ import inspect
 import numbers
 import contextlib
 import itertools
+from pathlib import Path
 from collections.abc import Iterable
 try:
   import matplotlib.pyplot as plt
@@ -177,7 +178,7 @@ def draw_graph(
 
   plt.show()
 
-def draw_confusion_matrix(m, labels):
+def draw_confusion_matrix(m, labels, show=True):
   fig, ax = plt.subplots()
   ax.imshow(m)
   ax.set_xticks(np.arange(len(labels)))
@@ -192,7 +193,10 @@ def draw_confusion_matrix(m, labels):
     for j in range(len(labels)):
       ax.text(j, i, m[i, j], ha="center", va="center", color="w")
   fig.tight_layout()
-  plt.show()
+  if show:
+    plt.show()
+  else:
+    return fig
 
 def graph_feature_dims(g):
   dim_node_features = 0
@@ -268,9 +272,10 @@ cache_format_types = {"binary", "text", "custom"}
 
 def cache_format(loader, dumper, type="binary"):
   assert type in cache_format_types
+  t = type
 
   class CacheFormat:
-    type = type
+    type = t
     load = staticmethod(loader)
     dump = staticmethod(dumper)
 
@@ -286,7 +291,13 @@ cache_formats = dict(
   pretty_json=cache_format(
     fy.partial(json.load, cls=NumpyDecoder),
     fy.partial(json.dump, indent="\t", cls=NumpyEncoder),
-    type="text")
+    type="text"),
+  plot=cache_format(
+    lambda _: None,
+    lambda fig, file: fig.savefig(
+      file, pad_inches=0, bbox_inches="tight", dpi=300),
+    type="custom"
+  )
 )
 
 def register_cache_format(format, load, dump, type="binary"):
@@ -316,6 +327,9 @@ def cache_write(file, data, format="pickle"):
       cache_format.dump(data, f)
 
 def cache(f, file, format="pickle", force=False):
+  if isinstance(file, str):
+    file = Path(file)
+
   if file.exists():
     return cache_read(file, format)
 
