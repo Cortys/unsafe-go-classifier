@@ -441,17 +441,12 @@ def export_confusion_matrices(
   kwargs["lazy_folds"] = True
   cms = evaluate(hypermodel_builder, **kwargs)
 
-  print("loaded", len(cms))
-
   labels1, labels2 = ed.get_target_label_dims()
   labels1_keys = labels1.keys()
   labels2_keys = labels2.keys()
-  print("keys", labels1_keys, labels2_keys)
 
   for convert_mode, lids in cms.items():
-    print(convert_mode, len(lids))
     for limit_id, get_folds in lids.items():
-      print(limit_id)
       prefix = f"{convert_mode}_{limit_id}_{model_name}"
 
       @utils.memoize
@@ -466,11 +461,17 @@ def export_confusion_matrices(
           "val": [],
           "test": [],
         }
+        i = 0
+        n = len(folds)
         for fold in folds:
           cm1_train, cm2_train = [], []
           cm1_val, cm2_val = [], []
           cm1_test, cm2_test = [], []
+          m = len(fold)
+          nm = n * m
           for get_model, get_ds in fold: # getter fns due to "lazy_return"
+            i += 1
+            print(f"Computing predictions {i}/{nm}...")
             model = get_model()
             _, train_ds, val_ds, test_ds = get_ds()
             (preds1, preds2), (tgts1, tgts2) = get_preds_and_targets(model, train_ds)

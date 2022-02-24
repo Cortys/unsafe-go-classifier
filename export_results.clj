@@ -14,13 +14,32 @@
 (def db-path "./mlflow.db")
 (def results-path "./results")
 (def experiment-name "usgo_v1")
-(def top-metrics-query
-  "SELECT m1.run_uuid as run_uuid, m1.key as key, m1.value as value
+#_(def top-metrics-query
+    "SELECT m1.run_uuid as run_uuid, m1.key as key, m1.value as value
    FROM metrics m1, (
      SELECT run_uuid, CAST(value AS INT) AS max_step FROM metrics
      WHERE run_uuid = ? AND key = \"restored_epoch\"
    ) m2
    WHERE m1.run_uuid = m2.run_uuid AND (m1.step = m2.max_step OR m1.step = -1)")
+; Simple metrics query can be used if database only contains the last metric values:
+(def top-metrics-query "SELECT * FROM metrics WHERE run_uuid = ?")
+(def complete-run-child-count 30)
+
+(def model-name-replacements {"WL2GNN" "2-WL-GNN"})
+(def limit-id-replacements {"v127_d127_f127_p127" "all"
+                            "v0_d127_f127_p127" "no vars"
+                            "v127_d0_f127_p127" "no types"
+                            "v127_d127_f0_p127" "no funcs"
+                            "v127_d127_f127_p0" "no pkgs"
+                            "v0_d0_f0_p0" "none"})
+(def model-order (zipmap ["MLP" "DeepSets" "GIN" "WL2GNN"] (range)))
+(def limit-id-order (zipmap ["v127_d127_f127_p127"
+                             "v0_d127_f127_p127"
+                             "v127_d0_f127_p127"
+                             "v127_d127_f0_p127"
+                             "v127_d127_f127_p0"
+                             "v0_d0_f0_p0"]
+                            (range)))
 
 (def metric-accessors
   (for [split [nil "val" "test"]
@@ -36,6 +55,8 @@
              :best-name (keyword (str split-base "_best"))
              :best-accessor (comp :best? split-base-kw :metrics))
       metric-desc)))
+
+(defn get-default [m] #(get m % %))
 
 (defn loss-metric? [metric] (str/ends-with? (name metric) "loss"))
 
@@ -110,6 +131,11 @@
                          (get-metrics run)))
             (transient {}) run-seq))))
 
+(defn grouped-best-run-metrics
+  ([run-seq group-fn & args]
+   (update-vals (group-by group-fn run-seq)
+                #(apply find-best-run-metrics % args))))
+
 (defn get-runs
   [& {:keys [experiment-id include-metrics? aggregate-children?]
       :or {experiment-id (get-experiment-id)
@@ -133,20 +159,27 @@
                   (group-by :mlflow.parentRunId))
         parent-runs (map (fn [run]
                            (let [run (dissoc run :metrics)
-                                 children (runs (:run_uuid run))]
+                                 children (runs (:run_uuid run))
+                                 run (assoc run :complete?
+                                            (= (count children)
+                                               complete-run-child-count))]
                              (if aggregate-children?
                                (assoc run :metrics
                                       (aggregate-runs children))
                                (assoc run :children children))))
                          (runs nil))]
     (if aggregate-children?
-      (let [best-means (find-best-run-metrics parent-runs :mean)]
+      (let [grouper :limit_id
+            get-rounded-mean (comp #(math/round (* 1000 %)) :mean)
+            best-means (grouped-best-run-metrics parent-runs grouper
+                                                 get-rounded-mean)]
         (map (fn [run]
                (let [metrics (:metrics run)
                      metrics (reduce-kv (fn [metrics metric best-mean]
                                           (assoc-in metrics [metric :best?]
-                                                    (= (-> metrics metric :mean) best-mean)))
-                                        metrics best-means)]
+                                                    (= (-> metrics metric get-rounded-mean)
+                                                       best-mean)))
+                                        metrics (-> run grouper best-means))]
                  (assoc run :metrics metrics)))
              parent-runs))
       parent-runs)))
@@ -168,6 +201,10 @@
 (defn write-aggregate-runs
   []
   (let [runs (get-runs :include-metrics? true :aggregate-children? true)
+        runs (filter :complete? runs)
+        runs (sort-by (juxt (comp limit-id-order :limit_id)
+                            (comp model-order :model))
+                      runs)
         model-kws [:model :limit_id :convert_mode :dataset]
         metric-kws (map :name metric-accessors)
         best-kws (keep :best-name metric-accessors)
@@ -177,7 +214,12 @@
     (write-csv "results/results.csv"
                columns
                (map (fn [run]
-                      (-> ((apply juxt model-kws) run)
+                      (-> ((apply juxt [(comp (get-default model-name-replacements)
+                                              :model)
+                                        (comp (get-default limit-id-replacements)
+                                              :limit_id)
+                                        :convert_mode :dataset])
+                           run)
                           (into (comp (map :accessor) (map #(% run)))
                                 metric-accessors)
                           (into (comp (keep :best-accessor)
