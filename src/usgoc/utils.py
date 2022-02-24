@@ -197,6 +197,9 @@ def draw_confusion_matrix(m, labels, show=True):
         j, i, v, ha="center",
         va="center", color=color)
   fig.tight_layout()
+  fig.set_size_inches(
+    4 / (fig.subplotpars.right - fig.subplotpars.left),
+    4 / (fig.subplotpars.top - fig.subplotpars.bottom))
   if show:
     plt.show()
   else:
