@@ -43,11 +43,16 @@ import usgoc.evaluation.evaluate as ee
 @click.option("--yes", "-y", is_flag=True, default=False)
 @click.option("--export", "-e", is_flag=True, default=False)
 @click.option("--confusion-matrices", is_flag=True, default=False)
+@click.option("--nop", is_flag=True, default=False)
 def evaluate(
   model, convert_mode, limit_id, fold=None, repeat=None,
   override=False, dry=False,
   tuner_convert_mode=None, tuner_limit_id=None,
-  suffix="", yes=False, export=False, confusion_matrices=False):
+  suffix="", yes=False, export=False, confusion_matrices=False, nop=False):
+  if nop:
+    print("NO OP: No evaluation done.")
+    return
+
   if export:
     print("Starting export of winning models.")
     f = ee.export_best
