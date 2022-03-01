@@ -9,7 +9,7 @@ FOLDS_MAX = 10
 REPEATS_MAX = 3
 
 
-def find_outer_run(convert_mode, limit_id, model_name):
+def find_outer_run(convert_mode, limit_id, model_name) -> mlflow.entities.Run | None:
   eid = mlflow.tracking.fluent._get_experiment_id()
   runs = mlflow.search_runs(
     [eid],
@@ -45,7 +45,7 @@ def find_inner_runs(fold=None, repeat=None) -> List[mlflow.entities.Run]:
 
   return runs
 
-def find_inner_run(fold, repeat):
+def find_inner_run(fold, repeat) -> mlflow.entities.Run | None:
   runs = find_inner_runs(fold, repeat)
   if len(runs) == 0:
     return None
