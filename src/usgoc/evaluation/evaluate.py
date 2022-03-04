@@ -1,4 +1,3 @@
-from locale import MON_2
 import os
 import shutil
 import numpy as np
@@ -7,22 +6,51 @@ import tensorflow as tf
 import mlflow
 import matplotlib.pyplot as plt
 from pathlib import Path
+import yaml
 
 import usgoc.utils as utils
 import usgoc.evaluation.utils as eu
 import usgoc.evaluation.models as em
 import usgoc.evaluation.datasets as ed
+import usgoc.models.utils as mu
 import usgoc.metrics.multi as mm
 
 class DryRunException(Exception):
   pass
 
+calib_config_name = "conformal_calibration_configs.yml"
+
+def evaluate_single_conformal(
+  model, train_ds, val_ds, test_ds,
+  alphas=[0.03, 0.05, 0.07, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5]):
+  calibration_configs = mu.multi_calibrate_conformal(model, val_ds, alphas)
+  print("Computed conformal calibration configs:", calibration_configs)
+
+  mlflow.log_dict(calibration_configs, calib_config_name)
+
+  def log_conf(ds, prefix=""):
+    preds, targets = mu.multi_predict_conformal_with_targets(
+      model, ds, calibration_configs)
+    histograms = mu.multi_conformal_histograms(preds)
+    mlflow.log_dict(histograms, f"{prefix}conformal_set_histograms.yml")
+    metrics = mu.multi_conformal_metrics(preds, targets)
+    print(f"Computed conformal {prefix}metrics:", metrics)
+    for k, v in metrics:
+      mlflow.log_metric(f"{prefix}{k}", v, -1)
+
+  log_conf(train_ds)
+  log_conf(val_ds, "val_")
+  log_conf(test_ds, "test_")
+  return calibration_configs
+
 def evaluate_single(
   get_model_ctr, get_ds, model_name,
   repeat=0, fold=0, epochs=1000, patience=100,
   convert_mode=None, limit_id=None,
-  ds_id="", override=False, dry=False, tensorboard_embeddings=False,
-  return_models=False, return_model_paths=False, return_metrics=False,
+  ds_id="", override=False, override_conformal=False,
+  dry=False, tensorboard_embeddings=False,
+  return_models=False, return_model_paths=False,
+  return_calibration_configs=False, return_metrics=False,
   return_dims=False, return_ds=False, lazy_return=False):
     if repeat < 0 or fold < 0:
       return None
@@ -34,21 +62,42 @@ def evaluate_single(
         run_id = run.info.run_id
         run_status = run.info.status
         if run_status == "FINISHED" and not override:
-          print(
-            f"Skipping {ds_id}_repeat{repeat}, {model_name}.",
-            f"Existing run: {run_id}.")
+          model_load_fn = lambda: mlflow.keras.load_model(
+            f"runs:/{run_id}/models", custom_objects=dict(
+                SparseMultiAccuracy=mm.SparseMultiAccuracy))
+          model = None
+          calib_configs = None
+          calib_config_path = os.path.join(run.info.artifact_uri, calib_config_name)
+          if override_conformal or not os.path.exists(calib_config_path):
+            print(f"Overriding conformal metrics {ds_id}_repeat{repeat}, {model_name}.",
+                  f"Existing run: {run_id}")
+            with mlflow.start_run(run_id, nested=True) as r:
+              _, train_ds, val_ds, test_ds = get_ds()
+              model = model_load_fn()
+              calib_configs = evaluate_single_conformal(model, train_ds, val_ds, test_ds)
+              run = r
+          else:
+            print(
+              f"Skipping {ds_id}_repeat{repeat}, {model_name}.",
+              f"Existing run: {run_id}.")
           res = ()
           if return_models:
-            model_load_fn = lambda: mlflow.keras.load_model(
-              f"runs:/{run_id}/models", custom_objects=dict(
-                SparseMultiAccuracy=mm.SparseMultiAccuracy))
             if lazy_return:
-              res += (model_load_fn,)
+              if model is not None:
+                res += (lambda: model,)
+              else:
+                res += (model_load_fn,)
             else:
               res += (model_load_fn(),)
           if return_model_paths:
             res += (
               os.path.join(run.info.artifact_uri, "models", "data", "model"),)
+          if return_calibration_configs:
+            if calib_configs is None:
+              with open(calib_config_path, "r") as f:
+                res += (yaml.safe_load(f),)
+            else:
+              res += (calib_configs,)
           if return_metrics:
             res += (run.data.metrics,)
           if return_ds:
@@ -131,6 +180,8 @@ def evaluate_single(
         for k, v in test_res.items():
           mlflow.log_metric(f"test_{k}", v, -1)
 
+        calib_configs = evaluate_single_conformal(model, train_ds, val_ds, test_ds)
+
         print(f"Finished {ds_id}_repeat{repeat}, {model_name} ({run_id}).")
 
         res = ()
@@ -142,6 +193,8 @@ def evaluate_single(
         if return_model_paths:
           res += (
             os.path.join(run.info.artifact_uri, "models", "data", "model"),)
+        if return_calibration_configs:
+          res += (calib_configs,)
         if return_metrics:
           res += (run.data.metrics,)
         if return_ds:

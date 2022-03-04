@@ -38,6 +38,7 @@ import usgoc.evaluation.evaluate as ee
   type=click.IntRange(0, eu.REPEATS_MAX),
   default=None)
 @click.option("--override/--no-override", default=False)
+@click.option("--override-conformal/--no-override-conformal", default=False)
 @click.option("--dry/--no-dry", default=False)
 @click.option("--suffix", type=click.STRING, default="")
 @click.option("--yes", "-y", is_flag=True, default=False)
@@ -46,7 +47,7 @@ import usgoc.evaluation.evaluate as ee
 @click.option("--nop", is_flag=True, default=False)
 def evaluate(
   model, convert_mode, limit_id, fold=None, repeat=None,
-  override=False, dry=False,
+  override=False, override_conformal=False, dry=False,
   tuner_convert_mode=None, tuner_limit_id=None,
   suffix="", yes=False, export=False, confusion_matrices=False, nop=False):
   if nop:
@@ -77,6 +78,7 @@ def evaluate(
   print(f"- Tuner convert mode: {str(tuner_convert_mode)}")
   print(f"- Tuner limit_id: {str(tuner_limit_id)}")
   print(f"- Override: {str(override)}")
+  print(f"- Override conformal: {str(override_conformal)}")
   print(f"- Dry run: {str(dry)}")
   print(f"- Experiment suffix: \"{suffix}\"")
 
@@ -92,7 +94,8 @@ def evaluate(
       limit_ids=limit_id,
       fold=fold,
       repeat=repeat,
-      override=override, dry=dry,
+      override=override, override_conformal=override_conformal,
+      dry=dry,
       experiment_suffix=suffix,
       tuner_convert_mode=tuner_convert_mode,
       tuner_limit_id=tuner_limit_id)
