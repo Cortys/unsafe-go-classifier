@@ -4,10 +4,18 @@ import usgoc.datasets.unsafe_go as dataset
 dataset_names = ["usgo_v1"]
 convert_modes = dataset.convert_modes
 limit_ids = dataset.get_dim_limit_dict().keys()
-evaluate_convert_modes = ["atomic_blocks", "split_blocks"]
+evaluate_convert_modes = [
+  "atomic_blocks",
+  # "split_blocks"
+]
 evaluate_limit_ids = [
   "v127_d127_f127_p127",
-  "v127_d127_f127_p127_core",
+  "v0_d127_f127_p127",
+  "v127_d0_f127_p127",
+  "v127_d127_f0_p127",
+  "v127_d127_f127_p0",
+  "v0_d0_f0_p0",
+  # "v127_d127_f127_p127_core",
 ]
 
 def get_batch_size(convert_mode=None, limit_id=None):

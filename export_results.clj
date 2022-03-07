@@ -44,7 +44,9 @@
 (def metric-accessors
   (for [split [nil "val" "test"]
         base ["loss" "label1_loss" "label2_loss"
-              "accuracy" "label1_accuracy" "label2_accuracy"]
+              "accuracy" "label1_accuracy" "label2_accuracy"
+              "accuracy_conf_0.1" "label1_accuracy_conf_0.1" "label2_accuracy_conf_0.1"
+              "label1_mean_size_conf_0.1" "label2_mean_size_conf_0.1"]
         stat [:mean :std]
         :let [split-base (str/join "_" (filter some? [split base]))
               split-base-kw (keyword split-base)
@@ -58,7 +60,8 @@
 
 (defn get-default [m] #(get m % %))
 
-(defn loss-metric? [metric] (str/ends-with? (name metric) "loss"))
+(defn loss-metric? [metric]
+  (not (str/includes? (name metric) "accuracy")))
 
 (defn mean [vals] (/ (apply + vals) (count vals)))
 
@@ -184,18 +187,24 @@
              parent-runs))
       parent-runs)))
 
+(defn normalize-colname
+  [colname]
+  (-> colname
+      name
+      csk/->camelCase
+      (str/replace #"0\.(\d+)"
+                   (fn [[_ decs]] (apply str "p" (map #(char (+ 17 (int %))) decs))))
+      (str/replace #"\d+" #(apply str (repeat (parse-long %) \I)))))
+
 (defn write-csv
   ([path cols maps]
    (write-csv path cols (map (apply juxt cols)) maps))
   ([path cols xform maps]
    (with-open [w (io/writer path)]
-     (let [data (into [(mapv (comp (fn [c]
-                                     (str/replace c #"\d+"
-                                                  #(apply str (repeat (parse-long %) \I))))
-                                   csk/->camelCase name)
-                             cols)]
-                      xform
-                      maps)]
+     (let [data
+           (into [(mapv normalize-colname cols)]
+                 xform
+                 maps)]
        (csv/write-csv w data)))))
 
 (defn write-aggregate-runs

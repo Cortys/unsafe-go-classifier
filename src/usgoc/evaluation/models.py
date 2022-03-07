@@ -116,10 +116,10 @@ models = dict(
 evaluate_models = [
   "MLP",
   "DeepSets",
-  "GCN",
+  # "GCN",
   "GIN",
-  "GGNN",
+  # "GGNN",
   "WL2GNN",
-  "RGCN",
-  "RGIN"
+  # "RGCN",
+  # "RGIN"
 ]

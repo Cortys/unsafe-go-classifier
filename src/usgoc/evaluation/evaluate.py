@@ -1,4 +1,5 @@
 import os
+from pickle import HIGHEST_PROTOCOL
 import shutil
 import numpy as np
 import funcy as fy
@@ -19,6 +20,7 @@ class DryRunException(Exception):
   pass
 
 calib_config_name = "conformal_calibration_configs.yml"
+size_hist_name_fn = lambda prefix: f"{prefix}conformal_set_histograms.yml"
 
 def evaluate_single_conformal(
   model, train_ds, val_ds, test_ds,
@@ -35,13 +37,14 @@ def evaluate_single_conformal(
     mlflow.log_dict(histograms, f"{prefix}conformal_set_histograms.yml")
     metrics = mu.multi_conformal_metrics(preds, targets)
     print(f"Computed conformal {prefix}metrics:", metrics)
-    for k, v in metrics:
+    for k, v in metrics.items():
       mlflow.log_metric(f"{prefix}{k}", v, -1)
+    return histograms
 
-  log_conf(train_ds)
-  log_conf(val_ds, "val_")
-  log_conf(test_ds, "test_")
-  return calibration_configs
+  train_hist = log_conf(train_ds)
+  val_hist = log_conf(val_ds, "val_")
+  test_hist = log_conf(test_ds, "test_")
+  return calibration_configs, (train_hist, val_hist, test_hist)
 
 def evaluate_single(
   get_model_ctr, get_ds, model_name,
@@ -51,7 +54,8 @@ def evaluate_single(
   dry=False, tensorboard_embeddings=False,
   return_models=False, return_model_paths=False,
   return_calibration_configs=False, return_metrics=False,
-  return_dims=False, return_ds=False, lazy_return=False):
+  return_size_histograms=False,
+  return_dims=False, return_ds=False, lazy_return=False, ignore_status=False):
     if repeat < 0 or fold < 0:
       return None
 
@@ -61,20 +65,26 @@ def evaluate_single(
       if run is not None:
         run_id = run.info.run_id
         run_status = run.info.status
-        if run_status == "FINISHED" and not override:
+        artifact_uri = run.info.artifact_uri[len("file://"):]
+        if (run_status == "FINISHED" or ignore_status) and not override:
           model_load_fn = lambda: mlflow.keras.load_model(
             f"runs:/{run_id}/models", custom_objects=dict(
                 SparseMultiAccuracy=mm.SparseMultiAccuracy))
           model = None
           calib_configs = None
-          calib_config_path = os.path.join(run.info.artifact_uri, calib_config_name)
+          hists = None
+          calib_config_path = os.path.join(artifact_uri, calib_config_name)
+          hist_paths = fy.lmap(
+            lambda pre: os.path.join(artifact_uri, size_hist_name_fn(pre)),
+            ["", "val_", "test_"])
           if override_conformal or not os.path.exists(calib_config_path):
             print(f"Overriding conformal metrics {ds_id}_repeat{repeat}, {model_name}.",
+                  f"Calibration config path: {calib_config_path}.",
                   f"Existing run: {run_id}")
             with mlflow.start_run(run_id, nested=True) as r:
               _, train_ds, val_ds, test_ds = get_ds()
               model = model_load_fn()
-              calib_configs = evaluate_single_conformal(model, train_ds, val_ds, test_ds)
+              calib_configs, hists = evaluate_single_conformal(model, train_ds, val_ds, test_ds)
               run = r
           else:
             print(
@@ -95,11 +105,19 @@ def evaluate_single(
           if return_calibration_configs:
             if calib_configs is None:
               with open(calib_config_path, "r") as f:
-                res += (yaml.safe_load(f),)
+                res += (yaml.unsafe_load(f),)
             else:
               res += (calib_configs,)
           if return_metrics:
             res += (run.data.metrics,)
+          if return_size_histograms:
+            if hists is None:
+              for pre in ["", "val_", "test_"]:
+                with open(os.path.join(
+                  artifact_uri, size_hist_name_fn(pre)), "r") as f:
+                  res += (yaml.unsafe_load(f),)
+            else:
+              res += hists
           if return_ds:
             if lazy_return:
               res += (get_ds,)
@@ -125,7 +143,7 @@ def evaluate_single(
             f"Existing run: {run_id}.")
         else:
           raise DryRunException(
-            f"Run {run_id} would be overidden. Doing nothing due to dry.")
+            f"Run {run_id} ({run_status}) would be overidden. Doing nothing due to dry.")
 
       if lazy_return:
         print(f"WARNING: True lazy returns impossible due to cache miss.")
