@@ -11,7 +11,7 @@
 (require '[pod.babashka.go-sqlite3 :as sqlite]
          '[camel-snake-kebab.core :as csk])
 
-(def db-path "./mlflow.db")
+(def db-path "./mlflow_v1.db")
 (def results-path "./results")
 (def experiment-name "usgo_v1")
 #_(def top-metrics-query
@@ -65,24 +65,49 @@
 
 (defn mean [vals] (/ (apply + vals) (count vals)))
 
-(defn mean-std
-  [vals]
-  (let [m (mean vals)]
-    [m (math/sqrt
-        (/ (apply + (map (comp #(* % %) #(- % m))
-                         vals))
-           (dec (count vals))))]))
+(defn mean-var
+  [vals & [vars]]
+  (let [m (mean vals)
+        v (if (nil? vars)
+            (/ (apply + (map (comp #(* % %) #(- % m))
+                             vals))
+               (dec (count vals)))
+            (/ (apply + vars) (#(* % %) (count vars))))]
+    [m v]))
 
 (defn stats
-  [vals]
-  (let [[vmean vstd] (mean-std vals)
-        vmin (apply min vals)
-        vmax (apply max vals)]
+  [vals
+   & {:keys [with-var? val-fn var-fn min-fn max-fn count-fn]
+      :or {with-var? false
+           val-fn first
+           var-fn second
+           min-fn nil
+           max-fn nil
+           count-fn nil}}]
+  (let [[inner-vals :as mean-args]
+        (if with-var?
+          [(map val-fn vals) (map var-fn vals)]
+          [vals])
+        [vmean vvar] (apply mean-var mean-args)
+        vstd (math/sqrt vvar)
+        outer-count (count vals)
+        vste (/ vstd (math/sqrt outer-count))
+        vmin (apply min (if (nil? min-fn)
+                          inner-vals
+                          (map min-fn vals)))
+        vmax (apply max (if (nil? max-fn)
+                          inner-vals
+                          (map max-fn vals)))]
     {:mean vmean
+     :var vvar
      :std vstd
+     :ste vste
      :min vmin
      :max vmax
-     :count (count vals)}))
+     :outer-count outer-count
+     :count (if (nil? count-fn)
+              outer-count
+              (transduce (map count-fn) + vals))}))
 
 (defn get-experiment-id
   []
@@ -105,16 +130,23 @@
   (kv-list->map (sqlite/query db-path [top-metrics-query run-id])))
 
 (defn aggregate-maps
-  [maps]
+  [maps & {:as opts}]
   (as-> maps $
     (filter some? $)
     (map #(update-vals % vector) $)
     (apply merge-with into $)
-    (update-vals $ stats)))
+    (update-vals $ #(stats % opts))))
 
 (defn aggregate-runs
   [run-seq]
-  (aggregate-maps (map :metrics run-seq)))
+  (let [folds (vals (group-by :fold run-seq))
+        folds (map #(aggregate-maps (map :metrics %)) folds)]
+    (aggregate-maps folds
+                    :with-var? true
+                    :val-fn :mean
+                    :var-fn :ste
+                    :min-fn :min :max-fn :max
+                    :count-fn :count)))
 
 (defn find-best-run-metrics
   ([run-seq] (find-best-run-metrics run-seq :metrics identity))
@@ -139,27 +171,32 @@
    (update-vals (group-by group-fn run-seq)
                 #(apply find-best-run-metrics % args))))
 
-(defn get-runs
-  [& {:keys [experiment-id include-metrics? aggregate-children?]
+(defn get-raw-runs
+  [& {:keys [experiment-id include-metrics?]
       :or {experiment-id (get-experiment-id)
-           include-metrics? false
-           aggregate-children? false}}]
+           include-metrics? false}}]
   (let [runs (sqlite/query db-path ["SELECT * FROM runs WHERE experiment_id = ? ORDER BY name"
                                     experiment-id])
         run-ids (into #{} (map :run_uuid) runs)
         tags (group-by-run run-ids (sqlite/query db-path ["SELECT * FROM tags"]))
         params (group-by-run run-ids (sqlite/query db-path ["SELECT * FROM params"]))
-        runs (->> runs
-                  (map (fn [run]
-                         (let [run-uuid (:run_uuid run)]
-                           (merge (select-keys run
-                                               [:run_uuid :name :status
-                                                :start_time :end_time :artifact_uri])
-                                  (kv-list->map (tags run-uuid))
-                                  {:params (kv-list->map (params run-uuid))
-                                   :metrics (when include-metrics?
-                                              (get-metrics run-uuid))}))))
-                  (group-by :mlflow.parentRunId))
+        runs (map (fn [run]
+                    (let [run-uuid (:run_uuid run)]
+                      (merge (select-keys run
+                                          [:run_uuid :name :status
+                                           :start_time :end_time :artifact_uri])
+                             (kv-list->map (tags run-uuid))
+                             {:params (kv-list->map (params run-uuid))
+                              :metrics (when include-metrics?
+                                         (get-metrics run-uuid))})))
+                  runs)]
+    runs))
+
+(defn group-runs
+  [runs
+   & {:keys [aggregate-children?]
+      :or {aggregate-children? false}}]
+  (let [runs (group-by :mlflow.parentRunId runs)
         parent-runs (map (fn [run]
                            (let [run (dissoc run :metrics)
                                  children (runs (:run_uuid run))
@@ -171,6 +208,7 @@
                                       (aggregate-runs children))
                                (assoc run :children children))))
                          (runs nil))]
+    (println "Got" (count parent-runs) "parent runs.")
     (if aggregate-children?
       (let [grouper :limit_id
             get-rounded-mean (comp #(math/round (* 1000 %)) :mean)
@@ -186,6 +224,11 @@
                  (assoc run :metrics metrics)))
              parent-runs))
       parent-runs)))
+
+(defn get-runs
+  [& {:as opts}]
+  (let [runs (get-raw-runs opts)]
+    (group-runs runs opts)))
 
 (defn normalize-colname
   [colname]
@@ -209,7 +252,9 @@
 
 (defn write-aggregate-runs
   []
+  (println "Fetching runs...")
   (let [runs (get-runs :include-metrics? true :aggregate-children? true)
+        _ (println "Loaded" (count runs) "runs.")
         runs (filter :complete? runs)
         runs (sort-by (juxt (comp limit-id-order :limit_id)
                             (comp model-order :model))
@@ -237,9 +282,11 @@
                runs)))
 
 (comment
-  (let [runs (time (get-runs :include-metrics? true :aggregate-children? true))
+  (def raw-runs (time (get-raw-runs :include-metrics? true)))
+  (let [runs (time (group-runs raw-runs :aggregate-children? true))
         fr (first runs)]
-    (map (second (nth metric-accessors 3)) runs))
+    #_(map (second (nth metric-accessors 3)) runs)
+    (-> fr :metrics))
   (time (get-metrics "379f8efef8d2421fba9977477de35ceb"))
   (write-aggregate-runs)
   )
