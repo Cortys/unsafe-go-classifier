@@ -11,7 +11,7 @@
 (require '[pod.babashka.go-sqlite3 :as sqlite]
          '[camel-snake-kebab.core :as csk])
 
-(def db-path "./mlflow_v1.db")
+(def db-path "./mlflow.db")
 (def results-path "./results")
 (def experiment-name "usgo_v1")
 #_(def top-metrics-query
@@ -27,18 +27,18 @@
 
 (def model-name-replacements {"WL2GNN" "2-WL-GNN"})
 (def limit-id-replacements {"v127_d127_f127_p127" "all"
-                            "v0_d127_f127_p127" "no vars"
-                            "v127_d0_f127_p127" "no types"
-                            "v127_d127_f0_p127" "no funcs"
-                            "v127_d127_f127_p0" "no pkgs"
-                            "v0_d0_f0_p0" "none"})
+                            "v127_d0_f0_p0_no_tf_fb_ob_ou" "only vars"
+                            "v0_d127_f0_p0_no_v_vt_fb_ob_ou" "only types"
+                            "v0_d0_f127_p0_no_v_vt_tf" "only funcs"
+                            "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou" "only pkgs"
+                            "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou" "none"})
 (def model-order (zipmap ["MLP" "DeepSets" "GIN" "WL2GNN"] (range)))
 (def limit-id-order (zipmap ["v127_d127_f127_p127"
-                             "v0_d127_f127_p127"
-                             "v127_d0_f127_p127"
-                             "v127_d127_f0_p127"
-                             "v127_d127_f127_p0"
-                             "v0_d0_f0_p0"]
+                             "v127_d0_f0_p0_no_tf_fb_ob_ou"
+                             "v0_d127_f0_p0_no_v_vt_fb_ob_ou"
+                             "v0_d0_f127_p0_no_v_vt_tf"
+                             "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou"
+                             "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou"]
                             (range)))
 
 (def metric-accessors
@@ -283,10 +283,11 @@
 
 (comment
   (def raw-runs (time (get-raw-runs :include-metrics? true)))
+  (as-> raw-runs $ (group-by :status $) (get $ "FAILED") (first $))
   (let [runs (time (group-runs raw-runs :aggregate-children? true))
         fr (first runs)]
     #_(map (second (nth metric-accessors 3)) runs)
-    (-> fr :metrics))
+    (->> runs (remove :complete?) first))
   (time (get-metrics "379f8efef8d2421fba9977477de35ceb"))
   (write-aggregate-runs)
   )

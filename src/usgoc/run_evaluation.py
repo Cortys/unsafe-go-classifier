@@ -45,13 +45,16 @@ import usgoc.evaluation.evaluate as ee
 @click.option("--export", "-e", is_flag=True, default=False)
 @click.option("--confusion-matrices", is_flag=True, default=False)
 @click.option("--ignore-status", is_flag=True, default=False)
+@click.option("--delete-runs", is_flag=True, default=False)
+@click.option("--delete-orphaned-runs", is_flag=True, default=False)
 @click.option("--nop", is_flag=True, default=False)
 def evaluate(
   model, convert_mode, limit_id, fold=None, repeat=None,
   override=False, override_conformal=False, dry=False,
   tuner_convert_mode=None, tuner_limit_id=None,
   suffix="", yes=False, export=False, confusion_matrices=False,
-  ignore_status=False, nop=False):
+  ignore_status=False, delete_runs=False, delete_orphaned_runs=False,
+  nop=False):
   if nop:
     print("NO OP: No evaluation done.")
     return
@@ -62,27 +65,35 @@ def evaluate(
   elif confusion_matrices:
     print("Starting export of confusion matrices.")
     f = ee.export_confusion_matrices
+  elif delete_orphaned_runs:
+    print("Deleting orphaned runs.")
+    f = ee.delete_orphaned_runs
+    model = [None]
   else:
     print("Starting evaluation.")
     f = ee.evaluate
-  print(f"Will use the following {len(model)} models:")
-  for m in model:
-    print(f"- {m}")
-  print(f"Will use the following {len(convert_mode)} convert modes:")
-  for m in convert_mode:
-    print(f"- {m}")
-  print(f"Will use the following {len(limit_id)} limit_ids:")
-  for lid in limit_id:
-    print(f"- {lid}")
-  print("Other options:")
-  print(f"- Fold: {str(fold)}")
-  print(f"- Repeat: {str(repeat)}")
-  print(f"- Tuner convert mode: {str(tuner_convert_mode)}")
-  print(f"- Tuner limit_id: {str(tuner_limit_id)}")
-  print(f"- Override: {str(override)}")
-  print(f"- Override conformal: {str(override_conformal)}")
+
+  if not delete_orphaned_runs:
+    print(f"Will use the following {len(model)} models:")
+    for m in model:
+      print(f"- {m}")
+    print(f"Will use the following {len(convert_mode)} convert modes:")
+    for m in convert_mode:
+      print(f"- {m}")
+    print(f"Will use the following {len(limit_id)} limit_ids:")
+    for lid in limit_id:
+      print(f"- {lid}")
+    print("Other options:")
+    print(f"- Fold: {str(fold)}")
+    print(f"- Repeat: {str(repeat)}")
+    print(f"- Tuner convert mode: {str(tuner_convert_mode)}")
+    print(f"- Tuner limit_id: {str(tuner_limit_id)}")
+    print(f"- Override: {str(override)}")
+    print(f"- Override conformal: {str(override_conformal)}")
+    print(f"- Ignore status: {str(ignore_status)}")
+    print(f"- Delete runs: {str(delete_runs)}")
+
   print(f"- Dry run: {str(dry)}")
-  print(f"- Ignore status: {str(ignore_status)}")
   print(f"- Experiment suffix: \"{suffix}\"")
 
   if not yes:
@@ -100,6 +111,7 @@ def evaluate(
       override=override, override_conformal=override_conformal,
       dry=dry,
       ignore_status=ignore_status,
+      delete_runs=delete_runs,
       experiment_suffix=suffix,
       tuner_convert_mode=tuner_convert_mode,
       tuner_limit_id=tuner_limit_id)

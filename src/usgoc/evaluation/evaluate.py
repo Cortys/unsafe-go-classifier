@@ -55,7 +55,8 @@ def evaluate_single(
   return_models=False, return_model_paths=False,
   return_calibration_configs=False, return_metrics=False,
   return_size_histograms=False,
-  return_dims=False, return_ds=False, lazy_return=False, ignore_status=False):
+  return_dims=False, return_ds=False, lazy_return=False, ignore_status=False,
+  delete_runs=False):
     if repeat < 0 or fold < 0:
       return None
 
@@ -66,7 +67,7 @@ def evaluate_single(
         run_id = run.info.run_id
         run_status = run.info.status
         artifact_uri = run.info.artifact_uri[len("file://"):]
-        if (run_status == "FINISHED" or ignore_status) and not override:
+        if (run_status == "FINISHED" or ignore_status) and not override and not delete_runs:
           model_load_fn = lambda: mlflow.keras.load_model(
             f"runs:/{run_id}/models", custom_objects=dict(
                 SparseMultiAccuracy=mm.SparseMultiAccuracy))
@@ -141,9 +142,17 @@ def evaluate_single(
           print(
             f"Deleting {run_status} {ds_id}_repeat{repeat}, {model_name}.",
             f"Existing run: {run_id}.")
+          if delete_runs:
+            return
+          else:
+            eu.invalidate_inner_run_cache()
         else:
           raise DryRunException(
             f"Run {run_id} ({run_status}) would be overidden. Doing nothing due to dry.")
+
+      if delete_runs:
+        raise DryRunException(
+          f"Nonexistent {ds_id}_repeat{repeat}, {model_name} cannot be deleted.")
 
       if lazy_return:
         print(f"WARNING: True lazy returns impossible due to cache miss.")
@@ -208,6 +217,8 @@ def evaluate_single(
             res += (lambda: model,)
           else:
             res += (model,)
+        else:
+          tf.keras.backend.clear_session()
         if return_model_paths:
           res += (
             os.path.join(run.info.artifact_uri, "models", "data", "model"),)
@@ -477,24 +488,6 @@ def aggregate_confusion_matrices(cms, normalize=True):
     m = np.around(m / np.sum(m, axis=1, keepdims=True), 2) * 100
   return m
 
-def get_preds_and_targets(model, ds):
-  preds1 = []
-  preds2 = []
-  targets1 = []
-  targets2 = []
-  for batch_in, batch_out in ds:
-    pred = model(batch_in)
-    preds1.append(pred[0])
-    preds2.append(pred[1])
-    targets1.append(batch_out[0])
-    targets2.append(batch_out[1])
-
-  preds1 = tf.concat(preds1, axis=0)
-  preds2 = tf.concat(preds2, axis=0)
-  targets1 = tf.concat(targets1, axis=0)
-  targets2 = tf.concat(targets2, axis=0)
-  return (preds1, preds2), (targets1, targets2)
-
 def export_confusion_matrices(
   hypermodel_builder, normalize=True, **kwargs):
   matrix_dir = Path(f"{utils.PROJECT_ROOT}/results/confusion_matrices_raw")
@@ -545,15 +538,16 @@ def export_confusion_matrices(
             print(f"Computing predictions {i}/{nm}...")
             model = get_model()
             _, train_ds, val_ds, test_ds = get_ds()
-            (preds1, preds2), (tgts1, tgts2) = get_preds_and_targets(model, train_ds)
+            (preds1, preds2), (tgts1, tgts2) = mu.predict_with_targets(model, train_ds)
             m1_train = mm.sparse_multi_confusion_matrix(tgts1, preds1).numpy()
             m2_train = mm.sparse_multi_confusion_matrix(tgts2, preds2).numpy()
-            (preds1, preds2), (tgts1, tgts2) = get_preds_and_targets(model, val_ds)
+            (preds1, preds2), (tgts1, tgts2) = mu.predict_with_targets(model, val_ds)
             m1_val = mm.sparse_multi_confusion_matrix(tgts1, preds1).numpy()
             m2_val = mm.sparse_multi_confusion_matrix(tgts2, preds2).numpy()
-            (preds1, preds2), (tgts1, tgts2) = get_preds_and_targets(model, test_ds)
+            (preds1, preds2), (tgts1, tgts2) = mu.predict_with_targets(model, test_ds)
             m1_test = mm.sparse_multi_confusion_matrix(tgts1, preds1).numpy()
             m2_test = mm.sparse_multi_confusion_matrix(tgts2, preds2).numpy()
+            tf.keras.backend.clear_session()
 
             cm1_train.append(m1_train)
             cm1_val.append(m1_val)
@@ -578,21 +572,32 @@ def export_confusion_matrices(
         m = aggregate_confusion_matrices(cms, normalize)
         return utils.draw_confusion_matrix(m.astype(int), labels, False)
 
-      utils.cache(
-        lambda: create_plot(cms1["train"], labels1_keys),
-        plot_dir / f"{prefix}_train_label1.pdf", format="plot")
-      utils.cache(
-        lambda: create_plot(cms1["val"], labels1_keys),
-        plot_dir / f"{prefix}_val_label1.pdf", format="plot")
-      utils.cache(
-        lambda: create_plot(cms1["test"], labels1_keys),
-        plot_dir / f"{prefix}_test_label1.pdf", format="plot")
-      utils.cache(
-        lambda: create_plot(cms2["train"], labels2_keys),
-        plot_dir / f"{prefix}_train_label2.pdf", format="plot")
-      utils.cache(
-        lambda: create_plot(cms2["val"], labels2_keys),
-        plot_dir / f"{prefix}_val_label2.pdf", format="plot")
-      utils.cache(
-        lambda: create_plot(cms2["test"], labels2_keys),
-        plot_dir / f"{prefix}_test_label2.pdf", format="plot")
+      for s in ["train", "val", "test"]:
+        utils.cache(
+          lambda: create_plot(cms1[s], labels1_keys),
+          plot_dir / f"{prefix}_{s}_label1.pdf", format="plot")
+        utils.cache(
+          lambda: create_plot(cms2[s], labels2_keys),
+          plot_dir / f"{prefix}_{s}_label2.pdf", format="plot")
+
+def delete_orphaned_runs(
+  model, ds_name=ed.dataset_names[0],
+  experiment_suffix="", dry=False, **kwargs):
+  mlflow.set_experiment(ds_name + experiment_suffix)
+  print("Finding orphans...")
+  orphan_runs = eu.find_orphaned_runs()
+  for run in orphan_runs:
+    run_id = run.info.run_id
+    run_status = run.info.status
+    tags = run.data.tags
+    run_name = tags["mlflow.runName"]
+    parent = tags["mlflow.parentRunId"]
+    lid = tags.get("limit_id", "-")
+    m = tags.get("model", "-")
+    print(
+      f"Deleting {run_status} orphan {run_name} ({run_id} child of {parent}). "
+      f"Model: {m}, Limit ID: {lid}.")
+    if dry:
+      print("- Doing nothing due to dry.")
+    else:
+      mlflow.delete_run(run_id)
