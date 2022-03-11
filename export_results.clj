@@ -40,6 +40,8 @@
                              "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou"
                              "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou"]
                             (range)))
+; One-sided t-CDF values:
+(def t-cdf {9 {0.1 1.383, 0.05 1.833, 0.01 2.821}})
 
 (def metric-accessors
   (for [split [nil "val" "test"]
@@ -54,8 +56,10 @@
                            :accessor (comp stat split-base-kw :metrics)}]]
     (if (= stat :mean)
       (assoc metric-desc
-             :best-name (keyword (str split-base "_best"))
-             :best-accessor (comp :best? split-base-kw :metrics))
+             :best-model-name (keyword (str split-base "_best_model"))
+             :best-model-accessor (comp :best-model? split-base-kw :metrics)
+             :best-limit-id-name (keyword (str split-base "_best_limit_id"))
+             :best-limit-id-accessor (comp :best-limit-id? split-base-kw :metrics))
       metric-desc)))
 
 (defn get-default [m] #(get m % %))
@@ -84,7 +88,7 @@
            min-fn nil
            max-fn nil
            count-fn nil}}]
-  (let [[inner-vals :as mean-args]
+  (let [[inner-vals inner-vars :as mean-args]
         (if with-var?
           [(map val-fn vals) (map var-fn vals)]
           [vals])
@@ -98,7 +102,9 @@
         vmax (apply max (if (nil? max-fn)
                           inner-vals
                           (map max-fn vals)))]
-    {:mean vmean
+    {:vals inner-vals
+     :vars inner-vars
+     :mean vmean
      :var vvar
      :std vstd
      :ste vste
@@ -148,28 +154,40 @@
                     :min-fn :min :max-fn :max
                     :count-fn :count)))
 
+(defn paired-test
+  [level smaller? vals1 vals2]
+  (let [n (count vals1)
+        val-diffs (if smaller?
+                    (map - vals2 vals1)
+                    (map - vals1 vals2))
+        [diff-mean diff-var] (mean-var val-diffs)]
+    (if (zero? diff-var)
+      (<= diff-mean 0)
+      (<= (* diff-mean (math/sqrt (/ n diff-var)))
+          (get-in t-cdf [(dec n) level])))))
+
 (defn find-best-run-metrics
-  ([run-seq] (find-best-run-metrics run-seq :metrics identity))
-  ([run-seq get-value] (find-best-run-metrics run-seq :metrics get-value))
-  ([run-seq get-metrics get-value]
-   (persistent!
-    (reduce (fn [best-metrics run]
-              (reduce-kv (fn [best-metrics metric value]
-                           (let [value (get-value value)
-                                 pred (if (loss-metric? metric) < >)
-                                 best-value (best-metrics metric)]
-                             (if (or (nil? best-value)
-                                     (pred value best-value))
-                               (assoc! best-metrics metric value)
-                               best-metrics)))
-                         best-metrics
-                         (get-metrics run)))
-            (transient {}) run-seq))))
+  ([run-seq level]
+   (update-vals (persistent!
+                 (reduce (fn [best-metrics run]
+                           (reduce-kv (fn [best-metrics metric {:keys [mean vals]}]
+                                        (let [min-metric? (loss-metric? metric)
+                                              pred (if min-metric? < >)
+                                              [best-mean] (best-metrics metric)]
+                                          (if (or (nil? best-mean)
+                                                  (pred mean best-mean))
+                                            (assoc! best-metrics metric
+                                                    [mean #(paired-test level min-metric? vals %)])
+                                            best-metrics)))
+                                      best-metrics
+                                      (:metrics run)))
+                         (transient {}) run-seq))
+                second)))
 
 (defn grouped-best-run-metrics
-  ([run-seq group-fn & args]
+  ([run-seq group-fn level]
    (update-vals (group-by group-fn run-seq)
-                #(apply find-best-run-metrics % args))))
+                #(find-best-run-metrics % level))))
 
 (defn get-raw-runs
   [& {:keys [experiment-id include-metrics?]
@@ -210,17 +228,19 @@
                          (runs nil))]
     (println "Got" (count parent-runs) "parent runs.")
     (if aggregate-children?
-      (let [grouper :limit_id
-            get-rounded-mean (comp #(math/round (* 1000 %)) :mean)
-            best-means (grouped-best-run-metrics parent-runs grouper
-                                                 get-rounded-mean)]
+      (let [level 0.1
+            best-model-tests (grouped-best-run-metrics parent-runs :limit_id level)
+            best-limit-id-tests (grouped-best-run-metrics parent-runs :model level)]
         (map (fn [run]
                (let [metrics (:metrics run)
-                     metrics (reduce-kv (fn [metrics metric best-mean]
-                                          (assoc-in metrics [metric :best?]
-                                                    (= (-> metrics metric get-rounded-mean)
-                                                       best-mean)))
-                                        metrics (-> run grouper best-means))]
+                     metrics (reduce-kv (fn [metrics metric best-pred]
+                                          (assoc-in metrics [metric :best-model?]
+                                                    (-> metrics metric :vals best-pred)))
+                                        metrics (-> run :limit_id best-model-tests))
+                     metrics (reduce-kv (fn [metrics metric best-pred]
+                                          (assoc-in metrics [metric :best-limit-id?]
+                                                    (-> metrics metric :vals best-pred)))
+                                        metrics (-> run :model best-limit-id-tests))]
                  (assoc run :metrics metrics)))
              parent-runs))
       parent-runs)))
@@ -261,8 +281,12 @@
                       runs)
         model-kws [:model :limit_id :convert_mode :dataset]
         metric-kws (map :name metric-accessors)
-        best-kws (keep :best-name metric-accessors)
-        columns (-> model-kws (into metric-kws) (into best-kws))]
+        best-model-kws (keep :best-model-name metric-accessors)
+        best-limit-id-kws (keep :best-limit-id-name metric-accessors)
+        columns (-> model-kws
+                    (into metric-kws)
+                    (into best-model-kws)
+                    (into best-limit-id-kws))]
     (println (str "Writing results CSV. "
                   (count runs) " rows, " (count columns) " columns."))
     (write-csv "results/results.csv"
@@ -276,7 +300,10 @@
                            run)
                           (into (comp (map :accessor) (map #(% run)))
                                 metric-accessors)
-                          (into (comp (keep :best-accessor)
+                          (into (comp (keep :best-model-accessor)
+                                      (map #(% run)) (map #(if % 1 0)))
+                                metric-accessors)
+                          (into (comp (keep :best-limit-id-accessor)
                                       (map #(% run)) (map #(if % 1 0)))
                                 metric-accessors))))
                runs)))
@@ -287,7 +314,8 @@
   (let [runs (time (group-runs raw-runs :aggregate-children? true))
         fr (first runs)]
     #_(map (second (nth metric-accessors 3)) runs)
-    (->> runs (remove :complete?) first))
+    #_(->> runs (remove :complete?) first)
+    (-> fr ((juxt :model :limit_id :metrics))))
   (time (get-metrics "379f8efef8d2421fba9977477de35ceb"))
   (write-aggregate-runs)
-  )
+  (let [[a b] [1]] [a b]))
