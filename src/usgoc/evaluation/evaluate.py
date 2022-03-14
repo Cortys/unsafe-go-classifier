@@ -440,6 +440,7 @@ def export_best(
 
   model_name = hypermodel_builder.name
   kwargs["return_model_paths"] = True
+  kwargs["return_calibration_configs"] = True
   kwargs["return_metrics"] = True
   kwargs["return_dims"] = True
   kwargs["dry"] = True
@@ -450,13 +451,15 @@ def export_best(
       target_dir = f"{models_dir}/{convert_mode}_{limit_id}/{model_name}"
       best_fold_crit = None
       best_fold_path = None
+      best_fold_calib = None
       best_fold_dims = None
       for fold in folds:
         fold_crits = []
         best_repeat_crit = None
         best_repeat_path = None
+        best_repeat_calib = None
         best_repeat_dims = None
-        for model_path, metrics, dims in fold:
+        for model_path, calib_configs, metrics, dims in fold:
           if isinstance(criterion, str):
             crit = metrics[criterion]
           else:
@@ -465,12 +468,14 @@ def export_best(
           if best_repeat_crit is None or crit > best_repeat_crit:
             best_repeat_crit = crit
             best_repeat_path = model_path
+            best_repeat_calib = calib_configs
             best_repeat_dims = dims
         # Use mean - 1std as fold peformance criterion:
         fold_crit = np.mean(fold_crits) - np.std(fold_crits)
         if best_fold_crit is None or fold_crit > best_fold_crit:
           best_fold_crit = fold_crit
           best_fold_path = best_repeat_path
+          best_fold_calib = best_repeat_calib
           best_fold_dims = best_repeat_dims
 
       model_path = best_fold_path[len("file://"):]
@@ -480,6 +485,8 @@ def export_best(
       best_fold_dims["in_enc"] = hypermodel_builder.in_enc
       utils.cache_write(
         f"{target_dir}/dims.json", best_fold_dims, "json")
+      utils.cache_write(
+        f"{target_dir}/conformal_calibration_configs.yml", best_fold_calib, "yaml")
 
 def aggregate_confusion_matrices(cms, normalize=True):
   cms = fy.lcat(cms)

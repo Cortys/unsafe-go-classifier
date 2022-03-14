@@ -76,8 +76,11 @@ It takes the following arguments:
 - **Cmds:**
   - `show --format [json (default)|dot]`: 
       Outputs the CFG for the selected usage as JSON or in Graphviz dot format.
-  - `predict --model [model name] [--limit-id [limit id, default=v127_d127_f127_p127]] [--logits]`: 
+  - `predict --model [model name] [--conformal-alpha [alpha, default=0]] [--limit-id [id, default=v127_d127_f127_p127)]] [--logits]`: 
       Outputs the prediction of the selected model as JSON.
+      The `conformal-alpha` parameter specifies whether conformal prediction results should be shown.
+      By default no conformal sets are produced. 
+      To obtain conformal sets, an error threshold `0 < alpha < 1` has to be provided; the smaller the alpha value, the larger the prediction sets will be (`0.1` is a good default choice).
       The `limit_id` specifies how the data associated with individual CFG nodes should be mapped to binary dimensions.
       If the `--logits` flag is set, prediction logits will be returned instead of normalized probabilities.
       Note that only combinations of models, limit ids and convert modes that were exported when building the prediction container will work.
@@ -103,35 +106,43 @@ An unsafe usage can be classified as follows:
 ./predict.sh \
   --project elastic/beats --package go.elastic.co/apm --file config.go \
   --line 413 --snippet "unsafe.Pointer(oldConfig)," \
-  predict -m WL2GNN 2>/dev/null \
+  predict -m WL2GNN -a 0.1 2>/dev/null \
 | jq
 ```
 Prediction output for both labels (exact probabilites might vary):
 ```json
-[{
-  "cast-basic": 3.8024680293347046e-08,
-  "cast-bytes": 2.10747663764721e-09,
-  "cast-header": 4.1693176910939655e-08,
-  "cast-pointer": 2.197234172385265e-09,
-  "cast-struct": 5.247088097348751e-07,
-  "definition": 1.1479721706564305e-07,
-  "delegate": 0.9999991655349731,
-  "memory-access": 8.367572235101761e-08,
-  "pointer-arithmetic": 3.887335964236627e-08,
-  "syscall": 2.412203492507814e-10,
-  "unused": 1.5881319870292288e-10
-}, {
-  "atomic": 0.9999879598617554,
-  "efficiency": 1.967955931547749e-08,
-  "ffi": 5.721917204937199e-06,
-  "generics": 1.3880583082936937e-06,
-  "hide-escape": 4.661455932364333e-06,
-  "layout": 1.2701431728601165e-07,
-  "no-gc": 1.7310886057941843e-09,
-  "reflect": 7.049543726544982e-10,
-  "serialization": 9.552078239494222e-08,
-  "types": 3.732756326257913e-09,
-  "unused": 1.0282862339394683e-09
-}]
+{
+  "probabilities": [{
+    "cast-basic": 0.000799796252977103,
+    "cast-bytes": 0.00023943622363731265,
+    "cast-header": 0.0008311063284054399,
+    "cast-pointer": 0.00024363627017010003,
+    "cast-struct": 0.0023890091106295586,
+    "definition": 0.0012677970807999372,
+    "delegate": 0.9921323657035828,
+    "memory-access": 0.001111199613660574,
+    "pointer-arithmetic": 0.0008071911288425326,
+    "syscall": 9.69868924585171e-05,
+    "unused": 8.147588232532144e-05
+  }, {
+    "atomic": 0.9911662936210632,
+    "efficiency": 0.00020463968394324183,
+    "ffi": 0.003083886345848441,
+    "generics": 0.0015664942329749465,
+    "hide-escape": 0.0027959353756159544,
+    "layout": 0.0004991954774595797,
+    "no-gc": 6.399328412953764e-05,
+    "reflect": 4.1643997974460945e-05,
+    "serialization": 0.0004356006102170795,
+    "types": 9.241054794983938e-05,
+    "unused": 4.988365981262177e-05
+  }],
+  "conformal_sets": [
+    ["delegate"],
+    ["atomic"]
+  ]
+}
 ```
 [jq](https://stedolan.github.io/jq/) is of course optional here. Also, `2>/dev/null` might not be the the right choice for production use 🙂.
+Note that the output format differs if `--conformal-alpha 0` (`-a 0`) is used;
+in this case, no conformal sets are produced, and the resulting JSON only contains the two probability maps (i.e. the value at `probabilites` in the above example output).

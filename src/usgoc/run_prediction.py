@@ -1,5 +1,6 @@
 import os
 import json
+import yaml
 import click
 import subprocess
 import funcy as fy
@@ -9,6 +10,7 @@ import tensorflow as tf
 import usgoc.utils as utils
 import usgoc.datasets.unsafe_go as dataset
 import usgoc.metrics.multi as mm
+import usgoc.postprocessing.conformal as conf
 
 PROJECTS_DIR = "/projects"
 EXPORT_DIR = f"{utils.PROJECT_ROOT}/exported_models"
@@ -108,10 +110,14 @@ def show(obj, format):
   "--limit-id", "-l",
   type=click.STRING,
   default="v127_d127_f127_p127")
+@click.option(
+  "--conformal-alpha", "-a",
+  type=click.FloatRange(0.0, 1.0),
+  default=0)
 @click.option("--logits", is_flag=True, default=False)
 @click.pass_obj
 def predict(
-  obj, model, limit_id, logits=False):
+  obj, model, limit_id, conformal_alpha=0.1, logits=False):
   with utils.cache_env(use_cache=False):
     convert_mode = obj["convert_mode"]
     cfg = get_cfg_json(**obj)
@@ -122,16 +128,25 @@ def predict(
     assert os.path.isdir(dir), "Requested model does not exist."
     with open(f"{EXPORT_DIR}/target_label_dims.json", "r") as f:
       labels1, labels2 = json.load(f)
-      labels1_keys = labels1.keys()
-      labels2_keys = labels2.keys()
+      labels1_keys = list(labels1.keys())
+      labels2_keys = list(labels2.keys())
     with open(f"{dir}/dims.json", "r") as f:
       dims = json.load(f)
+    if conformal_alpha == 0.0:
+      calib_config = dict(t1=1, t2=1)
+    else:
+      with open(f"{dir}/conformal_calibration_configs.yml", "r") as f:
+        calib_configs = yaml.unsafe_load(f)
+      assert conformal_alpha in calib_configs, f"Alpha must be from {calib_configs.keys()}."
+      calib_config = calib_configs[conformal_alpha]
     in_enc = dims["in_enc"]
     encoder = dataset.dataset_encoders[in_enc]
     ds = encoder(graphs, dims)
     model = tf.keras.models.load_model(f"{dir}/model", custom_objects=dict(
       SparseMultiAccuracy=mm.SparseMultiAccuracy))
     l1_pred, l2_pred = model.predict(ds)
+    l1_pred /= calib_config["t1"]
+    l2_pred /= calib_config["t2"]
     if logits:
       prob1 = l1_pred[0]
       prob2 = l2_pred[0]
@@ -140,7 +155,17 @@ def predict(
       prob2 = tf.nn.softmax(l2_pred, -1).numpy()[0]
     l1_dict = fy.zipdict(labels1_keys, prob1)
     l2_dict = fy.zipdict(labels2_keys, prob2)
-    print(json.dumps([l1_dict, l2_dict], cls=utils.NumpyEncoder))
+
+    if conformal_alpha == 0.0:
+      print(json.dumps([l1_dict, l2_dict], cls=utils.NumpyEncoder))
+    else:
+      set1_idx = conf.adaptive_sets(l1_pred, calib_config["qhat1"])[0]
+      set2_idx = conf.adaptive_sets(l2_pred, calib_config["qhat2"])[0]
+      set1 = [labels1_keys[i] for i in set1_idx]
+      set2 = [labels2_keys[i] for i in set2_idx]
+      print(json.dumps(dict(
+        probabilities=[l1_dict, l2_dict],
+        conformal_sets=[set1, set2]), cls=utils.NumpyEncoder))
 
 
 if __name__ == "__main__":

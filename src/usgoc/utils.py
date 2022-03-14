@@ -1,5 +1,6 @@
 import os
 import json
+import yaml
 import pickle
 import inspect
 import numbers
@@ -298,6 +299,10 @@ cache_formats = dict(
   pretty_json=cache_format(
     fy.partial(json.load, cls=NumpyDecoder),
     fy.partial(json.dump, indent="\t", cls=NumpyEncoder),
+    type="text"),
+  yaml=cache_format(
+    fy.partial(yaml.unsafe_load),
+    fy.partial(yaml.dump),
     type="text"),
   plot=cache_format(
     lambda _: None,
