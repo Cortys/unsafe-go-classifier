@@ -5,6 +5,7 @@ import keras_tuner as kt
 
 import usgoc.utils as utils
 import usgoc.models.gnn as gnn
+import usgoc.models.baseline as baseline
 
 def create_model_builder(
   instanciate, with_conv=True, with_inner_activation=False,
@@ -104,6 +105,7 @@ RGINBuilder = create_model_builder(gnn.RGIN)
 
 
 models = dict(
+  Majority=baseline.MajorityClassifier,
   MLP=MLPBuilder,
   DeepSets=DeepSetsBuilder,
   GCN=GCNBuilder,
@@ -114,6 +116,7 @@ models = dict(
   RGIN=RGINBuilder
 )
 evaluate_models = [
+  # "Majority",
   "MLP",
   "DeepSets",
   # "GCN",

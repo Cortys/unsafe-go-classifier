@@ -40,10 +40,14 @@ def get_encoded(
 
   ds = dataset.load_dataset(mode=convert_mode)
   splits = dataset.get_split_idxs(ds)
-  dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
-    ds, in_enc, splits, fold, mode=convert_mode, limit_id=limit_id,
-    batch_size_limit=batch_size_limit)
-  train_ds = train_ds.cache()
-  val_ds = val_ds.cache()
+  if in_enc == "raw":
+    dims = None
+    train_ds, val_ds, test_ds = dataset.get_dataset_slices(ds, splits, fold)
+  else:
+    dims, train_ds, val_ds, test_ds = dataset.get_encoded_dataset_slices(
+      ds, in_enc, splits, fold, mode=convert_mode, limit_id=limit_id,
+      batch_size_limit=batch_size_limit)
+    train_ds = train_ds.cache()
+    val_ds = val_ds.cache()
 
   return dims, train_ds, val_ds, test_ds

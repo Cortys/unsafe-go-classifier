@@ -11,6 +11,9 @@ def predict_with_targets(model, ds):
   targets1 = []
   targets2 = []
 
+  if isinstance(ds, tuple) and len(ds) == 2:
+    ds = [ds]
+
   for input, targets in ds:
     pred1, pred2 = model(input)
     target1, target2 = targets

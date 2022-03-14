@@ -4,6 +4,7 @@ import shutil
 import numpy as np
 import funcy as fy
 import tensorflow as tf
+import keras_tuner as kt
 import mlflow
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -57,6 +58,9 @@ def evaluate_single(
   return_size_histograms=False,
   return_dims=False, return_ds=False, lazy_return=False, ignore_status=False,
   delete_runs=False):
+    if return_model_paths:
+      assert get_model_ctr.is_keras, "Cannot return model paths for non-keras models."
+
     if repeat < 0 or fold < 0:
       return None
 
@@ -68,9 +72,15 @@ def evaluate_single(
         run_status = run.info.status
         artifact_uri = run.info.artifact_uri[len("file://"):]
         if (run_status == "FINISHED" or ignore_status) and not override and not delete_runs:
-          model_load_fn = lambda: mlflow.keras.load_model(
-            f"runs:/{run_id}/models", custom_objects=dict(
-                SparseMultiAccuracy=mm.SparseMultiAccuracy))
+          def model_load_fn():
+            if not get_model_ctr.is_keras:
+              model, _ = get_model_ctr()()
+              dims, train_ds, val_ds, test_ds = get_ds()
+              model.fit(train_ds)
+              return model
+            return mlflow.keras.load_model(
+              f"runs:/{run_id}/models", custom_objects=dict(
+                  SparseMultiAccuracy=mm.SparseMultiAccuracy))
           model = None
           calib_configs = None
           hists = None
@@ -178,30 +188,39 @@ def evaluate_single(
 
         dims, train_ds, val_ds, test_ds = get_ds()
         model, hp_dict = model_ctr()
-        mlflow.log_params(hp_dict["values"])
+        if hp_dict is not None:
+          mlflow.log_params(hp_dict["values"])
 
-        log_dir = f"{log_dir_base}/{run_id}"
+        if isinstance(model, tf.keras.Model):
+          log_dir = f"{log_dir_base}/{run_id}"
+          stop_early = tf.keras.callbacks.EarlyStopping(
+            monitor="val_accuracy", patience=patience,
+            restore_best_weights=True)
+          callbacks = [stop_early]
 
-        stop_early = tf.keras.callbacks.EarlyStopping(
-          monitor="val_accuracy", patience=patience,
-          restore_best_weights=True)
-        callbacks = [stop_early]
+          if tensorboard_embeddings:
+            tb = tf.keras.callbacks.TensorBoard(
+              log_dir=log_dir,
+              histogram_freq=10,
+              embeddings_freq=10,
+              write_graph=True,
+              update_freq="batch")
+            callbacks.append(tb)
 
-        if tensorboard_embeddings:
-          tb = tf.keras.callbacks.TensorBoard(
-            log_dir=log_dir,
-            histogram_freq=10,
-            embeddings_freq=10,
-            write_graph=True,
-            update_freq="batch")
-          callbacks.append(tb)
-
-        model.fit(
-          train_ds,
-          validation_data=val_ds,
-          callbacks=callbacks,
-          verbose=2, epochs=epochs)
-        mlflow.keras.log_model(model, "models")
+          model.fit(
+            train_ds,
+            validation_data=val_ds,
+            callbacks=callbacks,
+            verbose=2, epochs=epochs)
+          mlflow.keras.log_model(model, "models")
+        else:
+          model.fit(train_ds)
+          train_res = model.evaluate(train_ds, return_dict=True)
+          for k, v in train_res.items():
+            mlflow.log_metric(k, v, -1)
+          val_res = model.evaluate(val_ds, return_dict=True)
+          for k, v in val_res.items():
+            mlflow.log_metric(f"val_{k}", v, -1)
 
         test_res = model.evaluate(test_ds, return_dict=True)
         for k, v in test_res.items():
@@ -265,26 +284,35 @@ def evaluate_fold(
       hypermodel_builder.in_enc, fold=fold,
       convert_mode=tuner_convert_mode, limit_id=tuner_limit_id)
 
-  @utils.memoize
-  def get_model_ctr():
-    tune_dims, train_ds, val_ds, test_ds = get_tune_ds()
-    tuner_hypermodel = hypermodel_builder(**tune_dims)
+  if not issubclass(hypermodel_builder, kt.HyperModel):
+    def get_model_ctr():
+      return lambda: (hypermodel_builder(), None)
+    get_model_ctr.is_keras = False
+  else:
+    @utils.memoize
+    def get_model_ctr():
+      tune_dims, train_ds, val_ds, test_ds = get_tune_ds()
+      tuner_hypermodel = hypermodel_builder(**tune_dims)
 
-    mlflow.tensorflow.autolog(disable=True)
-    tuner = em.tune_hyperparams(
-      tuner_hypermodel, train_ds, val_ds, ds_id=tune_ds_id)
-    tuner.search_space_summary()
-    if tuner_limit_id is None:
-      return lambda: em.get_best_model(tuner)
-    else:
-      dims = get_ds()[0]
-      hypermodel = hypermodel_builder(**dims)
+      mlflow.tensorflow.autolog(disable=True)
+      tuner = em.tune_hyperparams(
+        tuner_hypermodel, train_ds, val_ds, ds_id=tune_ds_id)
+      tuner.search_space_summary()
+      if tuner_limit_id is None:
+        return lambda: em.get_best_model(tuner)
+      else:
+        dims = get_ds()[0]
+        hypermodel = hypermodel_builder(**dims)
 
-      def model_ctr():
-        best_hps = em.get_best_hps(tuner)
-        return hypermodel.build(best_hps), best_hps.get_config()
+        def model_ctr():
+          best_hps = em.get_best_hps(tuner)
+          return hypermodel.build(best_hps), best_hps.get_config()
 
-      return model_ctr
+        return model_ctr
+    get_model_ctr.is_keras = True
+
+  if getattr(hypermodel_builder, "is_deterministic", False):
+    repeat = 0
 
   if repeat is not None:
     res = evaluate_single(
@@ -332,6 +360,8 @@ def evaluate_limit_id(
       mlflow.set_tag("convert_mode", convert_mode)
       mlflow.set_tag("limit_id", limit_id)
       mlflow.set_tag("type", "outer")
+      if getattr(hypermodel_builder, "is_deterministic", False):
+        mlflow.set_tag("deterministic", True)
 
       print(f"Starting outer {ds_name}/{convert_mode}/{limit_id} for {mname}...")
 
