@@ -365,7 +365,15 @@
         fr (first (filter #(= (:model %) "Majority") runs))]
     #_(map (second (nth metric-accessors 3)) runs)
     #_(->> runs (remove :complete?) first)
-    (-> fr ((juxt :model :limit_id :deterministic :complete?))))
+    (-> fr ((juxt :name :params))))
+  (->> raw-runs
+       (filter #(-> % :params :pooling (= "softmax")))
+       (filter #(-> % :limit_id (= "v127_d127_f127_p127")))
+       (map (fn [r]
+              (do [(:name (first (filter #(= (:run_uuid %)
+                                             (:mlflow.parentRunId r))
+                                         raw-runs)))
+                   (:name r)]))))
   (time (get-metrics "379f8efef8d2421fba9977477de35ceb"))
   (with-redefs [get-raw-runs (constantly raw-runs)]
     (write-aggregate-runs))
