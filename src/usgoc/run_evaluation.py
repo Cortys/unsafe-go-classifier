@@ -44,6 +44,7 @@ import usgoc.evaluation.evaluate as ee
 @click.option("--yes", "-y", is_flag=True, default=False)
 @click.option("--export", "-e", is_flag=True, default=False)
 @click.option("--confusion-matrices", is_flag=True, default=False)
+@click.option("--feature-importances", is_flag=True, default=False)
 @click.option("--ignore-status", is_flag=True, default=False)
 @click.option("--delete-runs", is_flag=True, default=False)
 @click.option("--delete-orphaned-runs", is_flag=True, default=False)
@@ -52,7 +53,8 @@ def evaluate(
   model, convert_mode, limit_id, fold=None, repeat=None,
   override=False, override_conformal=False, dry=False,
   tuner_convert_mode=None, tuner_limit_id=None,
-  suffix="", yes=False, export=False, confusion_matrices=False,
+  suffix="", yes=False, export=False,
+  confusion_matrices=False, feature_importances=False,
   ignore_status=False, delete_runs=False, delete_orphaned_runs=False,
   nop=False):
   if nop:
@@ -65,6 +67,9 @@ def evaluate(
   elif confusion_matrices:
     print("Starting export of confusion matrices.")
     f = ee.export_confusion_matrices
+  elif feature_importances:
+    print("Starting export of feature importances.")
+    f = ee.export_feature_importances
   elif delete_orphaned_runs:
     print("Deleting orphaned runs.")
     f = ee.delete_orphaned_runs

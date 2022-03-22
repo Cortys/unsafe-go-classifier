@@ -53,12 +53,13 @@ mkdir -p evaluations
 mkdir -p exported_models
 mkdir -p data
 mkdir -p plots
+mkdir -p mlruns
 
 docker run --gpus all --name $CONTAINER_NAME \
 	-p $JUPYTER_PORT:8888 \
 	-p 6006:6006 -p 10666:10666 -p 1234:1234 \
 	-v $(pwd):/app \
-	-v $(pwd)/data:/app/data \
+	-v $(pwd)/data:/app/data -v $(pwd)/mlruns:/app/mlruns \
  	$ARGS \
 	-u $(id -u):$(id -g) \
 	--add-host=host.docker.internal:host-gateway \

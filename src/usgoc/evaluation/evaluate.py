@@ -16,6 +16,8 @@ import usgoc.evaluation.models as em
 import usgoc.evaluation.datasets as ed
 import usgoc.models.utils as mu
 import usgoc.metrics.multi as mm
+import usgoc.datasets.unsafe_go as dataset
+import usgoc.postprocessing.explain as explain
 
 class DryRunException(Exception):
   pass
@@ -616,6 +618,85 @@ def export_confusion_matrices(
         utils.cache(
           lambda: create_plot(cms2[s], labels2_keys),
           plot_dir / f"{prefix}_{s}_label2.pdf", format="plot")
+
+def export_feature_importances(
+  hypermodel_builder, **kwargs):
+  fimps_dir = Path(f"{utils.PROJECT_ROOT}/results/feature_importance_raw")
+  plot_dir = Path(f"{utils.PROJECT_ROOT}/results/feature_importance_plot")
+  utils.make_dir(fimps_dir)
+  utils.make_dir(plot_dir)
+  hypermodel_builder = cast_hypermodel_buider(hypermodel_builder)
+  model_name = hypermodel_builder.name
+  in_enc = hypermodel_builder.in_enc
+
+  kwargs["return_models"] = True
+  kwargs["return_ds"] = True
+  kwargs["dry"] = True
+  kwargs["keep_nesting"] = True
+  kwargs["lazy_return"] = True
+  kwargs["lazy_folds"] = True
+  cms = evaluate(hypermodel_builder, **kwargs)
+
+  labels1, labels2 = ed.get_target_label_dims()
+  labels1_keys = list(labels1.keys())
+  labels2_keys = list(labels2.keys())
+
+  for convert_mode, lids in cms.items():
+    for limit_id, get_folds in lids.items():
+      prefix = f"{convert_mode}_{limit_id}_{model_name}"
+
+      @utils.memoize
+      def compute_fimps():
+        folds = get_folds()
+        dims, fimps1, fimps2 = [], [], []
+        i = 0
+        n = len(folds)
+        for fold in folds:
+          dim, fimp1, fimp2 = [], [], []
+          m = len(fold)
+          nm = n * m
+          for get_model, get_ds in fold:  # getter fns due to "lazy_return"
+            i += 1
+            print(f"Computing importances {i}/{nm}...")
+            model = get_model()
+            d, _, _, test_ds = get_ds()
+            f1, f2 = explain.compute_importances(model, test_ds)
+            dim.append(d)
+            fimp1.append(f1)
+            fimp2.append(f2)
+            tf.keras.backend.clear_session()
+
+          dims.append(dim)
+          fimps1.append(fimp1)
+          fimps2.append(fimp2)
+        return dims, fimps1, fimps2
+
+      print(f"Computing feature importances for {prefix}...")
+      dims, fimps1, fimps2 = utils.cache(
+        lambda: compute_fimps(), fimps_dir / f"{prefix}.pickle", format="pickle")
+
+      print(f"Creating aggregated feature importance plots...")
+
+      def create_plot(dims, fimps1, fimps2):
+        fimps1 = fy.lmap(explain.group_feature_importance, fy.cat(fimps1))
+        fimps2 = fy.lmap(explain.group_feature_importance, fy.cat(fimps2))
+        merged_dims, remap_idxs = dataset.merge_dims(fy.lcat(dims))
+        fimps1 = dataset.apply_remap_idxs(
+          fimps1, remap_idxs,
+          merged_dims["node_label_count"], in_enc, with_marked_idx=True)
+        fimps2 = dataset.apply_remap_idxs(
+          fimps2, remap_idxs,
+          merged_dims["node_label_count"], in_enc, with_marked_idx=True)
+        fimps1 = np.sum(fimps1, 0)
+        fimps2 = np.sum(fimps2, 0)
+        return utils.draw_feature_importance_chart([
+          ("Label 1", labels1_keys + ["Combined"], fimps1),
+          ("Label 2", labels2_keys + ["Combined"], fimps2)
+        ], dataset.dims_to_labels(merged_dims, in_enc), show=False)
+
+      utils.cache(
+        lambda: create_plot(dims, fimps1, fimps2),
+        plot_dir / f"{prefix}_test.pdf", format="plot")
 
 def delete_orphaned_runs(
   model, ds_name=ed.dataset_names[0],

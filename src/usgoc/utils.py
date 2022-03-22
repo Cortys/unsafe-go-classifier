@@ -15,6 +15,7 @@ except ImportError:
 import networkx as nx
 import numpy as np
 import funcy as fy
+import colorsys
 
 PROJECT_ROOT = os.getenv("PROJECT_ROOT", ".")
 
@@ -201,6 +202,132 @@ def draw_confusion_matrix(m, labels, show=True):
   fig.set_size_inches(
     4 / (fig.subplotpars.right - fig.subplotpars.left),
     4 / (fig.subplotpars.top - fig.subplotpars.bottom))
+  if show:
+    plt.show()
+  else:
+    return fig
+
+def label_pair_to_short_string(label, ellipsis=12):
+  lt, ls = label
+  lt_map = dict(
+    datatype_flag="dtype",
+    datatype="dtype",
+    blocktype="btype",
+    vartype="vtype",
+    builtin_function="builtin",
+    binary_op="bop",
+    unary_op="uop",
+    function="func",
+    package="pkg",
+    varname="var",
+    selfref="self",
+    marked="mark",
+    context="ctx"
+  )
+  lt = lt_map.get(lt, lt)
+
+  if ls is None or ls == "":
+    return lt
+  else:
+    ls_map = dict(
+      package="pkg",
+      module="mod",
+      function="func",
+      variable="var",
+      external="ext"
+    )
+    if ls in ls_map:
+      ls = ls_map[ls]
+    elif len(ls) > ellipsis + 3:
+      ls = "…" + ls[-ellipsis:]
+    return f"{lt}\n{ls}"
+
+def draw_feature_importance_chart(
+  data, dim_names, top_k=8, bottom_k=8, min_width=0.016,
+  other_scaledown=3, show=True):
+  fig, axs = plt.subplots(nrows=len(data))
+  dim_names = np.array(dim_names)
+
+  def subplot(labels, fimps, ax):
+    labels = np.array(labels)[::-1]
+    dim_count = fimps.shape[-1]
+    fimps = fimps[::-1]
+    fimps_idx = np.argsort(fimps, axis=1)
+    fimps_abs = np.abs(fimps)
+    fimps_abs = np.take_along_axis(fimps_abs, fimps_idx, 1)
+    fimps_abs[:, bottom_k:(dim_count - top_k)] /= other_scaledown
+    fimps_sum = np.sum(fimps_abs, axis=1, keepdims=True)
+    fimps_norm = fimps_abs / fimps_sum
+    fimps_posidx = np.expand_dims(
+        np.argmax(np.take_along_axis(fimps, fimps_idx, 1) >= 0, 1), 1)
+    fimps_cumsum = np.pad(np.cumsum(fimps_norm, 1), [(0, 0), (1, 0)])
+
+    top_range = list(range(dim_count - top_k, dim_count))
+    bottom_range = list(range(bottom_k))
+    fontsize = 8
+
+    for i in bottom_range + top_range:
+      if i < bottom_k:
+        h = 0
+        p = i
+        j = p / bottom_k
+      else:
+        h = 117 / 360
+        p = (dim_count - i - 1)
+        j = p / top_k
+      # fontsize = 10 if p < 3 else 8
+      l = 0.25 + 0.6 * j
+      color = colorsys.hls_to_rgb(h, l, 0.54)
+      bar_widths = fimps_norm[:, i]
+      bars = ax.barh(
+        labels, bar_widths, left=fimps_cumsum[:, i],
+        color=color, clip_on=True)
+      bar_labels = dim_names[fimps_idx[:, i]]
+      bar_labels = [
+        label_pair_to_short_string(
+          l, 1 + int(w * 180)) if w >= min_width else ""
+        for l, w in zip(bar_labels, bar_widths)]
+      ax.bar_label(
+        bars, bar_labels,
+        label_type="center", color="white" if l < 0.55 else "black",
+        fontsize=fontsize, linespacing=1.7)
+
+    zero_offsets = np.squeeze(
+        np.take_along_axis(fimps_cumsum, fimps_posidx, 1), 1)
+    bars = ax.barh(
+        labels,
+        zero_offsets - fimps_cumsum[:, bottom_k],
+        left=fimps_cumsum[:, bottom_k],
+        color=colorsys.hls_to_rgb(0, 0.85, 0.54))
+    ax.bar_label(
+      bars, ["other"] * len(labels),
+      label_type="center", fontsize=fontsize)
+    bars = ax.barh(
+      labels,
+      fimps_cumsum[:, dim_count - top_k] - zero_offsets,
+      left=zero_offsets,
+      color=colorsys.hls_to_rgb(117 / 360, 0.85, 0.54))
+    ax.bar_label(
+      bars, ["other"] * len(labels),
+      label_type="center", fontsize=fontsize)
+
+    ax.get_xaxis().set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["left"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.tick_params(axis=u'both', which=u'both', length=0)
+
+  for (title, labels, fimps), ax in zip(data, axs):
+    subplot(labels, fimps, ax)
+    ax.set_title(title, fontweight="bold")
+    ax.margins(.0, .0)
+
+  fig.tight_layout(pad=.0)
+  fig.set_size_inches(
+    20 / (fig.subplotpars.right - fig.subplotpars.left),
+    len(data) * 7 / (fig.subplotpars.top - fig.subplotpars.bottom))
+  plt.subplots_adjust(hspace=.06)
   if show:
     plt.show()
   else:

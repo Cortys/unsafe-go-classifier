@@ -264,6 +264,58 @@ def create_graph_dims(
     edge_labels=edge_dims,
     edge_label_count=len(cfg_utils.edge_labels))
 
+def merge_dims(dims_list):
+  merged_node_dims = dict()
+  remap_idxs = []
+  new_idx = 0
+  for dims in dims_list:
+    remap_idx = np.empty(dims["node_label_count"], dtype=np.int32)
+    for label_type, sublabels in dims["node_labels"].items():
+      if label_type not in merged_node_dims:
+        merged_sublabels = dict()
+        merged_node_dims[label_type] = merged_sublabels
+      else:
+        merged_sublabels = merged_node_dims[label_type]
+      for sublabel, idx in sublabels.items():
+        if sublabel not in merged_sublabels:
+          merged_sublabels[sublabel] = new_idx
+          remap_idx[idx] = new_idx
+          new_idx += 1
+        else:
+          remap_idx[idx] = merged_sublabels[sublabel]
+    remap_idxs.append(remap_idx)
+
+  dims0 = dims_list[0]
+  return dict(
+    node_labels=merged_node_dims,
+    node_label_count=new_idx,
+    edge_labels=dims0["edge_labels"],
+    edge_label_count=dims0["edge_label_count"]
+  ), remap_idxs
+
+def apply_remap_idx(
+  X, remap_idx, node_label_count, in_enc=None, with_marked_idx=False):
+  offset = 0
+  if with_marked_idx:
+    offset += 1
+  if in_enc == "wl2":
+    offset += 3
+  old_node_label_count = remap_idx.size
+  old_final_offset = offset + old_node_label_count
+  final_offset = offset + node_label_count
+  node_label_diff = node_label_count - old_node_label_count
+  X_remapped = np.zeros(
+    X.shape[:-1] + (X.shape[-1] + node_label_diff,), dtype=X.dtype)
+  X_remapped[..., :offset] = X[..., :offset]
+  X_remapped[..., remap_idx + offset] = X[..., offset:old_final_offset]
+  X_remapped[..., final_offset:] = X[..., old_final_offset:]
+  return X_remapped
+
+def apply_remap_idxs(Xs, remap_idxs, node_label_count, in_enc, with_marked_idx=True):
+  return [
+    apply_remap_idx(X, remap_idx, node_label_count, in_enc, with_marked_idx)
+    for X, remap_idx in zip(Xs, remap_idxs)]
+
 def get_node_label_dims(node_dims, node_data):
   labels = node_data["labels"]
   dims = []
@@ -282,6 +334,34 @@ def get_node_label_dims(node_dims, node_data):
 
 def get_edge_label_dim(edge_dims, edge_data):
   return edge_dims[edge_data["label"]]
+
+def dims_to_labels(dims, in_enc, with_marked_idx=True, with_graph_type=True):
+  res = [("marked", None)] if with_marked_idx else []
+  node_dims_inv = [None] * dims["node_label_count"]
+
+  for bt, bd in dims["node_labels"].items():
+    for name, dim in bd.items():
+      node_dims_inv[dim] = (bt, name)
+
+  if in_enc == "wl2":
+    edge_dims_inv = [None] * dims["edge_label_count"]
+    for et, dim in dims["edge_labels"].items():
+      edge_dims_inv[dim] = ("edge", et)
+
+    res += [
+      ("metatype", "node"),
+      ("metatype", "edge"),
+      ("metatype", "indirect")
+    ]
+    res += node_dims_inv
+    res += edge_dims_inv
+  else:
+    res += node_dims_inv
+
+  if with_graph_type:
+    res += [("context", cfg_type) for cfg_type in cfg_utils.cfg_types]
+
+  return res
 
 @utils.cached(
   DATA_DIR / "wl1",
