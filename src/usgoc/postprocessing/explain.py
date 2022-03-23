@@ -65,7 +65,9 @@ def compute_importances(model, ds):
   model = enrich_model_outputs(model, with_conv_output=False)
   l1_fimps, l2_fimps = [], []
 
-  for input, _ in ds:
+  for input in ds:
+    if isinstance(input, tuple) and len(input) == 2:
+      input = input[0]
     (l1_fimp, l2_fimp), (l1_gimp, l2_gimp) = compute_batch_importances(model, input)
     l1_fimps.append(tf.concat([l1_fimp, l1_gimp], axis=-1))
     l2_fimps.append(tf.concat([l2_fimp, l2_gimp], axis=-1))
@@ -74,8 +76,10 @@ def compute_importances(model, ds):
   l2_fimps = tf.concat(l2_fimps, axis=1).numpy()
   return l1_fimps, l2_fimps
 
-def group_feature_importance(fimps):
+def group_feature_importance(fimps, append_aggregate=True):
   fimps_instance_grp = np.sum(fimps, 1)
+  if not append_aggregate:
+    return fimps_instance_grp
   fimps_lbl_grp = np.sum(fimps_instance_grp, 0, keepdims=True)
   return np.concatenate(
     [fimps_instance_grp, fimps_lbl_grp],

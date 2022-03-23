@@ -76,41 +76,77 @@ It takes the following arguments:
 - **Cmds:**
   - `show --format [json (default)|dot]`: 
       Outputs the CFG for the selected usage as JSON or in Graphviz dot format.
-  - `predict --model [model name] [--conformal-alpha [alpha, default=0]] [--limit-id [id, default=v127_d127_f127_p127)]] [--logits]`: 
+  - `predict [opts]`:
       Outputs the prediction of the selected model as JSON.
-      The `conformal-alpha` parameter specifies whether conformal prediction results should be shown.
-      By default no conformal sets are produced. 
-      To obtain conformal sets, an error threshold `0 < alpha < 1` has to be provided; the smaller the alpha value, the larger the prediction sets will be (`0.1` is a good default choice).
-      The `limit_id` specifies how the data associated with individual CFG nodes should be mapped to binary dimensions.
-      If the `--logits` flag is set, prediction logits will be returned instead of normalized probabilities.
       Note that only combinations of models, limit ids and convert modes that were exported when building the prediction container will work.
-      The `predict` command will only utilize the CPU. 
+      The `predict` command will only utilize the CPU.
+      If only the mandatory option `--model` is provided, the command outputs an array of two dictionaries with the probabilities of each label for both label types.
+      If other data is requested in addition to the label probabilities, the command returns a dictionary of 2-element arrays with (up to) the following keys: `probabilities`, `conformal_sets`, `feature_importance_scores`, `cfg` and `code` (depending on which options are set).
+
+      `predict` takes the following options:
+      - `--model`: The name of the model that should be used.
+      - `--limit-id` (optional, default=`default=v127_d127_f127_p127`):
+        Specifies how the data associated with individual CFG nodes should be mapped to binary dimensions.
+      - `--logits` (optional flag):
+        If this flag is set, prediction logits will be returned instead of normalized probabilities.
+      - `--conformal-alpha` (optional, default=`0`):
+        This floating point parameter specifies whether conformal prediction results should be returned.
+        By default, no conformal sets are produced. 
+        To obtain conformal sets, an error threshold `0 < alpha < 1` has to be provided; the smaller the alpha value, the larger the prediction sets will be (`0.1` is a good default choice).
+      - `--feature-importance-scores` (optional, default=`0`):
+        This integer parameter specifies whether feature importance scores should be returned for each possible label.
+        By default, no scores are produced.
+        The value `k` passed to this option specifies which top-k and bottom-k slices of the sorted feature importances (i.e., which features that are positive/negative indicators of a particular output label) should be returned.
+        This means that for `k=10`, a total of 20 features (top-10 + bottom-10) are returned for each label in descending feature importance order.
+        To get all the feature importances without slicing, use `k=-1`.
+      - `--cfg` (optional flag):
+        If this flag is set, the CFG representation for the specified usage is returned in addition to the probabilities.
+      - `--code` (optional flag):
+        If this flag is set, the source code of the direct context of the specified usage is returned.
+        Note that this is only a convenience flag, since the code string is also part of the data returned by the `--cfg` flag.
 
 ### Examples
 
-To visualize the CFG for a given usage, the following pipeline can be used:
+We will now use the [following](https://github.com/elastic/apm-agent-go/blob/0941b7ce4b338d0b40d6673b4d59ff82addfb71b/config.go#L413) use of `unsafe` in the [apm-agent-go](https://github.com/elastic/apm-agent-go) library, to illustrate how the prediction container can be used:
+```go
+func (t *Tracer) updateInstrumentationConfig(f func(cfg *instrumentationConfig)) {
+	for {
+		oldConfig := t.instrumentationConfig()
+		newConfig := *oldConfig
+		f(&newConfig)
+		if atomic.CompareAndSwapPointer(
+			(*unsafe.Pointer)(unsafe.Pointer(&t.instrumentationConfigInternal)),
+			unsafe.Pointer(oldConfig), // <- We want to classify this usage.
+			unsafe.Pointer(&newConfig),
+		) {
+			return
+		}
+	}
+}
+```
+
+We begin by visualizing the CFG that is created for this usage:
 ```bash
 ./predict.sh \
   --project elastic/beats --package go.elastic.co/apm --file config.go \
   --line 413 --snippet "unsafe.Pointer(oldConfig)," \
   show -f dot \
-| dot -Tsvg \
-| display
+| dot -Tsvg | display
 ```
 <p align="center"><img src="docs/example.svg" width="50%"></p>
 
 This only works if [Graphviz](https://graphviz.org/) (for `dot`) and [ImageMagick](https://imagemagick.org/index.php) (for `display`) are installed on the host system.
 
-An unsafe usage can be classified as follows:
+The unsafe usage can be classified as follows:
 ```bash
 ./predict.sh \
   --project elastic/beats --package go.elastic.co/apm --file config.go \
   --line 413 --snippet "unsafe.Pointer(oldConfig)," \
-  predict -m WL2GNN -a 0.1 2>/dev/null \
+  predict -m WL2GNN -a 0.1 --feature-importance-scores 1 \
 | jq
 ```
 Prediction output for both labels (exact probabilites might vary):
-```json
+```json5
 {
   "probabilities": [{
     "cast-basic": 0.000799796252977103,
@@ -140,9 +176,21 @@ Prediction output for both labels (exact probabilites might vary):
   "conformal_sets": [
     ["delegate"],
     ["atomic"]
-  ]
+  ],
+  "feature_importance_scores": [{
+    // ...other labels omitted
+    "delegate": [
+      { "feature": ["function", ""], "importance": 1.8111777305603027 },
+      { "feature": ["datatype_flag", "Pointer"], "importance": -2.739483118057251 }
+    ], // ...other labels omitted
+  }, {
+    "atomic": [
+      { "feature": ["package", "sync/atomic"], "importance": 1.2248451709747314 },
+      { "feature": ["datatype_flag", "Pointer"], "importance": -0.8520904183387756 }
+    ], // ...other labels omitted
+  }]
 }
 ```
-[jq](https://stedolan.github.io/jq/) is of course optional here. Also, `2>/dev/null` might not be the the right choice for production use 🙂.
-Note that the output format differs if `--conformal-alpha 0` (`-a 0`) is used;
-in this case, no conformal sets are produced, and the resulting JSON only contains the two probability maps (i.e. the value at `probabilites` in the above example output).
+[jq](https://stedolan.github.io/jq/) is of course optional here.
+Note that the output format would differ if `--conformal-alpha 0` (`-a 0`) and `--feature-importance-scores 0` (the default) was used;
+in that case, no conformal sets and no feature importances would be produced, then the resulting JSON would only contain the two probability maps (i.e. the 2-element array at `probabilites` in the above example output).

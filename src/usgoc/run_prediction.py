@@ -3,6 +3,7 @@ import json
 import yaml
 import click
 import subprocess
+import numpy as np
 import funcy as fy
 import networkx as nx
 import tensorflow as tf
@@ -11,6 +12,7 @@ import usgoc.utils as utils
 import usgoc.datasets.unsafe_go as dataset
 import usgoc.metrics.multi as mm
 import usgoc.postprocessing.conformal as conf
+import usgoc.postprocessing.explain as explain
 
 PROJECTS_DIR = "/projects"
 EXPORT_DIR = f"{utils.PROJECT_ROOT}/exported_models"
@@ -32,11 +34,40 @@ def get_cfg_json(
      "--package", package,
      "--file", file,
      "--line", str(line),
+     "--dist", str(dist),
+     "--cacheDist", str(cache_dist),
      "--snippet", snippet],
     env=dac_env,
     stdout=subprocess.PIPE, check=True,
     encoding="utf-8")
   return json.loads(p.stdout)
+
+def importance_score_dict(fimps, dim_names, labels, k=10):
+  fimps_idx = np.argsort(fimps, axis=1)
+  if k > 0 and k < dim_names.shape[0] / 2:
+    fimps_idx = np.concatenate([
+      fimps_idx[:, :k],
+      fimps_idx[:, -k:]
+    ], axis=1)
+
+  res = dict()
+  for lbl, lbl_fimps, idx in zip(labels, fimps, fimps_idx):
+    lbl_dim_names_sorted = dim_names[idx][::-1]
+    lbl_fimps_sorted = lbl_fimps[idx][::-1]
+    res[lbl] = [
+      dict(feature=n, importance=imp)
+      for n, imp in zip(lbl_dim_names_sorted, lbl_fimps_sorted)]
+
+  return res
+
+def importance_score_dicts(model, ds, dims, labels1, labels2, k=10):
+  fimps1, fimps2 = explain.compute_importances(model, ds)
+  fimps1 = explain.group_feature_importance(fimps1)
+  fimps2 = explain.group_feature_importance(fimps2)
+  dim_names = np.array(dataset.dims_to_labels(dims, dims["in_enc"]))
+  d1 = importance_score_dict(fimps1, dim_names, labels1 + ["combined"], k)
+  d2 = importance_score_dict(fimps2, dim_names, labels2 + ["combined"], k)
+  return d1, d2
 
 @click.group()
 @click.option(
@@ -114,12 +145,20 @@ def show(obj, format):
   "--conformal-alpha", "-a",
   type=click.FloatRange(0.0, 1.0),
   default=0)
+@click.option(
+  "--feature-importance-scores",
+  type=click.INT,
+  default=0)
 @click.option("--logits", is_flag=True, default=False)
+@click.option("--cfg", is_flag=True, default=False)
+@click.option("--code", is_flag=True, default=False)
 @click.pass_obj
 def predict(
-  obj, model, limit_id, conformal_alpha=0.1, logits=False):
+  obj, model, limit_id, conformal_alpha=0.1, feature_importance_scores=0,
+  logits=False, cfg=False, code=False):
   with utils.cache_env(use_cache=False):
     convert_mode = obj["convert_mode"]
+    with_cfg = cfg
     cfg = get_cfg_json(**obj)
     inst = dict(cfg=cfg, usage=obj)
     graphs = dataset.raw_to_graphs(
@@ -156,16 +195,26 @@ def predict(
     l1_dict = fy.zipdict(labels1_keys, prob1)
     l2_dict = fy.zipdict(labels2_keys, prob2)
 
-    if conformal_alpha == 0.0:
-      print(json.dumps([l1_dict, l2_dict], cls=utils.NumpyEncoder))
-    else:
+    res = dict(probabilities=[l1_dict, l2_dict])
+
+    if conformal_alpha > 0.0:
       set1_idx = conf.adaptive_sets(l1_pred, calib_config["qhat1"])[0]
       set2_idx = conf.adaptive_sets(l2_pred, calib_config["qhat2"])[0]
       set1 = [labels1_keys[i] for i in set1_idx]
       set2 = [labels2_keys[i] for i in set2_idx]
-      print(json.dumps(dict(
-        probabilities=[l1_dict, l2_dict],
-        conformal_sets=[set1, set2]), cls=utils.NumpyEncoder))
+      res["conformal_sets"] = [set1, set2]
+    if feature_importance_scores != 0:
+      res["feature_importance_scores"] = importance_score_dicts(
+        model, ds, dims, labels1_keys, labels2_keys, feature_importance_scores)
+    if with_cfg:
+      res["cfg"] = cfg
+    if code:
+      res["code"] = cfg["code"]
+
+    if len(res) == 1:
+      res = res["probabilities"]
+
+    print(json.dumps(res, cls=utils.NumpyEncoder))
 
 
 if __name__ == "__main__":
