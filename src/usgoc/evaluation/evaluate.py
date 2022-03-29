@@ -16,6 +16,7 @@ import usgoc.evaluation.models as em
 import usgoc.evaluation.datasets as ed
 import usgoc.models.utils as mu
 import usgoc.metrics.multi as mm
+import usgoc.metrics.correlation as mc
 import usgoc.datasets.unsafe_go as dataset
 import usgoc.postprocessing.explain as explain
 
@@ -520,11 +521,11 @@ def export_best(
       utils.cache_write(
         f"{target_dir}/conformal_calibration_configs.yml", best_fold_calib, "yaml")
 
-def aggregate_confusion_matrices(cms, normalize=True):
+def aggregate_matrices(cms, normalize=True, l1_norm=True):
   cms = fy.lcat(cms)
   m = np.sum(cms, axis=0)
   if normalize:
-    m = np.around(m / np.sum(m, axis=1, keepdims=True), 2) * 100
+    m = np.around(utils.row_normalize_matrix(m, l1_norm), 2) * 100
   return m
 
 def export_confusion_matrices(
@@ -608,7 +609,7 @@ def export_confusion_matrices(
 
       print(f"Creating aggregated confusion matrix plots...")
       def create_plot(cms, labels):
-        m = aggregate_confusion_matrices(cms, normalize)
+        m = aggregate_matrices(cms, normalize)
         return utils.draw_confusion_matrix(m.astype(int), labels, False)
 
       for s in ["train", "val", "test"]:
@@ -618,6 +619,75 @@ def export_confusion_matrices(
         utils.cache(
           lambda: create_plot(cms2[s], labels2_keys),
           plot_dir / f"{prefix}_{s}_label2.pdf", format="plot")
+
+def export_cooccurrence_matrices(
+  hypermodel_builder, alpha=0.1, normalize=True, **kwargs):
+  matrix_dir = Path(f"{utils.PROJECT_ROOT}/results/cooccurrence_matrices_raw")
+  plot_dir = Path(f"{utils.PROJECT_ROOT}/results/cooccurrence_matrices_plot")
+  utils.make_dir(matrix_dir)
+  utils.make_dir(plot_dir)
+  hypermodel_builder = cast_hypermodel_buider(hypermodel_builder)
+  model_name = hypermodel_builder.name
+
+  kwargs["return_models"] = True
+  kwargs["return_calibration_configs"] = True
+  kwargs["return_ds"] = True
+  kwargs["dry"] = True
+  kwargs["keep_nesting"] = True
+  kwargs["lazy_return"] = True
+  kwargs["lazy_folds"] = True
+  cms = evaluate(hypermodel_builder, **kwargs)
+
+  labels1, labels2 = ed.get_target_label_dims()
+  labels1_keys = labels1.keys()
+  labels2_keys = labels2.keys()
+
+  for convert_mode, lids in cms.items():
+    for limit_id, get_folds in lids.items():
+      prefix = f"{convert_mode}_{limit_id}_{model_name}"
+
+      @utils.memoize
+      def compute_cms():
+        folds = get_folds()
+        cms1, cms2 = [], []
+        i = 0
+        n = len(folds)
+        for fold in folds:
+          cm1, cm2 = [], []
+          m = len(fold)
+          nm = n * m
+          for get_model, calib_configs, get_ds in fold: # getter fns due to "lazy_return"
+            i += 1
+            print(f"Computing predictions {i}/{nm}...")
+            model = get_model()
+            _, _, _, test_ds = get_ds()
+            sets1, sets2 = mu.predict_conformal(model, test_ds, **calib_configs[alpha])
+            m1 = mc.sets_to_cooccurrence(sets1)
+            m2 = mc.sets_to_cooccurrence(sets2)
+            tf.keras.backend.clear_session()
+
+            cm1.append(m1)
+            cm2.append(m2)
+
+          cms1.append(cm1)
+          cms2.append(cm2)
+        return cms1, cms2
+
+      print(f"Computing cooccurrence matrices for {prefix}...")
+      cms1, cms2 = utils.cache(
+        lambda: compute_cms(), matrix_dir / f"{prefix}.pickle", format="pickle")
+
+      print(f"Creating aggregated cooccurrence matrix plots...")
+      def create_plot(cms, labels):
+        m = aggregate_matrices(cms, normalize, l1_norm=False)
+        return utils.draw_confusion_matrix(m.astype(int), labels, False)
+
+      utils.cache(
+        lambda: create_plot(cms1, labels1_keys),
+        plot_dir / f"{prefix}_label1.pdf", format="plot")
+      utils.cache(
+        lambda: create_plot(cms2, labels2_keys),
+        plot_dir / f"{prefix}_label2.pdf", format="plot")
 
 def export_feature_importances(
   hypermodel_builder, **kwargs):

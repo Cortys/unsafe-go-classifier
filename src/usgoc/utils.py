@@ -101,6 +101,14 @@ def obj_array(objects):
 
   return a
 
+def row_normalize_matrix(mat, l1_norm=True):
+  mat = mat.astype(np.float32)
+  if l1_norm:
+    norm = np.sum(mat, -1, keepdims=True)
+  else:
+    norm = np.max(mat, -1, keepdims=True)
+  return mat / norm
+
 @contextlib.contextmanager
 def local_seed(seed):
   state = np.random.get_state()
