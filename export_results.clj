@@ -1,10 +1,14 @@
 (ns usgoc.export-results
   (:require [babashka.deps :as deps]
             [babashka.pods :as pods]
+            [babashka.process :as proc]
             [clojure.math :as math]
             [clojure.string :as str]
             [clojure.java.io :as io]
-            [clojure.data.csv :as csv]))
+            [clojure.java.shell :as sh]
+            [clojure.data.csv :as csv]
+            [cheshire.core :as json])
+  (:import (java.util.concurrent TimeUnit)))
 
 (deps/add-deps '{:deps {camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}})
 (pods/load-pod 'org.babashka/go-sqlite3 "0.1.0")
@@ -358,12 +362,103 @@
                                 metric-accessors))))
                runs)))
 
+(defn feature-importance->html
+  [i {:keys [feature importance]}]
+  (let [[f1 f2] feature
+        feature (if (str/blank? f2)
+                  f1
+                  (str f1 "[<i>" f2 "</i>]"))]
+    (str "<span title='" importance "'>" feature "</span>")))
+
+(defn feature-importances->html
+  [fimps]
+  (str "<ul class='fimp-list'>"
+       (str/join "\n"
+                 (map (fn [[k v]]
+                        (str "<li><b>" (name k) ":</b> <i>"
+                             (str/join ", "
+                                       (map-indexed feature-importance->html v))
+                             "</i></li>"))
+                      fimps))
+       "</ul>"))
+
+(defn pred->md
+  [graphs-svg i {:keys [idx size conformal_sets feature_importance_scores code target]}]
+  (let [[sets1 sets2] conformal_sets
+        [fimps1 fimps2] feature_importance_scores
+        [t1 t2] target
+        graph-svg (get graphs-svg idx)]
+    (str "## " (inc i) ". Snippet #" idx " (size " size ")\n"
+         "```go\n" code "\n```\n\n"
+         "- **L1** (*" t1 "*): "
+         (str/join ", " (map #(format "*%s* (%.1f%%)" (first %) (* 100 (second %)))
+                             sets1))
+         "\n- **L2** (*" t2 "*): "
+         (str/join ", " (map #(format "*%s* (%.1f%%)" (first %) (* 100 (second %)))
+                             sets2))
+         "\n<details><summary>Graph</summary>" (or graph-svg "<i>Graph too large for visualizer.</i>") "</details>"
+         "\n\n<details>\n<summary>L1 Feature Importance</summary>\n"
+         (feature-importances->html fimps1)
+         "\n</details>\n<details>\n<summary>L2 Feature Importane</summary>\n"
+         (feature-importances->html fimps2)
+         "\n</details>")))
+
+(defn preds->html
+  "Convert JSON with prediction results into markdown."
+  [file title]
+  (let [pred-list (json/parse-stream (clojure.java.io/reader file) true)
+        graphs-svg (vec (json/parse-stream (clojure.java.io/reader "results/graphs_svg.json")))
+        pred-list (take-while #(>= (:size %) 4) pred-list)
+        ;; pred-list (take 10 pred-list)
+        pred-mds (pmap (partial pred->md graphs-svg) (range) pred-list)
+        md (str/join "\n\n" pred-mds)
+        md (str "<style>"
+                "details summary {font-weight:bold; cursor:pointer;}
+                 details:not([open]) summary::before {content: '► ';}
+                 details:not([open]) summary::after {content: ' (...)';}
+                 details[open] summary::before {content: '▼ ';}
+                 details[open] summary::after {content: ':';}
+                 .fimp-list li span {color: #3BB335;}
+                 .fimp-list li span:nth-child(n+4) {color: #B33535;}"
+                "</style>\n\n"
+                "# " title " Prediction Result Overview\n\n" md)
+        md-file (str/replace file #"\.json" ".md")]
+    (spit md-file md)
+    (sh/sh "pandoc" 
+           "-o" (str/replace file #"\.json" ".html")
+           "-f" "gfm" 
+           "--metadata" "pagetitle=\" title \""
+           "--template=uikit.html" "-s" "--toc"
+           md-file)))
+
+(defn graphs-dot->svg
+  []
+  (let [graphs-dot (vec (json/parse-stream (clojure.java.io/reader "results/graphs_dot.json")))
+        ;; graphs-dot (take 10 graphs-dot)
+        graphs-svg
+        (pmap (fn [i graph-dot]
+                (locking *out*
+                  (println "Converting graph" i "to svg..."))
+                (let [p
+                      (proc/process ["dot" "-Tsvg" "-Gnslimit=10" "-Gnslimit1=10"]
+                                    {:in graph-dot :out :string :err :string})
+                      done? (.waitFor ^java.lang.Process (:proc p) 20 TimeUnit/SECONDS)]
+                  (if done?
+                    (:out @p)
+                    (do
+                      (proc/destroy p)
+                      (locking *out* (println "Stopped conversion of graph" i))
+                      nil))))
+              (range) graphs-dot)]
+    (json/generate-stream graphs-svg (clojure.java.io/writer "results/graphs_svg.json"))
+    (println "Done.")))
+
 (comment
   (def raw-runs (time (get-raw-runs :include-metrics? true)))
   (as-> raw-runs $ (group-by :status $) (get $ "FAILED") (first $))
   (let [runs (time (group-runs raw-runs :aggregate-children? true))
         fr (first (filter #(= (:model %) "Majority") runs))]
-    #_(map (second (nth metric-accessors 3)) runs)
+    #_(map (second (nth c-accessors 3)) runs)
     #_(->> runs (remove :complete?) first)
     (-> fr ((juxt :name :params))))
   (->> raw-runs
@@ -377,4 +472,10 @@
   (time (get-metrics "379f8efef8d2421fba9977477de35ceb"))
   (with-redefs [get-raw-runs (constantly raw-runs)]
     (write-aggregate-runs))
+  (+ 1 1)
+  (graphs-dot->svg)
+  (preds->html "results/preds_DeepSets.json" "DeepSets")
+  (preds->html "results/preds_MLP.json" "MLP")
+  (preds->html "results/preds_GIN.json" "GIN")
+  (preds->html "results/preds_WL2GNN.json" "2-WL-GNN")
   )

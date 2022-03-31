@@ -46,11 +46,14 @@ def multi_calibrate_conformal(model, cal_ds, alphas=[0.1]):
 def calibrate_conformal(model, cal_ds, alpha=0.1):
   return multi_calibrate_conformal(model, cal_ds, [alpha])[alpha]
 
-def to_set_prediction(preds1, preds2, *, t1, t2, qhat1, qhat2):
+def to_set_prediction(
+  preds1, preds2, *, t1, t2, qhat1, qhat2, with_preds=False):
   preds1 = preds1 / t1
   preds2 = preds2 / t2
   sets1 = conf.adaptive_sets(preds1, qhat1)
   sets2 = conf.adaptive_sets(preds2, qhat2)
+  if with_preds:
+    return sets1, sets2, preds1, preds2
   return sets1, sets2
 
 def predict_conformal(model, ds, **calibration_config):
