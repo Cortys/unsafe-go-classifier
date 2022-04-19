@@ -379,7 +379,7 @@
                              (str/join ", "
                                        (map-indexed feature-importance->html v))
                              "</i></li>"))
-                      fimps))
+                      (sort-by first fimps)))
        "</ul>"))
 
 (defn pred->md
@@ -396,10 +396,12 @@
          "\n- **L2** (*" t2 "*): "
          (str/join ", " (map #(format "*%s* (%.1f%%)" (first %) (* 100 (second %)))
                              sets2))
-         "\n<details><summary>Graph</summary>" (or graph-svg "<i>Graph too large for visualizer.</i>") "</details>"
+         "\n<details><summary>Graph</summary>"
+         (or graph-svg "<i>Graph too large for visualizer.</i>")
+         "</details>"
          "\n\n<details>\n<summary>L1 Feature Importance</summary>\n"
          (feature-importances->html fimps1)
-         "\n</details>\n<details>\n<summary>L2 Feature Importane</summary>\n"
+         "\n</details>\n<details>\n<summary>L2 Feature Importance</summary>\n"
          (feature-importances->html fimps2)
          "\n</details>")))
 
@@ -408,9 +410,9 @@
   [file title]
   (let [pred-list (json/parse-stream (clojure.java.io/reader file) true)
         graphs-svg (vec (json/parse-stream (clojure.java.io/reader "results/graphs_svg.json")))
-        pred-list (take-while #(>= (:size %) 4) pred-list)
+        pred-list (take-while #(>= (:size %) 3) pred-list)
         ;; pred-list (take 10 pred-list)
-        pred-mds (pmap (partial pred->md graphs-svg) (range) pred-list)
+        pred-mds (map (partial pred->md graphs-svg) (range) pred-list)
         md (str/join "\n\n" pred-mds)
         md (str "<style>"
                 "details summary {font-weight:bold; cursor:pointer;}
@@ -424,9 +426,9 @@
                 "# " title " Prediction Result Overview\n\n" md)
         md-file (str/replace file #"\.json" ".md")]
     (spit md-file md)
-    (sh/sh "pandoc" 
+    (sh/sh "pandoc"
            "-o" (str/replace file #"\.json" ".html")
-           "-f" "gfm" 
+           "-f" "gfm"
            "--metadata" "pagetitle=\" title \""
            "--template=uikit.html" "-s" "--toc"
            md-file)))
@@ -474,8 +476,9 @@
     (write-aggregate-runs))
   (+ 1 1)
   (graphs-dot->svg)
-  (preds->html "results/preds_DeepSets.json" "DeepSets")
-  (preds->html "results/preds_MLP.json" "MLP")
-  (preds->html "results/preds_GIN.json" "GIN")
-  (preds->html "results/preds_WL2GNN.json" "2-WL-GNN")
+  (do
+    (preds->html "results/preds_DeepSets.json" "DeepSets")
+    (preds->html "results/preds_MLP.json" "MLP")
+    (preds->html "results/preds_GIN.json" "GIN")
+    (preds->html "results/preds_WL2GNN.json" "2-WL-GNN"))
   )

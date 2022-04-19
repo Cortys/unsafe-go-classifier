@@ -760,8 +760,8 @@ def export_feature_importances(
         fimps1 = np.sum(fimps1, 0)
         fimps2 = np.sum(fimps2, 0)
         return utils.draw_feature_importance_chart([
-          ("Label 1", labels1_keys + ["Combined"], fimps1),
-          ("Label 2", labels2_keys + ["Combined"], fimps2)
+          ("What? (Label 1)", labels1_keys + ["Combined"], fimps1),
+          ("Why? (Label 2)", labels2_keys + ["Combined"], fimps2)
         ], dataset.dims_to_labels(merged_dims, in_enc), show=False)
 
       utils.cache(
