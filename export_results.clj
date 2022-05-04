@@ -1,4 +1,4 @@
-(ns usgoc.export-results
+(ns export-results
   (:require [babashka.deps :as deps]
             [babashka.pods :as pods]
             [babashka.process :as proc]
@@ -165,7 +165,7 @@
     (aggregate-maps folds
                     :with-var? true
                     :val-fn :mean
-                    :var-fn :ste
+                    :var-fn :var
                     :min-fn :min :max-fn :max
                     :count-fn :count)))
 
@@ -194,21 +194,20 @@
      (let [best-map
            (persistent!
             (reduce (fn [best-metrics run]
-                      (let []
-                        (reduce-kv (fn [best-metrics metric {:keys [mean] :as stats}]
-                                     (let [min-metric? (loss-metric? metric)
-                                           min-metric? (if invert (not min-metric?) min-metric?)
-                                           pred (if min-metric? < >)
-                                           {:keys [best-mean]} (best-metrics metric)]
-                                       (if (or (nil? best-mean)
-                                               (pred mean best-mean))
-                                         (assoc! best-metrics metric
-                                                 {:best-mean mean
-                                                  :best-test
-                                                  #(paired-test level min-metric? stats %)})
-                                         best-metrics)))
-                                   best-metrics
-                                   (:metrics run))))
+                      (reduce-kv (fn [best-metrics metric {:keys [mean] :as stats}]
+                                   (let [min-metric? (loss-metric? metric)
+                                         min-metric? (if invert (not min-metric?) min-metric?)
+                                         pred (if min-metric? < >)
+                                         {:keys [best-mean]} (best-metrics metric)]
+                                     (if (or (nil? best-mean)
+                                             (pred mean best-mean))
+                                       (assoc! best-metrics metric
+                                               {:best-mean mean
+                                                :best-test
+                                                #(paired-test level min-metric? stats %)})
+                                       best-metrics)))
+                                 best-metrics
+                                 (:metrics run)))
                     (transient {}) run-seq))]
        (update-vals best-map :best-test)))))
 
@@ -363,7 +362,7 @@
                runs)))
 
 (defn feature-importance->html
-  [i {:keys [feature importance]}]
+  [_ {:keys [feature importance]}]
   (let [[f1 f2] feature
         feature (if (str/blank? f2)
                   f1
