@@ -50,6 +50,20 @@ def evaluate_single_conformal(
   test_hist = log_conf(test_ds, "test_")
   return calibration_configs, (train_hist, val_hist, test_hist)
 
+def evaluate_single_topk(
+  model, train_ds, val_ds, test_ds,
+  ks=[2,3,4,5,6,7,8,9,10]):
+  def log_topk_acc(ds, prefix=""):
+    preds, targets = mu.multi_predict_topk_with_targets(model, ds, ks)
+    metrics = mu.multi_topk_metrics(preds, targets)
+    print(f"Computed top-k {prefix}metrics:", metrics)
+    for k, v in metrics.items():
+      mlflow.log_metric(f"{prefix}{k}", v, -1)
+
+  log_topk_acc(train_ds)
+  log_topk_acc(val_ds, "val_")
+  log_topk_acc(test_ds, "test_")
+
 def evaluate_single(
   get_model_ctr, get_ds, model_name,
   repeat=0, fold=0, epochs=1000, patience=100,
@@ -230,6 +244,7 @@ def evaluate_single(
           mlflow.log_metric(f"test_{k}", v, -1)
 
         calib_configs = evaluate_single_conformal(model, train_ds, val_ds, test_ds)
+        evaluate_single_topk(model, train_ds, val_ds, test_ds)
 
         print(f"Finished {ds_id}_repeat{repeat}, {model_name} ({run_id}).")
 

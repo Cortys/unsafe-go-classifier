@@ -53,7 +53,10 @@
         base ["loss" "label1_loss" "label2_loss"
               "accuracy" "label1_accuracy" "label2_accuracy"
               "accuracy_conf_0.1" "label1_accuracy_conf_0.1" "label2_accuracy_conf_0.1"
-              "label1_mean_size_conf_0.1" "label2_mean_size_conf_0.1"]
+              "label1_mean_size_conf_0.1" "label2_mean_size_conf_0.1"
+              "accuracy_top_2", "label1_accuracy_top_2", "label2_accuracy_top_2"
+              "accuracy_top_3", "label1_accuracy_top_3", "label2_accuracy_top_3"
+              "accuracy_top_5", "label1_accuracy_top_5", "label2_accuracy_top_5"]
         stat [:mean :std]
         :let [split-base (str/join "_" (filter some? [split base]))
               split-base-kw (keyword split-base)
@@ -319,6 +322,7 @@
   (let [runs (get-runs :include-metrics? true :aggregate-children? true)
         _ (println "Loaded" (count runs) "runs.")
         runs (filter :complete? runs)
+        runs (remove #(and (= (:model %) "Majority") (not= (:limit_id %) "v127_d127_f127_p127")) runs)
         runs (sort-by (juxt (comp limit-id-order :limit_id)
                             (comp model-order :model))
                       runs)
@@ -456,7 +460,7 @@
 
 (comment
   (def raw-runs (time (get-raw-runs :include-metrics? true)))
-  (as-> raw-runs $ (group-by :status $) (get $ "FAILED") (first $))
+  (as-> raw-runs $ (group-by :status $) (get $ "FINISHED") (count $))
   (let [runs (time (group-runs raw-runs :aggregate-children? true))
         fr (first (filter #(= (:model %) "Majority") runs))]
     #_(map (second (nth c-accessors 3)) runs)

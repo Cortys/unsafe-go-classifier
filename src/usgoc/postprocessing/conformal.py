@@ -30,3 +30,6 @@ def adaptive_sets(pred_logits, qhat):
   sizes = np.argmax(pred_cumsum > qhat, axis=1)
   pred_sets = [pred_pi[i][:(sizes[i] + 1)] for i in range(sizes.shape[0])]
   return pred_sets
+
+def topk_sets(pred_logits, k=3):
+  return np.argsort(pred_logits)[:, -k:]

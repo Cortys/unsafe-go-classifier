@@ -56,9 +56,20 @@ def to_set_prediction(
     return sets1, sets2, preds1, preds2
   return sets1, sets2
 
+def to_topk_prediction(preds1, preds2, k=3, with_preds=False):
+  sets1 = conf.topk_sets(preds1, k)
+  sets2 = conf.topk_sets(preds2, k)
+  if with_preds:
+    return sets1, sets2, preds1, preds2
+  return sets1, sets2
+
 def predict_conformal(model, ds, **calibration_config):
   preds = model.predict(ds)
   return to_set_prediction(*preds, **calibration_config)
+
+def predict_topk(model, ds, **config):
+  preds = model.predict(ds)
+  return to_topk_prediction(*preds, **config)
 
 def conformal_metrics(sets, targets):
   sets1, sets2 = sets
@@ -72,6 +83,16 @@ def conformal_metrics(sets, targets):
     label2_mean_size_conf=conf_met.set_size_mean(sets2),
     label1_median_size_conf=conf_met.set_size_median(sets1),
     label2_median_size_conf=conf_met.set_size_median(sets2)
+  )
+
+def topk_metrics(sets, targets):
+  sets1, sets2 = sets
+  targets1, targets2 = targets
+
+  return dict(
+    label1_accuracy=conf_met.set_accuracy(targets1, sets1),
+    label2_accuracy=conf_met.set_accuracy(targets2, sets2),
+    accuracy=conf_met.multi_set_accuracy(targets, sets)
   )
 
 def conformal_histograms(sets):
@@ -94,11 +115,25 @@ def multi_predict_conformal_with_targets(model, ds, calibration_configs):
     for k, v in calibration_configs.items()
   }, targets
 
+def multi_predict_topk_with_targets(model, ds, ks):
+  preds, targets = predict_with_targets(model, ds)
+  return {
+    k: to_topk_prediction(*preds, k=k)
+    for k in ks
+  }, targets
+
 def multi_conformal_metrics(multi_preds, targets):
   return {
     f"{met}_{alpha}": val
     for alpha, sets in multi_preds.items()
     for met, val in conformal_metrics(sets, targets).items()
+  }
+
+def multi_topk_metrics(multi_preds, targets):
+  return {
+    f"{met}_top_{k}": val
+    for k, sets in multi_preds.items()
+    for met, val in topk_metrics(sets, targets).items()
   }
 
 def multi_conformal_histograms(multi_preds):
