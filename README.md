@@ -1,6 +1,11 @@
 # unsafe-go-classifier
 
 Classification models for `unsafe` usages in Go code.
+The performance of the models is summarized in the following table:
+![Results Table](./docs/results_table.png)
+The best mean values for each metric in a given feature subset block are set in **boldface**.
+The best and worst mean values for each metric for a given model are highlighted in blue and red, respectively.
+A result is considered to be the best/worst within a dimension if it has the highest/lowest mean or if the null hypothesis of a one-sided fold-wise paired t-test comparing it with the highest/lowest mean result cannot be rejected with a 90% confidence.
 
 ## 1. Dev environment
 
