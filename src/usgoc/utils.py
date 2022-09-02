@@ -188,7 +188,7 @@ def draw_graph(
 
   plt.show()
 
-def draw_confusion_matrix(m, labels, show=True):
+def draw_confusion_matrix(m, labels, show=True, text_config=dict(), rotation=45):
   fig, ax = plt.subplots()
   ax.imshow(m, cmap="BuGn")
   ax.set_xticks(np.arange(len(labels)))
@@ -196,7 +196,7 @@ def draw_confusion_matrix(m, labels, show=True):
   ax.set_xticklabels(labels)
   ax.set_yticklabels(labels)
   plt.setp(
-    ax.get_xticklabels(), rotation=45, ha="right",
+    ax.get_xticklabels(), rotation=rotation, ha="right",
     rotation_mode="anchor")
 
   for i in range(len(labels)):
@@ -205,15 +205,14 @@ def draw_confusion_matrix(m, labels, show=True):
       color = "black" if v <= 60 else "w"
       ax.text(
         j, i, v, ha="center",
-        va="center", color=color)
+        va="center", color=color, **text_config)
   fig.tight_layout()
   fig.set_size_inches(
     4 / (fig.subplotpars.right - fig.subplotpars.left),
     4 / (fig.subplotpars.top - fig.subplotpars.bottom))
   if show:
     plt.show()
-  else:
-    return fig
+  return fig
 
 def label_pair_to_short_string(label, ellipsis=12):
   lt, ls = label
