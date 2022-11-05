@@ -7,6 +7,7 @@ RUN apt-get update &&\
 	apt-get install -y graphviz graphviz-dev sqlite3 &&\
 	apt-get clean
 
+RUN pip3 install torch==1.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
 ADD requirements.txt requirements.txt
 RUN pip3 install --use-feature=2020-resolver -r requirements.txt
 

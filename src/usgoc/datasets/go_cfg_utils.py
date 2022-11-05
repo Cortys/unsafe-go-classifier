@@ -501,7 +501,9 @@ def cfg_to_graph(cfg, mark_line=None, module=None, mode=None):
     walk_result = walk_ast(t2l, f2l, ast, split_blocks=split_blocks)
     labels.update(walk_result["labels"])
 
-    g.add_node(n, label=get_node_label(labels), labels=labels, marked=False)
+    g.add_node(
+      n, label=get_node_label(labels), labels=labels,
+      code=block["code"], marked=False)
     block_ids[i] = n
 
     if mark_line is not None:

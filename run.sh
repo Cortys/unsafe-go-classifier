@@ -67,4 +67,6 @@ docker run --gpus all --name $CONTAINER_NAME \
 	-e TF_FORCE_GPU_ALLOW_GROWTH=$TF_FORCE_GPU_ALLOW_GROWTH \
 	-e "USER=$USER" \
 	-e "PROJECT_ROOT=/app" \
+	-e "TRANSFORMERS_CACHE=/app/.cache" \
+	-e "PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512" \
 	usgoc/usgoc
