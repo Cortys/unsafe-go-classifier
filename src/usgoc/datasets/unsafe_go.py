@@ -203,6 +203,10 @@ def collect_node_label_histogram(graphs, split_id=None, mode=default_mode):
 
   return labels
 
+@utils.cached(DATA_DIR, "emb_dict", "pickle")
+def embed_code_snippets(graphs):
+  raise Exception("Code embeddings currently have to be added manually.")
+
 @utils.cached(
   DATA_DIR / "cfg_dims",
   lambda _, limit_id=default_limit_id, split_id=None, mode=default_mode: (
