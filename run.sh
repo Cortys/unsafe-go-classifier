@@ -68,5 +68,5 @@ docker run --gpus all --name $CONTAINER_NAME \
 	-e "USER=$USER" \
 	-e "PROJECT_ROOT=/app" \
 	-e "TRANSFORMERS_CACHE=/app/.cache" \
-	-e "PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512" \
+	-e "PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:1024" \
 	usgoc/usgoc
