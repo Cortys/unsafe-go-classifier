@@ -75,6 +75,8 @@ def cfg_classifier(
 
   def instanciate(
     node_label_count=None,
+    node_feature_dim=None,
+    graph_feature_dim=None,
     fc_layer_units=[], fc_layer_args=None,
     out_activation=None,
     pooling="mean",
@@ -89,7 +91,8 @@ def cfg_classifier(
 
     in_meta = dict(
       node_label_count=node_label_count,
-      graph_feature_dim=4,
+      node_feature_dim=node_feature_dim,
+      graph_feature_dim=graph_feature_dim,
       edge_label_count=9,
       with_marked_node=True)
 

@@ -36,8 +36,8 @@ def encode_graph(
   graph_feature_dim=0,
   ignore_node_features=False, ignore_node_labels=False,
   ignore_edge_features=False, ignore_edge_labels=False,
-  node_label_fn=None,
-  edge_label_fn=None,
+  node_label_fn=None, node_feature_fn=None,
+  edge_label_fn=None, edge_feature_fn=None,
   with_marked_node=False):
 
   if node_feature_dim is None or ignore_node_features:
@@ -52,6 +52,10 @@ def encode_graph(
     node_label_fn = lambda d: d.get("label", 0) % node_label_count
   if edge_label_count > 0 and edge_label_fn is None:
     edge_label_fn = lambda d: d.get("label", 0) % edge_label_count
+  if node_feature_dim > 0 and node_feature_fn is None:
+    node_feature_fn = lambda d: d.get("features", 0)
+  if edge_feature_dim > 0 and edge_feature_fn is None:
+    edge_feature_fn = lambda d: d.get("features", 0)
 
   marked = -1 if with_marked_node else None
   multi = isinstance(g, nx.MultiGraph)
@@ -111,7 +115,7 @@ def encode_graph(
         X[i, node_label_offset + label_dims] = 1
       if node_feature_dim > 0:
         d = g_base.nodes[a]
-        X[i, node_feature_offset:edge_label_offset] = d["features"]
+        X[i, node_feature_offset:edge_label_offset] = node_feature_fn(d)
       if with_marked_node and g_base.nodes[a].get("marked", False):
         marked = i
 
@@ -128,12 +132,12 @@ def encode_graph(
               X[i, edge_label_offset + edge_label_fn(sd)] = 1
           if edge_feature_dim > 0:
             for sd in d.values():
-              X[i, edge_feature_offset:X_dim] += sd["features"]
+              X[i, edge_feature_offset:X_dim] += edge_feature_fn(sd)
         else:
           if edge_label_count > 0:
             X[i, edge_label_offset + edge_label_fn(d)] = 1
           if edge_feature_dim > 0:
-            X[i, edge_feature_offset:X_dim] = d["features"]
+            X[i, edge_feature_offset:X_dim] = edge_feature_fn(d)
       else:
         X[i, 2] = 1
       ref_a += [i, eid_lookup(e_ids, a, a)]

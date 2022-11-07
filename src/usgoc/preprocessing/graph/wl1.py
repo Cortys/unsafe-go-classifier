@@ -37,8 +37,8 @@ def encode_graph(
   graph_feature_dim=0,
   ignore_node_features=False, ignore_node_labels=False,
   ignore_edge_features=False, ignore_edge_labels=False,
-  node_label_fn=None,
-  edge_label_fn=None,
+  node_label_fn=None, node_feature_fn=None,
+  edge_label_fn=None, edge_feature_fn=None,
   with_ref_features=False, multirefs=False, with_marked_node=False):
 
   if node_feature_dim is None or ignore_node_features:
@@ -53,6 +53,10 @@ def encode_graph(
     node_label_fn = lambda d: d.get("label", 0) % node_label_count
   if edge_label_count > 0 and edge_label_fn is None:
     edge_label_fn = lambda d: d.get("label", 0) % edge_label_count
+  if node_feature_dim > 0 and node_feature_fn is None:
+    node_feature_fn = lambda d: d.get("features", 0)
+  if edge_feature_dim > 0 and edge_feature_fn is None:
+    edge_feature_fn = lambda d: d.get("features", 0)
 
   if node_ordering is None:
     node_ordering = g.nodes
@@ -101,7 +105,7 @@ def encode_graph(
         continue
       X[i, label_dims] = 1
     if node_feature_dim > 0:
-      X[i, node_label_count:node_dim] = data["features"]
+      X[i, node_label_count:node_dim] = node_feature_fn(data)
     if with_marked_node and data.get("marked", False):
       marked = i
     n_ids[node] = i
@@ -124,7 +128,7 @@ def encode_graph(
       if edge_label_count > 0:
         R[i, edge_label_fn(data)] = 1
       if edge_feature_dim > 0:
-        R[i, edge_label_count:edge_dim] = data["features"]
+        R[i, edge_label_count:edge_dim] = edge_feature_fn(data)
     if refs_count == 1:
       ref_a[i] = n_ids[a]
       ref_b[i] = n_ids[b]

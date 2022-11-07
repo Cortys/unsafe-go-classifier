@@ -72,6 +72,8 @@ def get_limit_name(limit_dict):
   limit_name = f"v{v}_d{d}_f{f}_p{p}"
   if limit_dict["only_core_packages"]:
     limit_name += "_core"
+  if limit_dict["nlp"]:
+    limit_name += "_nlp"
   if only_suffix != "":
     limit_name += f"_only{only_suffix}"
   if excl_suffix != "":
@@ -96,6 +98,7 @@ def get_dim_limit_dict():
     binary_op=[False, True],
     unary_op=[False, True],
     only_core_packages=[False, True],
+    nlp=[False, True]
   )
 
   for limit_dict in limit_combinations:
@@ -204,7 +207,7 @@ def collect_node_label_histogram(graphs, split_id=None, mode=default_mode):
   return labels
 
 @utils.cached(DATA_DIR, "emb_dict", "pickle")
-def embed_code_snippets(graphs):
+def embed_code_snippets(graphs) -> dict:
   raise Exception("Code embeddings currently have to be added manually.")
 
 @utils.cached(
@@ -262,11 +265,21 @@ def create_graph_dims(
   for i, ls in enumerate(cfg_utils.edge_labels):
     edge_dims[ls] = i
 
-  return dict(
+  dims = dict(
     node_labels=node_dims,
     node_label_count=node_dim_count,
     edge_labels=edge_dims,
     edge_label_count=len(cfg_utils.edge_labels))
+
+  if dim_limits["nlp"]:
+    embs = embed_code_snippets(graphs)
+    dims["node_feature_dim"] = fy.first(embs.values()).shape[-1]
+  else:
+    dims["node_feature_dim"] = 0
+
+  dims["graph_feature_dim"] = len(cfg_utils.cfg_types) + dims["node_feature_dim"]
+
+  return dims
 
 def merge_dims(dims_list):
   merged_node_dims = dict()
@@ -379,17 +392,34 @@ def wl1_encode_graphs(graphs, dims, multirefs=True, split_id=None):
   edge_label_fn = fy.partial(get_edge_label_dim, dims["edge_labels"])
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
+  node_feature_dim = dims["node_feature_dim"]
+  if node_feature_dim == 0:
+    node_feature_fn = lambda d: 0
+    code_embeddings = None
+  else:
+    code_embeddings = embed_code_snippets(graphs)
+    def node_feature_fn(data):
+      if "code" in data:
+        return code_embeddings.get(data["code"], 0)
+      return 0
 
   for i, g in enumerate(graphs):
     enc_g = wl1.encode_graph(
       g,
       node_label_count=node_label_count,
       edge_label_count=edge_label_count,
+      node_feature_dim=node_feature_dim,
       node_label_fn=node_label_fn,
       edge_label_fn=edge_label_fn,
+      node_feature_fn=node_feature_fn,
       multirefs=multirefs,
       with_marked_node=True)
-    enc_g["graph_X"] = graph_features[g.cfg_type]
+    if code_embeddings is not None:
+      enc_g["graph_X"] = np.concatenate([
+        graph_features[g.cfg_type],
+        code_embeddings[g.source_code]])
+    else:
+      enc_g["graph_X"] = graph_features[g.cfg_type]
     enc_graphs[i] = enc_g
 
   return enc_graphs
@@ -404,16 +434,34 @@ def wl2_encode_graphs(graphs, dims, radius=1, split_id=None):
   edge_label_fn = fy.partial(get_edge_label_dim, dims["edge_labels"])
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
+  node_feature_dim = dims["node_feature_dim"]
+
+  if node_feature_dim == 0:
+    node_feature_fn = lambda d: 0
+    code_embeddings = None
+  else:
+    code_embeddings = embed_code_snippets(graphs)
+    def node_feature_fn(data):
+      if "code" in data:
+        return code_embeddings.get(data["code"], 0)
+      return 0
 
   for i, g in enumerate(graphs):
     enc_g = wl2.encode_graph(
       g, radius=radius,
       node_label_count=node_label_count,
       edge_label_count=edge_label_count,
+      node_feature_dim=node_feature_dim,
       node_label_fn=node_label_fn,
       edge_label_fn=edge_label_fn,
+      node_feature_fn=node_feature_fn,
       with_marked_node=True)
-    enc_g["graph_X"] = graph_features[g.cfg_type]
+    if code_embeddings is not None:
+      enc_g["graph_X"] = np.concatenate([
+        graph_features[g.cfg_type],
+        code_embeddings[g.source_code]])
+    else:
+      enc_g["graph_X"] = graph_features[g.cfg_type]
     enc_graphs[i] = enc_g
 
   return enc_graphs
@@ -430,6 +478,9 @@ def wl1_tf_dataset(
 
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
+  node_feature_dim = dims["node_feature_dim"]
+  graph_feature_dim = dims["graph_feature_dim"]
+
   ds_batcher = wl1.WL1Batcher(
     batch_size_limit=batch_size_limit,
     batch_space_limit=batch_space_limit)
@@ -447,7 +498,8 @@ def wl1_tf_dataset(
   in_meta = dict(
     node_label_count=node_label_count,
     edge_label_count=edge_label_count,
-    graph_feature_dim=len(graph_features),
+    node_feature_dim=node_feature_dim,
+    graph_feature_dim=graph_feature_dim,
     with_marked_node=True)
   out_meta = dict()
   return tf.make_dataset(gen, in_enc, in_meta, out_enc, out_meta)
@@ -464,6 +516,9 @@ def wl2_tf_dataset(
 
   node_label_count = dims["node_label_count"]
   edge_label_count = dims["edge_label_count"]
+  node_feature_dim = dims["node_feature_dim"]
+  graph_feature_dim = dims["graph_feature_dim"]
+
   ds_batcher = wl2.WL2Batcher(
     batch_size_limit=batch_size_limit,
     batch_space_limit=batch_space_limit)
@@ -481,7 +536,8 @@ def wl2_tf_dataset(
   in_meta = dict(
     node_label_count=node_label_count,
     edge_label_count=edge_label_count,
-    graph_feature_dim=len(graph_features),
+    node_feature_dim=node_feature_dim,
+    graph_feature_dim=graph_feature_dim,
     with_marked_node=True)
   out_meta = dict()
   return tf.make_dataset(gen, in_enc, in_meta, out_enc, out_meta)
@@ -497,6 +553,9 @@ def node_set_tf_dataset(
   encoded_graphs = wl1_encode_graphs(graphs, dims, False, split_id)
 
   node_label_count = dims["node_label_count"]
+  node_feature_dim = dims["node_feature_dim"]
+  graph_feature_dim = dims["graph_feature_dim"]
+
   ds_batcher = wl1.SetBatcher(
     batch_size_limit=batch_size_limit,
     batch_space_limit=batch_space_limit)
@@ -512,7 +571,8 @@ def node_set_tf_dataset(
 
   in_meta = dict(
     node_label_count=node_label_count,
-    graph_feature_dim=len(graph_features),
+    node_feature_dim=node_feature_dim,
+    graph_feature_dim=graph_feature_dim,
     with_marked_node=True)
   out_meta = dict()
   return tf.make_dataset(gen, "node_set", in_meta, out_enc, out_meta)

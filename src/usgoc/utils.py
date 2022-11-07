@@ -26,7 +26,17 @@ def tolerant(f=None, only_named=True, ignore_varkwargs=False):
   if hasattr(f, "__tolerant__"):
     return f
 
-  spec = inspect.getfullargspec(f.__init__ if inspect.isclass(f) else f)
+  f_original = f
+
+  while True:
+    if inspect.isclass(f_original):
+      f_original = f_original.__init__
+    elif hasattr(f_original, "_tf_decorator") and hasattr(f_original, "__wrapped__"):
+      f_original = f_original.__wrapped__
+    else:
+      break
+
+  spec = inspect.getfullargspec(f_original)
   f_varargs = spec.varargs is not None
   f_varkws = not ignore_varkwargs and spec.varkw is not None
 

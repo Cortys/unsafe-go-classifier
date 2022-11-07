@@ -41,10 +41,15 @@ def create_model_builder(
           conv_activation=conv_activation,
           conv_inner_activation=conv_inner_activation,
           pooling=hp.Choice(
-            "pooling", ["sum", "mean", "softmax", "max", "min"])))
+            "pooling",[
+              "sum", "mean",
+              # "softmax",
+              "max", "min"])))
 
       return instanciate(
         node_label_count=self.config["node_label_count"],
+        node_feature_dim=self.config["node_feature_dim"],
+        graph_feature_dim=self.config["graph_feature_dim"],
         fc_dropout_rate=hp.Choice("fc_dropout", [.0, .5], default=.0),
         fc_layer_units=[hp.Int(
           "fc_units", 32, 512, 32)] * hp.Int("fc_depth", 1, 3),
