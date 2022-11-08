@@ -30,20 +30,25 @@
 (def complete-deterministic-run-child-count 10)
 (def complete-run-child-count 30)
 
-(def model-name-replacements {"WL2GNN" "2-WL-GNN"})
-(def limit-id-replacements {"v127_d127_f127_p127" "all"
-                            "v127_d0_f0_p0_no_tf_fb_ob_ou" "only vars"
-                            "v0_d127_f0_p0_no_v_vt_fb_ob_ou" "only types"
-                            "v0_d0_f127_p0_no_v_vt_tf" "only funcs"
-                            "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou" "only pkgs"
-                            "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou" "none"})
+(def model-name-replacements {"DeepSets" "DS"
+                              "WL2GNN" "2-WL"})
+(def limit-id-replacements {"v127_d127_f127_p127" "No NLP"
+                            "v127_d127_f127_p127_nlp" "NLP"}
+  #_{"v127_d127_f127_p127" "all"
+     "v127_d0_f0_p0_no_tf_fb_ob_ou" "only vars"
+     "v0_d127_f0_p0_no_v_vt_fb_ob_ou" "only types"
+     "v0_d0_f127_p0_no_v_vt_tf" "only funcs"
+     "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou" "only pkgs"
+     "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou" "none"})
 (def model-order (zipmap ["Majority" "MLP" "DeepSets" "GIN" "WL2GNN"] (range)))
-(def limit-id-order (zipmap ["v127_d127_f127_p127"
+(def limit-id-order (zipmap #_["v127_d127_f127_p127"
                              "v127_d0_f0_p0_no_tf_fb_ob_ou"
                              "v0_d127_f0_p0_no_v_vt_fb_ob_ou"
                              "v0_d0_f127_p0_no_v_vt_tf"
                              "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou"
                              "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou"]
+                            ["v127_d127_f127_p127"
+                             "v127_d127_f127_p127_nlp"]
                             (range)))
 ; One-sided t-CDF values:
 (def t-cdf {9 {0.1 1.383, 0.05 1.833, 0.01 2.821}})
@@ -270,7 +275,8 @@
                                (assoc run :metrics
                                       (aggregate-runs children))
                                (assoc run :children children))))
-                         (runs nil))]
+                         (runs nil))
+        parent-runs (filter #(= (:convert_mode %) "atomic_blocks") parent-runs)]
     (println "Got" (count parent-runs) "parent runs.")
     (if aggregate-children?
       (let [level 0.1
@@ -279,6 +285,8 @@
             [best-limit-id-tests worst-limit-id-tests]
             (grouped-best-run-metrics parent-runs :model level)]
         (map (fn [run]
+               (when (= (:model run) "GIN")
+                 (println (:limit_id run) (-> run :metrics :test_label1_accuracy)))
                (update run :metrics
                        #(-> %
                             (add-best-flags-to-metrics (-> run :limit_id best-model-tests)
@@ -322,9 +330,12 @@
   (let [runs (get-runs :include-metrics? true :aggregate-children? true)
         _ (println "Loaded" (count runs) "runs.")
         runs (filter :complete? runs)
-        runs (remove #(and (= (:model %) "Majority") (not= (:limit_id %) "v127_d127_f127_p127")) runs)
-        runs (sort-by (juxt (comp limit-id-order :limit_id)
-                            (comp model-order :model))
+        runs (remove #(and (= (:model %) "Majority")
+                           (not= (:limit_id %) "v127_d127_f127_p127"))
+                     runs)
+        runs (filter (comp limit-id-order :limit_id) runs)
+        runs (sort-by (juxt (comp model-order :model)
+                            (comp limit-id-order :limit_id))
                       runs)
         model-kws [:model :limit_id :convert_mode :dataset]
         metric-kws (map :name metric-accessors)
