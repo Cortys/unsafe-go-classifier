@@ -32,8 +32,9 @@
 
 (def model-name-replacements {"DeepSets" "DS"
                               "WL2GNN" "2-WL"})
-(def limit-id-replacements {"v127_d127_f127_p127" "No NLP"
-                            "v127_d127_f127_p127_nlp" "NLP"}
+(def limit-id-replacements {"v127_d127_f127_p127" "Static"
+                            "v0_d0_f0_p0_nlp_no_v_vt_tf_fb_ob_ou" "NLP"
+                            "v127_d127_f127_p127_nlp" "Static + NLP"}
   #_{"v127_d127_f127_p127" "all"
      "v127_d0_f0_p0_no_tf_fb_ob_ou" "only vars"
      "v0_d127_f0_p0_no_v_vt_fb_ob_ou" "only types"
@@ -48,6 +49,7 @@
                              "v0_d0_f0_p127_no_v_vt_tf_fb_ob_ou"
                              "v0_d0_f0_p0_no_v_vt_tf_fb_ob_ou"]
                             ["v127_d127_f127_p127"
+                             "v0_d0_f0_p0_nlp_no_v_vt_tf_fb_ob_ou"
                              "v127_d127_f127_p127_nlp"]
                             (range)))
 ; One-sided t-CDF values:
