@@ -7,7 +7,18 @@ The best mean values for each metric in a given feature subset block are set in 
 The best and worst mean values for each metric for a given model are highlighted in blue and red, respectively.
 A result is considered to be the best/worst within a dimension if it has the highest/lowest mean or if the null hypothesis of a one-sided fold-wise paired t-test comparing it with the highest/lowest mean result cannot be rejected with a 90% confidence.
 
-## 1. Dev environment
+Contents
+========
+
+* [Dev Environment](#1-dev-environment)
+* [Running Evaluations](#2-running-evaluations)
+* [Perform Predictions](#3-perform-predictions-on-new-data)
+   * [Get the Prediction Container](#get-the-prediction-container)
+   * [Run the Prediction Container](#run-the-prediction-container)
+* [Examples](#examples)
+
+## 1. Dev Environment
+
 
 Use the `run.sh` script to start a fully-featured development container.
 It contains a CUDA-enabled Tensorflow installation, a JupyterLab server (at port `8888`) along with all other required dependencies.
@@ -34,7 +45,33 @@ The best performing of those models can be selected for inclusion in a standalon
 This will create an `exported_models` directory which contains the selected models (multiple models can be selected by passing more than one `--model` option).
 Note that the evaluation of the selected models **must be completed** before trying to export them.
 
-A prediction container with the exported models can be built with the `build_pred.sh` script (will be tagged `usgoc/pred:latest`).
+You can either get the pre-build prediction container or build the prediction container by yourself. 
+
+### Get the Prediction Container 
+
+Either use `docker pull ghcr.io/cortys/usgoc/pred:latest` to get the latest prediction container *or* build the prediction container from scratch.
+
+To build the prediction container: 
+1. Ensure that the folder `exported_models` within this directory is present and has the models that should be used for prediction. If the folder is empty, download the folder `exported_models` from the existing Docker image into the folder `exported_models` within this directory, 
+
+```
+$ mkdir exported_models
+$ docker pull ghcr.io/cortys/usgoc/pred:latest
+$ docker cp $(docker create --name tc ghcr.io/cortys/usgoc/pred:latest):/app/exported_models ./exported_models && docker rm tc
+```
+Verify that the folder `exported_models` contains a folder named `atomic_blocks_v127_d127_f127_p127` and the file `target_label_dims.json`. 
+
+2. Ensure that the folder git submodule is updated. If the folder `unsafe_go_tools` is empty, update the git submodule, and
+
+```
+$ cd unsafe_go_tools
+$ git submodule update --init --recursive
+```
+
+3. Run the script to build the container: `$ ./build_pred.sh`
+The container will be tagged `usgoc/pred:latest`.
+
+### Run the Prediction Container
 
 Before running the prediction container, two Docker volumes should be created: `go_mod` and `go_cache`.
 They will be used to persist Go dependencies between runs.
@@ -74,7 +111,7 @@ It takes the following arguments:
       The Go version that should be used.
       Mostly only relevant for unsafe usages in Go core or CGO cache files.
       By default, the version that was used when labeling the dataset is used. 
-      Additionally, the prediction container also comes with version `1.17`.
+      Additionally, the prediction container also comes with version `1.20`.
   - `--convert-mode` (optional, default=`atomic_blocks`): 
       Specifies the type of CFG representation that should be used for the selected code.
       `atomic_blocks` will represent each statement as a single vertex, `split_blocks` will represent all expressions inside the statements as individual nested vertices.
