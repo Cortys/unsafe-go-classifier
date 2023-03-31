@@ -1,5 +1,5 @@
 # Build CFG creation tool:
-FROM golang:1.17.0-bullseye AS dac
+FROM golang:1.20.0-bullseye AS dac
 
 WORKDIR /app
 ADD unsafe_go_tools/scripts/data-acquisition-tool /app
@@ -18,8 +18,8 @@ ENV HOME=/root \
 
 RUN go get golang.org/dl/go1.14.3 &&\
 	go1.14.3 download
-RUN go get golang.org/dl/go1.17 &&\
-	go1.17 download
+RUN go get golang.org/dl/go1.20.2 &&\
+	go1.20.2 download
 RUN chmod -R 755 /root
 
 WORKDIR /app
